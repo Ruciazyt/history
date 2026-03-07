@@ -1,41 +1,53 @@
 {
-  "app.title": "History Atlas (MVP)",
-  "app.subtitle": "China · Eras · Events · Map",
-  "header.era": "Era",
-  "header.range": "Range",
-  "ui.eras": "Eras (China)",
-  "ui.timeline": "Timeline",
-  "ui.centerYear": "Center year",
-  "ui.window": "Window",
-  "ui.window.years": "{count} years",
-  "ui.window.10": "10 years",
-  "ui.window.50": "50 years",
-  "ui.window.100": "100 years",
-  "ui.events": "Events",
-  "ui.noEvents": "No events in this window.",
-  "ui.compare": "Compare (other eras)",
-  "ui.noCompare": "No comparable events in this window.",
-  "ui.rulers": "Rulers",
-  "ui.chaos": "Chaotic period",
-  "ui.seedNote": "Seed data is for MVP iteration; dates/locations are approximate.",
-  "locale.zh": "中文",
-  "locale.en": "English",
-  "locale.ja": "日本語",
-
-  "era.westernZhou": "Western Zhou",
-  "era.springAutumn": "Spring and Autumn",
-  "era.warringStates": "Warring States",
-  "era.qin": "Qin",
-  "era.westernHan": "Western Han",
-  "era.xin": "Xin (Wang Mang)",
-  "era.easternHan": "Eastern Han",
-  "era.threeKingdoms": "Three Kingdoms",
-  "era.westernJin": "Western Jin",
-  "era.easternJin16": "Eastern Jin & Sixteen Kingdoms",
-  "era.southernNorthern": "Southern & Northern Dynasties",
-
-  "ruler.qinshihuang": "Qin Shi Huang",
-  "ruler.qiner": "Qin Er Shi",
-  "ruler.hangaozu": "Emperor Gaozu of Han",
-  "ruler.hanwudi": "Emperor Wu of Han"
+  "app": {
+    "title": "History Atlas (MVP)",
+    "subtitle": "China · Eras · Events · Map"
+  },
+  "header": {
+    "era": "Era",
+    "range": "Range"
+  },
+  "ui": {
+    "eras": "Eras (China)",
+    "timeline": "Timeline",
+    "centerYear": "Center year",
+    "window": {
+      "label": "Window",
+      "years": "{count} years",
+      "10": "10 years",
+      "50": "50 years",
+      "100": "100 years"
+    },
+    "events": "Events",
+    "noEvents": "No events in this window.",
+    "compare": "Compare (other eras)",
+    "noCompare": "No comparable events in this window.",
+    "rulers": "Rulers",
+    "chaos": "Chaotic period",
+    "seedNote": "Seed data is for MVP iteration; dates/locations are approximate."
+  },
+  "locale": {
+    "zh": "中文",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "era": {
+    "westernZhou": "Western Zhou",
+    "springAutumn": "Spring and Autumn",
+    "warringStates": "Warring States",
+    "qin": "Qin",
+    "westernHan": "Western Han",
+    "xin": "Xin (Wang Mang)",
+    "easternHan": "Eastern Han",
+    "threeKingdoms": "Three Kingdoms",
+    "westernJin": "Western Jin",
+    "easternJin16": "Eastern Jin & Sixteen Kingdoms",
+    "southernNorthern": "Southern & Northern Dynasties"
+  },
+  "ruler": {
+    "qinshihuang": "Qin Shi Huang",
+    "qiner": "Qin Er Shi",
+    "hangaozu": "Emperor Gaozu of Han",
+    "hanwudi": "Emperor Wu of Han"
+  }
 }

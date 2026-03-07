@@ -184,7 +184,7 @@ export function HistoryApp({
                 <div className="text-sm text-zinc-800">
                   {t('ui.centerYear')}: <span className="font-semibold">{formatYear(year)}</span>
                   <span className="mx-2 text-zinc-300">|</span>
-                  {t('ui.window')}: <span className="font-semibold">{t('ui.window.years', { count: windowYears })}</span>
+                  {t('ui.window.label')}: <span className="font-semibold">{t('ui.window.years', { count: windowYears })}</span>
                   <span className="mx-2 text-zinc-300">|</span>
                   <span className="text-zinc-600">{rangeLabel(year, windowYears)}</span>
                 </div>

@@ -1,41 +1,53 @@
 {
-  "app.title": "歴史アトラス（MVP）",
-  "app.subtitle": "中国 · 時代 · 出来事 · 地図",
-  "header.era": "時代",
-  "header.range": "範囲",
-  "ui.eras": "時代（中国）",
-  "ui.timeline": "年表",
-  "ui.centerYear": "中心年",
-  "ui.window": "ウィンドウ",
-  "ui.window.years": "{count}年",
-  "ui.window.10": "10年",
-  "ui.window.50": "50年",
-  "ui.window.100": "100年",
-  "ui.events": "出来事",
-  "ui.noEvents": "この範囲には出来事がありません。",
-  "ui.compare": "同時期比較（他の時代）",
-  "ui.noCompare": "この範囲には比較できる出来事がありません。",
-  "ui.rulers": "統治者",
-  "ui.chaos": "混乱期",
-  "ui.seedNote": "サンプルデータはMVP用です。年代・地点は概算です。",
-  "locale.zh": "中文",
-  "locale.en": "English",
-  "locale.ja": "日本語",
-
-  "era.westernZhou": "西周",
-  "era.springAutumn": "春秋",
-  "era.warringStates": "戦国",
-  "era.qin": "秦",
-  "era.westernHan": "前漢",
-  "era.xin": "新（王莽）",
-  "era.easternHan": "後漢",
-  "era.threeKingdoms": "三国",
-  "era.westernJin": "西晋",
-  "era.easternJin16": "東晋・十六国",
-  "era.southernNorthern": "南北朝",
-
-  "ruler.qinshihuang": "始皇帝",
-  "ruler.qiner": "二世皇帝",
-  "ruler.hangaozu": "漢高祖",
-  "ruler.hanwudi": "漢武帝"
+  "app": {
+    "title": "歴史アトラス（MVP）",
+    "subtitle": "中国 · 時代 · 出来事 · 地図"
+  },
+  "header": {
+    "era": "時代",
+    "range": "範囲"
+  },
+  "ui": {
+    "eras": "時代（中国）",
+    "timeline": "年表",
+    "centerYear": "中心年",
+    "window": {
+      "label": "ウィンドウ",
+      "years": "{count}年",
+      "10": "10年",
+      "50": "50年",
+      "100": "100年"
+    },
+    "events": "出来事",
+    "noEvents": "この範囲には出来事がありません。",
+    "compare": "同時期比較（他の時代）",
+    "noCompare": "この範囲には比較できる出来事がありません。",
+    "rulers": "統治者",
+    "chaos": "混乱期",
+    "seedNote": "サンプルデータはMVP用です。年代・地点は概算です。"
+  },
+  "locale": {
+    "zh": "中文",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "era": {
+    "westernZhou": "西周",
+    "springAutumn": "春秋",
+    "warringStates": "戦国",
+    "qin": "秦",
+    "westernHan": "前漢",
+    "xin": "新（王莽）",
+    "easternHan": "後漢",
+    "threeKingdoms": "三国",
+    "westernJin": "西晋",
+    "easternJin16": "東晋・十六国",
+    "southernNorthern": "南北朝"
+  },
+  "ruler": {
+    "qinshihuang": "始皇帝",
+    "qiner": "二世皇帝",
+    "hangaozu": "漢高祖",
+    "hanwudi": "漢武帝"
+  }
 }
