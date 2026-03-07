@@ -84,7 +84,20 @@
     "zhou-li": "King Li of Zhou",
     "zhou-gonghe": "Gonghe Regency",
     "zhou-xuan": "King Xuan of Zhou",
-    "zhou-you": "King You of Zhou"
+    "zhou-you": "King You of Zhou",
+    "zhou-ping": "King Ping of Zhou",
+    "zhou-huan": "King Huan of Zhou",
+    "zhou-zhuang": "King Zhuang of Zhou",
+    "zhou-xi": "King Xi of Zhou",
+    "zhou-hui": "King Hui of Zhou",
+    "zhou-xiang": "King Xiang of Zhou",
+    "zhou-qing": "King Qing of Zhou",
+    "zhou-kuang": "King Kuang of Zhou",
+    "zhou-ding": "King Ding of Zhou",
+    "zhou-jian": "King Jian of Zhou",
+    "zhou-ling": "King Ling of Zhou",
+    "zhou-jing": "King Jing of Zhou",
+    "zhou-dao": "King Dao (Jing) of Zhou"
   },
   "rulerBio": {
     "qinshihuang": "First emperor of a unified Qin; standardized systems and central authority.",
@@ -115,7 +128,20 @@
     "zhou-li": "His policies led to unrest; deposition triggered the Gonghe Regency, a key chronological marker.",
     "zhou-gonghe": "A regency period after King Li’s exile; often treated as a key anchor year (841 BCE).",
     "zhou-xuan": "Traditionally associated with partial restoration of royal authority after the regency.",
-    "zhou-you": "The last Western Zhou king; his death in the Quanrong attack led to the Eastern Zhou transition."
+    "zhou-you": "The last Western Zhou king; his death in the Quanrong attack led to the Eastern Zhou transition.",
+    "zhou-ping": "Moved the Zhou court east to Luoyi (Luoyang) after turmoil, beginning the Eastern Zhou era.",
+    "zhou-huan": "An early Eastern Zhou king during the continued decline of royal authority and rising regional states.",
+    "zhou-zhuang": "Reign saw intensifying interstate competition and weakening Zhou central control.",
+    "zhou-xi": "A transitional mid–Spring and Autumn king as regional politics became dominant.",
+    "zhou-hui": "A Spring and Autumn king amid complex court–state relations and emerging hegemon politics.",
+    "zhou-xiang": "Long reign in which the hegemon system operated; Zhou increasingly relied on powerful states.",
+    "zhou-qing": "A king in the mid-late Spring and Autumn period amid continued weakening of the court.",
+    "zhou-kuang": "Short reign during ongoing dominance of regional states.",
+    "zhou-ding": "Late Spring and Autumn king as alliances and rivalry intensified among major states.",
+    "zhou-jian": "A late-period king as Zhou influence continued to decline.",
+    "zhou-ling": "Late Spring and Autumn king amid internal court issues and interstate tensions.",
+    "zhou-jing": "Late-period king as the balance among great states evolved rapidly.",
+    "zhou-dao": "Reigned at the end of the Spring and Autumn period; often used as a reference point for the transition toward the Warring States era."
   },
   "rulerHighlight": {
     "qinshihuang": "Unification, standardization (weights, measures, writing), and commandery-county administration.",
@@ -146,7 +172,20 @@
     "zhou-li": "Unrest leading to exile; Gonghe Regency begins.",
     "zhou-gonghe": "Chronological anchor around 841 BCE; transitional governance.",
     "zhou-xuan": "Partial restoration narrative; continued frontier conflicts.",
-    "zhou-you": "Capital sacked; Western Zhou ends."
+    "zhou-you": "Capital sacked; Western Zhou ends.",
+    "zhou-ping": "Eastern relocation to Luoyi; start of Eastern Zhou.",
+    "zhou-huan": "Continued decline of Zhou royal authority.",
+    "zhou-zhuang": "Intensifying interstate competition.",
+    "zhou-xi": "Hegemon politics taking shape.",
+    "zhou-hui": "Alliances and hegemon politics become more regular.",
+    "zhou-xiang": "Long reign during operation of the hegemon system.",
+    "zhou-qing": "Zhou influence keeps shrinking.",
+    "zhou-kuang": "Short reign; regional dominance continues.",
+    "zhou-ding": "Frequent alliances and rivalry in late period.",
+    "zhou-jian": "Late-period transition.",
+    "zhou-ling": "Deepening tensions in late period.",
+    "zhou-jing": "Great-state balance evolves in late period.",
+    "zhou-dao": "A reference point in the transition toward Warring States."
   },
   "event": {
     "sa-770-zhou-east": {
@@ -300,6 +339,22 @@
     "wz-771-quanrong": {
       "title": "Quanrong sack Haojing (771 BCE)",
       "summary": "The capital is attacked and King You dies; Western Zhou collapses, paving the way for Eastern Zhou."
+    },
+    "sa-707-xuge": {
+      "title": "Battle of Xuge",
+      "summary": "Conflict between the Zhou king and the State of Zheng, illustrating limited royal control over strong states."
+    },
+    "sa-651-kuiqiu": {
+      "title": "Kuiqiu conference",
+      "summary": "A major interstate conference led by Duke Huan of Qi, often cited as a key moment in hegemon politics."
+    },
+    "sa-597-bi": {
+      "title": "Battle of Bi",
+      "summary": "A pivotal battle in the Jin–Chu rivalry that influenced the balance among major powers."
+    },
+    "sa-594-tax": {
+      "title": "“First tax on fields” (trad.)",
+      "summary": "A traditionally recorded shift in taxation, often discussed as part of Spring and Autumn institutional change."
     }
   }
 }
