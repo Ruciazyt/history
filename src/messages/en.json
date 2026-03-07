@@ -59,19 +59,55 @@
     "qinshihuang": "Qin Shi Huang",
     "qiner": "Qin Er Shi",
     "hangaozu": "Emperor Gaozu of Han",
-    "hanwudi": "Emperor Wu of Han"
+    "hanwudi": "Emperor Wu of Han",
+    "suiwen": "Emperor Wen of Sui",
+    "suiyang": "Emperor Yang of Sui",
+    "tangtaizong": "Emperor Taizong of Tang",
+    "wuzetian": "Wu Zetian",
+    "tangxuanzong": "Emperor Xuanzong of Tang",
+    "songtaizu": "Emperor Taizu of Song",
+    "songhuizong": "Emperor Huizong of Song",
+    "yuanshizu": "Kublai Khan (Emperor Shizu of Yuan)",
+    "mingtaizu": "Hongwu Emperor (Taizu of Ming)",
+    "mingchengzu": "Yongle Emperor (Chengzu of Ming)",
+    "kangxi": "Kangxi Emperor",
+    "qianlong": "Qianlong Emperor"
   },
   "rulerBio": {
     "qinshihuang": "First emperor of a unified Qin; standardized systems and central authority.",
     "qiner": "Second Qin ruler; succession crisis and rebellions accelerated Qin's collapse.",
     "hangaozu": "Founder of the Han dynasty; rebuilt governance after the Qin–Chu wars.",
-    "hanwudi": "Expansion, state monopolies, and Confucian statecraft shaped the Han imperial model."
+    "hanwudi": "Expansion, state monopolies, and Confucian statecraft shaped the Han imperial model.",
+    "suiwen": "Unified China after centuries of division; laid administrative groundwork for the Tang.",
+    "suiyang": "Known for Grand Canal projects and costly campaigns; reign ended amid widespread rebellion.",
+    "tangtaizong": "Early Tang ruler associated with stable governance and expansion.",
+    "wuzetian": "The only woman to rule China as emperor in her own right; significant court and state reforms.",
+    "tangxuanzong": "A long reign with cultural flourishing but later destabilized by major rebellion.",
+    "songtaizu": "Founder of the Song; consolidated power and reduced warlord fragmentation.",
+    "songhuizong": "Patron of arts; his reign ended with the Jingkang crisis and northern collapse.",
+    "yuanshizu": "Established the Yuan dynasty as a Chinese imperial state; reorganized governance over a vast realm.",
+    "mingtaizu": "Founder of the Ming; rebuilt institutions and centralized authority.",
+    "mingchengzu": "Moved the capital to Beijing; sponsored major maritime expeditions.",
+    "kangxi": "Oversaw consolidation and long-term stability; patron of learning and statecraft.",
+    "qianlong": "Peak-era Qing ruler; major cultural projects alongside rising fiscal and social strains."
   },
   "rulerHighlight": {
     "qinshihuang": "Unification, standardization (weights, measures, writing), and commandery-county administration.",
     "qiner": "Court intrigue and uprisings; Qin rule ends shortly after.",
     "hangaozu": "Consolidation after Chu–Han contention; early Han institutions take shape.",
-    "hanwudi": "Territorial expansion and institutional reforms; long, influential reign."
+    "hanwudi": "Territorial expansion and institutional reforms; long, influential reign.",
+    "suiwen": "Reunification and institutional setup; set the stage for Tang governance.",
+    "suiyang": "Grand Canal expansion; overreach in labor and war contributed to collapse.",
+    "tangtaizong": "Governance reforms and a strong early Tang state.",
+    "wuzetian": "Reforms and patronage; reshaped court politics and examinations.",
+    "tangxuanzong": "Cultural prosperity early; later period linked to An Lushan Rebellion.",
+    "songtaizu": "Centralization and integration of military power under civil control.",
+    "songhuizong": "Cultural achievements; political-military weakness exposed by Jin invasion.",
+    "yuanshizu": "Formal founding of Yuan and administrative integration.",
+    "mingtaizu": "Institution-building and centralization.",
+    "mingchengzu": "Beijing capital era; Zheng He voyages.",
+    "kangxi": "Consolidation, frontier governance, and long stability.",
+    "qianlong": "Cultural projects and territorial management at Qing height."
   },
   "event": {
     "sa-770-zhou-east": {
@@ -80,7 +116,7 @@
     },
     "sa-656-qihuan": {
       "title": "Duke Huan of Qi becomes hegemon",
-      "summary": "Qi rises as a leading state, associated with Guan Zhong's reforms and the hegemon system."
+      "summary": "Qi rises as a leading state, associated with reforms and the hegemon system."
     },
     "sa-632-chengpu": {
       "title": "Battle of Chengpu",
@@ -134,17 +170,9 @@
       "title": "Rebellion of the Seven States",
       "summary": "A major revolt by regional kings is suppressed, strengthening central authority."
     },
-    "han-141-wudi": {
-      "title": "Emperor Wu of Han begins reign",
-      "summary": "A transformative reign marked by expansion and institutional change."
-    },
     "han-138-zhangqian": {
       "title": "Zhang Qian sent to the Western Regions",
       "summary": "Diplomatic missions open routes and knowledge that later underpin Silk Road connections."
-    },
-    "han-60-protectorate": {
-      "title": "Protectorate of the Western Regions established",
-      "summary": "Han administration in the Tarim Basin formalizes influence on key corridors."
     },
     "eh-105-paper": {
       "title": "Cai Lun improves papermaking (trad.)",
@@ -157,6 +185,62 @@
     "eh-220-han-ends": {
       "title": "End of Eastern Han",
       "summary": "Emperor Xian abdicates; Cao Pi founds Wei, beginning the Three Kingdoms era."
+    },
+    "sui-589-unify": {
+      "title": "Sui reunifies China",
+      "summary": "The Sui defeats the Chen and ends the Southern and Northern Dynasties division."
+    },
+    "sui-605-grand-canal": {
+      "title": "Grand Canal construction expands",
+      "summary": "Large-scale canal works link north and south, boosting transport and taxation capacity."
+    },
+    "tang-618-founded": {
+      "title": "Founding of the Tang dynasty",
+      "summary": "Li Yuan establishes the Tang, beginning a major era of imperial rebuilding."
+    },
+    "tang-755-anlushan": {
+      "title": "An Lushan Rebellion",
+      "summary": "A devastating rebellion that weakens Tang central power and reshapes society and military governance."
+    },
+    "song-960-founded": {
+      "title": "Founding of the Song dynasty",
+      "summary": "Zhao Kuangyin becomes Emperor Taizu and unifies much of China after the Five Dynasties period."
+    },
+    "song-1127-jingkang": {
+      "title": "Jingkang Incident",
+      "summary": "The Jin captures Kaifeng; Northern Song collapses and the court retreats south."
+    },
+    "yuan-1271-founded": {
+      "title": "Yuan dynasty proclaimed",
+      "summary": "Kublai Khan proclaims the Yuan dynasty, integrating Mongol rule into a Chinese dynastic framework."
+    },
+    "ming-1368-founded": {
+      "title": "Founding of the Ming dynasty",
+      "summary": "Zhu Yuanzhang (Hongwu) establishes the Ming and ends Yuan rule in China proper."
+    },
+    "ming-1405-zhenghe": {
+      "title": "Zheng He voyages begin",
+      "summary": "State-sponsored maritime expeditions project Ming influence across the Indian Ocean."
+    },
+    "qing-1644-founded": {
+      "title": "Qing takes Beijing",
+      "summary": "The Qing enters Beijing, beginning consolidation over China after the Ming collapse."
+    },
+    "qing-1840-opium": {
+      "title": "First Opium War",
+      "summary": "War with Britain marks a major turning point, intensifying foreign pressure and internal challenges."
+    },
+    "roc-1911-xinhai": {
+      "title": "Xinhai Revolution",
+      "summary": "Revolutionary uprisings end the Qing dynasty and launch the Republic era."
+    },
+    "prc-1949-founded": {
+      "title": "Founding of the People's Republic of China",
+      "summary": "The PRC is proclaimed in Beijing, beginning a new political era."
+    },
+    "prc-1978-reform": {
+      "title": "Reform and Opening-up begins",
+      "summary": "Economic reforms and opening policies start, transforming society and development trajectories."
     }
   }
 }

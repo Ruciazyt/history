@@ -198,9 +198,7 @@ export function HistoryApp({
                         })}
                       </ul>
                     ) : (
-                      <div className={`mt-1 text-xs ${active ? 'text-white/85' : 'text-zinc-500'}`}>
-                        {t('ui.chaos')}
-                      </div>
+                      <div className={`mt-1 text-xs ${active ? 'text-white/85' : 'text-zinc-500'}`}>-</div>
                     )}
                   </div>
                 </div>

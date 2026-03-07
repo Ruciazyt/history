@@ -18,7 +18,7 @@ export const CHINA_EVENTS: Event[] = [
     year: -656,
     titleKey: 'event.sa-656-qihuan.title',
     summaryKey: 'event.sa-656-qihuan.summary',
-    tags: ['reform', 'hegemony'],
+    tags: ['politics'],
     location: { lon: 118.05, lat: 36.8, label: 'Linzi (Qi)' },
   },
   {
@@ -57,7 +57,6 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-453-three-jin.title',
     summaryKey: 'event.ws-453-three-jin.summary',
     tags: ['politics'],
-    location: { lon: 112.43, lat: 37.87, label: 'Taiyuan region (approx.)' },
   },
   {
     id: 'ws-356-shangyang-reform',
@@ -75,7 +74,6 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-341-maling.title',
     summaryKey: 'event.ws-341-maling.summary',
     tags: ['war'],
-    location: { lon: 115.65, lat: 35.45, label: 'Maling (approx.)' },
   },
   {
     id: 'ws-260-changping',
@@ -83,20 +81,19 @@ export const CHINA_EVENTS: Event[] = [
     year: -260,
     titleKey: 'event.ws-260-changping.title',
     summaryKey: 'event.ws-260-changping.summary',
-    tags: ['war', 'qin'],
-    location: { lon: 112.8, lat: 35.49, label: 'Gaoping (approx.)' },
+    tags: ['war'],
   },
-
-  // Qin
   {
     id: 'ws-221-unification',
     entityId: 'qin',
     year: -221,
     titleKey: 'event.ws-221-unification.title',
     summaryKey: 'event.ws-221-unification.summary',
-    tags: ['unification', 'empire'],
+    tags: ['unification'],
     location: { lon: 109.0, lat: 34.33, label: 'Xianyang' },
   },
+
+  // Qin
   {
     id: 'qin-214-lingqu',
     entityId: 'qin',
@@ -104,7 +101,6 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.qin-214-lingqu.title',
     summaryKey: 'event.qin-214-lingqu.summary',
     tags: ['infrastructure'],
-    location: { lon: 110.99, lat: 25.33, label: 'Guilin region' },
   },
   {
     id: 'qin-210-first-emperor-death',
@@ -113,7 +109,6 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.qin-210-first-emperor-death.title',
     summaryKey: 'event.qin-210-first-emperor-death.summary',
     tags: ['politics'],
-    location: { lon: 118.48, lat: 35.05, label: 'Sand Hill / Shaqiu (approx.)' },
   },
   {
     id: 'qin-209-dazexiang',
@@ -122,17 +117,16 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.qin-209-dazexiang.title',
     summaryKey: 'event.qin-209-dazexiang.summary',
     tags: ['revolt'],
-    location: { lon: 116.6, lat: 33.64, label: 'Dazexiang (approx.)' },
   },
 
-  // Han
+  // Western Han
   {
     id: 'han-202-han-founded',
     entityId: 'han-western',
     year: -202,
     titleKey: 'event.han-202-han-founded.title',
     summaryKey: 'event.han-202-han-founded.summary',
-    tags: ['founding', 'empire'],
+    tags: ['founding'],
     location: { lon: 108.94, lat: 34.34, label: 'Chang’an (Xi’an)' },
   },
   {
@@ -141,17 +135,7 @@ export const CHINA_EVENTS: Event[] = [
     year: -154,
     titleKey: 'event.han-154-seven-states.title',
     summaryKey: 'event.han-154-seven-states.summary',
-    tags: ['revolt', 'politics'],
-    location: { lon: 117.28, lat: 34.21, label: 'Jiangsu/Anhui (approx.)' },
-  },
-  {
-    id: 'han-141-wudi',
-    entityId: 'han-western',
-    year: -141,
-    titleKey: 'event.han-141-wudi.title',
-    summaryKey: 'event.han-141-wudi.summary',
-    tags: ['politics', 'culture'],
-    location: { lon: 108.94, lat: 34.34, label: 'Chang’an' },
+    tags: ['revolt'],
   },
   {
     id: 'han-138-zhangqian',
@@ -159,16 +143,7 @@ export const CHINA_EVENTS: Event[] = [
     year: -138,
     titleKey: 'event.han-138-zhangqian.title',
     summaryKey: 'event.han-138-zhangqian.summary',
-    tags: ['diplomacy', 'trade'],
-  },
-  {
-    id: 'han-60-protectorate',
-    entityId: 'han-western',
-    year: -60,
-    titleKey: 'event.han-60-protectorate.title',
-    summaryKey: 'event.han-60-protectorate.summary',
-    tags: ['administration', 'frontier'],
-    location: { lon: 87.62, lat: 43.82, label: 'Xinjiang region (approx.)' },
+    tags: ['diplomacy'],
   },
 
   // Eastern Han
@@ -178,8 +153,7 @@ export const CHINA_EVENTS: Event[] = [
     year: 105,
     titleKey: 'event.eh-105-paper.title',
     summaryKey: 'event.eh-105-paper.summary',
-    tags: ['technology', 'culture'],
-    location: { lon: 113.62, lat: 34.75, label: 'Luoyang' },
+    tags: ['technology'],
   },
   {
     id: 'eh-184-yellow-turbans',
@@ -188,7 +162,6 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.eh-184-yellow-turbans.title',
     summaryKey: 'event.eh-184-yellow-turbans.summary',
     tags: ['revolt'],
-    location: { lon: 114.3, lat: 36.1, label: 'Hebei/Henan (approx.)' },
   },
   {
     id: 'eh-220-han-ends',
@@ -197,6 +170,133 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.eh-220-han-ends.title',
     summaryKey: 'event.eh-220-han-ends.summary',
     tags: ['politics'],
-    location: { lon: 113.65, lat: 34.76, label: 'Xuchang / Luoyang (approx.)' },
-  }
+  },
+
+  // Sui
+  {
+    id: 'sui-589-unify',
+    entityId: 'sui',
+    year: 589,
+    titleKey: 'event.sui-589-unify.title',
+    summaryKey: 'event.sui-589-unify.summary',
+    tags: ['unification'],
+  },
+  {
+    id: 'sui-605-grand-canal',
+    entityId: 'sui',
+    year: 605,
+    titleKey: 'event.sui-605-grand-canal.title',
+    summaryKey: 'event.sui-605-grand-canal.summary',
+    tags: ['infrastructure'],
+  },
+
+  // Tang
+  {
+    id: 'tang-618-founded',
+    entityId: 'tang',
+    year: 618,
+    titleKey: 'event.tang-618-founded.title',
+    summaryKey: 'event.tang-618-founded.summary',
+    tags: ['founding'],
+  },
+  {
+    id: 'tang-755-anlushan',
+    entityId: 'tang',
+    year: 755,
+    titleKey: 'event.tang-755-anlushan.title',
+    summaryKey: 'event.tang-755-anlushan.summary',
+    tags: ['revolt'],
+  },
+
+  // Song
+  {
+    id: 'song-960-founded',
+    entityId: 'song',
+    year: 960,
+    titleKey: 'event.song-960-founded.title',
+    summaryKey: 'event.song-960-founded.summary',
+    tags: ['founding'],
+  },
+  {
+    id: 'song-1127-jingkang',
+    entityId: 'song',
+    year: 1127,
+    titleKey: 'event.song-1127-jingkang.title',
+    summaryKey: 'event.song-1127-jingkang.summary',
+    tags: ['war', 'politics'],
+  },
+
+  // Yuan
+  {
+    id: 'yuan-1271-founded',
+    entityId: 'yuan',
+    year: 1271,
+    titleKey: 'event.yuan-1271-founded.title',
+    summaryKey: 'event.yuan-1271-founded.summary',
+    tags: ['founding'],
+  },
+
+  // Ming
+  {
+    id: 'ming-1368-founded',
+    entityId: 'ming',
+    year: 1368,
+    titleKey: 'event.ming-1368-founded.title',
+    summaryKey: 'event.ming-1368-founded.summary',
+    tags: ['founding'],
+  },
+  {
+    id: 'ming-1405-zhenghe',
+    entityId: 'ming',
+    year: 1405,
+    titleKey: 'event.ming-1405-zhenghe.title',
+    summaryKey: 'event.ming-1405-zhenghe.summary',
+    tags: ['maritime'],
+  },
+
+  // Qing
+  {
+    id: 'qing-1644-founded',
+    entityId: 'qing',
+    year: 1644,
+    titleKey: 'event.qing-1644-founded.title',
+    summaryKey: 'event.qing-1644-founded.summary',
+    tags: ['founding'],
+  },
+  {
+    id: 'qing-1840-opium',
+    entityId: 'qing',
+    year: 1840,
+    titleKey: 'event.qing-1840-opium.title',
+    summaryKey: 'event.qing-1840-opium.summary',
+    tags: ['war'],
+  },
+
+  // ROC
+  {
+    id: 'roc-1911-xinhai',
+    entityId: 'roc',
+    year: 1911,
+    titleKey: 'event.roc-1911-xinhai.title',
+    summaryKey: 'event.roc-1911-xinhai.summary',
+    tags: ['revolution'],
+  },
+
+  // PRC
+  {
+    id: 'prc-1949-founded',
+    entityId: 'prc',
+    year: 1949,
+    titleKey: 'event.prc-1949-founded.title',
+    summaryKey: 'event.prc-1949-founded.summary',
+    tags: ['founding'],
+  },
+  {
+    id: 'prc-1978-reform',
+    entityId: 'prc',
+    year: 1978,
+    titleKey: 'event.prc-1978-reform.title',
+    summaryKey: 'event.prc-1978-reform.summary',
+    tags: ['reform'],
+  },
 ];
