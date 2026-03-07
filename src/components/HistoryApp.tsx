@@ -157,17 +157,25 @@ export function HistoryApp({
                     </div>
                   </button>
 
-                  <div className={`px-2 pb-2 ${active ? '' : 'opacity-80'}`}>
-                    <div className={`mt-1 text-xs font-medium ${active ? 'text-white/80' : 'text-zinc-500'}`}>
-                      {t('ui.rulers')}
-                    </div>
-                    {!era.isParallelPolities ? (
-                      eraRulers.length ? (
-                        <ul className="mt-1 space-y-1">
+                  {active ? (
+                    <div className="px-2 pb-2">
+                      <div className="mt-1 text-xs font-medium text-white/80">{t('ui.rulers')}</div>
+
+                      {!era.isParallelPolities ? (
+                        eraRulers.length ? (
+                          <div className="mt-2">
+                            <div className="relative pl-4">
+                              <div className="absolute left-1 top-0 h-full w-px bg-white/20" />
+                              <ul className="space-y-2">
                         {eraRulers.map((r) => {
                           const rulerActive = selectedRulerId === r.id;
                           return (
-                            <li key={r.id}>
+                            <li key={r.id} className="relative">
+                              <span
+                                className={`absolute -left-[3px] top-2 h-2 w-2 rounded-full ${
+                                  rulerActive ? 'bg-white' : 'bg-white/50'
+                                }`}
+                              />
                               <button
                                 type="button"
                                 onClick={() => {
@@ -175,26 +183,14 @@ export function HistoryApp({
                                   setSelectedRulerId(r.id);
                                 }}
                                 className={`w-full rounded-md px-2 py-1 text-left text-xs transition ${
-                                  active
-                                    ? rulerActive
-                                      ? 'bg-white/20 text-white ring-1 ring-white/30'
-                                      : 'bg-white/10 text-white/95 hover:bg-white/15'
-                                    : rulerActive
-                                      ? 'bg-zinc-900 text-white'
-                                      : 'bg-zinc-50 text-zinc-800 hover:bg-zinc-100'
+                                  rulerActive
+                                    ? 'bg-white/20 text-white ring-1 ring-white/30'
+                                    : 'bg-white/10 text-white/95 hover:bg-white/15'
                                 }`}
                               >
                                 <div className="flex items-baseline justify-between gap-2">
                                   <span className="font-medium">{t(r.nameKey)}</span>
-                                  <span
-                                    className={
-                                      active
-                                        ? 'text-white/80'
-                                        : rulerActive
-                                          ? 'text-white/80'
-                                          : 'text-zinc-500'
-                                    }
-                                  >
+                                  <span className="text-white/80">
                                     {formatYear(r.startYear)}–{formatYear(r.endYear)}
                                   </span>
                                 </div>
@@ -202,71 +198,97 @@ export function HistoryApp({
                             </li>
                           );
                         })}
-                        </ul>
+                              </ul>
+                            </div>
+                          </div>
                       ) : (
-                        <div className={`mt-1 text-xs ${active ? 'text-white/85' : 'text-zinc-500'}`}>-</div>
+                        <div className="mt-2 text-xs text-white/85">-</div>
                       )
                     ) : (
-                      <div className="mt-2 space-y-3">
-                        {polities.map((p) => {
-                          const list = eraRulers
-                            .filter((r) => r.polityId === p.id)
-                            .sort((a, b) => a.startYear - b.startYear);
+                      <div className="mt-2">
+                        {/* Parallel polities matrix: vertical time axis, horizontal polities */}
+                        {(() => {
+                          const span = era.endYear - era.startYear;
+                          const step = span <= 80 ? 5 : span <= 220 ? 10 : 20;
+                          const ticks: number[] = [];
+                          for (let y = era.startYear; y <= era.endYear; y += step) ticks.push(y);
+                          if (ticks[ticks.length - 1] !== era.endYear) ticks.push(era.endYear);
+
+                          const byPolity = new Map<string, Ruler[]>();
+                          for (const p of polities) {
+                            byPolity.set(
+                              p.id,
+                              eraRulers
+                                .filter((r) => r.polityId === p.id)
+                                .sort((a, b) => a.startYear - b.startYear)
+                            );
+                          }
+
+                          const rulerAt = (polityId: string, y: number) => {
+                            const list = byPolity.get(polityId) ?? [];
+                            return list.find((r) => y >= r.startYear && y <= r.endYear) ?? null;
+                          };
+
                           return (
-                            <div key={p.id}>
-                              <div className={`text-[11px] font-semibold ${active ? 'text-white/80' : 'text-zinc-500'}`}>
-                                {t(p.nameKey)}
-                              </div>
-                              {list.length ? (
-                                <ul className="mt-1 space-y-1">
-                                  {list.map((r) => {
-                                    const rulerActive = selectedRulerId === r.id;
-                                    return (
-                                      <li key={r.id}>
+                            <div className="overflow-auto rounded-lg border border-white/10">
+                              <div
+                                className="grid min-w-[620px]"
+                                style={{ gridTemplateColumns: `96px repeat(${polities.length}, minmax(0, 1fr))` }}
+                              >
+                                <div className="sticky top-0 z-10 border-b border-white/10 bg-zinc-950/95 px-2 py-2 text-[11px] font-semibold text-white/80">
+                                  {t('ui.timeline')}
+                                </div>
+                                {polities.map((p) => (
+                                  <div
+                                    key={p.id}
+                                    className="sticky top-0 z-10 border-b border-l border-white/10 bg-zinc-950/95 px-2 py-2 text-[11px] font-semibold text-white/80"
+                                  >
+                                    {t(p.nameKey)}
+                                  </div>
+                                ))}
+
+                                {ticks.map((y) => (
+                                  <React.Fragment key={y}>
+                                    <div className="border-b border-white/10 bg-zinc-950/50 px-2 py-2 text-[11px] text-white/70">
+                                      <div className="flex items-center gap-2">
+                                        <span className="h-2 w-2 rounded-full bg-white/40" />
+                                        <span>{formatYear(y)}</span>
+                                      </div>
+                                    </div>
+                                    {polities.map((p) => {
+                                      const r = rulerAt(p.id, y);
+                                      const activeCell = r ? selectedRulerId === r.id : false;
+                                      return (
                                         <button
+                                          key={`${p.id}-${y}`}
                                           type="button"
                                           onClick={() => {
+                                            if (!r) return;
                                             setSelectedEraId(era.id);
                                             setSelectedRulerId(r.id);
                                           }}
-                                          className={`w-full rounded-md px-2 py-1 text-left text-xs transition ${
-                                            active
-                                              ? rulerActive
-                                                ? 'bg-white/20 text-white ring-1 ring-white/30'
-                                                : 'bg-white/10 text-white/95 hover:bg-white/15'
-                                              : rulerActive
-                                                ? 'bg-zinc-900 text-white'
-                                                : 'bg-zinc-50 text-zinc-800 hover:bg-zinc-100'
+                                          className={`border-b border-l border-white/10 px-2 py-2 text-left text-[11px] transition ${
+                                            r
+                                              ? activeCell
+                                                ? 'bg-white/15 text-white'
+                                                : 'bg-white/5 text-white/90 hover:bg-white/10'
+                                              : 'bg-transparent text-white/30'
                                           }`}
                                         >
-                                          <div className="flex items-baseline justify-between gap-2">
-                                            <span className="font-medium">{t(r.nameKey)}</span>
-                                            <span
-                                              className={
-                                                active
-                                                  ? 'text-white/80'
-                                                  : rulerActive
-                                                    ? 'text-white/80'
-                                                    : 'text-zinc-500'
-                                              }
-                                            >
-                                              {formatYear(r.startYear)}–{formatYear(r.endYear)}
-                                            </span>
-                                          </div>
+                                          {r ? t(r.nameKey) : ''}
                                         </button>
-                                      </li>
-                                    );
-                                  })}
-                                </ul>
-                              ) : (
-                                <div className={`mt-1 text-xs ${active ? 'text-white/85' : 'text-zinc-500'}`}>-</div>
-                              )}
+                                      );
+                                    })}
+                                  </React.Fragment>
+                                ))}
+                              </div>
                             </div>
                           );
-                        })}
+                        })()}
                       </div>
                     )}
                   </div>
+                ) : null}
                 </div>
               );
             })}
