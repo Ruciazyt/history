@@ -356,5 +356,23 @@
       "title": "「初税亩」（伝統）",
       "summary": "租税制度の変化として語られ、春秋期の制度転換の議論に用いられる。"
     }
+  },
+  "polity": {
+    "ws": {
+      "qin": "秦",
+      "chu": "楚",
+      "qi": "斉",
+      "yan": "燕",
+      "zhao": "趙",
+      "wei": "魏",
+      "han": "韓"
+    },
+    "fdtk": {
+      "laterLiang": "後梁",
+      "laterTang": "後唐",
+      "laterJin": "後晋",
+      "laterHan": "後漢",
+      "laterZhou": "後周"
+    }
   }
 }

@@ -356,5 +356,23 @@
       "title": "“First tax on fields” (trad.)",
       "summary": "A traditionally recorded shift in taxation, often discussed as part of Spring and Autumn institutional change."
     }
+  },
+  "polity": {
+    "ws": {
+      "qin": "Qin",
+      "chu": "Chu",
+      "qi": "Qi",
+      "yan": "Yan",
+      "zhao": "Zhao",
+      "wei": "Wei",
+      "han": "Han"
+    },
+    "fdtk": {
+      "laterLiang": "Later Liang",
+      "laterTang": "Later Tang",
+      "laterJin": "Later Jin",
+      "laterHan": "Later Han",
+      "laterZhou": "Later Zhou"
+    }
   }
 }

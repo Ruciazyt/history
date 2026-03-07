@@ -356,5 +356,23 @@
       "title": "“初税亩”（传统记述）",
       "summary": "传统上记载的赋税制度变化，被用来讨论春秋时期社会与制度转型。"
     }
+  },
+  "polity": {
+    "ws": {
+      "qin": "秦",
+      "chu": "楚",
+      "qi": "齐",
+      "yan": "燕",
+      "zhao": "赵",
+      "wei": "魏",
+      "han": "韩"
+    },
+    "fdtk": {
+      "laterLiang": "后梁",
+      "laterTang": "后唐",
+      "laterJin": "后晋",
+      "laterHan": "后汉",
+      "laterZhou": "后周"
+    }
   }
 }

@@ -3,11 +3,20 @@ export type Era = {
   nameKey: string; // i18n key
   startYear: number; // negative for BCE
   endYear: number;
+
+  /**
+   * Multi-polity (parallel states) era such as Warring States / Five Dynasties.
+   * When true, UI may render rulers grouped by polities instead of a single list.
+   */
+  isParallelPolities?: boolean;
+  polities?: { id: string; nameKey: string }[];
 };
 
 export type Ruler = {
   id: string;
   eraId: string;
+  /** Optional: used when era.isParallelPolities is true */
+  polityId?: string;
   nameKey: string; // i18n key
   startYear: number;
   endYear: number;

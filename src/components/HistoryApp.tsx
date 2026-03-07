@@ -128,6 +128,8 @@ export function HistoryApp({
                 .filter((r) => r.eraId === era.id)
                 .sort((a, b) => a.startYear - b.startYear);
 
+              const polities = era.isParallelPolities ? (era.polities ?? []) : [];
+
               return (
                 <div
                   key={era.id}
@@ -159,8 +161,9 @@ export function HistoryApp({
                     <div className={`mt-1 text-xs font-medium ${active ? 'text-white/80' : 'text-zinc-500'}`}>
                       {t('ui.rulers')}
                     </div>
-                    {eraRulers.length ? (
-                      <ul className="mt-1 space-y-1">
+                    {!era.isParallelPolities ? (
+                      eraRulers.length ? (
+                        <ul className="mt-1 space-y-1">
                         {eraRulers.map((r) => {
                           const rulerActive = selectedRulerId === r.id;
                           return (
@@ -199,9 +202,69 @@ export function HistoryApp({
                             </li>
                           );
                         })}
-                      </ul>
+                        </ul>
+                      ) : (
+                        <div className={`mt-1 text-xs ${active ? 'text-white/85' : 'text-zinc-500'}`}>-</div>
+                      )
                     ) : (
-                      <div className={`mt-1 text-xs ${active ? 'text-white/85' : 'text-zinc-500'}`}>-</div>
+                      <div className="mt-2 space-y-3">
+                        {polities.map((p) => {
+                          const list = eraRulers
+                            .filter((r) => r.polityId === p.id)
+                            .sort((a, b) => a.startYear - b.startYear);
+                          return (
+                            <div key={p.id}>
+                              <div className={`text-[11px] font-semibold ${active ? 'text-white/80' : 'text-zinc-500'}`}>
+                                {t(p.nameKey)}
+                              </div>
+                              {list.length ? (
+                                <ul className="mt-1 space-y-1">
+                                  {list.map((r) => {
+                                    const rulerActive = selectedRulerId === r.id;
+                                    return (
+                                      <li key={r.id}>
+                                        <button
+                                          type="button"
+                                          onClick={() => {
+                                            setSelectedEraId(era.id);
+                                            setSelectedRulerId(r.id);
+                                          }}
+                                          className={`w-full rounded-md px-2 py-1 text-left text-xs transition ${
+                                            active
+                                              ? rulerActive
+                                                ? 'bg-white/20 text-white ring-1 ring-white/30'
+                                                : 'bg-white/10 text-white/95 hover:bg-white/15'
+                                              : rulerActive
+                                                ? 'bg-zinc-900 text-white'
+                                                : 'bg-zinc-50 text-zinc-800 hover:bg-zinc-100'
+                                          }`}
+                                        >
+                                          <div className="flex items-baseline justify-between gap-2">
+                                            <span className="font-medium">{t(r.nameKey)}</span>
+                                            <span
+                                              className={
+                                                active
+                                                  ? 'text-white/80'
+                                                  : rulerActive
+                                                    ? 'text-white/80'
+                                                    : 'text-zinc-500'
+                                              }
+                                            >
+                                              {formatYear(r.startYear)}–{formatYear(r.endYear)}
+                                            </span>
+                                          </div>
+                                        </button>
+                                      </li>
+                                    );
+                                  })}
+                                </ul>
+                              ) : (
+                                <div className={`mt-1 text-xs ${active ? 'text-white/85' : 'text-zinc-500'}`}>-</div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
                     )}
                   </div>
                 </div>
