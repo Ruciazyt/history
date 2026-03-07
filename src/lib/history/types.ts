@@ -1,7 +1,15 @@
 export type Era = {
   id: string;
-  name: string;
+  nameKey: string; // i18n key
   startYear: number; // negative for BCE
+  endYear: number;
+};
+
+export type Ruler = {
+  id: string;
+  eraId: string;
+  nameKey: string; // i18n key
+  startYear: number;
   endYear: number;
 };
 
