@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { locales, type Locale } from '@/i18n/routing';
@@ -16,19 +16,22 @@ function stripLocale(pathname: string) {
   return pathname;
 }
 
+const LABELS: Record<Locale, string> = {
+  zh: '中文',
+  en: 'English',
+  ja: '日本語',
+};
+
 export function LocaleSwitcher() {
-  const t = useTranslations();
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();
-
-  const value = locale;
 
   return (
     <label className="inline-flex items-center gap-2 text-sm text-zinc-600">
       <span className="sr-only">Language</span>
       <select
-        value={value}
+        value={locale}
         onChange={(e) => {
           const next = e.target.value as Locale;
           const rest = stripLocale(pathname);
@@ -37,9 +40,11 @@ export function LocaleSwitcher() {
         }}
         className="rounded-lg border border-zinc-200 bg-white px-2 py-1 text-sm"
       >
-        <option value="zh">{t('locale.zh')}</option>
-        <option value="en">{t('locale.en')}</option>
-        <option value="ja">{t('locale.ja')}</option>
+        {locales.map((l) => (
+          <option key={l} value={l}>
+            {LABELS[l]}
+          </option>
+        ))}
       </select>
     </label>
   );
