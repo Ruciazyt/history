@@ -95,7 +95,7 @@ export function HistoryApp({
   return (
     <div className="flex h-screen flex-col bg-zinc-50 text-zinc-900">
       <header className="shrink-0 border-b border-zinc-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex w-full flex-col gap-2 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="text-sm text-zinc-500">{t('app.title')}</div>
             <h1 className="text-lg font-semibold">{t('app.subtitle')}</h1>
@@ -114,8 +114,8 @@ export function HistoryApp({
         </div>
       </header>
 
-      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col overflow-hidden px-4 py-4">
-        <div className="grid h-full grid-cols-1 gap-4 overflow-hidden lg:grid-cols-[300px_minmax(0,1fr)_360px]">
+      <div className="flex w-full flex-1 flex-col overflow-hidden px-4 py-4">
+        <div className="grid h-full grid-cols-1 gap-4 overflow-hidden lg:grid-cols-[320px_minmax(0,1fr)_380px] xl:grid-cols-[360px_minmax(0,1fr)_420px]">
         {/* Left: era list */}
         <aside className="flex max-h-full flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white p-3">
           <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">
