@@ -12,11 +12,11 @@
     "timeline": "Timeline",
     "centerYear": "Center year",
     "window": {
-      "label": "Window",
-      "years": "{count} years",
       "10": "10 years",
       "50": "50 years",
-      "100": "100 years"
+      "100": "100 years",
+      "label": "Window",
+      "years": "{count} years"
     },
     "events": "Events",
     "noEvents": "No events in this window.",
@@ -71,7 +71,20 @@
     "mingtaizu": "Hongwu Emperor (Taizu of Ming)",
     "mingchengzu": "Yongle Emperor (Chengzu of Ming)",
     "kangxi": "Kangxi Emperor",
-    "qianlong": "Qianlong Emperor"
+    "qianlong": "Qianlong Emperor",
+    "zhou-wu": "King Wu of Zhou",
+    "zhou-cheng": "King Cheng of Zhou",
+    "zhou-kang": "King Kang of Zhou",
+    "zhou-zhao": "King Zhao of Zhou",
+    "zhou-mu": "King Mu of Zhou",
+    "zhou-gong": "King Gong of Zhou",
+    "zhou-yih": "King Yih of Zhou",
+    "zhou-xiao": "King Xiao of Zhou",
+    "zhou-yi": "King Yi of Zhou",
+    "zhou-li": "King Li of Zhou",
+    "zhou-gonghe": "Gonghe Regency",
+    "zhou-xuan": "King Xuan of Zhou",
+    "zhou-you": "King You of Zhou"
   },
   "rulerBio": {
     "qinshihuang": "First emperor of a unified Qin; standardized systems and central authority.",
@@ -89,7 +102,20 @@
     "mingtaizu": "Founder of the Ming; rebuilt institutions and centralized authority.",
     "mingchengzu": "Moved the capital to Beijing; sponsored major maritime expeditions.",
     "kangxi": "Oversaw consolidation and long-term stability; patron of learning and statecraft.",
-    "qianlong": "Peak-era Qing ruler; major cultural projects alongside rising fiscal and social strains."
+    "qianlong": "Peak-era Qing ruler; major cultural projects alongside rising fiscal and social strains.",
+    "zhou-wu": "Overthrew Shang and founded the Zhou dynasty; associated with the conquest at Muye.",
+    "zhou-cheng": "Succeeded early; the Duke of Zhou served as regent and stabilized the new regime.",
+    "zhou-kang": "Traditionally linked to a period of consolidation and relative stability after founding.",
+    "zhou-zhao": "Known in tradition for southern campaigns; his death is linked to a failed expedition.",
+    "zhou-mu": "A long reign in later tradition; associated with westward expeditions and royal authority.",
+    "zhou-gong": "Continued Western Zhou governance; reign sits within the mid-Zhou sequence of kings.",
+    "zhou-yih": "A Western Zhou king; later sources describe pressures on royal authority.",
+    "zhou-xiao": "A short reign; part of the later Western Zhou succession.",
+    "zhou-yi": "Later Western Zhou king; period often described as weakening royal power.",
+    "zhou-li": "His policies led to unrest; deposition triggered the Gonghe Regency, a key chronological marker.",
+    "zhou-gonghe": "A regency period after King Li’s exile; often treated as a key anchor year (841 BCE).",
+    "zhou-xuan": "Traditionally associated with partial restoration of royal authority after the regency.",
+    "zhou-you": "The last Western Zhou king; his death in the Quanrong attack led to the Eastern Zhou transition."
   },
   "rulerHighlight": {
     "qinshihuang": "Unification, standardization (weights, measures, writing), and commandery-county administration.",
@@ -107,7 +133,20 @@
     "mingtaizu": "Institution-building and centralization.",
     "mingchengzu": "Beijing capital era; Zheng He voyages.",
     "kangxi": "Consolidation, frontier governance, and long stability.",
-    "qianlong": "Cultural projects and territorial management at Qing height."
+    "qianlong": "Cultural projects and territorial management at Qing height.",
+    "zhou-wu": "Conquest of Shang; initiation of Zhou political order.",
+    "zhou-cheng": "Regency governance; suppression of early rebellion and consolidation.",
+    "zhou-kang": "Consolidation phase in early Zhou tradition.",
+    "zhou-zhao": "Southern campaigning tradition; limits of royal expansion.",
+    "zhou-mu": "Long reign in tradition; royal authority and westward lore.",
+    "zhou-gong": "Mid-Zhou continuity of rites and governance.",
+    "zhou-yih": "Growing pressures on Zhou center.",
+    "zhou-xiao": "Late Western Zhou succession period.",
+    "zhou-yi": "Royal weakening often noted in later historiography.",
+    "zhou-li": "Unrest leading to exile; Gonghe Regency begins.",
+    "zhou-gonghe": "Chronological anchor around 841 BCE; transitional governance.",
+    "zhou-xuan": "Partial restoration narrative; continued frontier conflicts.",
+    "zhou-you": "Capital sacked; Western Zhou ends."
   },
   "event": {
     "sa-770-zhou-east": {
@@ -241,6 +280,26 @@
     "prc-1978-reform": {
       "title": "Reform and Opening-up begins",
       "summary": "Economic reforms and opening policies start, transforming society and development trajectories."
+    },
+    "wz-1046-muye": {
+      "title": "Battle of Muye",
+      "summary": "Zhou forces defeat Shang, opening the era of Western Zhou rule."
+    },
+    "wz-1042-regency": {
+      "title": "Regency of the Duke of Zhou (trad.)",
+      "summary": "Early regency politics stabilize the new dynasty after succession."
+    },
+    "wz-1040-fengjian": {
+      "title": "Enfeoffment & feudal order expands",
+      "summary": "The Zhou enfeoffment system and ritual-political order are consolidated across regions."
+    },
+    "wz-841-gonghe": {
+      "title": "Gonghe Regency begins (841 BCE)",
+      "summary": "After King Li’s exile, a regency begins; 841 BCE is a key anchor year in Chinese chronology."
+    },
+    "wz-771-quanrong": {
+      "title": "Quanrong sack Haojing (771 BCE)",
+      "summary": "The capital is attacked and King You dies; Western Zhou collapses, paving the way for Eastern Zhou."
     }
   }
 }

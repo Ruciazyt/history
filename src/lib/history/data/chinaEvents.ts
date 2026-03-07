@@ -2,6 +2,51 @@ import type { Event } from '../types';
 
 // Seed data for the MVP. Coordinates are approximate.
 export const CHINA_EVENTS: Event[] = [
+  // Western Zhou
+  {
+    id: 'wz-1046-muye',
+    entityId: 'wz-western-zhou',
+    year: -1046,
+    titleKey: 'event.wz-1046-muye.title',
+    summaryKey: 'event.wz-1046-muye.summary',
+    tags: ['war', 'founding'],
+    location: { lon: 114.7, lat: 34.8, label: 'Muye (approx.)' },
+  },
+  {
+    id: 'wz-1042-regency',
+    entityId: 'wz-western-zhou',
+    year: -1042,
+    titleKey: 'event.wz-1042-regency.title',
+    summaryKey: 'event.wz-1042-regency.summary',
+    tags: ['politics'],
+    location: { lon: 108.9, lat: 34.2, label: 'Haojing (approx.)' },
+  },
+  {
+    id: 'wz-1040-fengjian',
+    entityId: 'wz-western-zhou',
+    year: -1040,
+    titleKey: 'event.wz-1040-fengjian.title',
+    summaryKey: 'event.wz-1040-fengjian.summary',
+    tags: ['institution'],
+  },
+  {
+    id: 'wz-841-gonghe',
+    entityId: 'wz-western-zhou',
+    year: -841,
+    titleKey: 'event.wz-841-gonghe.title',
+    summaryKey: 'event.wz-841-gonghe.summary',
+    tags: ['politics'],
+  },
+  {
+    id: 'wz-771-quanrong',
+    entityId: 'wz-western-zhou',
+    year: -771,
+    titleKey: 'event.wz-771-quanrong.title',
+    summaryKey: 'event.wz-771-quanrong.summary',
+    tags: ['war', 'turningPoint'],
+    location: { lon: 108.9, lat: 34.2, label: 'Haojing region' },
+  },
+
   // Spring & Autumn
   {
     id: 'sa-770-zhou-east',
