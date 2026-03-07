@@ -93,8 +93,8 @@ export function HistoryApp({
   }, [currentEraEvents, otherEraEvents]);
 
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-900">
-      <header className="border-b border-zinc-200 bg-white">
+    <div className="flex h-screen flex-col bg-zinc-50 text-zinc-900">
+      <header className="shrink-0 border-b border-zinc-200 bg-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="text-sm text-zinc-500">{t('app.title')}</div>
@@ -114,13 +114,14 @@ export function HistoryApp({
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 py-4 lg:grid-cols-[300px_minmax(0,1fr)_360px]">
+      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col overflow-hidden px-4 py-4">
+        <div className="grid h-full grid-cols-1 gap-4 overflow-hidden lg:grid-cols-[300px_minmax(0,1fr)_360px]">
         {/* Left: era list */}
-        <aside className="rounded-xl border border-zinc-200 bg-white p-3">
+        <aside className="flex max-h-full flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white p-3">
           <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">
             {t('ui.eras')}
           </div>
-          <div className="space-y-1">
+          <div className="flex-1 space-y-1 overflow-auto pr-1">
             {eras.map((era) => {
               const active = era.id === selectedEraId;
               const eraRulers = rulers
@@ -207,10 +208,12 @@ export function HistoryApp({
               );
             })}
           </div>
+
+          <div className="mt-3 text-xs text-zinc-500">{t('ui.seedNote')}</div>
         </aside>
 
         {/* Center: map + time controls */}
-        <section className="flex flex-col gap-3">
+        <section className="flex min-h-0 flex-col gap-3 overflow-hidden">
           <div className="rounded-xl border border-zinc-200 bg-white p-3">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
@@ -255,13 +258,13 @@ export function HistoryApp({
             </div>
           </div>
 
-          <div className="h-[calc(100vh-220px)] min-h-[680px]">
+          <div className="min-h-0 flex-1">
             <HistoryMap events={mapEvents} />
           </div>
         </section>
 
         {/* Right: events */}
-        <aside className="rounded-xl border border-zinc-200 bg-white p-3">
+        <aside className="max-h-full overflow-auto rounded-xl border border-zinc-200 bg-white p-3">
           <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">
             {t('ui.events')}
           </div>
@@ -355,11 +358,8 @@ export function HistoryApp({
             </div>
           </div>
         </aside>
+        </div>
       </div>
-
-      <footer className="mx-auto max-w-7xl px-4 pb-8 text-xs text-zinc-500">
-        {t('ui.seedNote')}
-      </footer>
     </div>
   );
 }
