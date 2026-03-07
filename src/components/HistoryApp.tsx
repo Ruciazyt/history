@@ -114,7 +114,7 @@ export function HistoryApp({
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 py-4 lg:grid-cols-[260px_1fr_320px]">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 py-4 lg:grid-cols-[300px_minmax(0,1fr)_360px]">
         {/* Left: era list */}
         <aside className="rounded-xl border border-zinc-200 bg-white p-3">
           <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">
@@ -130,7 +130,9 @@ export function HistoryApp({
               return (
                 <div
                   key={era.id}
-                  className={`rounded-lg border ${active ? 'border-zinc-900' : 'border-transparent'} `}
+                  className={`rounded-lg border transition ${
+                    active ? 'border-zinc-900 bg-zinc-950 text-white' : 'border-transparent bg-transparent'
+                  }`}
                 >
                   <button
                     type="button"
@@ -140,20 +142,20 @@ export function HistoryApp({
                     }}
                     className={`w-full rounded-lg px-2 py-2 text-left text-sm transition ${
                       active
-                        ? 'bg-zinc-950 text-white'
+                        ? 'bg-transparent text-white'
                         : 'hover:bg-zinc-50 text-zinc-900'
                     }`}
                   >
                     <div className="flex items-baseline justify-between gap-2">
                       <div className="font-medium">{t(era.nameKey)}</div>
-                      <div className={`text-xs ${active ? 'text-zinc-200' : 'text-zinc-500'}`}>
+                      <div className={`text-xs ${active ? 'text-white/80' : 'text-zinc-500'}`}>
                         {formatYear(era.startYear)}–{formatYear(era.endYear)}
                       </div>
                     </div>
                   </button>
 
                   <div className={`px-2 pb-2 ${active ? '' : 'opacity-80'}`}>
-                    <div className={`mt-1 text-xs font-medium ${active ? 'text-zinc-200' : 'text-zinc-500'}`}>
+                    <div className={`mt-1 text-xs font-medium ${active ? 'text-white/80' : 'text-zinc-500'}`}>
                       {t('ui.rulers')}
                     </div>
                     {eraRulers.length ? (
@@ -253,7 +255,7 @@ export function HistoryApp({
             </div>
           </div>
 
-          <div className="h-[680px]">
+          <div className="h-[calc(100vh-220px)] min-h-[680px]">
             <HistoryMap events={mapEvents} />
           </div>
         </section>
