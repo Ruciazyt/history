@@ -39,21 +39,29 @@ export function HistoryApp({
     [eras, selectedEraId]
   );
 
+  const [selectedRulerId, setSelectedRulerId] = React.useState<string | null>(null);
+  const selectedRuler = React.useMemo(
+    () => (selectedRulerId ? rulers.find((r) => r.id === selectedRulerId) ?? null : null),
+    [rulers, selectedRulerId]
+  );
+
   const [windowYears, setWindowYears] = React.useState<number>(50);
   const [year, setYear] = React.useState<number>(clamp(-350, min, max));
 
-  // Keep year within selected era by default, but don't be strict when user explores.
+  const timelineMin = selectedRuler?.startYear ?? selectedEra.startYear;
+  const timelineMax = selectedRuler?.endYear ?? selectedEra.endYear;
+
+  // Keep year within selection (ruler reign if selected; otherwise era).
   React.useEffect(() => {
-    if (!selectedEra) return;
-    setYear((y) => clamp(y, selectedEra.startYear, selectedEra.endYear));
-  }, [selectedEra]);
+    setYear((y) => clamp(y, timelineMin, timelineMax));
+  }, [timelineMin, timelineMax]);
 
   const half = Math.floor(windowYears / 2);
   const rawFrom = year - half;
   const rawTo = year + half;
 
-  const from = selectedEra ? clamp(rawFrom, selectedEra.startYear, selectedEra.endYear) : rawFrom;
-  const to = selectedEra ? clamp(rawTo, selectedEra.startYear, selectedEra.endYear) : rawTo;
+  const from = clamp(rawFrom, timelineMin, timelineMax);
+  const to = clamp(rawTo, timelineMin, timelineMax);
 
   const inWindow = React.useMemo(
     () => (e: Event) => e.year >= from && e.year <= to,
@@ -126,11 +134,14 @@ export function HistoryApp({
                 >
                   <button
                     type="button"
-                    onClick={() => setSelectedEraId(era.id)}
+                    onClick={() => {
+                      setSelectedEraId(era.id);
+                      setSelectedRulerId(null);
+                    }}
                     className={`w-full rounded-lg px-2 py-2 text-left text-sm transition ${
                       active
-                        ? 'bg-zinc-900 text-white'
-                        : 'hover:bg-zinc-50 text-zinc-800'
+                        ? 'bg-zinc-950 text-white'
+                        : 'hover:bg-zinc-50 text-zinc-900'
                     }`}
                   >
                     <div className="flex items-baseline justify-between gap-2">
@@ -147,24 +158,47 @@ export function HistoryApp({
                     </div>
                     {eraRulers.length ? (
                       <ul className="mt-1 space-y-1">
-                        {eraRulers.map((r) => (
-                          <li
-                            key={r.id}
-                            className={`rounded-md px-2 py-1 text-xs ${
-                              active ? 'bg-white/10 text-white' : 'bg-zinc-50 text-zinc-700'
-                            }`}
-                          >
-                            <div className="flex items-baseline justify-between gap-2">
-                              <span className="font-medium">{t(r.nameKey)}</span>
-                              <span className={active ? 'text-zinc-200' : 'text-zinc-500'}>
-                                {formatYear(r.startYear)}–{formatYear(r.endYear)}
-                              </span>
-                            </div>
-                          </li>
-                        ))}
+                        {eraRulers.map((r) => {
+                          const rulerActive = selectedRulerId === r.id;
+                          return (
+                            <li key={r.id}>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setSelectedEraId(era.id);
+                                  setSelectedRulerId(r.id);
+                                }}
+                                className={`w-full rounded-md px-2 py-1 text-left text-xs transition ${
+                                  active
+                                    ? rulerActive
+                                      ? 'bg-white/20 text-white ring-1 ring-white/30'
+                                      : 'bg-white/10 text-white/95 hover:bg-white/15'
+                                    : rulerActive
+                                      ? 'bg-zinc-900 text-white'
+                                      : 'bg-zinc-50 text-zinc-800 hover:bg-zinc-100'
+                                }`}
+                              >
+                                <div className="flex items-baseline justify-between gap-2">
+                                  <span className="font-medium">{t(r.nameKey)}</span>
+                                  <span
+                                    className={
+                                      active
+                                        ? 'text-white/80'
+                                        : rulerActive
+                                          ? 'text-white/80'
+                                          : 'text-zinc-500'
+                                    }
+                                  >
+                                    {formatYear(r.startYear)}–{formatYear(r.endYear)}
+                                  </span>
+                                </div>
+                              </button>
+                            </li>
+                          );
+                        })}
                       </ul>
                     ) : (
-                      <div className={`mt-1 text-xs ${active ? 'text-zinc-200' : 'text-zinc-500'}`}>
+                      <div className={`mt-1 text-xs ${active ? 'text-white/85' : 'text-zinc-500'}`}>
                         {t('ui.chaos')}
                       </div>
                     )}
@@ -207,16 +241,16 @@ export function HistoryApp({
             <div className="mt-3">
               <input
                 type="range"
-                min={selectedEra.startYear}
-                max={selectedEra.endYear}
+                min={timelineMin}
+                max={timelineMax}
                 step={1}
                 value={year}
                 onChange={(e) => setYear(Number(e.target.value))}
                 className="w-full"
               />
               <div className="mt-1 flex justify-between text-xs text-zinc-500">
-                <span>{formatYear(selectedEra.startYear)}</span>
-                <span>{formatYear(selectedEra.endYear)}</span>
+                <span>{formatYear(timelineMin)}</span>
+                <span>{formatYear(timelineMax)}</span>
               </div>
             </div>
           </div>
@@ -233,6 +267,33 @@ export function HistoryApp({
           </div>
 
           <div className="space-y-5">
+            {selectedRuler ? (
+              <div className="mb-4 rounded-xl border border-zinc-200 bg-zinc-50 p-3">
+                <div className="text-xs text-zinc-500">{t('ui.rulerDetail')}</div>
+                <div className="mt-1 flex items-baseline justify-between gap-2">
+                  <div className="text-base font-semibold text-zinc-900">{t(selectedRuler.nameKey)}</div>
+                  <div className="text-xs text-zinc-600">
+                    {formatYear(selectedRuler.startYear)}–{formatYear(selectedRuler.endYear)}
+                  </div>
+                </div>
+                {selectedRuler.highlightKey ? (
+                  <div className="mt-2 text-sm text-zinc-700">{t(selectedRuler.highlightKey)}</div>
+                ) : null}
+                {selectedRuler.bioKey ? (
+                  <div className="mt-2 text-sm text-zinc-600">{t(selectedRuler.bioKey)}</div>
+                ) : null}
+                <div className="mt-3">
+                  <button
+                    type="button"
+                    className="rounded-lg border border-zinc-200 bg-white px-2 py-1 text-xs text-zinc-700 hover:bg-zinc-50"
+                    onClick={() => setSelectedRulerId(null)}
+                  >
+                    {t('ui.clearRuler')}
+                  </button>
+                </div>
+              </div>
+            ) : null}
+
             <div>
               <div className="mb-2 flex items-baseline justify-between">
                 <div className="text-sm font-semibold">{t(selectedEra.nameKey)}</div>
@@ -243,8 +304,8 @@ export function HistoryApp({
                   currentEraEvents.map((e) => (
                     <li key={e.id} className="rounded-lg border border-zinc-200 p-2">
                       <div className="text-xs text-zinc-500">{formatYear(e.year)}</div>
-                      <div className="text-sm font-semibold">{e.title}</div>
-                      <div className="text-sm text-zinc-700">{e.summary}</div>
+                      <div className="text-sm font-semibold">{t(e.titleKey)}</div>
+                      <div className="text-sm text-zinc-700">{t(e.summaryKey)}</div>
                       {e.tags?.length ? (
                         <div className="mt-1 flex flex-wrap gap-1">
                           {e.tags.map((t) => (
@@ -283,8 +344,8 @@ export function HistoryApp({
                           })()}
                         </div>
                       </div>
-                      <div className="text-sm font-semibold">{e.title}</div>
-                      <div className="text-sm text-zinc-700">{e.summary}</div>
+                      <div className="text-sm font-semibold">{t(e.titleKey)}</div>
+                      <div className="text-sm text-zinc-700">{t(e.summaryKey)}</div>
                     </li>
                   ))
                 ) : (

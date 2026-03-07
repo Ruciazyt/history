@@ -24,6 +24,8 @@
     "noCompare": "この範囲には比較できる出来事がありません。",
     "rulers": "統治者",
     "chaos": "混乱期",
+    "rulerDetail": "統治者",
+    "clearRuler": "選択解除",
     "seedNote": "サンプルデータはMVP用です。年代・地点は概算です。"
   },
   "locale": {
@@ -42,12 +44,119 @@
     "threeKingdoms": "三国",
     "westernJin": "西晋",
     "easternJin16": "東晋・十六国",
-    "southernNorthern": "南北朝"
+    "southernNorthern": "南北朝",
+    "sui": "隋",
+    "tang": "唐",
+    "fiveDynastiesTenKingdoms": "五代十国",
+    "song": "宋",
+    "yuan": "元",
+    "ming": "明",
+    "qing": "清",
+    "roc": "中華民国",
+    "prc": "中華人民共和国"
   },
   "ruler": {
     "qinshihuang": "始皇帝",
     "qiner": "二世皇帝",
     "hangaozu": "漢高祖",
     "hanwudi": "漢武帝"
+  },
+  "rulerBio": {
+    "qinshihuang": "中国を初めて統一した皇帝。制度の標準化と中央集権を推進。",
+    "qiner": "秦の二世。政争と反乱で秦は急速に崩壊へ向かう。",
+    "hangaozu": "劉邦。楚漢戦争後に漢を建国し、戦後秩序を再建。",
+    "hanwudi": "対外拡張と制度改革を進め、漢帝国の形を大きく規定した。"
+  },
+  "rulerHighlight": {
+    "qinshihuang": "統一後、度量衡・文字などの標準化と郡県制を強化。",
+    "qiner": "宦官・権臣の専横と蜂起で短期に終焉。",
+    "hangaozu": "前漢初期の政治枠組みを整える。",
+    "hanwudi": "長期政権で領土拡大と制度整備を推進。"
+  },
+  "event": {
+    "sa-770-zhou-east": {
+      "title": "周王朝が洛邑（洛陽）へ遷都",
+      "summary": "王室の東遷により、春秋時代の始まりとされる。"
+    },
+    "sa-656-qihuan": {
+      "title": "斉の桓公が覇者となる（伝統）",
+      "summary": "管仲の改革などを背景に斉が台頭し、覇者体制の一角を占める。"
+    },
+    "sa-632-chengpu": {
+      "title": "城濮の戦い",
+      "summary": "晋が楚に勝利し、諸侯勢力の均衡に影響を与える。"
+    },
+    "sa-551-confucius": {
+      "title": "孔子の誕生（伝統）",
+      "summary": "儒家思想の重要な基礎を築いた人物として後世に大きな影響。"
+    },
+    "sa-506-boju": {
+      "title": "柏挙の戦い",
+      "summary": "呉が楚に勝ち都を一時占領。諸侯抗争の激しさを示す。"
+    },
+    "ws-453-three-jin": {
+      "title": "晋の三分（韓・趙・魏）",
+      "summary": "権力が再編され、戦国秩序が加速する。"
+    },
+    "ws-356-shangyang-reform": {
+      "title": "商鞅の変法（秦）",
+      "summary": "法家改革で秦の国家動員と軍事力が強化され、統一の基盤となる。"
+    },
+    "ws-341-maling": {
+      "title": "馬陵の戦い",
+      "summary": "斉が魏を伏撃で破る。孫臏の戦術で知られる。"
+    },
+    "ws-260-changping": {
+      "title": "長平の戦い",
+      "summary": "秦が趙に大勝し、統一へ向けた優位が明確になる。"
+    },
+    "ws-221-unification": {
+      "title": "秦が中国を統一",
+      "summary": "六国を滅ぼし、嬴政が始皇帝を称して帝制国家を樹立。"
+    },
+    "qin-214-lingqu": {
+      "title": "霊渠の開削（伝統）",
+      "summary": "南方統治と兵站を支える重要な運河事業。"
+    },
+    "qin-210-first-emperor-death": {
+      "title": "始皇帝の死",
+      "summary": "継承混乱と反乱が続き、秦政権が動揺する。"
+    },
+    "qin-209-dazexiang": {
+      "title": "大沢郷の乱",
+      "summary": "陳勝・呉広の蜂起。反秦の動きが全国へ広がる象徴。"
+    },
+    "han-202-han-founded": {
+      "title": "劉邦が漢を建国",
+      "summary": "楚漢戦争後、劉邦（高祖）が即位し漢帝国を成立させる。"
+    },
+    "han-154-seven-states": {
+      "title": "七国の乱",
+      "summary": "地方諸王の反乱が鎮圧され、中央集権が強化される。"
+    },
+    "han-141-wudi": {
+      "title": "漢武帝が即位",
+      "summary": "対外拡張と制度改革が進む長期統治の始まり。"
+    },
+    "han-138-zhangqian": {
+      "title": "張騫が西域へ派遣",
+      "summary": "西域との往来を開き、後のシルクロード交流の基礎となる。"
+    },
+    "han-60-protectorate": {
+      "title": "西域都護の設置",
+      "summary": "タリム盆地への行政的関与を強め、要路の安全を確保する。"
+    },
+    "eh-105-paper": {
+      "title": "蔡倫の製紙改良（伝統）",
+      "summary": "紙の普及が行政と文化の広がりを後押しする。"
+    },
+    "eh-184-yellow-turbans": {
+      "title": "黄巾の乱",
+      "summary": "大規模反乱で後漢の統制が弱まり、分裂が進む。"
+    },
+    "eh-220-han-ends": {
+      "title": "後漢の終焉",
+      "summary": "献帝が禅譲し、曹丕が魏を建てて三国時代へ。"
+    }
   }
 }

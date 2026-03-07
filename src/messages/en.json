@@ -24,6 +24,8 @@
     "noCompare": "No comparable events in this window.",
     "rulers": "Rulers",
     "chaos": "Chaotic period",
+    "rulerDetail": "Ruler",
+    "clearRuler": "Clear",
     "seedNote": "Seed data is for MVP iteration; dates/locations are approximate."
   },
   "locale": {
@@ -42,12 +44,119 @@
     "threeKingdoms": "Three Kingdoms",
     "westernJin": "Western Jin",
     "easternJin16": "Eastern Jin & Sixteen Kingdoms",
-    "southernNorthern": "Southern & Northern Dynasties"
+    "southernNorthern": "Southern & Northern Dynasties",
+    "sui": "Sui",
+    "tang": "Tang",
+    "fiveDynastiesTenKingdoms": "Five Dynasties & Ten Kingdoms",
+    "song": "Song",
+    "yuan": "Yuan",
+    "ming": "Ming",
+    "qing": "Qing",
+    "roc": "Republic of China",
+    "prc": "People's Republic of China"
   },
   "ruler": {
     "qinshihuang": "Qin Shi Huang",
     "qiner": "Qin Er Shi",
     "hangaozu": "Emperor Gaozu of Han",
     "hanwudi": "Emperor Wu of Han"
+  },
+  "rulerBio": {
+    "qinshihuang": "First emperor of a unified Qin; standardized systems and central authority.",
+    "qiner": "Second Qin ruler; succession crisis and rebellions accelerated Qin's collapse.",
+    "hangaozu": "Founder of the Han dynasty; rebuilt governance after the Qin–Chu wars.",
+    "hanwudi": "Expansion, state monopolies, and Confucian statecraft shaped the Han imperial model."
+  },
+  "rulerHighlight": {
+    "qinshihuang": "Unification, standardization (weights, measures, writing), and commandery-county administration.",
+    "qiner": "Court intrigue and uprisings; Qin rule ends shortly after.",
+    "hangaozu": "Consolidation after Chu–Han contention; early Han institutions take shape.",
+    "hanwudi": "Territorial expansion and institutional reforms; long, influential reign."
+  },
+  "event": {
+    "sa-770-zhou-east": {
+      "title": "Zhou court moves east to Luoyi (Luoyang)",
+      "summary": "The royal court relocates east after turmoil, marking the conventional start of the Spring and Autumn period."
+    },
+    "sa-656-qihuan": {
+      "title": "Duke Huan of Qi becomes hegemon",
+      "summary": "Qi rises as a leading state, associated with Guan Zhong's reforms and the hegemon system."
+    },
+    "sa-632-chengpu": {
+      "title": "Battle of Chengpu",
+      "summary": "Jin defeats Chu in a pivotal battle, shaping the balance among competing states."
+    },
+    "sa-551-confucius": {
+      "title": "Birth of Confucius (trad.)",
+      "summary": "Traditionally dated to this year; later central to East Asian ethical and political thought."
+    },
+    "sa-506-boju": {
+      "title": "Battle of Boju",
+      "summary": "Wu defeats Chu and briefly captures its capital, highlighting volatile interstate rivalry."
+    },
+    "ws-453-three-jin": {
+      "title": "Partition of Jin (Three Jin)",
+      "summary": "Power consolidates into Han, Zhao, and Wei—accelerating the Warring States order."
+    },
+    "ws-356-shangyang-reform": {
+      "title": "Shang Yang reforms in Qin",
+      "summary": "Legalist reforms strengthen Qin institutions, military organization, and agriculture."
+    },
+    "ws-341-maling": {
+      "title": "Battle of Maling",
+      "summary": "Qi defeats Wei with ambush tactics; remembered for Sun Bin's strategy."
+    },
+    "ws-260-changping": {
+      "title": "Battle of Changping",
+      "summary": "Qin's victory over Zhao signals dominance and foreshadows imperial unification."
+    },
+    "ws-221-unification": {
+      "title": "Qin unifies the warring states",
+      "summary": "Qin conquers rival states; Ying Zheng proclaims himself First Emperor."
+    },
+    "qin-214-lingqu": {
+      "title": "Lingqu Canal constructed (trad.)",
+      "summary": "A major canal project supports logistics and consolidation in the south."
+    },
+    "qin-210-first-emperor-death": {
+      "title": "Death of Qin Shi Huang",
+      "summary": "Succession crises and revolts soon follow, undermining Qin rule."
+    },
+    "qin-209-dazexiang": {
+      "title": "Dazexiang Uprising",
+      "summary": "A rebellion led by Chen Sheng and Wu Guang becomes a symbol of anti-Qin unrest."
+    },
+    "han-202-han-founded": {
+      "title": "Liu Bang founds the Han dynasty",
+      "summary": "After the Chu–Han contention, Liu Bang becomes Emperor Gaozu and establishes Han."
+    },
+    "han-154-seven-states": {
+      "title": "Rebellion of the Seven States",
+      "summary": "A major revolt by regional kings is suppressed, strengthening central authority."
+    },
+    "han-141-wudi": {
+      "title": "Emperor Wu of Han begins reign",
+      "summary": "A transformative reign marked by expansion and institutional change."
+    },
+    "han-138-zhangqian": {
+      "title": "Zhang Qian sent to the Western Regions",
+      "summary": "Diplomatic missions open routes and knowledge that later underpin Silk Road connections."
+    },
+    "han-60-protectorate": {
+      "title": "Protectorate of the Western Regions established",
+      "summary": "Han administration in the Tarim Basin formalizes influence on key corridors."
+    },
+    "eh-105-paper": {
+      "title": "Cai Lun improves papermaking (trad.)",
+      "summary": "Papermaking improvements support administration and cultural diffusion."
+    },
+    "eh-184-yellow-turbans": {
+      "title": "Yellow Turban Rebellion",
+      "summary": "A massive uprising weakens central control and accelerates fragmentation."
+    },
+    "eh-220-han-ends": {
+      "title": "End of Eastern Han",
+      "summary": "Emperor Xian abdicates; Cao Pi founds Wei, beginning the Three Kingdoms era."
+    }
   }
 }

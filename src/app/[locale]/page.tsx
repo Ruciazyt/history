@@ -19,7 +19,14 @@ export default async function Home({
   const messages = (await import(`../../messages/${locale}.json`)).default;
 
   return (
-    <NextIntlClientProvider messages={messages} locale={locale}>
+    <NextIntlClientProvider
+      messages={messages}
+      locale={locale}
+      onError={() => {
+        // Avoid hard crashes in the UI for missing keys during iteration.
+      }}
+      getMessageFallback={({ key }) => key}
+    >
       <HistoryApp eras={CHINA_ERAS} events={CHINA_EVENTS} rulers={CHINA_RULERS} />
     </NextIntlClientProvider>
   );

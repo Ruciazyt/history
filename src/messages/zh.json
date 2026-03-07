@@ -24,6 +24,8 @@
     "noCompare": "该窗口暂无可对比事件。",
     "rulers": "统治者",
     "chaos": "混乱时期",
+    "rulerDetail": "统治者信息",
+    "clearRuler": "取消选择",
     "seedNote": "示例数据用于 MVP 迭代；年代与地点为近似值。"
   },
   "locale": {
@@ -42,12 +44,119 @@
     "threeKingdoms": "三国",
     "westernJin": "西晋",
     "easternJin16": "东晋十六国",
-    "southernNorthern": "南北朝"
+    "southernNorthern": "南北朝",
+    "sui": "隋",
+    "tang": "唐",
+    "fiveDynastiesTenKingdoms": "五代十国",
+    "song": "宋",
+    "yuan": "元",
+    "ming": "明",
+    "qing": "清",
+    "roc": "中华民国",
+    "prc": "中华人民共和国"
   },
   "ruler": {
     "qinshihuang": "秦始皇",
     "qiner": "秦二世",
     "hangaozu": "汉高祖",
     "hanwudi": "汉武帝"
+  },
+  "rulerBio": {
+    "qinshihuang": "中国历史上首位完成大一统的皇帝，确立中央集权与郡县制等制度基础。",
+    "qiner": "秦二世胡亥，在位期间内乱与起义爆发，秦朝迅速崩溃。",
+    "hangaozu": "刘邦，楚汉相争后建立汉朝，恢复与重建战后秩序。",
+    "hanwudi": "对外扩张、改革财政与官制，并确立儒家政治的国家化方向。"
+  },
+  "rulerHighlight": {
+    "qinshihuang": "统一六国后推行度量衡与文字等标准化，强化中央集权。",
+    "qiner": "赵高专权、民变四起，秦朝在短期内覆灭。",
+    "hangaozu": "奠定西汉初期政治框架与制度雏形。",
+    "hanwudi": "长期执政、开疆拓土，对汉帝国形态影响深远。"
+  },
+  "event": {
+    "sa-770-zhou-east": {
+      "title": "周平王东迁洛邑（洛阳）",
+      "summary": "王室东迁后，传统上以此为春秋时期的起点。"
+    },
+    "sa-656-qihuan": {
+      "title": "齐桓公称霸（传统记述）",
+      "summary": "齐国在管仲改革等背景下崛起，成为诸侯霸主之一。"
+    },
+    "sa-632-chengpu": {
+      "title": "城濮之战",
+      "summary": "晋楚大战的重要节点，影响当时诸侯力量格局。"
+    },
+    "sa-551-confucius": {
+      "title": "孔子诞生（传统纪年）",
+      "summary": "儒家思想的重要奠基者，后世影响深远。"
+    },
+    "sa-506-boju": {
+      "title": "柏举之战",
+      "summary": "吴国击败楚国并一度攻入郢都，反映诸侯争霸的剧烈波动。"
+    },
+    "ws-453-three-jin": {
+      "title": "三家分晋（韩赵魏崛起）",
+      "summary": "晋国权力分化加速，战国格局逐渐成型。"
+    },
+    "ws-356-shangyang-reform": {
+      "title": "商鞅变法（秦）",
+      "summary": "法家改革强化国家动员与军功体系，为秦统一奠定基础。"
+    },
+    "ws-341-maling": {
+      "title": "马陵之战",
+      "summary": "齐国以伏击大破魏军，常与孙膑兵法联系。"
+    },
+    "ws-260-changping": {
+      "title": "长平之战",
+      "summary": "秦赵决战，秦优势确立，统一趋势更明显。"
+    },
+    "ws-221-unification": {
+      "title": "秦统一六国",
+      "summary": "秦灭六国后，嬴政称始皇帝，建立帝制国家。"
+    },
+    "qin-214-lingqu": {
+      "title": "灵渠开凿（传统纪年）",
+      "summary": "重要水利与交通工程，服务南方军政与运输。"
+    },
+    "qin-210-first-emperor-death": {
+      "title": "秦始皇去世",
+      "summary": "继承危机与各地起义很快动摇秦政权。"
+    },
+    "qin-209-dazexiang": {
+      "title": "大泽乡起义",
+      "summary": "陈胜、吴广起义成为反秦浪潮的象征性开端之一。"
+    },
+    "han-202-han-founded": {
+      "title": "刘邦建立汉朝",
+      "summary": "楚汉相争后，刘邦即位为汉高祖，确立汉帝国。"
+    },
+    "han-154-seven-states": {
+      "title": "七国之乱",
+      "summary": "诸侯王叛乱被平定，中央集权进一步加强。"
+    },
+    "han-141-wudi": {
+      "title": "汉武帝即位",
+      "summary": "开启对外扩张与多方面改革的长期统治时期。"
+    },
+    "han-138-zhangqian": {
+      "title": "张骞出使西域",
+      "summary": "汉朝对西域的探索与联络，为后来的丝绸之路交流奠基。"
+    },
+    "han-60-protectorate": {
+      "title": "西域都护府设立",
+      "summary": "在西域建立更稳定的行政与军事体系，维护通道与影响力。"
+    },
+    "eh-105-paper": {
+      "title": "蔡伦改进造纸术（传统说法）",
+      "summary": "造纸技术的改进推动行政与文化传播。"
+    },
+    "eh-184-yellow-turbans": {
+      "title": "黄巾起义",
+      "summary": "大规模民变削弱东汉统治，加速地方割据与分裂。"
+    },
+    "eh-220-han-ends": {
+      "title": "东汉结束",
+      "summary": "汉献帝禅让，曹丕建魏，三国时代开启。"
+    }
   }
 }

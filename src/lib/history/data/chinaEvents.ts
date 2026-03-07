@@ -1,16 +1,14 @@
 import type { Event } from '../types';
 
-// NOTE: This is intentionally "few but high-signal" seed data for the MVP.
-// Coordinates are approximate.
+// Seed data for the MVP. Coordinates are approximate.
 export const CHINA_EVENTS: Event[] = [
   // Spring & Autumn
   {
     id: 'sa-770-zhou-east',
     entityId: 'period-spring-autumn',
     year: -770,
-    title: 'Zhou court moves east to Luoyi (Luoyang)',
-    summary:
-      'The royal court relocates east after turmoil, marking the conventional start of the Spring and Autumn period.',
+    titleKey: 'event.sa-770-zhou-east.title',
+    summaryKey: 'event.sa-770-zhou-east.summary',
     tags: ['politics', 'zhou'],
     location: { lon: 112.45, lat: 34.62, label: 'Luoyang' },
   },
@@ -18,29 +16,26 @@ export const CHINA_EVENTS: Event[] = [
     id: 'sa-656-qihuan',
     entityId: 'period-spring-autumn',
     year: -656,
-    title: 'Duke Huan of Qi rises as hegemon',
-    summary:
-      'Qi, assisted by Guan Zhong’s reforms, becomes a leading power among the states under the hegemon system.',
+    titleKey: 'event.sa-656-qihuan.title',
+    summaryKey: 'event.sa-656-qihuan.summary',
     tags: ['reform', 'hegemony'],
-    location: { lon: 118.05, lat: 36.80, label: 'Linzi (Qi)' },
+    location: { lon: 118.05, lat: 36.8, label: 'Linzi (Qi)' },
   },
   {
     id: 'sa-632-chengpu',
     entityId: 'period-spring-autumn',
     year: -632,
-    title: 'Battle of Chengpu',
-    summary:
-      'Jin defeats Chu in a major battle, shaping the balance of power among competing states.',
+    titleKey: 'event.sa-632-chengpu.title',
+    summaryKey: 'event.sa-632-chengpu.summary',
     tags: ['war'],
-    location: { lon: 114.35, lat: 35.70, label: 'Chengpu (approx.)' },
+    location: { lon: 114.35, lat: 35.7, label: 'Chengpu (approx.)' },
   },
   {
     id: 'sa-551-confucius',
     entityId: 'period-spring-autumn',
     year: -551,
-    title: 'Birth of Confucius (trad.)',
-    summary:
-      'Confucius, later central to East Asian political and ethical thought, is traditionally dated to this year.',
+    titleKey: 'event.sa-551-confucius.title',
+    summaryKey: 'event.sa-551-confucius.summary',
     tags: ['culture', 'philosophy'],
     location: { lon: 116.99, lat: 35.59, label: 'Qufu' },
   },
@@ -48,11 +43,10 @@ export const CHINA_EVENTS: Event[] = [
     id: 'sa-506-boju',
     entityId: 'period-spring-autumn',
     year: -506,
-    title: 'Battle of Boju',
-    summary:
-      'Wu defeats Chu and briefly captures Chu’s capital, showing the volatility of interstate rivalry.',
+    titleKey: 'event.sa-506-boju.title',
+    summaryKey: 'event.sa-506-boju.summary',
     tags: ['war'],
-    location: { lon: 114.30, lat: 30.59, label: 'Near Wuhan (approx.)' },
+    location: { lon: 114.3, lat: 30.59, label: 'Near Wuhan (approx.)' },
   },
 
   // Warring States
@@ -60,9 +54,8 @@ export const CHINA_EVENTS: Event[] = [
     id: 'ws-453-three-jin',
     entityId: 'period-warring-states',
     year: -453,
-    title: 'Partition of Jin (Three Jin)',
-    summary:
-      'Power consolidates into Han, Zhao, and Wei, accelerating the Warring States order of territorial states.',
+    titleKey: 'event.ws-453-three-jin.title',
+    summaryKey: 'event.ws-453-three-jin.summary',
     tags: ['politics'],
     location: { lon: 112.43, lat: 37.87, label: 'Taiyuan region (approx.)' },
   },
@@ -70,9 +63,8 @@ export const CHINA_EVENTS: Event[] = [
     id: 'ws-356-shangyang-reform',
     entityId: 'period-warring-states',
     year: -356,
-    title: 'Shang Yang reforms in Qin (begins)',
-    summary:
-      'Legalist reforms strengthen Qin’s institutions, military, and agriculture—key foundations for unification.',
+    titleKey: 'event.ws-356-shangyang-reform.title',
+    summaryKey: 'event.ws-356-shangyang-reform.summary',
     tags: ['reform', 'qin'],
     location: { lon: 108.95, lat: 34.27, label: 'Xianyang area' },
   },
@@ -80,9 +72,8 @@ export const CHINA_EVENTS: Event[] = [
     id: 'ws-341-maling',
     entityId: 'period-warring-states',
     year: -341,
-    title: 'Battle of Maling',
-    summary:
-      'Qi defeats Wei using deception and ambush tactics, remembered for Sun Bin’s strategy.',
+    titleKey: 'event.ws-341-maling.title',
+    summaryKey: 'event.ws-341-maling.summary',
     tags: ['war'],
     location: { lon: 115.65, lat: 35.45, label: 'Maling (approx.)' },
   },
@@ -90,31 +81,28 @@ export const CHINA_EVENTS: Event[] = [
     id: 'ws-260-changping',
     entityId: 'period-warring-states',
     year: -260,
-    title: 'Battle of Changping',
-    summary:
-      'Qin’s decisive victory over Zhao signals Qin’s dominance and foreshadows imperial unification.',
+    titleKey: 'event.ws-260-changping.title',
+    summaryKey: 'event.ws-260-changping.summary',
     tags: ['war', 'qin'],
-    location: { lon: 112.80, lat: 35.49, label: 'Gaoping (approx.)' },
-  },
-  {
-    id: 'ws-221-unification',
-    entityId: 'qin',
-    year: -221,
-    title: 'Qin unifies the warring states',
-    summary:
-      'Qin conquers rival states; Ying Zheng proclaims himself First Emperor (Qin Shi Huang).',
-    tags: ['unification', 'empire'],
-    location: { lon: 109.00, lat: 34.33, label: 'Xianyang' },
+    location: { lon: 112.8, lat: 35.49, label: 'Gaoping (approx.)' },
   },
 
   // Qin
   {
+    id: 'ws-221-unification',
+    entityId: 'qin',
+    year: -221,
+    titleKey: 'event.ws-221-unification.title',
+    summaryKey: 'event.ws-221-unification.summary',
+    tags: ['unification', 'empire'],
+    location: { lon: 109.0, lat: 34.33, label: 'Xianyang' },
+  },
+  {
     id: 'qin-214-lingqu',
     entityId: 'qin',
     year: -214,
-    title: 'Lingqu Canal constructed (trad. date)',
-    summary:
-      'A major canal project links river systems, supporting logistics and consolidation in the south.',
+    titleKey: 'event.qin-214-lingqu.title',
+    summaryKey: 'event.qin-214-lingqu.summary',
     tags: ['infrastructure'],
     location: { lon: 110.99, lat: 25.33, label: 'Guilin region' },
   },
@@ -122,9 +110,8 @@ export const CHINA_EVENTS: Event[] = [
     id: 'qin-210-first-emperor-death',
     entityId: 'qin',
     year: -210,
-    title: 'Death of Qin Shi Huang',
-    summary:
-      'The First Emperor dies during an eastern tour; succession crises and revolts soon follow.',
+    titleKey: 'event.qin-210-first-emperor-death.title',
+    summaryKey: 'event.qin-210-first-emperor-death.summary',
     tags: ['politics'],
     location: { lon: 118.48, lat: 35.05, label: 'Sand Hill / Shaqiu (approx.)' },
   },
@@ -132,21 +119,19 @@ export const CHINA_EVENTS: Event[] = [
     id: 'qin-209-dazexiang',
     entityId: 'qin',
     year: -209,
-    title: 'Dazexiang Uprising',
-    summary:
-      'Chen Sheng and Wu Guang lead a rebellion; it becomes a symbol of widespread anti-Qin unrest.',
+    titleKey: 'event.qin-209-dazexiang.title',
+    summaryKey: 'event.qin-209-dazexiang.summary',
     tags: ['revolt'],
-    location: { lon: 116.60, lat: 33.64, label: 'Dazexiang (approx.)' },
+    location: { lon: 116.6, lat: 33.64, label: 'Dazexiang (approx.)' },
   },
 
   // Han
   {
-    id: 'han-206-han-founded',
+    id: 'han-202-han-founded',
     entityId: 'han-western',
     year: -202,
-    title: 'Liu Bang establishes the Han dynasty',
-    summary:
-      'After the Chu–Han contention, Liu Bang becomes Emperor Gaozu, founding the Han imperial order.',
+    titleKey: 'event.han-202-han-founded.title',
+    summaryKey: 'event.han-202-han-founded.summary',
     tags: ['founding', 'empire'],
     location: { lon: 108.94, lat: 34.34, label: 'Chang’an (Xi’an)' },
   },
@@ -154,19 +139,17 @@ export const CHINA_EVENTS: Event[] = [
     id: 'han-154-seven-states',
     entityId: 'han-western',
     year: -154,
-    title: 'Rebellion of the Seven States',
-    summary:
-      'A major revolt by regional kings is suppressed, strengthening central authority.',
+    titleKey: 'event.han-154-seven-states.title',
+    summaryKey: 'event.han-154-seven-states.summary',
     tags: ['revolt', 'politics'],
-    location: { lon: 117.28, lat: 34.21, label: 'Jiangsu/Anhui region (approx.)' },
+    location: { lon: 117.28, lat: 34.21, label: 'Jiangsu/Anhui (approx.)' },
   },
   {
     id: 'han-141-wudi',
     entityId: 'han-western',
     year: -141,
-    title: 'Emperor Wu of Han begins reign',
-    summary:
-      'A transformative reign marked by expansion, state monopolies, and Confucian statecraft.',
+    titleKey: 'event.han-141-wudi.title',
+    summaryKey: 'event.han-141-wudi.summary',
     tags: ['politics', 'culture'],
     location: { lon: 108.94, lat: 34.34, label: 'Chang’an' },
   },
@@ -174,18 +157,16 @@ export const CHINA_EVENTS: Event[] = [
     id: 'han-138-zhangqian',
     entityId: 'han-western',
     year: -138,
-    title: 'Zhang Qian sent to the Western Regions',
-    summary:
-      'Diplomatic missions open routes and knowledge that later underpin Silk Road connections.',
+    titleKey: 'event.han-138-zhangqian.title',
+    summaryKey: 'event.han-138-zhangqian.summary',
     tags: ['diplomacy', 'trade'],
   },
   {
     id: 'han-60-protectorate',
     entityId: 'han-western',
     year: -60,
-    title: 'Protectorate of the Western Regions established',
-    summary:
-      'Han administration in the Tarim Basin formalizes influence and security on key trade corridors.',
+    titleKey: 'event.han-60-protectorate.title',
+    summaryKey: 'event.han-60-protectorate.summary',
     tags: ['administration', 'frontier'],
     location: { lon: 87.62, lat: 43.82, label: 'Xinjiang region (approx.)' },
   },
@@ -195,9 +176,8 @@ export const CHINA_EVENTS: Event[] = [
     id: 'eh-105-paper',
     entityId: 'han-eastern',
     year: 105,
-    title: 'Cai Lun improves papermaking (trad.)',
-    summary:
-      'Paper production is associated with Cai Lun’s improvements, aiding administration and culture.',
+    titleKey: 'event.eh-105-paper.title',
+    summaryKey: 'event.eh-105-paper.summary',
     tags: ['technology', 'culture'],
     location: { lon: 113.62, lat: 34.75, label: 'Luoyang' },
   },
@@ -205,20 +185,18 @@ export const CHINA_EVENTS: Event[] = [
     id: 'eh-184-yellow-turbans',
     entityId: 'han-eastern',
     year: 184,
-    title: 'Yellow Turban Rebellion',
-    summary:
-      'A massive uprising highlights social strain and weakens central control, paving the way to fragmentation.',
+    titleKey: 'event.eh-184-yellow-turbans.title',
+    summaryKey: 'event.eh-184-yellow-turbans.summary',
     tags: ['revolt'],
-    location: { lon: 114.30, lat: 36.10, label: 'Hebei/Henan region (approx.)' },
+    location: { lon: 114.3, lat: 36.1, label: 'Hebei/Henan (approx.)' },
   },
   {
     id: 'eh-220-han-ends',
     entityId: 'han-eastern',
     year: 220,
-    title: 'End of Eastern Han',
-    summary:
-      'Emperor Xian abdicates; Cao Pi founds Wei, beginning the Three Kingdoms era.',
+    titleKey: 'event.eh-220-han-ends.title',
+    summaryKey: 'event.eh-220-han-ends.summary',
     tags: ['politics'],
-    location: { lon: 113.65, lat: 34.76, label: 'Xuchang / Luoyang region' },
-  },
+    location: { lon: 113.65, lat: 34.76, label: 'Xuchang / Luoyang (approx.)' },
+  }
 ];

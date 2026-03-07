@@ -15,6 +15,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 
 import type { Event } from '@/lib/history/types';
 import { formatYear } from '@/lib/history/utils';
+import { useTranslations } from 'next-intl';
 
 export function HistoryMap({
   events,
@@ -25,6 +26,7 @@ export function HistoryMap({
   initialCenter?: { lon: number; lat: number };
   initialZoom?: number;
 }) {
+  const t = useTranslations();
   const [selectedId, setSelectedId] = React.useState<string | null>(null);
   const selected = React.useMemo(
     () => events.find((e) => e.id === selectedId) ?? null,
@@ -67,7 +69,7 @@ export function HistoryMap({
                 setSelectedId(e.id);
               }}
               className="h-3 w-3 rounded-full bg-red-600 ring-2 ring-white shadow"
-              aria-label={`Event: ${e.title}`}
+              aria-label={`Event: ${t(e.titleKey)}`}
             />
           </Marker>
         ))}
@@ -84,8 +86,8 @@ export function HistoryMap({
           >
             <div className="space-y-1">
               <div className="text-xs text-zinc-500">{formatYear(selected.year)}</div>
-              <div className="text-sm font-semibold text-zinc-900">{selected.title}</div>
-              <div className="text-sm text-zinc-700">{selected.summary}</div>
+              <div className="text-sm font-semibold text-zinc-900">{t(selected.titleKey)}</div>
+              <div className="text-sm text-zinc-700">{t(selected.summaryKey)}</div>
               {selected.location.label ? (
                 <div className="text-xs text-zinc-500">📍 {selected.location.label}</div>
               ) : null}

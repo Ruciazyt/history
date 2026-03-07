@@ -11,6 +11,8 @@ export type Ruler = {
   nameKey: string; // i18n key
   startYear: number;
   endYear: number;
+  bioKey?: string; // i18n key
+  highlightKey?: string; // i18n key
 };
 
 export type Entity = {
@@ -25,10 +27,10 @@ export type Entity = {
 
 export type Event = {
   id: string;
-  entityId: string; // dynasty/country/etc
+  entityId: string; // eraId
   year: number;
-  title: string;
-  summary: string;
+  titleKey: string; // i18n key
+  summaryKey: string; // i18n key
   tags?: string[];
   location?: { lon: number; lat: number; label?: string };
   sources?: { label: string; url?: string }[];
