@@ -97,7 +97,42 @@
     "zhou-jian": "King Jian of Zhou",
     "zhou-ling": "King Ling of Zhou",
     "zhou-jing": "King Jing of Zhou",
-    "zhou-dao": "King Dao (Jing) of Zhou"
+    "zhou-dao": "King Dao (Jing) of Zhou",
+
+    "ws-qin-xiao": "Duke Xiao of Qin",
+    "ws-qin-huiwen": "King Huiwen of Qin",
+    "ws-qin-zhaoxiang": "King Zhaoxiang of Qin",
+    "ws-qin-zheng": "King Zheng of Qin (pre-imperial)",
+
+    "ws-chu-huai": "King Huai of Chu",
+    "ws-chu-qingxiang": "King Qingxiang of Chu",
+    "ws-chu-kaolie": "King Kaolie of Chu",
+    "ws-chu-fuchu": "King Fuchu of Chu",
+
+    "ws-qi-wei": "King Wei of Qi",
+    "ws-qi-xuan": "King Xuan of Qi",
+    "ws-qi-min": "King Min of Qi",
+    "ws-qi-xiang": "King Xiang of Qi",
+    "ws-qi-jian": "King Jian of Qi",
+
+    "ws-yan-zhao": "King Zhao of Yan",
+    "ws-yan-hui": "King Hui of Yan",
+    "ws-yan-xi": "King Wucheng of Yan",
+    "ws-yan-xi2": "King Xi of Yan",
+
+    "ws-zhao-wuling": "King Wuling of Zhao",
+    "ws-zhao-huiwen": "King Huiwen of Zhao",
+    "ws-zhao-xiaocheng": "King Xiaocheng of Zhao",
+    "ws-zhao-daoxiang": "King Daoxiang of Zhao",
+    "ws-zhao-youmiu": "King Youmiu of Zhao",
+
+    "ws-wei-hui": "King Hui of Wei",
+    "ws-wei-xiang": "King Xiang of Wei",
+    "ws-wei-anxi": "King Anxi of Wei",
+    "ws-wei-jia": "King Jia of Wei",
+
+    "ws-han-xuanhui": "King Xuanhui of Han",
+    "ws-han-an": "King An of Han"
   },
   "rulerBio": {
     "qinshihuang": "First emperor of a unified Qin; standardized systems and central authority.",
@@ -141,7 +176,42 @@
     "zhou-jian": "A late-period king as Zhou influence continued to decline.",
     "zhou-ling": "Late Spring and Autumn king amid internal court issues and interstate tensions.",
     "zhou-jing": "Late-period king as the balance among great states evolved rapidly.",
-    "zhou-dao": "Reigned at the end of the Spring and Autumn period; often used as a reference point for the transition toward the Warring States era."
+    "zhou-dao": "Reigned at the end of the Spring and Autumn period; often used as a reference point for the transition toward the Warring States era.",
+
+    "ws-qin-xiao": "Mid-Warring States Qin ruler who appointed Shang Yang and backed major Legalist reforms that strengthened state capacity.",
+    "ws-qin-huiwen": "Continued Qin expansion and consolidation; associated with Qin's transition into a powerful kingdom.",
+    "ws-qin-zhaoxiang": "A long reign during which Qin accumulated decisive advantages; after Changping, Qin's path to unification became clearer.",
+    "ws-qin-zheng": "Unified Qin's internal politics and military resources, culminating in the conquest of the other states and unification in 221 BCE.",
+
+    "ws-chu-huai": "A major Chu king whose rivalry with Qin ended disastrously; he was detained by Qin and died away from his capital.",
+    "ws-chu-qingxiang": "Chu struggled under Qin pressure; the loss of Ying led to a southward shift in Chu's strategic center.",
+    "ws-chu-kaolie": "Ruled during repeated relocations and defensive adjustments as Qin advanced.",
+    "ws-chu-fuchu": "One of Chu's last kings; Chu was conquered by Qin in 223 BCE.",
+
+    "ws-qi-wei": "Promoted reforms and state strengthening, helping Qi rise as a leading eastern power.",
+    "ws-qi-xuan": "Associated with a strong Qi court and the intellectual milieu often linked to the Jixia Academy.",
+    "ws-qi-min": "His reign ended in catastrophe as Yan's invasion devastated Qi.",
+    "ws-qi-xiang": "A recovery-era ruler after Qi's near-collapse, rebuilding institutions and stability.",
+    "ws-qi-jian": "Qi's last king; maintained a cautious stance before being absorbed by Qin in the final unification.",
+
+    "ws-yan-zhao": "Strengthened Yan by recruiting talent (e.g., Yue Yi) and led campaigns that badly damaged Qi.",
+    "ws-yan-hui": "A turbulent reign marked by court politics; Yan's earlier momentum weakened.",
+    "ws-yan-xi": "A mid-to-late Yan king in an era of growing Qin pressure.",
+    "ws-yan-xi2": "One of Yan's last kings; after the failed assassination attempt by Crown Prince Dan, Yan fell to Qin.",
+
+    "ws-zhao-wuling": "Known for the 'Hu clothing and mounted archery' reforms that upgraded Zhao's cavalry and mobility.",
+    "ws-zhao-huiwen": "Oversaw Zhao during a strong phase with notable generals and active diplomacy.",
+    "ws-zhao-xiaocheng": "His reign saw the Battle of Changping, a devastating defeat that weakened Zhao.",
+    "ws-zhao-daoxiang": "Late Zhao ruler; reforms and resistance continued but could not reverse Qin's advance.",
+    "ws-zhao-youmiu": "A final Zhao king; Zhao was conquered by Qin in 228 BCE.",
+
+    "ws-wei-hui": "An early prominent Wei ruler; moved the capital to Daliang and helped Wei enter the ranks of major powers.",
+    "ws-wei-xiang": "Ruled as Wei's strategic position deteriorated under pressure from Qin and Qi.",
+    "ws-wei-anxi": "Attempted coalition diplomacy and internal measures to slow decline.",
+    "ws-wei-jia": "One of Wei's last kings; Wei fell to Qin in 225 BCE.",
+
+    "ws-han-xuanhui": "A Han ruler navigating survival between stronger neighbors in the Central Plains.",
+    "ws-han-an": "Han's last king; Han was the first of the Seven States conquered by Qin (230 BCE)."
   },
   "rulerHighlight": {
     "qinshihuang": "Unification, standardization (weights, measures, writing), and commandery-county administration.",
@@ -185,7 +255,42 @@
     "zhou-jian": "Late-period transition.",
     "zhou-ling": "Deepening tensions in late period.",
     "zhou-jing": "Great-state balance evolves in late period.",
-    "zhou-dao": "A reference point in the transition toward Warring States."
+    "zhou-dao": "A reference point in the transition toward Warring States.",
+
+    "ws-qin-xiao": "Backed Shang Yang's reforms, dramatically increasing Qin's administrative and military capacity.",
+    "ws-qin-huiwen": "Consolidated Qin's gains and pushed further expansion.",
+    "ws-qin-zhaoxiang": "After Changping, Qin held a decisive edge among the major states.",
+    "ws-qin-zheng": "Completed the conquest of the Six States and became the First Emperor.",
+
+    "ws-chu-huai": "Detention by Qin became a symbolic turning point in Chu's weakening position.",
+    "ws-chu-qingxiang": "Loss of Ying forced Chu's strategic southward shift.",
+    "ws-chu-kaolie": "Relocations and defensive adjustments under Qin pressure.",
+    "ws-chu-fuchu": "Chu's final collapse in Qin's unification campaigns.",
+
+    "ws-qi-wei": "Reform and strengthening that made Qi a leading eastern power.",
+    "ws-qi-xuan": "Peak-era Qi court often linked to flourishing intellectual life.",
+    "ws-qi-min": "Yan's invasion devastated Qi.",
+    "ws-qi-xiang": "Recovery and restoration after near-collapse.",
+    "ws-qi-jian": "Qi's absorption in the final phase of Qin unification.",
+
+    "ws-yan-zhao": "Yue Yi's campaign against Qi marked Yan's high point.",
+    "ws-yan-hui": "Court politics and reversals undermined earlier gains.",
+    "ws-yan-xi": "A defensive era under growing Qin dominance.",
+    "ws-yan-xi2": "After the failed assassination attempt, Yan fell to Qin.",
+
+    "ws-zhao-wuling": "Military reforms ('Hu clothing and mounted archery') reshaped Zhao's fighting style.",
+    "ws-zhao-huiwen": "Sustained a strong Zhao amid great-power rivalry.",
+    "ws-zhao-xiaocheng": "Changping shattered Zhao's manpower and momentum.",
+    "ws-zhao-daoxiang": "Struggle to resist Qin despite reforms and diplomacy.",
+    "ws-zhao-youmiu": "Zhao's fall to Qin.",
+
+    "ws-wei-hui": "Capital move to Daliang and Wei's rise as a major power.",
+    "ws-wei-xiang": "Deteriorating position between Qin and eastern rivals.",
+    "ws-wei-anxi": "Coalition diplomacy to slow decline.",
+    "ws-wei-jia": "Wei's conquest by Qin.",
+
+    "ws-han-xuanhui": "Han's survival politics between stronger neighbors.",
+    "ws-han-an": "Han was conquered first in Qin's final unification drive."
   },
   "event": {
     "sa-770-zhou-east": {
@@ -220,9 +325,49 @@
       "title": "Battle of Maling",
       "summary": "Qi defeats Wei with ambush tactics; remembered for Sun Bin's strategy."
     },
+    "ws-307-hufu-qishe": {
+      "title": "Zhao's cavalry reforms (Hu clothing & mounted archery)",
+      "summary": "King Wuling of Zhao promotes cavalry tactics and reforms, reshaping warfare in the north."
+    },
+    "ws-284-yan-attack-qi": {
+      "title": "Yan invades Qi (Yue Yi's campaign)",
+      "summary": "A coalition led by Yan devastates Qi, bringing the state close to collapse."
+    },
+    "ws-278-qin-takes-ying": {
+      "title": "Qin captures Ying (Chu's capital)",
+      "summary": "Qin general Bai Qi takes Ying, forcing Chu's strategic center to shift south."
+    },
+    "ws-256-zhou-ends": {
+      "title": "End of the Zhou royal house (trad.)",
+      "summary": "Zhou's remaining authority collapses, and interstate conquest becomes more definitive."
+    },
     "ws-260-changping": {
       "title": "Battle of Changping",
       "summary": "Qin's victory over Zhao signals dominance and foreshadows imperial unification."
+    },
+    "ws-230-qin-conquers-han": {
+      "title": "Qin conquers Han",
+      "summary": "The first major conquest in Qin's final unification drive; Han falls first among the Seven States."
+    },
+    "ws-228-qin-conquers-zhao": {
+      "title": "Qin conquers Zhao",
+      "summary": "After years of decline following Changping, Zhao is finally taken by Qin."
+    },
+    "ws-225-qin-conquers-wei": {
+      "title": "Qin conquers Wei",
+      "summary": "The fall of Daliang (often linked to flood tactics) ends Wei as an independent state."
+    },
+    "ws-223-qin-conquers-chu": {
+      "title": "Qin conquers Chu",
+      "summary": "A major southern campaign eliminates Chu, one of Qin's largest rivals."
+    },
+    "ws-222-qin-conquers-yan": {
+      "title": "Qin conquers Yan",
+      "summary": "After the failed assassination attempt, Yan cannot resist Qin's advance and falls."
+    },
+    "ws-221-qin-conquers-qi": {
+      "title": "Qin conquers Qi",
+      "summary": "Qi is absorbed in the final phase, completing Qin's conquest of the other states."
     },
     "ws-221-unification": {
       "title": "Qin unifies the warring states",
