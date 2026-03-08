@@ -1,6 +1,8 @@
 import type { Ruler } from '../types';
+import { SPRING_AUTUMN_RULERS } from './springAutumnRulers';
 
 export const CHINA_RULERS: Ruler[] = [
+  ...SPRING_AUTUMN_RULERS,
   // Western Zhou (kings + regency)
   {
     id: 'zhou-wu',
@@ -120,124 +122,7 @@ export const CHINA_RULERS: Ruler[] = [
     endYear: -771,
   },
 
-  // Eastern Zhou (Spring & Autumn: Zhou kings)
-  {
-    id: 'zhou-ping',
-    eraId: 'period-spring-autumn',
-    nameKey: 'ruler.zhou-ping',
-    bioKey: 'rulerBio.zhou-ping',
-    highlightKey: 'rulerHighlight.zhou-ping',
-    startYear: -770,
-    endYear: -720,
-  },
-  {
-    id: 'zhou-huan',
-    eraId: 'period-spring-autumn',
-    nameKey: 'ruler.zhou-huan',
-    bioKey: 'rulerBio.zhou-huan',
-    highlightKey: 'rulerHighlight.zhou-huan',
-    startYear: -719,
-    endYear: -697,
-  },
-  {
-    id: 'zhou-zhuang',
-    eraId: 'period-spring-autumn',
-    nameKey: 'ruler.zhou-zhuang',
-    bioKey: 'rulerBio.zhou-zhuang',
-    highlightKey: 'rulerHighlight.zhou-zhuang',
-    startYear: -696,
-    endYear: -682,
-  },
-  {
-    id: 'zhou-xi',
-    eraId: 'period-spring-autumn',
-    nameKey: 'ruler.zhou-xi',
-    bioKey: 'rulerBio.zhou-xi',
-    highlightKey: 'rulerHighlight.zhou-xi',
-    startYear: -681,
-    endYear: -677,
-  },
-  {
-    id: 'zhou-hui',
-    eraId: 'period-spring-autumn',
-    nameKey: 'ruler.zhou-hui',
-    bioKey: 'rulerBio.zhou-hui',
-    highlightKey: 'rulerHighlight.zhou-hui',
-    startYear: -676,
-    endYear: -652,
-  },
-  {
-    id: 'zhou-xiang',
-    eraId: 'period-spring-autumn',
-    nameKey: 'ruler.zhou-xiang',
-    bioKey: 'rulerBio.zhou-xiang',
-    highlightKey: 'rulerHighlight.zhou-xiang',
-    startYear: -651,
-    endYear: -619,
-  },
-  {
-    id: 'zhou-qing',
-    eraId: 'period-spring-autumn',
-    nameKey: 'ruler.zhou-qing',
-    bioKey: 'rulerBio.zhou-qing',
-    highlightKey: 'rulerHighlight.zhou-qing',
-    startYear: -618,
-    endYear: -613,
-  },
-  {
-    id: 'zhou-kuang',
-    eraId: 'period-spring-autumn',
-    nameKey: 'ruler.zhou-kuang',
-    bioKey: 'rulerBio.zhou-kuang',
-    highlightKey: 'rulerHighlight.zhou-kuang',
-    startYear: -612,
-    endYear: -607,
-  },
-  {
-    id: 'zhou-ding',
-    eraId: 'period-spring-autumn',
-    nameKey: 'ruler.zhou-ding',
-    bioKey: 'rulerBio.zhou-ding',
-    highlightKey: 'rulerHighlight.zhou-ding',
-    startYear: -606,
-    endYear: -586,
-  },
-  {
-    id: 'zhou-jian',
-    eraId: 'period-spring-autumn',
-    nameKey: 'ruler.zhou-jian',
-    bioKey: 'rulerBio.zhou-jian',
-    highlightKey: 'rulerHighlight.zhou-jian',
-    startYear: -585,
-    endYear: -572,
-  },
-  {
-    id: 'zhou-ling',
-    eraId: 'period-spring-autumn',
-    nameKey: 'ruler.zhou-ling',
-    bioKey: 'rulerBio.zhou-ling',
-    highlightKey: 'rulerHighlight.zhou-ling',
-    startYear: -571,
-    endYear: -545,
-  },
-  {
-    id: 'zhou-jing',
-    eraId: 'period-spring-autumn',
-    nameKey: 'ruler.zhou-jing',
-    bioKey: 'rulerBio.zhou-jing',
-    highlightKey: 'rulerHighlight.zhou-jing',
-    startYear: -544,
-    endYear: -520,
-  },
-  {
-    id: 'zhou-dao',
-    eraId: 'period-spring-autumn',
-    nameKey: 'ruler.zhou-dao',
-    bioKey: 'rulerBio.zhou-dao',
-    highlightKey: 'rulerHighlight.zhou-dao',
-    startYear: -519,
-    endYear: -476,
-  },
+  // Spring & Autumn rulers are in springAutumnRulers.ts (spread at top of array)
 
   // Warring States (Seven States, simplified key rulers)
   // Qin
@@ -553,6 +438,15 @@ export const CHINA_RULERS: Ruler[] = [
     startYear: -210,
     endYear: -207,
   },
+  {
+    id: 'qinziying',
+    eraId: 'qin',
+    nameKey: 'ruler.qinziying',
+    bioKey: 'rulerBio.qinziying',
+    highlightKey: 'rulerHighlight.qinziying',
+    startYear: -207,
+    endYear: -206,
+  },
 
   // Western Han (subset)
   {
@@ -573,6 +467,88 @@ export const CHINA_RULERS: Ruler[] = [
     startYear: -141,
     endYear: -87,
   },
+  { id: 'han-hui', eraId: 'han-western', nameKey: 'ruler.han-hui', bioKey: 'rulerBio.han-hui', startYear: -195, endYear: -188 },
+  { id: 'han-lv', eraId: 'han-western', nameKey: 'ruler.han-lv', bioKey: 'rulerBio.han-lv', highlightKey: 'rulerHighlight.han-lv', startYear: -188, endYear: -180 },
+  { id: 'han-wen', eraId: 'han-western', nameKey: 'ruler.han-wen', bioKey: 'rulerBio.han-wen', highlightKey: 'rulerHighlight.han-wen', startYear: -180, endYear: -157 },
+  { id: 'han-jing', eraId: 'han-western', nameKey: 'ruler.han-jing', bioKey: 'rulerBio.han-jing', highlightKey: 'rulerHighlight.han-jing', startYear: -157, endYear: -141 },
+  { id: 'han-zhao', eraId: 'han-western', nameKey: 'ruler.han-zhao', bioKey: 'rulerBio.han-zhao', startYear: -87, endYear: -74 },
+  { id: 'han-xuan', eraId: 'han-western', nameKey: 'ruler.han-xuan', bioKey: 'rulerBio.han-xuan', highlightKey: 'rulerHighlight.han-xuan', startYear: -74, endYear: -49 },
+  { id: 'han-yuan', eraId: 'han-western', nameKey: 'ruler.han-yuan', bioKey: 'rulerBio.han-yuan', startYear: -49, endYear: -33 },
+  { id: 'han-cheng', eraId: 'han-western', nameKey: 'ruler.han-cheng', bioKey: 'rulerBio.han-cheng', startYear: -33, endYear: -7 },
+  { id: 'han-ai', eraId: 'han-western', nameKey: 'ruler.han-ai', bioKey: 'rulerBio.han-ai', startYear: -7, endYear: -1 },
+  { id: 'han-ping', eraId: 'han-western', nameKey: 'ruler.han-ping', bioKey: 'rulerBio.han-ping', startYear: -1, endYear: 5 },
+  { id: 'han-ruzi', eraId: 'han-western', nameKey: 'ruler.han-ruzi', bioKey: 'rulerBio.han-ruzi', startYear: 6, endYear: 8 },
+
+  // Xin dynasty
+  { id: 'xin-wangmang', eraId: 'xin', nameKey: 'ruler.xin-wangmang', bioKey: 'rulerBio.xin-wangmang', highlightKey: 'rulerHighlight.xin-wangmang', startYear: 9, endYear: 23 },
+
+  // Eastern Han
+  { id: 'ehan-guangwu', eraId: 'han-eastern', nameKey: 'ruler.ehan-guangwu', bioKey: 'rulerBio.ehan-guangwu', highlightKey: 'rulerHighlight.ehan-guangwu', startYear: 25, endYear: 57 },
+  { id: 'ehan-ming', eraId: 'han-eastern', nameKey: 'ruler.ehan-ming', bioKey: 'rulerBio.ehan-ming', startYear: 57, endYear: 75 },
+  { id: 'ehan-zhang', eraId: 'han-eastern', nameKey: 'ruler.ehan-zhang', bioKey: 'rulerBio.ehan-zhang', startYear: 75, endYear: 88 },
+  { id: 'ehan-he', eraId: 'han-eastern', nameKey: 'ruler.ehan-he', bioKey: 'rulerBio.ehan-he', startYear: 88, endYear: 105 },
+  { id: 'ehan-an', eraId: 'han-eastern', nameKey: 'ruler.ehan-an', bioKey: 'rulerBio.ehan-an', startYear: 106, endYear: 125 },
+  { id: 'ehan-huan', eraId: 'han-eastern', nameKey: 'ruler.ehan-huan', bioKey: 'rulerBio.ehan-huan', highlightKey: 'rulerHighlight.ehan-huan', startYear: 146, endYear: 168 },
+  { id: 'ehan-ling', eraId: 'han-eastern', nameKey: 'ruler.ehan-ling', bioKey: 'rulerBio.ehan-ling', highlightKey: 'rulerHighlight.ehan-ling', startYear: 168, endYear: 189 },
+  { id: 'ehan-xian', eraId: 'han-eastern', nameKey: 'ruler.ehan-xian', bioKey: 'rulerBio.ehan-xian', highlightKey: 'rulerHighlight.ehan-xian', startYear: 189, endYear: 220 },
+
+
+  // Three Kingdoms - Wei
+  { id: 'tk-wei-caocao', eraId: 'three-kingdoms', polityId: 'tk-wei', nameKey: 'ruler.tk-wei-caocao', bioKey: 'rulerBio.tk-wei-caocao', highlightKey: 'rulerHighlight.tk-wei-caocao', startYear: 220, endYear: 220 },
+  { id: 'tk-wei-caopi', eraId: 'three-kingdoms', polityId: 'tk-wei', nameKey: 'ruler.tk-wei-caopi', bioKey: 'rulerBio.tk-wei-caopi', highlightKey: 'rulerHighlight.tk-wei-caopi', startYear: 220, endYear: 226 },
+  { id: 'tk-wei-caorui', eraId: 'three-kingdoms', polityId: 'tk-wei', nameKey: 'ruler.tk-wei-caorui', bioKey: 'rulerBio.tk-wei-caorui', highlightKey: 'rulerHighlight.tk-wei-caorui', startYear: 226, endYear: 239 },
+  { id: 'tk-wei-caofang', eraId: 'three-kingdoms', polityId: 'tk-wei', nameKey: 'ruler.tk-wei-caofang', bioKey: 'rulerBio.tk-wei-caofang', startYear: 239, endYear: 254 },
+  { id: 'tk-wei-caomao', eraId: 'three-kingdoms', polityId: 'tk-wei', nameKey: 'ruler.tk-wei-caomao', bioKey: 'rulerBio.tk-wei-caomao', startYear: 254, endYear: 260 },
+  { id: 'tk-wei-caohuan', eraId: 'three-kingdoms', polityId: 'tk-wei', nameKey: 'ruler.tk-wei-caohuan', bioKey: 'rulerBio.tk-wei-caohuan', startYear: 260, endYear: 265 },
+
+  // Three Kingdoms - Shu
+  { id: 'tk-shu-liubei', eraId: 'three-kingdoms', polityId: 'tk-shu', nameKey: 'ruler.tk-shu-liubei', bioKey: 'rulerBio.tk-shu-liubei', highlightKey: 'rulerHighlight.tk-shu-liubei', startYear: 221, endYear: 223 },
+  { id: 'tk-shu-liushan', eraId: 'three-kingdoms', polityId: 'tk-shu', nameKey: 'ruler.tk-shu-liushan', bioKey: 'rulerBio.tk-shu-liushan', highlightKey: 'rulerHighlight.tk-shu-liushan', startYear: 223, endYear: 263 },
+
+  // Three Kingdoms - Wu
+  { id: 'tk-wu-sunquan', eraId: 'three-kingdoms', polityId: 'tk-wu', nameKey: 'ruler.tk-wu-sunquan', bioKey: 'rulerBio.tk-wu-sunquan', highlightKey: 'rulerHighlight.tk-wu-sunquan', startYear: 229, endYear: 252 },
+  { id: 'tk-wu-sunliang', eraId: 'three-kingdoms', polityId: 'tk-wu', nameKey: 'ruler.tk-wu-sunliang', bioKey: 'rulerBio.tk-wu-sunliang', startYear: 252, endYear: 258 },
+  { id: 'tk-wu-sunxiu', eraId: 'three-kingdoms', polityId: 'tk-wu', nameKey: 'ruler.tk-wu-sunxiu', bioKey: 'rulerBio.tk-wu-sunxiu', startYear: 258, endYear: 264 },
+  { id: 'tk-wu-sunhao', eraId: 'three-kingdoms', polityId: 'tk-wu', nameKey: 'ruler.tk-wu-sunhao', bioKey: 'rulerBio.tk-wu-sunhao', highlightKey: 'rulerHighlight.tk-wu-sunhao', startYear: 264, endYear: 280 },
+
+  // Western Jin
+  { id: 'jin-w-wudi', eraId: 'jin-western', nameKey: 'ruler.jin-w-wudi', bioKey: 'rulerBio.jin-w-wudi', highlightKey: 'rulerHighlight.jin-w-wudi', startYear: 265, endYear: 290 },
+  { id: 'jin-w-huidi', eraId: 'jin-western', nameKey: 'ruler.jin-w-huidi', bioKey: 'rulerBio.jin-w-huidi', highlightKey: 'rulerHighlight.jin-w-huidi', startYear: 290, endYear: 306 },
+  { id: 'jin-w-huaidi', eraId: 'jin-western', nameKey: 'ruler.jin-w-huaidi', bioKey: 'rulerBio.jin-w-huaidi', startYear: 306, endYear: 313 },
+  { id: 'jin-w-mindi', eraId: 'jin-western', nameKey: 'ruler.jin-w-mindi', bioKey: 'rulerBio.jin-w-mindi', startYear: 313, endYear: 316 },
+
+  // Eastern Jin
+  { id: 'ej-yuan', eraId: 'jin-eastern-16k', polityId: 'ej-jin', nameKey: 'ruler.ej-yuan', bioKey: 'rulerBio.ej-yuan', highlightKey: 'rulerHighlight.ej-yuan', startYear: 317, endYear: 322 },
+  { id: 'ej-cheng', eraId: 'jin-eastern-16k', polityId: 'ej-jin', nameKey: 'ruler.ej-cheng', bioKey: 'rulerBio.ej-cheng', startYear: 325, endYear: 342 },
+  { id: 'ej-mu', eraId: 'jin-eastern-16k', polityId: 'ej-jin', nameKey: 'ruler.ej-mu', bioKey: 'rulerBio.ej-mu', startYear: 344, endYear: 361 },
+  { id: 'ej-xiaowu', eraId: 'jin-eastern-16k', polityId: 'ej-jin', nameKey: 'ruler.ej-xiaowu', bioKey: 'rulerBio.ej-xiaowu', highlightKey: 'rulerHighlight.ej-xiaowu', startYear: 372, endYear: 396 },
+  { id: 'ej-an', eraId: 'jin-eastern-16k', polityId: 'ej-jin', nameKey: 'ruler.ej-an', bioKey: 'rulerBio.ej-an', highlightKey: 'rulerHighlight.ej-an', startYear: 396, endYear: 418 },
+  // 十六国代表（北方）
+  { id: 'ej-north-fuqian', eraId: 'jin-eastern-16k', polityId: 'ej-north', nameKey: 'ruler.ej-north-fuqian', bioKey: 'rulerBio.ej-north-fuqian', highlightKey: 'rulerHighlight.ej-north-fuqian', startYear: 357, endYear: 385 },
+  { id: 'ej-north-tuoba', eraId: 'jin-eastern-16k', polityId: 'ej-north', nameKey: 'ruler.ej-north-tuoba', bioKey: 'rulerBio.ej-north-tuoba', startYear: 386, endYear: 409 },
+
+  // Southern-Northern Dynasties
+  { id: 'sn-south-liuyu', eraId: 'southern-northern', polityId: 'sn-south', nameKey: 'ruler.sn-south-liuyu', bioKey: 'rulerBio.sn-south-liuyu', highlightKey: 'rulerHighlight.sn-south-liuyu', startYear: 420, endYear: 422 },
+  { id: 'sn-south-wendi', eraId: 'southern-northern', polityId: 'sn-south', nameKey: 'ruler.sn-south-wendi', bioKey: 'rulerBio.sn-south-wendi', highlightKey: 'rulerHighlight.sn-south-wendi', startYear: 424, endYear: 453 },
+  { id: 'sn-south-xiaowudi', eraId: 'southern-northern', polityId: 'sn-south', nameKey: 'ruler.sn-south-xiaowudi', bioKey: 'rulerBio.sn-south-xiaowudi', startYear: 453, endYear: 464 },
+  { id: 'sn-south-chenba', eraId: 'southern-northern', polityId: 'sn-south', nameKey: 'ruler.sn-south-chenba', bioKey: 'rulerBio.sn-south-chenba', highlightKey: 'rulerHighlight.sn-south-chenba', startYear: 557, endYear: 559 },
+  { id: 'sn-south-chenxu', eraId: 'southern-northern', polityId: 'sn-south', nameKey: 'ruler.sn-south-chenxu', bioKey: 'rulerBio.sn-south-chenxu', startYear: 569, endYear: 582 },
+  { id: 'sn-north-tuobahong', eraId: 'southern-northern', polityId: 'sn-north', nameKey: 'ruler.sn-north-tuobahong', bioKey: 'rulerBio.sn-north-tuobahong', highlightKey: 'rulerHighlight.sn-north-tuobahong', startYear: 471, endYear: 499 },
+  { id: 'sn-north-weitai', eraId: 'southern-northern', polityId: 'sn-north', nameKey: 'ruler.sn-north-weitai', bioKey: 'rulerBio.sn-north-weitai', startYear: 499, endYear: 515 },
+  { id: 'sn-north-gaoyang', eraId: 'southern-northern', polityId: 'sn-north', nameKey: 'ruler.sn-north-gaoyang', bioKey: 'rulerBio.sn-north-gaoyang', startYear: 550, endYear: 559 },
+  { id: 'sn-north-yuwentai', eraId: 'southern-northern', polityId: 'sn-north', nameKey: 'ruler.sn-north-yuwentai', bioKey: 'rulerBio.sn-north-yuwentai', startYear: 534, endYear: 556 },
+
+  // Five Dynasties
+  { id: 'fd-liang-taizu', eraId: 'five-dynasties-ten-kingdoms', polityId: 'fdtk-later-liang', nameKey: 'ruler.fd-liang-taizu', bioKey: 'rulerBio.fd-liang-taizu', highlightKey: 'rulerHighlight.fd-liang-taizu', startYear: 907, endYear: 912 },
+  { id: 'fd-liang-modi', eraId: 'five-dynasties-ten-kingdoms', polityId: 'fdtk-later-liang', nameKey: 'ruler.fd-liang-modi', bioKey: 'rulerBio.fd-liang-modi', startYear: 912, endYear: 923 },
+  { id: 'fd-tang-zhuangzong', eraId: 'five-dynasties-ten-kingdoms', polityId: 'fdtk-later-tang', nameKey: 'ruler.fd-tang-zhuangzong', bioKey: 'rulerBio.fd-tang-zhuangzong', highlightKey: 'rulerHighlight.fd-tang-zhuangzong', startYear: 923, endYear: 926 },
+  { id: 'fd-tang-mingzong', eraId: 'five-dynasties-ten-kingdoms', polityId: 'fdtk-later-tang', nameKey: 'ruler.fd-tang-mingzong', bioKey: 'rulerBio.fd-tang-mingzong', startYear: 926, endYear: 933 },
+  { id: 'fd-jin-gaozi', eraId: 'five-dynasties-ten-kingdoms', polityId: 'fdtk-later-jin', nameKey: 'ruler.fd-jin-gaozi', bioKey: 'rulerBio.fd-jin-gaozi', highlightKey: 'rulerHighlight.fd-jin-gaozi', startYear: 936, endYear: 942 },
+  { id: 'fd-jin-chudi', eraId: 'five-dynasties-ten-kingdoms', polityId: 'fdtk-later-jin', nameKey: 'ruler.fd-jin-chudi', bioKey: 'rulerBio.fd-jin-chudi', startYear: 942, endYear: 947 },
+  { id: 'fd-han-gaozi', eraId: 'five-dynasties-ten-kingdoms', polityId: 'fdtk-later-han', nameKey: 'ruler.fd-han-gaozi', bioKey: 'rulerBio.fd-han-gaozi', startYear: 947, endYear: 948 },
+  { id: 'fd-zhou-taizu', eraId: 'five-dynasties-ten-kingdoms', polityId: 'fdtk-later-zhou', nameKey: 'ruler.fd-zhou-taizu', bioKey: 'rulerBio.fd-zhou-taizu', highlightKey: 'rulerHighlight.fd-zhou-taizu', startYear: 951, endYear: 954 },
+  { id: 'fd-zhou-shizong', eraId: 'five-dynasties-ten-kingdoms', polityId: 'fdtk-later-zhou', nameKey: 'ruler.fd-zhou-shizong', bioKey: 'rulerBio.fd-zhou-shizong', highlightKey: 'rulerHighlight.fd-zhou-shizong', startYear: 954, endYear: 959 },
+  { id: 'fd-zhou-gongdi', eraId: 'five-dynasties-ten-kingdoms', polityId: 'fdtk-later-zhou', nameKey: 'ruler.fd-zhou-gongdi', bioKey: 'rulerBio.fd-zhou-gongdi', startYear: 959, endYear: 960 },
 
   // Sui
   {
@@ -595,102 +571,60 @@ export const CHINA_RULERS: Ruler[] = [
   },
 
   // Tang
-  {
-    id: 'tangtaizong',
-    eraId: 'tang',
-    nameKey: 'ruler.tangtaizong',
-    bioKey: 'rulerBio.tangtaizong',
-    highlightKey: 'rulerHighlight.tangtaizong',
-    startYear: 626,
-    endYear: 649,
-  },
-  {
-    id: 'wuzetian',
-    eraId: 'tang',
-    nameKey: 'ruler.wuzetian',
-    bioKey: 'rulerBio.wuzetian',
-    highlightKey: 'rulerHighlight.wuzetian',
-    startYear: 690,
-    endYear: 705,
-  },
-  {
-    id: 'tangxuanzong',
-    eraId: 'tang',
-    nameKey: 'ruler.tangxuanzong',
-    bioKey: 'rulerBio.tangxuanzong',
-    highlightKey: 'rulerHighlight.tangxuanzong',
-    startYear: 712,
-    endYear: 756,
-  },
+  { id: 'tang-gaozu', eraId: 'tang', nameKey: 'ruler.tang-gaozu', bioKey: 'rulerBio.tang-gaozu', highlightKey: 'rulerHighlight.tang-gaozu', startYear: 618, endYear: 626 },
+  { id: 'tangtaizong', eraId: 'tang', nameKey: 'ruler.tangtaizong', bioKey: 'rulerBio.tangtaizong', highlightKey: 'rulerHighlight.tangtaizong', startYear: 626, endYear: 649 },
+  { id: 'tang-gaozong', eraId: 'tang', nameKey: 'ruler.tang-gaozong', bioKey: 'rulerBio.tang-gaozong', startYear: 649, endYear: 683 },
+  { id: 'wuzetian', eraId: 'tang', nameKey: 'ruler.wuzetian', bioKey: 'rulerBio.wuzetian', highlightKey: 'rulerHighlight.wuzetian', startYear: 690, endYear: 705 },
+  { id: 'tangxuanzong', eraId: 'tang', nameKey: 'ruler.tangxuanzong', bioKey: 'rulerBio.tangxuanzong', highlightKey: 'rulerHighlight.tangxuanzong', startYear: 712, endYear: 756 },
+  { id: 'tang-suzong', eraId: 'tang', nameKey: 'ruler.tang-suzong', bioKey: 'rulerBio.tang-suzong', startYear: 756, endYear: 762 },
+  { id: 'tang-dezong', eraId: 'tang', nameKey: 'ruler.tang-dezong', bioKey: 'rulerBio.tang-dezong', startYear: 779, endYear: 805 },
+  { id: 'tang-xianzong', eraId: 'tang', nameKey: 'ruler.tang-xianzong', bioKey: 'rulerBio.tang-xianzong', highlightKey: 'rulerHighlight.tang-xianzong', startYear: 805, endYear: 820 },
+  { id: 'tang-xizong', eraId: 'tang', nameKey: 'ruler.tang-xizong', bioKey: 'rulerBio.tang-xizong', startYear: 873, endYear: 888 },
+  { id: 'tang-aidi', eraId: 'tang', nameKey: 'ruler.tang-aidi', bioKey: 'rulerBio.tang-aidi', startYear: 904, endYear: 907 },
 
   // Song
-  {
-    id: 'songtaizu',
-    eraId: 'song',
-    nameKey: 'ruler.songtaizu',
-    bioKey: 'rulerBio.songtaizu',
-    highlightKey: 'rulerHighlight.songtaizu',
-    startYear: 960,
-    endYear: 976,
-  },
-  {
-    id: 'songhuizong',
-    eraId: 'song',
-    nameKey: 'ruler.songhuizong',
-    bioKey: 'rulerBio.songhuizong',
-    highlightKey: 'rulerHighlight.songhuizong',
-    startYear: 1100,
-    endYear: 1126,
-  },
+  { id: 'songtaizu', eraId: 'song', nameKey: 'ruler.songtaizu', bioKey: 'rulerBio.songtaizu', highlightKey: 'rulerHighlight.songtaizu', startYear: 960, endYear: 976 },
+  { id: 'song-taizong', eraId: 'song', nameKey: 'ruler.song-taizong', bioKey: 'rulerBio.song-taizong', startYear: 976, endYear: 997 },
+  { id: 'song-zhenzong', eraId: 'song', nameKey: 'ruler.song-zhenzong', bioKey: 'rulerBio.song-zhenzong', startYear: 997, endYear: 1022 },
+  { id: 'song-renzong', eraId: 'song', nameKey: 'ruler.song-renzong', bioKey: 'rulerBio.song-renzong', highlightKey: 'rulerHighlight.song-renzong', startYear: 1022, endYear: 1063 },
+  { id: 'song-shenzong', eraId: 'song', nameKey: 'ruler.song-shenzong', bioKey: 'rulerBio.song-shenzong', highlightKey: 'rulerHighlight.song-shenzong', startYear: 1067, endYear: 1085 },
+  { id: 'songhuizong', eraId: 'song', nameKey: 'ruler.songhuizong', bioKey: 'rulerBio.songhuizong', highlightKey: 'rulerHighlight.songhuizong', startYear: 1100, endYear: 1125 },
+  { id: 'song-gaozong', eraId: 'song', nameKey: 'ruler.song-gaozong', bioKey: 'rulerBio.song-gaozong', highlightKey: 'rulerHighlight.song-gaozong', startYear: 1127, endYear: 1162 },
+  { id: 'song-xiaozong', eraId: 'song', nameKey: 'ruler.song-xiaozong', bioKey: 'rulerBio.song-xiaozong', startYear: 1162, endYear: 1189 },
+  { id: 'song-lizong', eraId: 'song', nameKey: 'ruler.song-lizong', bioKey: 'rulerBio.song-lizong', startYear: 1224, endYear: 1264 },
+  { id: 'song-didi', eraId: 'song', nameKey: 'ruler.song-didi', bioKey: 'rulerBio.song-didi', startYear: 1278, endYear: 1279 },
 
   // Yuan
-  {
-    id: 'yuanshizu',
-    eraId: 'yuan',
-    nameKey: 'ruler.yuanshizu',
-    bioKey: 'rulerBio.yuanshizu',
-    highlightKey: 'rulerHighlight.yuanshizu',
-    startYear: 1260,
-    endYear: 1294,
-  },
+  { id: 'yuan-taizu', eraId: 'yuan', nameKey: 'ruler.yuan-taizu', bioKey: 'rulerBio.yuan-taizu', highlightKey: 'rulerHighlight.yuan-taizu', startYear: 1206, endYear: 1227 },
+  { id: 'yuan-taizong', eraId: 'yuan', nameKey: 'ruler.yuan-taizong', bioKey: 'rulerBio.yuan-taizong', startYear: 1229, endYear: 1241 },
+  { id: 'yuanshizu', eraId: 'yuan', nameKey: 'ruler.yuanshizu', bioKey: 'rulerBio.yuanshizu', highlightKey: 'rulerHighlight.yuanshizu', startYear: 1260, endYear: 1294 },
+  { id: 'yuan-chengzong', eraId: 'yuan', nameKey: 'ruler.yuan-chengzong', bioKey: 'rulerBio.yuan-chengzong', startYear: 1294, endYear: 1307 },
+  { id: 'yuan-renzong', eraId: 'yuan', nameKey: 'ruler.yuan-renzong', bioKey: 'rulerBio.yuan-renzong', startYear: 1311, endYear: 1320 },
+  { id: 'yuan-shundi', eraId: 'yuan', nameKey: 'ruler.yuan-shundi', bioKey: 'rulerBio.yuan-shundi', highlightKey: 'rulerHighlight.yuan-shundi', startYear: 1333, endYear: 1368 },
 
   // Ming
-  {
-    id: 'mingtaizu',
-    eraId: 'ming',
-    nameKey: 'ruler.mingtaizu',
-    bioKey: 'rulerBio.mingtaizu',
-    highlightKey: 'rulerHighlight.mingtaizu',
-    startYear: 1368,
-    endYear: 1398,
-  },
-  {
-    id: 'mingchengzu',
-    eraId: 'ming',
-    nameKey: 'ruler.mingchengzu',
-    bioKey: 'rulerBio.mingchengzu',
-    highlightKey: 'rulerHighlight.mingchengzu',
-    startYear: 1402,
-    endYear: 1424,
-  },
+  { id: 'mingtaizu', eraId: 'ming', nameKey: 'ruler.mingtaizu', bioKey: 'rulerBio.mingtaizu', highlightKey: 'rulerHighlight.mingtaizu', startYear: 1368, endYear: 1398 },
+  { id: 'mingchengzu', eraId: 'ming', nameKey: 'ruler.mingchengzu', bioKey: 'rulerBio.mingchengzu', highlightKey: 'rulerHighlight.mingchengzu', startYear: 1402, endYear: 1424 },
+  { id: 'ming-xuanzong', eraId: 'ming', nameKey: 'ruler.ming-xuanzong', bioKey: 'rulerBio.ming-xuanzong', startYear: 1425, endYear: 1435 },
+  { id: 'ming-yingzong', eraId: 'ming', nameKey: 'ruler.ming-yingzong', bioKey: 'rulerBio.ming-yingzong', highlightKey: 'rulerHighlight.ming-yingzong', startYear: 1435, endYear: 1449 },
+  { id: 'ming-daizong', eraId: 'ming', nameKey: 'ruler.ming-daizong', bioKey: 'rulerBio.ming-daizong', startYear: 1449, endYear: 1457 },
+  { id: 'ming-xianzong', eraId: 'ming', nameKey: 'ruler.ming-xianzong', bioKey: 'rulerBio.ming-xianzong', startYear: 1464, endYear: 1487 },
+  { id: 'ming-xiaozong', eraId: 'ming', nameKey: 'ruler.ming-xiaozong', bioKey: 'rulerBio.ming-xiaozong', highlightKey: 'rulerHighlight.ming-xiaozong', startYear: 1487, endYear: 1505 },
+  { id: 'ming-shizong', eraId: 'ming', nameKey: 'ruler.ming-shizong', bioKey: 'rulerBio.ming-shizong', startYear: 1521, endYear: 1567 },
+  { id: 'ming-shenzong', eraId: 'ming', nameKey: 'ruler.ming-shenzong', bioKey: 'rulerBio.ming-shenzong', highlightKey: 'rulerHighlight.ming-shenzong', startYear: 1572, endYear: 1620 },
+  { id: 'ming-sizong', eraId: 'ming', nameKey: 'ruler.ming-sizong', bioKey: 'rulerBio.ming-sizong', highlightKey: 'rulerHighlight.ming-sizong', startYear: 1627, endYear: 1644 },
 
   // Qing
-  {
-    id: 'kangxi',
-    eraId: 'qing',
-    nameKey: 'ruler.kangxi',
-    bioKey: 'rulerBio.kangxi',
-    highlightKey: 'rulerHighlight.kangxi',
-    startYear: 1661,
-    endYear: 1722,
-  },
-  {
-    id: 'qianlong',
-    eraId: 'qing',
-    nameKey: 'ruler.qianlong',
-    bioKey: 'rulerBio.qianlong',
-    highlightKey: 'rulerHighlight.qianlong',
-    startYear: 1735,
-    endYear: 1796,
-  },
+  { id: 'qing-taizu', eraId: 'qing', nameKey: 'ruler.qing-taizu', bioKey: 'rulerBio.qing-taizu', highlightKey: 'rulerHighlight.qing-taizu', startYear: 1616, endYear: 1626 },
+  { id: 'qing-taizong', eraId: 'qing', nameKey: 'ruler.qing-taizong', bioKey: 'rulerBio.qing-taizong', startYear: 1626, endYear: 1643 },
+  { id: 'qing-shizhu', eraId: 'qing', nameKey: 'ruler.qing-shizhu', bioKey: 'rulerBio.qing-shizhu', highlightKey: 'rulerHighlight.qing-shizhu', startYear: 1644, endYear: 1661 },
+  { id: 'kangxi', eraId: 'qing', nameKey: 'ruler.kangxi', bioKey: 'rulerBio.kangxi', highlightKey: 'rulerHighlight.kangxi', startYear: 1661, endYear: 1722 },
+  { id: 'qing-shizong', eraId: 'qing', nameKey: 'ruler.qing-shizong', bioKey: 'rulerBio.qing-shizong', highlightKey: 'rulerHighlight.qing-shizong', startYear: 1722, endYear: 1735 },
+  { id: 'qianlong', eraId: 'qing', nameKey: 'ruler.qianlong', bioKey: 'rulerBio.qianlong', highlightKey: 'rulerHighlight.qianlong', startYear: 1735, endYear: 1796 },
+  { id: 'qing-renzong', eraId: 'qing', nameKey: 'ruler.qing-renzong', bioKey: 'rulerBio.qing-renzong', startYear: 1796, endYear: 1820 },
+  { id: 'qing-xuanzong', eraId: 'qing', nameKey: 'ruler.qing-xuanzong', bioKey: 'rulerBio.qing-xuanzong', highlightKey: 'rulerHighlight.qing-xuanzong', startYear: 1820, endYear: 1850 },
+  { id: 'qing-wenzong', eraId: 'qing', nameKey: 'ruler.qing-wenzong', bioKey: 'rulerBio.qing-wenzong', startYear: 1850, endYear: 1861 },
+  { id: 'qing-cixi', eraId: 'qing', nameKey: 'ruler.qing-cixi', bioKey: 'rulerBio.qing-cixi', highlightKey: 'rulerHighlight.qing-cixi', startYear: 1861, endYear: 1908 },
+  { id: 'qing-dezong', eraId: 'qing', nameKey: 'ruler.qing-dezong', bioKey: 'rulerBio.qing-dezong', highlightKey: 'rulerHighlight.qing-dezong', startYear: 1875, endYear: 1908 },
+  { id: 'qing-puyi', eraId: 'qing', nameKey: 'ruler.qing-puyi', bioKey: 'rulerBio.qing-puyi', highlightKey: 'rulerHighlight.qing-puyi', startYear: 1908, endYear: 1912 },
 ];

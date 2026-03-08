@@ -33,17 +33,30 @@ export function HistoryApp({
   const t = useTranslations();
   const { min, max } = React.useMemo(() => yearBounds(eras), [eras]);
 
-  const [selectedEraId, setSelectedEraId] = React.useState<string | null>(eras[1]?.id ?? eras[0]?.id ?? null);
-  const selectedEra = React.useMemo(
-    () => eras.find((e) => e.id === selectedEraId) ?? eras[0],
-    [eras, selectedEraId]
-  );
+  const [openEraIds, setOpenEraIds] = React.useState<Set<string>>(new Set());
+  const toggleEra = React.useCallback((id: string) => {
+    setOpenEraIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }, []);
 
   const [selectedRulerId, setSelectedRulerId] = React.useState<string | null>(null);
   const selectedRuler = React.useMemo(
     () => (selectedRulerId ? rulers.find((r) => r.id === selectedRulerId) ?? null : null),
     [rulers, selectedRulerId]
   );
+
+  const selectedEra = React.useMemo(() => {
+    if (selectedRulerId) {
+      const r = rulers.find((r) => r.id === selectedRulerId);
+      if (r) return eras.find((e) => e.id === r.eraId) ?? eras[0];
+    }
+    const firstOpen = eras.find((e) => openEraIds.has(e.id));
+    return firstOpen ?? eras[0];
+  }, [eras, rulers, selectedRulerId, openEraIds]);
 
   const [windowYears, setWindowYears] = React.useState<number>(50);
   const [year, setYear] = React.useState<number>(clamp(-350, min, max));
@@ -69,19 +82,18 @@ export function HistoryApp({
   );
 
   const currentEraEvents = React.useMemo(() => {
-    const set = new Set([selectedEraId]);
     return events
-      .filter((e) => set.has(e.entityId))
+      .filter((e) => openEraIds.has(e.entityId))
       .filter(inWindow)
       .sort((a, b) => a.year - b.year);
-  }, [events, inWindow, selectedEraId]);
+  }, [events, inWindow, openEraIds]);
 
   const otherEraEvents = React.useMemo(() => {
     return events
-      .filter((e) => e.entityId !== selectedEraId)
+      .filter((e) => !openEraIds.has(e.entityId))
       .filter(inWindow)
       .sort((a, b) => a.year - b.year);
-  }, [events, inWindow, selectedEraId]);
+  }, [events, inWindow, openEraIds]);
 
   const mapEvents = React.useMemo(() => {
     // Prefer showing selected era events, but include others to support comparison.
@@ -115,7 +127,7 @@ export function HistoryApp({
       </header>
 
       <div className="flex w-full flex-1 flex-col overflow-hidden px-4 py-4">
-        <div className="grid h-full grid-cols-1 gap-4 overflow-hidden lg:grid-cols-[320px_minmax(0,1fr)_380px] xl:grid-cols-[360px_minmax(0,1fr)_420px]">
+        <div className="grid h-full grid-cols-1 gap-4 overflow-hidden lg:grid-cols-[380px_minmax(0,1fr)_320px] xl:grid-cols-[440px_minmax(0,1fr)_360px]">
         {/* Left: global vertical timeline (time-proportional, collapsible, scrollable) */}
         <aside className="flex max-h-full flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white">
           <div className="shrink-0 border-b border-zinc-200 bg-white p-3">
@@ -132,223 +144,176 @@ export function HistoryApp({
           </div>
 
           <div className="min-h-0 flex-1 overflow-auto p-3">
-            {(() => {
-              // px-per-year: increase to reduce visual density (more vertical space per year).
-              const pxPerYear = 1.15;
-              const minEraHeight = 140;
+            {/* Flow layout: each era block sized by content, axis line spans the container */}
+            <div className="relative">
+              {/* Continuous axis */}
+              <div className="absolute left-[20px] top-0 bottom-0 w-px bg-zinc-200" />
 
-              return (
-                <div className="space-y-3">
-                  {eras.map((era) => {
-                    const span = Math.max(1, era.endYear - era.startYear);
-                    const sectionH = Math.max(minEraHeight, Math.round(span * pxPerYear));
+              {eras.map((era) => {
+                const open = openEraIds.has(era.id);
+                const eraRulers = rulers
+                  .filter((r) => r.eraId === era.id)
+                  .sort((a, b) => a.startYear - b.startYear);
+                const polities = era.isParallelPolities ? (era.polities ?? []) : [];
 
-                    const eraRulers = rulers
-                      .filter((r) => r.eraId === era.id)
-                      .sort((a, b) => a.startYear - b.startYear);
-
-                    const polities = era.isParallelPolities ? (era.polities ?? []) : [];
-
-                    const yFor = (y: number) => {
-                      const ratio = (y - era.startYear) / span;
-                      return Math.round(ratio * (sectionH - 32)) + 16;
-                    };
-
-                    const open = era.id === selectedEraId;
-
-                    return (
-                      <div
-                        key={era.id}
-                        className="rounded-xl border border-zinc-200 bg-gradient-to-b from-white to-zinc-50"
-                      >
-                        {/* Era node (click the node to expand/collapse) */}
-                        <div className="relative px-3 py-2">
-                          <div className="absolute left-5 top-0 h-full w-px bg-zinc-200" />
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setSelectedRulerId(null);
-                              setSelectedEraId(open ? null : era.id);
-                            }}
-                            className="group relative flex w-full items-baseline gap-3 text-left"
-                          >
-                            <span
-                              className={`mt-1 h-2 w-2 rounded-full ring-4 transition ${
-                                open
-                                  ? 'bg-zinc-900 ring-zinc-900/15'
-                                  : 'bg-zinc-400 ring-zinc-400/15 group-hover:bg-zinc-700 group-hover:ring-zinc-700/15'
-                              }`}
-                              style={{ marginLeft: 8 }}
-                            />
-                            <div className="min-w-0 flex-1">
-                              <div className="flex items-baseline justify-between gap-2">
-                                <div className="min-w-0 truncate text-sm font-semibold text-zinc-900">{t(era.nameKey)}</div>
-                                <div className="shrink-0 text-xs text-zinc-500">
-                                  {formatYear(era.startYear)}–{formatYear(era.endYear)}
-                                </div>
-                              </div>
-                            </div>
-                          </button>
+                return (
+                  <div key={era.id} className="relative">
+                    {/* Era header row */}
+                    <button
+                      type="button"
+                      onClick={() => toggleEra(era.id)}
+                      className="group relative flex w-full items-center gap-3 py-2 pr-2 text-left"
+                      style={{ paddingLeft: 32 }}
+                    >
+                      <span
+                        className={`absolute z-10 h-3 w-3 rounded-full ring-4 transition ${
+                          open
+                            ? 'bg-zinc-900 ring-zinc-900/15'
+                            : 'bg-zinc-400 ring-zinc-400/15 group-hover:bg-zinc-700 group-hover:ring-zinc-700/15'
+                        }`}
+                        style={{ left: 20, transform: 'translate(-50%, -50%)', top: '50%' }}
+                      />
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-baseline justify-between gap-2">
+                          <span className="min-w-0 truncate text-sm font-semibold text-zinc-900">{t(era.nameKey)}</span>
+                          <span className="shrink-0 text-xs text-zinc-500">
+                            {formatYear(era.startYear)}–{formatYear(era.endYear)}
+                          </span>
                         </div>
-
-                        {open ? (
-                          <div className="px-3 pb-3">
-                            <div className="overflow-hidden rounded-lg border border-zinc-200 bg-white">
-                              <div className="relative" style={{ height: sectionH }}>
-                                {/* era axis */}
-                                <div className="absolute left-5 top-0 h-full w-px bg-zinc-200" />
-
-                                {!era.isParallelPolities ? (
-                                  (() => {
-                                    if (!eraRulers.length) {
-                                      return (
-                                        <div className="absolute left-0 top-0 p-3 text-sm text-zinc-500">-</div>
-                                      );
-                                    }
-
-                                    // Collision-avoid labels while keeping dot at the true year position.
-                                    const minGap = 36;
-                                    let lastLabelY = -1e9;
-
-                                    return eraRulers.map((r) => {
-                                      const rawY = yFor(r.startYear);
-                                      const labelY = Math.max(rawY, lastLabelY + minGap);
-                                      lastLabelY = labelY;
-
-                                      const active = selectedRulerId === r.id;
-
-                                      return (
-                                        <div key={r.id} className="absolute left-0 right-0" style={{ top: labelY }}>
-                                          {/* connector from dot (rawY) to labelY */}
-                                          <div
-                                            className="absolute left-5 w-10"
-                                            style={{ top: rawY - labelY + 6, height: 1 }}
-                                          >
-                                            <div className="h-px w-full bg-zinc-200" />
-                                          </div>
-
-                                          <button
-                                            type="button"
-                                            onClick={() => {
-                                              setSelectedEraId(era.id);
-                                              setSelectedRulerId(r.id);
-                                            }}
-                                            className="group flex w-full items-start gap-3 px-3 py-2 text-left"
-                                          >
-                                            {/* dot anchored to rawY */}
-                                            <span
-                                              className={`absolute left-0 h-2 w-2 rounded-full ring-4 transition ${
-                                                active
-                                                  ? 'bg-zinc-900 ring-zinc-900/15'
-                                                  : 'bg-zinc-400 ring-zinc-400/15 group-hover:bg-zinc-700 group-hover:ring-zinc-700/15'
-                                              }`}
-                                              style={{ top: rawY - labelY + 6, marginLeft: 18 }}
-                                            />
-
-                                            <div className="min-w-0 flex-1 pl-7">
-                                              <div className="flex items-baseline justify-between gap-3">
-                                                <div className={`truncate text-sm font-semibold ${active ? 'text-zinc-900' : 'text-zinc-800'}`}>
-                                                  {t(r.nameKey)}
-                                                </div>
-                                                <div className="shrink-0 text-xs text-zinc-500">
-                                                  {formatYear(r.startYear)}–{formatYear(r.endYear)}
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </button>
-                                        </div>
-                                      );
-                                    });
-                                  })()
-                                ) : (
-                                  (() => {
-                                    // Parallel polities matrix (time axis + states)
-                                    const step = span <= 80 ? 5 : span <= 220 ? 10 : 20;
-                                    const ticks: number[] = [];
-                                    for (let y = era.startYear; y <= era.endYear; y += step) ticks.push(y);
-                                    if (ticks[ticks.length - 1] !== era.endYear) ticks.push(era.endYear);
-
-                                    const byPolity = new Map<string, Ruler[]>();
-                                    for (const p of polities) {
-                                      byPolity.set(
-                                        p.id,
-                                        eraRulers
-                                          .filter((r) => r.polityId === p.id)
-                                          .sort((a, b) => a.startYear - b.startYear)
-                                      );
-                                    }
-                                    const rulerAt = (polityId: string, y: number) => {
-                                      const list = byPolity.get(polityId) ?? [];
-                                      return list.find((r) => y >= r.startYear && y <= r.endYear) ?? null;
-                                    };
-
-                                    return (
-                                      <div className="absolute inset-0 overflow-auto">
-                                        <div
-                                          className="grid min-w-[760px]"
-                                          style={{ gridTemplateColumns: `92px repeat(${polities.length}, minmax(0, 1fr))` }}
-                                        >
-                                          <div className="sticky top-0 z-10 border-b border-zinc-200 bg-white px-2 py-2 text-[11px] font-semibold text-zinc-500">
-                                            {t('ui.timeline')}
-                                          </div>
-                                          {polities.map((p) => (
-                                            <div
-                                              key={p.id}
-                                              className="sticky top-0 z-10 border-b border-l border-zinc-200 bg-white px-2 py-2 text-[11px] font-semibold text-zinc-700"
-                                            >
-                                              {t(p.nameKey)}
-                                            </div>
-                                          ))}
-
-                                          {ticks.map((y) => (
-                                            <React.Fragment key={y}>
-                                              <div className="border-b border-zinc-200 bg-zinc-50 px-2 py-2 text-[11px] text-zinc-600">
-                                                <div className="flex items-center gap-2">
-                                                  <span className="h-2 w-2 rounded-full bg-zinc-300" />
-                                                  <span>{formatYear(y)}</span>
-                                                </div>
-                                              </div>
-                                              {polities.map((p) => {
-                                                const r = rulerAt(p.id, y);
-                                                const active = r ? selectedRulerId === r.id : false;
-                                                return (
-                                                  <button
-                                                    key={`${p.id}-${y}`}
-                                                    type="button"
-                                                    onClick={() => {
-                                                      if (!r) return;
-                                                      setSelectedEraId(era.id);
-                                                      setSelectedRulerId(r.id);
-                                                    }}
-                                                    className={`border-b border-l border-zinc-200 px-2 py-2 text-left text-[11px] transition ${
-                                                      r
-                                                        ? active
-                                                          ? 'bg-zinc-900 text-white'
-                                                          : 'bg-white text-zinc-800 hover:bg-zinc-50'
-                                                        : 'bg-white text-zinc-300'
-                                                    }`}
-                                                  >
-                                                    {r ? t(r.nameKey) : ''}
-                                                  </button>
-                                                );
-                                              })}
-                                            </React.Fragment>
-                                          ))}
-                                        </div>
-                                      </div>
-                                    );
-                                  })()
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        ) : null}
                       </div>
-                    );
-                  })}
-                </div>
-              );
-            })()}
+                    </button>
+
+                    {/* Expanded content */}
+                    {open && (
+                      <div className="mb-2">
+                        {!era.isParallelPolities ? (
+                          /* Simple ruler list — dots aligned to the main axis (left=20px) */
+                          <div className="space-y-0.5">
+                            {eraRulers.length === 0 ? (
+                              <div className="py-1 text-xs text-zinc-400" style={{ paddingLeft: 32 }}>—</div>
+                            ) : eraRulers.map((r) => {
+                              const active = selectedRulerId === r.id;
+                              return (
+                                <button
+                                  key={r.id}
+                                  type="button"
+                                  onClick={() => setSelectedRulerId(r.id)}
+                                  className={`group relative flex w-full items-center rounded py-1 pr-2 text-left transition ${active ? 'bg-zinc-100' : 'hover:bg-zinc-50'}`}
+                                  style={{ paddingLeft: 32 }}
+                                >
+                                  {/* dot on axis */}
+                                  <span
+                                    className={`absolute h-1.5 w-1.5 rounded-full transition ${active ? 'bg-zinc-700' : 'bg-zinc-300 group-hover:bg-zinc-500'}`}
+                                    style={{ left: 20, top: '50%', transform: 'translate(-50%, -50%)' }}
+                                  />
+                                  <div className="min-w-0 flex-1 flex items-baseline justify-between gap-2">
+                                    <span className={`truncate text-[11px] font-medium ${active ? 'text-zinc-900' : 'text-zinc-600'}`}>
+                                      {t(r.nameKey)}
+                                    </span>
+                                    <span className="shrink-0 text-[11px] text-zinc-400">
+                                      {formatYear(r.startYear)}–{formatYear(r.endYear)}
+                                    </span>
+                                  </div>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          /* Parallel polities grid */
+                          <div className="ml-8 mr-2 mb-1">
+                          {(() => {
+                            const span = Math.max(1, era.endYear - era.startYear);
+                            const step = span <= 80 ? 5 : span <= 220 ? 10 : 20;
+                            const ticks: number[] = [];
+                            for (let y = era.startYear; y <= era.endYear; y += step) ticks.push(y);
+                            if (ticks[ticks.length - 1] !== era.endYear) ticks.push(era.endYear);
+                            const byPolity = new Map<string, Ruler[]>();
+                            for (const p of polities) {
+                              byPolity.set(
+                                p.id,
+                                eraRulers.filter((r) => r.polityId === p.id).sort((a, b) => a.startYear - b.startYear)
+                              );
+                            }
+                            const rulerAt = (polityId: string, y: number) => {
+                              const list = byPolity.get(polityId) ?? [];
+                              return list.find((r) => y >= r.startYear && y <= r.endYear) ?? null;
+                            };
+                            // Precompute rowspan: for each (polityId, tickIdx), how many consecutive ticks share the same ruler?
+                            // We only render the cell at the first tick of a ruler's run; subsequent ticks are skipped.
+                            type CellInfo = { ruler: Ruler | null; rowSpan: number } | null; // null = skip (covered by earlier rowspan)
+                            const cells: CellInfo[][] = ticks.map((y, ti) =>
+                              polities.map((p) => {
+                                const r = rulerAt(p.id, y);
+                                // Check if same ruler was already at previous tick → skip
+                                if (ti > 0) {
+                                  const prev = rulerAt(p.id, ticks[ti - 1]);
+                                  if (prev && r && prev.id === r.id) return null;
+                                }
+                                // Calculate rowspan: count forward ticks with the same ruler
+                                let span = 1;
+                                for (let j = ti + 1; j < ticks.length; j++) {
+                                  const next = rulerAt(p.id, ticks[j]);
+                                  if (next && r && next.id === r.id) span++;
+                                  else break;
+                                }
+                                return { ruler: r, rowSpan: span };
+                              })
+                            );
+                            return (
+                              <div className="overflow-auto rounded border border-zinc-200 bg-white">
+                                <table className="w-full border-collapse text-[10px]">
+                                  <thead>
+                                    <tr>
+                                      <th className="sticky top-0 z-10 border-b border-zinc-200 bg-white px-2 py-1 text-left font-semibold text-zinc-500 w-16">年份</th>
+                                      {polities.map((p) => (
+                                        <th key={p.id} className="sticky top-0 z-10 border-b border-l border-zinc-200 bg-white px-2 py-1 text-left font-semibold text-zinc-700">
+                                          {t(p.nameKey)}
+                                        </th>
+                                      ))}
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {ticks.map((y, ti) => (
+                                      <tr key={y}>
+                                        <td className="border-b border-zinc-100 bg-zinc-50 px-2 py-1 text-zinc-500 whitespace-nowrap">{formatYear(y)}</td>
+                                        {polities.map((p, pi) => {
+                                          const cell = cells[ti][pi];
+                                          if (cell === null) return null; // skip — covered by rowspan above
+                                          const { ruler: r, rowSpan } = cell;
+                                          const active = r ? selectedRulerId === r.id : false;
+                                          return (
+                                            <td
+                                              key={p.id}
+                                              rowSpan={rowSpan}
+                                              className={`border-b border-l border-zinc-100 px-2 py-1 align-top transition ${r ? active ? 'bg-zinc-900 text-white' : 'text-zinc-700' : 'text-zinc-300'}`}
+                                            >
+                                              {r ? (
+                                                <button
+                                                  type="button"
+                                                  onClick={() => setSelectedRulerId(r.id)}
+                                                  className={`w-full text-left hover:underline ${active ? 'text-white' : ''}`}
+                                                >
+                                                  {t(r.nameKey)}
+                                                </button>
+                                              ) : ''}
+                                            </td>
+                                          );
+                                        })}
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                              </div>
+                            );
+                          })()}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           {/* Ruler detail inline */}

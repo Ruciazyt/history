@@ -3,7 +3,21 @@ import type { Era } from '../types';
 // Year convention: negative = BCE, positive = CE.
 export const CHINA_ERAS: Era[] = [
   { id: 'wz-western-zhou', nameKey: 'era.westernZhou', startYear: -1046, endYear: -771 },
-  { id: 'period-spring-autumn', nameKey: 'era.springAutumn', startYear: -770, endYear: -476 },
+  {
+    id: 'period-spring-autumn',
+    nameKey: 'era.springAutumn',
+    startYear: -770,
+    endYear: -476,
+    isParallelPolities: true,
+    polities: [
+      { id: 'sa-zhou', nameKey: 'polity.sa.zhou' },
+      { id: 'sa-qi', nameKey: 'polity.sa.qi' },
+      { id: 'sa-jin', nameKey: 'polity.sa.jin' },
+      { id: 'sa-chu', nameKey: 'polity.sa.chu' },
+      { id: 'sa-qin', nameKey: 'polity.sa.qin' },
+      { id: 'sa-lu', nameKey: 'polity.sa.lu' },
+    ]
+  },
   {
     id: 'period-warring-states',
     nameKey: 'era.warringStates',
@@ -25,10 +39,26 @@ export const CHINA_ERAS: Era[] = [
   { id: 'han-western', nameKey: 'era.westernHan', startYear: -202, endYear: 8 },
   { id: 'xin', nameKey: 'era.xin', startYear: 9, endYear: 23 },
   { id: 'han-eastern', nameKey: 'era.easternHan', startYear: 25, endYear: 220 },
-  { id: 'three-kingdoms', nameKey: 'era.threeKingdoms', startYear: 220, endYear: 280 },
+  { id: 'three-kingdoms', nameKey: 'era.threeKingdoms', startYear: 220, endYear: 280, isParallelPolities: true,
+    polities: [
+      { id: 'tk-wei', nameKey: 'polity.tk.wei' },
+      { id: 'tk-shu', nameKey: 'polity.tk.shu' },
+      { id: 'tk-wu', nameKey: 'polity.tk.wu' },
+    ]
+  },
   { id: 'jin-western', nameKey: 'era.westernJin', startYear: 265, endYear: 316 },
-  { id: 'jin-eastern-16k', nameKey: 'era.easternJin16', startYear: 317, endYear: 420 },
-  { id: 'southern-northern', nameKey: 'era.southernNorthern', startYear: 420, endYear: 589 },
+  { id: 'jin-eastern-16k', nameKey: 'era.easternJin16', startYear: 317, endYear: 420, isParallelPolities: true,
+    polities: [
+      { id: 'ej-jin', nameKey: 'polity.ej.jin' },
+      { id: 'ej-north', nameKey: 'polity.ej.north' },
+    ]
+  },
+  { id: 'southern-northern', nameKey: 'era.southernNorthern', startYear: 420, endYear: 589, isParallelPolities: true,
+    polities: [
+      { id: 'sn-south', nameKey: 'polity.sn.south' },
+      { id: 'sn-north', nameKey: 'polity.sn.north' },
+    ]
+  },
   { id: 'sui', nameKey: 'era.sui', startYear: 581, endYear: 618 },
   { id: 'tang', nameKey: 'era.tang', startYear: 618, endYear: 907 },
   {
