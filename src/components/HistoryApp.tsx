@@ -116,185 +116,224 @@ export function HistoryApp({
 
       <div className="flex w-full flex-1 flex-col overflow-hidden px-4 py-4">
         <div className="grid h-full grid-cols-1 gap-4 overflow-hidden lg:grid-cols-[320px_minmax(0,1fr)_380px] xl:grid-cols-[360px_minmax(0,1fr)_420px]">
-        {/* Left: era list */}
-        <aside className="flex max-h-full flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white p-3">
-          <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">
-            {t('ui.eras')}
+        {/* Left: vertical timeline (rulers live on the timeline, not in a right sidebar) */}
+        <aside className="flex max-h-full flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white">
+          {/* Era picker */}
+          <div className="shrink-0 border-b border-zinc-200 p-3">
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">{t('ui.eras')}</div>
+            <div className="flex items-center gap-2">
+              <select
+                value={selectedEraId}
+                onChange={(e) => {
+                  setSelectedEraId(e.target.value);
+                  setSelectedRulerId(null);
+                }}
+                className="min-w-0 flex-1 rounded-lg border border-zinc-200 bg-white px-2 py-1 text-sm"
+              >
+                {eras.map((era) => (
+                  <option key={era.id} value={era.id}>
+                    {t(era.nameKey)} · {formatYear(era.startYear)}–{formatYear(era.endYear)}
+                  </option>
+                ))}
+              </select>
+              <div className="shrink-0 rounded-full bg-zinc-100 px-2 py-1 text-[11px] font-medium text-zinc-700">
+                {t('ui.rulers')}
+              </div>
+            </div>
           </div>
-          <div className="flex-1 space-y-1 overflow-auto pr-1">
-            {eras.map((era) => {
-              const active = era.id === selectedEraId;
+
+          {/* Timeline canvas */}
+          <div className="min-h-0 flex-1 overflow-auto p-3">
+            {(() => {
+              const era = selectedEra;
               const eraRulers = rulers
                 .filter((r) => r.eraId === era.id)
                 .sort((a, b) => a.startYear - b.startYear);
 
               const polities = era.isParallelPolities ? (era.polities ?? []) : [];
 
-              return (
-                <div
-                  key={era.id}
-                  className={`rounded-lg border transition ${
-                    active ? 'border-zinc-900 bg-zinc-950 text-white' : 'border-transparent bg-transparent'
-                  }`}
-                >
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedEraId(era.id);
-                      setSelectedRulerId(null);
-                    }}
-                    className={`w-full rounded-lg px-2 py-2 text-left text-sm transition ${
-                      active
-                        ? 'bg-transparent text-white'
-                        : 'hover:bg-zinc-50 text-zinc-900'
-                    }`}
-                  >
-                    <div className="flex items-baseline justify-between gap-2">
-                      <div className="font-medium">{t(era.nameKey)}</div>
-                      <div className={`text-xs ${active ? 'text-white/80' : 'text-zinc-500'}`}>
+              // Single-polity: a vertical axis; each ruler becomes a dot with label to the right.
+              if (!era.isParallelPolities) {
+                if (!eraRulers.length) return <div className="text-sm text-zinc-500">-</div>;
+
+                const span = Math.max(1, era.endYear - era.startYear);
+                const pxPerYear = 1.8; // MVP: readable density
+                const innerH = Math.max(520, Math.round(span * pxPerYear));
+
+                const yFor = (y: number) => {
+                  const ratio = (y - era.startYear) / span;
+                  return Math.round(ratio * (innerH - 32)) + 16;
+                };
+
+                return (
+                  <div className="rounded-xl border border-zinc-200 bg-gradient-to-b from-white to-zinc-50 p-3">
+                    <div className="mb-2 flex items-baseline justify-between gap-2">
+                      <div className="text-sm font-semibold text-zinc-900">{t(era.nameKey)}</div>
+                      <div className="text-xs text-zinc-500">
                         {formatYear(era.startYear)}–{formatYear(era.endYear)}
                       </div>
                     </div>
-                  </button>
 
-                  {active ? (
-                    <div className="px-2 pb-2">
-                      <div className="mt-1 text-xs font-medium text-white/80">{t('ui.rulers')}</div>
+                    <div className="overflow-hidden rounded-lg border border-zinc-200 bg-white">
+                      <div className="relative" style={{ height: innerH }}>
+                        <div className="absolute left-5 top-0 h-full w-px bg-zinc-200" />
 
-                      {!era.isParallelPolities ? (
-                        eraRulers.length ? (
-                          <div className="mt-2">
-                            <div className="relative pl-4">
-                              <div className="absolute left-1 top-0 h-full w-px bg-white/20" />
-                              <ul className="space-y-2">
                         {eraRulers.map((r) => {
-                          const rulerActive = selectedRulerId === r.id;
+                          const y = yFor(r.startYear);
+                          const active = selectedRulerId === r.id;
                           return (
-                            <li key={r.id} className="relative">
-                              <span
-                                className={`absolute -left-[3px] top-2 h-2 w-2 rounded-full ${
-                                  rulerActive ? 'bg-white' : 'bg-white/50'
-                                }`}
-                              />
+                            <div key={r.id} className="absolute left-0 right-0" style={{ top: y }}>
                               <button
                                 type="button"
-                                onClick={() => {
-                                  setSelectedEraId(era.id);
-                                  setSelectedRulerId(r.id);
-                                }}
-                                className={`w-full rounded-md px-2 py-1 text-left text-xs transition ${
-                                  rulerActive
-                                    ? 'bg-white/20 text-white ring-1 ring-white/30'
-                                    : 'bg-white/10 text-white/95 hover:bg-white/15'
-                                }`}
+                                onClick={() => setSelectedRulerId(r.id)}
+                                className="group flex w-full items-start gap-3 px-3 py-2 text-left"
                               >
-                                <div className="flex items-baseline justify-between gap-2">
-                                  <span className="font-medium">{t(r.nameKey)}</span>
-                                  <span className="text-white/80">
-                                    {formatYear(r.startYear)}–{formatYear(r.endYear)}
-                                  </span>
+                                <span
+                                  className={`mt-[6px] h-2 w-2 rounded-full ring-4 transition ${
+                                    active
+                                      ? 'bg-zinc-900 ring-zinc-900/15'
+                                      : 'bg-zinc-400 ring-zinc-400/15 group-hover:bg-zinc-700 group-hover:ring-zinc-700/15'
+                                  }`}
+                                />
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex items-baseline justify-between gap-3">
+                                    <div className={`truncate text-sm font-semibold ${active ? 'text-zinc-900' : 'text-zinc-800'}`}>
+                                      {t(r.nameKey)}
+                                    </div>
+                                    <div className="shrink-0 text-xs text-zinc-500">
+                                      {formatYear(r.startYear)}–{formatYear(r.endYear)}
+                                    </div>
+                                  </div>
+                                  {r.highlightKey ? (
+                                    <div className="mt-1 line-clamp-2 text-xs text-zinc-600">{t(r.highlightKey)}</div>
+                                  ) : null}
                                 </div>
                               </button>
-                            </li>
+                            </div>
                           );
                         })}
-                              </ul>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              // Parallel polities: left column is the vertical time axis; columns to the right are states.
+              const span = era.endYear - era.startYear;
+              const step = span <= 80 ? 5 : span <= 220 ? 10 : 20;
+              const ticks: number[] = [];
+              for (let y = era.startYear; y <= era.endYear; y += step) ticks.push(y);
+              if (ticks[ticks.length - 1] !== era.endYear) ticks.push(era.endYear);
+
+              const byPolity = new Map<string, Ruler[]>();
+              for (const p of polities) {
+                byPolity.set(
+                  p.id,
+                  eraRulers
+                    .filter((r) => r.polityId === p.id)
+                    .sort((a, b) => a.startYear - b.startYear)
+                );
+              }
+              const rulerAt = (polityId: string, y: number) => {
+                const list = byPolity.get(polityId) ?? [];
+                return list.find((r) => y >= r.startYear && y <= r.endYear) ?? null;
+              };
+
+              return (
+                <div className="rounded-xl border border-zinc-200 bg-gradient-to-b from-white to-zinc-50 p-3">
+                  <div className="mb-2 flex items-baseline justify-between gap-2">
+                    <div className="text-sm font-semibold text-zinc-900">{t(era.nameKey)}</div>
+                    <div className="text-xs text-zinc-500">
+                      {formatYear(era.startYear)}–{formatYear(era.endYear)}
+                    </div>
+                  </div>
+
+                  <div className="overflow-auto rounded-lg border border-zinc-200 bg-white">
+                    <div
+                      className="grid min-w-[760px]"
+                      style={{ gridTemplateColumns: `92px repeat(${polities.length}, minmax(0, 1fr))` }}
+                    >
+                      <div className="sticky top-0 z-10 border-b border-zinc-200 bg-white px-2 py-2 text-[11px] font-semibold text-zinc-500">
+                        {t('ui.timeline')}
+                      </div>
+                      {polities.map((p) => (
+                        <div
+                          key={p.id}
+                          className="sticky top-0 z-10 border-b border-l border-zinc-200 bg-white px-2 py-2 text-[11px] font-semibold text-zinc-700"
+                        >
+                          {t(p.nameKey)}
+                        </div>
+                      ))}
+
+                      {ticks.map((y) => (
+                        <React.Fragment key={y}>
+                          <div className="border-b border-zinc-200 bg-zinc-50 px-2 py-2 text-[11px] text-zinc-600">
+                            <div className="flex items-center gap-2">
+                              <span className="h-2 w-2 rounded-full bg-zinc-300" />
+                              <span>{formatYear(y)}</span>
                             </div>
                           </div>
-                      ) : (
-                        <div className="mt-2 text-xs text-white/85">-</div>
-                      )
-                    ) : (
-                      <div className="mt-2">
-                        {/* Parallel polities matrix: vertical time axis, horizontal polities */}
-                        {(() => {
-                          const span = era.endYear - era.startYear;
-                          const step = span <= 80 ? 5 : span <= 220 ? 10 : 20;
-                          const ticks: number[] = [];
-                          for (let y = era.startYear; y <= era.endYear; y += step) ticks.push(y);
-                          if (ticks[ticks.length - 1] !== era.endYear) ticks.push(era.endYear);
-
-                          const byPolity = new Map<string, Ruler[]>();
-                          for (const p of polities) {
-                            byPolity.set(
-                              p.id,
-                              eraRulers
-                                .filter((r) => r.polityId === p.id)
-                                .sort((a, b) => a.startYear - b.startYear)
-                            );
-                          }
-
-                          const rulerAt = (polityId: string, y: number) => {
-                            const list = byPolity.get(polityId) ?? [];
-                            return list.find((r) => y >= r.startYear && y <= r.endYear) ?? null;
-                          };
-
-                          return (
-                            <div className="overflow-auto rounded-lg border border-white/10">
-                              <div
-                                className="grid min-w-[620px]"
-                                style={{ gridTemplateColumns: `96px repeat(${polities.length}, minmax(0, 1fr))` }}
+                          {polities.map((p) => {
+                            const r = rulerAt(p.id, y);
+                            const active = r ? selectedRulerId === r.id : false;
+                            return (
+                              <button
+                                key={`${p.id}-${y}`}
+                                type="button"
+                                onClick={() => {
+                                  if (!r) return;
+                                  setSelectedRulerId(r.id);
+                                }}
+                                className={`border-b border-l border-zinc-200 px-2 py-2 text-left text-[11px] transition ${
+                                  r
+                                    ? active
+                                      ? 'bg-zinc-900 text-white'
+                                      : 'bg-white text-zinc-800 hover:bg-zinc-50'
+                                    : 'bg-white text-zinc-300'
+                                }`}
                               >
-                                <div className="sticky top-0 z-10 border-b border-white/10 bg-zinc-950/95 px-2 py-2 text-[11px] font-semibold text-white/80">
-                                  {t('ui.timeline')}
-                                </div>
-                                {polities.map((p) => (
-                                  <div
-                                    key={p.id}
-                                    className="sticky top-0 z-10 border-b border-l border-white/10 bg-zinc-950/95 px-2 py-2 text-[11px] font-semibold text-white/80"
-                                  >
-                                    {t(p.nameKey)}
-                                  </div>
-                                ))}
-
-                                {ticks.map((y) => (
-                                  <React.Fragment key={y}>
-                                    <div className="border-b border-white/10 bg-zinc-950/50 px-2 py-2 text-[11px] text-white/70">
-                                      <div className="flex items-center gap-2">
-                                        <span className="h-2 w-2 rounded-full bg-white/40" />
-                                        <span>{formatYear(y)}</span>
-                                      </div>
-                                    </div>
-                                    {polities.map((p) => {
-                                      const r = rulerAt(p.id, y);
-                                      const activeCell = r ? selectedRulerId === r.id : false;
-                                      return (
-                                        <button
-                                          key={`${p.id}-${y}`}
-                                          type="button"
-                                          onClick={() => {
-                                            if (!r) return;
-                                            setSelectedEraId(era.id);
-                                            setSelectedRulerId(r.id);
-                                          }}
-                                          className={`border-b border-l border-white/10 px-2 py-2 text-left text-[11px] transition ${
-                                            r
-                                              ? activeCell
-                                                ? 'bg-white/15 text-white'
-                                                : 'bg-white/5 text-white/90 hover:bg-white/10'
-                                              : 'bg-transparent text-white/30'
-                                          }`}
-                                        >
-                                          {r ? t(r.nameKey) : ''}
-                                        </button>
-                                      );
-                                    })}
-                                  </React.Fragment>
-                                ))}
-                              </div>
-                            </div>
-                          );
-                        })()}
-                      </div>
-                    )}
+                                {r ? t(r.nameKey) : ''}
+                              </button>
+                            );
+                          })}
+                        </React.Fragment>
+                      ))}
+                    </div>
                   </div>
-                ) : null}
                 </div>
               );
-            })}
+            })()}
           </div>
 
-          <div className="mt-3 text-xs text-zinc-500">{t('ui.seedNote')}</div>
+          {/* Ruler detail inline (moved from right sidebar) */}
+          {selectedRuler ? (
+            <div className="shrink-0 border-t border-zinc-200 bg-white p-3">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{t('ui.rulerDetail')}</div>
+                  <div className="mt-1 truncate text-base font-semibold text-zinc-900">{t(selectedRuler.nameKey)}</div>
+                  <div className="mt-0.5 text-xs text-zinc-500">
+                    {formatYear(selectedRuler.startYear)}–{formatYear(selectedRuler.endYear)}
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  className="shrink-0 rounded-lg border border-zinc-200 bg-white px-2 py-1 text-xs text-zinc-700 hover:bg-zinc-50"
+                  onClick={() => setSelectedRulerId(null)}
+                >
+                  {t('ui.clearRuler')}
+                </button>
+              </div>
+              {selectedRuler.highlightKey ? (
+                <div className="mt-2 text-sm text-zinc-700">{t(selectedRuler.highlightKey)}</div>
+              ) : null}
+              {selectedRuler.bioKey ? (
+                <div className="mt-2 text-sm text-zinc-600">{t(selectedRuler.bioKey)}</div>
+              ) : null}
+            </div>
+          ) : (
+            <div className="shrink-0 border-t border-zinc-200 bg-white p-3 text-xs text-zinc-500">{t('ui.seedNote')}</div>
+          )}
         </aside>
 
         {/* Center: map + time controls */}
@@ -355,32 +394,6 @@ export function HistoryApp({
           </div>
 
           <div className="space-y-5">
-            {selectedRuler ? (
-              <div className="mb-4 rounded-xl border border-zinc-200 bg-zinc-50 p-3">
-                <div className="text-xs text-zinc-500">{t('ui.rulerDetail')}</div>
-                <div className="mt-1 flex items-baseline justify-between gap-2">
-                  <div className="text-base font-semibold text-zinc-900">{t(selectedRuler.nameKey)}</div>
-                  <div className="text-xs text-zinc-600">
-                    {formatYear(selectedRuler.startYear)}–{formatYear(selectedRuler.endYear)}
-                  </div>
-                </div>
-                {selectedRuler.highlightKey ? (
-                  <div className="mt-2 text-sm text-zinc-700">{t(selectedRuler.highlightKey)}</div>
-                ) : null}
-                {selectedRuler.bioKey ? (
-                  <div className="mt-2 text-sm text-zinc-600">{t(selectedRuler.bioKey)}</div>
-                ) : null}
-                <div className="mt-3">
-                  <button
-                    type="button"
-                    className="rounded-lg border border-zinc-200 bg-white px-2 py-1 text-xs text-zinc-700 hover:bg-zinc-50"
-                    onClick={() => setSelectedRulerId(null)}
-                  >
-                    {t('ui.clearRuler')}
-                  </button>
-                </div>
-              </div>
-            ) : null}
 
             <div>
               <div className="mb-2 flex items-baseline justify-between">
