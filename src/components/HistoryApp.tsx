@@ -7,6 +7,8 @@ import { clamp, formatYear } from '@/lib/history/utils';
 import { HistoryMap } from '@/components/HistoryMap';
 import { LocaleSwitcher } from '@/components/LocaleSwitcher';
 import { useTranslations } from 'next-intl';
+import { worldComparisonEra, eastAsiaComparisonEra } from '@/lib/history/data/worldEras';
+import { worldComparisonRulers, eastAsiaRulers } from '@/lib/history/data/worldRulers';
 
 function rangeLabel(centerYear: number, windowYears: number) {
   const half = Math.floor(windowYears / 2);
@@ -31,7 +33,12 @@ export function HistoryApp({
   rulers: Ruler[];
 }) {
   const t = useTranslations();
-  const { min, max } = React.useMemo(() => yearBounds(eras), [eras]);
+
+  const [civMode, setCivMode] = React.useState<'china' | 'eurasian' | 'east-asia'>('china');
+  const activeEras = civMode === 'china' ? eras : civMode === 'eurasian' ? [worldComparisonEra] : [eastAsiaComparisonEra];
+  const activeRulers = civMode === 'china' ? rulers : civMode === 'eurasian' ? worldComparisonRulers : eastAsiaRulers;
+
+  const { min, max } = React.useMemo(() => yearBounds(activeEras), [activeEras]);
 
   const [openEraIds, setOpenEraIds] = React.useState<Set<string>>(new Set());
   const toggleEra = React.useCallback((id: string) => {
@@ -44,19 +51,26 @@ export function HistoryApp({
   }, []);
 
   const [selectedRulerId, setSelectedRulerId] = React.useState<string | null>(null);
+
+  const switchCiv = React.useCallback((mode: 'china' | 'eurasian' | 'east-asia') => {
+    setCivMode(mode);
+    setOpenEraIds(new Set());
+    setSelectedRulerId(null);
+  }, []);
+
   const selectedRuler = React.useMemo(
-    () => (selectedRulerId ? rulers.find((r) => r.id === selectedRulerId) ?? null : null),
-    [rulers, selectedRulerId]
+    () => (selectedRulerId ? activeRulers.find((r) => r.id === selectedRulerId) ?? null : null),
+    [activeRulers, selectedRulerId]
   );
 
   const selectedEra = React.useMemo(() => {
     if (selectedRulerId) {
-      const r = rulers.find((r) => r.id === selectedRulerId);
-      if (r) return eras.find((e) => e.id === r.eraId) ?? eras[0];
+      const r = activeRulers.find((r) => r.id === selectedRulerId);
+      if (r) return activeEras.find((e) => e.id === r.eraId) ?? activeEras[0];
     }
-    const firstOpen = eras.find((e) => openEraIds.has(e.id));
-    return firstOpen ?? eras[0];
-  }, [eras, rulers, selectedRulerId, openEraIds]);
+    const firstOpen = activeEras.find((e) => openEraIds.has(e.id));
+    return firstOpen ?? activeEras[0];
+  }, [activeEras, activeRulers, selectedRulerId, openEraIds]);
 
   const [windowYears, setWindowYears] = React.useState<number>(50);
   const [year, setYear] = React.useState<number>(clamp(-350, min, max));
@@ -114,6 +128,30 @@ export function HistoryApp({
           </div>
 
           <div className="flex items-center gap-3">
+            {/* Civilization switcher */}
+            <div className="flex rounded-lg border border-zinc-200 bg-zinc-100 p-0.5 text-sm">
+              <button
+                type="button"
+                onClick={() => switchCiv('china')}
+                className={`rounded-md px-3 py-1 transition-colors ${civMode === 'china' ? 'bg-white text-zinc-900 shadow-sm font-medium' : 'text-zinc-500 hover:text-zinc-700'}`}
+              >
+                🏯 中国史
+              </button>
+              <button
+                type="button"
+                onClick={() => switchCiv('eurasian')}
+                className={`rounded-md px-3 py-1 transition-colors ${civMode === 'eurasian' ? 'bg-white text-zinc-900 shadow-sm font-medium' : 'text-zinc-500 hover:text-zinc-700'}`}
+              >
+                🌍 欧亚对比
+              </button>
+              <button
+                type="button"
+                onClick={() => switchCiv('east-asia')}
+                className={`rounded-md px-3 py-1 transition-colors ${civMode === 'east-asia' ? 'bg-white text-zinc-900 shadow-sm font-medium' : 'text-zinc-500 hover:text-zinc-700'}`}
+              >
+                🌏 东亚对比
+              </button>
+            </div>
             <div className="text-sm text-zinc-600">
               <span className="font-medium">{t(selectedEra.nameKey)}</span>
               <span className="mx-2 text-zinc-300">|</span>
@@ -149,9 +187,9 @@ export function HistoryApp({
               {/* Continuous axis */}
               <div className="absolute left-[20px] top-0 bottom-0 w-px bg-zinc-200" />
 
-              {eras.map((era) => {
+              {activeEras.map((era) => {
                 const open = openEraIds.has(era.id);
-                const eraRulers = rulers
+                const eraRulers = activeRulers
                   .filter((r) => r.eraId === era.id)
                   .sort((a, b) => a.startYear - b.startYear);
                 const polities = era.isParallelPolities ? (era.polities ?? []) : [];
@@ -223,7 +261,7 @@ export function HistoryApp({
                           <div className="ml-8 mr-2 mb-1">
                           {(() => {
                             const span = Math.max(1, era.endYear - era.startYear);
-                            const step = span <= 80 ? 5 : span <= 220 ? 10 : 20;
+                            const step = span <= 80 ? 5 : span <= 220 ? 10 : span <= 600 ? 20 : span <= 1500 ? 50 : 100;
                             const ticks: number[] = [];
                             for (let y = era.startYear; y <= era.endYear; y += step) ticks.push(y);
                             if (ticks[ticks.length - 1] !== era.endYear) ticks.push(era.endYear);
@@ -394,7 +432,7 @@ export function HistoryApp({
           </div>
 
           <div className="min-h-0 flex-1">
-            <HistoryMap events={mapEvents} />
+            <HistoryMap events={mapEvents} openEraIds={openEraIds} />
           </div>
         </section>
 
@@ -451,7 +489,7 @@ export function HistoryApp({
                         <div className="text-xs text-zinc-500">{formatYear(e.year)}</div>
                         <div className="text-xs text-zinc-500">
                           {(() => {
-                            const era = eras.find((x) => x.id === e.entityId);
+                            const era = activeEras.find((x) => x.id === e.entityId);
                             return era ? t(era.nameKey) : e.entityId;
                           })()}
                         </div>
