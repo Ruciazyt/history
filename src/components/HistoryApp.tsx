@@ -116,196 +116,225 @@ export function HistoryApp({
 
       <div className="flex w-full flex-1 flex-col overflow-hidden px-4 py-4">
         <div className="grid h-full grid-cols-1 gap-4 overflow-hidden lg:grid-cols-[320px_minmax(0,1fr)_380px] xl:grid-cols-[360px_minmax(0,1fr)_420px]">
-        {/* Left: vertical timeline (rulers live on the timeline, not in a right sidebar) */}
+        {/* Left: global vertical timeline (time-proportional, collapsible, scrollable) */}
         <aside className="flex max-h-full flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white">
-          {/* Era picker */}
-          <div className="shrink-0 border-b border-zinc-200 p-3">
-            <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">{t('ui.eras')}</div>
-            <div className="flex items-center gap-2">
-              <select
-                value={selectedEraId}
-                onChange={(e) => {
-                  setSelectedEraId(e.target.value);
-                  setSelectedRulerId(null);
-                }}
-                className="min-w-0 flex-1 rounded-lg border border-zinc-200 bg-white px-2 py-1 text-sm"
-              >
-                {eras.map((era) => (
-                  <option key={era.id} value={era.id}>
-                    {t(era.nameKey)} · {formatYear(era.startYear)}–{formatYear(era.endYear)}
-                  </option>
-                ))}
-              </select>
-              <div className="shrink-0 rounded-full bg-zinc-100 px-2 py-1 text-[11px] font-medium text-zinc-700">
-                {t('ui.rulers')}
+          <div className="shrink-0 border-b border-zinc-200 bg-white p-3">
+            <div className="flex items-baseline justify-between gap-3">
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{t('ui.timeline')}</div>
+                <div className="mt-1 text-sm font-semibold text-zinc-900">{t('ui.rulers')}</div>
               </div>
+              <div className="text-xs text-zinc-500">{formatYear(min)}–{formatYear(max)}</div>
+            </div>
+            <div className="mt-2 text-xs text-zinc-600">
+              按真实时间比例排布；可滚动；时期可折叠。
             </div>
           </div>
 
-          {/* Timeline canvas */}
           <div className="min-h-0 flex-1 overflow-auto p-3">
             {(() => {
-              const era = selectedEra;
-              const eraRulers = rulers
-                .filter((r) => r.eraId === era.id)
-                .sort((a, b) => a.startYear - b.startYear);
-
-              const polities = era.isParallelPolities ? (era.polities ?? []) : [];
-
-              // Single-polity: a vertical axis; each ruler becomes a dot with label to the right.
-              if (!era.isParallelPolities) {
-                if (!eraRulers.length) return <div className="text-sm text-zinc-500">-</div>;
-
-                const span = Math.max(1, era.endYear - era.startYear);
-                const pxPerYear = 1.8; // MVP: readable density
-                const innerH = Math.max(520, Math.round(span * pxPerYear));
-
-                const yFor = (y: number) => {
-                  const ratio = (y - era.startYear) / span;
-                  return Math.round(ratio * (innerH - 32)) + 16;
-                };
-
-                return (
-                  <div className="rounded-xl border border-zinc-200 bg-gradient-to-b from-white to-zinc-50 p-3">
-                    <div className="mb-2 flex items-baseline justify-between gap-2">
-                      <div className="text-sm font-semibold text-zinc-900">{t(era.nameKey)}</div>
-                      <div className="text-xs text-zinc-500">
-                        {formatYear(era.startYear)}–{formatYear(era.endYear)}
-                      </div>
-                    </div>
-
-                    <div className="overflow-hidden rounded-lg border border-zinc-200 bg-white">
-                      <div className="relative" style={{ height: innerH }}>
-                        <div className="absolute left-5 top-0 h-full w-px bg-zinc-200" />
-
-                        {eraRulers.map((r) => {
-                          const y = yFor(r.startYear);
-                          const active = selectedRulerId === r.id;
-                          return (
-                            <div key={r.id} className="absolute left-0 right-0" style={{ top: y }}>
-                              <button
-                                type="button"
-                                onClick={() => setSelectedRulerId(r.id)}
-                                className="group flex w-full items-start gap-3 px-3 py-2 text-left"
-                              >
-                                <span
-                                  className={`mt-[6px] h-2 w-2 rounded-full ring-4 transition ${
-                                    active
-                                      ? 'bg-zinc-900 ring-zinc-900/15'
-                                      : 'bg-zinc-400 ring-zinc-400/15 group-hover:bg-zinc-700 group-hover:ring-zinc-700/15'
-                                  }`}
-                                />
-                                <div className="min-w-0 flex-1">
-                                  <div className="flex items-baseline justify-between gap-3">
-                                    <div className={`truncate text-sm font-semibold ${active ? 'text-zinc-900' : 'text-zinc-800'}`}>
-                                      {t(r.nameKey)}
-                                    </div>
-                                    <div className="shrink-0 text-xs text-zinc-500">
-                                      {formatYear(r.startYear)}–{formatYear(r.endYear)}
-                                    </div>
-                                  </div>
-                                  {r.highlightKey ? (
-                                    <div className="mt-1 line-clamp-2 text-xs text-zinc-600">{t(r.highlightKey)}</div>
-                                  ) : null}
-                                </div>
-                              </button>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
-
-              // Parallel polities: left column is the vertical time axis; columns to the right are states.
-              const span = era.endYear - era.startYear;
-              const step = span <= 80 ? 5 : span <= 220 ? 10 : 20;
-              const ticks: number[] = [];
-              for (let y = era.startYear; y <= era.endYear; y += step) ticks.push(y);
-              if (ticks[ticks.length - 1] !== era.endYear) ticks.push(era.endYear);
-
-              const byPolity = new Map<string, Ruler[]>();
-              for (const p of polities) {
-                byPolity.set(
-                  p.id,
-                  eraRulers
-                    .filter((r) => r.polityId === p.id)
-                    .sort((a, b) => a.startYear - b.startYear)
-                );
-              }
-              const rulerAt = (polityId: string, y: number) => {
-                const list = byPolity.get(polityId) ?? [];
-                return list.find((r) => y >= r.startYear && y <= r.endYear) ?? null;
-              };
+              // px-per-year kept small; scroll provides the depth.
+              const pxPerYear = 0.55;
+              const minEraHeight = 88;
 
               return (
-                <div className="rounded-xl border border-zinc-200 bg-gradient-to-b from-white to-zinc-50 p-3">
-                  <div className="mb-2 flex items-baseline justify-between gap-2">
-                    <div className="text-sm font-semibold text-zinc-900">{t(era.nameKey)}</div>
-                    <div className="text-xs text-zinc-500">
-                      {formatYear(era.startYear)}–{formatYear(era.endYear)}
-                    </div>
-                  </div>
+                <div className="space-y-3">
+                  {eras.map((era) => {
+                    const span = Math.max(1, era.endYear - era.startYear);
+                    const sectionH = Math.max(minEraHeight, Math.round(span * pxPerYear));
 
-                  <div className="overflow-auto rounded-lg border border-zinc-200 bg-white">
-                    <div
-                      className="grid min-w-[760px]"
-                      style={{ gridTemplateColumns: `92px repeat(${polities.length}, minmax(0, 1fr))` }}
-                    >
-                      <div className="sticky top-0 z-10 border-b border-zinc-200 bg-white px-2 py-2 text-[11px] font-semibold text-zinc-500">
-                        {t('ui.timeline')}
-                      </div>
-                      {polities.map((p) => (
-                        <div
-                          key={p.id}
-                          className="sticky top-0 z-10 border-b border-l border-zinc-200 bg-white px-2 py-2 text-[11px] font-semibold text-zinc-700"
-                        >
-                          {t(p.nameKey)}
-                        </div>
-                      ))}
+                    const eraRulers = rulers
+                      .filter((r) => r.eraId === era.id)
+                      .sort((a, b) => a.startYear - b.startYear);
 
-                      {ticks.map((y) => (
-                        <React.Fragment key={y}>
-                          <div className="border-b border-zinc-200 bg-zinc-50 px-2 py-2 text-[11px] text-zinc-600">
-                            <div className="flex items-center gap-2">
-                              <span className="h-2 w-2 rounded-full bg-zinc-300" />
-                              <span>{formatYear(y)}</span>
+                    const polities = era.isParallelPolities ? (era.polities ?? []) : [];
+
+                    const yFor = (y: number) => {
+                      const ratio = (y - era.startYear) / span;
+                      return Math.round(ratio * (sectionH - 32)) + 16;
+                    };
+
+                    return (
+                      <details
+                        key={era.id}
+                        open={era.id === selectedEraId}
+                        className="rounded-xl border border-zinc-200 bg-gradient-to-b from-white to-zinc-50"
+                        onToggle={(e) => {
+                          const open = (e.currentTarget as HTMLDetailsElement).open;
+                          if (open) {
+                            setSelectedEraId(era.id);
+                            setSelectedRulerId(null);
+                          }
+                        }}
+                      >
+                        <summary className="cursor-pointer list-none px-3 py-2">
+                          <div className="flex items-baseline justify-between gap-2">
+                            <div className="min-w-0 truncate text-sm font-semibold text-zinc-900">{t(era.nameKey)}</div>
+                            <div className="shrink-0 text-xs text-zinc-500">
+                              {formatYear(era.startYear)}–{formatYear(era.endYear)}
                             </div>
                           </div>
-                          {polities.map((p) => {
-                            const r = rulerAt(p.id, y);
-                            const active = r ? selectedRulerId === r.id : false;
-                            return (
-                              <button
-                                key={`${p.id}-${y}`}
-                                type="button"
-                                onClick={() => {
-                                  if (!r) return;
-                                  setSelectedRulerId(r.id);
-                                }}
-                                className={`border-b border-l border-zinc-200 px-2 py-2 text-left text-[11px] transition ${
-                                  r
-                                    ? active
-                                      ? 'bg-zinc-900 text-white'
-                                      : 'bg-white text-zinc-800 hover:bg-zinc-50'
-                                    : 'bg-white text-zinc-300'
-                                }`}
-                              >
-                                {r ? t(r.nameKey) : ''}
-                              </button>
-                            );
-                          })}
-                        </React.Fragment>
-                      ))}
-                    </div>
-                  </div>
+                        </summary>
+
+                        <div className="px-3 pb-3">
+                          <div className="overflow-hidden rounded-lg border border-zinc-200 bg-white">
+                            <div className="relative" style={{ height: sectionH }}>
+                              {/* era axis */}
+                              <div className="absolute left-5 top-0 h-full w-px bg-zinc-200" />
+
+                              {!era.isParallelPolities ? (
+                                (() => {
+                                  if (!eraRulers.length) {
+                                    return (
+                                      <div className="absolute left-0 top-0 p-3 text-sm text-zinc-500">-</div>
+                                    );
+                                  }
+
+                                  // Collision-avoid labels while keeping dot at the true year position.
+                                  const minGap = 28;
+                                  let lastLabelY = -1e9;
+
+                                  return eraRulers.map((r) => {
+                                    const rawY = yFor(r.startYear);
+                                    const labelY = Math.max(rawY, lastLabelY + minGap);
+                                    lastLabelY = labelY;
+
+                                    const active = selectedRulerId === r.id;
+
+                                    return (
+                                      <div key={r.id} className="absolute left-0 right-0" style={{ top: labelY }}>
+                                        {/* connector from dot (rawY) to labelY */}
+                                        <div
+                                          className="absolute left-5 w-10"
+                                          style={{ top: rawY - labelY + 6, height: 1 }}
+                                        >
+                                          <div className="h-px w-full bg-zinc-200" />
+                                        </div>
+
+                                        <button
+                                          type="button"
+                                          onClick={() => {
+                                            setSelectedEraId(era.id);
+                                            setSelectedRulerId(r.id);
+                                          }}
+                                          className="group flex w-full items-start gap-3 px-3 py-2 text-left"
+                                        >
+                                          {/* dot anchored to rawY */}
+                                          <span
+                                            className={`absolute left-0 h-2 w-2 rounded-full ring-4 transition ${
+                                              active
+                                                ? 'bg-zinc-900 ring-zinc-900/15'
+                                                : 'bg-zinc-400 ring-zinc-400/15 group-hover:bg-zinc-700 group-hover:ring-zinc-700/15'
+                                            }`}
+                                            style={{ top: rawY - labelY + 6, marginLeft: 18 }}
+                                          />
+
+                                          <div className="min-w-0 flex-1 pl-7">
+                                            <div className="flex items-baseline justify-between gap-3">
+                                              <div className={`truncate text-sm font-semibold ${active ? 'text-zinc-900' : 'text-zinc-800'}`}>
+                                                {t(r.nameKey)}
+                                              </div>
+                                              <div className="shrink-0 text-xs text-zinc-500">
+                                                {formatYear(r.startYear)}–{formatYear(r.endYear)}
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </button>
+                                      </div>
+                                    );
+                                  });
+                                })()
+                              ) : (
+                                (() => {
+                                  // Parallel polities matrix (time axis + states)
+                                  const step = span <= 80 ? 5 : span <= 220 ? 10 : 20;
+                                  const ticks: number[] = [];
+                                  for (let y = era.startYear; y <= era.endYear; y += step) ticks.push(y);
+                                  if (ticks[ticks.length - 1] !== era.endYear) ticks.push(era.endYear);
+
+                                  const byPolity = new Map<string, Ruler[]>();
+                                  for (const p of polities) {
+                                    byPolity.set(
+                                      p.id,
+                                      eraRulers
+                                        .filter((r) => r.polityId === p.id)
+                                        .sort((a, b) => a.startYear - b.startYear)
+                                    );
+                                  }
+                                  const rulerAt = (polityId: string, y: number) => {
+                                    const list = byPolity.get(polityId) ?? [];
+                                    return list.find((r) => y >= r.startYear && y <= r.endYear) ?? null;
+                                  };
+
+                                  return (
+                                    <div className="absolute inset-0 overflow-auto">
+                                      <div
+                                        className="grid min-w-[760px]"
+                                        style={{ gridTemplateColumns: `92px repeat(${polities.length}, minmax(0, 1fr))` }}
+                                      >
+                                        <div className="sticky top-0 z-10 border-b border-zinc-200 bg-white px-2 py-2 text-[11px] font-semibold text-zinc-500">
+                                          {t('ui.timeline')}
+                                        </div>
+                                        {polities.map((p) => (
+                                          <div
+                                            key={p.id}
+                                            className="sticky top-0 z-10 border-b border-l border-zinc-200 bg-white px-2 py-2 text-[11px] font-semibold text-zinc-700"
+                                          >
+                                            {t(p.nameKey)}
+                                          </div>
+                                        ))}
+
+                                        {ticks.map((y) => (
+                                          <React.Fragment key={y}>
+                                            <div className="border-b border-zinc-200 bg-zinc-50 px-2 py-2 text-[11px] text-zinc-600">
+                                              <div className="flex items-center gap-2">
+                                                <span className="h-2 w-2 rounded-full bg-zinc-300" />
+                                                <span>{formatYear(y)}</span>
+                                              </div>
+                                            </div>
+                                            {polities.map((p) => {
+                                              const r = rulerAt(p.id, y);
+                                              const active = r ? selectedRulerId === r.id : false;
+                                              return (
+                                                <button
+                                                  key={`${p.id}-${y}`}
+                                                  type="button"
+                                                  onClick={() => {
+                                                    if (!r) return;
+                                                    setSelectedEraId(era.id);
+                                                    setSelectedRulerId(r.id);
+                                                  }}
+                                                  className={`border-b border-l border-zinc-200 px-2 py-2 text-left text-[11px] transition ${
+                                                    r
+                                                      ? active
+                                                        ? 'bg-zinc-900 text-white'
+                                                        : 'bg-white text-zinc-800 hover:bg-zinc-50'
+                                                      : 'bg-white text-zinc-300'
+                                                  }`}
+                                                >
+                                                  {r ? t(r.nameKey) : ''}
+                                                </button>
+                                              );
+                                            })}
+                                          </React.Fragment>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  );
+                                })()
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </details>
+                    );
+                  })}
                 </div>
               );
             })()}
           </div>
 
-          {/* Ruler detail inline (moved from right sidebar) */}
+          {/* Ruler detail inline */}
           {selectedRuler ? (
             <div className="shrink-0 border-t border-zinc-200 bg-white p-3">
               <div className="flex items-start justify-between gap-3">
