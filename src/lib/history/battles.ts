@@ -1021,3 +1021,284 @@ export function getSeasonalityInsight(battles: Event[]): {
     insight,
   };
 }
+
+// ============ Geographic Region Analysis ============
+
+/**
+ * Geographic regions for ancient Chinese battles
+ * Based on historical military geography
+ */
+export type BattleRegion = 
+  | 'central-plains'   // 中原 - Central Henan area
+  | 'jiangdong'        // 江东 - East of Yangtze (Jiangsu, Zhejiang)
+  | 'sichuan'          // 四川盆地 - Sichuan Basin
+  | 'northwest'        // 西北 - Shaanxi, Gansu
+  | 'north-plains'     // 华北平原 - Hebei, Shanxi
+  | 'south-yangtze'   // 江南 - South of Yangtze
+  | 'lingnan'          //岭南 - Guangdong, Guangxi
+  | 'yunnan-guizhou'   // 云南贵州
+  | 'inner-mongolia'   // 塞北/内蒙古
+  | 'korea'            // 朝鲜半岛
+  | 'unknown';         // Unknown location
+
+/**
+ * Region metadata
+ */
+export type BattleRegionMeta = {
+  id: BattleRegion;
+  name: string;
+  latRange: [number, number];  // approximate latitude range
+  lonRange: [number, number]; // approximate longitude range
+  description: string;
+};
+
+/**
+ * All geographic regions with their definitions
+ */
+export const BATTLE_REGIONS: BattleRegionMeta[] = [
+  {
+    id: 'central-plains',
+    name: '中原',
+    latRange: [33, 36],
+    lonRange: [110, 116],
+    description: '中原核心地带',
+  },
+  {
+    id: 'north-plains',
+    name: '华北平原',
+    latRange: [36, 40],
+    lonRange: [113, 120],
+    description: '河北、山东地区',
+  },
+  {
+    id: 'northwest',
+    name: '西北',
+    latRange: [34, 42],
+    lonRange: [100, 110],
+    description: '关中、西北地区',
+  },
+  {
+    id: 'jiangdong',
+    name: '江东',
+    latRange: [28, 33],
+    lonRange: [116, 122],
+    description: '江浙沪地区',
+  },
+  {
+    id: 'south-yangtze',
+    name: '江南',
+    latRange: [24, 30],
+    lonRange: [106, 120],
+    description: '长江以南',
+  },
+  {
+    id: 'sichuan',
+    name: '四川',
+    latRange: [26, 32],
+    lonRange: [102, 110],
+    description: '四川盆地',
+  },
+  {
+    id: 'lingnan',
+    name: '岭南',
+    latRange: [20, 25],
+    lonRange: [106, 115],
+    description: '两广地区',
+  },
+  {
+    id: 'yunnan-guizhou',
+    name: '云贵',
+    latRange: [22, 29],
+    lonRange: [100, 110],
+    description: '云南、贵州',
+  },
+  {
+    id: 'inner-mongolia',
+    name: '塞北',
+    latRange: [38, 48],
+    lonRange: [105, 125],
+    description: '北方边疆',
+  },
+  {
+    id: 'korea',
+    name: '朝鲜半岛',
+    latRange: [33, 43],
+    lonRange: [124, 130],
+    description: '朝鲜半岛',
+  },
+];
+
+/**
+ * Classify a battle location into a geographic region
+ */
+export function getBattleRegion(battle: Event): BattleRegion {
+  const location = battle.location;
+  if (!location?.lon || !location?.lat) {
+    return 'unknown';
+  }
+  
+  const lon = location.lon;
+  const lat = location.lat;
+  
+  // Check each region's boundaries
+  for (const region of BATTLE_REGIONS) {
+    const [latMin, latMax] = region.latRange;
+    const [lonMin, lonMax] = region.lonRange;
+    
+    if (lat >= latMin && lat <= latMax && lon >= lonMin && lon <= lonMax) {
+      return region.id;
+    }
+  }
+  
+  // Default classification based on latitude for battles outside defined regions
+  if (lat > 40) return 'inner-mongolia';
+  if (lat < 24) return 'lingnan';
+  
+  return 'unknown';
+}
+
+/**
+ * Get region name in Chinese
+ */
+export function getRegionName(regionId: BattleRegion): string {
+  if (regionId === 'unknown') return '未知';
+  const region = BATTLE_REGIONS.find(r => r.id === regionId);
+  return region?.name || '未知';
+}
+
+/**
+ * Battle count by region
+ */
+export type BattleCountByRegion = {
+  regionId: BattleRegion;
+  regionName: string;
+  count: number;
+  percentage: number;
+  attackerWins: number;
+  defenderWins: number;
+  attackerWinRate: number;
+};
+
+/**
+ * Get battle counts and win rates grouped by region
+ */
+export function getBattleCountByRegion(battles: Event[]): BattleCountByRegion[] {
+  const regionStats = new Map<BattleRegion, {
+    count: number;
+    attackerWins: number;
+    defenderWins: number;
+  }>();
+  
+  // Initialize all regions
+  for (const region of BATTLE_REGIONS) {
+    regionStats.set(region.id, { count: 0, attackerWins: 0, defenderWins: 0 });
+  }
+  regionStats.set('unknown', { count: 0, attackerWins: 0, defenderWins: 0 });
+  
+  let totalWithLocation = 0;
+  
+  for (const battle of battles) {
+    const region = getBattleRegion(battle);
+    const stats = regionStats.get(region)!;
+    
+    stats.count++;
+    if (region !== 'unknown') {
+      totalWithLocation++;
+    }
+    
+    const result = battle.battle?.result;
+    if (result === 'attacker_win') {
+      stats.attackerWins++;
+    } else if (result === 'defender_win') {
+      stats.defenderWins++;
+    }
+  }
+  
+  const result: BattleCountByRegion[] = [];
+  for (const [regionId, stats] of regionStats) {
+    if (stats.count > 0) {
+      const determined = stats.attackerWins + stats.defenderWins;
+      result.push({
+        regionId,
+        regionName: getRegionName(regionId),
+        count: stats.count,
+        percentage: totalWithLocation > 0 
+          ? Math.round((stats.count / totalWithLocation) * 1000) / 10 
+          : 0,
+        attackerWins: stats.attackerWins,
+        defenderWins: stats.defenderWins,
+        attackerWinRate: determined > 0 
+          ? Math.round((stats.attackerWins / determined) * 1000) / 10 
+          : 0,
+      });
+    }
+  }
+  
+  // Sort by count descending
+  result.sort((a, b) => b.count - a.count);
+  return result;
+}
+
+/**
+ * Get battles within a specific region
+ */
+export function getBattlesByRegion(battles: Event[], region: BattleRegion): Event[] {
+  return battles.filter(battle => getBattleRegion(battle) === region);
+}
+
+/**
+ * Geographic insight about battles
+ */
+export type GeographicInsight = {
+  type: 'most-battles-region' | 'attacker-favored-region' | 'defender-favored-region';
+  title: string;
+  description: string;
+  regionName: string;
+  value: number;
+};
+
+/**
+ * Generate geographic insights from battle data
+ */
+export function getGeographicInsights(battles: Event[]): GeographicInsight[] {
+  const insights: GeographicInsight[] = [];
+  const regionStats = getBattleCountByRegion(battles);
+  
+  // Most battles region
+  const mostBattles = regionStats.find(r => r.count >= 2);
+  if (mostBattles) {
+    insights.push({
+      type: 'most-battles-region',
+      title: '主战场',
+      description: `${mostBattles.regionName}是最主要的战场，共发生${mostBattles.count}场战役`,
+      regionName: mostBattles.regionName,
+      value: mostBattles.count,
+    });
+  }
+  
+  // Attacker-favored region (high attacker win rate with sufficient battles)
+  const attackerFavored = regionStats.find(r => r.count >= 2 && r.attackerWinRate > 60);
+  if (attackerFavored) {
+    insights.push({
+      type: 'attacker-favored-region',
+      title: '进攻方优势',
+      description: `${attackerFavored.regionName}利于进攻方，进攻方胜率达${attackerFavored.attackerWinRate}%`,
+      regionName: attackerFavored.regionName,
+      value: attackerFavored.attackerWinRate,
+    });
+  }
+  
+  // Defender-favored region
+  const defenderFavored = regionStats.find(r => r.count >= 2 && r.attackerWinRate < 40);
+  if (defenderFavored) {
+    insights.push({
+      type: 'defender-favored-region',
+      title: '防守方优势',
+      description: `${defenderFavored.regionName}利于防守方，防守方胜率达${100 - defenderFavored.attackerWinRate}%`,
+      regionName: defenderFavored.regionName,
+      value: 100 - defenderFavored.attackerWinRate,
+    });
+  }
+  
+  return insights;
+}

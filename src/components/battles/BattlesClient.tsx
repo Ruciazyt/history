@@ -8,6 +8,7 @@ import { BattleCard } from '@/components/battles/BattleCard';
 import { BattleTimeline } from '@/components/battles/BattleTimeline';
 import { BattleDetail } from '@/components/battles/BattleDetail';
 import { BattleCompare } from '@/components/battles/BattleCompare';
+import { BattleGeography } from '@/components/battles/BattleGeography';
 import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 import { useTranslations } from 'next-intl';
 
@@ -249,6 +250,11 @@ export function BattlesClient({
                 </div>
               </div>
             )}
+            
+            {/* Geographic distribution */}
+            <div className="mt-4 pt-4 border-t border-zinc-100">
+              <BattleGeography battles={battles} />
+            </div>
           </div>
         </div>
       )}

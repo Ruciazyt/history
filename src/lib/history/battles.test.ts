@@ -23,6 +23,11 @@ import {
   getVictoryPatternByEra,
   getVictoryPatternBySeason,
   getBattleInsights,
+  getBattleRegion,
+  getRegionName,
+  getBattleCountByRegion,
+  getBattlesByRegion,
+  getGeographicInsights,
 } from './battles';
 import type { Event } from './types';
 
@@ -1238,6 +1243,129 @@ describe('battles', () => {
         i.type === 'attacker_trend' || i.type === 'defender_trend'
       );
       expect(trendInsights).toHaveLength(0);
+    });
+  });
+
+  describe('Geographic Region Analysis', () => {
+    const geographicBattles: Event[] = [
+      {
+        id: 'battle-central-plains',
+        entityId: 'han',
+        year: -200,
+        titleKey: 'battle.central',
+        tags: ['war'],
+        location: { lon: 114.0, lat: 34.5, label: '中原' },
+        battle: { result: 'attacker_win' },
+      },
+      {
+        id: 'battle-north-plains',
+        entityId: 'han',
+        year: -180,
+        titleKey: 'battle.north',
+        tags: ['war'],
+        location: { lon: 116.0, lat: 38.0, label: '华北' },
+        battle: { result: 'defender_win' },
+      },
+      {
+        id: 'battle-jiangdong',
+        entityId: 'han',
+        year: -150,
+        titleKey: 'battle.jiangdong',
+        tags: ['war'],
+        location: { lon: 119.0, lat: 31.0, label: '江东' },
+        battle: { result: 'attacker_win' },
+      },
+      {
+        id: 'battle-jiangdong-2',
+        entityId: 'han',
+        year: -140,
+        titleKey: 'battle.jiangdong2',
+        tags: ['war'],
+        location: { lon: 120.0, lat: 30.0, label: '江东' },
+        battle: { result: 'attacker_win' },
+      },
+      {
+        id: 'battle-no-location',
+        entityId: 'han',
+        year: -100,
+        titleKey: 'battle.noloc',
+        tags: ['war'],
+        battle: { result: 'draw' },
+      },
+    ];
+
+    it('should classify battles into geographic regions', () => {
+      // Test central plains classification
+      const centralBattle = geographicBattles[0];
+      expect(getBattleRegion(centralBattle)).toBe('central-plains');
+      
+      // Test north plains
+      const northBattle = geographicBattles[1];
+      expect(getBattleRegion(northBattle)).toBe('north-plains');
+      
+      // Test jiangdong
+      const jiangdongBattle = geographicBattles[2];
+      expect(getBattleRegion(jiangdongBattle)).toBe('jiangdong');
+      
+      // Test unknown (no location)
+      const noLocBattle = geographicBattles[4];
+      expect(getBattleRegion(noLocBattle)).toBe('unknown');
+    });
+
+    it('should get region name in Chinese', () => {
+      expect(getRegionName('central-plains')).toBe('中原');
+      expect(getRegionName('jiangdong')).toBe('江东');
+      expect(getRegionName('unknown')).toBe('未知');
+    });
+
+    it('should get battle count by region', () => {
+      const regionStats = getBattleCountByRegion(geographicBattles);
+      
+      expect(regionStats.length).toBeGreaterThan(0);
+      
+      // Find central plains
+      const central = regionStats.find(r => r.regionId === 'central-plains');
+      expect(central).toBeDefined();
+      expect(central?.count).toBe(1);
+      
+      // Find jiangdong (should have 2)
+      const jiangdong = regionStats.find(r => r.regionId === 'jiangdong');
+      expect(jiangdong).toBeDefined();
+      expect(jiangdong?.count).toBe(2);
+    });
+
+    it('should calculate attacker win rate by region', () => {
+      const regionStats = getBattleCountByRegion(geographicBattles);
+      
+      // Jiangdong: 2 attacker wins out of 2 = 100%
+      const jiangdong = regionStats.find(r => r.regionId === 'jiangdong');
+      expect(jiangdong?.attackerWinRate).toBe(100);
+      
+      // North plains: 0 attacker wins out of 1 = 0%
+      const north = regionStats.find(r => r.regionId === 'north-plains');
+      expect(north?.attackerWinRate).toBe(0);
+    });
+
+    it('should get battles filtered by region', () => {
+      const jiangdongBattles = getBattlesByRegion(geographicBattles, 'jiangdong');
+      expect(jiangdongBattles).toHaveLength(2);
+      
+      const centralBattles = getBattlesByRegion(geographicBattles, 'central-plains');
+      expect(centralBattles).toHaveLength(1);
+    });
+
+    it('should generate geographic insights', () => {
+      const insights = getGeographicInsights(geographicBattles);
+      
+      // Should have insights about most battles region
+      const mostBattlesInsight = insights.find(i => i.type === 'most-battles-region');
+      expect(mostBattlesInsight).toBeDefined();
+      expect(mostBattlesInsight?.regionName).toBe('江东');
+      
+      // Should have attacker-favored region insight
+      const attackerInsight = insights.find(i => i.type === 'attacker-favored-region');
+      expect(attackerInsight).toBeDefined();
+      expect(attackerInsight?.regionName).toBe('江东');
     });
   });
 });
