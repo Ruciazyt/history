@@ -7,6 +7,7 @@ import { getBattles, getBattleStats, getBattleCountByEra } from '@/lib/history/b
 import { BattleCard } from '@/components/battles/BattleCard';
 import { BattleTimeline } from '@/components/battles/BattleTimeline';
 import { BattleDetail } from '@/components/battles/BattleDetail';
+import { BattleCompare } from '@/components/battles/BattleCompare';
 import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 import { useTranslations } from 'next-intl';
 

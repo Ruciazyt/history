@@ -434,3 +434,128 @@ export function getParticipantStats(
   
   return stats;
 }
+
+/**
+ * Battle comparison data structure
+ */
+export type BattleComparison = {
+  battle1: Event;
+  battle2: Event;
+  comparison: {
+    yearDiff: number;
+    sameResult: boolean;
+    sameWinnerSide: boolean | null; // 'attacker' | 'defender' | null (null if draw/inconclusive)
+    sameEra: boolean;
+    locationDistance?: number; // km
+  };
+};
+
+/**
+ * Calculate distance between two coordinates using Haversine formula
+ */
+function calculateDistance(
+  lon1: number, 
+  lat1: number, 
+  lon2: number, 
+  lat2: number
+): number {
+  const R = 6371; // Earth's radius in km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = 
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+/**
+ * Compare two battles
+ */
+export function compareBattles(battle1: Event, battle2: Event): BattleComparison {
+  const yearDiff = Math.abs(battle1.year - battle2.year);
+  
+  const result1 = battle1.battle?.result;
+  const result2 = battle2.battle?.result;
+  const sameResult = result1 === result2;
+  
+  // Determine winner side for each battle
+  const getWinnerSide = (battle: Event): 'attacker' | 'defender' | null => {
+    const result = battle.battle?.result;
+    if (result === 'draw' || result === 'inconclusive' || !result) return null;
+    return result === 'attacker_win' ? 'attacker' : 'defender';
+  };
+  
+  const winner1 = getWinnerSide(battle1);
+  const winner2 = getWinnerSide(battle2);
+  const sameWinnerSide = winner1 !== null && winner2 !== null && winner1 === winner2;
+  
+  const sameEra = battle1.entityId === battle2.entityId;
+  
+  // Calculate distance if both have locations
+  let locationDistance: number | undefined;
+  if (battle1.location?.lon && battle1.location?.lat && 
+      battle2.location?.lon && battle2.location?.lat) {
+    locationDistance = calculateDistance(
+      battle1.location.lon,
+      battle1.location.lat,
+      battle2.location.lon,
+      battle2.location.lat
+    );
+  }
+  
+  return {
+    battle1,
+    battle2,
+    comparison: {
+      yearDiff,
+      sameResult,
+      sameWinnerSide,
+      sameEra,
+      locationDistance,
+    },
+  };
+}
+
+/**
+ * Generate comparison summary text
+ */
+export function getComparisonSummary(
+  comparison: BattleComparison['comparison'],
+  t: (key: string) => string
+): string[] {
+  const summary: string[] = [];
+  
+  if (comparison.yearDiff > 0) {
+    summary.push(`时间相差 ${comparison.yearDiff} 年`);
+  } else {
+    summary.push('同年发生');
+  }
+  
+  if (comparison.sameEra) {
+    summary.push('同一时期');
+  }
+  
+  if (comparison.sameResult) {
+    summary.push('结果相同');
+  } else {
+    summary.push('结果不同');
+  }
+  
+  if (comparison.sameWinnerSide === true) {
+    summary.push('胜利方相同');
+  } else if (comparison.sameWinnerSide === false) {
+    summary.push('胜利方不同');
+  }
+  
+  if (comparison.locationDistance !== undefined) {
+    if (comparison.locationDistance < 100) {
+      summary.push('地理位置接近');
+    } else {
+      summary.push(`相距约 ${Math.round(comparison.locationDistance)} km`);
+    }
+  }
+  
+  return summary;
+}

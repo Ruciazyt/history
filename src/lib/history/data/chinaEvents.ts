@@ -51,7 +51,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.wz-771-quanrong.title',
     summaryKey: 'event.wz-771-quanrong.summary',
     tags: ['war', 'turningPoint'],
-    location: { lon: 108.9, lat: 34.2, label: 'Haojing region' },
+    location: { lon: 108.9, lat: 34.2, label: '镐京' },
+    battle: {
+      belligerents: {
+        attacker: '犬戎',
+        defender: '西周',
+      },
+      result: 'attacker_win',
+    },
   },
 
   // Spring & Autumn
@@ -154,7 +161,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.sa-506-boju.title',
     summaryKey: 'event.sa-506-boju.summary',
     tags: ['war'],
-    location: { lon: 114.3, lat: 30.59, label: 'Near Wuhan (approx.)' },
+    location: { lon: 114.3, lat: 30.59, label: '柏举' },
+    battle: {
+      belligerents: {
+        attacker: '吴军',
+        defender: '楚军',
+      },
+      result: 'attacker_win',
+    },
   },
 
   // Warring States

@@ -10,6 +10,9 @@ import { BattleDetail } from './BattleDetail';
 interface BattleCardProps {
   battle: Event;
   onClick?: () => void;
+  selected?: boolean;
+  selectionMode?: boolean;
+  onSelect?: (battle: Event) => void;
 }
 
 // 朝代颜色映射
@@ -25,7 +28,7 @@ function getEraColor(entityId: string): string {
   return ERA_COLORS[entityId] || 'from-gray-50 to-gray-100 border-gray-200';
 }
 
-export function BattleCard({ battle, onClick }: BattleCardProps) {
+export function BattleCard({ battle, onClick, selected, selectionMode, onSelect }: BattleCardProps) {
   const t = useTranslations();
   const hasLocation = !!battle.location;
   const [showDetail, setShowDetail] = React.useState(false);
@@ -42,7 +45,9 @@ export function BattleCard({ battle, onClick }: BattleCardProps) {
   };
   
   const handleClick = () => {
-    if (onClick) {
+    if (selectionMode && onSelect) {
+      onSelect(battle);
+    } else if (onClick) {
       onClick();
     } else {
       setShowDetail(true);
@@ -54,11 +59,20 @@ export function BattleCard({ battle, onClick }: BattleCardProps) {
       <button
         type="button"
         onClick={handleClick}
-        className={`w-full text-left p-4 rounded-xl border bg-gradient-to-br ${eraColor} hover:shadow-md transition-all duration-200 hover:scale-[1.01]`}
+        className={`w-full text-left p-4 rounded-xl border bg-gradient-to-br ${eraColor} hover:shadow-md transition-all duration-200 hover:scale-[1.01] ${
+          selected ? 'ring-2 ring-red-500 ring-offset-2' : ''
+        } ${selectionMode ? 'cursor-pointer' : ''}`}
       >
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
+              {selectionMode && (
+                <span className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                  selected ? 'bg-red-500 border-red-500' : 'border-gray-300'
+                }`}>
+                  {selected && <span className="text-white text-xs">✓</span>}
+                </span>
+              )}
               <span className="text-sm font-bold text-gray-800">⚔️ {t(battle.titleKey)}</span>
             </div>
             <div className="text-xs text-gray-500 mt-1 flex items-center gap-2">
