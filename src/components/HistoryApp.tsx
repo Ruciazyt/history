@@ -226,6 +226,17 @@ export function HistoryApp({
                 const isOpen = openEraIds.has(era.id);
                 const eraRulers = activeRulers.filter((r) => r.eraId === era.id);
                 const eraColor = ERA_COLORS[era.id] || { bg: 'bg-zinc-50', text: 'text-zinc-700', dot: 'bg-zinc-400' };
+                const isMultiPolity = era.isParallelPolities && era.polities;
+                
+                // 多国并立时期：按polity分组
+                const rulersByPolity = isMultiPolity 
+                  ? eraRulers.reduce((acc, r) => {
+                      const polityId = r.polityId || 'other';
+                      if (!acc[polityId]) acc[polityId] = [];
+                      acc[polityId].push(r);
+                      return acc;
+                    }, {} as Record<string, typeof eraRulers>)
+                  : null;
                 
                 return (
                   <div key={era.id} className={`border-b border-zinc-100 last:border-0 ${isOpen ? eraColor.bg : ''}`}>
@@ -237,6 +248,7 @@ export function HistoryApp({
                       <span className={`w-2 h-2 rounded-full shrink-0 ${eraColor.dot}`}></span>
                       <span className={`flex-1 font-semibold ${eraColor.text} text-sm sm:text-base`}>
                         {t(era.nameKey)}
+                        {isMultiPolity && <span className="text-xs ml-1 text-zinc-400">（多国并立）</span>}
                       </span>
                       <span className="text-xs text-zinc-400 hidden sm:inline">
                         {formatYear(era.startYear)}–{formatYear(era.endYear)}
@@ -245,30 +257,75 @@ export function HistoryApp({
                     </button>
                     {isOpen && (
                       <div className="bg-zinc-50 px-2 py-1 sm:px-3 sm:py-2">
-                        {eraRulers.map((r) => {
-                          const isActive = selectedRulerId === r.id;
-                          return (
-                            <button
-                              key={r.id}
-                              type="button"
-                              onClick={() => setSelectedRulerId(r.id)}
-                              className={`flex w-full items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-left text-xs sm:text-sm ${
-                                isActive ? 'bg-blue-100 text-blue-800' : 'hover:bg-zinc-100 text-zinc-600'
-                              }`}
-                            >
-                              <span className="truncate">
-                                {r.isDynastyBlock ? (
-                                  <span className="font-semibold">{t(r.nameKey)}</span>
-                                ) : (
-                                  t(r.nameKey)
-                                )}
-                              </span>
-                              <span className="shrink-0 text-zinc-400">
-                                {formatYear(r.startYear)}–{formatYear(r.endYear)}
-                              </span>
-                            </button>
-                          );
-                        })}
+                        {isMultiPolity && rulersByPolity ? (
+                          // 多国并立时期：表格形式
+                          <div className="overflow-x-auto">
+                            <table className="w-full text-xs sm:text-sm">
+                              <thead>
+                                <tr className="text-left text-zinc-500 border-b border-zinc-200">
+                                  {era.polities?.map(p => (
+                                    <th key={p.id} className="px-1 py-1 font-medium">{t(p.nameKey)}</th>
+                                  ))}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {(() => {
+                                  const maxRows = Math.max(...Object.values(rulersByPolity).map(r => r.length));
+                                  return Array.from({ length: maxRows }).map((_, rowIdx) => (
+                                    <tr key={rowIdx} className="border-b border-zinc-100 last:border-0">
+                                      {era.polities?.map(p => {
+                                        const rulers = rulersByPolity[p.id] || [];
+                                        const r = rulers[rowIdx];
+                                        if (!r) return <td key={p.id} className="px-1 py-1"></td>;
+                                        const isActive = selectedRulerId === r.id;
+                                        return (
+                                          <td key={p.id} className="px-1 py-0.5">
+                                            <button
+                                              type="button"
+                                              onClick={() => setSelectedRulerId(r.id)}
+                                              className={`w-full text-left rounded px-1 py-0.5 truncate ${
+                                                isActive ? 'bg-blue-100 text-blue-800 font-medium' : 'hover:bg-zinc-100 text-zinc-600'
+                                              }`}
+                                            >
+                                              {t(r.nameKey)}
+                                              <span className="text-zinc-400 ml-1">{formatYear(r.startYear)}</span>
+                                            </button>
+                                          </td>
+                                        );
+                                      })}
+                                    </tr>
+                                  ));
+                                })()}
+                              </tbody>
+                            </table>
+                          </div>
+                        ) : (
+                          // 普通时期：列表形式
+                          eraRulers.map((r) => {
+                            const isActive = selectedRulerId === r.id;
+                            return (
+                              <button
+                                key={r.id}
+                                type="button"
+                                onClick={() => setSelectedRulerId(r.id)}
+                                className={`flex w-full items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-left text-xs sm:text-sm ${
+                                  isActive ? 'bg-blue-100 text-blue-800' : 'hover:bg-zinc-100 text-zinc-600'
+                                }`}
+                              >
+                                <span className="truncate">
+                                  {r.isDynastyBlock ? (
+                                    <span className="font-semibold">{t(r.nameKey)}</span>
+                                  ) : (
+                                    t(r.nameKey)
+                                  )}
+                                </span>
+                                <span className="shrink-0 text-zinc-400">
+                                  {formatYear(r.startYear)}–{formatYear(r.endYear)}
+                                </span>
+                              </button>
+                            );
+                          })
+                        )}
                       </div>
                     )}
                   </div>
