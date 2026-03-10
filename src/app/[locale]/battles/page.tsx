@@ -4,7 +4,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { CHINA_ERAS } from '@/lib/history/data/chinaEras';
 import { CHINA_EVENTS } from '@/lib/history/data/chinaEvents';
 import { CHINA_RULERS } from '@/lib/history/data/chinaRulers';
-import { BattlesClient } from '@/components/BattlesClient';
+import { BattlesClient } from '@/components/battles/BattlesClient';
 import { locales, type Locale } from '@/i18n/routing';
 
 export default async function BattlesPage({

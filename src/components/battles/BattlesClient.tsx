@@ -4,10 +4,10 @@ import * as React from 'react';
 import Link from 'next/link';
 import type { Era, Event, Ruler } from '@/lib/history/types';
 import { getBattles, getBattleStats, getBattleCountByEra } from '@/lib/history/battles';
-import { BattleCard } from '@/components/BattleCard';
-import { BattleTimeline } from '@/components/BattleTimeline';
-import { BattleDetail } from '@/components/BattleDetail';
-import { LocaleSwitcher } from '@/components/LocaleSwitcher';
+import { BattleCard } from '@/components/battles/BattleCard';
+import { BattleTimeline } from '@/components/battles/BattleTimeline';
+import { BattleDetail } from '@/components/battles/BattleDetail';
+import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 import { useTranslations } from 'next-intl';
 
 // 朝代数据映射

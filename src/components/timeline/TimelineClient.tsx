@@ -8,10 +8,10 @@ import { useSearchParams } from 'next/navigation';
 import { timelineProcesses, type TimelineProcess } from '@/lib/history/data/timeline';
 import { formatYear } from '@/lib/history/utils';
 import { useTranslations } from 'next-intl';
-import { LocaleSwitcher } from '@/components/LocaleSwitcher';
+import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 
 const TimelineMap = dynamic(
-  () => import('@/components/TimelineMap').then((m) => m.TimelineMap),
+  () => import('@/components/timeline/TimelineMap').then((m) => m.TimelineMap),
   { ssr: false }
 );
 

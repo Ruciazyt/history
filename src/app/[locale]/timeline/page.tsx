@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 
 import { locales, type Locale } from '@/i18n/routing';
-import { TimelineClient } from '@/components/TimelineClient';
+import { TimelineClient } from '@/components/timeline/TimelineClient';
 
 export default async function TimelinePage({
   params,

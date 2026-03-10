@@ -6,8 +6,8 @@ import Link from 'next/link';
 import type { Era, Event, Ruler } from '@/lib/history/types';
 import { clamp, formatYear } from '@/lib/history/utils';
 import { HistoryMap } from '@/components/HistoryMap';
-import { LocaleSwitcher } from '@/components/LocaleSwitcher';
-import { RulerRelations } from '@/components/RulerRelations';
+import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
+import { RulerRelations } from '@/components/common/RulerRelations';
 import { useTranslations } from 'next-intl';
 
 function rangeLabel(centerYear: number, windowYears: number) {
