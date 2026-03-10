@@ -12,6 +12,8 @@ export type Era = {
   polities?: { id: string; nameKey: string }[];
 };
 
+export type RulerRelation = 'father' | 'mother' | 'son' | 'daughter' | 'brother' | 'sister' | 'uncle' | 'nephew' | 'grandfather' | 'grandson' | 'cousin';
+
 export type Ruler = {
   id: string;
   eraId: string;
@@ -22,6 +24,16 @@ export type Ruler = {
   endYear: number;
   bioKey?: string; // i18n key
   highlightKey?: string; // i18n key
+  /** If true, this is a dynasty/empire block (long background band), not an individual ruler */
+  isDynastyBlock?: boolean;
+  /** Era name (年号) for Chinese emperors */
+  eraNameKey?: string; // i18n key
+  /** Parent ruler ID */
+  parentId?: string;
+  /** Sibling ruler IDs (brothers) */
+  siblingIds?: string[];
+  /** Children ruler IDs */
+  childrenIds?: string[];
 };
 
 export type Entity = {

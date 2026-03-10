@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/history/:path((?!api/).*)", "destination": "/:path" }
+  ]
+}

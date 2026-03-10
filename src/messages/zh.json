@@ -62,18 +62,18 @@
     "qiner": "秦二世（胡亥）",
     "hangaozu": "汉高祖（刘邦）",
     "hanwudi": "汉武帝（刘彻）",
-    "suiwen": "隋文帝",
-    "suiyang": "隋炀帝",
-    "tangtaizong": "唐太宗",
+    "suiwen": "隋文帝（杨坚）",
+    "suiyang": "隋炀帝（杨广）",
+    "tangtaizong": "唐太宗（李世民）",
     "wuzetian": "武则天",
-    "tangxuanzong": "唐玄宗",
-    "songtaizu": "宋太祖",
-    "songhuizong": "宋徽宗",
+    "tangxuanzong": "唐玄宗（李隆基）",
+    "songtaizu": "宋太祖（赵匡胤）",
+    "songhuizong": "宋徽宗（赵佶）",
     "yuanshizu": "元世祖（忽必烈）",
     "mingtaizu": "明太祖（朱元璋）",
-    "mingchengzu": "明成祖（永乐帝）",
-    "kangxi": "康熙帝",
-    "qianlong": "乾隆帝",
+    "mingchengzu": "明成祖（朱棣）",
+    "kangxi": "康熙帝（玄烨）",
+    "qianlong": "乾隆帝（弘历）",
     "zhou-wu": "周武王",
     "zhou-cheng": "周成王",
     "zhou-kang": "周康王",
@@ -378,7 +378,95 @@
     "ea-vn-ly": "李朝",
     "ea-vn-tran": "陈朝",
     "ea-vn-le": "后黎朝",
-    "ea-vn-nguyen": "阮朝"
+    "ea-vn-nguyen": "阮朝",
+    "guangwu": "汉光武帝（刘秀）",
+    "caowei": "魏文帝（曹丕）",
+    "xuanzong": "唐玄宗（李隆基）",
+    "huizong": "宋徽宗（赵佶）",
+    "kublai": "元世祖（忽必烈）",
+    "yongle": "明成祖（朱棣）",
+    "wc-ro-trajian": "图拉真",
+    "wc-ro-marcus": "马可·奥勒留",
+    "wc-ro-theodosius": "狄奥多西一世",
+    "wc-ro-basil": "巴西尔一世",
+    "wc-ro-alexios": "亚历克赛一世",
+    "wc-ro-abdul": "阿卜杜勒·艾哈迈德",
+    "wc-pe-khosrow": "库萨和一世",
+    "wc-pe-abbas": "阿拔斯大帝",
+    "wc-pe-naser": "纳迪尔沙阿",
+    "wc-is-umar": "欧麦尔·伊本·哈塔卜",
+    "wc-is-ali": "阿里·伊本·艾比·塔利卜",
+    "wc-is-abd": "阿卜杜勒·马利克",
+    "wc-is-mansur": "曼苏尔",
+    "wc-is-genghis": "成吉思汗（铁木真）",
+    "wc-is-babur": "巴布尔",
+    "wc-is-shahjahan": "沙贾汗（泰姬陵建造者）",
+    "ea-jp-ojin": "应神天皇",
+    "ea-jp-yomei": "用明天皇",
+    "ea-jp-kotoku": "孝德天皇",
+    "ea-jp-shotoku": "圣德太子",
+    "ea-jp-kanmu": "桓武天皇",
+    "ea-jp-murakami": "村上天皇",
+    "ea-jp-yoritomo": "源赖朝",
+    "ea-jp-hideyoshi": "丰臣秀吉",
+    "ea-jp-ieru": "德川家康",
+    "ea-kr-jul": "朱蒙（扶余创建者）",
+    "ea-kr-gwang": "广开土大王（高句丽）",
+    "ea-kr-sejong": "世宗大王",
+    "ea-kr-sunjong": "朝鲜纯宗",
+    "ea-vn-trung": "二征夫人（征侧/征贰）",
+    "ea-vn-lythai": "李太祖（李公蕴）",
+    "ea-vn-tranth": "陈仁宗",
+    "ea-vn-leithanh": "黎圣宗",
+    "ea-vn-quangtrung": "光中皇帝（阮惠）",
+    "ea-vn-gialong": "嘉隆帝（阮福映）",
+    "wc-cn-qin-dyn": "秦朝",
+    "wc-cn-han-dyn": "汉朝",
+    "wc-cn-3k-dyn": "三国",
+    "wc-cn-jin-dyn": "晋/南北朝",
+    "wc-cn-sui-dyn": "隋朝",
+    "wc-cn-tang-dyn": "唐朝",
+    "wc-cn-song-dyn": "宋朝",
+    "wc-cn-yuan-dyn": "元朝",
+    "wc-cn-ming-dyn": "明朝",
+    "wc-cn-qing-dyn": "清朝",
+    "wc-ro-republic-dyn": "罗马共和国",
+    "wc-ro-empire-dyn": "罗马帝国",
+    "wc-ro-west-dyn": "西罗马",
+    "wc-ro-byzantine-dyn": "拜占庭",
+    "wc-ro-ottoman-dyn": "奥斯曼",
+    "wc-pe-achaemenid-dyn": "阿契美尼德",
+    "wc-pe-seleucid-dyn": "塞琉古",
+    "wc-pe-parthian-dyn": "帕提亚",
+    "wc-pe-sassanid-dyn": "萨珊波斯",
+    "wc-pe-safavid-dyn": "萨法维",
+    "wc-is-rashidun-dyn": "正统哈里发",
+    "wc-is-umayyad-dyn": "倭马亚",
+    "wc-is-abbasid-dyn": "阿拔斯",
+    "wc-is-mongol-dyn": "伊尔汗国",
+    "wc-is-mughal-dyn": "莫卧儿",
+    "ea-jp-yamato-dyn": "大和",
+    "ea-jp-nara-dyn": "奈良",
+    "ea-jp-heian-dyn": "平安",
+    "ea-jp-kamakura-dyn": "镰仓",
+    "ea-jp-muromachi-dyn": "室町",
+    "ea-jp-edo-dyn": "江户",
+    "ea-kr-three-dyn": "三国",
+    "ea-kr-silla-dyn": "新罗",
+    "ea-kr-goryeo-dyn": "高丽",
+    "ea-kr-joseon-dyn": "朝鲜",
+    "ea-vn-early-dyn": "北属",
+    "ea-vn-dynasty1-dyn": "丁朝",
+    "ea-vn-ly-dyn": "李朝",
+    "ea-vn-tran-dyn": "陈朝",
+    "ea-vn-le-dyn": "后黎",
+    "ea-vn-nguyen-dyn": "阮朝",
+    "wc-ro-byz-fall-dyn": "拜占庭晚期",
+    "wc-is-timurid-dyn": "帖木儿",
+    "ea-jp-yayoi-dyn": "弥生",
+    "ea-jp-sengoku-dyn": "战国",
+    "ea-kr-empire-dyn": "大韩帝国",
+    "ea-vn-china-rule-dyn": "北属时期"
   },
   "rulerBio": {
     "qinshihuang": "中国历史上首位完成大一统的皇帝。13岁即位，亲政后用10年灭六国，建立中国第一个中央集权封建王朝。推行郡县制、统一文字度量衡、修驰道、筑长城，奠定两千年帝制基础。",
@@ -386,16 +474,16 @@
     "hangaozu": "汉朝开国皇帝，出身亭长，推翻秦朝，楚汉相争后击败项羽，建立西汉，推行休养生息政策，奠定汉室基础。",
     "hanwudi": "西汉最著名皇帝，在位54年。北击匈奴、开辟丝绸之路、独尊儒术、设太学，将汉朝推向鼎盛，奠定中国文化底色。",
     "suiwen": "结束长期分裂、重新统一全国，并为唐代制度与格局奠定基础。",
-    "suiyang": "大规模工程与对外用兵并举，劳役沉重，后期叛乱四起导致隋亡。",
+    "suiyang": "隋朝第二位皇帝，修建大运河，三征高丽，暴政导致隋朝灭亡。",
     "tangtaizong": "唐初重要统治者，强调纳谏与制度建设，贞观之治为后世称道。",
-    "wuzetian": "中国历史上唯一以“皇帝”身份临朝的女性统治者，政治改革与用人制度影响深远。",
+    "wuzetian": "中国历史上唯一的女皇帝，创立武周政权，打击门阀科举创新。",
     "tangxuanzong": "前期国力与文化繁荣，后期因安史之乱而急转直下。",
-    "songtaizu": "宋朝开国皇帝，削藩整军、加强中央集权，结束五代乱局。",
+    "songtaizu": "宋朝开国皇帝，陈桥兵变黄袍加身，结束五代十国分裂。",
     "songhuizong": "文化艺术成就突出，但军事与政局失衡，最终引发靖康之变。",
     "yuanshizu": "忽必烈，建立元朝并推动蒙古政权向中原王朝形态转化。",
     "mingtaizu": "朱元璋，建立明朝，重建财政与官制，强化中央权力。",
     "mingchengzu": "永乐帝，迁都北京并支持郑和下西洋等大型国家工程。",
-    "kangxi": "在位时间极长，整合边疆、稳定统治并重视学术文化。",
+    "kangxi": "康熙皇帝，在位61年，平定三藩、收复台湾、击败准噶尔，开创康乾盛世。",
     "qianlong": "盛世顶点阶段的皇帝，文化工程宏大，但也积累财政与社会压力。",
     "zhou-wu": "灭商建周的开国君主，以牧野之战奠定周朝基业。",
     "zhou-cheng": "幼年即位，周公旦摄政，平定叛乱并巩固新王朝。",
@@ -701,7 +789,48 @@
     "ea-vn-ly": "李朝迁都升龙（今河内），儒学佛教并重，建立科举制度，击退宋朝入侵，是越南文化发展重要时期。",
     "ea-vn-tran": "陈朝三次击退蒙古（元朝）入侵（1258、1285、1288），陈兴道成为民族英雄，白藤江之战载入史册。",
     "ea-vn-le": "黎利驱逐明朝（占领越南20年）后建立后黎朝，圣宗改革创黎朝全盛，字喃文学发展，越南文化认同确立。",
-    "ea-vn-nguyen": "阮朝统一越南全境，定都顺化，1862年起法国侵占，越南最后一个封建王朝。"
+    "ea-vn-nguyen": "阮朝统一越南全境，定都顺化，1862年起法国侵占，越南最后一个封建王朝。",
+    "guangwu": "东汉开国皇帝，刘秀推翻王莽政权重建汉朝，开创光武中兴。",
+    "caowei": "曹魏开国皇帝，曹操之子，篡汉建立魏国，三国时代开启者。",
+    "xuanzong": "唐朝最繁荣时期开创者，开元盛世，后因安史之乱逃亡。",
+    "huizong": "北宋末代皇帝，书画家，靖康之变被金人掳获。",
+    "kublai": "元朝开国皇帝，忽必烈汗，统一中国，创立行省制度。",
+    "yongle": "明成祖，迁都北京，编永乐大典，派郑和下西洋。",
+    "wc-ro-trajian": "罗马帝国五贤帝之一，达契亚战争远征，帝国版图最大时期。",
+    "wc-ro-marcus": "罗马帝国五贤帝最后一位，哲学家皇帝，著《沉思录》。",
+    "wc-ro-theodosius": "狄奥多西一世，最后一位统一罗马帝国的皇帝，米兰敕令后确立基督教国教。",
+    "wc-ro-basil": "巴西尔一世，拜占庭帝国马其顿王朝开创者，颁布《巴西尔法典》。",
+    "wc-ro-alexios": "亚历克赛一世，科穆宁王朝皇帝，十字军东征的召集者。",
+    "wc-ro-abdul": "奥斯曼帝国改革者，现代土耳其奠基人，颁布第一部宪法。",
+    "wc-pe-khosrow": "库萨和一世，萨珊波斯最伟大皇帝之一，与拜占庭争霸。",
+    "wc-pe-abbas": "阿拔斯一世，萨法维王朝最伟大君主，波斯文艺复兴开创者。",
+    "wc-pe-naser": "纳迪尔沙阿，伊朗中兴之主，建立阿夫沙尔王朝。",
+    "wc-is-umar": "伊斯兰第二任哈里发，征服叙利亚、埃及、波斯，伊斯兰帝国扩张者。",
+    "wc-is-ali": "穆罕默德堂弟，第四任哈里发，什叶派精神领袖。",
+    "wc-is-abd": "倭马亚王朝最伟大哈里发，发行金币，建立官僚制度。",
+    "wc-is-mansur": "阿拔斯王朝实际奠基者，巴格达城创建者。",
+    "wc-is-genghis": "成吉思汗，蒙古帝国创建者，征服欧亚大陆大部分地区。",
+    "wc-is-babur": "巴布尔，莫卧儿帝国创建者，帖木儿后裔。",
+    "wc-is-shahjahan": "沙贾汗，莫卧儿帝国最富有皇帝，泰姬陵建造者。",
+    "ea-jp-ojin": "应神天皇，日本传说中从朝鲜渡来的天皇，倡导儒学。",
+    "ea-jp-yomei": "用明天崇，推行佛教的天皇。",
+    "ea-jp-kotoku": "孝德天皇，大化改新推动者，日本律令制国家奠基人。",
+    "ea-jp-shotoku": "圣德太子，摄政，推大化改新，派遣遣隋使，佛教护法。",
+    "ea-jp-kanmu": "桓武天皇，迁都平安京，确立日本律令体制。",
+    "ea-jp-murakami": "村上天皇，平安中期天皇，院政制度开端。",
+    "ea-jp-yoritomo": "源赖朝，镰仓幕府创建者，武士政权开创者。",
+    "ea-jp-hideyoshi": "丰臣秀吉，织田信长继承者，战国统一者，侵朝失败。",
+    "ea-jp-ieru": "德川家康，江户幕府创建者，260年和平统治奠基人。",
+    "ea-kr-jul": "朱蒙，扶余/高句丽创建者，从中国东北南迁建立政权。",
+    "ea-kr-gwang": "广开土大王，高句丽最伟大国王，扩张领土击败百济。",
+    "ea-kr-sejong": "世宗大王，朝鲜王朝最伟大国王，创制韩文（训民正音）。",
+    "ea-kr-sunjong": "朝鲜纯宗，最后一位国王，大韩帝国时期。",
+    "ea-vn-trung": "二征夫人，越南民族英雄，起义反抗东汉统治。",
+    "ea-vn-lythai": "李太祖，李朝开国君主，迁都河内，建立科举制度。",
+    "ea-vn-tranth": "陈仁宗，陈朝第三位皇帝，击退蒙古入侵。",
+    "ea-vn-leithanh": "黎圣宗，后黎朝全盛时期，击败明军，统一越南。",
+    "ea-vn-quangtrung": "光中皇帝，西山朝创建者，驱逐清军，统一越南。",
+    "ea-vn-gialong": "嘉隆帝，阮朝开国皇帝，统一全越，征服南方。"
   },
   "rulerHighlight": {
     "qinshihuang": "前221年统一六国，称「皇帝」；推行书同文、车同轨、统一度量衡；修万里长城；建阿房宫、骊山陵（兵马俑）；前210年巡游途中驾崩于沙丘。",
@@ -866,216 +995,229 @@
     "ea-kr-goryeo": "1231年蒙古入侵；1251年高丽大藏经（八万大藏经）；高丽青瓷（12世纪）；1392年李成桂篡位建朝鲜。",
     "ea-kr-joseon": "1392年建国；1443年训民正音（韩文）创制；1592年壬辰倭乱李舜臣龟船；朱子学立国；科举制度完善。",
     "ea-vn-tran": "1258、1285、1288年三次击退蒙古；陈兴道白藤江之战；越南民族独立精神确立。",
-    "ea-vn-le": "1427年驱逐明朝；1428年黎利建后黎朝；圣宗洪德改革全盛；字喃文学（翘传前身）；1788年西山朝篡位。"
+    "ea-vn-le": "1427年驱逐明朝；1428年黎利建后黎朝；圣宗洪德改革全盛；字喃文学（翘传前身）；1788年西山朝篡位。",
+    "wc-ro-trajian": "98-117年在位；达契亚战争（101-106）；帝国最大版图；图拉真柱纪念。",
+    "wc-ro-marcus": "161-180年在位；《沉思录》；五贤帝最后一位；与帕提亚/日耳曼战争。",
+    "wc-ro-basil": "867-886年在位；马其顿王朝开创；《巴西尔法典》；收复克里特（961）。",
+    "wc-ro-alexios": "1081-1118年在位；科穆宁王朝；十字军东征（1096）；曼齐刻尔特战役（1071）。",
+    "wc-pe-khosrow": "531-579年在位；与拜占庭战争；萨珊波斯鼎盛；琐罗亚斯德教推广。",
+    "wc-pe-abbas": "1588-1629年在位；萨法维波斯鼎盛；与奥斯曼/乌兹别克战争；伊斯法罕繁荣。",
+    "wc-is-umar": "634-644年在位；征服叙利亚、埃及、波斯、迦太基；希吉拉历开始计算。",
+    "wc-is-abd": "685-705年在位；铸第纳尔金币；耶路撒冷圆顶清真寺（691）；确立阿拉伯语。",
+    "wc-is-genghis": "1206-1227年在位；统一蒙古；征服金/西夏/花剌子模；建立驿站制度。",
+    "ea-jp-yoritomo": "1192年任征夷大将军；镰仓幕府；承久之乱（1221）；武家政权开端。",
+    "ea-jp-hideyoshi": "1582年本能寺之变；1588年刀狩令；1592/1597年侵朝；大阪之阵（1615）。",
+    "ea-jp-ieru": "1603年任征夷大将军；大阪夏冬之战；1635年锁国令；260年和平结束。",
+    "ea-kr-sejong": "1418-1450年在位；1443年创制韩文；击退倭寇；农业改革。",
+    "ea-vn-trung": "40年起义；43年失败投江；越南民族精神象征；河内西湖二征庙。",
+    "ea-vn-tranth": "1225-1258年在位；白藤江之战（1288）击退蒙古；陈仁宗出家为僧。",
+    "ea-vn-leithanh": "1460-1497年在位；黎圣宗改革；1427年击退明军；越南全盛期。"
   },
   "event": {
-    "sa-770-zhou-east": {
-      "title": "周平王东迁洛邑（洛阳）",
-      "summary": "王室东迁后，传统上以此为春秋时期的起点。"
-    },
-    "sa-656-qihuan": {
-      "title": "齐桓公称霸（传统记述）",
-      "summary": "齐国崛起并参与诸侯盟主体系，影响春秋格局。"
-    },
-    "sa-632-chengpu": {
-      "title": "城濮之战",
-      "summary": "晋楚大战的重要节点，影响当时诸侯力量格局。"
-    },
-    "sa-551-confucius": {
-      "title": "孔子诞生（传统纪年）",
-      "summary": "儒家思想的重要奠基者，后世影响深远。"
-    },
-    "sa-506-boju": {
-      "title": "柏举之战",
-      "summary": "吴国击败楚国并一度攻入郢都，反映诸侯争霸的剧烈波动。"
-    },
-    "ws-453-three-jin": {
-      "title": "三家分晋（韩赵魏崛起）",
-      "summary": "晋国权力分化加速，战国格局逐渐成型。"
-    },
-    "ws-356-shangyang-reform": {
-      "title": "商鞅变法（秦）",
-      "summary": "法家改革强化国家动员与军功体系，为秦统一奠定基础。"
-    },
-    "ws-341-maling": {
-      "title": "马陵之战",
-      "summary": "齐国以伏击大破魏军，常与孙膑兵法联系。"
-    },
-    "ws-307-hufu-qishe": {
-      "title": "胡服骑射（赵武灵王改革）",
-      "summary": "赵国推进骑兵与服制改革，提升机动战能力并改变北方军事格局。"
-    },
-    "ws-284-yan-attack-qi": {
-      "title": "燕军伐齐（乐毅攻齐）",
-      "summary": "燕国联合诸侯攻齐，齐国遭重创并一度接近覆亡。"
-    },
-    "ws-278-qin-takes-ying": {
-      "title": "秦攻破郢都（楚迁徙）",
-      "summary": "秦将白起攻陷楚都郢，楚国战略重心南移。"
-    },
-    "ws-256-zhou-ends": {
-      "title": "周王室终结（传统纪年）",
-      "summary": "周在名义上的天下共主地位进一步瓦解，战国兼并更趋彻底。"
-    },
-    "ws-260-changping": {
-      "title": "长平之战",
-      "summary": "秦赵决战，秦优势确立，统一趋势更明显。"
-    },
-    "ws-230-qin-conquers-han": {
-      "title": "秦灭韩",
-      "summary": "秦统一战争的第一步，韩国成为最先被吞并的战国七雄之一。"
-    },
-    "ws-228-qin-conquers-zhao": {
-      "title": "秦灭赵",
-      "summary": "长平之战后赵国持续衰弱，最终被秦攻灭。"
-    },
-    "ws-225-qin-conquers-wei": {
-      "title": "秦灭魏",
-      "summary": "秦军水攻等战术迫使魏都大梁失守，魏亡。"
-    },
-    "ws-223-qin-conquers-chu": {
-      "title": "秦灭楚",
-      "summary": "秦以大军南下，楚作为南方强国最终被灭。"
-    },
-    "ws-222-qin-conquers-yan": {
-      "title": "秦灭燕",
-      "summary": "刺秦失败后燕国国势不支，终被秦灭。"
-    },
-    "ws-221-qin-conquers-qi": {
-      "title": "秦灭齐",
-      "summary": "齐国成为最后被吞并的强国之一，秦完成对六国的兼并。"
-    },
-    "ws-221-unification": {
-      "title": "秦统一六国",
-      "summary": "秦灭六国后，嬴政称始皇帝，建立帝制国家。"
-    },
-    "qin-214-lingqu": {
-      "title": "灵渠开凿（传统纪年）",
-      "summary": "重要水利与交通工程，服务南方军政与运输。"
-    },
-    "qin-210-first-emperor-death": {
-      "title": "秦始皇去世",
-      "summary": "继承危机与各地起义很快动摇秦政权。"
-    },
-    "qin-209-dazexiang": {
-      "title": "大泽乡起义",
-      "summary": "陈胜、吴广起义成为反秦浪潮的象征性开端之一。"
-    },
-    "han-202-han-founded": {
-      "title": "刘邦建立汉朝",
-      "summary": "楚汉相争后，刘邦即位为汉高祖，确立汉帝国。"
-    },
-    "han-154-seven-states": {
-      "title": "七国之乱",
-      "summary": "诸侯王叛乱被平定，中央集权进一步加强。"
-    },
-    "han-138-zhangqian": {
-      "title": "张骞出使西域",
-      "summary": "汉朝对西域的探索与联络，为后来的丝绸之路交流奠基。"
-    },
-    "eh-105-paper": {
-      "title": "蔡伦改进造纸术（传统说法）",
-      "summary": "造纸技术的改进推动行政与文化传播。"
-    },
-    "eh-184-yellow-turbans": {
-      "title": "黄巾起义",
-      "summary": "大规模民变削弱东汉统治，加速地方割据与分裂。"
-    },
-    "eh-220-han-ends": {
-      "title": "东汉结束",
-      "summary": "汉献帝禅让，曹丕建魏，三国时代开启。"
-    },
-    "sui-589-unify": {
-      "title": "隋统一全国",
-      "summary": "隋灭陈，结束南北对峙与长期分裂局面。"
-    },
-    "sui-605-grand-canal": {
-      "title": "大运河工程扩建",
-      "summary": "大规模运河建设连接南北，强化运输与财政动员能力。"
-    },
-    "tang-618-founded": {
-      "title": "唐朝建立",
-      "summary": "李渊建唐，开启帝国重建与制度延续的新阶段。"
-    },
-    "tang-755-anlushan": {
-      "title": "安史之乱",
-      "summary": "对唐朝造成巨大冲击，中央权力与社会结构发生深刻变化。"
-    },
-    "song-960-founded": {
-      "title": "宋朝建立",
-      "summary": "赵匡胤即位为宋太祖，结束五代乱局并重建统一秩序。"
-    },
-    "song-1127-jingkang": {
-      "title": "靖康之变",
-      "summary": "金军攻陷汴京，北宋灭亡，宋室南迁。"
-    },
-    "yuan-1271-founded": {
-      "title": "元朝定国号",
-      "summary": "忽必烈定国号“元”，将蒙古政权纳入中原王朝叙事框架。"
-    },
-    "ming-1368-founded": {
-      "title": "明朝建立",
-      "summary": "朱元璋建明，推翻元在中原统治并重建政权体系。"
-    },
-    "ming-1405-zhenghe": {
-      "title": "郑和下西洋启航",
-      "summary": "国家支持的远洋航行扩大明朝在印度洋区域的影响与交流。"
-    },
-    "qing-1644-founded": {
-      "title": "清入关并据北京",
-      "summary": "清军进入北京，随后逐步完成对全国的统治整合。"
-    },
-    "qing-1840-opium": {
-      "title": "第一次鸦片战争",
-      "summary": "对外战争成为近代转折点之一，外部压力与内部危机交织加剧。"
-    },
-    "roc-1911-xinhai": {
-      "title": "辛亥革命",
-      "summary": "革命浪潮推翻清朝，开启共和时代。"
-    },
-    "prc-1949-founded": {
-      "title": "中华人民共和国成立",
-      "summary": "在北京宣布成立新中国，进入新的政治发展阶段。"
-    },
-    "prc-1978-reform": {
-      "title": "改革开放启动",
-      "summary": "经济体制改革与对外开放政策推进，深刻改变社会与发展路径。"
-    },
+    "viewTimeline": "查看时间线",
     "wz-1046-muye": {
       "title": "牧野之战",
-      "summary": "周军击败商朝，西周统治由此展开。"
+      "summary": "周武王伐纣，在牧野击败商朝军队，建立周朝。"
     },
     "wz-1042-regency": {
-      "title": "周公摄政（传统叙述）",
-      "summary": "早期摄政稳定新王朝并巩固统治秩序。"
+      "title": "周公旦摄政",
+      "summary": "周武王去世后，周公旦摄政七年，稳定周朝统治。"
     },
     "wz-1040-fengjian": {
-      "title": "分封与封建秩序扩展",
-      "summary": "通过分封与礼制建构，周的政治秩序在诸侯间铺开并逐步稳固。"
+      "title": "分封制度确立",
+      "summary": "周朝建立分封制度，册封诸侯。"
     },
     "wz-841-gonghe": {
-      "title": "共和行政开始（前841年）",
-      "summary": "厉王出奔后出现摄政，“前841年”常被视为可靠纪年的重要锚点。"
+      "title": "共和行政",
+      "summary": "周厉王被流放，召公、周公共同执政，史称共和。"
     },
     "wz-771-quanrong": {
-      "title": "犬戎攻破镐京（前771年）",
-      "summary": "镐京遇袭、幽王身亡，西周覆亡，为东周转折铺路。"
+      "title": "犬戎攻破镐京",
+      "summary": "犬戎入侵，西周灭亡，平王东迁。"
+    },
+    "sa-770-zhou-east": {
+      "title": "周平王东迁",
+      "summary": "王室东迁洛邑，东周开始，春秋时期拉开序幕。"
     },
     "sa-707-xuge": {
-      "title": "繻葛之战",
-      "summary": "周桓王与郑国交战，反映王室对强诸侯的控制力不足。"
+      "title": "郑庄公射王",
+      "summary": "郑国与周王室冲突，显示周王室衰微。"
+    },
+    "sa-651-qihuan": {
+      "title": "齐桓公称霸",
+      "summary": "齐桓公成为春秋首位霸主。"
     },
     "sa-651-kuiqiu": {
-      "title": "葵丘会盟",
-      "summary": "齐桓公主持会盟，被视作霸主政治的重要节点之一。"
+      "title": "葵丘之会",
+      "summary": "齐桓公会盟诸侯，周王室派代表参加。"
+    },
+    "sa-594-tax": {
+      "title": "鲁国初税亩",
+      "summary": "鲁国实行初税亩，承认土地私有。"
     },
     "sa-597-bi": {
       "title": "邲之战",
-      "summary": "晋楚争霸中的关键战役之一，影响当时强国格局。"
+      "summary": "晋楚大战，晋国战败。"
     },
-    "sa-594-tax": {
-      "title": "“初税亩”（传统记述）",
-      "summary": "传统上记载的赋税制度变化，被用来讨论春秋时期社会与制度转型。"
+    "sa-551-confucius": {
+      "title": "孔子诞生",
+      "summary": "孔子诞生，儒家思想奠基。"
+    },
+    "sa-506-boju": {
+      "title": "柏举之战",
+      "summary": "吴国击败楚国，攻入郢都。"
+    },
+    "sa-632-chengpu": {
+      "title": "城濮之战",
+      "summary": "晋文公击败楚军，确立晋国霸主地位。"
+    },
+    "ws-453-three-jin": {
+      "title": "三家分晋",
+      "summary": "韩、赵、魏三家瓜分晋国，战国开始。"
+    },
+    "ws-356-shangyang": {
+      "title": "商鞅变法",
+      "summary": "秦孝公任用商鞅进行变法，秦国崛起。"
+    },
+    "ws-341-maling": {
+      "title": "马陵之战",
+      "summary": "孙膑计败庞涓，齐国击败魏国。"
+    },
+    "ws-307-hufu": {
+      "title": "胡服骑射",
+      "summary": "赵武灵王推行胡服骑射，军事改革。"
+    },
+    "ws-284-yan-qi": {
+      "title": "乐毅伐齐",
+      "summary": "燕国联合五国攻齐，齐国几近灭亡。"
+    },
+    "ws-260-changping": {
+      "title": "长平之战",
+      "summary": "秦国击败赵国，坑杀四十万降卒。"
+    },
+    "ws-278-ying": {
+      "title": "秦拔郢",
+      "summary": "秦国攻破楚国郢都。"
+    },
+    "ws-256-zhouends": {
+      "title": "东周灭亡",
+      "summary": "秦灭东周， 周朝结束。"
+    },
+    "ws-221-unification": {
+      "title": "秦灭六国",
+      "summary": "秦始皇统一六国，建立秦朝。"
+    },
+    "ws-230-han": {
+      "title": "秦灭韩",
+      "summary": "秦国灭韩国，统一进程开始。"
+    },
+    "ws-228-wei": {
+      "title": "秦灭魏",
+      "summary": "秦国灭魏国。"
+    },
+    "ws-225-zhao": {
+      "title": "秦灭赵",
+      "summary": "秦国灭赵国。"
+    },
+    "ws-223-chu": {
+      "title": "秦灭楚",
+      "summary": "秦国灭楚国。"
+    },
+    "ws-222-qi": {
+      "title": "秦灭燕",
+      "summary": "秦国灭燕国。"
+    },
+    "ws-221-qi": {
+      "title": "秦灭齐",
+      "summary": "秦国灭齐国，完成统一。"
+    },
+    "qin-214-lingqu": {
+      "title": "灵渠开凿",
+      "summary": "秦始皇派兵岭南，开凿灵渠。"
+    },
+    "qin-210-first-emperor-death": {
+      "title": "秦始皇驾崩",
+      "summary": "秦始皇病逝于沙丘，赵高、李斯篡改遗诏。"
+    },
+    "qin-209-dazexiang": {
+      "title": "大泽乡起义",
+      "summary": "陈胜、吴广在大泽乡起义，反抗秦朝。"
+    },
+    "han-202-han-founded": {
+      "title": "汉朝建立",
+      "summary": "刘邦在垓下击败项羽，建立汉朝。"
+    },
+    "han-154-seven-states": {
+      "title": "七国之乱",
+      "summary": "吴楚七国叛乱，景帝平定。"
+    },
+    "han-138-zhangqian": {
+      "title": "张骞出使西域",
+      "summary": "张骞出使西域，开辟丝绸之路。"
+    },
+    "eh-105-paper": {
+      "title": "蔡伦改进造纸术",
+      "summary": "蔡伦改进造纸术，促进文化传播。"
+    },
+    "eh-184-yellow-turbans": {
+      "title": "黄巾起义",
+      "summary": "张角领导黄巾起义，震动东汉。"
+    },
+    "eh-220-han-ends": {
+      "title": "汉朝灭亡",
+      "summary": "曹丕废汉献帝，汉朝灭亡。"
+    },
+    "sui-589-unify": {
+      "title": "隋朝统一",
+      "summary": "隋文帝灭陈，统一天下。"
+    },
+    "sui-605-canal": {
+      "title": "大运河开凿",
+      "summary": "隋炀帝开凿大运河，连接南北。"
+    },
+    "tang-618-founded": {
+      "title": "唐朝建立",
+      "summary": "李渊在长安称帝，建立唐朝。"
+    },
+    "tang-755-anlushan": {
+      "title": "安史之乱",
+      "summary": "安禄山叛乱，唐朝由盛转衰。"
+    },
+    "song-960-founded": {
+      "title": "宋朝建立",
+      "summary": "赵匡胤陈桥兵变，建立宋朝。"
+    },
+    "song-1127-jingkang": {
+      "title": "靖康之变",
+      "summary": "金朝攻破东京，北宋灭亡。"
+    },
+    "ming-1368-founded": {
+      "title": "明朝建立",
+      "summary": "朱元璋在南京称帝，建立明朝。"
+    },
+    "ming-1405-zhenghe": {
+      "title": "郑和下西洋",
+      "summary": "郑和率船队出使西洋，展示明朝国威。"
+    },
+    "qing-1644-founded": {
+      "title": "清朝建立",
+      "summary": "清军入关，定都北京。"
+    },
+    "qing-1840-opium": {
+      "title": "鸦片战争",
+      "summary": "英国发动鸦片战争，中国近代史开端。"
+    },
+    "roc-1911-xinhai": {
+      "title": "辛亥革命",
+      "summary": "武昌起义，清朝灭亡，中华民国建立。"
+    },
+    "prc-1949-founded": {
+      "title": "中华人民共和国成立",
+      "summary": "新中国成立，中国历史新篇章。"
+    },
+    "prc-1978-reform": {
+      "title": "改革开放",
+      "summary": "邓小平推行改革开放，中国经济腾飞。"
     }
   },
   "polity": {
@@ -1128,5 +1270,169 @@
       "korea": "朝鲜/韩国",
       "vietnam": "越南"
     }
+  },
+  "rulerEraName": {
+    "wc-cn-qinshihuang": "始皇帝",
+    "wc-cn-hanwudi": "建元/元狩/元封",
+    "wc-cn-guangwu": "建武",
+    "wc-cn-caowei": "黄初",
+    "wc-cn-suiyang": "大业",
+    "wc-cn-tangtaizong": "贞观",
+    "wc-cn-wuzetian": "天授/周历",
+    "wc-cn-xuanzong": "开元/天宝",
+    "wc-cn-songtaizu": "建隆/乾德",
+    "wc-cn-huizong": "崇宁/大观",
+    "wc-cn-kublai": "至元",
+    "wc-cn-yongle": "永乐",
+    "wc-cn-kangxi": "康熙",
+    "wc-cn-qianlong": "乾隆",
+    "wc-cn-han-hui": "前元",
+    "wc-cn-han-wen": "后元",
+    "wc-cn-han-jing": "中元",
+    "wc-cn-han-zhao": "始元",
+    "wc-cn-han-xuan": "本始/黄龙",
+    "wc-cn-han-yuan": "初元/永光",
+    "wc-cn-han-cheng": "建始",
+    "wc-cn-han-ai": "太初/元寿",
+    "wc-cn-han-ping": "元始",
+    "wc-cn-ehan-ming": "永平",
+    "wc-cn-ehan-zhang": "建初",
+    "wc-cn-ehan-he": "永元",
+    "wc-cn-ehan-an": "永初",
+    "wc-cn-ehan-huan": "建和",
+    "wc-cn-ehan-ling": "中平",
+    "wc-cn-ehan-xian": "建安",
+    "wc-cn-tk-caopi": "黄初",
+    "wc-cn-tk-liubei": "章武",
+    "wc-cn-tk-sunquan": "黄武",
+    "wc-cn-tang-gaozu": "武德",
+    "wc-cn-tang-gaozong": "永徽",
+    "wc-cn-tang-suzong": "乾元",
+    "wc-cn-tang-dezong": "大历",
+    "wc-cn-tang-xianzong": "元和",
+    "wc-cn-tang-xizong": "咸通",
+    "wc-cn-tang-aidi": "天祐",
+    "wc-cn-song-taizong": "太平兴国",
+    "wc-cn-song-zhenzong": "咸平/天禧",
+    "wc-cn-song-renzong": "天圣/明道",
+    "wc-cn-song-shenzong": "熙宁",
+    "wc-cn-song-gaozong": "建炎/绍兴",
+    "wc-cn-song-xiaozong": "乾道",
+    "wc-cn-song-lizong": "宝庆/绍定",
+    "wc-cn-song-didi": "咸淳",
+    "wc-cn-yuan-taizu": "武德",
+    "wc-cn-yuan-taizong": "元贞",
+    "wc-cn-yuan-chengzong": "大德",
+    "wc-cn-yuan-renzong": "皇庆",
+    "wc-cn-yuan-shundi": "至正",
+    "wc-cn-mingtaizu": "洪武",
+    "wc-cn-ming-xuanzong": "宣德",
+    "wc-cn-ming-yingzong": "正统/天顺",
+    "wc-cn-ming-daizong": "景泰",
+    "wc-cn-ming-xianzong": "成化",
+    "wc-cn-ming-xiaozong": "弘治",
+    "wc-cn-ming-shizong": "正德",
+    "wc-cn-ming-shenzong": "嘉靖",
+    "wc-cn-ming-sizong": "隆庆/万历",
+    "wc-cn-qing-taizu": "天命",
+    "wc-cn-qing-taizong": "天聪",
+    "wc-cn-qing-shizhu": "顺治",
+    "wc-cn-qing-shizong": "雍正",
+    "wc-cn-qing-renzong": "嘉庆",
+    "wc-cn-qing-xuanzong": "道光",
+    "wc-cn-qing-wenzong": "咸丰",
+    "wc-cn-qing-cixi": "同治",
+    "wc-cn-qing-dezong": "光绪",
+    "wc-cn-qing-puyi": "宣统",
+    "ea-cn-hanwudi": "建元/元狩/元封",
+    "ea-cn-tangtaizong": "贞观",
+    "ea-cn-wuzetian": "天授/周历",
+    "ea-cn-songtaizu": "建隆/乾德",
+    "ea-cn-yongle": "永乐",
+    "ea-cn-kangxi": "康熙",
+    "ea-cn-qianlong": "乾隆",
+    "wc-zhou-wu": "武王伐纣",
+    "wc-zhou-cheng": "成康之治",
+    "wc-zhou-kang": "康王盛世",
+    "wc-zhou-zhao": "昭王南征",
+    "wc-zhou-mu": "穆王西巡",
+    "wc-zhou-gong": "恭王治民",
+    "wc-zhou-yih": "懿王衰微",
+    "wc-zhou-xiao": "孝王复兴",
+    "wc-zhou-yi": "夷王削弱",
+    "wc-zhou-li": "厉王专利",
+    "wc-zhou-gonghe": "共和行政",
+    "wc-zhou-xuan": "宣王中兴",
+    "wc-zhou-you": "幽王失国"
+  },
+  "timeline": {
+    "title": "历史事件时间线",
+    "selectProcess": "选择历史进程",
+    "play": "播放",
+    "pause": "暂停",
+    "anti-qin": "反秦建汉",
+    "anti-qin-desc": "从陈胜吴广起义到刘邦建立汉朝的历史进程",
+    "three-kingdoms": "三国鼎立",
+    "three-kingdoms-desc": "从黄巾起义到三国鼎立的历史进程",
+    "daze-uprising": "大泽乡起义",
+    "daze-uprising-desc": "陈胜、吴广在大泽乡揭竿而起，反抗秦朝暴政",
+    "chen-sheng-king": "陈胜称王",
+    "chen-sheng-king-desc": "陈胜自立为王，建立张楚政权",
+    "xiang-liang-uprising": "项梁起兵",
+    "xiang-liang-uprising-desc": "项梁在会稽起兵，拥立楚怀王后裔",
+    "julu-battle": "巨鹿之战",
+    "julu-battle-desc": "项羽率楚军大破秦军，坑杀秦降卒二十万",
+    "qin-fall": "秦朝灭亡",
+    "qin-fall-desc": "刘邦攻入咸阳，秦朝灭亡",
+    "xiang-enfeoff": "项羽分封",
+    "xiang-enfeoff-desc": "项羽自封西楚霸王，分封十八路诸侯",
+    "chu-han-contention": "楚汉争霸",
+    "chu-han-contention-desc": "项羽与刘邦争夺天下，双方对峙",
+    "battle-of-gaixia": "垓下之战",
+    "battle-of-gaixia-desc": "刘邦围困项羽于垓下，项羽自刎乌江",
+    "han-unification": "汉朝建立",
+    "han-unification-desc": "刘邦称帝，建立汉朝，定都长安",
+    "dong-zhuo-enter": "董卓进京",
+    "dong-zhuo-enter-desc": "董卓率军入洛阳，废少帝立献帝",
+    "cao-cao-unites-north": "曹操统一北方",
+    "cao-cao-unites-north-desc": "曹操在官渡之战击败袁绍，统一北方",
+    "battle-of-red-cliffs": "赤壁之战",
+    "battle-of-red-cliffs-desc": "孙刘联军大败曹操，奠定三国鼎立基础",
+    "wei-founded": "曹魏建立",
+    "wei-founded-desc": "曹丕废汉献帝，建立魏国",
+    "shu-founded": "蜀汉建立",
+    "shu-founded-desc": "刘备在成都称帝，建立蜀汉",
+    "wu-founded": "东吴建立",
+    "wu-founded-desc": "孙权在健康称帝，建立东吴"
+  },
+  "location": {
+    "daze": "大泽乡（安徽宿州）",
+    "xianyang": "咸阳",
+    "julu": "巨鹿（河北邢台）",
+    "chang-an": "长安",
+    "gaixia": "垓下（安徽灵璧）",
+    "luoyang": "洛阳",
+    "ye": "邺城（河北邯郸）",
+    "red-cliffs": "赤壁（湖北赤壁）",
+    "chengdu": "成都",
+    "jianye": "建业（江苏南京）"
+  },
+  "faction": {
+    "qin": "秦",
+    "rebels": "起义军",
+    "chu": "楚",
+    "xiang": "项羽",
+    "han": "汉",
+    "dongzhuo": "董卓",
+    "cao": "曹操",
+    "wei": "魏",
+    "shu": "蜀汉",
+    "wu": "东吴",
+    "sun": "孙权",
+    "liu": "刘备",
+    "qi": "齐",
+    "zhao": "赵",
+    "han-state": "韩",
+    "yan": "燕"
   }
 }

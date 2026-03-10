@@ -20,7 +20,7 @@ export default async function Home({
 
   return (
     <NextIntlClientProvider messages={messages} locale={locale}>
-      <HistoryApp eras={CHINA_ERAS} events={CHINA_EVENTS} rulers={CHINA_RULERS} />
+      <HistoryApp eras={CHINA_ERAS} events={CHINA_EVENTS} rulers={CHINA_RULERS} locale={locale} />
     </NextIntlClientProvider>
   );
 }

@@ -65,15 +65,15 @@
     "suiwen": "Emperor Wen of Sui",
     "suiyang": "Emperor Yang of Sui",
     "tangtaizong": "Emperor Taizong of Tang",
-    "wuzetian": "Wu Zetian",
+    "wuzetian": "Wu Zetian (Empress Regnant)",
     "tangxuanzong": "Emperor Xuanzong of Tang",
-    "songtaizu": "Emperor Taizu of Song",
+    "songtaizu": "Emperor Taizu of Song (Zhao Kuangyin)",
     "songhuizong": "Emperor Huizong of Song",
     "yuanshizu": "Kublai Khan (Emperor Shizu of Yuan)",
     "mingtaizu": "Hongwu Emperor (Taizu of Ming)",
     "mingchengzu": "Yongle Emperor (Chengzu of Ming)",
-    "kangxi": "Kangxi Emperor",
-    "qianlong": "Qianlong Emperor",
+    "kangxi": "Emperor Kangxi",
+    "qianlong": "Emperor Qianlong",
     "zhou-wu": "King Wu of Zhou",
     "zhou-cheng": "King Cheng of Zhou",
     "zhou-kang": "King Kang of Zhou",
@@ -378,7 +378,48 @@
     "ea-vn-ly": "Ly Dynasty",
     "ea-vn-tran": "Tran Dynasty",
     "ea-vn-le": "Later Le Dynasty",
-    "ea-vn-nguyen": "Nguyen Dynasty"
+    "ea-vn-nguyen": "Nguyen Dynasty",
+    "guangwu": "Emperor Guangwu (Liu Xiu)",
+    "caowei": "Emperor Wen of Wei (Cao Pi)",
+    "xuanzong": "Emperor Xuanzong",
+    "huizong": "Emperor Huizong of Song",
+    "kublai": "Kublai Khan",
+    "yongle": "Emperor Yongle (Zhu Di)",
+    "wc-ro-trajian": "Trajan",
+    "wc-ro-marcus": "Marcus Aurelius",
+    "wc-ro-theodosius": "Theodosius I",
+    "wc-ro-basil": "Basil I",
+    "wc-ro-alexios": "Alexios I Komnenos",
+    "wc-ro-abdul": "Abdulaziz",
+    "wc-pe-khosrow": "Khosrow I",
+    "wc-pe-abbas": "Shah Abbas I",
+    "wc-pe-naser": "Nader Shah",
+    "wc-is-umar": "Umar ibn al-Khattab",
+    "wc-is-ali": "Ali ibn Abi Talib",
+    "wc-is-abd": "Abd al-Malik",
+    "wc-is-mansur": "Al-Mansur",
+    "wc-is-genghis": "Genghis Khan",
+    "wc-is-babur": "Babur",
+    "wc-is-shahjahan": "Shah Jahan",
+    "ea-jp-ojin": "Emperor Ojin",
+    "ea-jp-yomei": "Emperor Yomei",
+    "ea-jp-kotoku": "Emperor Kotoku",
+    "ea-jp-shotoku": "Prince Shōtoku",
+    "ea-jp-kanmu": "Emperor Kanmu",
+    "ea-jp-murakami": "Emperor Murakami",
+    "ea-jp-yoritomo": "Minamoto no Yoritomo",
+    "ea-jp-hideyoshi": "Toyotomi Hideyoshi",
+    "ea-jp-ieru": "Tokugawa Ieyasu",
+    "ea-kr-jul": "Jumong (Founding King)",
+    "ea-kr-gwang": "King Gwang",
+    "ea-kr-sejong": "King Sejong the Great",
+    "ea-kr-sunjong": "Emperor Sunjong",
+    "ea-vn-trung": "Trung Sisters",
+    "ea-vn-lythai": "Ly Thai To",
+    "ea-vn-tranth": "Tran Hue",
+    "ea-vn-leithanh": "Le Thanh Tong",
+    "ea-vn-quangtrung": "Quang Trung",
+    "ea-vn-gialong": "Gia Long"
   },
   "rulerBio": {
     "qinshihuang": "China's first emperor, who unified the warring states in 221 BCE. He standardized writing, weights and measures, built the Great Wall and vast road networks, and established the centralized imperial system that would last over 2,000 years.",
@@ -869,213 +910,186 @@
     "ea-vn-le": "1427年驱逐明朝；1428年黎利建后黎朝；圣宗洪德改革全盛；字喃文学（翘传前身）；1788年西山朝篡位。"
   },
   "event": {
-    "sa-770-zhou-east": {
-      "title": "Zhou court moves east to Luoyi (Luoyang)",
-      "summary": "The royal court relocates east after turmoil, marking the conventional start of the Spring and Autumn period."
-    },
-    "sa-656-qihuan": {
-      "title": "Duke Huan of Qi becomes hegemon",
-      "summary": "Qi rises as a leading state, associated with reforms and the hegemon system."
-    },
-    "sa-632-chengpu": {
-      "title": "Battle of Chengpu",
-      "summary": "Jin defeats Chu in a pivotal battle, shaping the balance among competing states."
-    },
-    "sa-551-confucius": {
-      "title": "Birth of Confucius (trad.)",
-      "summary": "Traditionally dated to this year; later central to East Asian ethical and political thought."
-    },
-    "sa-506-boju": {
-      "title": "Battle of Boju",
-      "summary": "Wu defeats Chu and briefly captures its capital, highlighting volatile interstate rivalry."
-    },
-    "ws-453-three-jin": {
-      "title": "Partition of Jin (Three Jin)",
-      "summary": "Power consolidates into Han, Zhao, and Wei—accelerating the Warring States order."
-    },
-    "ws-356-shangyang-reform": {
-      "title": "Shang Yang reforms in Qin",
-      "summary": "Legalist reforms strengthen Qin institutions, military organization, and agriculture."
-    },
-    "ws-341-maling": {
-      "title": "Battle of Maling",
-      "summary": "Qi defeats Wei with ambush tactics; remembered for Sun Bin's strategy."
-    },
-    "ws-307-hufu-qishe": {
-      "title": "Zhao's cavalry reforms (Hu clothing & mounted archery)",
-      "summary": "King Wuling of Zhao promotes cavalry tactics and reforms, reshaping warfare in the north."
-    },
-    "ws-284-yan-attack-qi": {
-      "title": "Yan invades Qi (Yue Yi's campaign)",
-      "summary": "A coalition led by Yan devastates Qi, bringing the state close to collapse."
-    },
-    "ws-278-qin-takes-ying": {
-      "title": "Qin captures Ying (Chu's capital)",
-      "summary": "Qin general Bai Qi takes Ying, forcing Chu's strategic center to shift south."
-    },
-    "ws-256-zhou-ends": {
-      "title": "End of the Zhou royal house (trad.)",
-      "summary": "Zhou's remaining authority collapses, and interstate conquest becomes more definitive."
-    },
-    "ws-260-changping": {
-      "title": "Battle of Changping",
-      "summary": "Qin's victory over Zhao signals dominance and foreshadows imperial unification."
-    },
-    "ws-230-qin-conquers-han": {
-      "title": "Qin conquers Han",
-      "summary": "The first major conquest in Qin's final unification drive; Han falls first among the Seven States."
-    },
-    "ws-228-qin-conquers-zhao": {
-      "title": "Qin conquers Zhao",
-      "summary": "After years of decline following Changping, Zhao is finally taken by Qin."
-    },
-    "ws-225-qin-conquers-wei": {
-      "title": "Qin conquers Wei",
-      "summary": "The fall of Daliang (often linked to flood tactics) ends Wei as an independent state."
-    },
-    "ws-223-qin-conquers-chu": {
-      "title": "Qin conquers Chu",
-      "summary": "A major southern campaign eliminates Chu, one of Qin's largest rivals."
-    },
-    "ws-222-qin-conquers-yan": {
-      "title": "Qin conquers Yan",
-      "summary": "After the failed assassination attempt, Yan cannot resist Qin's advance and falls."
-    },
-    "ws-221-qin-conquers-qi": {
-      "title": "Qin conquers Qi",
-      "summary": "Qi is absorbed in the final phase, completing Qin's conquest of the other states."
-    },
-    "ws-221-unification": {
-      "title": "Qin unifies the warring states",
-      "summary": "Qin conquers rival states; Ying Zheng proclaims himself First Emperor."
-    },
-    "qin-214-lingqu": {
-      "title": "Lingqu Canal constructed (trad.)",
-      "summary": "A major canal project supports logistics and consolidation in the south."
-    },
-    "qin-210-first-emperor-death": {
-      "title": "Death of Qin Shi Huang",
-      "summary": "Succession crises and revolts soon follow, undermining Qin rule."
-    },
-    "qin-209-dazexiang": {
-      "title": "Dazexiang Uprising",
-      "summary": "A rebellion led by Chen Sheng and Wu Guang becomes a symbol of anti-Qin unrest."
-    },
-    "han-202-han-founded": {
-      "title": "Liu Bang founds the Han dynasty",
-      "summary": "After the Chu–Han contention, Liu Bang becomes Emperor Gaozu and establishes Han."
-    },
-    "han-154-seven-states": {
-      "title": "Rebellion of the Seven States",
-      "summary": "A major revolt by regional kings is suppressed, strengthening central authority."
-    },
-    "han-138-zhangqian": {
-      "title": "Zhang Qian sent to the Western Regions",
-      "summary": "Diplomatic missions open routes and knowledge that later underpin Silk Road connections."
-    },
-    "eh-105-paper": {
-      "title": "Cai Lun improves papermaking (trad.)",
-      "summary": "Papermaking improvements support administration and cultural diffusion."
-    },
-    "eh-184-yellow-turbans": {
-      "title": "Yellow Turban Rebellion",
-      "summary": "A massive uprising weakens central control and accelerates fragmentation."
-    },
-    "eh-220-han-ends": {
-      "title": "End of Eastern Han",
-      "summary": "Emperor Xian abdicates; Cao Pi founds Wei, beginning the Three Kingdoms era."
-    },
-    "sui-589-unify": {
-      "title": "Sui reunifies China",
-      "summary": "The Sui defeats the Chen and ends the Southern and Northern Dynasties division."
-    },
-    "sui-605-grand-canal": {
-      "title": "Grand Canal construction expands",
-      "summary": "Large-scale canal works link north and south, boosting transport and taxation capacity."
-    },
-    "tang-618-founded": {
-      "title": "Founding of the Tang dynasty",
-      "summary": "Li Yuan establishes the Tang, beginning a major era of imperial rebuilding."
-    },
-    "tang-755-anlushan": {
-      "title": "An Lushan Rebellion",
-      "summary": "A devastating rebellion that weakens Tang central power and reshapes society and military governance."
-    },
-    "song-960-founded": {
-      "title": "Founding of the Song dynasty",
-      "summary": "Zhao Kuangyin becomes Emperor Taizu and unifies much of China after the Five Dynasties period."
-    },
-    "song-1127-jingkang": {
-      "title": "Jingkang Incident",
-      "summary": "The Jin captures Kaifeng; Northern Song collapses and the court retreats south."
-    },
-    "yuan-1271-founded": {
-      "title": "Yuan dynasty proclaimed",
-      "summary": "Kublai Khan proclaims the Yuan dynasty, integrating Mongol rule into a Chinese dynastic framework."
-    },
-    "ming-1368-founded": {
-      "title": "Founding of the Ming dynasty",
-      "summary": "Zhu Yuanzhang (Hongwu) establishes the Ming and ends Yuan rule in China proper."
-    },
-    "ming-1405-zhenghe": {
-      "title": "Zheng He voyages begin",
-      "summary": "State-sponsored maritime expeditions project Ming influence across the Indian Ocean."
-    },
-    "qing-1644-founded": {
-      "title": "Qing takes Beijing",
-      "summary": "The Qing enters Beijing, beginning consolidation over China after the Ming collapse."
-    },
-    "qing-1840-opium": {
-      "title": "First Opium War",
-      "summary": "War with Britain marks a major turning point, intensifying foreign pressure and internal challenges."
-    },
-    "roc-1911-xinhai": {
-      "title": "Xinhai Revolution",
-      "summary": "Revolutionary uprisings end the Qing dynasty and launch the Republic era."
-    },
-    "prc-1949-founded": {
-      "title": "Founding of the People's Republic of China",
-      "summary": "The PRC is proclaimed in Beijing, beginning a new political era."
-    },
-    "prc-1978-reform": {
-      "title": "Reform and Opening-up begins",
-      "summary": "Economic reforms and opening policies start, transforming society and development trajectories."
-    },
+    "viewTimeline": "View Timeline",
     "wz-1046-muye": {
       "title": "Battle of Muye",
-      "summary": "Zhou forces defeat Shang, opening the era of Western Zhou rule."
+      "summary": "King Wu of Zhou defeats Shang at Muye, establishes Zhou dynasty."
     },
     "wz-1042-regency": {
-      "title": "Regency of the Duke of Zhou (trad.)",
-      "summary": "Early regency politics stabilize the new dynasty after succession."
+      "title": "Duke of Zhou Regencies",
+      "summary": "Duke of Zhou serves as regent after King Wu's death."
     },
     "wz-1040-fengjian": {
-      "title": "Enfeoffment & feudal order expands",
-      "summary": "The Zhou enfeoffment system and ritual-political order are consolidated across regions."
+      "title": "Feudal System Established",
+      "summary": "Zhou establishes fengjian feudal system."
     },
     "wz-841-gonghe": {
-      "title": "Gonghe Regency begins (841 BCE)",
-      "summary": "After King Li’s exile, a regency begins; 841 BCE is a key anchor year in Chinese chronology."
+      "title": "Gonghe Regency",
+      "summary": "Duke of Zhao and Duke of Zhou rule jointly after King Li's exile."
     },
     "wz-771-quanrong": {
-      "title": "Quanrong sack Haojing (771 BCE)",
-      "summary": "The capital is attacked and King You dies; Western Zhou collapses, paving the way for Eastern Zhou."
+      "title": "Rong Invasion of Haojing",
+      "summary": "Rong tribes capture capital, Western Zhou falls."
+    },
+    "sa-770-zhou-east": {
+      "title": "King Ping Moves East",
+      "summary": "Royal court moves to Luoyang, Eastern Zhou begins."
     },
     "sa-707-xuge": {
-      "title": "Battle of Xuge",
-      "summary": "Conflict between the Zhou king and the State of Zheng, illustrating limited royal control over strong states."
+      "title": "Duke of Zheng Shoots King",
+      "summary": "Conflict between Zheng and Zhou royal court."
+    },
+    "sa-651-qihuan": {
+      "title": "Duke Huan Hegemon",
+      "summary": "Duke Huan of Qi becomes first hegemon in Spring and Autumn."
     },
     "sa-651-kuiqiu": {
-      "title": "Kuiqiu conference",
-      "summary": "A major interstate conference led by Duke Huan of Qi, often cited as a key moment in hegemon politics."
+      "title": "Kuiqiu Meeting",
+      "summary": "Duke Huan convenes lords at Kuiqiu."
+    },
+    "sa-594-tax": {
+      "title": "Land Tax Reform",
+      "summary": "Lu implements first land tax."
     },
     "sa-597-bi": {
       "title": "Battle of Bi",
-      "summary": "A pivotal battle in the Jin–Chu rivalry that influenced the balance among major powers."
+      "summary": "Jin defeated by Chu at Bi."
     },
-    "sa-594-tax": {
-      "title": "“First tax on fields” (trad.)",
-      "summary": "A traditionally recorded shift in taxation, often discussed as part of Spring and Autumn institutional change."
+    "sa-551-confucius": {
+      "title": "Confucius Born",
+      "summary": "Birth of Confucius, founder of Confucianism."
+    },
+    "sa-506-boju": {
+      "title": "Battle of Boju",
+      "summary": "Wu defeats Chu, captures capital."
+    },
+    "sa-632-chengpu": {
+      "title": "Battle of Chengpu",
+      "summary": "Jin defeats Chu, establishes hegemon."
+    },
+    "ws-453-three-jin": {
+      "title": "Three Jin States",
+      "summary": "Han, Zhao, Wei partition Jin, Warring States begins."
+    },
+    "ws-356-shangyang": {
+      "title": "Shang Yang Reforms",
+      "summary": "Shang Yang's reforms strengthen Qin."
+    },
+    "ws-341-maling": {
+      "title": "Battle of Maling",
+      "summary": "Sun Bin defeats Pang Juan at Maling."
+    },
+    "ws-307-hufu": {
+      "title": "Hu Fu骑射",
+      "summary": "King Wuling reforms military."
+    },
+    "ws-284-yan-qi": {
+      "title": "Leguo Attacks Qi",
+      "summary": "Yan coalition attacks Qi."
+    },
+    "ws-260-changping": {
+      "title": "Battle of Changping",
+      "summary": "Qin defeats Zhao, 400k buried."
+    },
+    "ws-278-ying": {
+      "title": "Qin Takes Ying",
+      "summary": "Qin captures Chu capital."
+    },
+    "ws-256-zhouends": {
+      "title": "Zhou Dynasty Ends",
+      "summary": "Qin eliminates Eastern Zhou."
+    },
+    "ws-221-unification": {
+      "title": "Qin Unification",
+      "summary": "Qin conquers six states, unified China."
+    },
+    "qin-214-lingqu": {
+      "title": "Lingqu Canal",
+      "summary": "Qin builds canal to south."
+    },
+    "qin-210-first-emperor-death": {
+      "title": "First Emperor Dies",
+      "summary": "First Emperor dies at Shaqiu."
+    },
+    "qin-209-dazexiang": {
+      "title": "Dazexiang Uprising",
+      "summary": "Chen Sheng uprising against Qin."
+    },
+    "han-202-han-founded": {
+      "title": "Han Dynasty Founded",
+      "summary": "Liu Bang establishes Han dynasty."
+    },
+    "han-154-seven-states": {
+      "title": "Seven Kingdoms Revolt",
+      "summary": "Rebellion of seven states suppressed."
+    },
+    "han-138-zhangqian": {
+      "title": "Zhang Qian's Mission",
+      "summary": "Zhang Qian opens Silk Road."
+    },
+    "eh-105-paper": {
+      "title": "Paper Invention",
+      "summary": "Cai Lun improves papermaking."
+    },
+    "eh-184-yellow-turbans": {
+      "title": "Yellow Turban Rebellion",
+      "summary": "Zhang Jue's rebellion."
+    },
+    "eh-220-han-ends": {
+      "title": "Han Dynasty Ends",
+      "summary": "Cao Pi deposes Emperor Xian."
+    },
+    "sui-589-unify": {
+      "title": "Sui Unification",
+      "summary": "Sui defeats Chen, unified China."
+    },
+    "sui-605-canal": {
+      "title": "Grand Canal Built",
+      "summary": "Sui builds Grand Canal."
+    },
+    "tang-618-founded": {
+      "title": "Tang Dynasty Founded",
+      "summary": "Li Yuan establishes Tang."
+    },
+    "tang-755-anlushan": {
+      "title": "An Lushan Rebellion",
+      "summary": "An Lushan's rebellion."
+    },
+    "song-960-founded": {
+      "title": "Song Dynasty Founded",
+      "summary": "Zhao Kuangyin establishes Song."
+    },
+    "song-1127-jingkang": {
+      "title": "Jingkang Incident",
+      "summary": "Northern Song falls to Jin."
+    },
+    "ming-1368-founded": {
+      "title": "Ming Dynasty Founded",
+      "summary": "Zhu Yuanzhang establishes Ming."
+    },
+    "ming-1405-zhenghe": {
+      "title": "Zheng He's Voyages",
+      "summary": "Zheng He's maritime expeditions."
+    },
+    "qing-1644-founded": {
+      "title": "Qing Dynasty Founded",
+      "summary": "Qing enters Beijing."
+    },
+    "qing-1840-opium": {
+      "title": "Opium Wars",
+      "summary": "Britain's wars on China."
+    },
+    "roc-1911-xinhai": {
+      "title": "Xinhai Revolution",
+      "summary": "Revolution ends Qing, establishes Republic."
+    },
+    "prc-1949-founded": {
+      "title": "PRC Founded",
+      "summary": "People's Republic established."
+    },
+    "prc-1978-reform": {
+      "title": "Reform and Opening",
+      "summary": "Deng Xiaoping's reforms."
     }
   },
   "polity": {
@@ -1128,5 +1142,75 @@
       "korea": "Korea",
       "vietnam": "Vietnam"
     }
+  },
+  "timeline": {
+    "title": "Historical Timeline",
+    "selectProcess": "Select Historical Process",
+    "play": "Play",
+    "pause": "Pause",
+    "anti-qin": "Fall of Qin, Rise of Han",
+    "anti-qin-desc": "From the Dazexiang Uprising to the establishment of the Han Dynasty",
+    "three-kingdoms": "Three Kingdoms",
+    "three-kingdoms-desc": "From the Yellow Turban Rebellion to the Three Kingdoms period",
+    "daze-uprising": "Dazexiang Uprising",
+    "daze-uprising-desc": "Chen Sheng and Wu Guang rise up against Qin tyranny",
+    "chen-sheng-king": "Chen Sheng Claims Kingship",
+    "chen-sheng-king-desc": "Chen Sheng declares himself king of Zhang Chu",
+    "xiang-liang-uprising": "Xiang Liang's Uprising",
+    "xiang-liang-uprising-desc": "Xiang Liang rallies forces in Kuaiji, supports Chu royal lineage",
+    "julu-battle": "Battle of Julu",
+    "julu-battle-desc": "Xiang Yu defeats Qin army,坑杀 200,000 surrendered soldiers",
+    "qin-fall": "Fall of Qin Dynasty",
+    "qin-fall-desc": "Liu Bang captures Xianyang, Qin Dynasty ends",
+    "xiang-enfeoff": "Xiang Yu's Enfeoffment",
+    "xiang-enfeoff-desc": "Xiang Yu titles himself King of Western Chu, enfeoffs 18 lords",
+    "chu-han-contention": "Chu-Han Contention",
+    "chu-han-contention-desc": "Xiang Yu and Liu Bang compete for supremacy",
+    "battle-of-gaixia": "Battle of Gaixia",
+    "battle-of-gaixia-desc": "Liu Bang surrounds Xiang Yu at Gaixia, Xiang Yu dies",
+    "han-unification": "Han Dynasty Founded",
+    "han-unification-desc": "Liu Bang becomes emperor, establishes Han Dynasty at Chang'an",
+    "dong-zhuo-enter": "Dong Zhuo Enters Capital",
+    "dong-zhuo-enter-desc": "Dong Zhuo enters Luoyang, deposes Emperor Xian",
+    "cao-cao-unites-north": "Cao Cao Unites North",
+    "cao-cao-unites-north-desc": "Cao Cao defeats Yuan Shao, unifies the north",
+    "battle-of-red-cliffs": "Battle of Red Cliffs",
+    "battle-of-red-cliffs-desc": "Sun-Liu alliance defeats Cao Cao, establishes Three Kingdoms",
+    "wei-founded": "Cao Wei Founded",
+    "wei-founded-desc": "Cao Pi deposes Emperor Xian, establishes Wei",
+    "shu-founded": "Shu Han Founded",
+    "shu-founded-desc": "Liu Bei declares himself emperor at Chengdu",
+    "wu-founded": "Eastern Wu Founded",
+    "wu-founded-desc": "Sun Quan declares emperor at Jianye"
+  },
+  "location": {
+    "daze": "Dazexiang (Suzhou, Anhui)",
+    "xianyang": "Xianyang",
+    "julu": "Julu (Xingtai, Hebei)",
+    "chang-an": "Chang'an",
+    "gaixia": "Gaixia (Lingbi, Anhui)",
+    "luoyang": "Luoyang",
+    "ye": "Ye (Handan, Hebei)",
+    "red-cliffs": "Red Cliffs (Chibi, Hubei)",
+    "chengdu": "Chengdu",
+    "jianye": "Jianye (Nanjing, Jiangsu)"
+  },
+  "faction": {
+    "qin": "Qin",
+    "rebels": "Rebels",
+    "chu": "Chu",
+    "xiang": "Xiang Yu",
+    "han": "Han",
+    "dongzhuo": "Dong Zhuo",
+    "cao": "Cao Cao",
+    "wei": "Wei",
+    "shu": "Shu Han",
+    "wu": "Eastern Wu",
+    "sun": "Sun Quan",
+    "liu": "Liu Bei",
+    "qi": "Qi",
+    "zhao": "Zhao",
+    "han-state": "Han (State)",
+    "yan": "Yan"
   }
 }

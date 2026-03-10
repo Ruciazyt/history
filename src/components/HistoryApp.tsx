@@ -1,11 +1,13 @@
 'use client';
 
 import * as React from 'react';
+import Link from 'next/link';
 
 import type { Era, Event, Ruler } from '@/lib/history/types';
 import { clamp, formatYear } from '@/lib/history/utils';
 import { HistoryMap } from '@/components/HistoryMap';
 import { LocaleSwitcher } from '@/components/LocaleSwitcher';
+import { RulerRelations } from '@/components/RulerRelations';
 import { useTranslations } from 'next-intl';
 import { worldComparisonEra, eastAsiaComparisonEra } from '@/lib/history/data/worldEras';
 import { worldComparisonRulers, eastAsiaRulers } from '@/lib/history/data/worldRulers';
@@ -27,12 +29,16 @@ export function HistoryApp({
   eras,
   events,
   rulers,
+  locale,
 }: {
   eras: Era[];
   events: Event[];
   rulers: Ruler[];
+  locale?: string;
 }) {
   const t = useTranslations();
+  const tEra = useTranslations('rulerEraName');
+  const currentLocale = locale || 'zh';
 
   const [civMode, setCivMode] = React.useState<'china' | 'eurasian' | 'east-asia'>('china');
   const activeEras = civMode === 'china' ? eras : civMode === 'eurasian' ? [worldComparisonEra] : [eastAsiaComparisonEra];
@@ -40,7 +46,7 @@ export function HistoryApp({
 
   const { min, max } = React.useMemo(() => yearBounds(activeEras), [activeEras]);
 
-  const [openEraIds, setOpenEraIds] = React.useState<Set<string>>(new Set());
+  const [openEraIds, setOpenEraIds] = React.useState<Set<string>>(new Set(['world-comparison', 'east-asia-comparison']));
   const toggleEra = React.useCallback((id: string) => {
     setOpenEraIds((prev) => {
       const next = new Set(prev);
@@ -54,7 +60,10 @@ export function HistoryApp({
 
   const switchCiv = React.useCallback((mode: 'china' | 'eurasian' | 'east-asia') => {
     setCivMode(mode);
-    setOpenEraIds(new Set());
+    // 默认展开：欧亚对比/东亚对比
+    if (mode === 'eurasian') setOpenEraIds(new Set(['world-comparison']));
+    else if (mode === 'east-asia') setOpenEraIds(new Set(['east-asia-comparison']));
+    else setOpenEraIds(new Set());
     setSelectedRulerId(null);
   }, []);
 
@@ -118,6 +127,12 @@ export function HistoryApp({
     return [...byId.values()];
   }, [currentEraEvents, otherEraEvents]);
 
+  // 主页面事件 → 时间线页面跳转（先做 MVP：反秦建汉）
+  const timelineLinks: Record<string, { process: string; event?: string }> = {
+    'qin-209-dazexiang': { process: 'anti-qin', event: 'daze-agriculture' },
+    'han-202-han-founded': { process: 'anti-qin', event: 'han-unification' },
+  };
+
   return (
     <div className="flex h-screen flex-col bg-zinc-50 text-zinc-900">
       <header className="shrink-0 border-b border-zinc-200 bg-white">
@@ -160,12 +175,18 @@ export function HistoryApp({
               </span>
             </div>
             <LocaleSwitcher />
+            <Link
+              href={`/${currentLocale}/timeline`}
+              className="px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 rounded-lg text-sm text-zinc-700 transition-colors border border-zinc-200"
+            >
+              📜 {t('event.viewTimeline')}
+            </Link>
           </div>
         </div>
       </header>
 
       <div className="flex w-full flex-1 flex-col overflow-hidden px-4 py-4">
-        <div className="grid h-full grid-cols-1 gap-4 overflow-hidden lg:grid-cols-[380px_minmax(0,1fr)_320px] xl:grid-cols-[440px_minmax(0,1fr)_360px]">
+        <div className="grid h-full grid-cols-1 gap-4 overflow-hidden lg:grid-cols-[420px_minmax(0,1fr)_320px] xl:grid-cols-[480px_minmax(0,1fr)_360px]">
         {/* Left: global vertical timeline (time-proportional, collapsible, scrollable) */}
         <aside className="flex max-h-full flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white">
           <div className="shrink-0 border-b border-zinc-200 bg-white p-3">
@@ -245,10 +266,10 @@ export function HistoryApp({
                                     style={{ left: 20, top: '50%', transform: 'translate(-50%, -50%)' }}
                                   />
                                   <div className="min-w-0 flex-1 flex items-baseline justify-between gap-2">
-                                    <span className={`truncate text-[11px] font-medium ${active ? 'text-zinc-900' : 'text-zinc-600'}`}>
-                                      {t(r.nameKey)}
+                                    <span className={`truncate text-[13px] font-medium ${active ? 'text-zinc-900' : 'text-zinc-600'}`}>
+                                      {t(r.nameKey)}{r.eraNameKey ? <span className="text-zinc-500"> - {tEra(r.eraNameKey)}</span> : null}
                                     </span>
-                                    <span className="shrink-0 text-[11px] text-zinc-400">
+                                    <span className="shrink-0 text-[13px] text-zinc-400">
                                       {formatYear(r.startYear)}–{formatYear(r.endYear)}
                                     </span>
                                   </div>
@@ -299,7 +320,7 @@ export function HistoryApp({
                             );
                             return (
                               <div className="overflow-auto rounded border border-zinc-200 bg-white">
-                                <table className="w-full border-collapse text-[10px]">
+                                <table className="w-full border-collapse text-[12px]">
                                   <thead>
                                     <tr>
                                       <th className="sticky top-0 z-10 border-b border-zinc-200 bg-white px-2 py-1 text-left font-semibold text-zinc-500 w-16">年份</th>
@@ -319,19 +340,20 @@ export function HistoryApp({
                                           if (cell === null) return null; // skip — covered by rowspan above
                                           const { ruler: r, rowSpan } = cell;
                                           const active = r ? selectedRulerId === r.id : false;
+                                          const isDynasty = r?.isDynastyBlock === true;
                                           return (
                                             <td
                                               key={p.id}
                                               rowSpan={rowSpan}
-                                              className={`border-b border-l border-zinc-100 px-2 py-1 align-top transition ${r ? active ? 'bg-zinc-900 text-white' : 'text-zinc-700' : 'text-zinc-300'}`}
+                                              className={`border-b border-l border-zinc-100 px-2 py-1 align-top transition ${isDynasty ? 'bg-zinc-100' : r ? active ? 'bg-zinc-900 text-white' : 'text-zinc-700' : 'text-zinc-300'}`}
                                             >
                                               {r ? (
                                                 <button
                                                   type="button"
                                                   onClick={() => setSelectedRulerId(r.id)}
-                                                  className={`w-full text-left hover:underline ${active ? 'text-white' : ''}`}
+                                                  className={`w-full text-left hover:underline ${isDynasty ? 'text-xs font-semibold text-zinc-600 truncate' : active ? 'text-white' : ''}`}
                                                 >
-                                                  {t(r.nameKey)}
+                                                  {t(r.nameKey)}{r.eraNameKey ? <span className="text-zinc-400"> - {tEra(r.eraNameKey)}</span> : null}
                                                 </button>
                                               ) : ''}
                                             </td>
@@ -379,6 +401,11 @@ export function HistoryApp({
               {selectedRuler.bioKey ? (
                 <div className="mt-2 text-sm text-zinc-600">{t(selectedRuler.bioKey)}</div>
               ) : null}
+              <RulerRelations
+                ruler={selectedRuler}
+                allRulers={activeRulers}
+                onRulerClick={(id) => setSelectedRulerId(id)}
+              />
             </div>
           ) : (
             <div className="shrink-0 border-t border-zinc-200 bg-white p-3 text-xs text-zinc-500">{t('ui.seedNote')}</div>
@@ -454,8 +481,18 @@ export function HistoryApp({
                   currentEraEvents.map((e) => (
                     <li key={e.id} className="rounded-lg border border-zinc-200 p-2">
                       <div className="text-xs text-zinc-500">{formatYear(e.year)}</div>
-                      <div className="text-sm font-semibold">{t(e.titleKey)}</div>
-                      <div className="text-sm text-zinc-700">{t(e.summaryKey)}</div>
+                      <div className="text-sm font-semibold">{t(`event.${e.id}.title`)}</div>
+                      <div className="text-sm text-zinc-700">{t(`event.${e.id}.summary`)}</div>
+                      {timelineLinks[e.id] ? (
+                        <div className="mt-2">
+                          <Link
+                            href={`/${currentLocale}/timeline?process=${timelineLinks[e.id].process}${timelineLinks[e.id].event ? `&event=${timelineLinks[e.id].event}` : ''}`}
+                            className="inline-flex items-center gap-1 rounded-md bg-zinc-900 px-2 py-1 text-xs font-medium text-white hover:bg-zinc-800"
+                          >
+                            {t('event.viewTimeline')} →
+                          </Link>
+                        </div>
+                      ) : null}
                       {e.tags?.length ? (
                         <div className="mt-1 flex flex-wrap gap-1">
                           {e.tags.map((t) => (
@@ -496,6 +533,16 @@ export function HistoryApp({
                       </div>
                       <div className="text-sm font-semibold">{t(e.titleKey)}</div>
                       <div className="text-sm text-zinc-700">{t(e.summaryKey)}</div>
+                      {timelineLinks[e.id] ? (
+                        <div className="mt-2">
+                          <Link
+                            href={`/${currentLocale}/timeline?process=${timelineLinks[e.id].process}${timelineLinks[e.id].event ? `&event=${timelineLinks[e.id].event}` : ''}`}
+                            className="inline-flex items-center gap-1 rounded-md bg-zinc-900 px-2 py-1 text-xs font-medium text-white hover:bg-zinc-800"
+                          >
+                            {t('event.viewTimeline')} →
+                          </Link>
+                        </div>
+                      ) : null}
                     </li>
                   ))
                 ) : (
