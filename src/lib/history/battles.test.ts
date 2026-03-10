@@ -12,6 +12,11 @@ import {
   getBattleCountByEra,
   getEraColor,
   groupBattlesByWar,
+  searchBattles,
+  sortBattles,
+  getUniqueParticipants,
+  getBattlesByParticipant,
+  getParticipantStats,
 } from './battles';
 import type { Event } from './types';
 
@@ -524,6 +529,339 @@ describe('battles', () => {
     it('should return empty array for empty input', () => {
       const groups = groupBattlesByWar([]);
       expect(groups).toHaveLength(0);
+    });
+  });
+
+  // Test translation function for search/sort
+  const t = (key: string): string => {
+    const translations: Record<string, string> = {
+      'event.sa-632-chengpu.title': '城濮之战',
+      'event.ws-260-changping.title': '长平之战',
+      'event.b1.title': '赤壁之战',
+      'event.b2.title': '官渡之战',
+      'event.b3.title': '淝水之战',
+      'war.1': '战国统一战争',
+      'war.2': '三国鼎立',
+    };
+    return translations[key] || key;
+  };
+
+  describe('searchBattles', () => {
+    const searchTestEvents: Event[] = [
+      {
+        id: 'b1',
+        entityId: 'era-spring-autumn',
+        year: -632,
+        titleKey: 'event.sa-632-chengpu.title',
+        summaryKey: 'summary',
+        tags: ['war'],
+        location: { lon: 114.35, lat: 35.7, label: '城濮' },
+        battle: {
+          belligerents: { attacker: '晋军', defender: '楚军' },
+          result: 'attacker_win',
+        },
+      },
+      {
+        id: 'b2',
+        entityId: 'era-warring-states',
+        year: -260,
+        titleKey: 'event.ws-260-changping.title',
+        summaryKey: 'summary',
+        tags: ['war'],
+        location: { lon: 113.4, lat: 35.9, label: '长平' },
+        battle: {
+          belligerents: { attacker: '秦军', defender: '赵军' },
+          result: 'attacker_win',
+        },
+      },
+      {
+        id: 'b3',
+        entityId: 'era-three-kingdoms',
+        year: -208,
+        titleKey: 'event.b1.title',
+        summaryKey: 'summary',
+        tags: ['war'],
+        location: { lon: 113.0, lat: 30.0, label: '赤壁' },
+        battle: {
+          warNameKey: 'war.1',
+          belligerents: { attacker: '曹操', defender: '孙刘联军' },
+          result: 'defender_win',
+        },
+      },
+    ];
+
+    it('should return all battles when no search options', () => {
+      const results = searchBattles(searchTestEvents, {}, t);
+      expect(results).toHaveLength(3);
+    });
+
+    it('should filter by query matching title', () => {
+      const results = searchBattles(searchTestEvents, { query: '城濮' }, t);
+      expect(results).toHaveLength(1);
+      expect(results[0].id).toBe('b1');
+    });
+
+    it('should filter by query matching location', () => {
+      const results = searchBattles(searchTestEvents, { query: '赤壁' }, t);
+      expect(results).toHaveLength(1);
+      expect(results[0].id).toBe('b3');
+    });
+
+    it('should filter by query matching participant', () => {
+      const results = searchBattles(searchTestEvents, { query: '晋军' }, t);
+      expect(results).toHaveLength(1);
+      expect(results[0].id).toBe('b1');
+    });
+
+    it('should filter by result', () => {
+      const results = searchBattles(searchTestEvents, { result: ['attacker_win'] }, t);
+      expect(results).toHaveLength(2);
+    });
+
+    it('should filter by multiple results', () => {
+      const results = searchBattles(searchTestEvents, { result: ['attacker_win', 'defender_win'] }, t);
+      expect(results).toHaveLength(3);
+    });
+
+    it('should filter by era', () => {
+      const results = searchBattles(searchTestEvents, { eraIds: ['era-spring-autumn'] }, t);
+      expect(results).toHaveLength(1);
+      expect(results[0].id).toBe('b1');
+    });
+
+    it('should filter by year range', () => {
+      const results = searchBattles(searchTestEvents, { yearRange: { start: -300, end: -200 } }, t);
+      expect(results).toHaveLength(2);
+    });
+
+    it('should combine multiple filters', () => {
+      const results = searchBattles(
+        searchTestEvents, 
+        { query: '秦', result: ['attacker_win'], eraIds: ['era-warring-states'] }, 
+        t
+      );
+      expect(results).toHaveLength(1);
+      expect(results[0].id).toBe('b2');
+    });
+
+    it('should return empty array when no matches', () => {
+      const results = searchBattles(searchTestEvents, { query: '不存在' }, t);
+      expect(results).toHaveLength(0);
+    });
+  });
+
+  describe('sortBattles', () => {
+    const sortTestEvents: Event[] = [
+      {
+        id: 'b1',
+        entityId: 'era1',
+        year: -200,
+        titleKey: 'event.b1.title',
+        summaryKey: 'summary',
+        tags: ['war'],
+        battle: { result: 'defender_win' },
+      },
+      {
+        id: 'b2',
+        entityId: 'era1',
+        year: -300,
+        titleKey: 'event.b2.title',
+        summaryKey: 'summary',
+        tags: ['war'],
+        battle: { result: 'attacker_win' },
+      },
+      {
+        id: 'b3',
+        entityId: 'era1',
+        year: -100,
+        titleKey: 'event.b3.title',
+        summaryKey: 'summary',
+        tags: ['war'],
+        battle: { result: 'draw' },
+      },
+    ];
+
+    it('should sort by year ascending', () => {
+      const sorted = sortBattles(sortTestEvents, 'year', true, t);
+      expect(sorted[0].year).toBe(-300);
+      expect(sorted[1].year).toBe(-200);
+      expect(sorted[2].year).toBe(-100);
+    });
+
+    it('should sort by year descending', () => {
+      const sorted = sortBattles(sortTestEvents, 'year', false, t);
+      expect(sorted[0].year).toBe(-100);
+      expect(sorted[1].year).toBe(-200);
+      expect(sorted[2].year).toBe(-300);
+    });
+
+    it('should sort by title', () => {
+      const sorted = sortBattles(sortTestEvents, 'title', true, t);
+      // event.b1.title < event.b2.title < event.b3.title (alphabetically)
+      expect(sorted[0].titleKey).toBe('event.b1.title');
+      expect(sorted[1].titleKey).toBe('event.b2.title');
+      expect(sorted[2].titleKey).toBe('event.b3.title');
+    });
+
+    it('should sort by result', () => {
+      const sorted = sortBattles(sortTestEvents, 'result', true, t);
+      // attacker_win = 0, defender_win = 1, draw = 2
+      expect(sorted[0].battle?.result).toBe('attacker_win');
+      expect(sorted[1].battle?.result).toBe('defender_win');
+      expect(sorted[2].battle?.result).toBe('draw');
+    });
+  });
+
+  describe('getUniqueParticipants', () => {
+    it('should return unique list of all participants', () => {
+      const battles: Event[] = [
+        {
+          id: 'b1',
+          entityId: 'era1',
+          year: -300,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: { belligerents: { attacker: '晋军', defender: '楚军' } },
+        },
+        {
+          id: 'b2',
+          entityId: 'era1',
+          year: -200,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: { belligerents: { attacker: '秦军', defender: '晋军' } },
+        },
+      ];
+      const participants = getUniqueParticipants(battles);
+      expect(participants).toHaveLength(3);
+      expect(participants).toContain('晋军');
+      expect(participants).toContain('楚军');
+      expect(participants).toContain('秦军');
+    });
+
+    it('should return empty array for no battles', () => {
+      const participants = getUniqueParticipants([]);
+      expect(participants).toHaveLength(0);
+    });
+  });
+
+  describe('getBattlesByParticipant', () => {
+    it('should return battles involving the participant', () => {
+      const battles: Event[] = [
+        {
+          id: 'b1',
+          entityId: 'era1',
+          year: -300,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: { belligerents: { attacker: '晋军', defender: '楚军' } },
+        },
+        {
+          id: 'b2',
+          entityId: 'era1',
+          year: -200,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: { belligerents: { attacker: '秦军', defender: '赵军' } },
+        },
+      ];
+      const results = getBattlesByParticipant(battles, '晋军');
+      expect(results).toHaveLength(1);
+      expect(results[0].id).toBe('b1');
+    });
+
+    it('should be case insensitive', () => {
+      const battles: Event[] = [
+        {
+          id: 'b1',
+          entityId: 'era1',
+          year: -300,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: { belligerents: { attacker: '晋军', defender: '楚军' } },
+        },
+      ];
+      const results = getBattlesByParticipant(battles, '晋军');
+      expect(results).toHaveLength(1);
+    });
+  });
+
+  describe('getParticipantStats', () => {
+    it('should calculate correct stats for attacker', () => {
+      const battles: Event[] = [
+        {
+          id: 'b1',
+          entityId: 'era1',
+          year: -300,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: { belligerents: { attacker: '晋军', defender: '楚军' }, result: 'attacker_win' },
+        },
+        {
+          id: 'b2',
+          entityId: 'era1',
+          year: -200,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: { belligerents: { attacker: '晋军', defender: '秦军' }, result: 'defender_win' },
+        },
+        {
+          id: 'b3',
+          entityId: 'era1',
+          year: -100,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: { belligerents: { attacker: '楚军', defender: '晋军' }, result: 'draw' },
+        },
+      ];
+      const stats = getParticipantStats(battles, '晋军');
+      expect(stats.total).toBe(3);
+      expect(stats.wins).toBe(1);
+      expect(stats.losses).toBe(1);
+      expect(stats.draws).toBe(1);
+    });
+
+    it('should calculate correct stats for defender', () => {
+      const battles: Event[] = [
+        {
+          id: 'b1',
+          entityId: 'era1',
+          year: -300,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: { belligerents: { attacker: '秦军', defender: '赵军' }, result: 'defender_win' },
+        },
+      ];
+      const stats = getParticipantStats(battles, '赵军');
+      expect(stats.wins).toBe(1);
+      expect(stats.losses).toBe(0);
+    });
+
+    it('should return zeros for participant with no battles', () => {
+      const battles: Event[] = [
+        {
+          id: 'b1',
+          entityId: 'era1',
+          year: -300,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: { belligerents: { attacker: '秦军', defender: '赵军' } },
+        },
+      ];
+      const stats = getParticipantStats(battles, '晋军');
+      expect(stats.total).toBe(0);
+      expect(stats.wins).toBe(0);
+      expect(stats.losses).toBe(0);
     });
   });
 });

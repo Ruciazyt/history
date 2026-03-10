@@ -253,3 +253,184 @@ export function groupBattlesByWar(battles: Event[]): BattleWarGroup[] {
   
   return result;
 }
+
+/**
+ * Battle search options
+ */
+export type BattleSearchOptions = {
+  /** Search query - matches title, location label, or parties */
+  query?: string;
+  /** Filter by battle result */
+  result?: ('attacker_win' | 'defender_win' | 'draw' | 'inconclusive')[];
+  /** Filter by era IDs */
+  eraIds?: string[];
+  /** Filter by year range */
+  yearRange?: { start: number; end: number };
+};
+
+/**
+ * Search and filter battles
+ */
+export function searchBattles(
+  battles: Event[], 
+  options: BattleSearchOptions,
+  t: (key: string) => string
+): Event[] {
+  let result = [...battles];
+
+  // Filter by search query
+  if (options.query && options.query.trim()) {
+    const query = options.query.toLowerCase().trim();
+    result = result.filter((battle) => {
+      const title = t(battle.titleKey).toLowerCase();
+      const location = battle.location?.label?.toLowerCase() || '';
+      const attacker = battle.battle?.belligerents?.attacker?.toLowerCase() || '';
+      const defender = battle.battle?.belligerents?.defender?.toLowerCase() || '';
+      const warName = battle.battle?.warNameKey ? t(battle.battle.warNameKey).toLowerCase() : '';
+      
+      return (
+        title.includes(query) ||
+        location.includes(query) ||
+        attacker.includes(query) ||
+        defender.includes(query) ||
+        warName.includes(query)
+      );
+    });
+  }
+
+  // Filter by result
+  if (options.result && options.result.length > 0) {
+    result = result.filter((battle) => 
+      battle.battle?.result && options.result!.includes(battle.battle.result)
+    );
+  }
+
+  // Filter by era
+  if (options.eraIds && options.eraIds.length > 0) {
+    result = result.filter((battle) => 
+      options.eraIds!.includes(battle.entityId)
+    );
+  }
+
+  // Filter by year range
+  if (options.yearRange) {
+    const { start, end } = options.yearRange;
+    result = result.filter((battle) => battle.year >= start && battle.year <= end);
+  }
+
+  return result;
+}
+
+/**
+ * Battle sort options
+ */
+export type BattleSortOption = 'year' | 'title' | 'result';
+
+/**
+ * Sort battles with custom comparator
+ */
+export function sortBattles(
+  battles: Event[], 
+  sortBy: BattleSortOption = 'year',
+  ascending = true,
+  t: (key: string) => string
+): Event[] {
+  const result = [...battles];
+  
+  result.sort((a, b) => {
+    let comparison = 0;
+    
+    switch (sortBy) {
+      case 'year':
+        comparison = a.year - b.year;
+        break;
+      case 'title':
+        comparison = t(a.titleKey).localeCompare(t(b.titleKey));
+        break;
+      case 'result':
+        const resultOrder = ['attacker_win', 'defender_win', 'draw', 'inconclusive'];
+        const aIndex = a.battle?.result ? resultOrder.indexOf(a.battle.result) : 4;
+        const bIndex = b.battle?.result ? resultOrder.indexOf(b.battle.result) : 4;
+        comparison = aIndex - bIndex;
+        break;
+    }
+    
+    return ascending ? comparison : -comparison;
+  });
+  
+  return result;
+}
+
+/**
+ * Get unique battle participants (attackers and defenders)
+ */
+export function getUniqueParticipants(battles: Event[]): string[] {
+  const participants = new Set<string>();
+  
+  for (const battle of battles) {
+    if (battle.battle?.belligerents?.attacker) {
+      participants.add(battle.battle.belligerents.attacker);
+    }
+    if (battle.battle?.belligerents?.defender) {
+      participants.add(battle.battle.belligerents.defender);
+    }
+  }
+  
+  return Array.from(participants).sort();
+}
+
+/**
+ * Get battles involving a specific participant
+ */
+export function getBattlesByParticipant(battles: Event[], participant: string): Event[] {
+  const name = participant.toLowerCase();
+  
+  return battles.filter((battle) => {
+    const attacker = battle.battle?.belligerents?.attacker?.toLowerCase() || '';
+    const defender = battle.battle?.belligerents?.defender?.toLowerCase() || '';
+    return attacker === name || defender === name;
+  });
+}
+
+/**
+ * Calculate win rate for a specific participant
+ */
+export function getParticipantStats(
+  battles: Event[], 
+  participant: string
+): { total: number; wins: number; losses: number; draws: number; inconclusive: number } {
+  const participantBattles = getBattlesByParticipant(battles, participant);
+  
+  const stats = {
+    total: participantBattles.length,
+    wins: 0,
+    losses: 0,
+    draws: 0,
+    inconclusive: 0,
+  };
+  
+  for (const battle of participantBattles) {
+    const isAttacker = battle.battle?.belligerents?.attacker?.toLowerCase() === participant.toLowerCase();
+    const result = battle.battle?.result;
+    
+    if (result === 'draw') {
+      stats.draws++;
+    } else if (result === 'inconclusive') {
+      stats.inconclusive++;
+    } else if (result === 'attacker_win') {
+      if (isAttacker) {
+        stats.wins++;
+      } else {
+        stats.losses++;
+      }
+    } else if (result === 'defender_win') {
+      if (!isAttacker) {
+        stats.wins++;
+      } else {
+        stats.losses++;
+      }
+    }
+  }
+  
+  return stats;
+}
