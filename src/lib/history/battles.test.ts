@@ -656,7 +656,7 @@ describe('battles', () => {
         id: 'b1',
         entityId: 'era1',
         year: -200,
-        titleKey: 'event.b1.title',
+        titleKey: 'battle.alpha',
         summaryKey: 'summary',
         tags: ['war'],
         battle: { result: 'defender_win' },
@@ -665,7 +665,7 @@ describe('battles', () => {
         id: 'b2',
         entityId: 'era1',
         year: -300,
-        titleKey: 'event.b2.title',
+        titleKey: 'battle.charlie',
         summaryKey: 'summary',
         tags: ['war'],
         battle: { result: 'attacker_win' },
@@ -674,12 +674,14 @@ describe('battles', () => {
         id: 'b3',
         entityId: 'era1',
         year: -100,
-        titleKey: 'event.b3.title',
+        titleKey: 'battle.beta',
         summaryKey: 'summary',
         tags: ['war'],
         battle: { result: 'draw' },
       },
     ];
+
+    const t = (key: string): string => key.replace('battle.', '');
 
     it('should sort by year ascending', () => {
       const sorted = sortBattles(sortTestEvents, 'year', true, t);
@@ -697,10 +699,10 @@ describe('battles', () => {
 
     it('should sort by title', () => {
       const sorted = sortBattles(sortTestEvents, 'title', true, t);
-      // event.b1.title < event.b2.title < event.b3.title (alphabetically)
-      expect(sorted[0].titleKey).toBe('event.b1.title');
-      expect(sorted[1].titleKey).toBe('event.b2.title');
-      expect(sorted[2].titleKey).toBe('event.b3.title');
+      // alpha < beta < charlie alphabetically
+      expect(sorted[0].titleKey).toBe('battle.alpha');
+      expect(sorted[1].titleKey).toBe('battle.beta');
+      expect(sorted[2].titleKey).toBe('battle.charlie');
     });
 
     it('should sort by result', () => {
