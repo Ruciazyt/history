@@ -11,6 +11,9 @@ import { RulerRelations } from '@/components/common/RulerRelations';
 import { SearchBox } from '@/components/common/SearchBox';
 import { useTranslations } from 'next-intl';
 
+import { worldComparisonEra, eastAsiaComparisonEra } from '@/lib/history/data/worldEras';
+import { worldComparisonRulers, eastAsiaRulers } from '@/lib/history/data/worldRulers';
+
 function rangeLabel(centerYear: number, windowYears: number) {
   const half = Math.floor(windowYears / 2);
   const from = centerYear - half;
@@ -445,6 +448,4 @@ const ERA_COLORS: Record<string, { bg: string; text: string; dot: string }> = {
   'three-kingdoms': { bg: 'bg-green-50', text: 'text-green-700', dot: 'bg-green-500' },
 };
 
-// Lazy-loaded comparison data
-import { worldComparisonEra, eastAsiaComparisonEra } from '@/lib/history/data/worldEras';
-import { worldComparisonRulers, eastAsiaRulers } from '@/lib/history/data/worldRulers';
+// Era colors

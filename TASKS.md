@@ -43,3 +43,19 @@ src/
 
 ## 自动迭代
 - Cron任务: 每15分钟自动思考新功能
+
+## 2026-03-10 迭代
+### 新增功能: 战役指挥官分析
+- [x] 扩展 Event 类型，添加 commanders 字段支持指挥官数据
+- [x] 添加指挥官分析函数：
+  - getUniqueCommanders: 获取所有唯一指挥官
+  - getBattlesByCommander: 获取指挥官参与的战役
+  - getCommanderStats: 获取指挥官统计数据
+  - getAllCommandersStats: 获取所有指挥官统计
+  - getTopCommanders: 获取排名前列的指挥官
+  - getCommanderInsights: 生成指挥官相关洞察
+  - hasCommanderData: 检查是否有指挥官数据
+- [x] 为多个经典战役添加指挥官数据（牧野之战、长平之战、马陵之战、柏举之战）
+- [x] 添加 commander.test.ts 测试文件（15个测试用例）
+- [x] 构建验证通过
+- [x] 部署到 Vercel 成功
