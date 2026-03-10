@@ -70,5 +70,12 @@ export type Event = {
     result?: 'attacker_win' | 'defender_win' | 'draw' | 'inconclusive';
     /** 战争名称（如果有独立名称） */
     warNameKey?: string;
+    /** 指挥官/将领 */
+    commanders?: {
+      /** 进攻方指挥官 */
+      attacker?: string[];
+      /** 防守方指挥官 */
+      defender?: string[];
+    };
   };
 };

@@ -1582,3 +1582,255 @@ export function getStreakInsights(battles: Event[]): StreakInsight[] {
   
   return insights;
 }
+
+// ============ Commander Analysis (指挥官分析) ============
+
+/**
+ * Commander statistics
+ */
+export type CommanderStats = {
+  name: string;
+  totalBattles: number;
+  wins: number;
+  losses: number;
+  draws: number;
+  inconclusive: number;
+  winRate: number;
+  firstBattleYear: number;
+  lastBattleYear: number;
+  battles: Event[];
+  side: 'attacker' | 'defender' | 'both';
+};
+
+/**
+ * Get all unique commanders from battles
+ */
+export function getUniqueCommanders(battles: Event[]): string[] {
+  const commanders = new Set<string>();
+  
+  for (const battle of battles) {
+    const cmd = battle.battle?.commanders;
+    if (cmd?.attacker) {
+      for (const name of cmd.attacker) {
+        if (name) commanders.add(name);
+      }
+    }
+    if (cmd?.defender) {
+      for (const name of cmd.defender) {
+        if (name) commanders.add(name);
+      }
+    }
+  }
+  
+  return Array.from(commanders).sort();
+}
+
+/**
+ * Get battles involving a specific commander
+ */
+export function getBattlesByCommander(battles: Event[], commander: string): {
+  battle: Event;
+  side: 'attacker' | 'defender';
+}[] {
+  const results: { battle: Event; side: 'attacker' | 'defender' }[] = [];
+  const commanderLower = commander.toLowerCase();
+  
+  for (const battle of battles) {
+    const cmd = battle.battle?.commanders;
+    if (cmd?.attacker) {
+      for (const name of cmd.attacker) {
+        if (name?.toLowerCase() === commanderLower) {
+          results.push({ battle, side: 'attacker' });
+        }
+      }
+    }
+    if (cmd?.defender) {
+      for (const name of cmd.defender) {
+        if (name?.toLowerCase() === commanderLower) {
+          results.push({ battle, side: 'defender' });
+        }
+      }
+    }
+  }
+  
+  return results;
+}
+
+/**
+ * Get commander statistics
+ */
+export function getCommanderStats(battles: Event[], commander: string): CommanderStats {
+  const commanderBattles = getBattlesByCommander(battles, commander);
+  
+  let wins = 0;
+  let losses = 0;
+  let draws = 0;
+  let inconclusive = 0;
+  let asAttacker = 0;
+  let asDefender = 0;
+  
+  const sortedBattles = [...commanderBattles].sort((a, b) => a.battle.year - b.battle.year);
+  let firstBattleYear = 0;
+  let lastBattleYear = 0;
+  
+  if (sortedBattles.length > 0) {
+    firstBattleYear = sortedBattles[0].battle.year;
+    lastBattleYear = sortedBattles[sortedBattles.length - 1].battle.year;
+  }
+  
+  for (const { battle, side } of commanderBattles) {
+    const result = battle.battle?.result;
+    
+    if (side === 'attacker') {
+      asAttacker++;
+    } else {
+      asDefender++;
+    }
+    
+    if (result === 'attacker_win') {
+      if (side === 'attacker') wins++;
+      else losses++;
+    } else if (result === 'defender_win') {
+      if (side === 'defender') wins++;
+      else losses++;
+    } else if (result === 'draw') {
+      draws++;
+    } else {
+      inconclusive++;
+    }
+  }
+  
+  const total = wins + losses + draws + inconclusive;
+  const determined = wins + losses;
+  
+  let side: 'attacker' | 'defender' | 'both' = 'both';
+  if (asAttacker > 0 && asDefender === 0) side = 'attacker';
+  else if (asDefender > 0 && asAttacker === 0) side = 'defender';
+  
+  return {
+    name: commander,
+    totalBattles: total,
+    wins,
+    losses,
+    draws,
+    inconclusive,
+    winRate: determined > 0 ? Math.round((wins / determined) * 1000) / 10 : 0,
+    firstBattleYear,
+    lastBattleYear,
+    battles: commanderBattles.map(c => c.battle),
+    side,
+  };
+}
+
+/**
+ * Get statistics for all commanders
+ */
+export function getAllCommandersStats(battles: Event[]): CommanderStats[] {
+  const commanders = getUniqueCommanders(battles);
+  const stats: CommanderStats[] = [];
+  
+  for (const commander of commanders) {
+    const commanderStats = getCommanderStats(battles, commander);
+    // Only include commanders with at least 1 battle
+    if (commanderStats.totalBattles > 0) {
+      stats.push(commanderStats);
+    }
+  }
+  
+  // Sort by win rate (with at least 1 battle), then by total battles
+  stats.sort((a, b) => {
+    if (b.totalBattles !== a.totalBattles) {
+      return b.totalBattles - a.totalBattles;
+    }
+    return b.winRate - a.winRate;
+  });
+  
+  return stats;
+}
+
+/**
+ * Top commanders by win rate (minimum 1 battle)
+ */
+export function getTopCommanders(battles: Event[], limit = 10): CommanderStats[] {
+  const allStats = getAllCommandersStats(battles);
+  return allStats.slice(0, limit);
+}
+
+/**
+ * Most experienced commanders (most battles)
+ */
+export function getMostExperiencedCommanders(battles: Event[], limit = 10): CommanderStats[] {
+  const allStats = getAllCommandersStats(battles);
+  return allStats
+    .sort((a, b) => b.totalBattles - a.totalBattles)
+    .slice(0, limit);
+}
+
+/**
+ * Commander insight type
+ */
+export type CommanderInsight = {
+  type: 'legendary-commander' | 'undefeated' | 'most-experienced' | 'battlefield-star';
+  title: string;
+  description: string;
+  commander?: CommanderStats;
+  value: number;
+};
+
+/**
+ * Generate insights from commander analysis
+ */
+export function getCommanderInsights(battles: Event[]): CommanderInsight[] {
+  const insights: CommanderInsight[] = [];
+  const allStats = getAllCommandersStats(battles);
+  
+  if (allStats.length === 0) return insights;
+  
+  // Legendary commander (highest win rate with at least 2 battles)
+  const legendary = allStats.find(s => s.totalBattles >= 2 && s.winRate >= 70);
+  if (legendary) {
+    insights.push({
+      type: 'legendary-commander',
+      title: '传奇名将',
+      description: `${legendary.name}参与${legendary.totalBattles}场战役，胜率高达${legendary.winRate}%`,
+      commander: legendary,
+      value: legendary.winRate,
+    });
+  }
+  
+  // Undefeated commander (at least 2 battles, no losses)
+  const undefeated = allStats.find(s => s.totalBattles >= 2 && s.losses === 0 && s.wins > 0);
+  if (undefeated) {
+    insights.push({
+      type: 'undefeated',
+      title: '常胜将军',
+      description: `${undefeated.name}保持${undefeated.totalBattles}战全胜的不败纪录`,
+      commander: undefeated,
+      value: undefeated.totalBattles,
+    });
+  }
+  
+  // Most experienced
+  const experienced = allStats.find(s => s.totalBattles >= 2);
+  if (experienced) {
+    insights.push({
+      type: 'most-experienced',
+      title: '身经百战',
+      description: `${experienced.name}参与战役最多，共${experienced.totalBattles}场`,
+      commander: experienced,
+      value: experienced.totalBattles,
+    });
+  }
+  
+  return insights;
+}
+
+/**
+ * Check if battles have commander data
+ */
+export function hasCommanderData(battles: Event[]): boolean {
+  return battles.some(b => 
+    (b.battle?.commanders?.attacker?.length ?? 0) > 0 ||
+    (b.battle?.commanders?.defender?.length ?? 0) > 0
+  );
+}
