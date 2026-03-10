@@ -17,6 +17,8 @@ import {
   getUniqueParticipants,
   getBattlesByParticipant,
   getParticipantStats,
+  compareBattles,
+  getComparisonSummary,
 } from './battles';
 import type { Event } from './types';
 
@@ -864,6 +866,178 @@ describe('battles', () => {
       expect(stats.total).toBe(0);
       expect(stats.wins).toBe(0);
       expect(stats.losses).toBe(0);
+    });
+  });
+
+  describe('compareBattles', () => {
+    const battle1: Event = {
+      id: 'b1',
+      entityId: 'period-spring-autumn',
+      year: -632,
+      titleKey: 'battle.1',
+      summaryKey: 'summary',
+      tags: ['war'],
+      location: { lon: 114.35, lat: 35.7, label: 'Chengpu' },
+      battle: {
+        belligerents: { attacker: '晋军', defender: '楚军' },
+        result: 'attacker_win',
+      },
+    };
+
+    const battle2: Event = {
+      id: 'b2',
+      entityId: 'period-warring-states',
+      year: -260,
+      titleKey: 'battle.2',
+      summaryKey: 'summary',
+      tags: ['war'],
+      location: { lon: 113.4, lat: 35.9, label: 'Changping' },
+      battle: {
+        belligerents: { attacker: '秦军', defender: '赵军' },
+        result: 'attacker_win',
+      },
+    };
+
+    const battle3: Event = {
+      id: 'b3',
+      entityId: 'period-spring-autumn',
+      year: -632,
+      titleKey: 'battle.3',
+      summaryKey: 'summary',
+      tags: ['war'],
+      location: { lon: 114.35, lat: 35.7, label: 'Chengpu' },
+      battle: {
+        belligerents: { attacker: '晋军', defender: '楚军' },
+        result: 'defender_win',
+      },
+    };
+
+    it('should calculate correct year difference', () => {
+      const comparison = compareBattles(battle1, battle2);
+      expect(comparison.comparison.yearDiff).toBe(372);
+    });
+
+    it('should detect same result', () => {
+      const comparison = compareBattles(battle1, battle2);
+      expect(comparison.comparison.sameResult).toBe(true);
+    });
+
+    it('should detect different result', () => {
+      const comparison = compareBattles(battle1, battle3);
+      expect(comparison.comparison.sameResult).toBe(false);
+    });
+
+    it('should detect same winner side for attacker wins', () => {
+      const comparison = compareBattles(battle1, battle2);
+      expect(comparison.comparison.sameWinnerSide).toBe(true);
+    });
+
+    it('should detect different winner side', () => {
+      const comparison = compareBattles(battle1, battle3);
+      expect(comparison.comparison.sameWinnerSide).toBe(false);
+    });
+
+    it('should detect same era', () => {
+      const comparison = compareBattles(battle1, battle3);
+      expect(comparison.comparison.sameEra).toBe(true);
+    });
+
+    it('should detect different era', () => {
+      const comparison = compareBattles(battle1, battle2);
+      expect(comparison.comparison.sameEra).toBe(false);
+    });
+
+    it('should calculate location distance', () => {
+      const comparison = compareBattles(battle1, battle2);
+      expect(comparison.comparison.locationDistance).toBeDefined();
+      expect(comparison.comparison.locationDistance).toBeGreaterThan(80);
+      expect(comparison.comparison.locationDistance).toBeLessThan(120);
+    });
+
+    it('should handle battles without location', () => {
+      const battleNoLoc: Event = {
+        id: 'b4',
+        entityId: 'era1',
+        year: -100,
+        titleKey: 'test',
+        summaryKey: 'test',
+        tags: ['war'],
+        battle: { result: 'attacker_win' },
+      };
+      const comparison = compareBattles(battle1, battleNoLoc);
+      expect(comparison.comparison.locationDistance).toBeUndefined();
+    });
+
+    it('should return null for same winner side when draw', () => {
+      const battleDraw: Event = {
+        id: 'b5',
+        entityId: 'era1',
+        year: -100,
+        titleKey: 'test',
+        summaryKey: 'test',
+        tags: ['war'],
+        battle: { result: 'draw' },
+      };
+      const comparison = compareBattles(battle1, battleDraw);
+      expect(comparison.comparison.sameWinnerSide).toBeNull();
+    });
+  });
+
+  describe('getComparisonSummary', () => {
+    const mockComparison = {
+      battle1: {} as Event,
+      battle2: {} as Event,
+      comparison: {
+        yearDiff: 100,
+        sameResult: true,
+        sameWinnerSide: true,
+        sameEra: false,
+        locationDistance: 50,
+      },
+    };
+
+    const t = (key: string): string => key;
+
+    it('should generate summary for year difference', () => {
+      const summary = getComparisonSummary(mockComparison.comparison, t);
+      expect(summary).toContain('时间相差 100 年');
+    });
+
+    it('should generate summary for same year', () => {
+      const summary = getComparisonSummary({
+        ...mockComparison.comparison,
+        yearDiff: 0,
+      }, t);
+      expect(summary).toContain('同年发生');
+    });
+
+    it('should generate summary for different era', () => {
+      const summary = getComparisonSummary(mockComparison.comparison, t);
+      expect(summary).not.toContain('同一时期');
+    });
+
+    it('should generate summary for same era', () => {
+      const summary = getComparisonSummary({
+        ...mockComparison.comparison,
+        sameEra: true,
+      }, t);
+      expect(summary).toContain('同一时期');
+    });
+
+    it('should generate summary for close location', () => {
+      const summary = getComparisonSummary({
+        ...mockComparison.comparison,
+        locationDistance: 50,
+      }, t);
+      expect(summary).toContain('地理位置接近');
+    });
+
+    it('should generate summary for far location', () => {
+      const summary = getComparisonSummary({
+        ...mockComparison.comparison,
+        locationDistance: 500,
+      }, t);
+      expect(summary).toContain('相距约 500 km');
     });
   });
 });

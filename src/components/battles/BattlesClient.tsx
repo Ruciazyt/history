@@ -64,11 +64,39 @@ export function BattlesClient({
   const [viewMode, setViewMode] = React.useState<'grid' | 'timeline'>('grid');
   const [selectedBattle, setSelectedBattle] = React.useState<Event | null>(null);
   
+  // Comparison mode state
+  const [compareMode, setCompareMode] = React.useState(false);
+  const [selectedBattles, setSelectedBattles] = React.useState<Event[]>([]);
+  const [compareBattle, setCompareBattle] = React.useState<{ battle1: Event; battle2: Event } | null>(null);
+  
   const displayedBattles = selectedEra 
     ? battlesByEra.get(selectedEra) || []
     : battles;
     
   const eraOptions = Array.from(battlesByEra.keys());
+  
+  // Handler for selecting battles in compare mode
+  const handleBattleSelect = React.useCallback((battle: Event) => {
+    setSelectedBattles(prev => {
+      const isSelected = prev.some(b => b.id === battle.id);
+      if (isSelected) {
+        return prev.filter(b => b.id !== battle.id);
+      }
+      if (prev.length >= 2) {
+        // Replace the first one if already 2 selected
+        return [prev[1], battle];
+      }
+      return [...prev, battle];
+    });
+  }, []);
+  
+  // Auto-open compare modal when 2 battles are selected
+  React.useEffect(() => {
+    if (selectedBattles.length === 2) {
+      setCompareBattle({ battle1: selectedBattles[0], battle2: selectedBattles[1] });
+      setSelectedBattles([]); // Clear selection after opening
+    }
+  }, [selectedBattles]);
   
   return (
     <div className="min-h-screen bg-zinc-50">
@@ -92,6 +120,23 @@ export function BattlesClient({
             <span className="text-xs text-zinc-500 bg-zinc-100 px-2 py-1 rounded-full">
               {battles.length} 场战役
             </span>
+            {/* Compare mode toggle */}
+            <button
+              onClick={() => {
+                setCompareMode(!compareMode);
+                setSelectedBattles([]);
+              }}
+              className={`p-1.5 rounded-lg transition-all ${
+                compareMode 
+                  ? 'bg-amber-100 text-amber-700' 
+                  : 'text-zinc-500 hover:text-zinc-700 hover:bg-zinc-100'
+              }`}
+              title="对比模式"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </button>
             {/* View toggle */}
             <div className="flex items-center bg-zinc-100 rounded-lg p-0.5">
               <button
@@ -208,6 +253,19 @@ export function BattlesClient({
         </div>
       )}
       
+      {/* Selection indicator when in compare mode */}
+      {compareMode && selectedBattles.length > 0 && (
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-20 bg-amber-500 text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+          <span>已选择 {selectedBattles.length}/2 场战役</span>
+          <button 
+            onClick={() => setSelectedBattles([])}
+            className="hover:bg-amber-600 rounded-full p-1"
+          >
+            ✕
+          </button>
+        </div>
+      )}
+      
       {/* Stats */}
       <div className="bg-white border-b border-zinc-100 px-4 py-3">
         <div className="max-w-4xl mx-auto flex items-center justify-between text-sm">
@@ -236,6 +294,9 @@ export function BattlesClient({
                 <BattleCard
                   key={battle.id}
                   battle={battle}
+                  selectionMode={compareMode}
+                  selected={selectedBattles.some(b => b.id === battle.id)}
+                  onSelect={handleBattleSelect}
                 />
               ))}
             </div>
@@ -255,6 +316,15 @@ export function BattlesClient({
         <BattleDetail 
           battle={selectedBattle} 
           onClose={() => setSelectedBattle(null)} 
+        />
+      )}
+      
+      {/* Battle Compare Modal */}
+      {compareBattle && (
+        <BattleCompare 
+          battle1={compareBattle.battle1}
+          battle2={compareBattle.battle2}
+          onClose={() => setCompareBattle(null)}
         />
       )}
     </div>

@@ -489,7 +489,13 @@ export function compareBattles(battle1: Event, battle2: Event): BattleComparison
   
   const winner1 = getWinnerSide(battle1);
   const winner2 = getWinnerSide(battle2);
-  const sameWinnerSide = winner1 !== null && winner2 !== null && winner1 === winner2;
+  
+  // If either battle has no winner (draw/inconclusive), return null
+  // Otherwise compare if they have the same winner side
+  let sameWinnerSide: boolean | null = null;
+  if (winner1 !== null && winner2 !== null) {
+    sameWinnerSide = winner1 === winner2;
+  }
   
   const sameEra = battle1.entityId === battle2.entityId;
   

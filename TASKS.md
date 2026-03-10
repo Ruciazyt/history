@@ -1,38 +1,40 @@
-# History Atlas 项目迭代计划
+# History Atlas 项目状态
 
-## 四个优化方向
-1. UI展示优化 - [已完成]
-2. 项目结构 - [已完成]
-3. 代码优化 - [已完成]
-4. 屏幕适配 - [已完成]
+## 项目地址
+https://history.ruciazyt.cn
 
 ## 已完成功能
-- [x] 帝王关系可视化功能
-- [x] 战役/战争可视化功能
-- [x] 战役详情弹窗
-- [x] 地图战役标记区分（⚔️ vs 红点）
-- [x] UI优化 - 战役页面视觉升级
-- [x] UI优化 - 时间线视觉升级（朝代颜色）
-- [x] 代码优化 - 提取公共 Hooks
-- [x] 代码优化 - React.memo 组件优化
-- [x] 项目结构 - 组件目录重组
-- [x] 屏幕适配 - 移动端体验提升
+
+### 核心功能
+- [x] 帝王关系可视化（父子、兄弟关系）
+- [x] 战役/战争可视化（15+经典战役）
+- [x] 搜索功能（帝王、战役、事件）
+- [x] 战役统计
+
+### UI/UX
+- [x] 朝代颜色标识系统
+- [x] 战役卡片视觉升级
+- [x] 移动端适配
+- [x] 时间线视觉优化
+
+### 代码质量
+- [x] 公共Hooks提取
+- [x] React.memo优化
+- [x] 组件目录重组
 
 ## 项目结构
 ```
 src/
 ├── components/
-│   ├── battles/      - 战役相关组件
-│   ├── timeline/     - 时间线相关组件
+│   ├── battles/      - 战役页面
+│   ├── timeline/     - 时间线页面
 │   ├── common/       - 公共组件
-│   ├── HistoryApp.tsx
-│   └── HistoryMap.tsx
+│   └── HistoryApp.tsx - 主应用
 ├── lib/history/
 │   ├── useHistoryData.ts
 │   ├── useBattleData.ts
-│   ├── battles.ts
-│   └── rulerRelations.ts
+│   └── battles.ts
 ```
 
-## 部署地址
-https://history.ruciazyt.cn
+## 自动迭代
+- Cron任务: 每15分钟自动思考新功能
