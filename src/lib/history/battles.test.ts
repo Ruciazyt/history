@@ -28,6 +28,10 @@ import {
   getBattleCountByRegion,
   getBattlesByRegion,
   getGeographicInsights,
+  getParticipantStreakStats,
+  getAllParticipantsStreakStats,
+  getTopStreaks,
+  getStreakInsights,
 } from './battles';
 import type { Event } from './types';
 
@@ -1366,6 +1370,194 @@ describe('battles', () => {
       const attackerInsight = insights.find(i => i.type === 'attacker-favored-region');
       expect(attackerInsight).toBeDefined();
       expect(attackerInsight?.regionName).toBe('江东');
+    });
+  });
+
+  // ============ Streak Analysis Tests ============
+  describe('streak analysis', () => {
+    const streakBattles: Event[] = [
+      {
+        id: 'battle-s1',
+        entityId: 'era1',
+        year: -632,
+        titleKey: 'battle1',
+        summaryKey: 'summary1',
+        tags: ['war'],
+        battle: {
+          belligerents: { attacker: '秦军', defender: '晋军' },
+          result: 'attacker_win',
+        },
+      },
+      {
+        id: 'battle-s2',
+        entityId: 'era1',
+        year: -627,
+        titleKey: 'battle2',
+        summaryKey: 'summary2',
+        tags: ['war'],
+        battle: {
+          belligerents: { attacker: '秦军', defender: '郑军' },
+          result: 'attacker_win',
+        },
+      },
+      {
+        id: 'battle-s3',
+        entityId: 'era1',
+        year: -620,
+        titleKey: 'battle3',
+        summaryKey: 'summary3',
+        tags: ['war'],
+        battle: {
+          belligerents: { attacker: '秦军', defender: '晋军' },
+          result: 'defender_win',
+        },
+      },
+      {
+        id: 'battle-s4',
+        entityId: 'era1',
+        year: -615,
+        titleKey: 'battle4',
+        summaryKey: 'summary4',
+        tags: ['war'],
+        battle: {
+          belligerents: { attacker: '秦军', defender: '楚军' },
+          result: 'attacker_win',
+        },
+      },
+      {
+        id: 'battle-s5',
+        entityId: 'era1',
+        year: -610,
+        titleKey: 'battle5',
+        summaryKey: 'summary5',
+        tags: ['war'],
+        battle: {
+          belligerents: { attacker: '秦军', defender: '晋军' },
+          result: 'attacker_win',
+        },
+      },
+      {
+        id: 'battle-s6',
+        entityId: 'era1',
+        year: -605,
+        titleKey: 'battle6',
+        summaryKey: 'summary6',
+        tags: ['war'],
+        battle: {
+          belligerents: { attacker: '秦军', defender: '晋军' },
+          result: 'attacker_win',
+        },
+      },
+      {
+        id: 'battle-s7',
+        entityId: 'era1',
+        year: -590,
+        titleKey: 'battle7',
+        summaryKey: 'summary7',
+        tags: ['war'],
+        battle: {
+          belligerents: { attacker: '楚军', defender: '吴军' },
+          result: 'attacker_win',
+        },
+      },
+    ];
+
+    it('should calculate participant streak stats', () => {
+      const stats = getParticipantStreakStats(streakBattles, '秦军');
+      
+      expect(stats.participant).toBe('秦军');
+      // 秦军: -632 win, -627 win (win streak of 2), -620 loss (streak broken), -615 win, -610 win, -605 win (win streak of 3)
+      expect(stats.longestWinStreak).toBe(3);
+      // Single loss is not counted as a loss streak (need at least 2)
+      expect(stats.longestLossStreak).toBe(0);
+    });
+
+    it('should get all participants streak stats', () => {
+      const allStats = getAllParticipantsStreakStats(streakBattles);
+      
+      // Should include秦军 with 3 consecutive wins
+      const qinStats = allStats.find(s => s.participant === '秦军');
+      expect(qinStats).toBeDefined();
+      expect(qinStats?.longestWinStreak).toBe(3);
+    });
+
+    it('should get top streaks', () => {
+      const topStreaks = getTopStreaks(streakBattles, 3);
+      
+      // Should find the 3-win streak
+      const threeWinStreak = topStreaks.find(s => s.length === 3 && s.streakType === 'win');
+      expect(threeWinStreak).toBeDefined();
+      expect(threeWinStreak?.participant).toBe('秦军');
+    });
+
+    it('should generate streak insights', () => {
+      const insights = getStreakInsights(streakBattles);
+      
+      // Should find dominant force (3+ win streak)
+      const dominantForceInsight = insights.find(i => i.type === 'dominant-force');
+      expect(dominantForceInsight).toBeDefined();
+      expect(dominantForceInsight?.participant).toBe('秦军');
+      expect(dominantForceInsight?.value).toBe(3);
+    });
+
+    it('should handle participant case insensitivity', () => {
+      const stats1 = getParticipantStreakStats(streakBattles, '秦军');
+      const stats2 = getParticipantStreakStats(streakBattles, '秦军'); // Same
+      
+      expect(stats1.longestWinStreak).toBe(stats2.longestWinStreak);
+    });
+
+    it('should return empty for non-existent participant', () => {
+      const stats = getParticipantStreakStats(streakBattles, '不存在的军队');
+      
+      expect(stats.participant).toBe('不存在的军队');
+      expect(stats.longestWinStreak).toBe(0);
+      expect(stats.longestLossStreak).toBe(0);
+    });
+
+    it('should handle draw and inconclusive results in streaks', () => {
+      const drawBattles: Event[] = [
+        {
+          id: 'd1',
+          entityId: 'era1',
+          year: -100,
+          titleKey: 'd1',
+          summaryKey: 's1',
+          tags: ['war'],
+          battle: {
+            belligerents: { attacker: 'A军', defender: 'B军' },
+            result: 'attacker_win',
+          },
+        },
+        {
+          id: 'd2',
+          entityId: 'era1',
+          year: -99,
+          titleKey: 'd2',
+          summaryKey: 's2',
+          tags: ['war'],
+          battle: {
+            belligerents: { attacker: 'A军', defender: 'B军' },
+            result: 'draw',
+          },
+        },
+        {
+          id: 'd3',
+          entityId: 'era1',
+          year: -98,
+          titleKey: 'd3',
+          summaryKey: 's3',
+          tags: ['war'],
+          battle: {
+            belligerents: { attacker: 'A军', defender: 'B军' },
+            result: 'attacker_win',
+          },
+        },
+      ];
+      
+      const stats = getParticipantStreakStats(drawBattles, 'A军');
+      // Single win is not counted as a win streak (need at least 2)
+      expect(stats.longestWinStreak).toBe(0);
     });
   });
 });

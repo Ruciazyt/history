@@ -1302,3 +1302,283 @@ export function getGeographicInsights(battles: Event[]): GeographicInsight[] {
   
   return insights;
 }
+
+// ============ Battle Streak Analysis (连胜连败分析) ============
+
+/**
+ * A single battle result for streak tracking
+ */
+type BattleResult = {
+  battle: Event;
+  participant: 'attacker' | 'defender';
+  result: 'win' | 'loss' | 'draw' | 'inconclusive';
+  year: number;
+};
+
+/**
+ * A streak of consecutive wins or losses
+ */
+export type BattleStreak = {
+  participant: string;
+  streakType: 'win' | 'loss';
+  length: number;
+  startYear: number;
+  endYear: number;
+  battles: Event[];
+  isLongest: boolean;
+};
+
+/**
+ * Participant streak statistics
+ */
+export type ParticipantStreakStats = {
+  participant: string;
+  longestWinStreak: number;
+  longestLossStreak: number;
+  currentWinStreak: number;
+  currentLossStreak: number;
+  winStreaks: BattleStreak[];
+  lossStreaks: BattleStreak[];
+};
+
+/**
+ * Track battle results for a specific participant
+ */
+function getParticipantBattleResults(battles: Event[], participant: string): BattleResult[] {
+  const results: BattleResult[] = [];
+  const sortedBattles = sortBattlesByYear(battles);
+  
+  for (const battle of sortedBattles) {
+    const attacker = battle.battle?.belligerents?.attacker;
+    const defender = battle.battle?.belligerents?.defender;
+    const battleResult = battle.battle?.result;
+    
+    if (!attacker || !defender || !battleResult) continue;
+    
+    const participantLower = participant.toLowerCase();
+    const attackerLower = attacker.toLowerCase();
+    const defenderLower = defender.toLowerCase();
+    
+    if (attackerLower === participantLower) {
+      results.push({
+        battle,
+        participant: 'attacker',
+        result: battleResult === 'attacker_win' ? 'win' : 
+                battleResult === 'defender_win' ? 'loss' : 
+                battleResult === 'draw' ? 'draw' : 'inconclusive',
+        year: battle.year,
+      });
+    } else if (defenderLower === participantLower) {
+      results.push({
+        battle,
+        participant: 'defender',
+        result: battleResult === 'defender_win' ? 'win' : 
+                battleResult === 'attacker_win' ? 'loss' : 
+                battleResult === 'draw' ? 'draw' : 'inconclusive',
+        year: battle.year,
+      });
+    }
+  }
+  
+  return results;
+}
+
+/**
+ * Extract streaks from battle results
+ */
+function extractStreaks(results: BattleResult[], streakType: 'win' | 'loss'): BattleStreak[] {
+  const streaks: BattleStreak[] = [];
+  let currentStreak: BattleResult[] = [];
+  
+  for (const result of results) {
+    if (result.result === streakType) {
+      currentStreak.push(result);
+    } else {
+      // Streak broken
+      if (currentStreak.length >= 2) {
+        streaks.push({
+          participant: currentStreak[0].battle.battle?.belligerents?.[
+            currentStreak[0].participant === 'attacker' ? 'attacker' : 'defender'
+          ] || '',
+          streakType,
+          length: currentStreak.length,
+          startYear: currentStreak[0].year,
+          endYear: currentStreak[currentStreak.length - 1].year,
+          battles: currentStreak.map(r => r.battle),
+          isLongest: false,
+        });
+      }
+      currentStreak = [];
+    }
+  }
+  
+  // Handle last streak
+  if (currentStreak.length >= 2) {
+    streaks.push({
+      participant: currentStreak[0].battle.battle?.belligerents?.[
+        currentStreak[0].participant === 'attacker' ? 'attacker' : 'defender'
+      ] || '',
+      streakType,
+      length: currentStreak.length,
+      startYear: currentStreak[0].year,
+      endYear: currentStreak[currentStreak.length - 1].year,
+      battles: currentStreak.map(r => r.battle),
+      isLongest: false,
+    });
+  }
+  
+  return streaks;
+}
+
+/**
+ * Get streak statistics for a specific participant
+ */
+export function getParticipantStreakStats(battles: Event[], participant: string): ParticipantStreakStats {
+  const results = getParticipantBattleResults(battles, participant);
+  
+  const winStreaks = extractStreaks(results, 'win');
+  const lossStreaks = extractStreaks(results, 'loss');
+  
+  // Mark longest streaks
+  let longestWin = 0;
+  let longestLoss = 0;
+  
+  for (const streak of winStreaks) {
+    if (streak.length > longestWin) {
+      longestWin = streak.length;
+    }
+  }
+  
+  for (const streak of lossStreaks) {
+    if (streak.length > longestLoss) {
+      longestLoss = streak.length;
+    }
+  }
+  
+  for (const streak of winStreaks) {
+    if (streak.length === longestWin && longestWin >= 2) {
+      streak.isLongest = true;
+    }
+  }
+  
+  for (const streak of lossStreaks) {
+    if (streak.length === longestLoss && longestLoss >= 2) {
+      streak.isLongest = true;
+    }
+  }
+  
+  // Calculate current streak (from most recent battle)
+  let currentWinStreak = 0;
+  let currentLossStreak = 0;
+  const reversedResults = [...results].reverse();
+  
+  for (const result of reversedResults) {
+    if (result.result === 'win') {
+      currentWinStreak++;
+    } else if (result.result === 'loss') {
+      currentLossStreak++;
+    } else {
+      break; // Streak broken by draw/inconclusive
+    }
+  }
+  
+  return {
+    participant,
+    longestWinStreak: longestWin,
+    longestLossStreak: longestLoss,
+    currentWinStreak,
+    currentLossStreak,
+    winStreaks,
+    lossStreaks,
+  };
+}
+
+/**
+ * Get all participants with their streak statistics
+ */
+export function getAllParticipantsStreakStats(battles: Event[]): ParticipantStreakStats[] {
+  const participants = getUniqueParticipants(battles);
+  const stats: ParticipantStreakStats[] = [];
+  
+  for (const participant of participants) {
+    const participantStats = getParticipantStreakStats(battles, participant);
+    // Only include participants with at least 2 battles
+    if (participantStats.longestWinStreak >= 2 || participantStats.longestLossStreak >= 2) {
+      stats.push(participantStats);
+    }
+  }
+  
+  // Sort by longest win streak descending
+  stats.sort((a, b) => b.longestWinStreak - a.longestWinStreak);
+  
+  return stats;
+}
+
+/**
+ * Get top streaks across all participants
+ */
+export function getTopStreaks(battles: Event[], limit = 5): BattleStreak[] {
+  const allStats = getAllParticipantsStreakStats(battles);
+  const allStreaks: BattleStreak[] = [];
+  
+  for (const stats of allStats) {
+    allStreaks.push(...stats.winStreaks, ...stats.lossStreaks);
+  }
+  
+  // Sort by length descending
+  allStreaks.sort((a, b) => b.length - a.length);
+  
+  return allStreaks.slice(0, limit);
+}
+
+/**
+ * Streak insight type
+ */
+export type StreakInsight = {
+  type: 'dominant-force' | 'turning-point' | 'historical-pattern';
+  title: string;
+  description: string;
+  participant?: string;
+  streak?: BattleStreak;
+  value: number;
+};
+
+/**
+ * Generate insights from streak analysis
+ */
+export function getStreakInsights(battles: Event[]): StreakInsight[] {
+  const insights: StreakInsight[] = [];
+  const allStats = getAllParticipantsStreakStats(battles);
+  
+  if (allStats.length === 0) return insights;
+  
+  // Find dominant force (longest win streak)
+  const dominantForce = allStats.find(s => s.longestWinStreak >= 3);
+  if (dominantForce) {
+    const streak = dominantForce.winStreaks.find(s => s.isLongest);
+    insights.push({
+      type: 'dominant-force',
+      title: '连胜霸主',
+      description: `${dominantForce.participant}曾在历史上创造${dominantForce.longestWinStreak}连胜的辉煌战绩`,
+      participant: dominantForce.participant,
+      streak,
+      value: dominantForce.longestWinStreak,
+    });
+  }
+  
+  // Find significant loss streaks (3+ consecutive losses)
+  const losingStreak = allStats.find(s => s.longestLossStreak >= 3);
+  if (losingStreak) {
+    const streak = losingStreak.lossStreaks.find(s => s.isLongest);
+    insights.push({
+      type: 'historical-pattern',
+      title: '连败记录',
+      description: `${losingStreak.participant}曾遭遇${losingStreak.longestLossStreak}连败`,
+      participant: losingStreak.participant,
+      streak,
+      value: losingStreak.longestLossStreak,
+    });
+  }
+  
+  return insights;
+}
