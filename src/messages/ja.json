@@ -1174,28 +1174,15 @@
   "nav": {
     "battles": "戦い"
   },
-  "wc-cn-mingtaizu": "洪武",
-  "wc-cn-ming-jianwen": "建文",
-  "wc-cn-ming-yongle": "永楽",
-  "wc-cn-ming-hongxi": "洪熙",
-  "wc-cn-ming-xuande": "宣徳",
-  "wc-cn-ming-zhengtong": "正統",
-  "wc-cn-ming-tianshun": "天順",
-  "wc-cn-ming-chenghua": "成化",
-  "wc-cn-ming-hongzhi": "弘治",
-  "wc-cn-ming-zhengde": "正徳",
-  "wc-cn-ming-jiajing": "嘉靖",
-  "wc-cn-ming-longqing": "隆慶",
-  "wc-cn-ming-wanli": "万暦",
-  "wc-cn-ming-taichang": "泰昌",
-  "wc-cn-ming-tianqi": "天啓",
-  "wc-cn-ming-chongzhen": "崇禎",
-  "wc-cn-ming-xuanzong": "宣徳",
-  "wc-cn-ming-yingzong": "天順",
-  "wc-cn-ming-daizong": "景泰",
-  "wc-cn-ming-xianzong": "成化",
-  "wc-cn-ming-xiaozong": "弘治",
-  "wc-cn-ming-shizong": "嘉靖",
-  "wc-cn-ming-shenzong": "万暦",
-  "wc-cn-ming-sizong": "崇禎"
+  "rulerEraName": {
+    "wc-cn-mingtaizu": "洪武",
+    "wc-cn-ming-xuanzong": "宣徳",
+    "wc-cn-ming-yingzong": "正統/天順",
+    "wc-cn-ming-daizong": "景泰",
+    "wc-cn-ming-xianzong": "成化",
+    "wc-cn-ming-xiaozong": "弘治",
+    "wc-cn-ming-shizong": "嘉靖",
+    "wc-cn-ming-shenzong": "万暦",
+    "wc-cn-ming-sizong": "崇禎"
+  }
 }

@@ -289,7 +289,7 @@ export function HistoryApp({
                                             >
                                               <span>{t(r.nameKey)}</span>
                                               {r.eraNameKey && (
-                                                <span className="text-amber-600 ml-1">{t(r.eraNameKey)}</span>
+                                                <span className="text-amber-600 ml-1">{tEra(r.eraNameKey)}</span>
                                               )}
                                               <span className="text-zinc-400 ml-1">{formatYear(r.startYear)}</span>
                                             </button>
@@ -322,7 +322,7 @@ export function HistoryApp({
                                     <>
                                       <span>{t(r.nameKey)}</span>
                                       {r.eraNameKey && (
-                                        <span className="text-amber-600 text-xs">{t(r.eraNameKey)}</span>
+                                        <span className="text-amber-600 text-xs">{tEra(r.eraNameKey)}</span>
                                       )}
                                     </>
                                   )}
@@ -411,7 +411,7 @@ export function HistoryApp({
               {currentEraEvents.length > 0 ? (
                 currentEraEvents.map((e) => {
                   const era = activeEras.find((era) => era.id === e.entityId);
-                  const eraName = era ? tEra(era.nameKey) : '';
+                  const eraName = era ? t(era.nameKey) : '';
                   return (
                     <div
                       key={e.id}
@@ -443,7 +443,7 @@ export function HistoryApp({
                   </div>
                   {otherEraEvents.slice(0, 20).map((e) => {
                     const era = activeEras.find((era) => era.id === e.entityId);
-                    const eraName = era ? tEra(era.nameKey) : '';
+                    const eraName = era ? t(era.nameKey) : '';
                     return (
                       <div
                         key={e.id}
@@ -470,7 +470,7 @@ export function HistoryApp({
                       <span className="truncate text-sm sm:text-base font-semibold text-zinc-900">{t(selectedRuler.nameKey)}</span>
                       {selectedRuler.eraNameKey && (
                         <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded">
-                          {t(selectedRuler.eraNameKey)}
+                          {tEra(selectedRuler.eraNameKey)}
                         </span>
                       )}
                     </div>

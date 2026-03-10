@@ -1834,3 +1834,360 @@ export function hasCommanderData(battles: Event[]): boolean {
     (b.battle?.commanders?.defender?.length ?? 0) > 0
   );
 }
+
+// ==================== Battle Type Analysis ====================
+
+import type { BattleType, BattleImpact } from './types';
+
+/** Battle type statistics */
+export type BattleTypeStats = {
+  type: BattleType;
+  typeName: string;
+  total: number;
+  attackerWins: number;
+  defenderWins: number;
+  draws: number;
+  inconclusive: number;
+  attackerWinRate: number;
+  defenderWinRate: number;
+};
+
+/**
+ * Get Chinese name for battle type
+ */
+export function getBattleTypeName(type: BattleType): string {
+  const names: Record<BattleType, string> = {
+    'founding': '开国之战',
+    'unification': '统一战争',
+    'conquest': '征服战',
+    'defense': '防御战',
+    'rebellion': '叛乱/起义',
+    'civil-war': '内战',
+    'frontier': '边疆战役',
+    'invasion': '入侵/外敌',
+    'unknown': '未知类型',
+  };
+  return names[type] || '未知类型';
+}
+
+/**
+ * Get all unique battle types present in the data
+ */
+export function getBattleTypesPresent(battles: Event[]): BattleType[] {
+  const types = new Set<BattleType>();
+  for (const battle of battles) {
+    if (battle.battle?.battleType) {
+      types.add(battle.battle.battleType);
+    }
+  }
+  return Array.from(types);
+}
+
+/**
+ * Get battles filtered by type
+ */
+export function getBattlesByType(battles: Event[], battleType: BattleType): Event[] {
+  return battles.filter(b => b.battle?.battleType === battleType);
+}
+
+/**
+ * Calculate statistics for a specific battle type
+ */
+export function getStatsByBattleType(battles: Event[], battleType: BattleType): BattleTypeStats {
+  const typeBattles = getBattlesByType(battles, battleType);
+  
+  let attackerWins = 0;
+  let defenderWins = 0;
+  let draws = 0;
+  let inconclusive = 0;
+  
+  for (const battle of typeBattles) {
+    const result = battle.battle?.result;
+    switch (result) {
+      case 'attacker_win':
+        attackerWins++;
+        break;
+      case 'defender_win':
+        defenderWins++;
+        break;
+      case 'draw':
+        draws++;
+        break;
+      case 'inconclusive':
+        inconclusive++;
+        break;
+    }
+  }
+  
+  const total = typeBattles.length;
+  const knownResults = attackerWins + defenderWins + draws + inconclusive;
+  
+  return {
+    type: battleType,
+    typeName: getBattleTypeName(battleType),
+    total,
+    attackerWins,
+    defenderWins,
+    draws,
+    inconclusive,
+    attackerWinRate: knownResults > 0 ? (attackerWins / knownResults) * 100 : 0,
+    defenderWinRate: knownResults > 0 ? (defenderWins / knownResults) * 100 : 0,
+  };
+}
+
+/**
+ * Get statistics for all battle types
+ */
+export function getAllBattleTypesStats(battles: Event[]): BattleTypeStats[] {
+  const types = getBattleTypesPresent(battles);
+  return types.map(type => getStatsByBattleType(battles, type))
+    .sort((a, b) => b.total - a.total);
+}
+
+/** Battle impact level statistics */
+export type BattleImpactStats = {
+  impact: BattleImpact;
+  impactName: string;
+  total: number;
+  attackerWins: number;
+  defenderWins: number;
+  draws: number;
+  inconclusive: number;
+  attackerWinRate: number;
+  defenderWinRate: number;
+};
+
+/**
+ * Get Chinese name for battle impact
+ */
+export function getBattleImpactName(impact: BattleImpact): string {
+  const names: Record<BattleImpact, string> = {
+    'decisive': '决定性战役',
+    'major': '重要战役',
+    'minor': '小型战役',
+    'unknown': '未知影响',
+  };
+  return names[impact] || '未知影响';
+}
+
+/**
+ * Get all unique battle impacts present in the data
+ */
+export function getBattleImpactsPresent(battles: Event[]): BattleImpact[] {
+  const impacts = new Set<BattleImpact>();
+  for (const battle of battles) {
+    if (battle.battle?.impact) {
+      impacts.add(battle.battle.impact);
+    }
+  }
+  return Array.from(impacts);
+}
+
+/**
+ * Get battles filtered by impact level
+ */
+export function getBattlesByImpact(battles: Event[], impact: BattleImpact): Event[] {
+  return battles.filter(b => b.battle?.impact === impact);
+}
+
+/**
+ * Calculate statistics for a specific battle impact level
+ */
+export function getStatsByBattleImpact(battles: Event[], impact: BattleImpact): BattleImpactStats {
+  const impactBattles = getBattlesByImpact(battles, impact);
+  
+  let attackerWins = 0;
+  let defenderWins = 0;
+  let draws = 0;
+  let inconclusive = 0;
+  
+  for (const battle of impactBattles) {
+    const result = battle.battle?.result;
+    switch (result) {
+      case 'attacker_win':
+        attackerWins++;
+        break;
+      case 'defender_win':
+        defenderWins++;
+        break;
+      case 'draw':
+        draws++;
+        break;
+      case 'inconclusive':
+        inconclusive++;
+        break;
+    }
+  }
+  
+  const total = impactBattles.length;
+  const knownResults = attackerWins + defenderWins + draws + inconclusive;
+  
+  return {
+    impact,
+    impactName: getBattleImpactName(impact),
+    total,
+    attackerWins,
+    defenderWins,
+    draws,
+    inconclusive,
+    attackerWinRate: knownResults > 0 ? (attackerWins / knownResults) * 100 : 0,
+    defenderWinRate: knownResults > 0 ? (defenderWins / knownResults) * 100 : 0,
+  };
+}
+
+/**
+ * Get statistics for all battle impact levels
+ */
+export function getAllBattleImpactsStats(battles: Event[]): BattleImpactStats[] {
+  const impacts = getBattleImpactsPresent(battles);
+  return impacts.map(impact => getStatsByBattleImpact(battles, impact))
+    .sort((a, b) => b.total - a.total);
+}
+
+/** Combined battle type and impact analysis */
+export type BattleTypeImpactAnalysis = {
+  type: BattleType;
+  impact: BattleImpact;
+  count: number;
+  attackerWins: number;
+  defenderWins: number;
+};
+
+/**
+ * Get cross-analysis of battle types and impacts
+ */
+export function getBattleTypeImpactMatrix(battles: Event[]): BattleTypeImpactAnalysis[] {
+  const matrix: BattleTypeImpactAnalysis[] = [];
+  const types = getBattleTypesPresent(battles);
+  const impacts = getBattleImpactsPresent(battles);
+  
+  for (const type of types) {
+    for (const impact of impacts) {
+      const filtered = battles.filter(
+        b => b.battle?.battleType === type && b.battle?.impact === impact
+      );
+      
+      if (filtered.length > 0) {
+        let attackerWins = 0;
+        let defenderWins = 0;
+        
+        for (const battle of filtered) {
+          if (battle.battle?.result === 'attacker_win') attackerWins++;
+          else if (battle.battle?.result === 'defender_win') defenderWins++;
+        }
+        
+        matrix.push({
+          type,
+          impact,
+          count: filtered.length,
+          attackerWins,
+          defenderWins,
+        });
+      }
+    }
+  }
+  
+  return matrix.sort((a, b) => b.count - a.count);
+}
+
+/** Battle type insight */
+export type BattleTypeInsight = {
+  type: BattleType;
+  typeName: string;
+  insight: string;
+  confidence: 'high' | 'medium' | 'low';
+};
+
+/**
+ * Generate insights about battle types
+ */
+export function getBattleTypeInsights(battles: Event[]): BattleTypeInsight[] {
+  const insights: BattleTypeInsight[] = [];
+  const stats = getAllBattleTypesStats(battles);
+  
+  for (const stat of stats) {
+    if (stat.total < 2) continue;
+    
+    const { type, typeName, attackerWinRate, defenderWinRate, total } = stat;
+    
+    // High confidence insights (lots of data)
+    if (total >= 3) {
+      if (attackerWinRate > 70) {
+        insights.push({
+          type,
+          typeName,
+          insight: `${typeName}通常由进攻方主导，进攻方胜率高达${attackerWinRate.toFixed(1)}%`,
+          confidence: 'high',
+        });
+      } else if (defenderWinRate > 70) {
+        insights.push({
+          type,
+          typeName,
+          insight: `${typeName}往往是防守方的天下，防守方胜率达${defenderWinRate.toFixed(1)}%`,
+          confidence: 'high',
+        });
+      } else if (attackerWinRate > 50) {
+        insights.push({
+          type,
+          typeName,
+          insight: `${typeName}中进攻方略占优势，胜率${attackerWinRate.toFixed(1)}%`,
+          confidence: 'medium',
+        });
+      } else if (defenderWinRate > 50) {
+        insights.push({
+          type,
+          typeName,
+          insight: `${typeName}中防守方略有优势，胜率${defenderWinRate.toFixed(1)}%`,
+          confidence: 'medium',
+        });
+      }
+    } else {
+      // Lower confidence for fewer battles
+      if (attackerWinRate > 50) {
+        insights.push({
+          type,
+          typeName,
+          insight: `${typeName}初步显示进攻方有一定优势`,
+          confidence: 'low',
+        });
+      } else if (defenderWinRate > 50) {
+        insights.push({
+          type,
+          typeName,
+          insight: `${typeName}初步显示防守方有一定优势`,
+          confidence: 'low',
+        });
+      }
+    }
+  }
+  
+  return insights;
+}
+
+/**
+ * Get most common battle type
+ */
+export function getMostCommonBattleType(battles: Event[]): BattleTypeStats | null {
+  const stats = getAllBattleTypesStats(battles);
+  return stats.length > 0 ? stats[0] : null;
+}
+
+/**
+ * Get battle type with highest attacker win rate
+ */
+export function getMostAggressiveBattleType(battles: Event[]): BattleTypeStats | null {
+  const stats = getAllBattleTypesStats(battles);
+  return stats.reduce((max, stat) => 
+    stat.attackerWinRate > (max?.attackerWinRate ?? 0) ? stat : max
+  , null as BattleTypeStats | null);
+}
+
+/**
+ * Get battle type with highest defender win rate
+ */
+export function getMostDefensiveBattleType(battles: Event[]): BattleTypeStats | null {
+  const stats = getAllBattleTypesStats(battles);
+  return stats.reduce((max, stat) => 
+    stat.defenderWinRate > (max?.defenderWinRate ?? 0) ? stat : max
+  , null as BattleTypeStats | null);
+}
