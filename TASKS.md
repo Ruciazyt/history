@@ -1,9 +1,9 @@
 # History Atlas 项目迭代计划
 
 ## 四个优化方向
-1. UI展示优化 - [进行中]
-2. 项目结构 - [待处理]
-3. 代码优化 - [待处理]
+1. UI展示优化 - [已完成]
+2. 项目结构 - [已完成]
+3. 代码优化 - [已完成]
 4. 屏幕适配 - [已完成]
 
 ## 已完成功能
@@ -12,12 +12,27 @@
 - [x] 战役详情弹窗
 - [x] 地图战役标记区分（⚔️ vs 红点）
 - [x] UI优化 - 战役页面视觉升级
+- [x] UI优化 - 时间线视觉升级（朝代颜色）
+- [x] 代码优化 - 提取公共 Hooks
+- [x] 代码优化 - React.memo 组件优化
+- [x] 项目结构 - 组件目录重组
 - [x] 屏幕适配 - 移动端体验提升
+
+## 项目结构
+```
+src/
+├── components/
+│   ├── battles/      - 战役相关组件
+│   ├── timeline/     - 时间线相关组件
+│   ├── common/       - 公共组件
+│   ├── HistoryApp.tsx
+│   └── HistoryMap.tsx
+├── lib/history/
+│   ├── useHistoryData.ts
+│   ├── useBattleData.ts
+│   ├── battles.ts
+│   └── rulerRelations.ts
+```
 
 ## 部署地址
 https://history.ruciazyt.cn
-
-## 本次迭代
-- [x] 战役统计面板 - 展示各时期战役数量和胜负统计
-- [x] 战役时间线视图 - 新增时间线模式，以垂直时间线展示战役 chronologically
-- [x] 战役搜索与筛选功能 - 支持按名称/地点/参战方搜索，按结果/朝代/年份筛选，支持排序

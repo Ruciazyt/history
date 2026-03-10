@@ -8,6 +8,7 @@ import { clamp, formatYear } from '@/lib/history/utils';
 import { HistoryMap } from '@/components/HistoryMap';
 import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 import { RulerRelations } from '@/components/common/RulerRelations';
+import { SearchBox } from '@/components/common/SearchBox';
 import { useTranslations } from 'next-intl';
 
 function rangeLabel(centerYear: number, windowYears: number) {
@@ -144,6 +145,7 @@ export function HistoryApp({
               <h1 className="text-base sm:text-lg font-semibold truncate">{t('app.subtitle')}</h1>
             </div>
             <div className="flex items-center gap-2 shrink-0 ml-2">
+              <SearchBox eras={eras} events={events} rulers={rulers} locale={currentLocale} />
               <LocaleSwitcher />
             </div>
           </div>
