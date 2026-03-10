@@ -258,46 +258,60 @@ export function HistoryApp({
                     {isOpen && (
                       <div className="bg-zinc-50 px-2 py-1 sm:px-3 sm:py-2">
                         {isMultiPolity && rulersByPolity ? (
-                          // 多国并立时期：表格形式
+                          // 多国并立时期：表格形式（纵轴为时间）
                           <div className="overflow-x-auto">
-                            <table className="w-full text-xs sm:text-sm">
+                            <table className="w-full text-xs sm:text-sm border-collapse">
                               <thead>
                                 <tr className="text-left text-zinc-500 border-b border-zinc-200">
+                                  <th className="px-2 py-2 font-medium w-16 shrink-0">年份</th>
                                   {era.polities?.map(p => (
-                                    <th key={p.id} className="px-1 py-1 font-medium">{t(p.nameKey)}</th>
+                                    <th key={p.id} className="px-2 py-2 font-medium min-w-[100px]">{t(p.nameKey)}</th>
                                   ))}
                                 </tr>
                               </thead>
                               <tbody>
                                 {(() => {
-                                  const maxRows = Math.max(...Object.values(rulersByPolity).map(r => r.length));
-                                  return Array.from({ length: maxRows }).map((_, rowIdx) => (
-                                    <tr key={rowIdx} className="border-b border-zinc-100 last:border-0">
-                                      {era.polities?.map(p => {
-                                        const rulers = rulersByPolity[p.id] || [];
-                                        const r = rulers[rowIdx];
-                                        if (!r) return <td key={p.id} className="px-1 py-1"></td>;
-                                        const isActive = selectedRulerId === r.id;
-                                        return (
-                                          <td key={p.id} className="px-1 py-0.5">
-                                            <button
-                                              type="button"
-                                              onClick={() => setSelectedRulerId(r.id)}
-                                              className={`w-full text-left rounded px-1 py-0.5 truncate ${
-                                                isActive ? 'bg-blue-100 text-blue-800 font-medium' : 'hover:bg-zinc-100 text-zinc-600'
-                                              }`}
-                                            >
-                                              <span>{t(r.nameKey)}</span>
-                                              {r.eraNameKey && (
-                                                <span className="text-amber-600 ml-1">{tEra(r.eraNameKey)}</span>
-                                              )}
-                                              <span className="text-zinc-400 ml-1">{formatYear(r.startYear)}</span>
-                                            </button>
-                                          </td>
-                                        );
-                                      })}
-                                    </tr>
-                                  ));
+                                  // 按年份排序所有统治者
+                                  const allRulers = eraRulers.sort((a, b) => a.startYear - b.startYear);
+                                  // 按起始年份分组
+                                  const rulersByYear = allRulers.reduce((acc, r) => {
+                                    const year = r.startYear;
+                                    if (!acc[year]) acc[year] = [];
+                                    acc[year].push(r);
+                                    return acc;
+                                  }, {} as Record<number, typeof eraRulers>);
+                                  const years = Object.keys(rulersByYear).map(Number).sort((a, b) => a - b);
+                                  return years.map(year => {
+                                    const rulers = rulersByYear[year];
+                                    return (
+                                      <tr key={year} className="border-b border-zinc-100 last:border-0 hover:bg-zinc-100/50">
+                                        <td className="px-2 py-2 text-zinc-500 font-medium shrink-0 w-16">
+                                          {formatYear(year)}
+                                        </td>
+                                        {era.polities?.map(p => {
+                                          const r = rulers.find(r => r.polityId === p.id);
+                                          if (!r) return <td key={p.id} className="px-2 py-2"></td>;
+                                          const isActive = selectedRulerId === r.id;
+                                          return (
+                                            <td key={p.id} className="px-2 py-1">
+                                              <button
+                                                type="button"
+                                                onClick={() => setSelectedRulerId(r.id)}
+                                                className={`w-full text-left rounded px-2 py-1.5 truncate ${
+                                                  isActive ? 'bg-blue-100 text-blue-800 font-medium' : 'hover:bg-zinc-100 text-zinc-700'
+                                                }`}
+                                              >
+                                                <div>{t(r.nameKey)}</div>
+                                                {r.eraNameKey && (
+                                                  <div className="text-amber-600 text-xs">{tEra(r.eraNameKey)}</div>
+                                                )}
+                                              </button>
+                                            </td>
+                                          );
+                                        })}
+                                      </tr>
+                                    );
+                                  });
                                 })()}
                               </tbody>
                             </table>
