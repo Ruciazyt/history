@@ -19,3 +19,4 @@ https://history.ruciazyt.cn
 
 ## 本次迭代
 - [x] 战役统计面板 - 展示各时期战役数量和胜负统计
+- [x] 战役时间线视图 - 新增时间线模式，以垂直时间线展示战役 chronologically
