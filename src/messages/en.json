@@ -11,6 +11,7 @@
     "eras": "Eras (China)",
     "timeline": "Timeline",
     "centerYear": "Center year",
+    "back": "Back",
     "window": {
       "10": "10 years",
       "50": "50 years",
@@ -1212,5 +1213,8 @@
     "zhao": "Zhao",
     "han-state": "Han (State)",
     "yan": "Yan"
+  },
+  "nav": {
+    "battles": "Battles"
   }
 }

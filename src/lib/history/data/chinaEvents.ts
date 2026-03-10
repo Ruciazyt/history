@@ -10,7 +10,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.wz-1046-muye.title',
     summaryKey: 'event.wz-1046-muye.summary',
     tags: ['war', 'founding'],
-    location: { lon: 114.7, lat: 34.8, label: 'Muye (approx.)' },
+    location: { lon: 114.7, lat: 34.8, label: '牧野' },
+    battle: {
+      belligerents: {
+        attacker: '周军',
+        defender: '商军',
+      },
+      result: 'attacker_win',
+    },
   },
   {
     id: 'wz-1042-regency',
@@ -80,6 +87,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.sa-597-bi.title',
     summaryKey: 'event.sa-597-bi.summary',
     tags: ['war'],
+    location: { lon: 115.0, lat: 35.0, label: '聊城' },
+    battle: {
+      belligerents: {
+        attacker: '晋军',
+        defender: '楚军',
+      },
+      result: 'attacker_win',
+    },
   },
   {
     id: 'sa-594-tax',
@@ -200,6 +215,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-260-changping.title',
     summaryKey: 'event.ws-260-changping.summary',
     tags: ['war'],
+    location: { lon: 113.0, lat: 35.5, label: '长平' },
+    battle: {
+      belligerents: {
+        attacker: '秦军',
+        defender: '赵军',
+      },
+      result: 'attacker_win',
+    },
   },
   {
     id: 'ws-230-qin-conquers-han',

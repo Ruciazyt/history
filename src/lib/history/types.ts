@@ -55,4 +55,18 @@ export type Event = {
   tags?: string[];
   location?: { lon: number; lat: number; label?: string };
   sources?: { label: string; url?: string }[];
+  // Battle-specific fields
+  battle?: {
+    /** 参战方 */
+    belligerents?: {
+      /** 进攻方/挑战方 */
+      attacker: string;
+      /** 防守方/被挑战方 */
+      defender: string;
+    };
+    /** 战役结果 */
+    result?: 'attacker_win' | 'defender_win' | 'draw' | 'inconclusive';
+    /** 战争名称（如果有独立名称） */
+    warNameKey?: string;
+  };
 };

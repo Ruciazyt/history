@@ -181,6 +181,12 @@ export function HistoryApp({
             >
               📜 {t('event.viewTimeline')}
             </Link>
+            <Link
+              href={`/${currentLocale}/battles`}
+              className="px-3 py-1.5 bg-red-50 hover:bg-red-100 rounded-lg text-sm text-red-700 transition-colors border border-red-200"
+            >
+              ⚔️ {t('nav.battles') || '战役'}
+            </Link>
           </div>
         </div>
       </header>
