@@ -86,3 +86,94 @@ export function getMappableEvents(events: Event[]): Event[] {
     (e) => e.location && Number.isFinite(e.location.lon) && Number.isFinite(e.location.lat)
   );
 }
+
+/**
+ * Statistics for battles
+ */
+export type BattleStats = {
+  /** Total number of battles */
+  total: number;
+  /** Number of battles won by attacker */
+  attackerWins: number;
+  /** Number of battles won by defender */
+  defenderWins: number;
+  /** Number of draws */
+  draws: number;
+  /** Number of inconclusive results */
+  inconclusive: number;
+  /** Number of battles with unknown result */
+  unknown: number;
+};
+
+/**
+ * Calculate battle statistics
+ */
+export function getBattleStats(battles: Event[]): BattleStats {
+  const stats: BattleStats = {
+    total: battles.length,
+    attackerWins: 0,
+    defenderWins: 0,
+    draws: 0,
+    inconclusive: 0,
+    unknown: 0,
+  };
+
+  for (const battle of battles) {
+    const result = battle.battle?.result;
+    switch (result) {
+      case 'attacker_win':
+        stats.attackerWins++;
+        break;
+      case 'defender_win':
+        stats.defenderWins++;
+        break;
+      case 'draw':
+        stats.draws++;
+        break;
+      case 'inconclusive':
+        stats.inconclusive++;
+        break;
+      default:
+        stats.unknown++;
+    }
+  }
+
+  return stats;
+}
+
+/**
+ * Battle count by era
+ */
+export type BattleCountByEra = {
+  eraId: string;
+  eraName: string;
+  count: number;
+};
+
+/**
+ * Get battle counts grouped by era
+ */
+export function getBattleCountByEra(battles: Event[], eras: { id: string; nameKey: string }[], t: (key: string) => string): BattleCountByEra[] {
+  const counts = new Map<string, number>();
+
+  for (const battle of battles) {
+    const current = counts.get(battle.entityId) || 0;
+    counts.set(battle.entityId, current + 1);
+  }
+
+  const result: BattleCountByEra[] = [];
+  for (const era of eras) {
+    const count = counts.get(era.id) || 0;
+    if (count > 0) {
+      result.push({
+        eraId: era.id,
+        eraName: t(era.nameKey),
+        count,
+      });
+    }
+  }
+
+  // Sort by count descending
+  result.sort((a, b) => b.count - a.count);
+  return result;
+}

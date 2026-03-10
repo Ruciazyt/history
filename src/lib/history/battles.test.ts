@@ -8,6 +8,8 @@ import {
   isBattleComplete,
   separateBattlesAndEvents,
   getMappableEvents,
+  getBattleStats,
+  getBattleCountByEra,
 } from './battles';
 import type { Event } from './types';
 
@@ -256,6 +258,146 @@ describe('battles', () => {
       ];
       const mappable = getMappableEvents(eventsWithInvalid);
       expect(mappable).toHaveLength(0);
+    });
+  });
+
+  describe('getBattleStats', () => {
+    it('should calculate correct battle statistics', () => {
+      const battles = getBattles(mockEvents);
+      const stats = getBattleStats(battles);
+      expect(stats.total).toBe(2);
+      expect(stats.attackerWins).toBe(2);
+      expect(stats.defenderWins).toBe(0);
+      expect(stats.draws).toBe(0);
+      expect(stats.inconclusive).toBe(0);
+      expect(stats.unknown).toBe(0);
+    });
+
+    it('should handle battles with various results', () => {
+      const eventsWithResults: Event[] = [
+        {
+          id: 'b1',
+          entityId: 'era1',
+          year: -500,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: { result: 'attacker_win' },
+        },
+        {
+          id: 'b2',
+          entityId: 'era1',
+          year: -400,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: { result: 'defender_win' },
+        },
+        {
+          id: 'b3',
+          entityId: 'era1',
+          year: -300,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: { result: 'draw' },
+        },
+        {
+          id: 'b4',
+          entityId: 'era1',
+          year: -200,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: { result: 'inconclusive' },
+        },
+        {
+          id: 'b5',
+          entityId: 'era1',
+          year: -100,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+          battle: {},
+        },
+      ];
+      const stats = getBattleStats(eventsWithResults);
+      expect(stats.total).toBe(5);
+      expect(stats.attackerWins).toBe(1);
+      expect(stats.defenderWins).toBe(1);
+      expect(stats.draws).toBe(1);
+      expect(stats.inconclusive).toBe(1);
+      expect(stats.unknown).toBe(1);
+    });
+
+    it('should return zeros for empty array', () => {
+      const stats = getBattleStats([]);
+      expect(stats.total).toBe(0);
+      expect(stats.attackerWins).toBe(0);
+      expect(stats.defenderWins).toBe(0);
+    });
+  });
+
+  describe('getBattleCountByEra', () => {
+    it('should count battles by era correctly', () => {
+      const battles = getBattles(mockEvents);
+      const eras = [
+        { id: 'era1', nameKey: 'era.springAutumn' },
+        { id: 'era2', nameKey: 'era.warringStates' },
+      ];
+      const t = (key: string) => {
+        const names: Record<string, string> = {
+          'era.springAutumn': '春秋',
+          'era.warringStates': '战国',
+        };
+        return names[key] || key;
+      };
+      
+      const counts = getBattleCountByEra(battles, eras, t);
+      expect(counts).toHaveLength(1);
+      expect(counts[0].eraName).toBe('春秋');
+      expect(counts[0].count).toBe(2);
+    });
+
+    it('should return empty array when no battles', () => {
+      const counts = getBattleCountByEra([], [], () => '');
+      expect(counts).toHaveLength(0);
+    });
+
+    it('should sort by count descending', () => {
+      const battles: Event[] = [
+        {
+          id: 'b1',
+          entityId: 'era1',
+          year: -500,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+        },
+        {
+          id: 'b2',
+          entityId: 'era1',
+          year: -400,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+        },
+        {
+          id: 'b3',
+          entityId: 'era2',
+          year: -300,
+          titleKey: 'test',
+          summaryKey: 'test',
+          tags: ['war'],
+        },
+      ];
+      const eras = [
+        { id: 'era1', nameKey: 'era.1' },
+        { id: 'era2', nameKey: 'era.2' },
+      ];
+      const counts = getBattleCountByEra(battles, eras, (k) => k);
+      expect(counts[0].count).toBe(2);
+      expect(counts[1].count).toBe(1);
     });
   });
 });

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import type { Era, Event, Ruler } from '@/lib/history/types';
-import { getBattles } from '@/lib/history/battles';
+import { getBattles, getBattleStats, getBattleCountByEra } from '@/lib/history/battles';
 import { BattleCard } from '@/components/BattleCard';
 import { LocaleSwitcher } from '@/components/LocaleSwitcher';
 import { useTranslations } from 'next-intl';
@@ -32,6 +32,14 @@ export function BattlesClient({
   const tEra = useTranslations('rulerEraName');
   
   const battles = React.useMemo(() => getBattles(events), [events]);
+  
+  // Battle statistics
+  const stats = React.useMemo(() => getBattleStats(battles), [battles]);
+  
+  // Battle count by era
+  const battleCountByEra = React.useMemo(() => 
+    getBattleCountByEra(battles, eras, tEra), 
+  [battles, eras, tEra]);
   
   // Group battles by era
   const battlesByEra = React.useMemo(() => {
@@ -116,6 +124,55 @@ export function BattlesClient({
           })}
         </div>
       </header>
+      
+      {/* Stats Panel */}
+      {selectedEra === null && (
+        <div className="bg-white border-b border-zinc-100 px-4 py-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+              <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-3 border border-red-100">
+                <div className="text-2xl font-bold text-red-600">{stats.attackerWins}</div>
+                <div className="text-xs text-red-500">进攻方胜利</div>
+              </div>
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-3 border border-blue-100">
+                <div className="text-2xl font-bold text-blue-600">{stats.defenderWins}</div>
+                <div className="text-xs text-blue-500">防守方胜利</div>
+              </div>
+              <div className="bg-gradient-to-br from-gray-50 to-zinc-50 rounded-xl p-3 border border-zinc-200">
+                <div className="text-2xl font-bold text-zinc-600">{stats.draws}</div>
+                <div className="text-xs text-zinc-500">平局</div>
+              </div>
+              <div className="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl p-3 border border-yellow-100">
+                <div className="text-2xl font-bold text-yellow-600">{stats.inconclusive}</div>
+                <div className="text-xs text-yellow-500">胜负未明</div>
+              </div>
+            </div>
+            
+            {/* Era distribution */}
+            {battleCountByEra.length > 0 && (
+              <div className="mt-3">
+                <div className="text-xs text-zinc-500 mb-2">各时期战役分布</div>
+                <div className="flex flex-wrap gap-2">
+                  {battleCountByEra.map(({ eraName, count }) => {
+                    const eraInfo = Object.entries(ERA_INFO).find(([_, info]) => info.name === eraName);
+                    const dotColor = eraInfo ? eraInfo[1] : 'bg-gray-400';
+                    return (
+                      <span 
+                        key={eraName}
+                        className="inline-flex items-center gap-1.5 px-3 py-1 bg-zinc-50 rounded-full text-sm"
+                      >
+                        <span className={`w-2 h-2 rounded-full ${dotColor}`}></span>
+                        <span className="font-medium">{eraName}</span>
+                        <span className="text-zinc-400">{count}</span>
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
       
       {/* Stats */}
       <div className="bg-white border-b border-zinc-100 px-4 py-3">
