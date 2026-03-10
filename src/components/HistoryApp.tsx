@@ -9,8 +9,6 @@ import { HistoryMap } from '@/components/HistoryMap';
 import { LocaleSwitcher } from '@/components/LocaleSwitcher';
 import { RulerRelations } from '@/components/RulerRelations';
 import { useTranslations } from 'next-intl';
-import { worldComparisonEra, eastAsiaComparisonEra } from '@/lib/history/data/worldEras';
-import { worldComparisonRulers, eastAsiaRulers } from '@/lib/history/data/worldRulers';
 
 function rangeLabel(centerYear: number, windowYears: number) {
   const half = Math.floor(windowYears / 2);
@@ -79,6 +77,7 @@ export function HistoryApp({
     }
     const firstOpen = activeEras.find((e) => openEraIds.has(e.id));
     return firstOpen ?? activeEras[0];
+
   }, [activeEras, activeRulers, selectedRulerId, openEraIds]);
 
   const [windowYears, setWindowYears] = React.useState<number>(50);
@@ -135,431 +134,300 @@ export function HistoryApp({
 
   return (
     <div className="flex h-screen flex-col bg-zinc-50 text-zinc-900">
+      {/* Header - 移动端优化 */}
       <header className="shrink-0 border-b border-zinc-200 bg-white">
-        <div className="flex w-full flex-col gap-2 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <div className="text-sm text-zinc-500">{t('app.title')}</div>
-            <h1 className="text-lg font-semibold">{t('app.subtitle')}</h1>
+        <div className="flex w-full flex-col gap-2 px-3 py-3 sm:px-4 sm:py-4">
+          {/* Top row: title + locale */}
+          <div className="flex items-center justify-between">
+            <div className="flex-1 min-w-0">
+              <div className="text-xs sm:text-sm text-zinc-500 truncate">{t('app.title')}</div>
+              <h1 className="text-base sm:text-lg font-semibold truncate">{t('app.subtitle')}</h1>
+            </div>
+            <div className="flex items-center gap-2 shrink-0 ml-2">
+              <LocaleSwitcher />
+            </div>
           </div>
-
-          <div className="flex items-center gap-3">
-            {/* Civilization switcher */}
-            <div className="flex rounded-lg border border-zinc-200 bg-zinc-100 p-0.5 text-sm">
-              <button
-                type="button"
-                onClick={() => switchCiv('china')}
-                className={`rounded-md px-3 py-1 transition-colors ${civMode === 'china' ? 'bg-white text-zinc-900 shadow-sm font-medium' : 'text-zinc-500 hover:text-zinc-700'}`}
-              >
-                🏯 中国史
-              </button>
-              <button
-                type="button"
-                onClick={() => switchCiv('eurasian')}
-                className={`rounded-md px-3 py-1 transition-colors ${civMode === 'eurasian' ? 'bg-white text-zinc-900 shadow-sm font-medium' : 'text-zinc-500 hover:text-zinc-700'}`}
-              >
-                🌍 欧亚对比
-              </button>
-              <button
-                type="button"
-                onClick={() => switchCiv('east-asia')}
-                className={`rounded-md px-3 py-1 transition-colors ${civMode === 'east-asia' ? 'bg-white text-zinc-900 shadow-sm font-medium' : 'text-zinc-500 hover:text-zinc-700'}`}
-              >
-                🌏 东亚对比
-              </button>
+          
+          {/* Second row: civ switcher - scrollable on mobile */}
+          <div className="overflow-x-auto scrollbar-hide py-1 -mx-1 px-1">
+            <div className="flex items-center gap-2 sm:gap-3">
+              {/* Civilization switcher */}
+              <div className="flex rounded-lg border border-zinc-200 bg-zinc-100 p-0.5 text-xs sm:text-sm shrink-0">
+                <button
+                  type="button"
+                  onClick={() => switchCiv('china')}
+                  className={`rounded-md px-2 sm:px-3 py-1 transition-colors whitespace-nowrap ${civMode === 'china' ? 'bg-white text-zinc-900 shadow-sm font-medium' : 'text-zinc-500 hover:text-zinc-700'}`}
+                >
+                  🏯 中国史
+                </button>
+                <button
+                  type="button"
+                  onClick={() => switchCiv('eurasian')}
+                  className={`rounded-md px-2 sm:px-3 py-1 transition-colors whitespace-nowrap ${civMode === 'eurasian' ? 'bg-white text-zinc-900 shadow-sm font-medium' : 'text-zinc-500 hover:text-zinc-700'}`}
+                >
+                  🌍 欧亚
+                </button>
+                <button
+                  type="button"
+                  onClick={() => switchCiv('east-asia')}
+                  className={`rounded-md px-2 sm:px-3 py-1 transition-colors whitespace-nowrap ${civMode === 'east-asia' ? 'bg-white text-zinc-900 shadow-sm font-medium' : 'text-zinc-500 hover:text-zinc-700'}`}
+                >
+                  🌏 东亚
+                </button>
+              </div>
+              
+              {/* Era info */}
+              <div className="text-xs sm:text-sm text-zinc-600 hidden sm:block">
+                <span className="font-medium">{t(selectedEra.nameKey)}</span>
+                <span className="mx-2 text-zinc-300">|</span>
+                <span>
+                  {formatYear(selectedEra.startYear)}–{formatYear(selectedEra.endYear)}
+                </span>
+              </div>
+              
+              {/* Quick links */}
+              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                <Link
+                  href={`/${currentLocale}/timeline`}
+                  className="px-2 sm:px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 rounded-lg text-xs sm:text-sm text-zinc-700 transition-colors border border-zinc-200 whitespace-nowrap"
+                >
+                  📜 <span className="hidden sm:inline">{t('event.viewTimeline')}</span>
+                </Link>
+                <Link
+                  href={`/${currentLocale}/battles`}
+                  className="px-2 sm:px-3 py-1.5 bg-red-50 hover:bg-red-100 rounded-lg text-xs sm:text-sm text-red-700 transition-colors border border-red-200 whitespace-nowrap"
+                >
+                  ⚔️ <span className="hidden sm:inline">{t('nav.battles')}</span>
+                </Link>
+              </div>
             </div>
-            <div className="text-sm text-zinc-600">
-              <span className="font-medium">{t(selectedEra.nameKey)}</span>
-              <span className="mx-2 text-zinc-300">|</span>
-              <span>
-                {formatYear(selectedEra.startYear)}–{formatYear(selectedEra.endYear)}
-              </span>
-            </div>
-            <LocaleSwitcher />
-            <Link
-              href={`/${currentLocale}/timeline`}
-              className="px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 rounded-lg text-sm text-zinc-700 transition-colors border border-zinc-200"
-            >
-              📜 {t('event.viewTimeline')}
-            </Link>
-            <Link
-              href={`/${currentLocale}/battles`}
-              className="px-3 py-1.5 bg-red-50 hover:bg-red-100 rounded-lg text-sm text-red-700 transition-colors border border-red-200"
-            >
-              ⚔️ {t('nav.battles') || '战役'}
-            </Link>
           </div>
         </div>
       </header>
 
-      <div className="flex w-full flex-1 flex-col overflow-hidden px-4 py-4">
-        <div className="grid h-full grid-cols-1 gap-4 overflow-hidden lg:grid-cols-[420px_minmax(0,1fr)_320px] xl:grid-cols-[480px_minmax(0,1fr)_360px]">
-        {/* Left: global vertical timeline (time-proportional, collapsible, scrollable) */}
-        <aside className="flex max-h-full flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white">
-          <div className="shrink-0 border-b border-zinc-200 bg-white p-3">
-            <div className="flex items-baseline justify-between gap-3">
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{t('ui.timeline')}</div>
-                <div className="mt-1 text-sm font-semibold text-zinc-900">{t('ui.rulers')}</div>
+      <div className="flex w-full flex-1 flex-col overflow-hidden px-2 sm:px-4 py-2 sm:py-4">
+        <div className="grid h-full grid-cols-1 gap-2 sm:gap-4 overflow-hidden lg:grid-cols-[380px_minmax(0,1fr)_280px] xl:grid-cols-[420px_minmax(0,1fr)_320px]">
+          {/* Left: global vertical timeline */}
+          <aside className="flex max-h-full flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white">
+            <div className="shrink-0 border-b border-zinc-200 bg-white p-2 sm:p-3">
+              <div className="flex items-baseline justify-between gap-3">
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{t('ui.eras')}</div>
+                </div>
               </div>
-              <div className="text-xs text-zinc-500">{formatYear(min)}–{formatYear(max)}</div>
             </div>
-            <div className="mt-2 text-xs text-zinc-600">
-              按真实时间比例排布；可滚动；时期可折叠。
-            </div>
-          </div>
-
-          <div className="min-h-0 flex-1 overflow-auto p-3">
-            {/* Flow layout: each era block sized by content, axis line spans the container */}
-            <div className="relative">
-              {/* Continuous axis */}
-              <div className="absolute left-[20px] top-0 bottom-0 w-px bg-zinc-200" />
-
+            <div className="flex-1 overflow-y-auto">
               {activeEras.map((era) => {
-                const open = openEraIds.has(era.id);
-                const eraRulers = activeRulers
-                  .filter((r) => r.eraId === era.id)
-                  .sort((a, b) => a.startYear - b.startYear);
-                const polities = era.isParallelPolities ? (era.polities ?? []) : [];
-
+                const isOpen = openEraIds.has(era.id);
+                const eraRulers = activeRulers.filter((r) => r.eraId === era.id);
                 return (
-                  <div key={era.id} className="relative">
-                    {/* Era header row */}
+                  <div key={era.id} className="border-b border-zinc-100 last:border-0">
                     <button
                       type="button"
                       onClick={() => toggleEra(era.id)}
-                      className="group relative flex w-full items-center gap-3 py-2 pr-2 text-left"
-                      style={{ paddingLeft: 32 }}
+                      className="flex w-full items-center gap-2 px-2 py-2 text-left hover:bg-zinc-50 sm:px-3"
                     >
-                      <span
-                        className={`absolute z-10 h-3 w-3 rounded-full ring-4 transition ${
-                          open
-                            ? 'bg-zinc-900 ring-zinc-900/15'
-                            : 'bg-zinc-400 ring-zinc-400/15 group-hover:bg-zinc-700 group-hover:ring-zinc-700/15'
-                        }`}
-                        style={{ left: 20, transform: 'translate(-50%, -50%)', top: '50%' }}
-                      />
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-baseline justify-between gap-2">
-                          <span className="min-w-0 truncate text-sm font-semibold text-zinc-900">{t(era.nameKey)}</span>
-                          <span className="shrink-0 text-xs text-zinc-500">
-                            {formatYear(era.startYear)}–{formatYear(era.endYear)}
-                          </span>
-                        </div>
-                      </div>
+                      <span className="text-sm">{isOpen ? '▼' : '▶'}</span>
+                      <span className="flex-1 font-medium text-zinc-800 text-sm sm:text-base">
+                        {t(era.nameKey)}
+                      </span>
+                      <span className="text-xs text-zinc-400 hidden sm:inline">
+                        {formatYear(era.startYear)}–{formatYear(era.endYear)}
+                      </span>
                     </button>
-
-                    {/* Expanded content */}
-                    {open && (
-                      <div className="mb-2">
-                        {!era.isParallelPolities ? (
-                          /* Simple ruler list — dots aligned to the main axis (left=20px) */
-                          <div className="space-y-0.5">
-                            {eraRulers.length === 0 ? (
-                              <div className="py-1 text-xs text-zinc-400" style={{ paddingLeft: 32 }}>—</div>
-                            ) : eraRulers.map((r) => {
-                              const active = selectedRulerId === r.id;
-                              return (
-                                <button
-                                  key={r.id}
-                                  type="button"
-                                  onClick={() => setSelectedRulerId(r.id)}
-                                  className={`group relative flex w-full items-center rounded py-1 pr-2 text-left transition ${active ? 'bg-zinc-100' : 'hover:bg-zinc-50'}`}
-                                  style={{ paddingLeft: 32 }}
-                                >
-                                  {/* dot on axis */}
-                                  <span
-                                    className={`absolute h-1.5 w-1.5 rounded-full transition ${active ? 'bg-zinc-700' : 'bg-zinc-300 group-hover:bg-zinc-500'}`}
-                                    style={{ left: 20, top: '50%', transform: 'translate(-50%, -50%)' }}
-                                  />
-                                  <div className="min-w-0 flex-1 flex items-baseline justify-between gap-2">
-                                    <span className={`truncate text-[13px] font-medium ${active ? 'text-zinc-900' : 'text-zinc-600'}`}>
-                                      {t(r.nameKey)}{r.eraNameKey ? <span className="text-zinc-500"> - {tEra(r.eraNameKey)}</span> : null}
-                                    </span>
-                                    <span className="shrink-0 text-[13px] text-zinc-400">
-                                      {formatYear(r.startYear)}–{formatYear(r.endYear)}
-                                    </span>
-                                  </div>
-                                </button>
-                              );
-                            })}
-                          </div>
-                        ) : (
-                          /* Parallel polities grid */
-                          <div className="ml-8 mr-2 mb-1">
-                          {(() => {
-                            const span = Math.max(1, era.endYear - era.startYear);
-                            const step = span <= 80 ? 5 : span <= 220 ? 10 : span <= 600 ? 20 : span <= 1500 ? 50 : 100;
-                            const ticks: number[] = [];
-                            for (let y = era.startYear; y <= era.endYear; y += step) ticks.push(y);
-                            if (ticks[ticks.length - 1] !== era.endYear) ticks.push(era.endYear);
-                            const byPolity = new Map<string, Ruler[]>();
-                            for (const p of polities) {
-                              byPolity.set(
-                                p.id,
-                                eraRulers.filter((r) => r.polityId === p.id).sort((a, b) => a.startYear - b.startYear)
-                              );
-                            }
-                            const rulerAt = (polityId: string, y: number) => {
-                              const list = byPolity.get(polityId) ?? [];
-                              return list.find((r) => y >= r.startYear && y <= r.endYear) ?? null;
-                            };
-                            // Precompute rowspan: for each (polityId, tickIdx), how many consecutive ticks share the same ruler?
-                            // We only render the cell at the first tick of a ruler's run; subsequent ticks are skipped.
-                            type CellInfo = { ruler: Ruler | null; rowSpan: number } | null; // null = skip (covered by earlier rowspan)
-                            const cells: CellInfo[][] = ticks.map((y, ti) =>
-                              polities.map((p) => {
-                                const r = rulerAt(p.id, y);
-                                // Check if same ruler was already at previous tick → skip
-                                if (ti > 0) {
-                                  const prev = rulerAt(p.id, ticks[ti - 1]);
-                                  if (prev && r && prev.id === r.id) return null;
-                                }
-                                // Calculate rowspan: count forward ticks with the same ruler
-                                let span = 1;
-                                for (let j = ti + 1; j < ticks.length; j++) {
-                                  const next = rulerAt(p.id, ticks[j]);
-                                  if (next && r && next.id === r.id) span++;
-                                  else break;
-                                }
-                                return { ruler: r, rowSpan: span };
-                              })
-                            );
-                            return (
-                              <div className="overflow-auto rounded border border-zinc-200 bg-white">
-                                <table className="w-full border-collapse text-[12px]">
-                                  <thead>
-                                    <tr>
-                                      <th className="sticky top-0 z-10 border-b border-zinc-200 bg-white px-2 py-1 text-left font-semibold text-zinc-500 w-16">年份</th>
-                                      {polities.map((p) => (
-                                        <th key={p.id} className="sticky top-0 z-10 border-b border-l border-zinc-200 bg-white px-2 py-1 text-left font-semibold text-zinc-700">
-                                          {t(p.nameKey)}
-                                        </th>
-                                      ))}
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {ticks.map((y, ti) => (
-                                      <tr key={y}>
-                                        <td className="border-b border-zinc-100 bg-zinc-50 px-2 py-1 text-zinc-500 whitespace-nowrap">{formatYear(y)}</td>
-                                        {polities.map((p, pi) => {
-                                          const cell = cells[ti][pi];
-                                          if (cell === null) return null; // skip — covered by rowspan above
-                                          const { ruler: r, rowSpan } = cell;
-                                          const active = r ? selectedRulerId === r.id : false;
-                                          const isDynasty = r?.isDynastyBlock === true;
-                                          return (
-                                            <td
-                                              key={p.id}
-                                              rowSpan={rowSpan}
-                                              className={`border-b border-l border-zinc-100 px-2 py-1 align-top transition ${isDynasty ? 'bg-zinc-100' : r ? active ? 'bg-zinc-900 text-white' : 'text-zinc-700' : 'text-zinc-300'}`}
-                                            >
-                                              {r ? (
-                                                <button
-                                                  type="button"
-                                                  onClick={() => setSelectedRulerId(r.id)}
-                                                  className={`w-full text-left hover:underline ${isDynasty ? 'text-xs font-semibold text-zinc-600 truncate' : active ? 'text-white' : ''}`}
-                                                >
-                                                  {t(r.nameKey)}{r.eraNameKey ? <span className="text-zinc-400"> - {tEra(r.eraNameKey)}</span> : null}
-                                                </button>
-                                              ) : ''}
-                                            </td>
-                                          );
-                                        })}
-                                      </tr>
-                                    ))}
-                                  </tbody>
-                                </table>
-                              </div>
-                            );
-                          })()}
-                          </div>
-                        )}
+                    {isOpen && (
+                      <div className="bg-zinc-50 px-2 py-1 sm:px-3 sm:py-2">
+                        {eraRulers.map((r) => {
+                          const isActive = selectedRulerId === r.id;
+                          return (
+                            <button
+                              key={r.id}
+                              type="button"
+                              onClick={() => setSelectedRulerId(r.id)}
+                              className={`flex w-full items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-left text-xs sm:text-sm ${
+                                isActive ? 'bg-blue-100 text-blue-800' : 'hover:bg-zinc-100 text-zinc-600'
+                              }`}
+                            >
+                              <span className="truncate">
+                                {r.isDynastyBlock ? (
+                                  <span className="font-semibold">{t(r.nameKey)}</span>
+                                ) : (
+                                  t(r.nameKey)
+                                )}
+                              </span>
+                              <span className="shrink-0 text-zinc-400">
+                                {formatYear(r.startYear)}–{formatYear(r.endYear)}
+                              </span>
+                            </button>
+                          );
+                        })}
                       </div>
                     )}
                   </div>
                 );
               })}
             </div>
-          </div>
+          </aside>
 
-          {/* Ruler detail inline */}
-          {selectedRuler ? (
-            <div className="shrink-0 border-t border-zinc-200 bg-white p-3">
-              <div className="flex items-start justify-between gap-3">
+          {/* Center: map + time controls */}
+          <section className="flex min-h-0 flex-col gap-2 sm:gap-3 overflow-hidden">
+            <div className="rounded-xl border border-zinc-200 bg-white p-2 sm:p-3">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0">
-                  <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{t('ui.rulerDetail')}</div>
-                  <div className="mt-1 truncate text-base font-semibold text-zinc-900">{t(selectedRuler.nameKey)}</div>
-                  <div className="mt-0.5 text-xs text-zinc-500">
-                    {formatYear(selectedRuler.startYear)}–{formatYear(selectedRuler.endYear)}
+                  <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{t('ui.timeline')}</div>
+                  <div className="text-xs sm:text-sm text-zinc-800">
+                    <span className="font-semibold">{formatYear(year)}</span>
+                    <span className="mx-1.5 sm:mx-2 text-zinc-300">|</span>
+                    <span className="hidden sm:inline">{t('ui.window.label')}: </span>
+                    <span className="font-semibold">{t('ui.window.years', { count: windowYears })}</span>
+                    <span className="mx-1.5 sm:mx-2 text-zinc-300 hidden sm:inline">|</span>
+                    <span className="text-zinc-600 hidden sm:inline">{rangeLabel(year, windowYears)}</span>
                   </div>
                 </div>
-                <button
-                  type="button"
-                  className="shrink-0 rounded-lg border border-zinc-200 bg-white px-2 py-1 text-xs text-zinc-700 hover:bg-zinc-50"
-                  onClick={() => setSelectedRulerId(null)}
-                >
-                  {t('ui.clearRuler')}
-                </button>
-              </div>
-              {selectedRuler.highlightKey ? (
-                <div className="mt-2 text-sm text-zinc-700">{t(selectedRuler.highlightKey)}</div>
-              ) : null}
-              {selectedRuler.bioKey ? (
-                <div className="mt-2 text-sm text-zinc-600">{t(selectedRuler.bioKey)}</div>
-              ) : null}
-              <RulerRelations
-                ruler={selectedRuler}
-                allRulers={activeRulers}
-                onRulerClick={(id) => setSelectedRulerId(id)}
-              />
-            </div>
-          ) : (
-            <div className="shrink-0 border-t border-zinc-200 bg-white p-3 text-xs text-zinc-500">{t('ui.seedNote')}</div>
-          )}
-        </aside>
 
-        {/* Center: map + time controls */}
-        <section className="flex min-h-0 flex-col gap-3 overflow-hidden">
-          <div className="rounded-xl border border-zinc-200 bg-white p-3">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{t('ui.timeline')}</div>
-                <div className="text-sm text-zinc-800">
-                  {t('ui.centerYear')}: <span className="font-semibold">{formatYear(year)}</span>
-                  <span className="mx-2 text-zinc-300">|</span>
-                  {t('ui.window.label')}: <span className="font-semibold">{t('ui.window.years', { count: windowYears })}</span>
-                  <span className="mx-2 text-zinc-300">|</span>
-                  <span className="text-zinc-600">{rangeLabel(year, windowYears)}</span>
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  {[10, 50, 100].map((w) => (
+                    <button
+                      key={w}
+                      type="button"
+                      onClick={() => setWindowYears(w)}
+                      className={`shrink-0 rounded-lg px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium transition-colors ${
+                        windowYears === w
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
+                      }`}
+                    >
+                      {w}年
+                    </button>
+                  ))}
+                  <div className="flex items-center gap-1 border-l border-zinc-200 pl-2 ml-1">
+                    <button
+                      type="button"
+                      onClick={() => setYear((y) => y - windowYears)}
+                      disabled={year - windowYears < timelineMin}
+                      className="rounded-lg bg-zinc-100 p-1.5 text-zinc-600 hover:bg-zinc-200 disabled:opacity-50"
+                    >
+                      ◀
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setYear((y) => y + windowYears)}
+                      disabled={year + windowYears > timelineMax}
+                      className="rounded-lg bg-zinc-100 p-1.5 text-zinc-600 hover:bg-zinc-200 disabled:opacity-50"
+                    >
+                      ▶
+                    </button>
+                  </div>
                 </div>
               </div>
-
-              <div className="flex items-center gap-2">
-                <label className="text-xs font-medium text-zinc-600">Window</label>
-                <select
-                  value={windowYears}
-                  onChange={(e) => setWindowYears(Number(e.target.value))}
-                  className="rounded-lg border border-zinc-200 bg-white px-2 py-1 text-sm"
-                >
-                  <option value={10}>{t('ui.window.10')}</option>
-                  <option value={50}>{t('ui.window.50')}</option>
-                  <option value={100}>{t('ui.window.100')}</option>
-                </select>
-              </div>
             </div>
 
-            <div className="mt-3">
-              <input
-                type="range"
-                min={timelineMin}
-                max={timelineMax}
-                step={1}
-                value={year}
-                onChange={(e) => setYear(Number(e.target.value))}
-                className="w-full"
-              />
-              <div className="mt-1 flex justify-between text-xs text-zinc-500">
-                <span>{formatYear(timelineMin)}</span>
-                <span>{formatYear(timelineMax)}</span>
+            <div className="flex-1 min-h-0 rounded-xl border border-zinc-200 bg-white overflow-hidden">
+              <HistoryMap events={mapEvents} openEraIds={openEraIds} />
+            </div>
+          </section>
+
+          {/* Right: events */}
+          <aside className="flex max-h-full flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white">
+            <div className="shrink-0 border-b border-zinc-200 bg-white p-2 sm:p-3">
+              <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+                {t('ui.events')} ({currentEraEvents.length})
               </div>
             </div>
-          </div>
-
-          <div className="min-h-0 flex-1">
-            <HistoryMap events={mapEvents} openEraIds={openEraIds} />
-          </div>
-        </section>
-
-        {/* Right: events */}
-        <aside className="max-h-full overflow-auto rounded-xl border border-zinc-200 bg-white p-3">
-          <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">
-            {t('ui.events')}
-          </div>
-
-          <div className="space-y-5">
-
-            <div>
-              <div className="mb-2 flex items-baseline justify-between">
-                <div className="text-sm font-semibold">{t(selectedEra.nameKey)}</div>
-                <div className="text-xs text-zinc-500">{currentEraEvents.length} items</div>
-              </div>
-              <ul className="space-y-2">
-                {currentEraEvents.length ? (
-                  currentEraEvents.map((e) => (
-                    <li key={e.id} className="rounded-lg border border-zinc-200 p-2">
-                      <div className="text-xs text-zinc-500">{formatYear(e.year)}</div>
-                      <div className="text-sm font-semibold">{t(`event.${e.id}.title`)}</div>
-                      <div className="text-sm text-zinc-700">{t(`event.${e.id}.summary`)}</div>
-                      {timelineLinks[e.id] ? (
-                        <div className="mt-2">
-                          <Link
-                            href={`/${currentLocale}/timeline?process=${timelineLinks[e.id].process}${timelineLinks[e.id].event ? `&event=${timelineLinks[e.id].event}` : ''}`}
-                            className="inline-flex items-center gap-1 rounded-md bg-zinc-900 px-2 py-1 text-xs font-medium text-white hover:bg-zinc-800"
-                          >
-                            {t('event.viewTimeline')} →
-                          </Link>
-                        </div>
-                      ) : null}
-                      {e.tags?.length ? (
-                        <div className="mt-1 flex flex-wrap gap-1">
-                          {e.tags.map((t) => (
-                            <span
-                              key={t}
-                              className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600"
-                            >
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                      ) : null}
-                    </li>
-                  ))
-                ) : (
-                  <div className="text-sm text-zinc-500">{t('ui.noEvents')}</div>
-                )}
-              </ul>
-            </div>
-
-            <div>
-              <div className="mb-2 flex items-baseline justify-between">
-                <div className="text-sm font-semibold">{t('ui.compare')}</div>
-                <div className="text-xs text-zinc-500">{otherEraEvents.length} items</div>
-              </div>
-              <ul className="space-y-2">
-                {otherEraEvents.length ? (
-                  otherEraEvents.map((e) => (
-                    <li key={e.id} className="rounded-lg border border-zinc-200 p-2">
-                      <div className="flex items-baseline justify-between gap-2">
-                        <div className="text-xs text-zinc-500">{formatYear(e.year)}</div>
-                        <div className="text-xs text-zinc-500">
-                          {(() => {
-                            const era = activeEras.find((x) => x.id === e.entityId);
-                            return era ? t(era.nameKey) : e.entityId;
-                          })()}
-                        </div>
+            <div className="flex-1 overflow-y-auto">
+              {currentEraEvents.length > 0 ? (
+                currentEraEvents.map((e) => {
+                  const era = activeEras.find((era) => era.id === e.entityId);
+                  const eraName = era ? tEra(era.nameKey) : '';
+                  return (
+                    <div
+                      key={e.id}
+                      className="border-b border-zinc-100 px-2 py-2 last:border-0 sm:px-3"
+                    >
+                      <div className="text-xs text-zinc-400">
+                        {formatYear(e.year)} {eraName ? `· ${eraName}` : ''}
                       </div>
-                      <div className="text-sm font-semibold">{t(e.titleKey)}</div>
-                      <div className="text-sm text-zinc-700">{t(e.summaryKey)}</div>
-                      {timelineLinks[e.id] ? (
-                        <div className="mt-2">
-                          <Link
-                            href={`/${currentLocale}/timeline?process=${timelineLinks[e.id].process}${timelineLinks[e.id].event ? `&event=${timelineLinks[e.id].event}` : ''}`}
-                            className="inline-flex items-center gap-1 rounded-md bg-zinc-900 px-2 py-1 text-xs font-medium text-white hover:bg-zinc-800"
-                          >
-                            {t('event.viewTimeline')} →
-                          </Link>
+                      <div className="mt-0.5 text-sm font-medium text-zinc-800">
+                        {t(e.titleKey)}
+                      </div>
+                      {e.tags && e.tags.includes('war') && (
+                        <div className="mt-1 inline-flex items-center gap-1 rounded bg-red-50 px-1.5 py-0.5 text-xs text-red-600">
+                          ⚔️ 战役
                         </div>
-                      ) : null}
-                    </li>
-                  ))
-                ) : (
-                  <div className="text-sm text-zinc-500">{t('ui.noCompare')}</div>
-                )}
-              </ul>
+                      )}
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="p-4 text-center text-sm text-zinc-400">{t('ui.noEvents')}</div>
+              )}
+              {otherEraEvents.length > 0 && (
+                <>
+                  <div className="border-t border-zinc-200 bg-zinc-50 px-2 py-2 sm:px-3">
+                    <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+                      {t('ui.compare')} ({otherEraEvents.length})
+                    </div>
+                  </div>
+                  {otherEraEvents.slice(0, 20).map((e) => {
+                    const era = activeEras.find((era) => era.id === e.entityId);
+                    const eraName = era ? tEra(era.nameKey) : '';
+                    return (
+                      <div
+                        key={e.id}
+                        className="border-b border-zinc-100 px-2 py-2 last:border-0 sm:px-3"
+                      >
+                        <div className="text-xs text-zinc-400">
+                          {formatYear(e.year)} {eraName ? `· ${eraName}` : ''}
+                        </div>
+                        <div className="mt-0.5 text-sm text-zinc-600">{t(e.titleKey)}</div>
+                      </div>
+                    );
+                  })}
+                </>
+              )}
             </div>
-          </div>
-        </aside>
+
+            {/* Ruler detail inline */}
+            {selectedRuler ? (
+              <div className="shrink-0 border-t border-zinc-200 bg-white p-2 sm:p-3">
+                <div className="flex items-start justify-between gap-2 sm:gap-3">
+                  <div className="min-w-0">
+                    <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{t('ui.rulerDetail')}</div>
+                    <div className="mt-1 truncate text-sm sm:text-base font-semibold text-zinc-900">{t(selectedRuler.nameKey)}</div>
+                    <div className="mt-0.5 text-xs text-zinc-500">
+                      {formatYear(selectedRuler.startYear)}–{formatYear(selectedRuler.endYear)}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    className="shrink-0 rounded-lg border border-zinc-200 bg-white px-2 py-1 text-xs text-zinc-700 hover:bg-zinc-50"
+                    onClick={() => setSelectedRulerId(null)}
+                  >
+                    {t('ui.clearRuler')}
+                  </button>
+                </div>
+                {selectedRuler.highlightKey ? (
+                  <div className="mt-2 text-xs sm:text-sm text-zinc-700">{t(selectedRuler.highlightKey)}</div>
+                ) : null}
+                {selectedRuler.bioKey ? (
+                  <div className="mt-2 text-xs sm:text-sm text-zinc-600">{t(selectedRuler.bioKey)}</div>
+                ) : null}
+                <RulerRelations
+                  ruler={selectedRuler}
+                  allRulers={activeRulers}
+                  onRulerClick={(id) => setSelectedRulerId(id)}
+                />
+              </div>
+            ) : (
+              <div className="shrink-0 border-t border-zinc-200 bg-white p-2 sm:p-3 text-xs text-zinc-500">{t('ui.seedNote')}</div>
+            )}
+          </aside>
         </div>
       </div>
     </div>
   );
 }
+
+// Lazy-loaded comparison data
+import { worldComparisonEra, eastAsiaComparisonEra } from '@/lib/history/data/worldEras';
+import { worldComparisonRulers, eastAsiaRulers } from '@/lib/history/data/worldRulers';

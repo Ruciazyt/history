@@ -65,3 +65,24 @@ export function isBattleComplete(battle: Event): boolean {
   
   return hasBelligerents && hasResult && hasLocation;
 }
+
+/**
+ * Separate events into battles and non-battles
+ * Returns an object with battle and normal event arrays
+ */
+export function separateBattlesAndEvents(events: Event[]): { battles: Event[]; normalEvents: Event[] } {
+  const battleIds = new Set(getBattles(events).map((b) => b.id));
+  return {
+    battles: events.filter((e) => battleIds.has(e.id)),
+    normalEvents: events.filter((e) => !battleIds.has(e.id)),
+  };
+}
+
+/**
+ * Filter events that have valid location coordinates
+ */
+export function getMappableEvents(events: Event[]): Event[] {
+  return events.filter(
+    (e) => e.location && Number.isFinite(e.location.lon) && Number.isFinite(e.location.lat)
+  );
+}

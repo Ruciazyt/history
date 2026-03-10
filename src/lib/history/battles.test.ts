@@ -6,6 +6,8 @@ import {
   getBattlesByYearRange,
   getBattleParties,
   isBattleComplete,
+  separateBattlesAndEvents,
+  getMappableEvents,
 } from './battles';
 import type { Event } from './types';
 
@@ -196,6 +198,64 @@ describe('battles', () => {
         },
       };
       expect(isBattleComplete(battle)).toBe(false);
+    });
+  });
+
+  describe('separateBattlesAndEvents', () => {
+    it('should separate battles from normal events', () => {
+      const { battles, normalEvents } = separateBattlesAndEvents(mockEvents);
+      expect(battles).toHaveLength(2);
+      expect(normalEvents).toHaveLength(1);
+      expect(normalEvents[0].id).toBe('non-battle');
+    });
+
+    it('should return empty arrays when no events', () => {
+      const { battles, normalEvents } = separateBattlesAndEvents([]);
+      expect(battles).toHaveLength(0);
+      expect(normalEvents).toHaveLength(0);
+    });
+
+    it('should handle events without tags', () => {
+      const eventsWithNoTags: Event[] = [
+        {
+          id: 'no-tag',
+          entityId: 'era1',
+          year: -500,
+          titleKey: 'test',
+          summaryKey: 'test',
+        },
+      ];
+      const { battles, normalEvents } = separateBattlesAndEvents(eventsWithNoTags);
+      expect(battles).toHaveLength(0);
+      expect(normalEvents).toHaveLength(1);
+    });
+  });
+
+  describe('getMappableEvents', () => {
+    it('should filter events with valid coordinates', () => {
+      const mappable = getMappableEvents(mockEvents);
+      // battle-1 and battle-2 have valid locations
+      expect(mappable).toHaveLength(2);
+    });
+
+    it('should exclude events without location', () => {
+      const mappable = getMappableEvents(mockEvents);
+      expect(mappable.every((e) => e.location !== undefined)).toBe(true);
+    });
+
+    it('should exclude events with invalid coordinates', () => {
+      const eventsWithInvalid: Event[] = [
+        {
+          id: 'invalid',
+          entityId: 'era1',
+          year: -500,
+          titleKey: 'test',
+          summaryKey: 'test',
+          location: { lon: NaN, lat: 35, label: 'invalid' },
+        },
+      ];
+      const mappable = getMappableEvents(eventsWithInvalid);
+      expect(mappable).toHaveLength(0);
     });
   });
 });

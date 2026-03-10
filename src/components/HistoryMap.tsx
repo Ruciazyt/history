@@ -16,6 +16,7 @@ import type { Event } from '@/lib/history/types';
 import { formatYear } from '@/lib/history/utils';
 import { useTranslations } from 'next-intl';
 import { dynastyBoundaries } from '@/lib/history/data/dynastyBoundaries';
+import { getBattles } from '@/lib/history/battles';
 
 export function HistoryMap({
   events,
@@ -39,6 +40,15 @@ export function HistoryMap({
     () => events.filter((e) => e.location && Number.isFinite(e.location.lon) && Number.isFinite(e.location.lat)),
     [events]
   );
+
+  // 分离战役和普通事件
+  const { battles, normalEvents } = React.useMemo(() => {
+    const battleIds = new Set(getBattles(events).map((b) => b.id));
+    return {
+      battles: mappable.filter((e) => battleIds.has(e.id)),
+      normalEvents: mappable.filter((e) => !battleIds.has(e.id)),
+    };
+  }, [mappable, events]);
 
   // Collect all open eras that have boundary data
   const activeBoundaries = React.useMemo(() => {
@@ -87,7 +97,8 @@ export function HistoryMap({
           </Source>
         ))}
 
-        {mappable.map((e) => (
+        {/* 普通事件标记 - 红色圆点 */}
+        {normalEvents.map((e) => (
           <Marker
             key={e.id}
             longitude={e.location!.lon}
@@ -100,9 +111,31 @@ export function HistoryMap({
                 ev.stopPropagation();
                 setSelectedId(e.id);
               }}
-              className="h-3 w-3 rounded-full bg-red-600 ring-2 ring-white shadow"
+              className="h-3 w-3 rounded-full bg-red-600 ring-2 ring-white shadow hover:scale-125 transition-transform"
               aria-label={`Event: ${t(e.titleKey)}`}
             />
+          </Marker>
+        ))}
+
+        {/* 战役标记 - 剑图标 */}
+        {battles.map((e) => (
+          <Marker
+            key={e.id}
+            longitude={e.location!.lon}
+            latitude={e.location!.lat}
+            anchor="bottom"
+          >
+            <button
+              type="button"
+              onClick={(ev) => {
+                ev.stopPropagation();
+                setSelectedId(e.id);
+              }}
+              className="flex items-center justify-center w-6 h-6 rounded-full bg-red-600 ring-2 ring-white shadow hover:scale-125 transition-transform text-white text-xs font-bold"
+              aria-label={`Battle: ${t(e.titleKey)}`}
+            >
+              ⚔️
+            </button>
           </Marker>
         ))}
 
