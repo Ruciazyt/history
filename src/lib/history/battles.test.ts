@@ -10,6 +10,8 @@ import {
   getMappableEvents,
   getBattleStats,
   getBattleCountByEra,
+  getEraColor,
+  groupBattlesByWar,
 } from './battles';
 import type { Event } from './types';
 
@@ -398,6 +400,130 @@ describe('battles', () => {
       const counts = getBattleCountByEra(battles, eras, (k) => k);
       expect(counts[0].count).toBe(2);
       expect(counts[1].count).toBe(1);
+    });
+  });
+
+  describe('getEraColor', () => {
+    it('should return correct color for spring-autumn era', () => {
+      expect(getEraColor('period-spring-autumn')).toBe('#3b82f6');
+    });
+
+    it('should return correct color for warring-states era', () => {
+      expect(getEraColor('period-warring-states')).toBe('#a855f7');
+    });
+
+    it('should return correct color for Qin era', () => {
+      expect(getEraColor('qin')).toBe('#52525b');
+    });
+
+    it('should return correct color for Han era', () => {
+      expect(getEraColor('han')).toBe('#dc2626');
+    });
+
+    it('should return default color for unknown era', () => {
+      expect(getEraColor('unknown-era')).toBe('#6b7280');
+    });
+  });
+
+  describe('groupBattlesByWar', () => {
+    it('should group battles by war name', () => {
+      const battles: Event[] = [
+        {
+          id: 'b1',
+          entityId: 'era1',
+          year: -300,
+          titleKey: 'war1.battle1',
+          summaryKey: 'summary',
+          tags: ['war'],
+          battle: { warNameKey: 'war.1', belligerents: { attacker: 'A', defender: 'B' }, result: 'attacker_win' },
+        },
+        {
+          id: 'b2',
+          entityId: 'era1',
+          year: -290,
+          titleKey: 'war1.battle2',
+          summaryKey: 'summary',
+          tags: ['war'],
+          battle: { warNameKey: 'war.1', belligerents: { attacker: 'A', defender: 'C' }, result: 'defender_win' },
+        },
+        {
+          id: 'b3',
+          entityId: 'era1',
+          year: -200,
+          titleKey: 'war2.battle1',
+          summaryKey: 'summary',
+          tags: ['war'],
+          battle: { warNameKey: 'war.2', belligerents: { attacker: 'D', defender: 'E' }, result: 'draw' },
+        },
+      ];
+      
+      const groups = groupBattlesByWar(battles);
+      expect(groups).toHaveLength(2);
+      expect(groups[0].warName).toBe('war.1');
+      expect(groups[0].battles).toHaveLength(2);
+      expect(groups[1].warName).toBe('war.2');
+      expect(groups[1].battles).toHaveLength(1);
+    });
+
+    it('should group battles without war name as independent', () => {
+      const battles: Event[] = [
+        {
+          id: 'b1',
+          entityId: 'era1',
+          year: -300,
+          titleKey: 'battle1',
+          summaryKey: 'summary',
+          tags: ['war'],
+          battle: { belligerents: { attacker: 'A', defender: 'B' }, result: 'attacker_win' },
+        },
+        {
+          id: 'b2',
+          entityId: 'era1',
+          year: -200,
+          titleKey: 'battle2',
+          summaryKey: 'summary',
+          tags: ['war'],
+          battle: { warNameKey: 'some.war', belligerents: { attacker: 'C', defender: 'D' }, result: 'defender_win' },
+        },
+      ];
+      
+      const groups = groupBattlesByWar(battles);
+      expect(groups).toHaveLength(2);
+      // First should be the independent battle (sorted by year)
+      expect(groups[0].battles[0].year).toBe(-300);
+      expect(groups[1].battles[0].year).toBe(-200);
+    });
+
+    it('should sort battles within war by year', () => {
+      const battles: Event[] = [
+        {
+          id: 'b1',
+          entityId: 'era1',
+          year: -200,
+          titleKey: 'war.battle2',
+          summaryKey: 'summary',
+          tags: ['war'],
+          battle: { warNameKey: 'war', belligerents: { attacker: 'A', defender: 'B' } },
+        },
+        {
+          id: 'b2',
+          entityId: 'era1',
+          year: -300,
+          titleKey: 'war.battle1',
+          summaryKey: 'summary',
+          tags: ['war'],
+          battle: { warNameKey: 'war', belligerents: { attacker: 'C', defender: 'D' } },
+        },
+      ];
+      
+      const groups = groupBattlesByWar(battles);
+      expect(groups[0].battles[0].year).toBe(-300);
+      expect(groups[0].battles[1].year).toBe(-200);
+    });
+
+    it('should return empty array for empty input', () => {
+      const groups = groupBattlesByWar([]);
+      expect(groups).toHaveLength(0);
     });
   });
 });

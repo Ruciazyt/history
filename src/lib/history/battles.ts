@@ -177,3 +177,79 @@ export function getBattleCountByEra(battles: Event[], eras: { id: string; nameKe
   result.sort((a, b) => b.count - a.count);
   return result;
 }
+
+/**
+ * Timeline entry for battle timeline view
+ */
+export type BattleTimelineEntry = {
+  battle: Event;
+  eraName: string;
+  eraColor: string;
+};
+
+/**
+ * Get timeline color for era
+ */
+export function getEraColor(eraId: string): string {
+  const colorMap: Record<string, string> = {
+    'period-spring-autumn': '#3b82f6', // blue
+    'period-warring-states': '#a855f7', // purple
+    'qin': '#52525b', // zinc
+    'han': '#dc2626', // red
+    'wz-western-zhou': '#f59e0b', // amber
+    'wz-eastern-zhou': '#f59e0b',
+    'period-three-kingdoms': '#ef4444',
+    'period-north-south': '#22c55e',
+    'sui': '#14b8a6',
+    'tang': '#f97316',
+    'period-five-dynasties': '#ec4899',
+    'song': '#8b5cf6',
+    'yuan': '#06b6d4',
+    'ming': '#eab308',
+    'qing': '#65a30d',
+  };
+  return colorMap[eraId] || '#6b7280';
+}
+
+/**
+ * Group battles by war name
+ */
+export type BattleWarGroup = {
+  warName: string;
+  battles: Event[];
+};
+
+/**
+ * Group battles by war name if they have one
+ */
+export function groupBattlesByWar(battles: Event[]): BattleWarGroup[] {
+  const warGroups = new Map<string, Event[]>();
+  
+  for (const battle of battles) {
+    const warName = battle.battle?.warNameKey 
+      ? battle.battle.warNameKey 
+      : `独立战役`;
+    
+    if (!warGroups.has(warName)) {
+      warGroups.set(warName, []);
+    }
+    warGroups.get(warName)!.push(battle);
+  }
+  
+  // Sort battles within each war by year
+  for (const [, warBattles] of warGroups) {
+    warBattles.sort((a, b) => a.year - b.year);
+  }
+  
+  // Sort wars by first battle year
+  const result: BattleWarGroup[] = [];
+  const sortedWars = Array.from(warGroups.entries()).sort(
+    (a, b) => a[1][0].year - b[1][0].year
+  );
+  
+  for (const [warName, warBattles] of sortedWars) {
+    result.push({ warName, battles: warBattles });
+  }
+  
+  return result;
+}

@@ -5,6 +5,8 @@ import Link from 'next/link';
 import type { Era, Event, Ruler } from '@/lib/history/types';
 import { getBattles, getBattleStats, getBattleCountByEra } from '@/lib/history/battles';
 import { BattleCard } from '@/components/BattleCard';
+import { BattleTimeline } from '@/components/BattleTimeline';
+import { BattleDetail } from '@/components/BattleDetail';
 import { LocaleSwitcher } from '@/components/LocaleSwitcher';
 import { useTranslations } from 'next-intl';
 
@@ -58,6 +60,8 @@ export function BattlesClient({
   }, [battles, eras, tEra]);
   
   const [selectedEra, setSelectedEra] = React.useState<string | null>(null);
+  const [viewMode, setViewMode] = React.useState<'grid' | 'timeline'>('grid');
+  const [selectedBattle, setSelectedBattle] = React.useState<Event | null>(null);
   
   const displayedBattles = selectedEra 
     ? battlesByEra.get(selectedEra) || []
@@ -87,6 +91,35 @@ export function BattlesClient({
             <span className="text-xs text-zinc-500 bg-zinc-100 px-2 py-1 rounded-full">
               {battles.length} 场战役
             </span>
+            {/* View toggle */}
+            <div className="flex items-center bg-zinc-100 rounded-lg p-0.5">
+              <button
+                onClick={() => setViewMode('grid')}
+                className={`p-1.5 rounded-md transition-all ${
+                  viewMode === 'grid' 
+                    ? 'bg-white text-zinc-900 shadow-sm' 
+                    : 'text-zinc-500 hover:text-zinc-700'
+                }`}
+                title="网格视图"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+              </button>
+              <button
+                onClick={() => setViewMode('timeline')}
+                className={`p-1.5 rounded-md transition-all ${
+                  viewMode === 'timeline' 
+                    ? 'bg-white text-zinc-900 shadow-sm' 
+                    : 'text-zinc-500 hover:text-zinc-700'
+                }`}
+                title="时间线视图"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                </svg>
+              </button>
+            </div>
             <LocaleSwitcher />
           </div>
         </div>
@@ -189,14 +222,23 @@ export function BattlesClient({
       {/* Battles list */}
       <main className="max-w-4xl mx-auto p-4">
         {displayedBattles.length > 0 ? (
-          <div className="grid gap-3 sm:grid-cols-2">
-            {displayedBattles.map((battle) => (
-              <BattleCard
-                key={battle.id}
-                battle={battle}
-              />
-            ))}
-          </div>
+          viewMode === 'timeline' ? (
+            <BattleTimeline 
+              battles={displayedBattles}
+              eras={eras}
+              tEra={tEra}
+              onBattleClick={setSelectedBattle}
+            />
+          ) : (
+            <div className="grid gap-3 sm:grid-cols-2">
+              {displayedBattles.map((battle) => (
+                <BattleCard
+                  key={battle.id}
+                  battle={battle}
+                />
+              ))}
+            </div>
+          )
         ) : (
           <div className="flex flex-col items-center justify-center py-16 text-zinc-400">
             <svg className="w-16 h-16 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -206,6 +248,14 @@ export function BattlesClient({
           </div>
         )}
       </main>
+      
+      {/* Battle Detail Modal */}
+      {selectedBattle && (
+        <BattleDetail 
+          battle={selectedBattle} 
+          onClose={() => setSelectedBattle(null)} 
+        />
+      )}
     </div>
   );
 }
