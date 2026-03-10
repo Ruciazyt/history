@@ -287,7 +287,10 @@ export function HistoryApp({
                                                 isActive ? 'bg-blue-100 text-blue-800 font-medium' : 'hover:bg-zinc-100 text-zinc-600'
                                               }`}
                                             >
-                                              {t(r.nameKey)}
+                                              <span>{t(r.nameKey)}</span>
+                                              {r.eraNameKey && (
+                                                <span className="text-amber-600 ml-1">{t(r.eraNameKey)}</span>
+                                              )}
                                               <span className="text-zinc-400 ml-1">{formatYear(r.startYear)}</span>
                                             </button>
                                           </td>
@@ -312,11 +315,16 @@ export function HistoryApp({
                                   isActive ? 'bg-blue-100 text-blue-800' : 'hover:bg-zinc-100 text-zinc-600'
                                 }`}
                               >
-                                <span className="truncate">
+                                <span className="truncate flex items-center gap-1">
                                   {r.isDynastyBlock ? (
                                     <span className="font-semibold">{t(r.nameKey)}</span>
                                   ) : (
-                                    t(r.nameKey)
+                                    <>
+                                      <span>{t(r.nameKey)}</span>
+                                      {r.eraNameKey && (
+                                        <span className="text-amber-600 text-xs">{t(r.eraNameKey)}</span>
+                                      )}
+                                    </>
                                   )}
                                 </span>
                                 <span className="shrink-0 text-zinc-400">
@@ -458,7 +466,14 @@ export function HistoryApp({
                 <div className="flex items-start justify-between gap-2 sm:gap-3">
                   <div className="min-w-0">
                     <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{t('ui.rulerDetail')}</div>
-                    <div className="mt-1 truncate text-sm sm:text-base font-semibold text-zinc-900">{t(selectedRuler.nameKey)}</div>
+                    <div className="mt-1 flex items-center gap-2 flex-wrap">
+                      <span className="truncate text-sm sm:text-base font-semibold text-zinc-900">{t(selectedRuler.nameKey)}</span>
+                      {selectedRuler.eraNameKey && (
+                        <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded">
+                          {t(selectedRuler.eraNameKey)}
+                        </span>
+                      )}
+                    </div>
                     <div className="mt-0.5 text-xs text-zinc-500">
                       {formatYear(selectedRuler.startYear)}–{formatYear(selectedRuler.endYear)}
                     </div>
