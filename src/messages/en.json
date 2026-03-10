@@ -1216,5 +1216,29 @@
   },
   "nav": {
     "battles": "Battles"
-  }
+  },
+  "wc-cn-mingtaizu": "Hongwu",
+  "wc-cn-ming-jianwen": "Jianwen",
+  "wc-cn-ming-yongle": "Yongle",
+  "wc-cn-ming-hongxi": "Hongxi",
+  "wc-cn-ming-xuande": "Xuande",
+  "wc-cn-ming-zhengtong": "Zhengtong",
+  "wc-cn-ming-tianshun": "Tianshun",
+  "wc-cn-ming-chenghua": "Chenghua",
+  "wc-cn-ming-hongzhi": "Hongzhi",
+  "wc-cn-ming-zhengde": "Zhengde",
+  "wc-cn-ming-jiajing": "Jiajing",
+  "wc-cn-ming-longqing": "Longqing",
+  "wc-cn-ming-wanli": "Wanli",
+  "wc-cn-ming-taichang": "Taichang",
+  "wc-cn-ming-tianqi": "Tianqi",
+  "wc-cn-ming-chongzhen": "Chongzhen",
+  "wc-cn-ming-xuanzong": "Xuande",
+  "wc-cn-ming-yingzong": "Tianshun",
+  "wc-cn-ming-daizong": "Jingtai",
+  "wc-cn-ming-xianzong": "Chenghua",
+  "wc-cn-ming-xiaozong": "Hongzhi",
+  "wc-cn-ming-shizong": "Jiajing",
+  "wc-cn-ming-shenzong": "Wanli",
+  "wc-cn-ming-sizong": "Chongzhen"
 }

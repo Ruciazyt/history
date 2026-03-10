@@ -46,6 +46,21 @@ export type Entity = {
   center?: { lon: number; lat: number };
 };
 
+/** 战役影响力级别 */
+export type BattleImpact = 'decisive' | 'major' | 'minor' | 'unknown';
+
+/** 战役类型 */
+export type BattleType = 
+  | 'founding'       // 开国之战
+  | 'unification'    // 统一战争
+  | 'conquest'       // 征服战
+  | 'defense'        // 防御战
+  | 'rebellion'      // 叛乱/起义
+  | 'civil-war'      // 内战
+  | 'frontier'       // 边疆战役
+  | 'invasion'       // 入侵/外敌
+  | 'unknown';
+
 export type Event = {
   id: string;
   entityId: string; // eraId
@@ -77,5 +92,9 @@ export type Event = {
       /** 防守方指挥官 */
       defender?: string[];
     };
+    /** 战役影响力级别 */
+    impact?: BattleImpact;
+    /** 战役类型 */
+    battleType?: BattleType;
   };
 };
