@@ -129,7 +129,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.sa-632-chengpu.title',
     summaryKey: 'event.sa-632-chengpu.summary',
     tags: ['war'],
-    location: { lon: 114.35, lat: 35.7, label: 'Chengpu (approx.)' },
+    location: { lon: 114.35, lat: 35.7, label: '城濮' },
+    battle: {
+      belligerents: {
+        attacker: '晋军',
+        defender: '楚军',
+      },
+      result: 'attacker_win',
+    },
   },
   {
     id: 'sa-551-confucius',
@@ -175,6 +182,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-341-maling.title',
     summaryKey: 'event.ws-341-maling.summary',
     tags: ['war'],
+    location: { lon: 117.0, lat: 34.5, label: '马陵' },
+    battle: {
+      belligerents: {
+        attacker: '齐军',
+        defender: '魏军',
+      },
+      result: 'attacker_win',
+    },
   },
   {
     id: 'ws-307-hufu-qishe',
@@ -191,6 +206,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-284-yan-attack-qi.title',
     summaryKey: 'event.ws-284-yan-attack-qi.summary',
     tags: ['war', 'yan', 'qi'],
+    location: { lon: 118.0, lat: 36.8, label: '临淄' },
+    battle: {
+      belligerents: {
+        attacker: '燕军',
+        defender: '齐军',
+      },
+      result: 'attacker_win',
+    },
   },
   {
     id: 'ws-278-qin-takes-ying',
@@ -199,6 +222,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-278-qin-takes-ying.title',
     summaryKey: 'event.ws-278-qin-takes-ying.summary',
     tags: ['war', 'qin', 'chu'],
+    location: { lon: 112.5, lat: 29.0, label: '郢' },
+    battle: {
+      belligerents: {
+        attacker: '秦军',
+        defender: '楚军',
+      },
+      result: 'attacker_win',
+    },
   },
   {
     id: 'ws-256-zhou-ends',
@@ -231,6 +262,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-230-qin-conquers-han.title',
     summaryKey: 'event.ws-230-qin-conquers-han.summary',
     tags: ['war', 'qin', 'han'],
+    location: { lon: 113.0, lat: 34.5, label: '新郑' },
+    battle: {
+      belligerents: {
+        attacker: '秦军',
+        defender: '韩军',
+      },
+      result: 'attacker_win',
+    },
   },
   {
     id: 'ws-228-qin-conquers-zhao',
@@ -239,6 +278,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-228-qin-conquers-zhao.title',
     summaryKey: 'event.ws-228-qin-conquers-zhao.summary',
     tags: ['war', 'qin', 'zhao'],
+    location: { lon: 114.5, lat: 38.0, label: '邯郸' },
+    battle: {
+      belligerents: {
+        attacker: '秦军',
+        defender: '赵军',
+      },
+      result: 'attacker_win',
+    },
   },
   {
     id: 'ws-225-qin-conquers-wei',
@@ -247,6 +294,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-225-qin-conquers-wei.title',
     summaryKey: 'event.ws-225-qin-conquers-wei.summary',
     tags: ['war', 'qin', 'wei'],
+    location: { lon: 114.3, lat: 34.8, label: '大梁' },
+    battle: {
+      belligerents: {
+        attacker: '秦军',
+        defender: '魏军',
+      },
+      result: 'attacker_win',
+    },
   },
   {
     id: 'ws-223-qin-conquers-chu',
@@ -255,6 +310,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-223-qin-conquers-chu.title',
     summaryKey: 'event.ws-223-qin-conquers-chu.summary',
     tags: ['war', 'qin', 'chu'],
+    location: { lon: 112.5, lat: 29.0, label: '寿春' },
+    battle: {
+      belligerents: {
+        attacker: '秦军',
+        defender: '楚军',
+      },
+      result: 'attacker_win',
+    },
   },
   {
     id: 'ws-222-qin-conquers-yan',
@@ -263,6 +326,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-222-qin-conquers-yan.title',
     summaryKey: 'event.ws-222-qin-conquers-yan.summary',
     tags: ['war', 'qin', 'yan'],
+    location: { lon: 120.0, lat: 40.0, label: '辽阳' },
+    battle: {
+      belligerents: {
+        attacker: '秦军',
+        defender: '燕军',
+      },
+      result: 'attacker_win',
+    },
   },
   {
     id: 'ws-221-qin-conquers-qi',
@@ -271,6 +342,14 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-221-qin-conquers-qi.title',
     summaryKey: 'event.ws-221-qin-conquers-qi.summary',
     tags: ['war', 'qin', 'qi'],
+    location: { lon: 118.0, lat: 36.8, label: '临淄' },
+    battle: {
+      belligerents: {
+        attacker: '秦军',
+        defender: '齐军',
+      },
+      result: 'attacker_win',
+    },
   },
   {
     id: 'ws-221-unification',
