@@ -705,6 +705,278 @@ export function getMostActiveSeason(battles: Event[]): BattleSeasonality | null 
   return seasonality.find(s => s.season !== 'unknown' && s.count > 0) || null;
 }
 
+// ============ Victory Pattern Analysis ============
+
+/**
+ * Victory pattern by side (attacker vs defender)
+ */
+export type VictoryPattern = {
+  side: 'attacker' | 'defender';
+  wins: number;
+  losses: number;
+  draws: number;
+  inconclusive: number;
+  total: number;
+  winRate: number;
+};
+
+/**
+ * Analyze overall attacker vs defender victory patterns
+ */
+export function getAttackerDefenderPattern(battles: Event[]): VictoryPattern[] {
+  let attackerWins = 0;
+  let attackerLosses = 0;
+  let attackerDraws = 0;
+  let attackerInconclusive = 0;
+  
+  let defenderWins = 0;
+  let defenderLosses = 0;
+  let defenderDraws = 0;
+  let defenderInconclusive = 0;
+  
+  for (const battle of battles) {
+    const result = battle.battle?.result;
+    
+    switch (result) {
+      case 'attacker_win':
+        attackerWins++;
+        defenderLosses++;
+        break;
+      case 'defender_win':
+        defenderWins++;
+        attackerLosses++;
+        break;
+      case 'draw':
+        attackerDraws++;
+        defenderDraws++;
+        break;
+      case 'inconclusive':
+        attackerInconclusive++;
+        defenderInconclusive++;
+        break;
+    }
+  }
+  
+  const attackerTotal = attackerWins + attackerLosses + attackerDraws + attackerInconclusive;
+  const defenderTotal = defenderWins + defenderLosses + defenderDraws + defenderInconclusive;
+  
+  return [
+    {
+      side: 'attacker',
+      wins: attackerWins,
+      losses: attackerLosses,
+      draws: attackerDraws,
+      inconclusive: attackerInconclusive,
+      total: attackerTotal,
+      winRate: attackerTotal > 0 ? Math.round((attackerWins / attackerTotal) * 1000) / 10 : 0,
+    },
+    {
+      side: 'defender',
+      wins: defenderWins,
+      losses: defenderLosses,
+      draws: defenderDraws,
+      inconclusive: defenderInconclusive,
+      total: defenderTotal,
+      winRate: defenderTotal > 0 ? Math.round((defenderWins / defenderTotal) * 1000) / 10 : 0,
+    },
+  ];
+}
+
+/**
+ * Victory pattern by era
+ */
+export type EraVictoryPattern = {
+  eraId: string;
+  eraName: string;
+  battles: number;
+  attackerWins: number;
+  defenderWins: number;
+  draws: number;
+  inconclusive: number;
+  attackerWinRate: number;
+};
+
+/**
+ * Get victory patterns grouped by era
+ */
+export function getVictoryPatternByEra(
+  battles: Event[],
+  eras: { id: string; nameKey: string }[],
+  t: (key: string) => string
+): EraVictoryPattern[] {
+  const eraStats = new Map<string, { battles: number; attackerWins: number; defenderWins: number; draws: number; inconclusive: number }>();
+  
+  // Initialize all eras
+  for (const era of eras) {
+    eraStats.set(era.id, { battles: 0, attackerWins: 0, defenderWins: 0, draws: 0, inconclusive: 0 });
+  }
+  
+  // Count battles by era
+  for (const battle of battles) {
+    const stats = eraStats.get(battle.entityId);
+    if (!stats) continue;
+    
+    stats.battles++;
+    const result = battle.battle?.result;
+    
+    if (result === 'attacker_win') stats.attackerWins++;
+    else if (result === 'defender_win') stats.defenderWins++;
+    else if (result === 'draw') stats.draws++;
+    else if (result === 'inconclusive') stats.inconclusive++;
+  }
+  
+  // Build result
+  const result: EraVictoryPattern[] = [];
+  for (const era of eras) {
+    const stats = eraStats.get(era.id)!;
+    if (stats.battles > 0) {
+      const determined = stats.attackerWins + stats.defenderWins;
+      result.push({
+        eraId: era.id,
+        eraName: t(era.nameKey),
+        battles: stats.battles,
+        attackerWins: stats.attackerWins,
+        defenderWins: stats.defenderWins,
+        draws: stats.draws,
+        inconclusive: stats.inconclusive,
+        attackerWinRate: determined > 0 ? Math.round((stats.attackerWins / determined) * 1000) / 10 : 0,
+      });
+    }
+  }
+  
+  // Sort by battle count descending
+  result.sort((a, b) => b.battles - a.battles);
+  return result;
+}
+
+/**
+ * Victory pattern by season
+ */
+export type SeasonVictoryPattern = {
+  season: BattleSeason;
+  seasonName: string;
+  battles: number;
+  attackerWins: number;
+  defenderWins: number;
+  draws: number;
+  attackerWinRate: number;
+};
+
+/**
+ * Get victory patterns by season
+ */
+export function getVictoryPatternBySeason(battles: Event[]): SeasonVictoryPattern[] {
+  const seasonStats = new Map<BattleSeason, { battles: number; attackerWins: number; defenderWins: number; draws: number }>();
+  
+  const seasons: BattleSeason[] = ['spring', 'summer', 'autumn', 'winter'];
+  for (const season of seasons) {
+    seasonStats.set(season, { battles: 0, attackerWins: 0, defenderWins: 0, draws: 0 });
+  }
+  
+  for (const battle of battles) {
+    const month = getBattleMonth(battle);
+    const season = month ? getSeasonFromMonth(month) : null;
+    if (!season || season === 'unknown') continue;
+    
+    const stats = seasonStats.get(season)!;
+    stats.battles++;
+    
+    const result = battle.battle?.result;
+    if (result === 'attacker_win') stats.attackerWins++;
+    else if (result === 'defender_win') stats.defenderWins++;
+    else if (result === 'draw') stats.draws++;
+  }
+  
+  const result: SeasonVictoryPattern[] = [];
+  for (const season of seasons) {
+    const stats = seasonStats.get(season)!;
+    if (stats.battles > 0) {
+      const determined = stats.attackerWins + stats.defenderWins;
+      result.push({
+        season,
+        seasonName: getSeasonName(season),
+        battles: stats.battles,
+        attackerWins: stats.attackerWins,
+        defenderWins: stats.defenderWins,
+        draws: stats.draws,
+        attackerWinRate: determined > 0 ? Math.round((stats.attackerWins / determined) * 1000) / 10 : 0,
+      });
+    }
+  }
+  
+  return result;
+}
+
+/**
+ * Key insight from battle analysis
+ */
+export type BattleInsight = {
+  type: 'era_dominance' | 'season_advantage' | 'attacker_trend' | 'defender_trend';
+  title: string;
+  description: string;
+  value: number; // percentage or count
+};
+
+/**
+ * Generate key insights from battle data
+ */
+export function getBattleInsights(
+  battles: Event[],
+  eras: { id: string; nameKey: string }[],
+  t: (key: string) => string
+): BattleInsight[] {
+  const insights: BattleInsight[] = [];
+  
+  // Get attacker/defender pattern
+  const pattern = getAttackerDefenderPattern(battles);
+  const attackerPattern = pattern.find(p => p.side === 'attacker')!;
+  
+  // Attacker vs Defender trend
+  if (attackerPattern.total >= 3) {
+    if (attackerPattern.winRate > 60) {
+      insights.push({
+        type: 'attacker_trend',
+        title: '进攻方优势',
+        description: `进攻方胜率${attackerPattern.winRate}%，明显高于防守方`,
+        value: attackerPattern.winRate,
+      });
+    } else if (attackerPattern.winRate < 40) {
+      insights.push({
+        type: 'defender_trend',
+        title: '防守方优势',
+        description: `防守方胜率${100 - attackerPattern.winRate}%，明显高于进攻方`,
+        value: 100 - attackerPattern.winRate,
+      });
+    }
+  }
+  
+  // Season advantage
+  const seasonPattern = getVictoryPatternBySeason(battles);
+  const dominantSeason = seasonPattern.find(s => s.battles >= 2);
+  if (dominantSeason) {
+    insights.push({
+      type: 'season_advantage',
+      title: `${dominantSeason.seasonName}战役最多`,
+      description: `该季节共发生${dominantSeason.battles}场战役`,
+      value: dominantSeason.battles,
+    });
+  }
+  
+  // Era dominance
+  const eraPattern = getVictoryPatternByEra(battles, eras, t);
+  const dominantEra = eraPattern.find(e => e.battles >= 3);
+  if (dominantEra) {
+    insights.push({
+      type: 'era_dominance',
+      title: `${dominantEra.eraName}时期战役最多`,
+      description: `该时期共发生${dominantEra.battles}场战役`,
+      value: dominantEra.battles,
+    });
+  }
+  
+  return insights;
+}
+
 /**
  * Check if battles follow ancient Chinese military wisdom
  * (less activity in summer and winter)

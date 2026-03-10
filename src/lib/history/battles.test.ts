@@ -19,6 +19,10 @@ import {
   getParticipantStats,
   compareBattles,
   getComparisonSummary,
+  getAttackerDefenderPattern,
+  getVictoryPatternByEra,
+  getVictoryPatternBySeason,
+  getBattleInsights,
 } from './battles';
 import type { Event } from './types';
 
@@ -1038,6 +1042,202 @@ describe('battles', () => {
         locationDistance: 500,
       }, t);
       expect(summary).toContain('相距约 500 km');
+    });
+  });
+
+  describe('getAttackerDefenderPattern', () => {
+    it('should calculate attacker vs defender pattern', () => {
+      const battles = getBattles(mockEvents);
+      const pattern = getAttackerDefenderPattern(battles);
+      
+      expect(pattern).toHaveLength(2);
+      const attacker = pattern.find(p => p.side === 'attacker')!;
+      const defender = pattern.find(p => p.side === 'defender')!;
+      
+      expect(attacker.wins).toBe(2);
+      expect(attacker.losses).toBe(0);
+      expect(attacker.winRate).toBe(100);
+      
+      expect(defender.wins).toBe(0);
+      expect(defender.losses).toBe(2);
+    });
+
+    it('should handle draws correctly', () => {
+      const battlesWithDraw: Event[] = [
+        {
+          id: 'draw-battle',
+          entityId: 'era1',
+          year: -500,
+          titleKey: 'battle.draw',
+          tags: ['war'],
+          battle: { result: 'draw' },
+        },
+      ];
+      const pattern = getAttackerDefenderPattern(battlesWithDraw);
+      
+      const attacker = pattern.find(p => p.side === 'attacker')!;
+      expect(attacker.draws).toBe(1);
+      expect(attacker.winRate).toBe(0);
+    });
+
+    it('should handle inconclusive results', () => {
+      const battlesWithInconclusive: Event[] = [
+        {
+          id: 'inconclusive-battle',
+          entityId: 'era1',
+          year: -500,
+          titleKey: 'battle.inconclusive',
+          tags: ['war'],
+          battle: { result: 'inconclusive' },
+        },
+      ];
+      const pattern = getAttackerDefenderPattern(battlesWithInconclusive);
+      
+      const attacker = pattern.find(p => p.side === 'attacker')!;
+      expect(attacker.inconclusive).toBe(1);
+    });
+  });
+
+  describe('getVictoryPatternByEra', () => {
+    it('should group victories by era', () => {
+      const battles = getBattles(mockEvents);
+      const eras = [
+        { id: 'era1', nameKey: 'era.era1' },
+        { id: 'era2', nameKey: 'era.era2' },
+      ];
+      const t = (key: string) => key;
+      
+      const pattern = getVictoryPatternByEra(battles, eras, t);
+      
+      expect(pattern.length).toBeGreaterThan(0);
+      expect(pattern[0]).toHaveProperty('eraId');
+      expect(pattern[0]).toHaveProperty('attackerWinRate');
+    });
+
+    it('should return empty array for no matching eras', () => {
+      const battles = getBattles(mockEvents);
+      const eras: { id: string; nameKey: string }[] = [];
+      
+      const pattern = getVictoryPatternByEra(battles, eras, (k) => k);
+      expect(pattern).toHaveLength(0);
+    });
+  });
+
+  describe('getVictoryPatternBySeason', () => {
+    it('should group victories by season', () => {
+      const battlesWithMonth: Event[] = [
+        {
+          id: 'spring-battle',
+          entityId: 'era1',
+          year: -500,
+          month: 4, // spring
+          titleKey: 'battle.spring',
+          tags: ['war'],
+          battle: { result: 'attacker_win' },
+        },
+        {
+          id: 'autumn-battle',
+          entityId: 'era1',
+          year: -400,
+          month: 10, // autumn
+          titleKey: 'battle.autumn',
+          tags: ['war'],
+          battle: { result: 'defender_win' },
+        },
+      ];
+      
+      const pattern = getVictoryPatternBySeason(battlesWithMonth);
+      
+      expect(pattern.length).toBe(2);
+      const spring = pattern.find(p => p.season === 'spring')!;
+      expect(spring.battles).toBe(1);
+      expect(spring.attackerWins).toBe(1);
+    });
+
+    it('should exclude unknown seasons', () => {
+      const battles: Event[] = [
+        {
+          id: 'no-month',
+          entityId: 'era1',
+          year: -500,
+          titleKey: 'battle.no-month',
+          tags: ['war'],
+          battle: { result: 'attacker_win' },
+        },
+      ];
+      
+      const pattern = getVictoryPatternBySeason(battles);
+      expect(pattern).toHaveLength(0);
+    });
+  });
+
+  describe('getBattleInsights', () => {
+    it('should generate insights from battle data', () => {
+      // Create battles with enough data for insights
+      const battlesForInsights: Event[] = [
+        {
+          id: 'b1',
+          entityId: 'era1',
+          year: -632,
+          month: 4,
+          titleKey: 'b1',
+          tags: ['war'],
+          battle: { result: 'attacker_win' },
+        },
+        {
+          id: 'b2',
+          entityId: 'era1',
+          year: -260,
+          month: 7,
+          titleKey: 'b2',
+          tags: ['war'],
+          battle: { result: 'attacker_win' },
+        },
+        {
+          id: 'b3',
+          entityId: 'era1',
+          year: -200,
+          month: 10,
+          titleKey: 'b3',
+          tags: ['war'],
+          battle: { result: 'attacker_win' },
+        },
+      ];
+      
+      const eras = [
+        { id: 'era1', nameKey: 'era.era1' },
+      ];
+      const t = (key: string) => key;
+      
+      const insights = getBattleInsights(battlesForInsights, eras, t);
+      
+      expect(insights.length).toBeGreaterThan(0);
+      expect(insights[0]).toHaveProperty('type');
+      expect(insights[0]).toHaveProperty('title');
+      expect(insights[0]).toHaveProperty('description');
+      expect(insights[0]).toHaveProperty('value');
+    });
+
+    it('should not generate trend insight with insufficient data', () => {
+      const singleBattle: Event[] = [
+        {
+          id: 'single',
+          entityId: 'era1',
+          year: -500,
+          titleKey: 'battle.single',
+          tags: ['war'],
+          battle: { result: 'attacker_win' },
+        },
+      ];
+      const eras = [{ id: 'era1', nameKey: 'era.era1' }];
+      
+      const insights = getBattleInsights(singleBattle, eras, (k) => k);
+      
+      // Should not have trend insights with only 1 battle
+      const trendInsights = insights.filter(i => 
+        i.type === 'attacker_trend' || i.type === 'defender_trend'
+      );
+      expect(trendInsights).toHaveLength(0);
     });
   });
 });
