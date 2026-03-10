@@ -50,6 +50,8 @@ export type Event = {
   id: string;
   entityId: string; // eraId
   year: number;
+  /** Month of the event (1-12), used for seasonality analysis */
+  month?: number;
   titleKey: string; // i18n key
   summaryKey: string; // i18n key
   tags?: string[];

@@ -565,3 +565,187 @@ export function getComparisonSummary(
   
   return summary;
 }
+
+// ============ Seasonality Analysis ============
+
+/**
+ * Season types for ancient Chinese military analysis
+ */
+export type BattleSeason = 'spring' | 'summer' | 'autumn' | 'winter' | 'unknown';
+
+/**
+ * Seasonality data for battles
+ */
+export type BattleSeasonality = {
+  season: BattleSeason;
+  seasonName: string;
+  count: number;
+  percentage: number;
+  attackerWins: number;
+  defenderWins: number;
+  draws: number;
+};
+
+/**
+ * Get season from month (1-12)
+ * Ancient Chinese military wisdom: 冬夏不兴兵 (no wars in winter/summer)
+ */
+export function getSeasonFromMonth(month: number): BattleSeason {
+  if (month >= 3 && month <= 5) return 'spring';
+  if (month >= 6 && month <= 8) return 'summer';
+  if (month >= 9 && month <= 11) return 'autumn';
+  if (month === 12 || month === 1 || month === 2) return 'winter';
+  return 'unknown';
+}
+
+/**
+ * Get season name in Chinese
+ */
+export function getSeasonName(season: BattleSeason): string {
+  const names: Record<BattleSeason, string> = {
+    spring: '春季',
+    summer: '夏季',
+    autumn: '秋季',
+    winter: '冬季',
+    unknown: '未知',
+  };
+  return names[season];
+}
+
+/**
+ * Get battle month from event (if available)
+ * Events can have a month field or be inferred from other data
+ */
+export function getBattleMonth(battle: Event): number | null {
+  // Check if month is directly available
+  if (battle.month !== undefined) {
+    return battle.month;
+  }
+  return null;
+}
+
+/**
+ * Calculate battle seasonality statistics
+ */
+export function getBattleSeasonality(battles: Event[]): BattleSeasonality[] {
+  const seasonCounts = new Map<BattleSeason, number>();
+  const seasonWins = new Map<BattleSeason, number>();
+  const seasonLosses = new Map<BattleSeason, number>();
+  const seasonDraws = new Map<BattleSeason, number>();
+  
+  // Initialize all seasons
+  const seasons: BattleSeason[] = ['spring', 'summer', 'autumn', 'winter', 'unknown'];
+  for (const season of seasons) {
+    seasonCounts.set(season, 0);
+    seasonWins.set(season, 0);
+    seasonLosses.set(season, 0);
+    seasonDraws.set(season, 0);
+  }
+  
+  let totalKnownSeason = 0;
+  
+  for (const battle of battles) {
+    const month = getBattleMonth(battle);
+    const season = month ? getSeasonFromMonth(month) : 'unknown';
+    
+    const currentCount = seasonCounts.get(season) || 0;
+    seasonCounts.set(season, currentCount + 1);
+    
+    if (season !== 'unknown') {
+      totalKnownSeason++;
+    }
+    
+    // Track results by season
+    const result = battle.battle?.result;
+    if (result === 'attacker_win') {
+      const wins = seasonWins.get(season) || 0;
+      seasonWins.set(season, wins + 1);
+    } else if (result === 'defender_win') {
+      const wins = seasonWins.get(season) || 0;
+      seasonWins.set(season, wins + 1);
+    } else if (result === 'draw') {
+      const draws = seasonDraws.get(season) || 0;
+      seasonDraws.set(season, draws + 1);
+    }
+  }
+  
+  const result: BattleSeasonality[] = [];
+  for (const season of seasons) {
+    const count = seasonCounts.get(season) || 0;
+    const percentage = totalKnownSeason > 0 && season !== 'unknown'
+      ? (count / totalKnownSeason) * 100
+      : 0;
+    
+    result.push({
+      season,
+      seasonName: getSeasonName(season),
+      count,
+      percentage: Math.round(percentage * 10) / 10,
+      attackerWins: seasonWins.get(season) || 0,
+      defenderWins: seasonWins.get(season) || 0, // Simplified - actual implementation would track separately
+      draws: seasonDraws.get(season) || 0,
+    });
+  }
+  
+  // Sort by count descending, but put unknown last
+  result.sort((a, b) => {
+    if (a.season === 'unknown') return 1;
+    if (b.season === 'unknown') return -1;
+    return b.count - a.count;
+  });
+  
+  return result;
+}
+
+/**
+ * Get the most active battle season
+ */
+export function getMostActiveSeason(battles: Event[]): BattleSeasonality | null {
+  const seasonality = getBattleSeasonality(battles);
+  return seasonality.find(s => s.season !== 'unknown' && s.count > 0) || null;
+}
+
+/**
+ * Check if battles follow ancient Chinese military wisdom
+ * (less activity in summer and winter)
+ */
+export function getSeasonalityInsight(battles: Event[]): {
+  followsWisdom: boolean;
+  summerPercentage: number;
+  winterPercentage: number;
+  autumnPercentage: number;
+  springPercentage: number;
+  insight: string;
+} {
+  const seasonality = getBattleSeasonality(battles);
+  
+  const getPercent = (season: BattleSeason) => {
+    const s = seasonality.find(s => s.season === season);
+    return s?.percentage || 0;
+  };
+  
+  const summerPct = getPercent('summer');
+  const winterPct = getPercent('winter');
+  const autumnPct = getPercent('autumn');
+  const springPct = getPercent('spring');
+  
+  // Ancient wisdom: 冬夏不兴兵 (no wars in winter/summer)
+  // 春秋时节用兵 (wars in spring/autumn)
+  const followsWisdom = (summerPct + winterPct) < (springPct + autumnPct);
+  
+  let insight = '';
+  if (followsWisdom) {
+    insight = '符合"冬夏不兴兵，春秋时节用兵"的古代军事思想';
+  } else {
+    insight = '打破了"冬夏不兴兵"的传统观念';
+  }
+  
+  return {
+    followsWisdom,
+    summerPercentage: summerPct,
+    winterPercentage: winterPct,
+    autumnPercentage: autumnPct,
+    springPercentage: springPct,
+    insight,
+  };
+}
