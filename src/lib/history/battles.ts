@@ -2191,3 +2191,130 @@ export function getMostDefensiveBattleType(battles: Event[]): BattleTypeStats | 
     stat.defenderWinRate > (max?.defenderWinRate ?? 0) ? stat : max
   , null as BattleTypeStats | null);
 }
+
+/** Battle impact insight */
+export type BattleImpactInsight = {
+  impact: BattleImpact;
+  impactName: string;
+  insight: string;
+  confidence: 'high' | 'medium' | 'low';
+};
+
+/**
+ * Generate insights about battle impacts
+ */
+export function getBattleImpactInsights(battles: Event[]): BattleImpactInsight[] {
+  const insights: BattleImpactInsight[] = [];
+  const stats = getAllBattleImpactsStats(battles);
+  
+  for (const stat of stats) {
+    if (stat.total < 2) continue;
+    
+    const { impact, impactName, attackerWinRate, defenderWinRate, total } = stat;
+    
+    // Generate insights based on impact level
+    if (total >= 3) {
+      // High confidence insights
+      if (attackerWinRate > 70) {
+        insights.push({
+          impact,
+          impactName,
+          insight: `${impactName}战役通常由进攻方主导，进攻方胜率高达${attackerWinRate.toFixed(1)}%`,
+          confidence: 'high',
+        });
+      } else if (defenderWinRate > 70) {
+        insights.push({
+          impact,
+          impactName,
+          insight: `${impactName}战役中防守方表现更为出色，胜率达${defenderWinRate.toFixed(1)}%`,
+          confidence: 'high',
+        });
+      } else if (attackerWinRate > 50) {
+        insights.push({
+          impact,
+          impactName,
+          insight: `${impactName}战役中进攻方略占优势，胜率${attackerWinRate.toFixed(1)}%`,
+          confidence: 'medium',
+        });
+      } else if (defenderWinRate > 50) {
+        insights.push({
+          impact,
+          impactName,
+          insight: `${impactName}战役中防守方略有优势，胜率${defenderWinRate.toFixed(1)}%`,
+          confidence: 'medium',
+        });
+      }
+    } else {
+      // Lower confidence for fewer battles
+      if (attackerWinRate > 50) {
+        insights.push({
+          impact,
+          impactName,
+          insight: `${impactName}战役初步显示进攻方有一定优势`,
+          confidence: 'low',
+        });
+      } else if (defenderWinRate > 50) {
+        insights.push({
+          impact,
+          impactName,
+          insight: `${impactName}战役初步显示防守方有一定优势`,
+          confidence: 'low',
+        });
+      }
+    }
+  }
+  
+  return insights;
+}
+
+/**
+ * Get impact level distribution
+ */
+export function getImpactDistribution(battles: Event[]): { impact: BattleImpact; count: number; percentage: number }[] {
+  const stats = getAllBattleImpactsStats(battles);
+  const total = battles.length;
+  
+  return stats.map(stat => ({
+    impact: stat.impact,
+    count: stat.total,
+    percentage: total > 0 ? (stat.total / total) * 100 : 0,
+  })).sort((a, b) => b.count - a.count);
+}
+
+/**
+ * Get most common impact level
+ */
+export function getMostCommonImpact(battles: Event[]): BattleImpactStats | null {
+  const stats = getAllBattleImpactsStats(battles);
+  return stats.length > 0 ? stats[0] : null;
+}
+
+/**
+ * Get battles that are both decisive and have commander data
+ */
+export function getDecisiveBattlesWithCommanders(battles: Event[]): Event[] {
+  return battles.filter(b => 
+    b.battle?.impact === 'decisive' && 
+    (b.battle?.commanders?.attacker?.length || 0) > 0
+  );
+}
+
+/**
+ * Analyze correlation between impact and result
+ */
+export function getImpactResultCorrelation(battles: Event[]): {
+  impact: BattleImpact;
+  attackerWins: number;
+  defenderWins: number;
+  winRate: 'attacker' | 'defender' | 'equal';
+}[] {
+  const stats = getAllBattleImpactsStats(battles);
+  
+  return stats.map(stat => ({
+    impact: stat.impact,
+    attackerWins: stat.attackerWins,
+    defenderWins: stat.defenderWins,
+    winRate: stat.attackerWinRate > stat.defenderWinRate ? 'attacker' :
+             stat.defenderWinRate > stat.attackerWinRate ? 'defender' : 'equal',
+  }));
+}
