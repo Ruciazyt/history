@@ -25,7 +25,7 @@ https://history.ruciazyt.cn
 - [x] 公共Hooks提取
 - [x] React.memo优化
 - [x] 组件目录重组
-- [x] 单元测试（113个测试用例）
+- [x] 单元测试（166个测试用例）
 
 ## 项目结构
 ```
@@ -69,3 +69,17 @@ src/
   - getImpactResultCorrelation: 分析影响力与胜负的关联
 - [x] 添加 impact.test.ts 测试文件（12个测试用例）
 - [x] 构建验证通过
+- [x] 部署到 Vercel 成功
+
+### 新增功能: 战役结果关联性分析 (2026-03-11 14:10)
+- [x] 添加 outcomeCorrelation.ts 战役结果关联性分析模块
+- [x] 支持分析季节、地区、战役类型、影响力级别与胜负的关联
+- [x] 添加因素对比和洞察生成功能
+- [x] 添加 outcomeCorrelation.test.ts 测试文件（19个测试用例）
+- [x] 新增函数：
+  - getOutcomeCorrelationAnalysis: 综合分析各因素与胜负的关联
+  - getVictoryFactorInsights: 生成关键胜负因素洞察
+  - getKeyVictoryFactorsSummary: 获取关键胜负因素摘要
+  - compareFactors: 对比两个不同因素的胜负概率
+- [x] 构建验证通过
+- [x] 部署到 Vercel 成功
