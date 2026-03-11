@@ -64,6 +64,21 @@ export type BattleType =
   | 'invasion'       // 入侵/外敌
   | 'unknown';
 
+/** 战役战略/战术类型 */
+export type BattleStrategy = 
+  | 'ambush'         // 伏击
+  | 'fire'           // 火攻
+  | 'water'          // 水攻/水淹
+  | 'encirclement'   // 包围
+  | 'siege'          // 攻城
+  | 'pincer'         // 钳形攻势
+  | 'feigned-retreat' // 诱敌深入/假装撤退
+  | 'alliance'       // 联盟作战
+  | 'defensive'      // 防御作战
+  | 'offensive'      // 进攻作战
+  | 'guerrilla'      // 游击战
+  | 'unknown';
+
 export type Event = {
   id: string;
   entityId: string; // eraId
@@ -101,5 +116,7 @@ export type Event = {
     scale?: BattleScale;
     /** 战役类型 */
     battleType?: BattleType;
+    /** 战役战略/战术 */
+    strategy?: BattleStrategy[];
   };
 };

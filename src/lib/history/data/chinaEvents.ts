@@ -24,6 +24,7 @@ export const CHINA_EVENTS: Event[] = [
         attacker: ['姬发', '姜子牙'],
         defender: ['帝辛'],
       },
+      strategy: ['offensive', 'ambush'],
     },
   },
   {
@@ -158,6 +159,7 @@ export const CHINA_EVENTS: Event[] = [
       result: 'attacker_win',
       battleType: 'defense',
       impact: 'major',
+      strategy: ['defensive', 'alliance'],
     },
   },
   {
@@ -190,6 +192,7 @@ export const CHINA_EVENTS: Event[] = [
         attacker: ['孙武', '伍子胥'],
         defender: ['囊瓦'],
       },
+      strategy: ['offensive', 'pincer'],
     },
   },
 
@@ -232,6 +235,7 @@ export const CHINA_EVENTS: Event[] = [
         attacker: ['孙膑', '田忌'],
         defender: ['庞涓'],
       },
+      strategy: ['ambush', 'feigned-retreat'],
     },
   },
   {
@@ -304,6 +308,7 @@ export const CHINA_EVENTS: Event[] = [
         attacker: ['白起'],
         defender: ['赵括'],
       },
+      strategy: ['encirclement', 'offensive'],
     },
   },
   {

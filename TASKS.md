@@ -41,8 +41,15 @@ src/
 │   └── battles.ts
 ```
 
-## 自动迭代
-- Cron任务: 每15分钟自动思考新功能
+### 新增功能: 战役对比分析 (2026-03-11 18:40)
+- [x] 添加 battleComparison.ts 战役对比分析模块
+- [x] 支持9个维度对比：年代、季节、地域、参战方、结果、类型、规模、影响力、指挥官
+- [x] findSimilarBattles: 查找相似战役
+- [x] getBattleComparisonInsights: 生成对比洞察
+- [x] getBattleComparisonSummary: 获取对比摘要
+- [x] 添加 battleComparison.test.ts 测试文件（23个测试用例）
+- [x] 构建验证通过
+- [x] 部署到 Vercel 成功
 
 ## 2026-03-10 迭代
 ### 新增功能: 战役指挥官分析
