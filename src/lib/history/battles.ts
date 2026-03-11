@@ -2318,3 +2318,314 @@ export function getImpactResultCorrelation(battles: Event[]): {
              stat.defenderWinRate > stat.attackerWinRate ? 'defender' : 'equal',
   }));
 }
+
+// ============ 势力(Faction)分析功能 ============
+
+export type FactionStats = {
+  name: string;
+  totalBattles: number;
+  asAttacker: number;
+  asDefender: number;
+  wins: number;
+  losses: number;
+  draws: number;
+  winRate: number;
+  /** 作为进攻方时的胜率 */
+  attackerWinRate: number;
+  /** 作为防守方时的胜率 */
+  defenderWinRate: number;
+  /** 参与的战役年份范围 */
+  yearRange: { start: number; end: number };
+};
+
+export type FactionBattles = {
+  asAttacker: Event[];
+  asDefender: Event[];
+};
+
+export type FactionVsFaction = {
+  faction1: string;
+  faction2: string;
+  battles: Event[];
+  faction1Wins: number;
+  faction2Wins: number;
+  draws: number;
+};
+
+export type FactionInsight = {
+  faction: string;
+  insight: string;
+  confidence: 'high' | 'medium' | 'low';
+  stat?: string;
+};
+
+/**
+ * Get all unique factions (participants) from battles
+ */
+export function getAllFactions(battles: Event[]): string[] {
+  const factions = new Set<string>();
+  battles.forEach(battle => {
+    const { attacker, defender } = getBattleParties(battle);
+    if (attacker) factions.add(attacker);
+    if (defender) factions.add(defender);
+  });
+  return Array.from(factions).sort();
+}
+
+/**
+ * Get faction's battle history
+ */
+export function getFactionBattles(battles: Event[], faction: string): FactionBattles {
+  return {
+    asAttacker: battles.filter(b => b.battle?.belligerents?.attacker === faction),
+    asDefender: battles.filter(b => b.battle?.belligerents?.defender === faction),
+  };
+}
+
+/**
+ * Get statistics for a specific faction
+ */
+export function getFactionStats(battles: Event[], faction: string): FactionStats | null {
+  const factionBattles = getFactionBattles(battles, faction);
+  
+  if (factionBattles.asAttacker.length === 0 && factionBattles.asDefender.length === 0) {
+    return null;
+  }
+  
+  const asAttacker = factionBattles.asAttacker;
+  const asDefender = factionBattles.asDefender;
+  const allBattles = [...asAttacker, ...asDefender];
+  
+  const wins = allBattles.filter(b => {
+    const isAttacker = b.battle?.belligerents?.attacker === faction;
+    return isAttacker ? b.battle?.result === 'attacker_win' : b.battle?.result === 'defender_win';
+  }).length;
+  
+  const losses = allBattles.filter(b => {
+    const isAttacker = b.battle?.belligerents?.attacker === faction;
+    return isAttacker ? b.battle?.result === 'defender_win' : b.battle?.result === 'attacker_win';
+  }).length;
+  
+  const draws = allBattles.filter(b => b.battle?.result === 'draw').length;
+  
+  const attackerWins = asAttacker.filter(b => b.battle?.result === 'attacker_win').length;
+  const defenderWins = asDefender.filter(b => b.battle?.result === 'defender_win').length;
+  
+  const years = allBattles.map(b => b.year).filter(y => y !== undefined);
+  const startYear = years.length > 0 ? Math.min(...years) : 0;
+  const endYear = years.length > 0 ? Math.max(...years) : 0;
+  
+  return {
+    name: faction,
+    totalBattles: allBattles.length,
+    asAttacker: asAttacker.length,
+    asDefender: asDefender.length,
+    wins,
+    losses,
+    draws,
+    winRate: allBattles.length > 0 ? (wins / allBattles.length) * 100 : 0,
+    attackerWinRate: asAttacker.length > 0 ? (attackerWins / asAttacker.length) * 100 : 0,
+    defenderWinRate: asDefender.length > 0 ? (defenderWins / asDefender.length) * 100 : 0,
+    yearRange: { start: startYear, end: endYear },
+  };
+}
+
+/**
+ * Get statistics for all factions
+ */
+export function getAllFactionsStats(battles: Event[]): FactionStats[] {
+  const factions = getAllFactions(battles);
+  return factions
+    .map(faction => getFactionStats(battles, faction))
+    .filter((stat): stat is FactionStats => stat !== null)
+    .sort((a, b) => b.totalBattles - a.totalBattles);
+}
+
+/**
+ * Get top most active factions
+ */
+export function getTopFactions(battles: Event[], limit = 10): FactionStats[] {
+  return getAllFactionsStats(battles).slice(0, limit);
+}
+
+/**
+ * Get top factions by win rate (minimum 3 battles)
+ */
+export function getTopFactionsByWinRate(battles: Event[], limit = 10): FactionStats[] {
+  return getAllFactionsStats(battles)
+    .filter(f => f.totalBattles >= 3)
+    .sort((a, b) => b.winRate - a.winRate)
+    .slice(0, limit);
+}
+
+/**
+ * Get factions that have the best record as attackers
+ */
+export function getMostAggressiveFactions(battles: Event[], limit = 10): FactionStats[] {
+  return getAllFactionsStats(battles)
+    .filter(f => f.asAttacker >= 3)
+    .sort((a, b) => b.attackerWinRate - a.attackerWinRate)
+    .slice(0, limit);
+}
+
+/**
+ * Get factions that have the best record as defenders
+ */
+export function getMostDefensiveFactions(battles: Event[], limit = 10): FactionStats[] {
+  return getAllFactionsStats(battles)
+    .filter(f => f.asDefender >= 3)
+    .sort((a, b) => b.defenderWinRate - a.defenderWinRate)
+    .slice(0, limit);
+}
+
+/**
+ * Get head-to-head record between two factions
+ */
+export function getFactionVsFaction(battles: Event[], faction1: string, faction2: string): FactionVsFaction | null {
+  const relevantBattles = battles.filter(b => {
+    const { attacker, defender } = getBattleParties(b);
+    return (attacker === faction1 && defender === faction2) ||
+           (attacker === faction2 && defender === faction1);
+  });
+  
+  if (relevantBattles.length === 0) {
+    return null;
+  }
+  
+  const faction1Wins = relevantBattles.filter(b => {
+    const { attacker, defender } = getBattleParties(b);
+    if (attacker === faction1) {
+      return b.battle?.result === 'attacker_win';
+    } else {
+      return b.battle?.result === 'defender_win';
+    }
+  }).length;
+  
+  const faction2Wins = relevantBattles.filter(b => {
+    const { attacker, defender } = getBattleParties(b);
+    if (attacker === faction2) {
+      return b.battle?.result === 'attacker_win';
+    } else {
+      return b.battle?.result === 'defender_win';
+    }
+  }).length;
+  
+  const draws = relevantBattles.filter(b => b.battle?.result === 'draw').length;
+  
+  return {
+    faction1,
+    faction2,
+    battles: relevantBattles,
+    faction1Wins,
+    faction2Wins,
+    draws,
+  };
+}
+
+/**
+ * Get rivalry analysis - factions that fought each other most often
+ */
+export function getTopRivalries(battles: Event[], limit = 10): FactionVsFaction[] {
+  const factions = getAllFactions(battles);
+  const rivalries: FactionVsFaction[] = [];
+  
+  for (let i = 0; i < factions.length; i++) {
+    for (let j = i + 1; j < factions.length; j++) {
+      const rivalry = getFactionVsFaction(battles, factions[i], factions[j]);
+      if (rivalry && rivalry.battles.length > 0) {
+        rivalries.push(rivalry);
+      }
+    }
+  }
+  
+  return rivalries
+    .sort((a, b) => b.battles.length - a.battles.length)
+    .slice(0, limit);
+}
+
+/**
+ * Check if there is faction data in battles
+ */
+export function hasFactionData(battles: Event[]): boolean {
+  return battles.some(b => 
+    b.battle?.belligerents?.attacker || b.battle?.belligerents?.defender
+  );
+}
+
+/**
+ * Generate insights about factions
+ */
+export function getFactionInsights(battles: Event[]): FactionInsight[] {
+  const insights: FactionInsight[] = [];
+  const allStats = getAllFactionsStats(battles);
+  
+  if (allStats.length === 0) return insights;
+  
+  // Most active faction
+  const mostActive = allStats[0];
+  if (mostActive) {
+    insights.push({
+      faction: mostActive.name,
+      insight: `${mostActive.name} 是最活跃的势力，参与了 ${mostActive.totalBattles} 场战役`,
+      confidence: 'high',
+      stat: `${mostActive.totalBattles} 场战役`,
+    });
+  }
+  
+  // Best win rate
+  const minBattlesForBestRate = 3;
+  const bestWinRate = allStats.filter(f => f.totalBattles >= minBattlesForBestRate)[0];
+  if (bestWinRate && bestWinRate.totalBattles >= minBattlesForBestRate) {
+    insights.push({
+      faction: bestWinRate.name,
+      insight: `${bestWinRate.name} 拥有最高胜率，达 ${bestWinRate.winRate.toFixed(1)}%（至少${minBattlesForBestRate}场战役）`,
+      confidence: bestWinRate.totalBattles >= 5 ? 'high' : 'medium',
+      stat: `${bestWinRate.winRate.toFixed(1)}% 胜率`,
+    });
+  }
+  
+  // Most aggressive (attacker wins)
+  const aggressiveFactions = allStats
+    .filter(f => f.asAttacker >= 3)
+    .sort((a, b) => b.attackerWinRate - a.attackerWinRate);
+  if (aggressiveFactions.length > 0) {
+    const aggressive = aggressiveFactions[0];
+    insights.push({
+      faction: aggressive.name,
+      insight: `${aggressive.name} 作为进攻方时胜率高达 ${aggressive.attackerWinRate.toFixed(1)}%，是最具进攻性的势力`,
+      confidence: aggressive.asAttacker >= 5 ? 'high' : 'medium',
+      stat: `${aggressive.attackerWinRate.toFixed(1)}% 进攻胜率`,
+    });
+  }
+  
+  // Most defensive (defender wins)
+  const defensiveFactions = allStats
+    .filter(f => f.asDefender >= 3)
+    .sort((a, b) => b.defenderWinRate - a.defenderWinRate);
+  if (defensiveFactions.length > 0) {
+    const defensive = defensiveFactions[0];
+    insights.push({
+      faction: defensive.name,
+      insight: `${defensive.name} 作为防守方时表现出色，防守胜率达 ${defensive.defenderWinRate.toFixed(1)}%`,
+      confidence: defensive.asDefender >= 5 ? 'high' : 'medium',
+      stat: `${defensive.defenderWinRate.toFixed(1)}% 防守胜率`,
+    });
+  }
+  
+  // Longest military history
+  const sortedByHistory = [...allStats].sort((a, b) => 
+    (b.yearRange.end - b.yearRange.start) - (a.yearRange.end - a.yearRange.start)
+  );
+  if (sortedByHistory.length > 0 && sortedByHistory[0].yearRange.end !== sortedByHistory[0].yearRange.start) {
+    const longestHistory = sortedByHistory[0];
+    const span = longestHistory.yearRange.end - longestHistory.yearRange.start;
+    insights.push({
+      faction: longestHistory.name,
+      insight: `${longestHistory.name} 军事活动跨度最长，持续约 ${span} 年`,
+      confidence: 'medium',
+      stat: `约 ${span} 年`,
+    });
+  }
+  
+  return insights;
+}
