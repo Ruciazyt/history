@@ -19,6 +19,7 @@ export const CHINA_EVENTS: Event[] = [
       result: 'attacker_win',
       battleType: 'founding',
       impact: 'decisive',
+      scale: 'massive',
       commanders: {
         attacker: ['姬发', '姜子牙'],
         defender: ['帝辛'],
@@ -66,6 +67,7 @@ export const CHINA_EVENTS: Event[] = [
       result: 'attacker_win',
       battleType: 'invasion',
       impact: 'decisive',
+      scale: 'large',
     },
   },
 
@@ -111,6 +113,7 @@ export const CHINA_EVENTS: Event[] = [
       result: 'attacker_win',
       battleType: 'defense',
       impact: 'major',
+      scale: 'large',
     },
   },
   {
@@ -182,6 +185,7 @@ export const CHINA_EVENTS: Event[] = [
       result: 'attacker_win',
       battleType: 'conquest',
       impact: 'major',
+      scale: 'large',
       commanders: {
         attacker: ['孙武', '伍子胥'],
         defender: ['囊瓦'],
@@ -223,6 +227,7 @@ export const CHINA_EVENTS: Event[] = [
       result: 'attacker_win',
       battleType: 'conquest',
       impact: 'major',
+      scale: 'medium',
       commanders: {
         attacker: ['孙膑', '田忌'],
         defender: ['庞涓'],
@@ -267,6 +272,7 @@ export const CHINA_EVENTS: Event[] = [
         defender: '楚军',
       },
       result: 'attacker_win',
+      scale: 'large',
     },
   },
   {
@@ -293,6 +299,7 @@ export const CHINA_EVENTS: Event[] = [
       result: 'attacker_win',
       battleType: 'conquest',
       impact: 'decisive',
+      scale: 'massive',
       commanders: {
         attacker: ['白起'],
         defender: ['赵括'],
@@ -315,6 +322,7 @@ export const CHINA_EVENTS: Event[] = [
       result: 'attacker_win',
       battleType: 'conquest',
       impact: 'major',
+      scale: 'medium',
     },
   },
   {
@@ -331,6 +339,7 @@ export const CHINA_EVENTS: Event[] = [
         defender: '赵军',
       },
       result: 'attacker_win',
+      scale: 'large',
     },
   },
   {
@@ -347,6 +356,7 @@ export const CHINA_EVENTS: Event[] = [
         defender: '魏军',
       },
       result: 'attacker_win',
+      scale: 'medium',
     },
   },
   {
@@ -363,6 +373,7 @@ export const CHINA_EVENTS: Event[] = [
         defender: '楚军',
       },
       result: 'attacker_win',
+      scale: 'large',
     },
   },
   {
@@ -379,6 +390,7 @@ export const CHINA_EVENTS: Event[] = [
         defender: '燕军',
       },
       result: 'attacker_win',
+      scale: 'medium',
     },
   },
   {
@@ -395,6 +407,7 @@ export const CHINA_EVENTS: Event[] = [
         defender: '齐军',
       },
       result: 'attacker_win',
+      scale: 'medium',
     },
   },
   {

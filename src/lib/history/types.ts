@@ -49,6 +49,9 @@ export type Entity = {
 /** 战役影响力级别 */
 export type BattleImpact = 'decisive' | 'major' | 'minor' | 'unknown';
 
+/** 战役规模级别 */
+export type BattleScale = 'massive' | 'large' | 'medium' | 'small' | 'unknown';
+
 /** 战役类型 */
 export type BattleType = 
   | 'founding'       // 开国之战
@@ -94,6 +97,8 @@ export type Event = {
     };
     /** 战役影响力级别 */
     impact?: BattleImpact;
+    /** 战役规模级别 */
+    scale?: BattleScale;
     /** 战役类型 */
     battleType?: BattleType;
   };
