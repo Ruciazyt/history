@@ -58,6 +58,33 @@
     "world-comparison": "Eurasian Comparison",
     "east-asia-comparison": "East Asia Comparison"
   },
+  "polity": {
+    "sa.zhou": "Zhou",
+    "sa.qi": "Qi",
+    "sa.jin": "Jin",
+    "sa.chu": "Chu",
+    "sa.qin": "Qin",
+    "sa.lu": "Lu",
+    "ws.qin": "Qin",
+    "ws.chu": "Chu",
+    "ws.qi": "Qi",
+    "ws.yan": "Yan",
+    "ws.zhao": "Zhao",
+    "ws.wei": "Wei",
+    "ws.han": "Han",
+    "tk.wei": "Wei",
+    "tk.shu": "Shu Han",
+    "tk.wu": "Eastern Wu",
+    "ej.jin": "Eastern Jin",
+    "ej.north": "Sixteen Kingdoms",
+    "sn.south": "Southern Dynasties",
+    "sn.north": "Northern Dynasties",
+    "fdtk.laterLiang": "Later Liang",
+    "fdtk.laterTang": "Later Tang",
+    "fdtk.laterJin": "Later Jin",
+    "fdtk.laterHan": "Later Han",
+    "fdtk.laterZhou": "Later Zhou"
+  },
   "ruler": {
     "qinshihuang": "Qin Shi Huang (Ying Zheng)",
     "qiner": "Qin Er Shi (Hu Hai)",
@@ -1216,6 +1243,20 @@
   },
   "nav": {
     "battles": "Battles"
+  },
+  "matrix": {
+    "title": "Timeline Matrix",
+    "selectEra": "Select Era",
+    "details": "Details",
+    "selectCell": "Click a cell to view details",
+    "rulers": "Rulers",
+    "events": "Events",
+    "noRulers": "No ruler data",
+    "noEvents": "No event data",
+    "battle": "Battle",
+    "attackerWin": "Attacker wins",
+    "defenderWin": "Defender wins",
+    "draw": "Draw"
   },
   "rulerEraName": {
     "wc-cn-qinshihuang": "First Emperor",

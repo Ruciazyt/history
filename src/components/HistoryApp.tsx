@@ -199,6 +199,12 @@ export function HistoryApp({
                   📜 <span className="hidden sm:inline">{t('event.viewTimeline')}</span>
                 </Link>
                 <Link
+                  href={`/${currentLocale}/matrix`}
+                  className="px-2 sm:px-3 py-1.5 bg-blue-50 hover:bg-blue-100 rounded-lg text-xs sm:text-sm text-blue-700 transition-colors border border-blue-200 whitespace-nowrap"
+                >
+                  ⊞ <span className="hidden sm:inline">{t('matrix.title')}</span>
+                </Link>
+                <Link
                   href={`/${currentLocale}/battles`}
                   className="px-2 sm:px-3 py-1.5 bg-red-50 hover:bg-red-100 rounded-lg text-xs sm:text-sm text-red-700 transition-colors border border-red-200 whitespace-nowrap"
                 >

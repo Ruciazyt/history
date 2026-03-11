@@ -58,6 +58,33 @@
     "world-comparison": "欧亚对比",
     "east-asia-comparison": "东亚对比"
   },
+  "polity": {
+    "sa.zhou": "周",
+    "sa.qi": "齐",
+    "sa.jin": "晋",
+    "sa.chu": "楚",
+    "sa.qin": "秦",
+    "sa.lu": "鲁",
+    "ws.qin": "秦",
+    "ws.chu": "楚",
+    "ws.qi": "齐",
+    "ws.yan": "燕",
+    "ws.zhao": "赵",
+    "ws.wei": "魏",
+    "ws.han": "韩",
+    "tk.wei": "魏",
+    "tk.shu": "蜀汉",
+    "tk.wu": "东吴",
+    "ej.jin": "东晋",
+    "ej.north": "北方十六国",
+    "sn.south": "南朝",
+    "sn.north": "北朝",
+    "fdtk.laterLiang": "后梁",
+    "fdtk.laterTang": "后唐",
+    "fdtk.laterJin": "后晋",
+    "fdtk.laterHan": "后汉",
+    "fdtk.laterZhou": "后周"
+  },
   "ruler": {
     "qinshihuang": "秦始皇（嬴政）",
     "qiner": "秦二世（胡亥）",
@@ -1449,5 +1476,19 @@
   },
   "nav": {
     "battles": "战役"
+  },
+  "matrix": {
+    "title": "时间轴矩阵",
+    "selectEra": "选择时代",
+    "details": "详情",
+    "selectCell": "点击左侧矩阵单元格查看详情",
+    "rulers": "君主",
+    "events": "事件",
+    "noRulers": "暂无君主数据",
+    "noEvents": "暂无事件数据",
+    "battle": "战役",
+    "attackerWin": "进攻方胜",
+    "defenderWin": "防守方胜",
+    "draw": "平局"
   }
 }
