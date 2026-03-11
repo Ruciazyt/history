@@ -59,3 +59,13 @@ src/
 - [x] 添加 commander.test.ts 测试文件（15个测试用例）
 - [x] 构建验证通过
 - [x] 部署到 Vercel 成功
+
+### 新增功能: 战役影响力洞察 (2026-03-10 22:25)
+- [x] 添加战役影响力洞察函数：
+  - getBattleImpactInsights: 生成影响力相关历史见解
+  - getImpactDistribution: 获取影响力级别分布
+  - getMostCommonImpact: 获取最常见的影响力级别
+  - getDecisiveBattlesWithCommanders: 获取具有指挥官的决定性战役
+  - getImpactResultCorrelation: 分析影响力与胜负的关联
+- [x] 添加 impact.test.ts 测试文件（12个测试用例）
+- [x] 构建验证通过
