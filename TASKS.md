@@ -25,7 +25,7 @@ https://history.ruciazyt.cn
 - [x] 公共Hooks提取
 - [x] React.memo优化
 - [x] 组件目录重组
-- [x] 单元测试（166个测试用例）
+- [x] 单元测试（271个测试用例）
 
 ## 项目结构
 ```
@@ -101,4 +101,25 @@ src/
 - [x] 生成战争相关历史洞察
 - [x] 添加 warAnalysis.test.ts 测试文件（19个测试用例）
 - [x] 构建验证通过
+- [x] 部署到 Vercel 成功
+
+### 新增功能: 战役战略/战术分析 (2026-03-11 19:47)
+- [x] 添加 BattleStrategy 类型定义（伏击、火攻、水攻、包围等12种战术）
+- [x] 创建 battleStrategy.ts 分析模块：
+  - getStrategyStats: 获取战略使用统计
+  - getMostUsedStrategies: 获取最常用战术
+  - getMostEffectiveStrategies: 获取最有效战术
+  - getStrategyAttackerDefenderAnalysis: 分析战术对攻守双方的影响
+  - getStrategyInsights: 生成战略相关历史洞察
+  - getStrategyDistributionByEra: 按朝代分析战术分布
+  - getStrategySummary: 获取完整战术摘要
+- [x] 创建 battleStrategy.test.ts 测试文件（22个测试用例）
+- [x] 为5个经典战役添加战略数据：
+  - 牧野之战: 进攻、伏击
+  - 马陵之战: 伏击、诱敌深入
+  - 长平之战: 包围、进攻
+  - 城濮之战: 防御、联盟
+  - 柏举之战: 进攻、钳形攻势
+- [x] 构建验证通过
+- [x] 单元测试: 271个测试用例全部通过
 - [x] 部署到 Vercel 成功
