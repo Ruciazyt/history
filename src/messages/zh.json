@@ -1531,5 +1531,9 @@
   "empire_ly-dynasty": "李朝",
   "empire_le-dynasty": "黎朝",
   "empire_nguyen-dynasty": "阮朝",
-  "empires_active": "个帝国"
+  "empires_active": "个帝国",
+  "event.ws-223-qin-conquers-chu": {
+    "title": "秦灭楚",
+    "summary": "秦国灭楚国，战国七雄格局进一步改变。"
+  }
 }
