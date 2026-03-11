@@ -79,6 +79,21 @@ export type BattleStrategy =
   | 'guerrilla'      // 游击战
   | 'unknown';
 
+/** 战役地形类型 */
+export type BattleTerrain = 
+  | 'plains'         // 平原
+  | 'mountains'      // 山地
+  | 'hills'          // 丘陵
+  | 'water'          // 水域（江河湖泊）
+  | 'desert'         // 沙漠
+  | 'plateau'        // 高原
+  | 'forest'         // 森林
+  | 'marsh'          // 沼泽
+  | 'coastal'        // 沿海
+  | 'urban'          // 城市/城镇
+  | 'pass'           // 关隘/峡谷
+  | 'unknown';
+
 export type Event = {
   id: string;
   entityId: string; // eraId
@@ -118,5 +133,7 @@ export type Event = {
     battleType?: BattleType;
     /** 战役战略/战术 */
     strategy?: BattleStrategy[];
+    /** 战役地形 */
+    terrain?: BattleTerrain[];
   };
 };

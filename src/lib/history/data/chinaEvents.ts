@@ -25,6 +25,7 @@ export const CHINA_EVENTS: Event[] = [
         defender: ['帝辛'],
       },
       strategy: ['offensive', 'ambush'],
+      terrain: ['plains'],
     },
   },
   {
@@ -160,6 +161,7 @@ export const CHINA_EVENTS: Event[] = [
       battleType: 'defense',
       impact: 'major',
       strategy: ['defensive', 'alliance'],
+      terrain: ['plains'],
     },
   },
   {
@@ -193,6 +195,7 @@ export const CHINA_EVENTS: Event[] = [
         defender: ['囊瓦'],
       },
       strategy: ['offensive', 'pincer'],
+      terrain: ['mountains', 'hills'],
     },
   },
 
@@ -236,6 +239,7 @@ export const CHINA_EVENTS: Event[] = [
         defender: ['庞涓'],
       },
       strategy: ['ambush', 'feigned-retreat'],
+      terrain: ['forest', 'hills'],
     },
   },
   {
@@ -309,6 +313,7 @@ export const CHINA_EVENTS: Event[] = [
         defender: ['赵括'],
       },
       strategy: ['encirclement', 'offensive'],
+      terrain: ['mountains', 'hills'],
     },
   },
   {
