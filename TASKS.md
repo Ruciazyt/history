@@ -25,7 +25,7 @@ https://history.ruciazyt.cn
 - [x] 公共Hooks提取
 - [x] React.memo优化
 - [x] 组件目录重组
-- [x] 单元测试（271个测试用例）
+- [x] 单元测试（400个测试用例）
 
 ## 项目结构
 ```
@@ -145,4 +145,22 @@ src/
 - [x] 添加 battleTimeAnalysis.ts 世纪/时代分析模块（9个测试用例）
 - [x] 构建验证通过
 - [x] 单元测试: 355个测试用例全部通过
+- [x] 部署到 Vercel 成功
+
+### 新增功能: 战役指挥官网络分析 (2026-03-11 22:06)
+- [x] 添加 commanderNetwork.ts 指挥官网络分析模块
+- [x] 支持分析指挥官之间的合作与对立关系
+- [x] 核心函数：
+  - buildCommanderNetwork: 构建指挥官关系网络
+  - getCommanderRelation: 获取两个指挥官之间的关系
+  - getTopOpponents: 获取指挥官的对手列表
+  - getTopCollaborators: 获取指挥官的合作者列表
+  - getTopMatchups: 获取最常见的对手组合
+  - getTopCollaborations: 获取最默契的合作组合
+  - getCommanderClusters: 找出活跃的指挥官群体
+  - getCommanderNetworkSummary: 获取网络摘要
+  - getCommanderNetworkInsights: 生成网络洞察
+- [x] 创建 commanderNetwork.test.ts 测试文件（22个测试用例）
+- [x] 构建验证通过
+- [x] 单元测试: 400个测试用例全部通过
 - [x] 部署到 Vercel 成功

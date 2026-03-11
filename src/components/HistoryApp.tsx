@@ -6,6 +6,8 @@ import Link from 'next/link';
 import type { Era, Event, Ruler } from '@/lib/history/types';
 import { clamp, formatYear } from '@/lib/history/utils';
 import { HistoryMap } from '@/components/HistoryMap';
+import { WorldEmpireMap } from '@/components/world/WorldEmpireMap';
+import { TimelineSlider } from '@/components/world/TimelineSlider';
 import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 import { RulerRelations } from '@/components/common/RulerRelations';
 import { SearchBox } from '@/components/common/SearchBox';
@@ -13,6 +15,7 @@ import { useTranslations } from 'next-intl';
 
 import { worldComparisonEra, eastAsiaComparisonEra } from '@/lib/history/data/worldEras';
 import { worldComparisonRulers, eastAsiaRulers } from '@/lib/history/data/worldRulers';
+import { getWorldEraBounds, getActiveBoundaries } from '@/lib/history/data/worldBoundaries';
 
 function rangeLabel(centerYear: number, windowYears: number) {
   const half = Math.floor(windowYears / 2);
@@ -43,6 +46,15 @@ export function HistoryApp({
   const currentLocale = locale || 'zh';
 
   const [civMode, setCivMode] = React.useState<'china' | 'eurasian' | 'east-asia'>('china');
+  
+  // 世界帝国地图的当前年份
+  const [worldYear, setWorldYear] = React.useState<number>(1);
+  const worldEraBounds = React.useMemo(() => getWorldEraBounds(civMode === 'eurasian' ? 'eurasian' : 'east-asia'), [civMode]);
+  const activeWorldBoundaries = React.useMemo(() => 
+    getActiveBoundaries(worldYear, civMode === 'eurasian' ? 'eurasian' : 'east-asia'),
+    [worldYear, civMode]
+  );
+  
   const activeEras = civMode === 'china' ? eras : civMode === 'eurasian' ? [worldComparisonEra] : [eastAsiaComparisonEra];
   const activeRulers = civMode === 'china' ? rulers : civMode === 'eurasian' ? worldComparisonRulers : eastAsiaRulers;
 
@@ -416,7 +428,26 @@ export function HistoryApp({
             </div>
 
             <div className="flex-1 min-h-0 rounded-xl border border-zinc-200 bg-white overflow-hidden">
-              <HistoryMap events={mapEvents} openEraIds={openEraIds} />
+              {civMode === 'china' ? (
+                <HistoryMap events={mapEvents} openEraIds={openEraIds} />
+              ) : (
+                <>
+                  <div className="flex-1 min-h-0">
+                    <WorldEmpireMap 
+                      year={worldYear} 
+                      mode={civMode === 'eurasian' ? 'eurasian' : 'east-asia'}
+                    />
+                  </div>
+                  <TimelineSlider
+                    year={worldYear}
+                    minYear={worldEraBounds.min}
+                    maxYear={worldEraBounds.max}
+                    onYearChange={setWorldYear}
+                    activeEmpires={activeWorldBoundaries.map(b => b.properties.nameKey)}
+                    t={(key: string) => t(key)}
+                  />
+                </>
+              )}
             </div>
           </section>
 

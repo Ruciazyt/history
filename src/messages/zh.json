@@ -1490,5 +1490,42 @@
     "attackerWin": "进攻方胜",
     "defenderWin": "防守方胜",
     "draw": "平局"
+  },
+  "map": {
+    "legend": "图例"
+  },
+  "empire": {
+    "qin": "秦朝",
+    "han-western": "西汉",
+    "han-eastern": "东汉",
+    "tang": "唐朝",
+    "song": "宋朝",
+    "yuan": "元朝",
+    "ming": "明朝",
+    "qing": "清朝",
+    "rome-republic": "罗马共和国",
+    "rome-empire": "罗马帝国",
+    "byzantine": "拜占庭帝国",
+    "ottoman": "奥斯曼帝国",
+    "achaemenid": "阿契美尼德波斯",
+    "parthian": "帕提亚帝国",
+    "sassanid": "萨珊波斯",
+    "safavid": "萨法维波斯",
+    "umayyad": "倭马亚王朝",
+    "abbasid": "阿拔斯王朝",
+    "timurid": "帖木儿帝国",
+    "alexander": "亚历山大帝国",
+    "mongol": "蒙古帝国",
+    "maurya": "孔雀王朝",
+    "mughal": "莫卧儿帝国",
+    "heian": "平安时代",
+    "edo": "江户时代",
+    "goryeo": "高丽王朝",
+    "joseon": "朝鲜王朝",
+    "ly-dynasty": "李朝",
+    "le-dynasty": "黎朝",
+    "nguyen-dynasty": "阮朝",
+    "han-wester": "西汉",
+    "active": "个帝国"
   }
 }
