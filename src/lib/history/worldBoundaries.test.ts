@@ -12,7 +12,7 @@ describe('worldBoundaries', () => {
       const boundaries = getActiveBoundaries(-210, 'eurasian');
       
       // At -210 BCE, Qin should be active (-221 to -206)
-      const qin = boundaries.find(b => b.properties.nameKey === 'empire.qin');
+      const qin = boundaries.find(b => b.properties.nameKey === 'empire_qin');
       expect(qin).toBeDefined();
     });
 
@@ -20,7 +20,7 @@ describe('worldBoundaries', () => {
       const boundaries = getActiveBoundaries(100, 'eurasian');
       
       // At 100 CE, Roman Empire should be active
-      const rome = boundaries.find(b => b.properties.nameKey === 'empire.rome-empire');
+      const rome = boundaries.find(b => b.properties.nameKey === 'empire_rome-empire');
       expect(rome).toBeDefined();
     });
 
@@ -28,7 +28,7 @@ describe('worldBoundaries', () => {
       const boundaries = getActiveBoundaries(1000, 'eurasian');
       
       // At 1000 CE, Song should be active
-      const song = boundaries.find(b => b.properties.nameKey === 'empire.song');
+      const song = boundaries.find(b => b.properties.nameKey === 'empire_song');
       expect(song).toBeDefined();
     });
 
@@ -36,8 +36,8 @@ describe('worldBoundaries', () => {
       const boundaries = getActiveBoundaries(1200, 'eurasian');
       
       // At 1200 CE, Song, Abbasid should be active
-      const song = boundaries.find(b => b.properties.nameKey === 'empire.song');
-      const abbasid = boundaries.find(b => b.properties.nameKey === 'empire.abbasid');
+      const song = boundaries.find(b => b.properties.nameKey === 'empire_song');
+      const abbasid = boundaries.find(b => b.properties.nameKey === 'empire_abbasid');
       
       expect(song).toBeDefined();
       expect(abbasid).toBeDefined();
@@ -47,8 +47,8 @@ describe('worldBoundaries', () => {
       const boundaries = getActiveBoundaries(1800, 'eurasian');
       
       // At 1800 CE, Qing, Ottoman should be active
-      const qing = boundaries.find(b => b.properties.nameKey === 'empire.qing');
-      const ottoman = boundaries.find(b => b.properties.nameKey === 'empire.ottoman');
+      const qing = boundaries.find(b => b.properties.nameKey === 'empire_qing');
+      const ottoman = boundaries.find(b => b.properties.nameKey === 'empire_ottoman');
       
       expect(qing).toBeDefined();
       expect(ottoman).toBeDefined();
@@ -58,9 +58,9 @@ describe('worldBoundaries', () => {
       const boundaries = getActiveBoundaries(1700, 'east-asia');
       
       // At 1700 CE, Qing China, Edo Japan, Joseon Korea should be active
-      const qing = boundaries.find(b => b.properties.nameKey === 'empire.qing');
-      const edo = boundaries.find(b => b.properties.nameKey === 'empire.edo');
-      const joseon = boundaries.find(b => b.properties.nameKey === 'empire.joseon');
+      const qing = boundaries.find(b => b.properties.nameKey === 'empire_qing');
+      const edo = boundaries.find(b => b.properties.nameKey === 'empire_edo');
+      const joseon = boundaries.find(b => b.properties.nameKey === 'empire_joseon');
       
       expect(qing).toBeDefined();
       expect(edo).toBeDefined();
@@ -120,14 +120,14 @@ describe('worldBoundaries', () => {
 
   describe('Chinese Empire Coverage', () => {
     const chineseEmpires = [
-      'empire.qin',
-      'empire.han-western',
-      'empire.han-eastern',
-      'empire.tang',
-      'empire.song',
-      'empire.yuan',
-      'empire.ming',
-      'empire.qing',
+      'empire_qin',
+      'empire_han-western',
+      'empire_han-eastern',
+      'empire_tang',
+      'empire_song',
+      'empire_yuan',
+      'empire_ming',
+      'empire_qing',
     ];
 
     it('should include all major Chinese dynasties', () => {
@@ -140,10 +140,10 @@ describe('worldBoundaries', () => {
 
   describe('Roman Empire Coverage', () => {
     const romanEmpires = [
-      'empire.rome-republic',
-      'empire.rome-empire',
-      'empire.byzantine',
-      'empire.ottoman',
+      'empire_rome-republic',
+      'empire_rome-empire',
+      'empire_byzantine',
+      'empire_ottoman',
     ];
 
     it('should include Roman/Byzantine/Ottoman empires', () => {
@@ -156,10 +156,10 @@ describe('worldBoundaries', () => {
 
   describe('Persian Empire Coverage', () => {
     const persianEmpires = [
-      'empire.achaemenid',
-      'empire.parthian',
-      'empire.sassanid',
-      'empire.safavid',
+      'empire_achaemenid',
+      'empire_parthian',
+      'empire_sassanid',
+      'empire_safavid',
     ];
 
     it('should include all Persian empires', () => {
@@ -172,9 +172,9 @@ describe('worldBoundaries', () => {
 
   describe('Islamic Caliphate Coverage', () => {
     const islamicEmpires = [
-      'empire.umayyad',
-      'empire.abbasid',
-      'empire.timurid',
+      'empire_umayyad',
+      'empire_abbasid',
+      'empire_timurid',
     ];
 
     it('should include Islamic empires', () => {
@@ -188,57 +188,57 @@ describe('worldBoundaries', () => {
   describe('East Asia Coverage', () => {
     it('should include Japanese periods', () => {
       const eastAsiaKeys = eastAsiaBoundaries.map(b => b.properties.nameKey);
-      expect(eastAsiaKeys).toContain('empire.heian');
-      expect(eastAsiaKeys).toContain('empire.edo');
+      expect(eastAsiaKeys).toContain('empire_heian');
+      expect(eastAsiaKeys).toContain('empire_edo');
     });
 
     it('should include Korean dynasties', () => {
       const eastAsiaKeys = eastAsiaBoundaries.map(b => b.properties.nameKey);
-      expect(eastAsiaKeys).toContain('empire.goryeo');
-      expect(eastAsiaKeys).toContain('empire.joseon');
+      expect(eastAsiaKeys).toContain('empire_goryeo');
+      expect(eastAsiaKeys).toContain('empire_joseon');
     });
 
     it('should include Vietnamese dynasties', () => {
       const eastAsiaKeys = eastAsiaBoundaries.map(b => b.properties.nameKey);
-      expect(eastAsiaKeys).toContain('empire.ly-dynasty');
-      expect(eastAsiaKeys).toContain('empire.le-dynasty');
-      expect(eastAsiaKeys).toContain('empire.nguyen-dynasty');
+      expect(eastAsiaKeys).toContain('empire_ly-dynasty');
+      expect(eastAsiaKeys).toContain('empire_le-dynasty');
+      expect(eastAsiaKeys).toContain('empire_nguyen-dynasty');
     });
   });
 
   describe('i18n Translations', () => {
     // Mock translation function for testing
     const mockTranslations: Record<string, string> = {
-      'empire.qin': '秦朝',
-      'empire.han-western': '西汉',
-      'empire.tang': '唐朝',
-      'empire.ming': '明朝',
-      'empire.qing': '清朝',
-      'empire.rome-empire': '罗马帝国',
-      'empire.ottoman': '奥斯曼帝国',
-      'empire.heian': '平安时代',
-      'empire.edo': '江户时代',
+      'empire_qin': '秦朝',
+      'empire_han-western': '西汉',
+      'empire_tang': '唐朝',
+      'empire_ming': '明朝',
+      'empire_qing': '清朝',
+      'empire_rome-empire': '罗马帝国',
+      'empire_ottoman': '奥斯曼帝国',
+      'empire_heian': '平安时代',
+      'empire_edo': '江户时代',
       'empires.active': '个帝国',
     };
 
     const mockT = (key: string): string => mockTranslations[key] || key;
 
     it('should have translations for major empires', () => {
-      expect(mockT('empire.qin')).toBe('秦朝');
-      expect(mockT('empire.han-western')).toBe('西汉');
-      expect(mockT('empire.tang')).toBe('唐朝');
-      expect(mockT('empire.ming')).toBe('明朝');
-      expect(mockT('empire.qing')).toBe('清朝');
+      expect(mockT('empire_qin')).toBe('秦朝');
+      expect(mockT('empire_han-western')).toBe('西汉');
+      expect(mockT('empire_tang')).toBe('唐朝');
+      expect(mockT('empire_ming')).toBe('明朝');
+      expect(mockT('empire_qing')).toBe('清朝');
     });
 
     it('should have translations for Roman/Ottoman empires', () => {
-      expect(mockT('empire.rome-empire')).toBe('罗马帝国');
-      expect(mockT('empire.ottoman')).toBe('奥斯曼帝国');
+      expect(mockT('empire_rome-empire')).toBe('罗马帝国');
+      expect(mockT('empire_ottoman')).toBe('奥斯曼帝国');
     });
 
     it('should have translations for East Asian periods', () => {
-      expect(mockT('empire.heian')).toBe('平安时代');
-      expect(mockT('empire.edo')).toBe('江户时代');
+      expect(mockT('empire_heian')).toBe('平安时代');
+      expect(mockT('empire_edo')).toBe('江户时代');
     });
 
     it('should return key when translation is missing', () => {
