@@ -123,3 +123,26 @@ src/
 - [x] 构建验证通过
 - [x] 单元测试: 271个测试用例全部通过
 - [x] 部署到 Vercel 成功
+
+### 新增功能: 战役因果链分析 (2026-03-11 21:35)
+- [x] 添加 battleChain.ts 战役因果链分析模块
+- [x] 支持分析战役之间的历史关联和连锁反应
+- [x] 提供因果链图构建功能
+- [x] 识别5种因果链类型：
+  - escalation: 规模升级链
+  - retaliation: 复仇反击链
+  - conquest: 征服扩张链
+  - collapse: 持续溃败链
+  - domino: 多米诺效应
+- [x] 核心函数：
+  - buildBattleChainGraph: 构建因果链图
+  - getBattleChain: 获取指定战役的因果链
+  - getMostInfluentialChains: 获取最具影响力的因果链
+  - analyzeChainType: 分析因果链类型
+  - getBattleChainSummary: 获取因果链摘要
+  - hasChainData: 检查是否有足够的因果链数据
+- [x] 创建 battleChain.test.ts 测试文件（20个测试用例）
+- [x] 添加 battleTimeAnalysis.ts 世纪/时代分析模块（9个测试用例）
+- [x] 构建验证通过
+- [x] 单元测试: 355个测试用例全部通过
+- [x] 部署到 Vercel 成功
