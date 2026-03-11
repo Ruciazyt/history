@@ -94,6 +94,22 @@ export type BattleTerrain =
   | 'pass'           // 关隘/峡谷
   | 'unknown';
 
+/** 战役伤亡估算数据 */
+export type BattleCasualties = {
+  /** 进攻方伤亡人数 */
+  attacker?: number;
+  /** 防守方伤亡人数 */
+  defender?: number;
+  /** 进攻方伤亡类型 */
+  attackerCasualtyType?: 'killed' | 'wounded' | 'captured' | 'missing' | 'combined';
+  /** 防守方伤亡类型 */
+  defenderCasualtyType?: 'killed' | 'wounded' | 'captured' | 'missing' | 'combined';
+  /** 伤亡估算依据 */
+  source?: string;
+  /** 估算可靠程度 */
+  reliability?: 'high' | 'medium' | 'low';
+};
+
 export type Event = {
   id: string;
   entityId: string; // eraId
@@ -135,5 +151,7 @@ export type Event = {
     strategy?: BattleStrategy[];
     /** 战役地形 */
     terrain?: BattleTerrain[];
+    /** 战役伤亡估算 */
+    casualties?: BattleCasualties;
   };
 };

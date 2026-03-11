@@ -55,7 +55,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '西汉', nameKey: 'empire.han-wester', startYear: -206, endYear: 9, color: '#DC2626' },
+    properties: { name: '西汉', nameKey: 'empire.han-western', startYear: -206, endYear: 9, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[

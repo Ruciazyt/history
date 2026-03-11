@@ -59,31 +59,55 @@
     "east-asia-comparison": "東アジア比較"
   },
   "polity": {
-    "sa.zhou": "周",
-    "sa.qi": "斉",
-    "sa.jin": "晋",
-    "sa.chu": "楚",
-    "sa.qin": "秦",
-    "sa.lu": "魯",
-    "ws.qin": "秦",
-    "ws.chu": "楚",
-    "ws.qi": "斉",
-    "ws.yan": "燕",
-    "ws.zhao": "趙",
-    "ws.wei": "魏",
-    "ws.han": "韓",
-    "tk.wei": "魏",
-    "tk.shu": "蜀漢",
-    "tk.wu": "東呉",
-    "ej.jin": "東晋",
-    "ej.north": "十六国",
-    "sn.south": "南朝",
-    "sn.north": "北朝",
-    "fdtk.laterLiang": "後梁",
-    "fdtk.laterTang": "後唐",
-    "fdtk.laterJin": "後晋",
-    "fdtk.laterHan": "後漢",
-    "fdtk.laterZhou": "後周"
+    "ws": {
+      "qin": "秦",
+      "chu": "楚",
+      "qi": "斉",
+      "yan": "燕",
+      "zhao": "趙",
+      "wei": "魏",
+      "han": "韓"
+    },
+    "fdtk": {
+      "laterLiang": "後梁",
+      "laterTang": "後唐",
+      "laterJin": "後晋",
+      "laterHan": "後漢",
+      "laterZhou": "後周"
+    },
+    "sa": {
+      "zhou": "周（天子）",
+      "qi": "斉",
+      "jin": "晋",
+      "chu": "楚",
+      "qin": "秦",
+      "lu": "魯"
+    },
+    "tk": {
+      "wei": "魏",
+      "shu": "蜀漢",
+      "wu": "呉"
+    },
+    "ej": {
+      "jin": "東晋",
+      "north": "北方諸国"
+    },
+    "sn": {
+      "south": "南朝",
+      "north": "北朝"
+    },
+    "wc": {
+      "china": "中国",
+      "rome": "ローマ/ビザンツ/オスマン",
+      "persia": "ペルシア",
+      "islam": "イスラム・カリフ国"
+    },
+    "ea": {
+      "china": "中国",
+      "japan": "日本",
+      "korea": "朝鮮/韓国",
+      "vietnam": "ベトナム"
+    }
   },
   "ruler": {
     "qinshihuang": "秦始皇（嬴政）",
@@ -1147,57 +1171,6 @@
       "summary": "租税制度の変化として語られ、春秋期の制度転換の議論に用いられる。"
     }
   },
-  "polity": {
-    "ws": {
-      "qin": "秦",
-      "chu": "楚",
-      "qi": "斉",
-      "yan": "燕",
-      "zhao": "趙",
-      "wei": "魏",
-      "han": "韓"
-    },
-    "fdtk": {
-      "laterLiang": "後梁",
-      "laterTang": "後唐",
-      "laterJin": "後晋",
-      "laterHan": "後漢",
-      "laterZhou": "後周"
-    },
-    "sa": {
-      "zhou": "周（天子）",
-      "qi": "斉",
-      "jin": "晋",
-      "chu": "楚",
-      "qin": "秦",
-      "lu": "魯"
-    },
-    "tk": {
-      "wei": "魏",
-      "shu": "蜀漢",
-      "wu": "呉"
-    },
-    "ej": {
-      "jin": "東晋",
-      "north": "北方諸国"
-    },
-    "sn": {
-      "south": "南朝",
-      "north": "北朝"
-    },
-    "wc": {
-      "china": "中国",
-      "rome": "ローマ/ビザンツ/オスマン",
-      "persia": "ペルシア",
-      "islam": "イスラム・カリフ国"
-    },
-    "ea": {
-      "china": "中国",
-      "japan": "日本",
-      "korea": "朝鮮/韓国",
-      "vietnam": "ベトナム"
-    }
-  },
   "nav": {
     "battles": "戦い"
   },
@@ -1290,5 +1263,36 @@
     "wc-cn-qing-cixi": "同治",
     "wc-cn-qing-dezong": "光緒",
     "wc-cn-qing-puyi": "宣統"
-  }
+  },
+  "empire.qin": "秦王朝",
+  "empire.han-western": "前漢",
+  "empire.han-eastern": "後漢",
+  "empire.tang": "唐王朝",
+  "empire.song": "宋王朝",
+  "empire.yuan": "元王朝",
+  "empire.ming": "明王朝",
+  "empire.qing": "清王朝",
+  "empire.rome-republic": "ローマ共和国",
+  "empire.rome-empire": "ローマ帝国",
+  "empire.byzantine": "ビザンツ帝国",
+  "empire.ottoman": "オスマン帝国",
+  "empire.achaemenid": "アケメネス朝ペルシア",
+  "empire.parthian": "パルティア帝国",
+  "empire.sassanid": "ササン朝ペルシア",
+  "empire.safavid": "サファヴィー朝",
+  "empire.umayyad": "ウマイヤ朝",
+  "empire.abbasid": "アッバス朝",
+  "empire.timurid": "ティムール帝国",
+  "empire.alexander": "アレクサンドロス帝国",
+  "empire.mongol": "モンゴル帝国",
+  "empire.maurya": "マウリヤ帝国",
+  "empire.mughal": "ムガル帝国",
+  "empire.heian": "平安時代",
+  "empire.edo": "江戸時代",
+  "empire.goryeo": "高麗王朝",
+  "empire.joseon": "李氏朝鲜",
+  "empire.ly-dynasty": "李朝",
+  "empire.le-dynasty": "黎朝",
+  "empire.nguyen-dynasty": "阮朝",
+  "empires.active": "帝国"
 }

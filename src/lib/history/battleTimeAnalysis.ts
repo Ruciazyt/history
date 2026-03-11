@@ -32,19 +32,20 @@ export function getEraGroupLabel(era: EraGroup): string {
 export function getBattleCentury(battle: Event): number {
   const year = battle.year;
   if (year < 0) {
-    // 公元前: -1 世纪 = 1-100 BCE
-    return Math.floor((Math.abs(year) - 1) / 100) + 1;
-  } else {
-    // 公元后: 1 世纪 = 1-100 CE
-    return Math.floor((year - 1) / 100) + 1;
+    // BCE: return negative century (e.g. -1 = 1st century BCE)
+    return -(Math.floor((Math.abs(year) - 1) / 100) + 1);
   }
+
+  // CE: return positive century (e.g. 1 = 1st century CE)
+  return Math.floor((year - 1) / 100) + 1;
 }
 
 /** 获取世纪标签 */
 export function getCenturyLabel(century: number): string {
-  if (century <= 0) return '未知';
-  if (century === 1) return '公元前1世纪';
+  if (century === 0) return '未知';
+
   if (century < 0) return `公元前${Math.abs(century)}世纪`;
+
   return `公元${century}世纪`;
 }
 

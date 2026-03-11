@@ -123,33 +123,33 @@ const mockBattles: Event[] = [
 describe('battleTimeAnalysis', () => {
   describe('getBattleCentury', () => {
     it('should return correct century for BCE years', () => {
-      expect(getBattleCentury({ ...mockBattles[0], year: -1046 })).toBe(11);
-      expect(getBattleCentury({ ...mockBattles[0], year: -100 })).toBe(1);
-      expect(getBattleCentury({ ...mockBattles[0], year: -200 })).toBe(2);
+      expect(getBattleCentury({ ...mockBattles[0], year: -1046 })).toBe(-11);
+      expect(getBattleCentury({ ...mockBattles[0], year: -100 })).toBe(-1);
+      expect(getBattleCentury({ ...mockBattles[0], year: -200 })).toBe(-2);
     });
 
     it('should return correct century for CE years', () => {
-      expect(getBattleCentury({ ...mockBattles[4], year: 200 })).toBe(3);
-      expect(getBattleCentury({ ...mockBattles[6], year: 1200 })).toBe(13);
+      expect(getBattleCentury({ ...mockBattles[4], year: 200 })).toBe(2);
+      expect(getBattleCentury({ ...mockBattles[6], year: 1200 })).toBe(12);
       expect(getBattleCentury({ ...mockBattles[7], year: 1644 })).toBe(17);
     });
   });
 
   describe('getCenturyLabel', () => {
     it('should return correct labels for BCE centuries', () => {
-      expect(getCenturyLabel(11)).toBe('公元前11世纪');
-      expect(getCenturyLabel(3)).toBe('公元前3世纪');
-      expect(getCenturyLabel(1)).toBe('公元前1世纪');
+      expect(getCenturyLabel(-11)).toBe('公元前11世纪');
+      expect(getCenturyLabel(-3)).toBe('公元前3世纪');
+      expect(getCenturyLabel(-1)).toBe('公元前1世纪');
     });
 
     it('should return correct labels for CE centuries', () => {
-      expect(getCenturyLabel(13)).toBe('公元13世纪');
+      expect(getCenturyLabel(2)).toBe('公元2世纪');
+      expect(getCenturyLabel(12)).toBe('公元12世纪');
       expect(getCenturyLabel(17)).toBe('公元17世纪');
     });
 
     it('should return unknown for invalid century', () => {
       expect(getCenturyLabel(0)).toBe('未知');
-      expect(getCenturyLabel(-1)).toBe('未知');
     });
   });
 
@@ -218,7 +218,7 @@ describe('battleTimeAnalysis', () => {
 
     it('should track attacker/defender wins', () => {
       const dist = getCenturyDistribution(mockBattles);
-      const century11 = dist.find(d => d.century === 11);
+      const century11 = dist.find(d => d.century === -11);
       expect(century11?.attackerWins).toBe(1);
     });
   });

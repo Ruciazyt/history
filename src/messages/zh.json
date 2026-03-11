@@ -59,31 +59,55 @@
     "east-asia-comparison": "东亚对比"
   },
   "polity": {
-    "sa.zhou": "周",
-    "sa.qi": "齐",
-    "sa.jin": "晋",
-    "sa.chu": "楚",
-    "sa.qin": "秦",
-    "sa.lu": "鲁",
-    "ws.qin": "秦",
-    "ws.chu": "楚",
-    "ws.qi": "齐",
-    "ws.yan": "燕",
-    "ws.zhao": "赵",
-    "ws.wei": "魏",
-    "ws.han": "韩",
-    "tk.wei": "魏",
-    "tk.shu": "蜀汉",
-    "tk.wu": "东吴",
-    "ej.jin": "东晋",
-    "ej.north": "北方十六国",
-    "sn.south": "南朝",
-    "sn.north": "北朝",
-    "fdtk.laterLiang": "后梁",
-    "fdtk.laterTang": "后唐",
-    "fdtk.laterJin": "后晋",
-    "fdtk.laterHan": "后汉",
-    "fdtk.laterZhou": "后周"
+    "ws": {
+      "qin": "秦",
+      "chu": "楚",
+      "qi": "齐",
+      "yan": "燕",
+      "zhao": "赵",
+      "wei": "魏",
+      "han": "韩"
+    },
+    "fdtk": {
+      "laterLiang": "后梁",
+      "laterTang": "后唐",
+      "laterJin": "后晋",
+      "laterHan": "后汉",
+      "laterZhou": "后周"
+    },
+    "sa": {
+      "zhou": "周（天子）",
+      "qi": "齐",
+      "jin": "晋",
+      "chu": "楚",
+      "qin": "秦",
+      "lu": "鲁"
+    },
+    "tk": {
+      "wei": "魏",
+      "shu": "蜀汉",
+      "wu": "吴"
+    },
+    "ej": {
+      "jin": "东晋",
+      "north": "北方诸国"
+    },
+    "sn": {
+      "south": "南朝",
+      "north": "北朝"
+    },
+    "wc": {
+      "china": "中国",
+      "rome": "罗马/拜占庭/奥斯曼",
+      "persia": "波斯帝国",
+      "islam": "伊斯兰哈里发"
+    },
+    "ea": {
+      "china": "中国",
+      "japan": "日本",
+      "korea": "朝鲜/韩国",
+      "vietnam": "越南"
+    }
   },
   "ruler": {
     "qinshihuang": "秦始皇（嬴政）",
@@ -1248,57 +1272,6 @@
       "summary": "邓小平推行改革开放，中国经济腾飞。"
     }
   },
-  "polity": {
-    "ws": {
-      "qin": "秦",
-      "chu": "楚",
-      "qi": "齐",
-      "yan": "燕",
-      "zhao": "赵",
-      "wei": "魏",
-      "han": "韩"
-    },
-    "fdtk": {
-      "laterLiang": "后梁",
-      "laterTang": "后唐",
-      "laterJin": "后晋",
-      "laterHan": "后汉",
-      "laterZhou": "后周"
-    },
-    "sa": {
-      "zhou": "周（天子）",
-      "qi": "齐",
-      "jin": "晋",
-      "chu": "楚",
-      "qin": "秦",
-      "lu": "鲁"
-    },
-    "tk": {
-      "wei": "魏",
-      "shu": "蜀汉",
-      "wu": "吴"
-    },
-    "ej": {
-      "jin": "东晋",
-      "north": "北方诸国"
-    },
-    "sn": {
-      "south": "南朝",
-      "north": "北朝"
-    },
-    "wc": {
-      "china": "中国",
-      "rome": "罗马/拜占庭/奥斯曼",
-      "persia": "波斯帝国",
-      "islam": "伊斯兰哈里发"
-    },
-    "ea": {
-      "china": "中国",
-      "japan": "日本",
-      "korea": "朝鲜/韩国",
-      "vietnam": "越南"
-    }
-  },
   "rulerEraName": {
     "wc-cn-qinshihuang": "始皇帝",
     "wc-cn-hanwudi": "建元/元狩/元封",
@@ -1527,5 +1500,36 @@
     "nguyen-dynasty": "阮朝",
     "han-wester": "西汉",
     "active": "个帝国"
-  }
+  },
+  "empire.qin": "秦朝",
+  "empire.han-western": "西汉",
+  "empire.han-eastern": "东汉",
+  "empire.tang": "唐朝",
+  "empire.song": "宋朝",
+  "empire.yuan": "元朝",
+  "empire.ming": "明朝",
+  "empire.qing": "清朝",
+  "empire.rome-republic": "罗马共和国",
+  "empire.rome-empire": "罗马帝国",
+  "empire.byzantine": "拜占庭帝国",
+  "empire.ottoman": "奥斯曼帝国",
+  "empire.achaemenid": "阿契美尼德波斯",
+  "empire.parthian": "帕提亚帝国",
+  "empire.sassanid": "萨珊波斯",
+  "empire.safavid": "萨法维波斯",
+  "empire.umayyad": "倭马亚王朝",
+  "empire.abbasid": "阿拔斯王朝",
+  "empire.timurid": "帖木儿帝国",
+  "empire.alexander": "亚历山大帝国",
+  "empire.mongol": "蒙古帝国",
+  "empire.maurya": "孔雀王朝",
+  "empire.mughal": "莫卧儿帝国",
+  "empire.heian": "平安时代",
+  "empire.edo": "江户时代",
+  "empire.goryeo": "高丽王朝",
+  "empire.joseon": "朝鲜王朝",
+  "empire.ly-dynasty": "李朝",
+  "empire.le-dynasty": "黎朝",
+  "empire.nguyen-dynasty": "阮朝",
+  "empires.active": "个帝国"
 }

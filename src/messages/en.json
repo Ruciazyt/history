@@ -59,31 +59,55 @@
     "east-asia-comparison": "East Asia Comparison"
   },
   "polity": {
-    "sa.zhou": "Zhou",
-    "sa.qi": "Qi",
-    "sa.jin": "Jin",
-    "sa.chu": "Chu",
-    "sa.qin": "Qin",
-    "sa.lu": "Lu",
-    "ws.qin": "Qin",
-    "ws.chu": "Chu",
-    "ws.qi": "Qi",
-    "ws.yan": "Yan",
-    "ws.zhao": "Zhao",
-    "ws.wei": "Wei",
-    "ws.han": "Han",
-    "tk.wei": "Wei",
-    "tk.shu": "Shu Han",
-    "tk.wu": "Eastern Wu",
-    "ej.jin": "Eastern Jin",
-    "ej.north": "Sixteen Kingdoms",
-    "sn.south": "Southern Dynasties",
-    "sn.north": "Northern Dynasties",
-    "fdtk.laterLiang": "Later Liang",
-    "fdtk.laterTang": "Later Tang",
-    "fdtk.laterJin": "Later Jin",
-    "fdtk.laterHan": "Later Han",
-    "fdtk.laterZhou": "Later Zhou"
+    "ws": {
+      "qin": "Qin",
+      "chu": "Chu",
+      "qi": "Qi",
+      "yan": "Yan",
+      "zhao": "Zhao",
+      "wei": "Wei",
+      "han": "Han"
+    },
+    "fdtk": {
+      "laterLiang": "Later Liang",
+      "laterTang": "Later Tang",
+      "laterJin": "Later Jin",
+      "laterHan": "Later Han",
+      "laterZhou": "Later Zhou"
+    },
+    "sa": {
+      "zhou": "Zhou (Son of Heaven)",
+      "qi": "Qi",
+      "jin": "Jin",
+      "chu": "Chu",
+      "qin": "Qin",
+      "lu": "Lu"
+    },
+    "tk": {
+      "wei": "Wei",
+      "shu": "Shu Han",
+      "wu": "Wu"
+    },
+    "ej": {
+      "jin": "Eastern Jin",
+      "north": "Sixteen Kingdoms"
+    },
+    "sn": {
+      "south": "Southern Dynasties",
+      "north": "Northern Dynasties"
+    },
+    "wc": {
+      "china": "China",
+      "rome": "Rome/Byzantine/Ottoman",
+      "persia": "Persia",
+      "islam": "Islamic Caliphates"
+    },
+    "ea": {
+      "china": "China",
+      "japan": "Japan",
+      "korea": "Korea",
+      "vietnam": "Vietnam"
+    }
   },
   "ruler": {
     "qinshihuang": "Qin Shi Huang (Ying Zheng)",
@@ -1120,57 +1144,6 @@
       "summary": "Deng Xiaoping's reforms."
     }
   },
-  "polity": {
-    "ws": {
-      "qin": "Qin",
-      "chu": "Chu",
-      "qi": "Qi",
-      "yan": "Yan",
-      "zhao": "Zhao",
-      "wei": "Wei",
-      "han": "Han"
-    },
-    "fdtk": {
-      "laterLiang": "Later Liang",
-      "laterTang": "Later Tang",
-      "laterJin": "Later Jin",
-      "laterHan": "Later Han",
-      "laterZhou": "Later Zhou"
-    },
-    "sa": {
-      "zhou": "Zhou (Son of Heaven)",
-      "qi": "Qi",
-      "jin": "Jin",
-      "chu": "Chu",
-      "qin": "Qin",
-      "lu": "Lu"
-    },
-    "tk": {
-      "wei": "Wei",
-      "shu": "Shu Han",
-      "wu": "Wu"
-    },
-    "ej": {
-      "jin": "Eastern Jin",
-      "north": "Sixteen Kingdoms"
-    },
-    "sn": {
-      "south": "Southern Dynasties",
-      "north": "Northern Dynasties"
-    },
-    "wc": {
-      "china": "China",
-      "rome": "Rome/Byzantine/Ottoman",
-      "persia": "Persia",
-      "islam": "Islamic Caliphates"
-    },
-    "ea": {
-      "china": "China",
-      "japan": "Japan",
-      "korea": "Korea",
-      "vietnam": "Vietnam"
-    }
-  },
   "timeline": {
     "title": "Historical Timeline",
     "selectProcess": "Select Historical Process",
@@ -1333,5 +1306,36 @@
     "wc-cn-qing-cixi": "Tongzhi",
     "wc-cn-qing-dezong": "Guangxu",
     "wc-cn-qing-puyi": "Xuantong"
-  }
+  },
+  "empire.qin": "Qin Dynasty",
+  "empire.han-western": "Western Han",
+  "empire.han-eastern": "Eastern Han",
+  "empire.tang": "Tang Dynasty",
+  "empire.song": "Song Dynasty",
+  "empire.yuan": "Yuan Dynasty",
+  "empire.ming": "Ming Dynasty",
+  "empire.qing": "Qing Dynasty",
+  "empire.rome-republic": "Roman Republic",
+  "empire.rome-empire": "Roman Empire",
+  "empire.byzantine": "Byzantine Empire",
+  "empire.ottoman": "Ottoman Empire",
+  "empire.achaemenid": "Achaemenid Persia",
+  "empire.parthian": "Parthian Empire",
+  "empire.sassanid": "Sassanid Persia",
+  "empire.safavid": "Safavid Persia",
+  "empire.umayyad": "Umayyad Caliphate",
+  "empire.abbasid": "Abbasid Caliphate",
+  "empire.timurid": "Timurid Empire",
+  "empire.alexander": "Alexandrian Empire",
+  "empire.mongol": "Mongol Empire",
+  "empire.maurya": "Maurya Empire",
+  "empire.mughal": "Mughal Empire",
+  "empire.heian": "Heian Period",
+  "empire.edo": "Edo Period",
+  "empire.goryeo": "Goryeo Dynasty",
+  "empire.joseon": "Joseon Dynasty",
+  "empire.ly-dynasty": "Ly Dynasty",
+  "empire.le-dynasty": "Le Dynasty",
+  "empire.nguyen-dynasty": "Nguyen Dynasty",
+  "empires.active": "empires"
 }
