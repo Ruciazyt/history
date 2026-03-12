@@ -9,7 +9,7 @@ import { getActiveBoundaries, getWorldEraBounds } from '@/lib/history/data/world
 import { getBattles } from '@/lib/history/battles';
 import { YearSlider } from '@/components/common/YearSlider';
 
-const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || 'wuKPTBpCRcUtXCPp1IBpmvHmz8M43204';
+const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
 
 declare global {
   interface Window {
@@ -119,24 +119,40 @@ export function HistoryMap({
   // 加载百度地图
   React.useEffect(() => {
     if (mapRef.current) return;
+    if (!BAIDU_MAP_AK) {
+      console.error('百度地图 AK 未配置');
+      return;
+    }
     
     const loadMap = () => {
       if (window.BMapGL) {
-        const map = new window.BMapGL.Map(mapContainerRef.current);
-        map.centerAndZoom(new window.BMapGL.Point(mapCenter.lon, mapCenter.lat), mapZoom);
-        map.enableScrollWheelZoom(true);
-        mapRef.current = map;
-        setMapReady(true);
+        try {
+          const map = new window.BMapGL.Map(mapContainerRef.current);
+          map.centerAndZoom(new window.BMapGL.Point(mapCenter.lon, mapCenter.lat), mapZoom);
+          map.enableScrollWheelZoom(true);
+          mapRef.current = map;
+          setMapReady(true);
+          console.log('百度地图加载成功');
+        } catch (e) {
+          console.error('百度地图初始化失败:', e);
+        }
       }
     };
 
     if (window.BMapGL) {
       loadMap();
     } else {
+      console.log('正在加载百度地图 SDK...');
       const script = document.createElement('script');
       script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}`;
       script.async = true;
-      script.onload = loadMap;
+      script.onload = () => {
+        console.log('百度地图 SDK 加载完成');
+        loadMap();
+      };
+      script.onerror = (e) => {
+        console.error('百度地图 SDK 加载失败:', e);
+      };
       document.head.appendChild(script);
     }
   }, [mapCenter.lon, mapCenter.lat, mapZoom]);

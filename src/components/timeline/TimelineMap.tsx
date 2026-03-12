@@ -6,7 +6,7 @@ import { useBaiduMap } from './BaiduMapHooks';
 
 import type { TimelineEvent, Territory } from '@/lib/history/data/timeline';
 
-const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || 'wuKPTBpCRcUtXCPp1IBpmvHmz8M43204';
+const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
 
 interface TimelineMapProps {
   event: TimelineEvent | null;

@@ -10,7 +10,7 @@ import {
   type WorldBoundary,
 } from '@/lib/history/data/worldBoundaries';
 
-const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || 'wuKPTBpCRcUtXCPp1IBpmvHmz8M43204';
+const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
 
 declare global {
   interface Window {
