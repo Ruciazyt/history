@@ -345,6 +345,8 @@ export type Event = {
     causes?: BattleCause[];
     /** 战役军力对比 */
     forceComparison?: BattleForceComparison;
+    /** 战役持续时间（天数） */
+    duration?: number;
   };
 };
 
@@ -417,3 +419,12 @@ export type BattleForceComparison = {
   /** 军力差距描述 */
   difference?: string;
 };
+
+/** 战役持续时间分类 */
+export type BattleDurationCategory = 
+  | 'daily'          // 一天内的战役
+  | 'short'          // 1-3天
+  | 'medium'         // 4-7天
+  | 'extended'       // 8-30天
+  | 'protracted'     // 30天以上
+  | 'unknown';
