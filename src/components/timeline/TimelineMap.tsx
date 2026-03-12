@@ -1,121 +1,94 @@
 'use client';
 
 import * as React from 'react';
-import Map, { Marker, Popup, NavigationControl, Source, Layer, type MapLib } from 'react-map-gl/maplibre';
-import maplibregl from 'maplibre-gl';
-import 'maplibre-gl/dist/maplibre-gl.css';
-
 import type { TimelineEvent, Territory } from '@/lib/history/data/timeline';
-import { formatYear } from '@/lib/history/utils';
-import { useTranslations } from 'next-intl';
+
+const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
+
+declare global {
+  interface Window {
+    BMapGL: any;
+  }
+}
 
 interface TimelineMapProps {
   event: TimelineEvent | null;
 }
 
 export function TimelineMap({ event }: TimelineMapProps) {
-  const t = useTranslations();
-  const [viewState, setViewState] = React.useState({
-    longitude: event?.location.lon ?? 108.95,
-    latitude: event?.location.lat ?? 34.34,
-    zoom: 4,
-    minZoom: 3,
-    maxZoom: 8,
-    pitch: 0,
-    bearing: 0,
-  });
-  const [popupInfo, setPopupInfo] = React.useState<string | null>(null);
+  const [mapReady, setMapReady] = React.useState(false);
+  const mapContainerRef = React.useRef<HTMLDivElement>(null);
+  const mapRef = React.useRef<any>(null);
 
-  const geojsonData = React.useMemo(() => {
-    if (!event?.territories) return null;
-    
-    return {
-      type: 'FeatureCollection' as const,
-      features: event.territories.map((territory) => ({
-        type: 'Feature' as const,
-        properties: {
-          name: t(territory.factionNameKey),
-          color: territory.color,
-        },
-        geometry: {
-          type: 'Polygon' as const,
-          coordinates: [territory.polygon],
-        },
-      }))
-    };
-  }, [event, t]);
-
+  // 加载百度地图
   React.useEffect(() => {
-    if (event) {
-      setViewState({
-        longitude: event.location.lon,
-        latitude: event.location.lat,
-        zoom: 5,
-        minZoom: 3,
-        maxZoom: 8,
-        pitch: 0,
-        bearing: 0,
+    if (mapRef.current) return;
+
+    const initMap = () => {
+      if (window.BMapGL && mapContainerRef.current) {
+        try {
+          const center = event?.location 
+            ? { lng: event.location.lon, lat: event.location.lat }
+            : { lng: 108.95, lat: 34.34 };
+          
+          const map = new window.BMapGL.Map(mapContainerRef.current);
+          map.centerAndZoom(new window.BMapGL.Point(center.lng, center.lat), 5);
+          map.enableScrollWheelZoom(true);
+          mapRef.current = map;
+          setMapReady(true);
+          console.log('✅ TimelineMap 百度地图加载成功');
+        } catch (e) {
+          console.error('初始化失败:', e);
+        }
+      }
+    };
+
+    // 使用 JSONP 回调
+    const callbackName = 'baiduMapCb_' + Date.now();
+    (window as any)[callbackName] = () => initMap();
+
+    const script = document.createElement('script');
+    script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}&callback=${callbackName}`;
+    script.async = true;
+    script.onload = () => console.log('百度地图 SDK 加载完成');
+    document.head.appendChild(script);
+
+    return () => { delete (window as any)[callbackName]; };
+  }, []);
+
+  // 绘制多边形
+  React.useEffect(() => {
+    if (!mapRef.current || !mapReady || !event?.territories) return;
+
+    const map = mapRef.current;
+    map.clearOverlays();
+
+    event.territories.forEach((territory: Territory) => {
+      if (!territory.polygon || territory.polygon.length < 3) return;
+
+      const points = territory.polygon.map((coord: number[]) => 
+        new window.BMapGL.Point(coord[0], coord[1])
+      );
+
+      const polygon = new window.BMapGL.Polygon(points, {
+        strokeColor: territory.color,
+        strokeWeight: 2,
+        fillColor: territory.color,
+        fillOpacity: 0.35,
       });
-    }
-  }, [event]);
+
+      map.addOverlay(polygon);
+    });
+  }, [mapReady, event]);
 
   return (
     <div className="relative w-full h-full rounded-lg overflow-hidden border border-zinc-700">
-      <Map
-        {...viewState}
-        onMove={evt => setViewState(prev => ({ ...prev, ...evt.viewState }))}
-        maxBounds={[[73.0, 17.5], [135.5, 54.5]]}
-        mapStyle="https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json"
-        style={{ width: '100%', height: '100%' }}
-      >
-        <NavigationControl position="top-right" />
-
-        {geojsonData && (
-          <Source id="territories" type="geojson" data={geojsonData}>
-            <Layer
-              id="territory-fill"
-              type="fill"
-              paint={{
-                'fill-color': ['get', 'color'],
-                'fill-opacity': 0.35,
-              }}
-            />
-            <Layer
-              id="territory-line"
-              type="line"
-              paint={{
-                'line-color': ['get', 'color'],
-                'line-width': 2,
-              }}
-            />
-          </Source>
-        )}
-
-        {event?.location && (
-          <Marker
-            longitude={event.location.lon}
-            latitude={event.location.lat}
-            anchor="bottom"
-            onClick={e => {
-              e.originalEvent.stopPropagation();
-              setPopupInfo(event.location?.nameKey || 'Location');
-            }}
-          >
-            <div className="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg" />
-          </Marker>
-        )}
-
-        {popupInfo && (
-          <Popup
-            longitude={event?.location.lon ?? 0}
-            latitude={event?.location.lat ?? 0}
-            anchor="top"
-            onClose={() => setPopupInfo(null)}
-          >
-            <div className="text-sm">{popupInfo}</div>
-          </Popup>
-        )}
-      </Map>
+      {!mapReady && (
+        <div className="absolute inset-0 flex items-center justify-center bg-zinc-900 text-zinc-400 z-10">
+          Loading... {BAIDU_MAP_AK ? '(AK已配置)' : '(AK未配置)'}
+        </div>
+      )}
+      <div ref={mapContainerRef} className="w-full h-full" />
     </div>
   );
 }
