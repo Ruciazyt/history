@@ -25,7 +25,7 @@ https://history.ruciazyt.cn
 - [x] 公共Hooks提取
 - [x] React.memo优化
 - [x] 组件目录重组
-- [x] 单元测试（558个测试用例）
+- [x] 单元测试（601个测试用例）
 
 ## 项目结构
 ```
@@ -249,4 +249,49 @@ src/
   - 柏举之战: 三路夹击、楚将逃跑、内部倒戈
 - [x] 构建验证通过
 - [x] 单元测试: 487个测试用例全部通过
+- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
+
+### 新增功能: 战役原因分析 (2026-03-12 15:40)
+- [x] 添加 battleCause.ts 战役原因分析模块
+- [x] 支持16种战役原因类型：
+  - territorial-dispute (领土争端)
+  - political-rivalry (政治 rivalry)
+  - revenge (复仇)
+  - succession-dispute (继承权争夺)
+  - economic-interest (经济利益)
+  - ideological-conflict (意识形态冲突)
+  - preemptive-attack (先发制人攻击)
+  - defensive-war (自卫战争)
+  - expansionism (扩张主义)
+  - dynastic-conflict (朝代冲突)
+  - tributary-dispute (朝贡体系争议)
+  - border-incident (边境冲突)
+  - alliance-obligation (联盟义务)
+  - usurpation (篡位/叛变)
+  - rebellion (叛乱/起义)
+- [x] 新增原因严重程度分析 (critical/major/minor)
+- [x] 核心函数：
+  - getCauseTypeLabel: 获取原因类型中文标签
+  - getSeverityLabel: 获取严重程度标签
+  - getUniqueCauseTypes: 获取所有唯一原因类型
+  - hasCauseData: 检查是否有原因数据
+  - getCauseTypeStats: 获取特定类型原因统计
+  - getAllCauseTypeStats: 获取所有类型统计
+  - getBattlesByCauseType: 按原因类型筛选战役
+  - getMostCommonCauseTypes: 获取最常见原因类型
+  - getCauseSeverityDistribution: 获取严重程度分布
+  - getBattlesWithMostCauses: 获取涉及原因最多的战役
+  - getCauseResultCorrelation: 分析原因与胜负关联
+  - getDefensiveVsOffensiveStats: 防御性战争 vs 进攻性战争统计
+  - getCauseInsights: 生成历史洞察
+  - getCauseSummary: 获取完整原因摘要
+- [x] 创建 battleCause.test.ts 测试文件（24个测试用例）
+- [x] 为5个经典战役添加原因数据：
+  - 牧野之战: 朝代更替、政治 rivalry、先发制人
+  - 长平之战: 领土争端、扩张主义、政治 rivalry
+  - 马陵之战: 复仇、领土争端、扩张主义
+  - 柏举之战: 领土争端、复仇、扩张主义
+  - 城濮之战: 联盟义务、领土争端、政治 rivalry
+- [x] 构建验证通过
+- [x] 单元测试: 601个测试用例全部通过
 - [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
