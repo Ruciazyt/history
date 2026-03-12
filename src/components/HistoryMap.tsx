@@ -123,16 +123,17 @@ export function HistoryMap({
       console.error('百度地图 AK 未配置');
       return;
     }
-    
-    const loadMap = () => {
-      console.log('开始初始化百度地图', window.BMapGL, mapContainerRef.current);
+
+    const initMap = () => {
+      if (!mapContainerRef.current) {
+        setTimeout(initMap, 100);
+        return;
+      }
+      
       if (window.BMapGL) {
         try {
-          console.log('创建地图对象...');
           const map = new window.BMapGL.Map(mapContainerRef.current);
-          console.log('设置中心点...', mapCenter);
           map.centerAndZoom(new window.BMapGL.Point(mapCenter.lon, mapCenter.lat), mapZoom);
-          console.log('启用滚轮缩放...');
           map.enableScrollWheelZoom(true);
           mapRef.current = map;
           setMapReady(true);
@@ -140,26 +141,33 @@ export function HistoryMap({
         } catch (e) {
           console.error('❌ 百度地图初始化失败:', e);
         }
-      } else {
-        console.error('❌ BMapGL 未定义');
       }
     };
 
+    // 检查是否已加载
     if (window.BMapGL) {
-      loadMap();
-    } else {
-      console.log('正在加载百度地图 SDK...');
+      initMap();
+      return;
+    }
+
+    // 百度地图使用 document.write，需要在 document.body 后加载
+    const loadScript = () => {
       const script = document.createElement('script');
       script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}`;
-      script.async = true;
+      script.async = false; // 同步加载
       script.onload = () => {
         console.log('百度地图 SDK 加载完成');
-        loadMap();
+        setTimeout(initMap, 200);
       };
-      script.onerror = (e) => {
-        console.error('百度地图 SDK 加载失败:', e);
-      };
-      document.head.appendChild(script);
+      script.onerror = (e) => console.error('加载失败:', e);
+      document.body.appendChild(script);
+    };
+
+    // 确保在客户端加载
+    if (document.body) {
+      loadScript();
+    } else {
+      window.addEventListener('DOMContentLoaded', loadScript);
     }
   }, [mapCenter.lon, mapCenter.lat, mapZoom]);
 
