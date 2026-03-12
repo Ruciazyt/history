@@ -182,3 +182,25 @@ src/
 - [x] 构建验证通过
 - [x] 单元测试: 400个测试用例全部通过
 - [x] 部署到 Vercel 成功
+
+### 新增功能: 战役转折点分析 (2026-03-12 10:06)
+- [x] 添加 BattleTurningPointType 类型定义（14种转折点类型）
+- [x] 创建 battleTurningPoints.ts 分析模块：
+  - getTurningPointTypeStats: 获取转折点类型统计
+  - getMostCommonTurningPointTypes: 获取最常见转折点类型
+  - getTurningPointsByParty: 按阵营分类统计
+  - getTurningPointImpactStats: 转折点影响分析
+  - getBattlesByTurningPointType: 按类型筛选战役
+  - getTurningPointOutcomeCorrelation: 转折点与胜负关联分析
+  - getBattlesWithMostTurningPoints: 获取转折点最多的战役
+  - getTurningPointInsights: 生成历史洞察
+  - getTurningPointSummary: 获取完整摘要
+- [x] 创建 battleTurningPoints.test.ts 测试文件（18个测试用例）
+- [x] 为4个经典战役添加转折点数据：
+  - 长平之战: 赵括阵亡、秦军包围、断粮
+  - 马陵之战: 伏击触发、庞涓自杀、中计
+  - 城濮之战: 侧翼夹击、楚军轻敌冒进
+  - 柏举之战: 三路夹击、楚将逃跑、内部倒戈
+- [x] 构建验证通过
+- [x] 单元测试: 487个测试用例全部通过
+- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
