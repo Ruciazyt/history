@@ -64,7 +64,11 @@ export function WorldEmpireMap({
             key={`${boundary.properties.nameKey}-${index}`}
             id={`empire-${index}`}
             type="geojson"
-            data={boundary}
+            data={{
+              type: 'Feature',
+              properties: boundary.properties,
+              geometry: boundary.geometry
+            }}
           >
             <Layer
               id={`empire-fill-${index}`}
