@@ -25,7 +25,7 @@ https://history.ruciazyt.cn
 - [x] 公共Hooks提取
 - [x] React.memo优化
 - [x] 组件目录重组
-- [x] 单元测试（400个测试用例）
+- [x] 单元测试（558个测试用例）
 
 ## 项目结构
 ```
@@ -200,6 +200,33 @@ src/
 - [x] 创建 battleWeather.test.ts 测试文件（17个测试用例）
 - [x] 构建验证通过
 - [x] 单元测试: 504个测试用例全部通过
+- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
+
+### 新增功能: 战役后果分析 (2026-03-12 13:20)
+- [x] 添加 AftermathType 类型定义（领土变化、政治动荡、朝代更替、军事衰弱、经济发展、人口迁移等14种后果类型）
+- [x] 添加 AftermathSeverity 类型定义（巨大、重大、中等、轻微、未知）
+- [x] 添加 AftermathScope 类型定义（全国、区域性、局部、未知）
+- [x] 创建 battleAftermath.ts 分析模块：
+  - getAftermathTypeLabel: 获取后果类型中文标签
+  - getSeverityLabel: 获取严重程度标签
+  - getScopeLabel: 获取影响范围标签
+  - getUniqueAftermathTypes: 获取所有唯一后果类型
+  - hasAftermathData: 检查是否有后果数据
+  - getAftermathTypeStats: 获取特定类型后果统计
+  - getAllAftermathTypeStats: 获取所有类型统计
+  - getBattlesByAftermathType: 按后果类型筛选战役
+  - getMostCommonAftermathTypes: 获取最常见后果类型
+  - getMostSevereAftermathBattles: 获取最严重后果战役
+  - getLongTermAftermathBattles: 获取长期影响战役
+  - getAftermathSeverityDistribution: 获取严重程度分布
+  - getAftermathScopeDistribution: 获取影响范围分布
+  - getAftermathResultCorrelation: 分析后果与胜负关联
+  - getAftermathInsights: 生成历史洞察
+  - getAftermathSummary: 获取完整后果摘要
+- [x] 创建 battleAftermath.test.ts 测试文件（30个测试用例）
+- [x] 为城濮之战、长平之战、马陵之战添加后果数据
+- [x] 构建验证通过
+- [x] 单元测试: 558个测试用例全部通过
 - [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
 
 ### 新增功能: 战役转折点分析 (2026-03-12 10:06)
