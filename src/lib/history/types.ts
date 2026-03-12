@@ -127,6 +127,19 @@ export type BattleCasualties = {
   reliability?: 'high' | 'medium' | 'low';
 };
 
+/** 战役天气类型 */
+export type BattleWeather = 
+  | 'clear'         // 晴天
+  | 'rainy'         // 雨天
+  | 'snowy'         // 雪天
+  | 'windy'         // 大风
+  | 'foggy'         // 雾天
+  | 'stormy'        // 暴风雨
+  | 'cloudy'        // 多云
+  | 'hot'           // 炎热
+  | 'cold'          // 寒冷
+  | 'unknown';
+
 /** 战役转折点类型 */
 export type BattleTurningPointType = 
   | 'commander-death'       // 指挥官阵亡
@@ -206,6 +219,8 @@ export type Event = {
     pacing?: BattlePacing;
     /** 战役作战时间段 */
     timeOfDay?: BattleTimeOfDay;
+    /** 战役天气条件 */
+    weather?: BattleWeather[];
     /** 战役转折点/关键事件 */
     turningPoints?: BattleTurningPoint[];
   };
