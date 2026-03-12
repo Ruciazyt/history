@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   description: 'History learning atlas MVP',
 };
 
+// 预加载百度地图 SDK
+const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -24,6 +27,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh">
+      <head>
+        <link 
+          rel="preload" 
+          href={`https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}`} 
+          as="script" 
+        />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
