@@ -125,17 +125,23 @@ export function HistoryMap({
     }
     
     const loadMap = () => {
+      console.log('开始初始化百度地图', window.BMapGL, mapContainerRef.current);
       if (window.BMapGL) {
         try {
+          console.log('创建地图对象...');
           const map = new window.BMapGL.Map(mapContainerRef.current);
+          console.log('设置中心点...', mapCenter);
           map.centerAndZoom(new window.BMapGL.Point(mapCenter.lon, mapCenter.lat), mapZoom);
+          console.log('启用滚轮缩放...');
           map.enableScrollWheelZoom(true);
           mapRef.current = map;
           setMapReady(true);
-          console.log('百度地图加载成功');
+          console.log('✅ 百度地图加载成功');
         } catch (e) {
-          console.error('百度地图初始化失败:', e);
+          console.error('❌ 百度地图初始化失败:', e);
         }
+      } else {
+        console.error('❌ BMapGL 未定义');
       }
     };
 
