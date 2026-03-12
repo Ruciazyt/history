@@ -341,5 +341,43 @@ export type Event = {
     aftermath?: BattleAftermath[];
     /** 战役情报活动 */
     intelligence?: BattleIntelligence[];
+    /** 战役原因/导火索 */
+    causes?: BattleCause[];
   };
+};
+
+/** 战役原因类型 */
+export type BattleCauseType =
+  | 'territorial-dispute'    // 领土争端
+  | 'political-rivalry'      // 政治 rivalry/权力斗争
+  | 'revenge'                // 复仇
+  | 'succession-dispute'     // 继承权争夺
+  | 'economic-interest'      // 经济利益
+  | 'ideological-conflict'   // 意识形态冲突
+  | 'preemptive-attack'      // 先发制人攻击
+  | 'defensive-war'          // 自卫战争
+  | 'expansionism'           // 扩张主义
+  | 'dynastic-conflict'      // 朝代冲突
+  | 'tributary-dispute'      // 朝贡体系争议
+  | 'border-incident'        // 边境冲突
+  | 'alliance-obligation'    // 联盟义务
+  | 'usurpation'             // 篡位/叛变
+  | 'rebellion'              // 叛乱/起义
+  | 'unknown';
+
+/** 战役原因严重程度 */
+export type CauseSeverity = 'critical' | 'major' | 'minor' | 'unknown';
+
+/** 战役原因数据 */
+export type BattleCause = {
+  /** 原因类型 */
+  type: BattleCauseType;
+  /** 原因描述 */
+  description: string;
+  /** 涉及的势力/国家 */
+  parties?: string[];
+  /** 严重程度 */
+  severity?: CauseSeverity;
+  /** 持续时间（年）- 可选，表示该原因积累了多久 */
+  duration?: number;
 };
