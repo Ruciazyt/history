@@ -116,7 +116,7 @@ export function HistoryMap({
     return 2;
   }, [mode, initialZoom]);
 
-  // 加载百度地图
+  // 加载百度地图 - 使用 JSONP 方式
   React.useEffect(() => {
     if (mapRef.current) return;
     if (!BAIDU_MAP_AK) {
@@ -124,13 +124,12 @@ export function HistoryMap({
       return;
     }
 
-    const initMap = () => {
-      if (!mapContainerRef.current) {
-        setTimeout(initMap, 100);
-        return;
-      }
-      
-      if (window.BMapGL) {
+    // 使用 JSONP 回调方式加载
+    const callbackName = 'baiduMapCallback_' + Date.now();
+    
+    (window as any)[callbackName] = () => {
+      console.log('百度地图回调执行');
+      if (window.BMapGL && mapContainerRef.current) {
         try {
           const map = new window.BMapGL.Map(mapContainerRef.current);
           map.centerAndZoom(new window.BMapGL.Point(mapCenter.lon, mapCenter.lat), mapZoom);
@@ -139,36 +138,23 @@ export function HistoryMap({
           setMapReady(true);
           console.log('✅ 百度地图加载成功');
         } catch (e) {
-          console.error('❌ 百度地图初始化失败:', e);
+          console.error('❌ 初始化失败:', e);
         }
       }
+      delete (window as any)[callbackName];
     };
 
-    // 检查是否已加载
-    if (window.BMapGL) {
-      initMap();
-      return;
-    }
+    // 动态创建 script 使用回调
+    const script = document.createElement('script');
+    script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}&callback=${callbackName}`;
+    script.async = true;
+    script.onload = () => console.log('百度地图 SDK 加载完成');
+    script.onerror = (e) => console.error('加载失败:', e);
+    document.head.appendChild(script);
 
-    // 百度地图使用 document.write，需要在 document.body 后加载
-    const loadScript = () => {
-      const script = document.createElement('script');
-      script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}`;
-      script.async = false; // 同步加载
-      script.onload = () => {
-        console.log('百度地图 SDK 加载完成');
-        setTimeout(initMap, 200);
-      };
-      script.onerror = (e) => console.error('加载失败:', e);
-      document.body.appendChild(script);
+    return () => {
+      delete (window as any)[callbackName];
     };
-
-    // 确保在客户端加载
-    if (document.body) {
-      loadScript();
-    } else {
-      window.addEventListener('DOMContentLoaded', loadScript);
-    }
   }, [mapCenter.lon, mapCenter.lat, mapZoom]);
 
   // 绘制内容

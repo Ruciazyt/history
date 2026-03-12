@@ -349,7 +349,43 @@ export type Event = {
     duration?: number;
     /** 战役兵器/武器使用 */
     armaments?: BattleArmament[];
+    /** 战役典籍记载 */
+    literature?: BattleLiterature[];
   };
+};
+
+/** 历史典籍类型 */
+export type LiteratureType = 
+  | 'shiji'           // 史记
+  | 'zizhitongjian'   // 资治通鉴
+  | 'zuozhuan'        // 左传
+  | 'guoyu'           // 国语
+  | 'chunqiu'         // 春秋
+  | 'shangshu'        // 尚书
+  | 'zhoushu'         // 周书
+  | 'hanshu'          // 汉书
+  | 'houhanshu'       // 后汉书
+  | 'sanguozhi'       // 三国志
+  | 'jinshu'          // 晋书
+  | 'liangshu'        // 梁书
+  | 'beishi'          // 北史
+  | 'nanshi'          // 南史
+  | 'tongzhi'         // 通志
+  | 'tongkao'         // 通考
+  | 'other';          // 其他
+
+/** 典籍记载信息 */
+export type BattleLiterature = {
+  /** 典籍名称/类型 */
+  source: LiteratureType;
+  /** 具体章节/卷 */
+  chapter?: string;
+  /** 记载的简要描述 */
+  description?: string;
+  /** 记载可信度评估 */
+  reliability?: 'high' | 'medium' | 'low';
+  /** 记载特点 */
+  characteristics?: string[];
 };
 
 /** 战役原因类型 */
