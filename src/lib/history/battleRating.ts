@@ -115,7 +115,7 @@ function getDurationScore(battle: Event): number {
   if (!duration) return 0;
   
   // 超过30天为持久战
-  if (duration > 30) return DURATION_SCORE_MAP.protracted;
+  if (duration >= 30) return DURATION_SCORE_MAP.protracted;
   if (duration >= 8) return DURATION_SCORE_MAP.extended;
   if (duration >= 4) return DURATION_SCORE_MAP.medium;
   if (duration >= 1) return DURATION_SCORE_MAP.short;
@@ -128,7 +128,7 @@ function getDurationScore(battle: Event): number {
  */
 function getCasualtiesScore(battle: Event): number {
   const casualties = battle.battle?.casualties;
-  if (!casusalies) return 0;
+  if (!casualties) return 0;
   
   const attacker = casualties.attacker || 0;
   const defender = casualties.defender || 0;
@@ -166,6 +166,9 @@ function getTurningPointsScore(battle: Event): number {
  * 基于战役类型、是否有指挥官、是否有联盟等因素综合判断
  */
 function getStrategicScore(battle: Event): number {
+  // 首先检查是否有战役数据
+  if (!battle.battle) return 0;
+  
   let score = 0;
   
   // 战役类型分数
