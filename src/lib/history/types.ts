@@ -94,6 +94,23 @@ export type BattleTerrain =
   | 'pass'           // 关隘/峡谷
   | 'unknown';
 
+/** 战役突发性类型 */
+export type BattlePacing = 
+  | 'surprise'       // 突袭战
+  | 'rapid'          // 快速决战
+  | 'extended'       // 持久战
+  | 'siege'          // 围城战
+  | 'unknown';
+
+/** 战役作战时间段 */
+export type BattleTimeOfDay =
+  | 'dawn'           // 黎明
+  | 'morning'        // 上午
+  | 'afternoon'      // 下午
+  | 'evening'        // 傍晚
+  | 'night'          // 夜间
+  | 'unknown';
+
 /** 战役伤亡估算数据 */
 export type BattleCasualties = {
   /** 进攻方伤亡人数 */
@@ -153,5 +170,9 @@ export type Event = {
     terrain?: BattleTerrain[];
     /** 战役伤亡估算 */
     casualties?: BattleCasualties;
+    /** 战役突发性/节奏 */
+    pacing?: BattlePacing;
+    /** 战役作战时间段 */
+    timeOfDay?: BattleTimeOfDay;
   };
 };
