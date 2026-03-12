@@ -324,3 +324,28 @@ src/
 - [x] 构建验证通过
 - [x] 单元测试: 666个测试用例全部通过
 - [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
+
+### 新增功能: 战役综合评分系统 (2026-03-12 21:20)
+- [x] 添加 battleRating.ts 战役综合评分模块
+- [x] 支持6个维度评分：
+  - scale: 规模 (massive/large/medium/small)
+  - impact: 影响力 (decisive/major/minor)
+  - duration: 持续时间
+  - casualties: 伤亡人数
+  - turningPoints: 转折点数量
+  - strategic: 战略重要性（基于战役类型、指挥官、联盟等）
+- [x] 提供 S/A/B/C/D 等级评定
+- [x] 支持战役排名和对比分析
+- [x] 提供 RatingWeights 配置，可自定义各维度权重
+- [x] 核心函数：
+  - calculateBattleRating: 计算单场战役评分
+  - calculateAllRatings: 计算所有战役评分并排名
+  - getTopRatedBattles: 获取排名前N的战役
+  - getBattlesByRating: 按等级筛选战役
+  - getRatingSummary: 获取评分摘要
+  - compareBattleRatings: 对比两场战役
+  - hasRatingData: 检查是否有评分数据
+- [x] 创建 battleRating.test.ts 测试文件（25个测试用例）
+- [x] 构建验证通过
+- [x] 单元测试: 716个测试用例全部通过
+- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
