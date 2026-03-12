@@ -347,6 +347,8 @@ export type Event = {
     forceComparison?: BattleForceComparison;
     /** 战役持续时间（天数） */
     duration?: number;
+    /** 战役兵器/武器使用 */
+    armaments?: BattleArmament[];
   };
 };
 
@@ -418,6 +420,44 @@ export type BattleForceComparison = {
   advantage?: 'attacker' | 'defender' | 'balanced' | 'unknown';
   /** 军力差距描述 */
   difference?: string;
+};
+
+/** 战役兵器/武器类型 */
+export type BattleArmamentType =
+  | 'sword'           // 剑
+  | 'spear'          // 矛/枪
+  | 'dagger-axe'     // 戈
+  | 'halberd'        // 戟
+  | 'bow'            // 弓
+  | 'crossbow'       // 弩
+  | 'chariot'        // 战车
+  | 'cavalry'        // 骑兵
+  | 'infantry'       // 步兵
+  | 'navy'           // 水军
+  | 'siege-weapon'   // 攻城器械
+  | 'fire-weapon'    // 火攻器械
+  | 'shield'         // 盾牌/防御
+  | 'armor'          // 铠甲
+  | 'horse'          // 战马
+  | 'unknown';
+
+/** 兵器使用方 */
+export type ArmamentSide = 'attacker' | 'defender' | 'both' | 'unknown';
+
+/** 战役兵器使用数据 */
+export type BattleArmament = {
+  /** 兵器类型 */
+  type: BattleArmamentType;
+  /** 兵器描述 */
+  description?: string;
+  /** 使用方 */
+  side: ArmamentSide;
+  /** 数量（可选） */
+  count?: number;
+  /** 是否为主要兵器 */
+  isPrimary?: boolean;
+  /** 备注 */
+  notes?: string;
 };
 
 /** 战役持续时间分类 */
