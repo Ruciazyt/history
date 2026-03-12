@@ -303,23 +303,24 @@ src/
 - [x] 单元测试: 601个测试用例全部通过
 - [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
 
-### 新增功能: 战役军力对比分析 (2026-03-12 17:51)
-- [x] 添加 BattleForce, BattleForceComparison, ForceUnitType 类型定义
-- [x] 创建 battleForce.ts 分析模块：
-  - getForceUnitLabel: 获取军力单位中文标签
-  - getAdvantageLabel: 获取优势方标签
-  - hasForceData: 检查是否有军力数据
-  - getBattlesWithForceData: 获取有军力数据的战役
-  - getForceStats: 获取军力统计
-  - getBattlesByForceAdvantage: 按优势筛选战役
-  - getOutnumberedVictories: 获取以少胜多战役
-  - getSuperiorForceVictories: 获取以多胜少战役
-  - getForceRatio: 计算军力比例
-  - getForceDifferenceCategory: 分类军力差距
-  - getForceOutcomeCorrelation: 分析军力与胜负关联
-  - getForceInsights: 生成历史洞察
-  - getForceSummary: 获取完整摘要
-- [x] 创建 battleForce.test.ts 测试文件（21个测试用例）
+### 新增功能: 战役持续时间分析 (2026-03-12 18:58)
+- [x] 添加 BattleDurationCategory 类型定义（daily/short/medium/extended/protracted）
+- [x] 添加 duration 字段到 Event.battle 类型
+- [x] 创建 battleDuration.ts 分析模块：
+  - getDurationCategoryLabel: 获取持续时间分类标签
+  - daysToDurationCategory: 将天数转换为分类
+  - hasDurationData: 检查是否有持续时间数据
+  - getDurationStats: 获取特定分类的统计
+  - getAllDurationStats: 获取所有分类统计
+  - getBattlesByDurationCategory: 按分类筛选战役
+  - getQuickVictoryStats: 快速决战统计
+  - getProtractedWarStats: 持久战统计
+  - getDurationOutcomeCorrelation: 持续时间与胜负关联分析
+  - getLongestBattles: 获取最长战役
+  - getShortestBattles: 获取最短战役
+  - getDurationSummary: 获取完整摘要
+  - getDurationInsights: 生成历史洞察
+- [x] 创建 battleDuration.test.ts 测试文件（21个测试用例）
 - [x] 构建验证通过
-- [x] 单元测试: 645个测试用例全部通过
+- [x] 单元测试: 666个测试用例全部通过
 - [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
