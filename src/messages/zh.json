@@ -1453,7 +1453,16 @@
   },
   "nav": {
     "battles": "战役",
-    "world": "欧亚"
+    "world": "欧亚",
+    "location": "地名"
+  },
+  "location": {
+    "title": "地名演变查询",
+    "description": "输入地名查看其历史演变",
+    "placeholder": "输入地名，如：长安、洛阳、邯郸...",
+    "events": "个相关事件",
+    "noResults": "未找到相关地点",
+    "back": "返回搜索"
   },
   "world": {
     "eurasian": "欧亚大陆",

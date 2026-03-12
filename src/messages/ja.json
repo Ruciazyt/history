@@ -1173,7 +1173,16 @@
   },
   "nav": {
     "battles": "戦い",
-    "world": "世界"
+    "world": "世界",
+    "location": "地名"
+  },
+  "location": {
+    "title": "地名変遷検索",
+    "description": "地名を入力して歴史的変遷を表示",
+    "placeholder": "地名を入力例：長安、洛陽...",
+    "events": "件の関連事項",
+    "noResults": "結果が見つかりません",
+    "back": "検索に戻る"
   },
   "world": {
     "eurasian": "ユーラシア",

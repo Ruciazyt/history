@@ -228,6 +228,12 @@ export function HistoryApp({
                 >
                   🌍 <span className="hidden sm:inline">{t('nav.world')}</span>
                 </Link>
+                <Link
+                  href={`/${currentLocale}/location`}
+                  className="px-2 sm:px-3 py-1.5 bg-purple-50 hover:bg-purple-100 rounded-lg text-xs sm:text-sm text-purple-700 transition-colors border border-purple-200 whitespace-nowrap"
+                >
+                  📍 <span className="hidden sm:inline">{t('nav.location')}</span>
+                </Link>
               </div>
             </div>
           </div>

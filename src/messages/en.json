@@ -1216,7 +1216,16 @@
   },
   "nav": {
     "battles": "Battles",
-    "world": "World"
+    "world": "World",
+    "location": "Location"
+  },
+  "location": {
+    "title": "Location History",
+    "description": "Search a place to see its historical evolution",
+    "placeholder": "Enter location name, e.g. Chang'an, Luoyang...",
+    "events": "events",
+    "noResults": "No results found",
+    "back": "Back to search"
   },
   "world": {
     "eurasian": "Eurasia",
