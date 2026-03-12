@@ -343,6 +343,8 @@ export type Event = {
     intelligence?: BattleIntelligence[];
     /** 战役原因/导火索 */
     causes?: BattleCause[];
+    /** 战役军力对比 */
+    forceComparison?: BattleForceComparison;
   };
 };
 
@@ -380,4 +382,38 @@ export type BattleCause = {
   severity?: CauseSeverity;
   /** 持续时间（年）- 可选，表示该原因积累了多久 */
   duration?: number;
+};
+
+/** 军力单位类型 */
+export type ForceUnitType =
+  | 'infantry'        // 步兵
+  | 'cavalry'         // 骑兵
+  | 'chariot'         // 战车
+  | 'navy'            // 水军
+  | 'archer'          // 弓箭手
+  | 'mixed'           // 混合部队
+  | 'unknown';
+
+/** 军力数据 */
+export type BattleForce = {
+  /** 军力规模 */
+  strength: number;
+  /** 军力单位 */
+  unitType?: ForceUnitType;
+  /** 军力估算依据 */
+  source?: string;
+  /** 估算可靠程度 */
+  reliability?: 'high' | 'medium' | 'low';
+};
+
+/** 战役军力对比数据 */
+export type BattleForceComparison = {
+  /** 进攻方军力 */
+  attacker: BattleForce;
+  /** 防守方军力 */
+  defender: BattleForce;
+  /** 优势方 */
+  advantage?: 'attacker' | 'defender' | 'balanced' | 'unknown';
+  /** 军力差距描述 */
+  difference?: string;
 };

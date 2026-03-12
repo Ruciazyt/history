@@ -251,7 +251,14 @@ src/
 - [x] 单元测试: 487个测试用例全部通过
 - [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
 
-### 新增功能: 战役原因分析 (2026-03-12 15:40)
+### 新增功能: 战役胜负预测分析 (2026-03-12 16:45)
+- [x] 添加 battlePrediction.ts 战役胜负预测分析模块
+- [x] 支持基于地形、天气、季节、战术等因素预测胜负
+- [x] 提供因素分析、洞察生成、准确率统计功能
+- [x] 创建 battlePrediction.test.ts 测试文件（23个测试用例）
+- [x] 构建验证通过
+- [x] 单元测试: 624个测试用例全部通过
+- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
 - [x] 添加 battleCause.ts 战役原因分析模块
 - [x] 支持16种战役原因类型：
   - territorial-dispute (领土争端)
