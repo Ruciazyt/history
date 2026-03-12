@@ -98,7 +98,7 @@ export function TimelineMap({ event }: TimelineMapProps) {
             anchor="bottom"
             onClick={e => {
               e.originalEvent.stopPropagation();
-              setPopupInfo(event.location.label || 'Location');
+              setPopupInfo(event.location?.label || 'Location');
             }}
           >
             <div className="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg" />
