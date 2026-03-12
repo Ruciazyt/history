@@ -1,10 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import Map, { Marker, Popup, NavigationControl, Source, Layer, type MapLib } from 'react-map-gl/maplibre';
-import maplibregl from 'maplibre-gl';
-import 'maplibre-gl/dist/maplibre-gl.css';
-
 import type { Event } from '@/lib/history/types';
 import { formatYear } from '@/lib/history/utils';
 import { useTranslations } from 'next-intl';
@@ -12,6 +8,14 @@ import { dynastyBoundaries } from '@/lib/history/data/dynastyBoundaries';
 import { getActiveBoundaries, getWorldEraBounds } from '@/lib/history/data/worldBoundaries';
 import { getBattles } from '@/lib/history/battles';
 import { YearSlider } from '@/components/common/YearSlider';
+
+const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
+
+declare global {
+  interface Window {
+    BMapGL: any;
+  }
+}
 
 export function HistoryMap({
   events,
@@ -35,6 +39,9 @@ export function HistoryMap({
   const t = useTranslations();
   const [selectedId, setSelectedId] = React.useState<string | null>(null);
   const [isPlaying, setIsPlaying] = React.useState(false);
+  const [mapReady, setMapReady] = React.useState(false);
+  const mapContainerRef = React.useRef<HTMLDivElement>(null);
+  const mapRef = React.useRef<any>(null);
 
   const selected = React.useMemo(
     () => events?.find((e) => e.id === selectedId) ?? null,
@@ -96,6 +103,124 @@ export function HistoryMap({
     return 2;
   }, [mode, initialZoom]);
 
+  // 加载百度地图
+  React.useEffect(() => {
+    if (mapRef.current) return;
+
+    const initMap = () => {
+      if (window.BMapGL && mapContainerRef.current) {
+        try {
+          const map = new window.BMapGL.Map(mapContainerRef.current);
+          map.centerAndZoom(new window.BMapGL.Point(mapCenter.lon, mapCenter.lat), mapZoom);
+          map.enableScrollWheelZoom(true);
+          mapRef.current = map;
+          setMapReady(true);
+          console.log('✅ HistoryMap 百度地图加载成功');
+        } catch (e) {
+          console.error('初始化失败:', e);
+        }
+      }
+    };
+
+    const callbackName = 'baiduMapCb_' + Date.now();
+    (window as any)[callbackName] = initMap;
+
+    const script = document.createElement('script');
+    script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}&callback=${callbackName}`;
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => { delete (window as any)[callbackName]; };
+  }, [mapCenter.lon, mapCenter.lat, mapZoom]);
+
+  // 绘制内容
+  React.useEffect(() => {
+    if (!mapRef.current || !mapReady) return;
+
+    const map = mapRef.current;
+    map.clearOverlays();
+
+    // 绘制中国王朝边界
+    if (mode === 'china') {
+      activeBoundaries.forEach(({ feature }) => {
+        if (!feature.geometry.coordinates) return;
+        
+        const coords = feature.geometry.coordinates;
+        const processPolygon = (points: any[]) => {
+          if (!points || points.length < 3) return;
+          const bmapPoints = points.map((coord: number[]) => 
+            new window.BMapGL.Point(coord[0], coord[1])
+          );
+          const polygon = new window.BMapGL.Polygon(bmapPoints, {
+            strokeColor: '#DC6432',
+            strokeWeight: 2,
+            fillColor: '#DC6432',
+            fillOpacity: 0.2,
+          });
+          map.addOverlay(polygon);
+        };
+
+        try {
+          if (feature.geometry.type === 'MultiPolygon') {
+            (coords as any[]).forEach((poly: any[]) => {
+              if (poly && poly[0]) processPolygon(poly[0]);
+            });
+          } else if (feature.geometry.type === 'Polygon') {
+            processPolygon(coords[0]);
+          }
+        } catch (e) {
+          console.warn('Failed to draw boundary', e);
+        }
+      });
+    }
+
+    // 绘制世界帝国边界
+    if (mode !== 'china') {
+      worldBoundaries.forEach((boundary) => {
+        const coords = boundary.geometry.coordinates;
+        if (!coords || coords.length === 0) return;
+
+        const processPolygon = (points: any[]) => {
+          if (!points || points.length < 3) return;
+          const bmapPoints = points.map((coord: number[]) => 
+            new window.BMapGL.Point(coord[0], coord[1])
+          );
+          const polygon = new window.BMapGL.Polygon(bmapPoints, {
+            strokeColor: boundary.properties.color,
+            strokeWeight: 2,
+            fillColor: boundary.properties.color,
+            fillOpacity: 0.25,
+          });
+          map.addOverlay(polygon);
+        };
+
+        try {
+          if (boundary.geometry.type === 'MultiPolygon') {
+            (coords as any[]).forEach((poly: any[]) => {
+              if (poly && poly[0]) processPolygon(poly[0]);
+            });
+          } else if (boundary.geometry.type === 'Polygon') {
+            processPolygon(coords[0]);
+          }
+        } catch (e) {
+          console.warn('Failed to draw world boundary', e);
+        }
+      });
+    }
+
+    // 绘制事件标记
+    const allEvents = mode === 'china' ? [...normalEvents, ...battles] : [];
+    allEvents.forEach((e) => {
+      if (!e.location) return;
+      
+      const marker = new window.BMapGLMarker(new window.BMapGL.Point(e.location.lon, e.location.lat));
+      marker.addEventListener('click', () => {
+        setSelectedId(e.id);
+      });
+      map.addOverlay(marker);
+    });
+  }, [mapReady, mode, activeBoundaries, worldBoundaries, normalEvents, battles]);
+
   return (
     <div className="h-full w-full overflow-hidden rounded-xl border border-zinc-200 bg-white flex flex-col">
       {mode !== 'china' && worldEraBounds && onYearChange && (
@@ -110,111 +235,14 @@ export function HistoryMap({
       )}
 
       <div className="flex-1 relative">
-        <Map
-          mapLib={maplibregl as unknown as MapLib}
-          initialViewState={{
-            longitude: mapCenter.lon,
-            latitude: mapCenter.lat,
-            zoom: mapZoom,
-          }}
-          style={{ width: '100%', height: '100%' }}
-          mapStyle="https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json"
-          onClick={() => setSelectedId(null)}
-        >
-          <div className="absolute right-3 top-3 z-10">
-            <NavigationControl visualizePitch />
+        {!mapReady && (
+          <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 text-zinc-400 z-10">
+            Loading... {BAIDU_MAP_AK ? '(AK已配置)' : '(AK未配置)'}
           </div>
+        )}
+        <div ref={mapContainerRef} className="w-full h-full" />
 
-          {mode === 'china' && activeBoundaries.map(({ id, feature }) => (
-            <Source key={id} id={`boundary-${id}`} type="geojson" data={feature}>
-              <Layer
-                id={`fill-${id}`}
-                type="fill"
-                paint={{ 'fill-color': '#DC6432', 'fill-opacity': 0.2 }}
-              />
-              <Layer
-                id={`line-${id}`}
-                type="line"
-                paint={{ 'line-color': '#DC6432', 'line-width': 2, 'line-opacity': 0.8 }}
-              />
-            </Source>
-          ))}
-
-          {worldBoundaries.map((boundary, idx) => (
-            <Source key={`world-${idx}`} id={`world-boundary-${idx}`} type="geojson" data={boundary}>
-              <Layer
-                id={`world-fill-${idx}`}
-                type="fill"
-                paint={{ 'fill-color': boundary.properties.color, 'fill-opacity': 0.25 }}
-              />
-              <Layer
-                id={`world-line-${idx}`}
-                type="line"
-                paint={{ 'line-color': boundary.properties.color, 'line-width': 2, 'line-opacity': 0.8 }}
-              />
-            </Source>
-          ))}
-
-          {mode === 'china' && normalEvents.map((e) => (
-            <Marker
-              key={e.id}
-              longitude={e.location!.lon}
-              latitude={e.location!.lat}
-              anchor="bottom"
-            >
-              <button
-                type="button"
-                onClick={(ev) => {
-                  ev.stopPropagation();
-                  setSelectedId(e.id);
-                }}
-                className="h-3 w-3 rounded-full bg-red-600 ring-2 ring-white shadow hover:scale-125 transition-transform"
-              />
-            </Marker>
-          ))}
-
-          {mode === 'china' && battles.map((e) => (
-            <Marker
-              key={e.id}
-              longitude={e.location!.lon}
-              latitude={e.location!.lat}
-              anchor="bottom"
-            >
-              <button
-                type="button"
-                onClick={(ev) => {
-                  ev.stopPropagation();
-                  setSelectedId(e.id);
-                }}
-                className="flex items-center justify-center w-6 h-6 rounded-full bg-red-600 ring-2 ring-white shadow hover:scale-125 transition-transform text-white text-xs"
-              >
-                ⚔️
-              </button>
-            </Marker>
-          ))}
-
-          {selected?.location && (
-            <Popup
-              longitude={selected.location.lon}
-              latitude={selected.location.lat}
-              anchor="top"
-              closeButton
-              closeOnClick={false}
-              onClose={() => setSelectedId(null)}
-              maxWidth="320px"
-            >
-              <div className="space-y-1">
-                <div className="text-xs text-zinc-500">{formatYear(selected.year)}</div>
-                <div className="text-sm font-semibold">{t(selected.titleKey)}</div>
-                <div className="text-sm">{t(selected.summaryKey)}</div>
-                {selected.location.label && (
-                  <div className="text-xs text-zinc-500">📍 {selected.location.label}</div>
-                )}
-              </div>
-            </Popup>
-          )}
-        </Map>
-
+        {/* 图例 */}
         {worldBoundaries.length > 0 && (
           <div className="absolute right-4 bottom-4 bg-white/95 backdrop-blur-sm rounded-lg shadow p-3 z-10">
             <div className="text-xs font-medium text-zinc-500 mb-2">图例</div>
