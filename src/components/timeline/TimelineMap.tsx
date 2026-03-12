@@ -1,12 +1,13 @@
 'use client';
 
 import * as React from 'react';
-import { useTranslations } from 'next-intl';
-import { useBaiduMap } from './BaiduMapHooks';
+import Map, { Marker, Popup, NavigationControl, Source, Layer, type MapLib } from 'react-map-gl/maplibre';
+import maplibregl from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
 
 import type { TimelineEvent, Territory } from '@/lib/history/data/timeline';
-
-const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
+import { formatYear } from '@/lib/history/utils';
+import { useTranslations } from 'next-intl';
 
 interface TimelineMapProps {
   event: TimelineEvent | null;
@@ -18,82 +19,103 @@ export function TimelineMap({ event }: TimelineMapProps) {
     longitude: event?.location.lon ?? 108.95,
     latitude: event?.location.lat ?? 34.34,
     zoom: 4,
+    minZoom: 3,
+    maxZoom: 8,
+    pitch: 0,
+    bearing: 0,
   });
   const [popupInfo, setPopupInfo] = React.useState<string | null>(null);
 
-  const { ready, map, containerRef, initMap } = useBaiduMap(BAIDU_MAP_AK);
+  const geojsonData = React.useMemo(() => {
+    if (!event?.territories) return null;
+    
+    return {
+      type: 'FeatureCollection' as const,
+      features: event.territories.map((territory) => ({
+        type: 'Feature' as const,
+        properties: {
+          name: t(territory.factionNameKey),
+          color: territory.color,
+        },
+        geometry: {
+          type: 'Polygon' as const,
+          coordinates: [territory.polygon],
+        },
+      }))
+    };
+  }, [event, t]);
 
-  // 初始化地图
   React.useEffect(() => {
-    if (ready && event) {
-      initMap({ lng: event.location.lon, lat: event.location.lat }, 5);
-    } else if (ready) {
-      initMap({ lng: 108.95, lat: 34.34 }, 4);
-    }
-  }, [ready, event, initMap]);
-
-  // 更新地图中心
-  React.useEffect(() => {
-    if (map && event) {
-      map.centerAndZoom(new window.BMapGL.Point(event.location.lon, event.location.lat), 5);
-    }
-  }, [map, event]);
-
-  // 绘制多边形
-  React.useEffect(() => {
-    if (!map || !event?.territories) return;
-
-    // 清除之前的覆盖物
-    map.clearOverlays();
-
-    // 添加新的多边形
-    event.territories.forEach((territory: Territory) => {
-      if (!territory.polygon || territory.polygon.length < 3) return;
-
-      const points = territory.polygon.map((coord: number[]) => 
-        new window.BMapGL.Point(coord[0], coord[1])
-      );
-
-      const polygon = new window.BMapGL.Polygon(points, {
-        strokeColor: territory.color,
-        strokeWeight: 2,
-        fillColor: territory.color,
-        fillOpacity: 0.35,
+    if (event) {
+      setViewState({
+        longitude: event.location.lon,
+        latitude: event.location.lat,
+        zoom: 5,
+        minZoom: 3,
+        maxZoom: 8,
+        pitch: 0,
+        bearing: 0,
       });
-
-      polygon.addEventListener('click', () => {
-        setPopupInfo(t(territory.factionNameKey));
-      });
-
-      map.addOverlay(polygon);
-    });
-  }, [map, event, t]);
+    }
+  }, [event]);
 
   return (
     <div className="relative w-full h-full rounded-lg overflow-hidden border border-zinc-700">
-      {!ready && (
-        <div className="absolute inset-0 flex items-center justify-center bg-zinc-900 text-zinc-400">
-          Loading map...
-        </div>
-      )}
-      <div 
-        ref={containerRef} 
-        className="w-full h-full"
-        style={{ visibility: ready ? 'visible' : 'hidden' }}
-      />
-      
-      {/* Popup */}
-      {popupInfo && (
-        <div className="absolute top-4 left-4 bg-black/80 text-white px-3 py-2 rounded-lg text-sm">
-          {popupInfo}
-          <button 
-            onClick={() => setPopupInfo(null)}
-            className="ml-2 text-zinc-400 hover:text-white"
+      <Map
+        {...viewState}
+        onMove={evt => setViewState(prev => ({ ...prev, ...evt.viewState }))}
+        maxBounds={[[73.0, 17.5], [135.5, 54.5]]}
+        mapStyle="https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json"
+        style={{ width: '100%', height: '100%' }}
+      >
+        <NavigationControl position="top-right" />
+
+        {geojsonData && (
+          <Source id="territories" type="geojson" data={geojsonData}>
+            <Layer
+              id="territory-fill"
+              type="fill"
+              paint={{
+                'fill-color': ['get', 'color'],
+                'fill-opacity': 0.35,
+              }}
+            />
+            <Layer
+              id="territory-line"
+              type="line"
+              paint={{
+                'line-color': ['get', 'color'],
+                'line-width': 2,
+              }}
+            />
+          </Source>
+        )}
+
+        {event?.location && (
+          <Marker
+            longitude={event.location.lon}
+            latitude={event.location.lat}
+            anchor="bottom"
+            onClick={e => {
+              e.originalEvent.stopPropagation();
+              setPopupInfo(event.location.label || 'Location');
+            }}
           >
-            ×
-          </button>
-        </div>
-      )}
+            <div className="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg" />
+          </Marker>
+        )}
+
+        {popupInfo && (
+          <Popup
+            longitude={event?.location.lon ?? 0}
+            latitude={event?.location.lat ?? 0}
+            anchor="top"
+            onClose={() => setPopupInfo(null)}
+          >
+            <div className="text-sm">{popupInfo}</div>
+          </Popup>
+        )}
+      </Map>
     </div>
   );
 }

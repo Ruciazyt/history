@@ -1,6 +1,10 @@
 'use client';
 
 import * as React from 'react';
+import Map, { Marker, Popup, NavigationControl, Source, Layer, type MapLib } from 'react-map-gl/maplibre';
+import maplibregl from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
+
 import { formatYear } from '@/lib/history/utils';
 import { useTranslations } from 'next-intl';
 import {
@@ -9,15 +13,6 @@ import {
   getActiveBoundaries,
   type WorldBoundary,
 } from '@/lib/history/data/worldBoundaries';
-
-const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
-
-declare global {
-  interface Window {
-    BMapGL: any;
-    initBaiduMap: () => void;
-  }
-}
 
 interface WorldEmpireMapProps {
   year: number;
@@ -36,126 +31,78 @@ export function WorldEmpireMap({
 }: WorldEmpireMapProps) {
   const t = useTranslations();
   const [selectedEmpire, setSelectedEmpire] = React.useState<WorldBoundary | null>(null);
-  const [mapReady, setMapReady] = React.useState(false);
-  const mapContainerRef = React.useRef<HTMLDivElement>(null);
-  const mapRef = React.useRef<any>(null);
 
-  // 获取当前年份活跃的帝国
   const activeBoundaries = React.useMemo(
     () => getActiveBoundaries(year, mode),
     [year, mode]
   );
 
-  // 获取活跃帝国名称列表
   const activeEmpireNames = React.useMemo(
     () => activeBoundaries.map((b) => t(b.properties.nameKey)),
     [activeBoundaries, t]
   );
 
-  // 加载百度地图
-  React.useEffect(() => {
-    if (mapRef.current) return;
-    
-    const loadMap = () => {
-      if (window.BMapGL) {
-        const map = new window.BMapGL.Map(mapContainerRef.current);
-        map.centerAndZoom(new window.BMapGL.Point(initialCenter.lon, initialCenter.lat), initialZoom);
-        map.enableScrollWheelZoom(true);
-        mapRef.current = map;
-        setMapReady(true);
-      }
-    };
-
-    if (window.BMapGL) {
-      loadMap();
-    } else {
-      const script = document.createElement('script');
-      script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}`;
-      script.async = true;
-      script.onload = loadMap;
-      document.head.appendChild(script);
-    }
-  }, [initialCenter.lon, initialCenter.lat, initialZoom]);
-
-  // 绘制帝国边界
-  React.useEffect(() => {
-    if (!mapRef.current || !mapReady) return;
-
-    const map = mapRef.current;
-    map.clearOverlays();
-
-    activeBoundaries.forEach((boundary) => {
-      const coords = boundary.geometry.coordinates;
-      if (!coords || coords.length === 0) return;
-
-      const processPolygon = (points: any[]) => {
-        if (!points || points.length < 3) return;
-        
-        const bmapPoints = points.map((coord: number[]) => 
-          new window.BMapGL.Point(coord[0], coord[1])
-        );
-
-        const polygon = new window.BMapGL.Polygon(bmapPoints, {
-          strokeColor: boundary.properties.color,
-          strokeWeight: 2,
-          fillColor: boundary.properties.color,
-          fillOpacity: 0.35,
-        });
-
-        polygon.addEventListener('click', () => {
-          setSelectedEmpire(boundary);
-        });
-
-        map.addOverlay(polygon);
-      };
-
-      try {
-        if (boundary.geometry.type === 'MultiPolygon') {
-          (coords as any[]).forEach((poly: any[]) => {
-            if (poly && poly[0]) {
-              processPolygon(poly[0]);
-            }
-          });
-        } else if (boundary.geometry.type === 'Polygon') {
-          processPolygon(coords[0]);
-        }
-      } catch (e) {
-        console.warn('Failed to draw boundary:', boundary.properties.name, e);
-      }
-    });
-  }, [mapReady, activeBoundaries]);
-
   return (
     <div className="h-full w-full overflow-hidden rounded-xl border border-zinc-200 bg-white relative">
-      {!mapReady && (
-        <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 text-zinc-400 z-10">
-          Loading...
+      <Map
+        mapLib={maplibregl as unknown as MapLib}
+        initialViewState={{
+          longitude: initialCenter.lon,
+          latitude: initialCenter.lat,
+          zoom: initialZoom,
+        }}
+        style={{ width: '100%', height: '100%' }}
+        mapStyle="https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json"
+        onClick={() => setSelectedEmpire(null)}
+      >
+        <div className="absolute right-3 top-3 z-10">
+          <NavigationControl visualizePitch />
         </div>
-      )}
-      <div ref={mapContainerRef} className="w-full h-full" />
-      
-      {/* 选中的帝国信息 */}
-      {selectedEmpire && (
-        <div className="absolute left-4 top-4 bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-4 max-w-xs z-20">
-          <div className="flex justify-between items-start">
-            <h3 
-              className="font-bold text-lg"
-              style={{ color: selectedEmpire.properties.color }}
+
+        {activeBoundaries.map((boundary, index) => (
+          <Source
+            key={`${boundary.properties.nameKey}-${index}`}
+            id={`empire-${index}`}
+            type="geojson"
+            data={boundary}
+          >
+            <Layer
+              id={`empire-fill-${index}`}
+              type="fill"
+              paint={{
+                'fill-color': boundary.properties.color,
+                'fill-opacity': 0.3,
+              }}
+            />
+            <Layer
+              id={`empire-line-${index}`}
+              type="line"
+              paint={{
+                'line-color': boundary.properties.color,
+                'line-width': 2,
+              }}
+            />
+          </Source>
+        ))}
+      </Map>
+
+      {/* 底部帝国列表 */}
+      <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-zinc-200 p-3">
+        <div className="flex flex-wrap gap-2">
+          {activeBoundaries.map((b, i) => (
+            <span
+              key={i}
+              className="px-1.5 py-0.5 text-[10px] text-white rounded"
+              style={{ backgroundColor: b.properties.color }}
             >
-              {t(selectedEmpire.properties.nameKey)}
-            </h3>
-            <button 
-              onClick={() => setSelectedEmpire(null)}
-              className="text-zinc-400 hover:text-zinc-600"
-            >
-              ×
-            </button>
-          </div>
-          <div className="text-sm text-zinc-600 mt-2">
-            {formatYear(selectedEmpire.properties.startYear)} - {formatYear(selectedEmpire.properties.endYear)}
-          </div>
+              {t(b.properties.nameKey)}
+            </span>
+          ))}
+          {activeBoundaries.length === 0 && (
+            <span className="text-xs text-white/50">No empires</span>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
