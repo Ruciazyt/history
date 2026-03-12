@@ -249,6 +249,41 @@ export type BattleAftermath = {
   isLongTerm?: boolean;
 };
 
+/** 战役情报活动类型 */
+export type IntelligenceType =
+  | 'espionage'      // 间谍活动/卧底
+  | 'infiltration'   // 渗透/内应
+  | 'deception'      // 欺诈/诱敌
+  | 'counter-intelligence' // 反间谍
+  | 'reconnaissance' // 侦察
+  | 'propaganda'     // 宣传/心理战
+  | 'defection'      // 倒戈/投诚
+  | 'sabotage'       // 破坏活动
+  | 'unknown';
+
+/** 情报活动结果 */
+export type IntelligenceResult =
+  | 'success'        // 成功
+  | 'failure'        // 失败
+  | 'partial'       // 部分成功
+  | 'unknown';
+
+/** 战役情报活动数据 */
+export type BattleIntelligence = {
+  /** 情报活动类型 */
+  type: IntelligenceType;
+  /** 情报活动描述 */
+  description: string;
+  /** 哪方开展的情报活动 */
+  side: 'attacker' | 'defender' | 'both' | 'unknown';
+  /** 情报活动结果 */
+  result: IntelligenceResult;
+  /** 哪方从中受益 */
+  benefit?: 'attacker' | 'defender' | 'both' | 'unknown';
+  /** 附加说明 */
+  notes?: string;
+};
+
 export type Event = {
   id: string;
   entityId: string; // eraId
@@ -304,5 +339,7 @@ export type Event = {
     alliance?: BattleAlliance;
     /** 战役后果/长期影响 */
     aftermath?: BattleAftermath[];
+    /** 战役情报活动 */
+    intelligence?: BattleIntelligence[];
   };
 };
