@@ -183,6 +183,25 @@ src/
 - [x] 单元测试: 400个测试用例全部通过
 - [x] 部署到 Vercel 成功
 
+### 新增功能: 战役天气分析 (2026-03-12 11:09)
+- [x] 添加 BattleWeather 类型定义（晴天、雨天、雪天、大风、雾天、暴风雨、多云、炎热、寒冷、未知共10种天气类型）
+- [x] 创建 battleWeather.ts 分析模块：
+  - getWeatherLabel: 获取天气中文标签
+  - getWeatherStats: 获取天气统计
+  - getAllWeatherStats: 获取所有天气类型统计（含0值）
+  - getMostCommonWeather: 获取最常见天气
+  - getKnownWeatherCount: 获取已知天气条件战役数量
+  - getBattlesByWeather: 按天气类型筛选战役
+  - getWeatherOutcomeCorrelation: 分析天气与战役结果关联
+  - getWeatherAttackerDefenderAnalysis: 分析天气对进攻方/防守方胜率影响
+  - getWeatherInsights: 生成天气分析历史洞察
+  - getWeatherSummary: 获取完整天气分析摘要
+  - hasWeatherData: 检查是否有天气数据
+- [x] 创建 battleWeather.test.ts 测试文件（17个测试用例）
+- [x] 构建验证通过
+- [x] 单元测试: 504个测试用例全部通过
+- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
+
 ### 新增功能: 战役转折点分析 (2026-03-12 10:06)
 - [x] 添加 BattleTurningPointType 类型定义（14种转折点类型）
 - [x] 创建 battleTurningPoints.ts 分析模块：

@@ -172,6 +172,42 @@ export type BattleTurningPoint = {
   impact?: 'positive' | 'negative' | 'neutral';
 };
 
+/** 联盟类型 */
+export type AllianceType = 
+  | 'offensive'      // 进攻联盟
+  | 'defensive'      // 防御联盟
+  | 'cooperative'    // 合作/协同作战
+  | 'temporary'      // 临时联盟
+  | 'unknown';
+
+/** 联盟参与者 */
+export type AllianceParticipant = {
+  /** 参与者名称 */
+  name: string;
+  /** 在联盟中的角色 */
+  role: 'leader' | 'member';
+  /** 联盟中的贡献/重要性 (可选) */
+  contribution?: 'major' | 'minor' | 'unknown';
+};
+
+/** 战役联盟数据 */
+export type BattleAlliance = {
+  /** 联盟ID */
+  id: string;
+  /** 联盟名称（可选） */
+  name?: string;
+  /** 联盟类型 */
+  type: AllianceType;
+  /** 联盟参与者 */
+  participants: AllianceParticipant[];
+  /** 联盟持续时间（年）- 可选 */
+  duration?: number;
+  /** 联盟结果 */
+  outcome?: 'victory' | 'defeat' | 'draw' | 'dissolved' | 'unknown';
+  /** 联盟形成原因（可选） */
+  reason?: string;
+};
+
 export type Event = {
   id: string;
   entityId: string; // eraId
@@ -223,5 +259,7 @@ export type Event = {
     weather?: BattleWeather[];
     /** 战役转折点/关键事件 */
     turningPoints?: BattleTurningPoint[];
+    /** 战役联盟数据 */
+    alliance?: BattleAlliance;
   };
 };

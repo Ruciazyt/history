@@ -63,7 +63,7 @@ export function WorldEmpireMap({
           zoom: initialZoom,
         }}
         style={{ width: '100%', height: '100%' }}
-        mapStyle="https://tiles.openfreemap.org/styles/liberty"
+        mapStyle="https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json"
         onClick={() => setSelectedEmpire(null)}
       >
         <div className="absolute right-3 top-3 z-10">

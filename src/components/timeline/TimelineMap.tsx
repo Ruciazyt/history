@@ -67,7 +67,7 @@ export function TimelineMap({ event }: TimelineMapProps) {
         onMove={evt => setViewState(prev => ({ ...prev, ...evt.viewState }))}
         // 限制视野在中国附近
         maxBounds={[[73.0, 17.5], [135.5, 54.5]]}
-        mapStyle="https://tiles.openfreemap.org/styles/liberty"
+        mapStyle="https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json"
         style={{ width: '100%', height: '100%' }}
       >
         <NavigationControl position="top-right" />
