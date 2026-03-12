@@ -208,6 +208,47 @@ export type BattleAlliance = {
   reason?: string;
 };
 
+/** 战役后果/影响类型 */
+export type AftermathType =
+  | 'territorial-change'    // 领土变化
+  | 'political-upheaval'   // 政治动荡
+  | 'dynastic-change'      // 朝代更替
+  | 'military-weakening'  // 军事衰弱
+  | 'military-strengthening' // 军事增强
+  | 'economic-decline'    // 经济衰退
+  | 'economic-growth'     // 经济发展
+  | 'population-displacement' // 人口迁移
+  | 'cultural-shift'      // 文化变迁
+  | 'treaty-signed'       // 条约签订
+  | 'system-collapse'     // 制度崩溃
+  | 'unification'          // 统一
+  | 'fragmentation'       // 分裂
+  | 'unknown';
+
+/** 战役后果严重程度 */
+export type AftermathSeverity = 'massive' | 'significant' | 'moderate' | 'minor' | 'unknown';
+
+/** 战役后果影响范围 */
+export type AftermathScope = 'continental' | 'regional' | 'local' | 'unknown';
+
+/** 战役具体后果 */
+export type BattleAftermath = {
+  /** 后果类型 */
+  type: AftermathType;
+  /** 后果描述 */
+  description: string;
+  /** 影响的国家/势力 */
+  affectedParties?: string[];
+  /** 严重程度 */
+  severity?: AftermathSeverity;
+  /** 影响范围 */
+  scope?: AftermathScope;
+  /** 持续时间（年）- 可选 */
+  duration?: number;
+  /** 是否为长期影响 */
+  isLongTerm?: boolean;
+};
+
 export type Event = {
   id: string;
   entityId: string; // eraId
@@ -261,5 +302,7 @@ export type Event = {
     turningPoints?: BattleTurningPoint[];
     /** 战役联盟数据 */
     alliance?: BattleAlliance;
+    /** 战役后果/长期影响 */
+    aftermath?: BattleAftermath[];
   };
 };
