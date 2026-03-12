@@ -264,8 +264,13 @@ export function HistoryMap({
 
       <div className="flex-1 relative">
         {!mapReady && (
-          <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 text-zinc-400 z-10">
-            Loading...
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-zinc-100 text-zinc-400 z-10">
+            <div>Loading map...</div>
+            {BAIDU_MAP_AK ? (
+              <div className="text-xs text-green-500 mt-1">AK 已配置</div>
+            ) : (
+              <div className="text-xs text-red-500 mt-1">AK 未配置 - 请在 Vercel 添加环境变量</div>
+            )}
           </div>
         )}
         <div ref={mapContainerRef} className="w-full h-full" />
