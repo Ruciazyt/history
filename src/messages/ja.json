@@ -1172,7 +1172,12 @@
     }
   },
   "nav": {
-    "battles": "戦い"
+    "battles": "戦い",
+    "world": "世界"
+  },
+  "world": {
+    "eurasian": "ユーラシア",
+    "eastAsia": "東アジア"
   },
   "matrix": {
     "title": "時系列マトリックス",

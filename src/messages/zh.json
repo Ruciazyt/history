@@ -1452,7 +1452,12 @@
     "yan": "燕"
   },
   "nav": {
-    "battles": "战役"
+    "battles": "战役",
+    "world": "欧亚"
+  },
+  "world": {
+    "eurasian": "欧亚大陆",
+    "eastAsia": "东亚"
   },
   "matrix": {
     "title": "时间轴矩阵",

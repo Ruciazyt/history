@@ -1215,7 +1215,12 @@
     "yan": "Yan"
   },
   "nav": {
-    "battles": "Battles"
+    "battles": "Battles",
+    "world": "World"
+  },
+  "world": {
+    "eurasian": "Eurasia",
+    "eastAsia": "East Asia"
   },
   "matrix": {
     "title": "Timeline Matrix",

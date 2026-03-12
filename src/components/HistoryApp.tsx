@@ -222,6 +222,12 @@ export function HistoryApp({
                 >
                   ⚔️ <span className="hidden sm:inline">{t('nav.battles')}</span>
                 </Link>
+                <Link
+                  href={`/${currentLocale}/world`}
+                  className="px-2 sm:px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 rounded-lg text-xs sm:text-sm text-emerald-700 transition-colors border border-emerald-200 whitespace-nowrap"
+                >
+                  🌍 <span className="hidden sm:inline">{t('nav.world')}</span>
+                </Link>
               </div>
             </div>
           </div>
