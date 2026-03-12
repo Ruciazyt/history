@@ -209,16 +209,24 @@ export function HistoryMap({
       });
     }
 
-    // 绘制事件标记
+    // 绘制事件标记 - 使用圆形替代 Marker
     const allEvents = mode === 'china' ? [...normalEvents, ...battles] : [];
     allEvents.forEach((e) => {
       if (!e.location) return;
       
-      const marker = new window.BMapGLMarker(new window.BMapGL.Point(e.location.lon, e.location.lat));
-      marker.addEventListener('click', () => {
+      // 使用圆形标记
+      const circle = new window.BMapGL.Circle(new window.BMapGL.Point(e.location.lon, e.location.lat), {
+        radius: 5000,
+        strokeColor: '#DC2626',
+        strokeWeight: 2,
+        fillColor: '#DC2626',
+        fillOpacity: 0.8,
+      });
+      
+      circle.addEventListener('click', () => {
         setSelectedId(e.id);
       });
-      map.addOverlay(marker);
+      map.addOverlay(circle);
     });
   }, [mapReady, mode, activeBoundaries, worldBoundaries, normalEvents, battles]);
 
