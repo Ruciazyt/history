@@ -127,6 +127,38 @@ export type BattleCasualties = {
   reliability?: 'high' | 'medium' | 'low';
 };
 
+/** 战役转折点类型 */
+export type BattleTurningPointType = 
+  | 'commander-death'       // 指挥官阵亡
+  | 'commander-captured'    // 指挥官被俘
+  | 'flank-collapse'        // 侧翼崩溃
+  | 'reinforcement-arrival' // 援军到达
+  | 'supply-disruption'     // 补给中断
+  | 'weather-change'        // 天气突变
+  | 'defection'            // 倒戈/背叛
+  | 'strategic-mistake'     // 战略失误
+  | 'fortification-breach' // 防线突破
+  | 'ambush-triggered'      // 伏击触发
+  | 'morale-collapse'       // 士气崩溃
+  | 'trap-triggered'        // 陷阱触发
+  | 'fire-attack'           // 火攻成功
+  | 'flood-attack'          // 水攻成功
+  | 'unknown';
+
+/** 战役关键转折点 */
+export type BattleTurningPoint = {
+  /** 转折点类型 */
+  type: BattleTurningPointType;
+  /** 转折点描述 */
+  description: string;
+  /** 涉及的战役方 */
+  party?: 'attacker' | 'defender' | 'both' | 'unknown';
+  /** 发生的阶段/回合 (可选) */
+  phase?: string;
+  /** 对谁有利 */
+  impact?: 'positive' | 'negative' | 'neutral';
+};
+
 export type Event = {
   id: string;
   entityId: string; // eraId
@@ -174,5 +206,7 @@ export type Event = {
     pacing?: BattlePacing;
     /** 战役作战时间段 */
     timeOfDay?: BattleTimeOfDay;
+    /** 战役转折点/关键事件 */
+    turningPoints?: BattleTurningPoint[];
   };
 };

@@ -178,6 +178,22 @@ export const CHINA_EVENTS: Event[] = [
         source: '《左传》记载',
         reliability: 'medium',
       },
+      turningPoints: [
+        {
+          type: 'flank-collapse',
+          description: '晋军左右夹击楚军侧翼',
+          party: 'attacker',
+          impact: 'positive',
+          phase: '决战阶段',
+        },
+        {
+          type: 'strategic-mistake',
+          description: '楚军轻敌冒进，中了晋军诱敌之计',
+          party: 'defender',
+          impact: 'negative',
+          phase: '诱敌阶段',
+        },
+      ],
     },
   },
   {
@@ -220,6 +236,29 @@ export const CHINA_EVENTS: Event[] = [
         source: '《左传》《史记》记载',
         reliability: 'medium',
       },
+      turningPoints: [
+        {
+          type: 'flank-collapse',
+          description: '吴军三路夹击楚军主力',
+          party: 'attacker',
+          impact: 'positive',
+          phase: '决战阶段',
+        },
+        {
+          type: 'strategic-mistake',
+          description: '楚将囊瓦临阵脱逃，导致楚军溃败',
+          party: 'defender',
+          impact: 'negative',
+          phase: '溃败阶段',
+        },
+        {
+          type: 'defection',
+          description: '楚军内部倒戈',
+          party: 'defender',
+          impact: 'negative',
+          phase: '战中',
+        },
+      ],
     },
   },
 
@@ -272,6 +311,29 @@ export const CHINA_EVENTS: Event[] = [
         source: '《史记》《孙膑兵法》记载',
         reliability: 'medium',
       },
+      turningPoints: [
+        {
+          type: 'ambush-triggered',
+          description: '齐军伏兵万弩齐发',
+          party: 'attacker',
+          impact: 'positive',
+          phase: '伏击阶段',
+        },
+        {
+          type: 'commander-death',
+          description: '庞涓兵败自杀',
+          party: 'defender',
+          impact: 'negative',
+          phase: '溃败阶段',
+        },
+        {
+          type: 'trap-triggered',
+          description: '庞涓中计进入马陵狭道',
+          party: 'defender',
+          impact: 'negative',
+          phase: '诱敌阶段',
+        },
+      ],
     },
   },
   {
@@ -354,6 +416,29 @@ export const CHINA_EVENTS: Event[] = [
         source: '《史记》《资治通鉴》记载',
         reliability: 'high',
       },
+      turningPoints: [
+        {
+          type: 'commander-death',
+          description: '赵括率军突围时被秦军射杀',
+          party: 'defender',
+          impact: 'negative',
+          phase: '突围阶段',
+        },
+        {
+          type: 'flank-collapse',
+          description: '秦军完成对赵军的合围',
+          party: 'attacker',
+          impact: 'positive',
+          phase: '包围阶段',
+        },
+        {
+          type: 'supply-disruption',
+          description: '赵军断粮四十六天',
+          party: 'defender',
+          impact: 'negative',
+          phase: '相持阶段',
+        },
+      ],
     },
   },
   {

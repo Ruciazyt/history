@@ -147,7 +147,25 @@ src/
 - [x] 单元测试: 355个测试用例全部通过
 - [x] 部署到 Vercel 成功
 
-### 新增功能: 战役指挥官网络分析 (2026-03-11 22:06)
+### 新增功能: 战役节奏分析 (2026-03-12 08:53)
+- [x] 添加 BattlePacing 类型定义（突袭战、快速决战、持久战、围城战）
+- [x] 添加 BattleTimeOfDay 类型定义（黎明、上午、下午、傍晚、夜间）
+- [x] 创建 battlePacing.ts 分析模块：
+  - getPacingStats: 获取战役节奏统计
+  - getAllPacingStats: 获取所有节奏类型统计
+  - getTimeOfDayStats: 获取战役时间段统计
+  - getAllTimeOfDayStats: 获取所有时间段统计
+  - getBattlesByPacing: 按节奏筛选战役
+  - getBattlesByTimeOfDay: 按时间段筛选战役
+  - getSurpriseAnalysis: 突袭战成功率分析
+  - getPacingInsights: 生成节奏分析洞察
+  - getTimeOfDayInsights: 生成时间段分析洞察
+  - getPacingSummary: 获取完整节奏摘要
+- [x] 创建 battlePacing.test.ts 测试文件（21个测试用例）
+- [x] 更新 types.ts 添加 pacing 和 timeOfDay 字段
+- [x] 构建验证通过
+- [x] 单元测试: 469个测试用例全部通过
+- [x] 部署到 Vercel 成功
 - [x] 添加 commanderNetwork.ts 指挥官网络分析模块
 - [x] 支持分析指挥官之间的合作与对立关系
 - [x] 核心函数：
