@@ -370,3 +370,32 @@ src/
 - [x] 构建验证通过
 - [x] 单元测试: 773个测试用例全部通过
 - [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
+
+### 新增功能: 战役投降/改编分析 (2026-03-13 15:40)
+- [x] 添加 SurrenderType 类型定义（9种投降类型）
+- [x] 添加 BattleSurrender 类型定义
+- [x] 创建 battleSurrender.ts 分析模块：
+  - getSurrenderTypeLabel: 获取投降类型中文标签
+  - getSurrenderSeverityLabel: 获取严重程度标签
+  - getTreatmentLabel: 获取处理方式标签
+  - getUniqueSurrenderTypes: 获取所有唯一投降类型
+  - hasSurrenderData: 检查是否有投降数据
+  - getSurrenderTypeStats: 获取特定类型统计
+  - getAllSurrenderTypeStats: 获取所有类型统计
+  - getSurrenderBySide: 按阵营统计投降
+  - getBattlesWithSurrender: 获取有投降的战役
+  - getBattlesBySurrenderType: 按类型筛选
+  - getMassSurrenderBattles: 获取大规模投降战役
+  - getDefectionBattles: 获取倒戈战役
+  - getDecisiveSurrenderBattles: 获取决定性投降战役
+  - getSurrenderResultCorrelation: 投降与胜负关联分析
+  - getTreatmentStats: 投降人员处理方式统计
+  - getDefectionImpact: 倒戈影响分析
+  - getSurrenderInsights: 生成历史洞察
+  - getSurrenderSummary: 获取完整摘要
+- [x] 创建 battleSurrender.test.ts 测试文件（23个测试用例）
+- [x] 为长平之战添加投降数据（四十五万赵军投降后被坑杀）
+- [x] 更新 types.ts 添加投降数据类型定义
+- [x] 构建验证通过
+- [x] 单元测试: 924个测试用例全部通过
+- [x] 代码已推送到 GitHub，等待 Vercel 自动部署
