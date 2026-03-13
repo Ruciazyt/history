@@ -837,6 +837,29 @@ export const CHINA_EVENTS: Event[] = [
           characteristics: ['防守', '等待'],
         },
       ],
+      surrender: [
+        {
+          type: 'mass-surrender',
+          description: '赵军在断粮四十六天后，四十五万赵军向秦军投降',
+          side: 'defender',
+          severity: 'massive',
+          number: 450000,
+          treatment: 'executed',
+          involvesKeyPerson: false,
+          impact: 'decisive',
+        },
+      ],
+      commandersLoss: [
+        {
+          name: '赵括',
+          type: 'killed-in-action',
+          description: '赵括率军突围时被秦军射杀',
+          side: 'defender',
+          severity: 'critical',
+          phase: '突围阶段',
+          isKeyCommander: true,
+        },
+      ],
     },
   },
   {

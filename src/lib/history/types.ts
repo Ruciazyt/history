@@ -364,7 +364,47 @@ export type Event = {
     moraleShifts?: MoraleShiftEvent[];
     /** 战役将领损失数据 */
     commandersLoss?: BattleCommanderLoss[];
+    /** 战役投降/改编数据 */
+    surrender?: BattleSurrender[];
   };
+};
+
+/** 投降/改编类型 */
+export type SurrenderType =
+  | 'surrender'           // 投降
+  | 'capitulation'       // 投降（正式）
+  | 'defection'          // 倒戈/投诚
+  | 'surrender-after-wound'  // 受伤后投降
+  | 'mass-surrender'     // 大规模投降
+  | 'surrender-pursuit' // 投降后追击
+  | 'refused-surrender'  // 拒绝投降
+  | 'negotiated-surrender' // 谈判投降
+  | 'unknown';
+
+/** 投降方阵营 */
+export type SurrenderSide = 'attacker' | 'defender' | 'both' | 'unknown';
+
+/** 投降/改编严重程度 */
+export type SurrenderSeverity = 'massive' | 'significant' | 'moderate' | 'minor' | 'unknown';
+
+/** 战役投降/改编数据 */
+export type BattleSurrender = {
+  /** 投降/改编类型 */
+  type: SurrenderType;
+  /** 描述 */
+  description: string;
+  /** 投降方 */
+  side: SurrenderSide;
+  /** 严重程度 */
+  severity?: SurrenderSeverity;
+  /** 投降的人数规模（可选） */
+  number?: number;
+  /** 投降后的人员处理 */
+  treatment?: 'enslaved' | 'integrated' | 'released' | 'executed' | 'unknown';
+  /** 是否涉及关键人物 */
+  involvesKeyPerson?: boolean;
+  /** 投降后对战役结果的影响 */
+  impact?: 'decisive' | 'significant' | 'minor' | 'unknown';
 };
 
 /** 战役阵型类型 */
