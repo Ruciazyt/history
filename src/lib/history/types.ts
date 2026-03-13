@@ -353,6 +353,15 @@ export type Event = {
     literature?: BattleLiterature[];
     /** 战役阵型数据 */
     formations?: BattleFormationData[];
+    /** 战役士气因素 */
+    moraleFactors?: BattleMoraleFactor[];
+    /** 战役初始士气水平 */
+    initialMorale?: {
+      attacker?: InitialMoraleLevel;
+      defender?: InitialMoraleLevel;
+    };
+    /** 战役士气变化事件 */
+    moraleShifts?: MoraleShiftEvent[];
   };
 };
 
@@ -538,3 +547,58 @@ export type BattleDurationCategory =
   | 'extended'       // 8-30天
   | 'protracted'     // 30天以上
   | 'unknown';
+
+/** 战役士气因素类型 */
+export type MoraleFactorType =
+  | 'leadership'       // 领导力/统帅能力
+  | 'discipline'       // 纪律性
+  | 'motivation'       // 战斗动机/士气激励
+  | 'experience'      // 作战经验
+  | 'training'        // 训练水平
+  | 'loyalty'         // 忠诚度
+  | 'morale-boost'    // 士气提升事件
+  | 'morale-crisis'   // 士气危机
+  | 'fatigue'         // 疲劳/厌战
+  | 'fear'            // 恐惧
+  | 'unknown';
+
+/** 士气因素影响方向 */
+export type MoraleImpact = 'positive' | 'negative' | 'neutral';
+
+/** 士气因素严重程度 */
+export type MoraleSeverity = 'critical' | 'major' | 'minor' | 'unknown';
+
+/** 战役士气因素数据 */
+export type BattleMoraleFactor = {
+  /** 因素类型 */
+  type: MoraleFactorType;
+  /** 因素描述 */
+  description: string;
+  /** 涉及的阵营 */
+  side: 'attacker' | 'defender' | 'both' | 'unknown';
+  /** 影响方向 */
+  impact: MoraleImpact;
+  /** 严重程度 */
+  severity?: MoraleSeverity;
+  /** 发生的阶段（可选） */
+  phase?: string;
+  /** 备注 */
+  notes?: string;
+};
+
+/** 战役初始士气水平 */
+export type InitialMoraleLevel = 'high' | 'medium' | 'low' | 'unknown';
+
+/** 战役士气变化事件 */
+export type MoraleShiftEvent = {
+  /** 变化描述 */
+  description: string;
+  /** 发生的阶段 */
+  phase: string;
+  /** 变化方向 */
+  direction: 'up' | 'down' | 'stable';
+  /** 对哪方产生影响 */
+  side: 'attacker' | 'defender' | 'both';
+  /** 影响幅度 */
+  magnitude?: 'large' | 'moderate' | 'small';
+};
