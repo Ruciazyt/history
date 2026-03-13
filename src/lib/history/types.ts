@@ -366,7 +366,49 @@ export type Event = {
     commandersLoss?: BattleCommanderLoss[];
     /** 战役投降/改编数据 */
     surrender?: BattleSurrender[];
+    /** 战役遗产/纪念数据 */
+    heritage?: BattleHeritage[];
   };
+};
+
+/** 纪念/遗产类型 */
+export type HeritageType =
+  | 'memorial'           // 纪念碑/纪念馆
+  | 'museum'             // 博物馆
+  | 'archaeological-site' // 古战场遗址
+  | 'tomb'               // 陵墓/墓地
+  | 'temple'             // 祠堂/寺庙
+  | 'cultural-site'      // 文化遗址
+  | 'literary-work'      // 文学作品
+  | 'film-tv'           // 影视作品
+  | 'game'               // 游戏
+  | 'idiom-proverb'      // 成语/谚语
+  | 'place-name'         // 地名影响
+  | 'festival'           // 节日/纪念活动
+  | 'education'          // 教育/教材
+  | 'unknown';
+
+/** 遗产严重程度/重要性 */
+export type HeritageSignificance = 'world' | 'national' | 'regional' | 'local' | 'unknown';
+
+/** 战役遗产/纪念数据 */
+export type BattleHeritage = {
+  /** 遗产类型 */
+  type: HeritageType;
+  /** 遗产名称 */
+  name: string;
+  /** 描述 */
+  description?: string;
+  /** 位置（可选） */
+  location?: string;
+  /** 重要性级别 */
+  significance?: HeritageSignificance;
+  /** 建立/出现时间 */
+  establishedYear?: number;
+  /** 相关人物（可选） */
+  relatedFigures?: string[];
+  /** 备注 */
+  notes?: string;
 };
 
 /** 投降/改编类型 */
