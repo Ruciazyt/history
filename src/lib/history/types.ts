@@ -368,6 +368,8 @@ export type Event = {
     surrender?: BattleSurrender[];
     /** 战役遗产/纪念数据 */
     heritage?: BattleHeritage[];
+    /** 战役通信/联络数据 */
+    communications?: BattleCommunication[];
   };
 };
 
@@ -720,4 +722,56 @@ export type BattleCommanderLoss = {
   phase?: string;
   /** 是否为关键将领（对战役有重大影响） */
   isKeyCommander?: boolean;
+};
+
+/** 通信/联络类型 */
+export type CommunicationType =
+  | 'signal-fire'        // 烽火台/狼烟
+  | 'drum'               // 鼓声联络
+  | 'horn'               // 号角联络
+  | 'flag'               // 战旗/旗帜信号
+  | 'messenger'          // 信使/传令兵
+  | 'beacon'             // 烽火/信号灯
+  | 'relay'              // 驿站/接力传递
+  | 'pyrotechnic'        // 烟火信号
+  | 'sound-signal'       // 声音信号
+  | 'visual-signal'      // 视觉信号
+  | 'encrypted-message'  // 密信/暗号
+  | 'unknown';
+
+/** 通信结果 */
+export type CommunicationResult =
+  | 'success'           // 成功传达
+  | 'failure'           // 传达失败
+  | 'intercepted'       // 被截获
+  | 'delayed'           // 延迟传达
+  | 'partial'           // 部分传达
+  | 'unknown';
+
+/** 通信方向 */
+export type CommunicationDirection =
+  | 'forward'           // 前线向后方的请求/报告
+  | 'backward'          // 后方向前线的指令
+  | 'lateral'           // 同级之间的联络
+  | 'multi-directional' // 多方向联络
+  | 'unknown';
+
+/** 战役通信数据 */
+export type BattleCommunication = {
+  /** 通信类型 */
+  type: CommunicationType;
+  /** 通信描述 */
+  description: string;
+  /** 发起方 */
+  side: 'attacker' | 'defender' | 'both' | 'unknown';
+  /** 通信结果 */
+  result: CommunicationResult;
+  /** 通信方向 */
+  direction?: CommunicationDirection;
+  /** 是否涉及截获/破解 */
+  intercepted?: boolean;
+  /** 对战役结果的影响 */
+  impact?: 'decisive' | 'significant' | 'minor' | 'unknown';
+  /** 备注 */
+  notes?: string;
 };
