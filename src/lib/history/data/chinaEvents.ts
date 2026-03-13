@@ -89,6 +89,21 @@ export const CHINA_EVENTS: Event[] = [
           characteristics: ['编年体', '宏观视角'],
         },
       ],
+      formations: [
+        {
+          formation: 'frontal-attack',
+          description: '周军以战车为核心进行正面突击，突破商军阵线',
+          side: 'attacker',
+          characteristics: ['战车冲击', '正面突击', '勇气'],
+          isInnovative: true,
+        },
+        {
+          formation: 'defensive',
+          description: '商军临时组建防御阵型，但士气低落',
+          side: 'defender',
+          characteristics: ['防守', '士气低落', '被动'],
+        },
+      ],
     },
   },
   {
@@ -320,6 +335,21 @@ export const CHINA_EVENTS: Event[] = [
           characteristics: ['详细描写', '人物刻画'],
         },
       ],
+      formations: [
+        {
+          formation: 'flanking',
+          description: '晋军左右两翼夹击楚军侧翼',
+          side: 'attacker',
+          characteristics: ['夹击', '侧翼突破', '战术机动'],
+          isInnovative: true,
+        },
+        {
+          formation: 'defensive',
+          description: '楚军主力布阵防守，但被晋军突破',
+          side: 'defender',
+          characteristics: ['防守', '被动挨打'],
+        },
+      ],
     },
   },
   {
@@ -431,6 +461,21 @@ export const CHINA_EVENTS: Event[] = [
           description: '吴王阖闾称霸之战',
           reliability: 'high',
           characteristics: ['人物刻画', '开疆拓土'],
+        },
+      ],
+      formations: [
+        {
+          formation: 'cavalry-flank',
+          description: '吴军使用骑兵进行侧翼迂回作战',
+          side: 'attacker',
+          characteristics: ['骑兵', '迂回', '快速突击'],
+          isInnovative: true,
+        },
+        {
+          formation: 'center-break',
+          description: '吴军集中兵力突破楚军中央防线',
+          side: 'attacker',
+          characteristics: ['中央突破', '分割包围'],
         },
       ],
     },
@@ -574,6 +619,21 @@ export const CHINA_EVENTS: Event[] = [
           description: '马陵之战时间线',
           reliability: 'medium',
           characteristics: ['编年体', '宏观视角'],
+        },
+      ],
+      formations: [
+        {
+          formation: 'long-wedge',
+          description: '孙膑采用减灶计，诱导魏军进入狭窄山谷后用锥形阵突破',
+          side: 'attacker',
+          characteristics: ['伏击', '诱导', '突破'],
+          isInnovative: true,
+        },
+        {
+          formation: 'retreating',
+          description: '庞涓率军追击齐军，进入马陵狭道',
+          side: 'defender',
+          characteristics: ['追击', '中计'],
         },
       ],
     },
@@ -760,6 +820,21 @@ export const CHINA_EVENTS: Event[] = [
           description: '汉书中关于长平之战的记载',
           reliability: 'medium',
           characteristics: ['史料补充'],
+        },
+      ],
+      formations: [
+        {
+          formation: 'encirclement',
+          description: '白起指挥秦军采用锥形阵和包围阵型围困赵军',
+          side: 'attacker',
+          characteristics: ['包围', '分割', '消耗'],
+          isInnovative: true,
+        },
+        {
+          formation: 'defensive',
+          description: '赵军被迫结阵防守，等待援军',
+          side: 'defender',
+          characteristics: ['防守', '等待'],
         },
       ],
     },

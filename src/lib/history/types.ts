@@ -351,7 +351,41 @@ export type Event = {
     armaments?: BattleArmament[];
     /** 战役典籍记载 */
     literature?: BattleLiterature[];
+    /** 战役阵型数据 */
+    formations?: BattleFormationData[];
   };
+};
+
+/** 战役阵型类型 */
+export type BattleFormation =
+  | 'long-wedge'          // 锥形阵/楔形阵
+  | 'frontal-attack'      // 正面突击
+  | 'flanking'            // 侧翼攻击
+  | 'encirclement'        // 包围阵型
+  | 'defensive'           // 防御阵型
+  | 'retreating'          // 撤退阵型/诱敌
+  | 'center-break'        // 中央突破
+  | 'skirmish'            // 散兵阵型
+  | 'cavalry-flank'       // 骑兵侧翼
+  | 'chariot-charge'      // 战车冲击
+  | 'mixed-formation'     // 混合阵型
+  | 'unknown';
+
+/** 阵型角色 */
+export type FormationRole = 'attacker' | 'defender' | 'both';
+
+/** 战役阵型数据 */
+export type BattleFormationData = {
+  /** 使用的阵型 */
+  formation: BattleFormation;
+  /** 描述 */
+  description?: string;
+  /** 使用方 */
+  side: FormationRole;
+  /** 阵型特点 */
+  characteristics?: string[];
+  /** 是否为该方首次使用/创新 */
+  isInnovative?: boolean;
 };
 
 /** 历史典籍类型 */
