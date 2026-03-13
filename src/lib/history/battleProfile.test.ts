@@ -69,6 +69,7 @@ describe('battleProfile', () => {
       month: 5,
       titleKey: '马陵之战',
       summaryKey: '齐国与魏国之间的伏击战',
+      tags: ['war'],
       battle: {
         result: 'defender_win',
         scale: 'large',
@@ -101,6 +102,7 @@ describe('battleProfile', () => {
       month: 4,
       titleKey: '城濮之战',
       summaryKey: '晋国与楚国的争霸战',
+      tags: ['war'],
       battle: {
         result: 'attacker_win',
         scale: 'medium',

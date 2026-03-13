@@ -292,8 +292,8 @@ function generateUniqueFeatures(battle: Event): string[] {
     features.push('重大战役');
   }
 
-  // 转折点特征
-  if ((bd.turningPoints?.length || 0) >= 3) {
+  // 转折点特征 (2个及以上即为多转折点)
+  if ((bd.turningPoints?.length || 0) >= 2) {
     features.push('多转折点战役');
   }
 
