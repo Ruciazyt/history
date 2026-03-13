@@ -349,3 +349,24 @@ src/
 - [x] 构建验证通过
 - [x] 单元测试: 716个测试用例全部通过
 - [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
+
+### 新增功能: 战役阵型分析 (2026-03-13 09:50)
+- [x] 添加 BattleFormation 类型定义（11种阵型类型）
+- [x] 创建 battleFormation.ts 分析模块：
+  - getFormationLabel: 获取阵型中文标签
+  - getFormationRoleLabel: 获取阵型角色标签
+  - getFormationBySide: 按阵营分析阵型使用
+  - getFormationOutcomeCorrelation: 阵型与胜负关联分析
+  - getMostEffectiveFormations: 最成功阵型分析
+  - getFormationSummary: 获取完整分析摘要
+  - getFormationInsights: 生成历史洞察
+- [x] 创建 battleFormation.test.ts 测试文件（25个测试用例）
+- [x] 为5个经典战役添加阵型数据：
+  - 长平之战: 包围阵型、防御阵型
+  - 马陵之战: 锥形阵、诱敌深入
+  - 城濮之战: 侧翼攻击、防御阵型
+  - 柏举之战: 骑兵侧翼、中央突破
+  - 牧野之战: 正面突击、防御阵型
+- [x] 构建验证通过
+- [x] 单元测试: 773个测试用例全部通过
+- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
