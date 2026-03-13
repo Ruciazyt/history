@@ -362,6 +362,8 @@ export type Event = {
     };
     /** 战役士气变化事件 */
     moraleShifts?: MoraleShiftEvent[];
+    /** 战役将领损失数据 */
+    commandersLoss?: BattleCommanderLoss[];
   };
 };
 
@@ -601,4 +603,39 @@ export type MoraleShiftEvent = {
   side: 'attacker' | 'defender' | 'both';
   /** 影响幅度 */
   magnitude?: 'large' | 'moderate' | 'small';
+};
+
+/** 将领损失类型 */
+export type CommanderLossType =
+  | 'killed-in-action'     // 阵亡
+  | 'captured'            // 被俘
+  | 'defected'            // 倒戈/投诚
+  | 'deserted'            // 逃亡/开小差
+  | 'executed'            // 被处决
+  | 'wounded-died'        // 受伤后死亡
+  | 'suicide'             // 自杀
+  | 'unknown';
+
+/** 将领损失严重程度 */
+export type LossSeverity = 'critical' | 'major' | 'minor' | 'unknown';
+
+/** 将领损失阵营 */
+export type LossSide = 'attacker' | 'defender' | 'both' | 'unknown';
+
+/** 战役将领损失数据 */
+export type BattleCommanderLoss = {
+  /** 将领名称 */
+  name: string;
+  /** 损失类型 */
+  type: CommanderLossType;
+  /** 描述 */
+  description?: string;
+  /** 所属阵营 */
+  side: LossSide;
+  /** 严重程度 */
+  severity?: LossSeverity;
+  /** 发生在哪个阶段 */
+  phase?: string;
+  /** 是否为关键将领（对战役有重大影响） */
+  isKeyCommander?: boolean;
 };
