@@ -407,5 +407,4 @@ src/
 - [x] 修复 compareBattleProfiles 函数因测试数据问题导致的失败
 - [x] 构建验证通过
 - [x] 单元测试: 937个测试用例全部通过
-- [ ] 提交代码并推送到仓库
-- [ ] 部署到 Vercel
+- [x] 代码已推送到 GitHub (由 Vercel 自动部署)
