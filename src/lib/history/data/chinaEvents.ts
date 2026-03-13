@@ -453,6 +453,29 @@ export const CHINA_EVENTS: Event[] = [
           position: 'midstream',
         },
       ],
+      logistics: [
+        {
+          type: 'food-provision',
+          description: '晋军"退避三舍"，获得当地诸侯的粮草支持',
+          side: 'attacker',
+          source: 'allied-support',
+          status: 'adequate',
+        },
+        {
+          type: 'supply-line',
+          description: '晋军以逸待劳，保障后勤补给线',
+          side: 'attacker',
+          source: 'home-base',
+          status: 'adequate',
+        },
+        {
+          type: 'food-provision',
+          description: '楚军孤军深入，后勤补给困难',
+          side: 'defender',
+          source: 'local-levy',
+          status: 'strained',
+        },
+      ],
     },
   },
   {
@@ -786,6 +809,21 @@ export const CHINA_EVENTS: Event[] = [
           decisive: true,
         },
       ],
+      logistics: [
+        {
+          type: 'supply-line',
+          description: '齐军诱敌深入，确保退路补给线安全',
+          side: 'attacker',
+          source: 'home-base',
+          status: 'adequate',
+        },
+        {
+          type: 'food-provision',
+          description: '齐军每日减少灶台，迷惑魏军以为齐军溃逃',
+          side: 'attacker',
+          status: 'adequate',
+        },
+      ],
     },
   },
   {
@@ -1062,6 +1100,30 @@ export const CHINA_EVENTS: Event[] = [
           side: 'attacker',
           result: 'success',
           position: 'upstream',
+          decisive: true,
+        },
+      ],
+      logistics: [
+        {
+          type: 'food-provision',
+          description: '秦军断赵粮道，赵军后勤补给被切断',
+          side: 'defender',
+          source: 'home-base',
+          status: 'cut-off',
+          decisive: true,
+        },
+        {
+          type: 'supply-line',
+          description: '秦军建立稳固的补给线，确保前线粮草供应',
+          side: 'attacker',
+          source: 'home-base',
+          status: 'adequate',
+        },
+        {
+          type: 'food-provision',
+          description: '赵军断粮四十六天，士兵相互残食',
+          side: 'defender',
+          status: 'depleted',
           decisive: true,
         },
       ],

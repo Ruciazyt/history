@@ -374,6 +374,8 @@ export type Event = {
     riverOperations?: BattleRiverOperation[];
     /** 战役突破/追击/突围数据 */
     breakthrough?: BattleBreakthrough[];
+    /** 战役后勤/补给数据 */
+    logistics?: BattleLogistics[];
   };
 };
 
@@ -874,6 +876,76 @@ export type BattleBreakthrough = {
   decisive?: boolean;
   /** 涉及的关键人物 */
   keyFigures?: string[];
+  /** 备注 */
+  notes?: string;
+};
+
+/** 战役后勤/补给类型 */
+export type LogisticsType =
+  | 'supply-line'        // 补给线
+  | 'food-provision'     // 粮草供应
+  | 'ammunition'         // 武器弹药
+  | 'reinforcement'      // 援军/兵力补给
+  | 'medical'            // 医疗救护
+  | 'winter-supply'      // 冬装/御寒物资
+  | 'equipment'          // 装备补充
+  | 'horse-supply'       // 战马补充
+  | 'naval-supply'       // 水军补给
+  | 'siege-equipment'    // 攻城器械
+  | 'treasury'           // 财力资源
+  | 'unknown';
+
+/** 补给来源 */
+export type SupplySource =
+  | 'home-base'          // 本土供应
+  | 'conquered-territory' // 征伐当地
+  | 'allied-support'     // 盟友支援
+  | 'plundering'         // 掠夺敌方
+  | 'local-levy'         // 当地征集
+  | 'strategic-reserve'  // 战略储备
+  | 'unknown';
+
+/** 补给状态 */
+export type SupplyStatus =
+  | 'adequate'          // 充足
+  | 'strained'           // 紧张
+  | 'depleted'           // 枯竭
+  | 'cut-off'            // 切断
+  | 'unknown';
+
+/** 后勤问题类型 */
+export type LogisticsProblemType =
+  | 'supply-cut'        // 补给被切断
+  | 'food-shortage'      // 粮草短缺
+  | 'starvation'         // 饥饿/断粮
+  | 'disease'            // 疾病/疫病
+  | 'desertion'          // 逃兵
+  | 'exhaustion'         // 疲劳过度
+  | 'overextension'      // 战线过长
+  | 'delayed-supply'     // 补给延误
+  | 'unknown';
+
+/** 后勤影响严重程度 */
+export type LogisticsImpact = 'critical' | 'significant' | 'minor' | 'unknown';
+
+/** 战役后勤/补给数据 */
+export type BattleLogistics = {
+  /** 后勤/补给类型 */
+  type: LogisticsType;
+  /** 描述 */
+  description: string;
+  /** 涉及的阵营 */
+  side: 'attacker' | 'defender' | 'both' | 'unknown';
+  /** 补给来源 */
+  source?: SupplySource;
+  /** 补给状态 */
+  status?: SupplyStatus;
+  /** 数量/规模（可选） */
+  quantity?: number;
+  /** 单位（可选，如"石"、"匹"等） */
+  unit?: string;
+  /** 是否为决定性因素 */
+  decisive?: boolean;
   /** 备注 */
   notes?: string;
 };
