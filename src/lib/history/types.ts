@@ -370,6 +370,10 @@ export type Event = {
     heritage?: BattleHeritage[];
     /** 战役通信/联络数据 */
     communications?: BattleCommunication[];
+    /** 战役渡河/水战数据 */
+    riverOperations?: BattleRiverOperation[];
+    /** 战役突破/追击/突围数据 */
+    breakthrough?: BattleBreakthrough[];
   };
 };
 
@@ -772,6 +776,104 @@ export type BattleCommunication = {
   intercepted?: boolean;
   /** 对战役结果的影响 */
   impact?: 'decisive' | 'significant' | 'minor' | 'unknown';
+  /** 备注 */
+  notes?: string;
+};
+
+/** 战役渡河/水战类型 */
+export type RiverOperationType =
+  | 'river-crossing'     // 渡河作战
+  | ' pontoon-bridge'    // 浮桥渡河
+  | 'ford-crossing'     // 涉水渡河
+  | 'boat-crossing'     // 船只渡河
+  | 'swimming'          // 游泳渡河
+  | 'naval-battle'      // 水战/海战
+  | 'river-ambush'       // 河湾伏击
+  | 'dam-flooding'      // 水攻/水淹
+  | 'island-attack'     // 岛屿进攻
+  | 'coastal-landing'   // 登陆作战
+  | 'unknown';
+
+/** 渡河/水战结果 */
+export type RiverOperationResult =
+  | 'success'           // 成功渡河/完成水战
+  | 'failure'          // 失败/被击退
+  | 'partial'          // 部分成功
+  | 'delayed'          // 延误
+  | 'unknown';
+
+/** 渡河/水战位置类型 */
+export type RiverPosition =
+  | 'upstream'         // 上游（占据上游）
+  | 'downstream'       // 下游
+  | 'midstream'        // 中游
+  | 'riverbank'        // 河岸
+  | 'unknown';
+
+/** 战役渡河/水战数据 */
+export type BattleRiverOperation = {
+  /** 渡河/水战类型 */
+  type: RiverOperationType;
+  /** 描述 */
+  description: string;
+  /** 涉及的河流/水域名称 */
+  riverName?: string;
+  /** 哪方执行的操作 */
+  side: 'attacker' | 'defender' | 'both' | 'unknown';
+  /** 操作结果 */
+  result: RiverOperationResult;
+  /** 位置优势 */
+  position?: RiverPosition;
+  /** 是否为决定性因素 */
+  decisive?: boolean;
+  /** 备注 */
+  notes?: string;
+};
+
+/** 战役突破/追击/突围类型 */
+export type BreakthroughType =
+  | 'frontal-breakthrough'     // 正面突破
+  | 'flanking-breakthrough'   // 侧翼突破
+  | 'center-breakthrough'     // 中央突破
+  | 'encirclement-breakout'   // 突围/突围战
+  | 'pursuit-victory'        // 追击胜利
+  | 'defensive-stand'         // 防守坚守
+  | 'tactical-retreat'        // 战术撤退
+  | 'feigned-retreat'         // 佯败/诱敌
+  | 'counterattack'           // 反击
+  | 'ambush-breakout'        // 伏击突围
+  | 'siege-breakout'         // 围城突围
+  | 'unknown';
+
+/** 突破/追击结果 */
+export type BreakthroughResult =
+  | 'success'                 // 成功
+  | 'failure'                 // 失败
+  | 'partial'                // 部分成功
+  | 'inconclusive'           // 未明
+  | 'unknown';
+
+/** 突破严重程度 */
+export type BreakthroughSeverity = 'decisive' | 'significant' | 'minor' | 'unknown';
+
+/** 战役突破/追击/突围数据 */
+export type BattleBreakthrough = {
+  /** 突破/追击类型 */
+  type: BreakthroughType;
+  /** 描述 */
+  description: string;
+  /** 执行方 */
+  side: 'attacker' | 'defender' | 'both' | 'unknown';
+  /** 结果 */
+  result: BreakthroughResult;
+  /** 严重程度 */
+  severity?: BreakthroughSeverity;
+  /** 发生的阶段/回合 */
+  phase?: string;
+  /** 是否为决定性因素 */
+  decisive?: boolean;
+  /** 涉及的关键人物 */
+  keyFigures?: string[];
   /** 备注 */
   notes?: string;
 };

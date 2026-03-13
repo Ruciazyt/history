@@ -443,6 +443,16 @@ export const CHINA_EVENTS: Event[] = [
           relatedFigures: ['左丘明'],
         },
       ],
+      riverOperations: [
+        {
+          type: 'ford-crossing',
+          description: '晋军渡黄河迎击楚军',
+          riverName: '黄河',
+          side: 'attacker',
+          result: 'success',
+          position: 'midstream',
+        },
+      ],
     },
   },
   {
@@ -765,6 +775,17 @@ export const CHINA_EVENTS: Event[] = [
           significance: 'national',
         },
       ],
+      riverOperations: [
+        {
+          type: 'river-ambush',
+          description: '马陵河谷伏击战',
+          riverName: '马陵河',
+          side: 'attacker',
+          result: 'success',
+          position: 'downstream',
+          decisive: true,
+        },
+      ],
     },
   },
   {
@@ -1031,6 +1052,17 @@ export const CHINA_EVENTS: Event[] = [
           name: '《大秦帝国》',
           description: '电视剧再现长平之战场景',
           significance: 'national',
+        },
+      ],
+      riverOperations: [
+        {
+          type: 'river-crossing',
+          description: '秦军渡过丹水实施包围',
+          riverName: '丹水',
+          side: 'attacker',
+          result: 'success',
+          position: 'upstream',
+          decisive: true,
         },
       ],
     },
