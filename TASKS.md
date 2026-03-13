@@ -408,3 +408,31 @@ src/
 - [x] 构建验证通过
 - [x] 单元测试: 937个测试用例全部通过
 - [x] 代码已推送到 GitHub (由 Vercel 自动部署)
+
+### 新增功能: 战役通信/联络分析 (2026-03-13 18:58)
+- [x] 添加 battleCommunication.ts 战役通信分析模块
+- [x] 支持12种通信类型：烽火台/狼烟、鼓声、号角、战旗、信使、烽火、驿站、烟火信号、声音信号、视觉信号、密信
+- [x] 核心函数：
+  - getCommunicationTypeLabel: 获取通信类型中文标签
+  - getCommunicationResultLabel: 获取通信结果标签
+  - getCommunicationDirectionLabel: 获取通信方向标签
+  - hasCommunicationData: 检查是否有通信数据
+  - getUniqueCommunicationTypes: 获取所有唯一通信类型
+  - getCommunicationTypeStats: 获取特定类型统计
+  - getAllCommunicationTypeStats: 获取所有类型统计
+  - getCommunicationBySide: 按阵营统计通信
+  - getBattlesWithCommunication: 获取有通信的战役
+  - getBattlesByCommunicationType: 按类型筛选战役
+  - getMostCommunicationBattles: 获取通信最多的战役
+  - getCommunicationResultCorrelation: 分析通信与结果关联
+  - getCommunicationImpactAnalysis: 分析通信影响
+  - getDecisiveCommunicationBattles: 获取有决定性通信影响的战役
+  - getInterceptedCommunicationBattles: 获取通信被截获的战役
+  - getCommunicationInsights: 生成通信分析洞察
+  - getCommunicationSummary: 获取完整通信摘要
+- [x] 创建 battleCommunication.test.ts 测试文件（22个测试用例）
+- [x] 更新 types.ts 添加通信类型定义
+- [x] 构建验证通过
+- [x] 单元测试: 959个测试用例全部通过
+- [x] 代码已推送到 GitHub
+- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
