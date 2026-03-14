@@ -167,30 +167,10 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
             {formatYear(year)}
           </div>
           
-          {/* 窗口大小 */}
-          <div className="flex gap-2">
-            {([50, 100, 200] as const).map(size => (
-              <button
-                key={size}
-                onClick={() => setWindowSize(size)}
-                className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
-                  windowSize === size
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
-                }`}
-              >
-                {size}年
-              </button>
-            ))}
+          {/* 活跃帝国数 */}
+          <div className="text-zinc-400">
+            {activeEmpires.length} 个帝国活跃
           </div>
-        </div>
-        
-        {/* 窗口范围 */}
-        <div className="text-center text-zinc-400 mt-2">
-          {formatYear(Math.floor(windowEnd))} ← {formatYear(Math.floor(windowStart))} 
-          <span className="ml-3 text-zinc-500">
-            ({activeEmpires.length} 个帝国活跃)
-          </span>
         </div>
       </header>
 
@@ -267,44 +247,13 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
           </div>
         </div>
 
-        {/* 右侧：交互式时间轴 */}
-        <div className="w-1/2 flex flex-col bg-zinc-900/30">
-          {/* 滑块 */}
-          <div className="p-4 border-b border-zinc-800 flex-shrink-0">
-            <div className="relative h-8 bg-zinc-800 rounded-full">
-              <div 
-                className="absolute h-full bg-blue-500/30 rounded-full"
-                style={{
-                  left: `${((windowStart - minYear) / (maxYear - minYear)) * 100}%`,
-                  width: `${((windowEnd - windowStart) / (maxYear - minYear)) * 100}%`,
-                }}
-              />
-              <div 
-                className="absolute top-0 bottom-0 w-1 bg-blue-500"
-                style={{ left: `${((year - minYear) / (maxYear - minYear)) * 100}%` }}
-              />
-              <input
-                type="range"
-                min={minYear}
-                max={maxYear}
-                value={year}
-                onChange={(e) => setYear(Number(e.target.value))}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-              />
-            </div>
-            <div className="flex justify-between text-xs text-zinc-500 mt-1">
-              <span>{formatYear(minYear)}</span>
-              <span>{formatYear(maxYear)}</span>
-            </div>
-          </div>
+        {/* 右侧：当前年份帝国详情 */}
+        <div className="w-1/2 flex flex-col bg-zinc-900/30 p-4 overflow-y-auto">
+          <h3 className="text-xl font-bold mb-4">
+            {formatYear(year)} 年的世界
+          </h3>
           
-          {/* 当前年份详情 */}
-          <div className="flex-1 p-4 overflow-y-auto">
-            <h3 className="text-xl font-bold mb-4">
-              {formatYear(year)} 年的世界
-            </h3>
-            
-            {activeEmpires.length > 0 ? (
+          {activeEmpires.length > 0 ? (
               <div className="space-y-2">
                 {activeEmpires.map((empire, idx) => {
                   const region = regions.find(r => r.boundaries.includes(empire));
@@ -338,7 +287,6 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
                 该时期无记录
               </div>
             )}
-          </div>
         </div>
       </div>
     </div>
