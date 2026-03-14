@@ -42,7 +42,7 @@ interface WorldTimelineProps {
 
 export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
   const [year, setYear] = React.useState(1);
-  const listContainerRef = React.useRef<HTMLDivElement>(null);
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   
   // 获取所有帝国数据（去重）
   const allBoundaries = React.useMemo(() => {
@@ -104,8 +104,8 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
 
   // 滚动到当前年份
   React.useEffect(() => {
-    if (listContainerRef.current) {
-      const container = listContainerRef.current;
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
       const totalYears = maxYear - minYear;
       const percentage = (year - minYear) / totalYears;
       const scrollTop = percentage * container.scrollHeight;
@@ -122,6 +122,17 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
       top: `${Math.max(0, topPercent)}%`,
       height: `${Math.max(0.5, heightPercent)}%`,
     };
+  };
+
+  // 处理滚动
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    // 同步滚动其他容器
+    document.querySelectorAll('.sync-scroll').forEach((el) => {
+      if (el !== container) {
+        el.scrollTop = container.scrollTop;
+      }
+    });
   };
 
   return (
@@ -142,7 +153,11 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
           <div className="h-10 border-b border-zinc-800 bg-zinc-800/50 flex items-center justify-center text-xs text-zinc-500">
             年份
           </div>
-          <div ref={listContainerRef} className="flex-1 overflow-y-auto relative">
+          <div 
+            ref={scrollContainerRef}
+            className="flex-1 overflow-y-auto sync-scroll"
+            onScroll={handleScroll}
+          >
             <div className="relative" style={{ height: '4000px' }}>
               {yearMarks.map(y => (
                 <div 
@@ -164,8 +179,8 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
           </div>
         </div>
 
-        {/* 右侧地区列 */}
-        <div className="flex-1 flex overflow-x-auto">
+        {/* 右侧地区列 - 共享滚动 */}
+        <div className="flex-1 flex overflow-hidden">
           {regionsData.map(region => (
             <div key={region.key} className="flex-shrink-0 w-40 flex flex-col border-r border-zinc-800">
               {/* 地区标题 */}
@@ -176,8 +191,11 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
                 {region.name}
               </div>
               
-              {/* 帝国时间块 */}
-              <div className="flex-1 relative overflow-y-auto">
+              {/* 帝国时间块 - 同步滚动 */}
+              <div 
+                className="flex-1 overflow-y-auto sync-scroll"
+                onScroll={handleScroll}
+              >
                 <div className="relative" style={{ height: '4000px' }}>
                   {/* 年份刻度线 */}
                   {yearMarks.map(y => (
