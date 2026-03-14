@@ -409,6 +409,23 @@ src/
 - [x] 单元测试: 937个测试用例全部通过
 - [x] 代码已推送到 GitHub (由 Vercel 自动部署)
 
+### 新增功能: 战役夜战/夜间行动分析 (2026-03-14 09:43)
+- [x] 添加 battleNight.ts 战役夜战分析模块
+- [x] 支持时间段分析（黎明/上午/下午/傍晚/夜间/未知）
+- [x] isNightBattle: 判断是否为夜战
+- [x] getNightBattleCount: 统计夜战数量
+- [x] getTimeOfDayDistribution: 获取时间段分布
+- [x] getNightOpsStats: 获取夜战统计
+- [x] getNightAttackSuccessRate: 计算夜袭成功率
+- [x] compareNightDayResults: 对比昼夜战斗结果
+- [x] getTimeOfDayInsights: 生成时间段历史洞察
+- [x] getTimeOfDaySummary: 获取完整分析摘要
+- [x] 创建 battleNight.test.ts 测试文件（20个测试用例）
+- [x] 构建验证通过
+- [x] 单元测试: 1118个测试用例全部通过
+- [x] 代码已推送到 GitHub
+- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
+
 ### 新增功能: 战役俘虏/囚犯分析 (2026-03-14 08:40)
 - [x] 添加 BattlePrisoner 类型定义（俘虏类型、待遇、阵营、严重程度）
 - [x] 创建 battlePrisoner.ts 分析模块：
