@@ -63,6 +63,53 @@ const REGIONS = [
   { key: 'west', name: '西方', color: '#3B82F6' },
 ];
 
+// 合并相同政权的块
+function mergeEmpires(boundaries: WorldBoundary[]): WorldBoundary[] {
+  const merged: WorldBoundary[] = [];
+  const nameMap = new Map<string, WorldBoundary[]>();
+  
+  // 按名称分组
+  boundaries.forEach(b => {
+    const name = b.properties.name;
+    if (!nameMap.has(name)) {
+      nameMap.set(name, []);
+    }
+    nameMap.get(name)!.push(b);
+  });
+  
+  // 合并相同名称的块
+  nameMap.forEach((items, name) => {
+    if (items.length === 1) {
+      merged.push(items[0]);
+    } else {
+      // 找最早的开始时间和最晚的结束时间
+      let minStart = Infinity;
+      let maxEnd = -Infinity;
+      items.forEach(item => {
+        minStart = Math.min(minStart, item.properties.startYear);
+        maxEnd = Math.max(maxEnd, item.properties.endYear);
+      });
+      // 使用最大的块
+      const largest = items.reduce((a, b) => {
+        const aLen = a.properties.endYear - a.properties.startYear;
+        const bLen = b.properties.endYear - b.properties.startYear;
+        return aLen > bLen ? a : b;
+      });
+      
+      merged.push({
+        ...largest,
+        properties: {
+          ...largest.properties,
+          startYear: minStart,
+          endYear: maxEnd,
+        },
+      });
+    }
+  });
+  
+  return merged;
+}
+
 function getEmpiresForRegion(boundaries: WorldBoundary[], patterns: string[], isInclude: boolean = true): WorldBoundary[] {
   return boundaries.filter(b => {
     const name = b.properties.name;
@@ -116,7 +163,9 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
         default:
           boundaries = [];
       }
-      return { ...region, boundaries };
+      // 合并相同政权
+      const merged = mergeEmpires(boundaries);
+      return { ...region, boundaries: merged };
     });
   }, [allBoundaries]);
   
@@ -196,22 +245,24 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
                     const style = getBlockStyle(empire.properties.startYear, empire.properties.endYear);
                     const isActive = empire.properties.startYear <= year && empire.properties.endYear >= year;
                     const info = EMPIRE_INFO[empire.properties.name] || { en: '', desc: '' };
+                    const blockHeight = empire.properties.endYear - empire.properties.startYear;
                     
                     return (
                       <div
                         key={idx}
-                        className={`absolute left-0.5 right-0.5 text-white flex flex-col items-center justify-center text-center ${isActive ? 'ring-1 ring-white' : ''}`}
+                        className={`absolute left-0.5 right-0.5 text-white flex flex-col text-center ${isActive ? 'ring-1 ring-white' : ''}`}
                         style={{
                           ...style,
                           backgroundColor: empire.properties.color,
                           zIndex: isActive ? 10 : 1,
                           minHeight: '24px',
                           padding: '2px 4px',
+                          overflow: 'visible',
                         }}
                       >
                         <span className="font-bold text-[10px] leading-tight">{empire.properties.name}</span>
-                        {info.en && <span className="text-[8px] opacity-80 leading-tight">{info.en}</span>}
-                        {info.desc && <span className="text-[7px] opacity-60 leading-tight">{info.desc}</span>}
+                        {info.en && blockHeight > 30 && <span className="text-[8px] opacity-80 leading-tight">{info.en}</span>}
+                        <span className="text-[8px] opacity-90 absolute top-0.5 right-1">{formatYearShort(empire.properties.startYear)}</span>
                       </div>
                     );
                   })}
