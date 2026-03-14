@@ -62,7 +62,7 @@ const REGIONS = [
   { key: 'west', name: '西方', color: '#3B82F6' },
 ];
 
-// 合并相同且时间完全重叠的政权块
+// 合并完全相同的政权块
 function mergeEmpires(boundaries: WorldBoundary[]): WorldBoundary[] {
   const nameMap = new Map<string, WorldBoundary[]>();
   
@@ -79,7 +79,7 @@ function mergeEmpires(boundaries: WorldBoundary[]): WorldBoundary[] {
     if (items.length === 1) {
       merged.push(items[0]);
     } else {
-      // 检查是否有完全相同的起止时间可以合并
+      // 检查是否有完全相同的起止时间
       const timeKeyMap = new Map<string, WorldBoundary[]>();
       items.forEach(item => {
         const key = `${item.properties.startYear}-${item.properties.endYear}`;
@@ -89,7 +89,6 @@ function mergeEmpires(boundaries: WorldBoundary[]): WorldBoundary[] {
         timeKeyMap.get(key)!.push(item);
       });
       
-      // 对于相同时间的，只保留一个（取最大的）
       timeKeyMap.forEach((timeItems) => {
         const largest = timeItems.reduce((a, b) => {
           const aLen = a.properties.endYear - a.properties.startYear;
@@ -115,6 +114,117 @@ function getEmpiresForRegion(boundaries: WorldBoundary[], patterns: string[], is
 interface WorldTimelineProps {
   minYear: number;
   maxYear: number;
+}
+
+// Canvas 绘制时间轴
+function TimelineCanvas({ 
+  boundaries, 
+  year, 
+  minYear, 
+  maxYear, 
+  color,
+  onHover 
+}: { 
+  boundaries: WorldBoundary[]; 
+  year: number; 
+  minYear: number; 
+  maxYear: number;
+  color: string;
+  onHover?: (empire: WorldBoundary | null) => void;
+}) {
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [dimensions, setDimensions] = React.useState({ width: 0, height: 0 });
+
+  React.useEffect(() => {
+    const updateDimensions = () => {
+      if (containerRef.current) {
+        setDimensions({
+          width: containerRef.current.clientWidth,
+          height: containerRef.current.clientHeight
+        });
+      }
+    };
+    
+    updateDimensions();
+    const observer = new ResizeObserver(updateDimensions);
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  React.useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || dimensions.width === 0) return;
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = dimensions.width * dpr;
+    canvas.height = dimensions.height * dpr;
+    canvas.style.width = `${dimensions.width}px`;
+    canvas.style.height = `${dimensions.height}px`;
+    ctx.scale(dpr, dpr);
+    
+    const totalYears = maxYear - minYear;
+    
+    // 绘制当前年份线
+    const yearY = ((year - minYear) / totalYears) * dimensions.height;
+    ctx.strokeStyle = '#3b82f6';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(0, yearY);
+    ctx.lineTo(dimensions.width, yearY);
+    ctx.stroke();
+    
+    // 绘制帝国块
+    boundaries.forEach(empire => {
+      const startY = ((empire.properties.startYear - minYear) / totalYears) * dimensions.height;
+      const endY = ((empire.properties.endYear - minYear) / totalYears) * dimensions.height;
+      const height = endY - startY;
+      const isActive = empire.properties.startYear <= year && empire.properties.endYear >= year;
+      
+      // 绘制色块
+      ctx.fillStyle = empire.properties.color;
+      if (isActive) {
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(2, startY, dimensions.width - 4, height);
+      }
+      ctx.fillRect(2, startY, dimensions.width - 4, Math.max(height, 8));
+      
+      // 绘制文字（只在块足够大时显示）
+      if (height > 20) {
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 9px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(empire.properties.name, dimensions.width / 2, startY + height / 2);
+        
+        // 英文名
+        const info = EMPIRE_INFO[empire.properties.name];
+        if (info && height > 35) {
+          ctx.font = '7px sans-serif';
+          ctx.fillStyle = 'rgba(255,255,255,0.8)';
+          ctx.fillText(info.en, dimensions.width / 2, startY + height / 2 + 10);
+        }
+        
+        // 开始时间（右上角）
+        ctx.font = '7px sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(formatYearShort(empire.properties.startYear), dimensions.width - 4, startY + 8);
+      }
+    });
+  }, [boundaries, year, dimensions, minYear, maxYear]);
+
+  return (
+    <canvas 
+      ref={canvasRef}
+      className="absolute top-0 left-0"
+    />
+  );
 }
 
 export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
@@ -168,26 +278,6 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
     );
   }, [allBoundaries, year]);
 
-  React.useEffect(() => {
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const totalYears = maxYear - minYear;
-      const percentage = (year - minYear) / totalYears;
-      const scrollTop = percentage * container.scrollHeight;
-      container.scrollTop = scrollTop - container.clientHeight / 2;
-    }
-  }, [year, minYear, maxYear]);
-
-  const getBlockStyle = (startYear: number, endYear: number) => {
-    const totalYears = maxYear - minYear;
-    const topPercent = ((startYear - minYear) / totalYears) * 100;
-    const heightPercent = ((endYear - startYear) / totalYears) * 100;
-    return {
-      top: `${topPercent}%`,
-      height: `${Math.max(heightPercent, 2)}%`,
-    };
-  };
-
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const container = e.currentTarget;
     const scrollTop = container.scrollTop;
@@ -209,22 +299,21 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
       </header>
 
       <div className="flex-1 flex overflow-hidden">
-        {/* 左侧年份列 - 缩小 */}
-        <div className="w-10 flex-shrink-0 flex flex-col">
+        {/* 左侧年份列 - Canvas */}
+        <div className="w-12 flex-shrink-0 flex flex-col">
           <div className="h-8 border-b border-zinc-800 bg-zinc-900 flex items-center justify-center text-[10px] text-zinc-500">年份</div>
           <div ref={scrollContainerRef} className="flex-1 overflow-y-auto sync-scroll relative" onScroll={handleScroll}>
-            <div className="relative" style={{ height: '2400px' }}>
-              {Array.from({ length: Math.floor((maxYear - minYear) / 100) + 1 }, (_, i) => minYear + i * 100).map(y => (
-                <div key={y} className="absolute w-full text-[8px] text-zinc-500" style={{ top: `${((y - minYear) / (maxYear - minYear)) * 100}%` }}>
-                  {formatYearShort(y)}
-                </div>
-              ))}
-              <div className="absolute w-full border-t-2 border-blue-500 z-10" style={{ top: `${((year - minYear) / (maxYear - minYear)) * 100}%` }} />
-            </div>
+            <TimelineCanvas 
+              boundaries={allBoundaries}
+              year={year}
+              minYear={minYear}
+              maxYear={maxYear}
+              color="#3b82f6"
+            />
           </div>
         </div>
 
-        {/* 中间地区列 */}
+        {/* 中间地区列 - Canvas */}
         <div className="flex-1 flex">
           {regionsData.map(region => (
             <div key={region.key} className="flex-1 flex flex-col min-w-0">
@@ -232,33 +321,13 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
                 {region.name}
               </div>
               <div className="flex-1 overflow-y-auto sync-scroll relative" onScroll={handleScroll}>
-                <div className="relative" style={{ height: '2400px' }}>
-                  <div className="absolute w-full border-t-2 border-blue-500 z-10" style={{ top: `${((year - minYear) / (maxYear - minYear)) * 100}%` }} />
-                  {region.boundaries.map((empire, idx) => {
-                    const style = getBlockStyle(empire.properties.startYear, empire.properties.endYear);
-                    const isActive = empire.properties.startYear <= year && empire.properties.endYear >= year;
-                    const info = EMPIRE_INFO[empire.properties.name] || { en: '', desc: '' };
-                    const blockHeight = empire.properties.endYear - empire.properties.startYear;
-                    
-                    return (
-                      <div
-                        key={idx}
-                        className={`absolute left-0 right-0 text-white flex flex-col items-center justify-center text-center ${isActive ? 'ring-1 ring-white' : ''}`}
-                        style={{
-                          ...style,
-                          backgroundColor: empire.properties.color,
-                          zIndex: isActive ? 10 : 1,
-                          minHeight: '20px',
-                          padding: '1px 0',
-                        }}
-                      >
-                        <div className="font-bold text-[9px] leading-tight">{empire.properties.name}</div>
-                        {info.en && blockHeight > 25 && <div className="text-[7px] opacity-80 leading-tight">{info.en}</div>}
-                        <div className="text-[7px] opacity-90 absolute top-0.5 right-1">{formatYearShort(empire.properties.startYear)}</div>
-                      </div>
-                    );
-                  })}
-                </div>
+                <TimelineCanvas 
+                  boundaries={region.boundaries}
+                  year={year}
+                  minYear={minYear}
+                  maxYear={maxYear}
+                  color={region.color}
+                />
               </div>
             </div>
           ))}
