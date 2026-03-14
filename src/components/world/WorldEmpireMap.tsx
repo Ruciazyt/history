@@ -10,9 +10,13 @@ import {
   type WorldBoundary,
 } from '@/lib/history/data/worldBoundaries';
 
-// 动态导入 leaflet 以避免 SSR 问题
-let L: any = null;
-let ReactLeaflet: any = null;
+const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
+
+declare global {
+  interface Window {
+    BMapGL: any;
+  }
+}
 
 interface WorldEmpireMapProps {
   year: number;
@@ -22,113 +26,102 @@ interface WorldEmpireMapProps {
   onYearChange?: (year: number) => void;
 }
 
+// 根据模式获取不同的中心点和缩放级别
+function getMapConfig(mode: 'eurasian' | 'east-asia') {
+  switch (mode) {
+    case 'eurasian':
+      return { center: { lon: 90, lat: 40 }, zoom: 2 }; // 欧亚大陆中心
+    case 'east-asia':
+      return { center: { lon: 110, lat: 35 }, zoom: 3 }; // 东亚中心
+    default:
+      return { center: { lon: 90, lat: 35 }, zoom: 2 };
+  }
+}
+
 export function WorldEmpireMap({
   year,
   mode,
-  initialCenter = { lon: 90, lat: 35 },
-  initialZoom = 2,
 }: WorldEmpireMapProps) {
   const t = useTranslations();
   const [mapReady, setMapReady] = React.useState(false);
   const mapContainerRef = React.useRef<HTMLDivElement>(null);
   const mapRef = React.useRef<any>(null);
-  const polygonsRef = React.useRef<any[]>([]);
+  
+  // 根据模式获取地图配置
+  const mapConfig = React.useMemo(() => getMapConfig(mode), [mode]);
+  const { center: initialCenter, zoom: initialZoom } = mapConfig;
 
   const activeBoundaries = React.useMemo(
     () => getActiveBoundaries(year, mode),
     [year, mode]
   );
 
-  // 中心点设置 - 根据模式调整
-  const center: [number, number] = mode === 'eurasian' 
-    ? [35, 90]   // 欧亚大陆中心
-    : [35, 110]; // 东亚中心
-
-  const zoom = mode === 'eurasian' ? 2 : 3;
-
-  // 加载 Leaflet 地图
+  // 加载百度地图
   React.useEffect(() => {
-    if (mapRef.current) return;
+    // 如果地图已初始化，先清除
+    if (mapRef.current) {
+      mapRef.current = null;
+    }
 
-    const loadLeaflet = async () => {
-      // 动态导入 leaflet
-      const leaflet = await import('leaflet');
-      L = leaflet.default || leaflet;
-      
-      // 导入 react-leaflet
-      const ReactL = await import('react-leaflet');
-      ReactLeaflet = ReactL;
-
-      if (mapContainerRef.current && !mapRef.current) {
-        const map = L.map(mapContainerRef.current).setView(center, zoom);
-        
-        // 使用 OpenStreetMap 图层（免费，无需 API Key）
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-          maxZoom: 18,
-        }).addTo(map);
-
-        mapRef.current = map;
-        setMapReady(true);
-        console.log('✅ WorldEmpireMap Leaflet 地图加载成功 (欧亚/东亚模式)');
+    const initMap = () => {
+      if (window.BMapGL && mapContainerRef.current) {
+        try {
+          // 每次重新创建地图实例
+          const map = new window.BMapGL.Map(mapContainerRef.current);
+          map.centerAndZoom(new window.BMapGL.Point(initialCenter.lon, initialCenter.lat), initialZoom);
+          map.enableScrollWheelZoom(true);
+          mapRef.current = map;
+          setMapReady(true);
+          console.log(`✅ WorldEmpireMap 百度地图加载成功 (mode: ${mode})`);
+        } catch (e) {
+          console.error('初始化失败:', e);
+        }
       }
     };
 
-    loadLeaflet();
+    const callbackName = 'baiduMapCb_' + Date.now();
+    (window as any)[callbackName] = initMap;
 
-    return () => {
+    const script = document.createElement('script');
+    script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}&callback=${callbackName}`;
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => { 
+      delete (window as any)[callbackName];
+      // 清理地图实例
       if (mapRef.current) {
-        mapRef.current.remove();
         mapRef.current = null;
       }
     };
-  }, [center, zoom]);
+  }, [mode, initialCenter.lon, initialCenter.lat, initialZoom]);
 
   // 绘制边界
   React.useEffect(() => {
-    if (!mapRef.current || !mapReady || !L) return;
+    if (!mapRef.current || !mapReady) return;
 
     const map = mapRef.current;
+    map.clearOverlays();
 
-    // 清除之前的 polygons
-    polygonsRef.current.forEach((poly: any) => {
-      map.removeLayer(poly);
-    });
-    polygonsRef.current = [];
-
-    // 绘制新的边界
     activeBoundaries.forEach((boundary) => {
       const coords = boundary.geometry.coordinates;
       if (!coords || coords.length === 0) return;
 
-      try {
-        const processPolygon = (points: any[]) => {
-          if (!points || points.length < 3) return;
-          
-          // 转换坐标: [lon, lat] -> [lat, lon]
-          const latLngs = points.map((coord: number[]) => 
-            L.latLng(coord[1], coord[0])
-          );
-          
-          const polygon = L.polygon(latLngs, {
-            color: boundary.properties.color,
-            weight: 2,
-            fillColor: boundary.properties.color,
-            fillOpacity: 0.35,
-          });
-          
-          // 添加 popup
-          polygon.bindPopup(`
-            <div style="font-weight: bold; color: ${boundary.properties.color}">
-              ${t(boundary.properties.nameKey)}
-            </div>
-            <div>${formatYear(boundary.properties.startYear)} - ${formatYear(boundary.properties.endYear)}</div>
-          `);
-          
-          polygon.addTo(map);
-          polygonsRef.current.push(polygon);
-        };
+      const processPolygon = (points: any[]) => {
+        if (!points || points.length < 3) return;
+        const bmapPoints = points.map((coord: number[]) => 
+          new window.BMapGL.Point(coord[0], coord[1])
+        );
+        const polygon = new window.BMapGL.Polygon(bmapPoints, {
+          strokeColor: boundary.properties.color,
+          strokeWeight: 2,
+          fillColor: boundary.properties.color,
+          fillOpacity: 0.35,
+        });
+        map.addOverlay(polygon);
+      };
 
+      try {
         if (boundary.geometry.type === 'MultiPolygon') {
           (coords as any[]).forEach((poly: any[]) => {
             if (poly && poly[0]) processPolygon(poly[0]);
@@ -140,19 +133,13 @@ export function WorldEmpireMap({
         console.warn('绘制边界失败', e);
       }
     });
-  }, [mapReady, activeBoundaries, t]);
-
-  // 监听模式变化，更新地图中心
-  React.useEffect(() => {
-    if (!mapRef.current || !mapReady) return;
-    mapRef.current.setView(center, zoom);
-  }, [mode, center, zoom, mapReady]);
+  }, [mapReady, activeBoundaries]);
 
   return (
     <div className="h-full w-full overflow-hidden rounded-xl border border-zinc-200 bg-white relative">
       {!mapReady && (
         <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 text-zinc-400 z-10">
-          Loading map...
+          Loading... {BAIDU_MAP_AK ? '(AK已配置)' : '(AK未配置)'}
         </div>
       )}
       <div ref={mapContainerRef} className="w-full h-full" />
