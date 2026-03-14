@@ -127,7 +127,6 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
   // 处理滚动
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const container = e.currentTarget;
-    // 同步滚动其他容器
     document.querySelectorAll('.sync-scroll').forEach((el) => {
       if (el !== container) {
         el.scrollTop = container.scrollTop;
@@ -146,7 +145,7 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
         </div>
       </header>
 
-      {/* 主内容：横向表格布局 */}
+      {/* 主内容 */}
       <div className="flex-1 flex overflow-hidden">
         {/* 左侧年份列 */}
         <div className="w-16 flex-shrink-0 flex flex-col border-r border-zinc-800">
@@ -170,7 +169,6 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
                   </span>
                 </div>
               ))}
-              {/* 当前年份线 */}
               <div 
                 className="absolute w-full border-t-2 border-blue-500 z-10"
                 style={{ top: `${((maxYear - year) / (maxYear - minYear)) * 100}%` }}
@@ -179,25 +177,21 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
           </div>
         </div>
 
-        {/* 右侧地区列 - 共享滚动 */}
+        {/* 中间地区列 */}
         <div className="flex-1 flex overflow-hidden">
           {regionsData.map(region => (
             <div key={region.key} className="flex-shrink-0 w-40 flex flex-col border-r border-zinc-800">
-              {/* 地区标题 */}
               <div 
                 className="h-10 flex items-center justify-center text-sm font-bold flex-shrink-0"
                 style={{ backgroundColor: region.color }}
               >
                 {region.name}
               </div>
-              
-              {/* 帝国时间块 - 同步滚动 */}
               <div 
                 className="flex-1 overflow-y-auto sync-scroll"
                 onScroll={handleScroll}
               >
                 <div className="relative" style={{ height: '4000px' }}>
-                  {/* 年份刻度线 */}
                   {yearMarks.map(y => (
                     <div 
                       key={y.year}
@@ -205,14 +199,10 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
                       style={{ top: `${((maxYear - y.year) / (maxYear - minYear)) * 100}%` }}
                     />
                   ))}
-                  
-                  {/* 当前年份线 */}
                   <div 
                     className="absolute w-full border-t-2 border-blue-500 z-10"
                     style={{ top: `${((maxYear - year) / (maxYear - minYear)) * 100}%` }}
                   />
-                  
-                  {/* 帝国块 */}
                   {region.boundaries.map((empire, idx) => {
                     const style = getBlockStyle(empire.properties.startYear, empire.properties.endYear);
                     const isActive = empire.properties.startYear <= year && empire.properties.endYear >= year;
@@ -237,6 +227,74 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* 右侧：当前年份详情 */}
+        <div className="w-72 flex-shrink-0 flex flex-col border-l border-zinc-800 bg-zinc-900/30">
+          {/* 年份滑块 */}
+          <div className="p-4 border-b border-zinc-800 flex-shrink-0">
+            <div className="relative h-8 bg-zinc-800 rounded-full">
+              <div 
+                className="absolute top-0 bottom-0 w-1 bg-blue-500"
+                style={{ left: `${((year - minYear) / (maxYear - minYear)) * 100}%` }}
+              />
+              <input
+                type="range"
+                min={minYear}
+                max={maxYear}
+                value={year}
+                onChange={(e) => setYear(Number(e.target.value))}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              />
+            </div>
+            <div className="flex justify-between text-xs text-zinc-500 mt-1">
+              <span>{formatYear(minYear)}</span>
+              <span>{formatYear(maxYear)}</span>
+            </div>
+          </div>
+          
+          {/* 当前年份详情 */}
+          <div className="flex-1 p-4 overflow-y-auto">
+            <h3 className="text-lg font-bold mb-3">{formatYear(year)} 年的世界</h3>
+            
+            {activeEmpires.length > 0 ? (
+              <div className="space-y-2">
+                {activeEmpires.map((empire, idx) => {
+                  const region = REGIONS.find(r => {
+                    const name = empire.properties.name;
+                    if (r.key === 'china') return ['秦', '汉', '唐', '宋', '元', '明', '清', '隋', '三国', '晋', '南北朝', '五代'].some(p => name.includes(p));
+                    if (r.key === 'korea') return ['高丽', '朝鲜', '新罗', '百济', '伽倻', '渤海'].some(p => name.includes(p));
+                    if (r.key === 'japan') return ['平安', '江户', '奈良', '镰仓', '室町', '飞鸟', '大和'].some(p => name.includes(p));
+                    if (r.key === 'west') return ['罗马', '拜占庭', '奥斯曼', '波斯', '亚历山大', '帕提亚', '萨珊', '阿拉伯', '倭马亚', '阿拔斯', '帖木儿'].some(p => name.includes(p));
+                    return false;
+                  });
+                  
+                  return (
+                    <div 
+                      key={idx}
+                      className="p-3 rounded-lg bg-zinc-800/50 border-l-4"
+                      style={{ borderLeftColor: empire.properties.color }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span 
+                          className="px-2 py-0.5 text-xs text-white rounded"
+                          style={{ backgroundColor: empire.properties.color }}
+                        >
+                          {region?.name || '其他'}
+                        </span>
+                        <span className="font-bold">{empire.properties.name}</span>
+                      </div>
+                      <div className="text-xs text-zinc-400 mt-1">
+                        {formatYear(empire.properties.startYear)} - {formatYear(empire.properties.endYear)}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="text-zinc-500 text-center py-8">该时期无记录</div>
+            )}
+          </div>
         </div>
       </div>
     </div>
