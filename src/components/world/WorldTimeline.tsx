@@ -12,7 +12,6 @@ function formatYearShort(year: number): string {
   return `${year}`;
 }
 
-// 政权英文名称和简要描述
 const EMPIRE_INFO: Record<string, { en: string; desc: string }> = {
   '秦朝': { en: 'Qin Dynasty', desc: 'First unified empire' },
   '西汉': { en: 'Western Han', desc: 'Golden age of Confucianism' },
@@ -65,10 +64,8 @@ const REGIONS = [
 
 // 合并相同政权的块
 function mergeEmpires(boundaries: WorldBoundary[]): WorldBoundary[] {
-  const merged: WorldBoundary[] = [];
   const nameMap = new Map<string, WorldBoundary[]>();
   
-  // 按名称分组
   boundaries.forEach(b => {
     const name = b.properties.name;
     if (!nameMap.has(name)) {
@@ -77,19 +74,17 @@ function mergeEmpires(boundaries: WorldBoundary[]): WorldBoundary[] {
     nameMap.get(name)!.push(b);
   });
   
-  // 合并相同名称的块
+  const merged: WorldBoundary[] = [];
   nameMap.forEach((items, name) => {
     if (items.length === 1) {
       merged.push(items[0]);
     } else {
-      // 找最早的开始时间和最晚的结束时间
       let minStart = Infinity;
       let maxEnd = -Infinity;
       items.forEach(item => {
         minStart = Math.min(minStart, item.properties.startYear);
         maxEnd = Math.max(maxEnd, item.properties.endYear);
       });
-      // 使用最大的块
       const largest = items.reduce((a, b) => {
         const aLen = a.properties.endYear - a.properties.startYear;
         const bLen = b.properties.endYear - b.properties.startYear;
@@ -163,7 +158,6 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
         default:
           boundaries = [];
       }
-      // 合并相同政权
       const merged = mergeEmpires(boundaries);
       return { ...region, boundaries: merged };
     });
@@ -235,7 +229,7 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
         <div className="flex-1 flex">
           {regionsData.map(region => (
             <div key={region.key} className="flex-1 flex flex-col">
-              <div className="h-10 flex items-center justify-center text-sm font-bold flex-shrink-0 border-b border-zinc-800" style={{ backgroundColor: region.color }}>
+              <div className="h-10 flex items-center justify-center text-sm font-bold flex-shrink-0 border-b-0" style={{ backgroundColor: region.color }}>
                 {region.name}
               </div>
               <div className="flex-1 overflow-y-auto sync-scroll relative" onScroll={handleScroll}>
@@ -250,19 +244,18 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
                     return (
                       <div
                         key={idx}
-                        className={`absolute left-0.5 right-0.5 text-white flex flex-col text-center ${isActive ? 'ring-1 ring-white' : ''}`}
+                        className={`absolute left-0 right-0 text-white flex flex-col items-center justify-center text-center ${isActive ? 'ring-1 ring-white' : ''}`}
                         style={{
                           ...style,
                           backgroundColor: empire.properties.color,
                           zIndex: isActive ? 10 : 1,
                           minHeight: '24px',
-                          padding: '2px 4px',
-                          overflow: 'visible',
+                          padding: '2px 0',
                         }}
                       >
-                        <span className="font-bold text-[10px] leading-tight">{empire.properties.name}</span>
-                        {info.en && blockHeight > 30 && <span className="text-[8px] opacity-80 leading-tight">{info.en}</span>}
-                        <span className="text-[8px] opacity-90 absolute top-0.5 right-1">{formatYearShort(empire.properties.startYear)}</span>
+                        <div className="font-bold text-[10px] leading-tight">{empire.properties.name}</div>
+                        {info.en && blockHeight > 30 && <div className="text-[8px] opacity-80 leading-tight">{info.en}</div>}
+                        <div className="text-[8px] opacity-90 absolute top-0.5 right-1">{formatYearShort(empire.properties.startYear)}</div>
                       </div>
                     );
                   })}
