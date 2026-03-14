@@ -409,30 +409,30 @@ src/
 - [x] 单元测试: 937个测试用例全部通过
 - [x] 代码已推送到 GitHub (由 Vercel 自动部署)
 
-### 新增功能: 战役通信/联络分析 (2026-03-13 18:58)
-- [x] 添加 battleCommunication.ts 战役通信分析模块
-- [x] 支持12种通信类型：烽火台/狼烟、鼓声、号角、战旗、信使、烽火、驿站、烟火信号、声音信号、视觉信号、密信
-- [x] 核心函数：
-  - getCommunicationTypeLabel: 获取通信类型中文标签
-  - getCommunicationResultLabel: 获取通信结果标签
-  - getCommunicationDirectionLabel: 获取通信方向标签
-  - hasCommunicationData: 检查是否有通信数据
-  - getUniqueCommunicationTypes: 获取所有唯一通信类型
-  - getCommunicationTypeStats: 获取特定类型统计
-  - getAllCommunicationTypeStats: 获取所有类型统计
-  - getCommunicationBySide: 按阵营统计通信
-  - getBattlesWithCommunication: 获取有通信的战役
-  - getBattlesByCommunicationType: 按类型筛选战役
-  - getMostCommunicationBattles: 获取通信最多的战役
-  - getCommunicationResultCorrelation: 分析通信与结果关联
-  - getCommunicationImpactAnalysis: 分析通信影响
-  - getDecisiveCommunicationBattles: 获取有决定性通信影响的战役
-  - getInterceptedCommunicationBattles: 获取通信被截获的战役
-  - getCommunicationInsights: 生成通信分析洞察
-  - getCommunicationSummary: 获取完整通信摘要
-- [x] 创建 battleCommunication.test.ts 测试文件（22个测试用例）
-- [x] 更新 types.ts 添加通信类型定义
+### 新增功能: 战役俘虏/囚犯分析 (2026-03-14 08:40)
+- [x] 添加 BattlePrisoner 类型定义（俘虏类型、待遇、阵营、严重程度）
+- [x] 创建 battlePrisoner.ts 分析模块：
+  - getPrisonerTypeLabel: 获取俘虏类型中文标签
+  - getPrisonerTreatmentLabel: 获取俘虏待遇中文标签
+  - getPrisonerSideLabel: 获取俘虏阵营中文标签
+  - getPrisonerSeverityLabel: 获取严重程度标签
+  - hasPrisonerData: 检查是否有俘虏数据
+  - getUniquePrisonerTypes: 获取所有唯一俘虏类型
+  - getPrisonerTypeStats: 获取特定类型统计
+  - getAllPrisonerTypeStats: 获取所有类型统计
+  - getPrisonerBySide: 按阵营统计俘虏
+  - getMassivePrisonerBattles: 获取大规模俘虏战役
+  - getCommanderCapturedBattles: 获取指挥官被俘战役
+  - getExecutedPrisonerBattles: 获取处死俘虏战役
+  - getIntegratedPrisonerBattles: 获取收编俘虏战役
+  - getDecisivePrisonerImpactBattles: 获取决定性影响战役
+  - getTreatmentStats: 俘虏待遇统计
+  - getPrisonerResultCorrelation: 俘虏与胜负关联分析
+  - getHighestPrisonerCountBattles: 获取被俘最多战役
+  - getPrisonerInsights: 生成历史洞察
+  - getPrisonerSummary: 获取完整摘要
+- [x] 创建 battlePrisoner.test.ts 测试文件（28个测试用例）
 - [x] 构建验证通过
-- [x] 单元测试: 959个测试用例全部通过
+- [x] 单元测试: 1098个测试用例全部通过
 - [x] 代码已推送到 GitHub
 - [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
