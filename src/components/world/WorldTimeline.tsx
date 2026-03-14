@@ -57,9 +57,17 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
   const windowStart = year - windowSize / 2;
   const windowEnd = year + windowSize / 2;
   
-  // 获取所有帝国数据
+  // 获取所有帝国数据（去重）
   const allBoundaries = React.useMemo(() => {
-    return [...eurasianBoundaries, ...eastAsiaBoundaries];
+    const combined = [...eurasianBoundaries, ...eastAsiaBoundaries];
+    // 按名称去重
+    const seen = new Set<string>();
+    return combined.filter(b => {
+      const key = `${b.properties.name}-${b.properties.startYear}-${b.properties.endYear}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
   }, []);
   
   // 按地区分组
@@ -106,12 +114,13 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
     ];
   }, [allBoundaries]);
   
-  // 获取当前窗口内的帝国
+  // 获取当前年份正好存在的帝国（而非窗口范围）
   const activeEmpires = React.useMemo(() => {
     return allBoundaries.filter(b => 
-      b.properties.startYear <= windowEnd && b.properties.endYear >= windowStart
+      // 只显示当前年份正好在区间内的帝国
+      b.properties.startYear <= year && b.properties.endYear >= year
     );
-  }, [allBoundaries, windowStart, windowEnd]);
+  }, [allBoundaries, year]);
 
   // 生成年份刻度
   const yearMarks = React.useMemo(() => {
