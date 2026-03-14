@@ -376,6 +376,8 @@ export type Event = {
     breakthrough?: BattleBreakthrough[];
     /** 战役后勤/补给数据 */
     logistics?: BattleLogistics[];
+    /** 战役俘虏/囚犯数据 */
+    prisoners?: BattlePrisoner[];
   };
 };
 
@@ -946,6 +948,55 @@ export type BattleLogistics = {
   unit?: string;
   /** 是否为决定性因素 */
   decisive?: boolean;
+  /** 备注 */
+  notes?: string;
+};
+
+/** 俘虏/囚犯类型 */
+export type PrisonerType =
+  | 'captured-soldiers'  // 被俘士兵
+  | 'captured-commanders' // 被俘指挥官
+  | 'civilians'          // 平民
+  | 'hostages'           // 人质
+  | 'refugees'           // 难民
+  | 'unknown';
+
+/** 俘虏待遇类型 */
+export type PrisonerTreatment =
+  | 'executed'           // 处死
+  | 'enslaved'           // 奴役
+  | 'released'           // 释放
+  | 'ransomed'           // 赎还
+  | 'integrated'         // 收编
+  | 'imprisoned'         // 囚禁
+  | 'exiled'             // 流放
+  | 'negotiated'         // 谈判解决
+  | 'unknown';
+
+/** 俘虏阵营 */
+export type PrisonerSide = 'attacker' | 'defender' | 'unknown';
+
+/** 俘虏严重程度 */
+export type PrisonerSeverity = 'massive' | 'significant' | 'moderate' | 'minor' | 'unknown';
+
+/** 战役俘虏/囚犯数据 */
+export type BattlePrisoner = {
+  /** 俘虏类型 */
+  type: PrisonerType;
+  /** 描述 */
+  description: string;
+  /** 被俘方 */
+  side: PrisonerSide;
+  /** 俘虏人数 */
+  number?: number;
+  /** 俘虏待遇 */
+  treatment?: PrisonerTreatment;
+  /** 严重程度 */
+  severity?: PrisonerSeverity;
+  /** 是否涉及关键人物 */
+  involvesKeyPerson?: boolean;
+  /** 俘虏后对战役结果的影响 */
+  impact?: 'decisive' | 'significant' | 'minor' | 'unknown';
   /** 备注 */
   notes?: string;
 };
