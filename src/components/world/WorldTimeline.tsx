@@ -138,90 +138,91 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
 
       <div className="flex-1 flex overflow-hidden">
         {/* 左侧年份列 */}
-        <div className="w-12 flex-shrink-0 flex flex-col border-r-0">
-          <div className="h-10 border-b border-zinc-700 bg-zinc-800 flex items-center justify-center text-xs text-zinc-500">
+        <div className="w-12 flex-shrink-0 flex flex-col border-r border-zinc-800">
+          <div className="h-10 border-b border-zinc-800 bg-zinc-900 flex items-center justify-center text-xs text-zinc-500">
             年份
           </div>
           <div 
             ref={scrollContainerRef}
-            className="flex-1 overflow-y-auto sync-scroll"
+            className="flex-1 overflow-y-auto sync-scroll relative"
             onScroll={handleScroll}
           >
-            <div className="relative" style={{ height: '4000px' }}>
-              {yearMarks.map(y => (
-                <div 
-                  key={y.year}
-                  className={`absolute w-full ${y.major ? 'border-zinc-700' : 'border-zinc-800'} border-b`}
-                  style={{ top: `${((maxYear - y.year) / (maxYear - minYear)) * 100}%` }}
-                >
-                  <span className={`text-[9px] pl-0.5 ${y.major ? 'text-zinc-400' : 'text-zinc-600'}`}>
-                    {formatYearShort(y.year)}
-                  </span>
-                </div>
-              ))}
+            {/* 年份刻度 - 只在正确位置显示 */}
+            {yearMarks.map(y => (
               <div 
-                className="absolute w-full border-t-2 border-blue-500 z-10"
-                style={{ top: `${((maxYear - year) / (maxYear - minYear)) * 100}%` }}
-              />
-            </div>
+                key={y.year}
+                className="absolute w-full pointer-events-none"
+                style={{ top: `${((maxYear - y.year) / (maxYear - minYear)) * 100}%`, height: `${100 / (maxYear - minYear) * 50}%` }}
+              >
+                <span className={`text-[9px] pl-0.5 ${y.major ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                  {y.major ? formatYearShort(y.year) : ''}
+                </span>
+              </div>
+            ))}
+            {/* 当前年份线 */}
+            <div 
+              className="absolute w-full border-t-2 border-blue-500 z-10"
+              style={{ top: `${((maxYear - year) / (maxYear - minYear)) * 100}%` }}
+            />
           </div>
         </div>
 
-        {/* 中间地区列 - 紧密排列无间隙 */}
+        {/* 中间地区列 - 无格子线条 */}
         <div className="flex-1 flex">
           {regionsData.map(region => (
-            <div key={region.key} className="flex-1 flex flex-col border-r-0">
+            <div key={region.key} className="flex-1 flex flex-col">
               <div 
-                className="h-10 flex items-center justify-center text-sm font-bold flex-shrink-0 border-b border-r border-zinc-700"
+                className="h-10 flex items-center justify-center text-sm font-bold flex-shrink-0 border-b border-zinc-800"
                 style={{ backgroundColor: region.color }}
               >
                 {region.name}
               </div>
               <div 
-                className="flex-1 overflow-y-auto sync-scroll"
+                className="flex-1 overflow-y-auto sync-scroll relative"
                 onScroll={handleScroll}
               >
-                <div className="relative" style={{ height: '4000px' }}>
-                  {yearMarks.map(y => (
-                    <div 
-                      key={y.year}
-                      className={`absolute w-full ${y.major ? 'border-zinc-700' : 'border-zinc-800'} border-b`}
-                      style={{ top: `${((maxYear - y.year) / (maxYear - minYear)) * 100}%` }}
-                    />
-                  ))}
+                {/* 年份刻度线 */}
+                {yearMarks.map(y => (
                   <div 
-                    className="absolute w-full border-t-2 border-blue-500 z-10"
-                    style={{ top: `${((maxYear - year) / (maxYear - minYear)) * 100}%` }}
+                    key={y.year}
+                    className={`absolute w-full ${y.major ? 'border-zinc-700' : 'border-transparent'} border-b pointer-events-none`}
+                    style={{ top: `${((maxYear - y.year) / (maxYear - minYear)) * 100}%` }}
                   />
-                  {region.boundaries.map((empire, idx) => {
-                    const style = getBlockStyle(empire.properties.startYear, empire.properties.endYear);
-                    const isActive = empire.properties.startYear <= year && empire.properties.endYear >= year;
-                    
-                    return (
-                      <div
-                        key={idx}
-                        className={`absolute left-0 right-0 px-0.5 text-[9px] text-white overflow-hidden ${
-                          isActive ? 'ring-1 ring-white shadow-lg' : 'opacity-60'
-                        }`}
-                        style={{
-                          ...style,
-                          backgroundColor: empire.properties.color,
-                          zIndex: isActive ? 10 : 1,
-                        }}
-                      >
-                        <div className="font-medium truncate text-center">{empire.properties.name}</div>
-                      </div>
-                    );
-                  })}
-                </div>
+                ))}
+                {/* 当前年份线 */}
+                <div 
+                  className="absolute w-full border-t-2 border-blue-500 z-10"
+                  style={{ top: `${((maxYear - year) / (maxYear - minYear)) * 100}%` }}
+                />
+                {/* 帝国块 */}
+                {region.boundaries.map((empire, idx) => {
+                  const style = getBlockStyle(empire.properties.startYear, empire.properties.endYear);
+                  const isActive = empire.properties.startYear <= year && empire.properties.endYear >= year;
+                  
+                  return (
+                    <div
+                      key={idx}
+                      className={`absolute left-0 right-0 px-1 text-[9px] text-white flex items-center justify-center ${
+                        isActive ? 'ring-1 ring-white' : ''
+                      }`}
+                      style={{
+                        ...style,
+                        backgroundColor: empire.properties.color,
+                        zIndex: isActive ? 10 : 1,
+                      }}
+                    >
+                      <span className="font-medium truncate">{empire.properties.name}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           ))}
         </div>
 
         {/* 右侧详情 */}
-        <div className="w-64 flex-shrink-0 flex flex-col border-l border-zinc-700 bg-zinc-900/30">
-          <div className="p-3 border-b border-zinc-700 flex-shrink-0">
+        <div className="w-64 flex-shrink-0 flex flex-col border-l border-zinc-800 bg-zinc-900/30">
+          <div className="p-3 border-b border-zinc-800 flex-shrink-0">
             <div className="relative h-6 bg-zinc-800 rounded-full">
               <div 
                 className="absolute top-0 bottom-0 w-0.5 bg-blue-500"
