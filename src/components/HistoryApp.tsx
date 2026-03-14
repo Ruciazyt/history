@@ -55,8 +55,14 @@ export function HistoryApp({
     [worldYear, civMode]
   );
   
-  const activeEras = civMode === 'china' ? eras : civMode === 'eurasian' ? [worldComparisonEra] : [eastAsiaComparisonEra];
-  const activeRulers = civMode === 'china' ? rulers : civMode === 'eurasian' ? worldComparisonRulers : eastAsiaRulers;
+  const activeEras = React.useMemo(
+    () => civMode === 'china' ? eras : civMode === 'eurasian' ? [worldComparisonEra] : [eastAsiaComparisonEra],
+    [civMode, eras]
+  );
+  const activeRulers = React.useMemo(
+    () => civMode === 'china' ? rulers : civMode === 'eurasian' ? worldComparisonRulers : eastAsiaRulers,
+    [civMode, rulers]
+  );
 
   const { min, max } = React.useMemo(() => yearBounds(activeEras), [activeEras]);
 
@@ -141,12 +147,6 @@ export function HistoryApp({
     for (const e of merged) byId.set(e.id, e);
     return [...byId.values()];
   }, [currentEraEvents, otherEraEvents]);
-
-  // 主页面事件 → 时间线页面跳转（先做 MVP：反秦建汉）
-  const timelineLinks: Record<string, { process: string; event?: string }> = {
-    'qin-209-dazexiang': { process: 'anti-qin', event: 'daze-agriculture' },
-    'han-202-han-founded': { process: 'anti-qin', event: 'han-unification' },
-  };
 
   return (
     <div className="flex h-screen flex-col bg-zinc-50 text-zinc-900">

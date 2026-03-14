@@ -320,7 +320,7 @@ export function getIntelligenceSideAnalysis(events: Event[]): IntelligenceSideAn
   
   let attackerWins = 0;
   let defenderWins = 0;
-  let totalWithIntel = intelBattles.length;
+  const totalWithIntel = intelBattles.length;
   
   for (const battle of intelBattles) {
     const sides = new Set(battle.battle?.intelligence?.map(i => i.side) || []);

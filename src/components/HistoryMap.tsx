@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import type { Event } from '@/lib/history/types';
-import { formatYear } from '@/lib/history/utils';
 import { useTranslations } from 'next-intl';
 import { dynastyBoundaries } from '@/lib/history/data/dynastyBoundaries';
 import { getActiveBoundaries, getWorldEraBounds } from '@/lib/history/data/worldBoundaries';
