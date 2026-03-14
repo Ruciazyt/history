@@ -124,14 +124,25 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
     };
   };
 
-  // 处理滚动
+  // 处理滚动 - 同步所有列
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const container = e.currentTarget;
+    const scrollTop = container.scrollTop;
+    // 同步所有滚动容器
     document.querySelectorAll('.sync-scroll').forEach((el) => {
       if (el !== container) {
-        el.scrollTop = container.scrollTop;
+        (el as HTMLDivElement).scrollTop = scrollTop;
       }
     });
+  };
+
+  // 隐藏滚动条的样式
+  const scrollbarHiddenStyle = {
+    scrollbarWidth: 'none' as const,
+    msOverflowStyle: 'none' as const,
+    '&::-webkit-scrollbar': {
+      display: 'none' as const,
+    },
   };
 
   return (
@@ -156,6 +167,7 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
             ref={scrollContainerRef}
             className="flex-1 overflow-y-auto sync-scroll"
             onScroll={handleScroll}
+            style={scrollbarHiddenStyle}
           >
             <div className="relative" style={{ height: '4000px' }}>
               {yearMarks.map(y => (
@@ -190,6 +202,7 @@ export function WorldTimeline({ minYear, maxYear }: WorldTimelineProps) {
               <div 
                 className="flex-1 overflow-y-auto sync-scroll"
                 onScroll={handleScroll}
+                style={scrollbarHiddenStyle}
               >
                 <div className="relative" style={{ height: '4000px' }}>
                   {yearMarks.map(y => (
