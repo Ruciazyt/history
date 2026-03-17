@@ -1,18 +1,15 @@
 'use client';
 
 import * as React from 'react';
-import { formatYear } from '@/lib/history/utils';
 import { useTranslations } from 'next-intl';
 import {
-  eurasianBoundaries,
-  eastAsiaBoundaries,
   getActiveBoundaries,
-  type WorldBoundary,
 } from '@/lib/history/data/worldBoundaries';
 
 const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   interface Window {
     BMapGL: any;
   }
@@ -45,7 +42,7 @@ export function WorldEmpireMap({
   const t = useTranslations();
   const [mapReady, setMapReady] = React.useState(false);
   const mapContainerRef = React.useRef<HTMLDivElement>(null);
-  const mapRef = React.useRef<any>(null);
+  const mapRef = React.useRef<{ centerAndZoom: (point: unknown, zoom: number) => void; enableScrollWheelZoom: (enabled: boolean) => void; clearOverlays: () => void; addOverlay: (overlay: unknown) => void; Point: new (lng: number, lat: number) => unknown; Polygon: new (points: unknown[], options: unknown) => unknown } | null>(null);
   
   // 根据模式获取地图配置
   const mapConfig = React.useMemo(() => getMapConfig(mode), [mode]);
@@ -80,7 +77,8 @@ export function WorldEmpireMap({
     };
 
     const callbackName = 'baiduMapCb_' + Date.now();
-    (window as any)[callbackName] = initMap;
+    const initMapWrapper = () => { initMap(); };
+    (window as unknown as Record<string, () => void>)[callbackName] = initMapWrapper;
 
     const script = document.createElement('script');
     script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}&callback=${callbackName}`;
@@ -88,7 +86,9 @@ export function WorldEmpireMap({
     document.head.appendChild(script);
 
     return () => { 
-      delete (window as any)[callbackName];
+      if ((window as unknown as Record<string, unknown>)[callbackName]) {
+        delete (window as unknown as Record<string, unknown>)[callbackName];
+      }
       // 清理地图实例
       if (mapRef.current) {
         mapRef.current = null;
@@ -107,9 +107,11 @@ export function WorldEmpireMap({
       const coords = boundary.geometry.coordinates;
       if (!coords || coords.length === 0) return;
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const processPolygon = (points: any[]) => {
         if (!points || points.length < 3) return;
-        const bmapPoints = points.map((coord: number[]) => 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const bmapPoints = points.map((coord: any) => 
           new window.BMapGL.Point(coord[0], coord[1])
         );
         const polygon = new window.BMapGL.Polygon(bmapPoints, {
@@ -123,11 +125,13 @@ export function WorldEmpireMap({
 
       try {
         if (boundary.geometry.type === 'MultiPolygon') {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (coords as any[]).forEach((poly: any[]) => {
             if (poly && poly[0]) processPolygon(poly[0]);
           });
         } else if (boundary.geometry.type === 'Polygon') {
-          processPolygon(coords[0]);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          processPolygon(coords[0] as any[]);
         }
       } catch (e) {
         console.warn('绘制边界失败', e);

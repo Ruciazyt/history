@@ -14,7 +14,7 @@ export function LocationClient({ locale }: LocationClientProps) {
   const [query, setQuery] = React.useState('');
   const [results, setResults] = React.useState<LocationSearchResult[]>([]);
   const [selectedLocation, setSelectedLocation] = React.useState<string | null>(null);
-  const [history, setHistory] = React.useState<{ location: string; timeline: Array<{ year: number; event: any }> } | null>(null);
+  const [history, setHistory] = React.useState<{ location: string; timeline: Array<{ year: number; event: { titleKey?: string; summaryKey?: string; title?: string } }> } | null>(null);
 
   // 搜索处理
   const handleSearch = (value: string) => {

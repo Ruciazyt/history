@@ -11,6 +11,7 @@ import { YearSlider } from '@/components/common/YearSlider';
 const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   interface Window {
     BMapGL: any;
     BMapGLMarker: any;
@@ -41,9 +42,9 @@ export function HistoryMap({
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [mapReady, setMapReady] = React.useState(false);
   const mapContainerRef = React.useRef<HTMLDivElement>(null);
-  const mapRef = React.useRef<any>(null);
+  const mapRef = React.useRef<{ centerAndZoom: (point: unknown, zoom: number) => void; enableScrollWheelZoom: (enabled: boolean) => void; clearOverlays: () => void; addOverlay: (overlay: unknown) => void; Point: new (lng: number, lat: number) => unknown; Polygon: new (points: unknown[], options: unknown) => unknown } | null>(null);
 
-  const selected = React.useMemo(
+  React.useMemo(
     () => events?.find((e) => e.id === selectedId) ?? null,
     [events, selectedId]
   );
@@ -123,14 +124,19 @@ export function HistoryMap({
     };
 
     const callbackName = 'baiduMapCb_' + Date.now();
-    (window as any)[callbackName] = initMap;
+    const initMapWrapper = () => { initMap(); };
+    (window as unknown as Record<string, () => void>)[callbackName] = initMapWrapper;
 
     const script = document.createElement('script');
     script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}&callback=${callbackName}`;
     script.async = true;
     document.head.appendChild(script);
 
-    return () => { delete (window as any)[callbackName]; };
+    return () => { 
+      if ((window as unknown as Record<string, unknown>)[callbackName]) {
+        delete (window as unknown as Record<string, unknown>)[callbackName]; 
+      }
+    };
   }, [mapCenter.lon, mapCenter.lat, mapZoom]);
 
   // 绘制内容
@@ -146,9 +152,11 @@ export function HistoryMap({
         if (!feature.geometry.coordinates) return;
         
         const coords = feature.geometry.coordinates;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const processPolygon = (points: any[]) => {
           if (!points || points.length < 3) return;
-          const bmapPoints = points.map((coord: number[]) => 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const bmapPoints = points.map((coord: any) => 
             new window.BMapGL.Point(coord[0], coord[1])
           );
           const polygon = new window.BMapGL.Polygon(bmapPoints, {
@@ -162,6 +170,7 @@ export function HistoryMap({
 
         try {
           if (feature.geometry.type === 'MultiPolygon') {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (coords as any[]).forEach((poly: any[]) => {
               if (poly && poly[0]) processPolygon(poly[0]);
             });
@@ -180,9 +189,11 @@ export function HistoryMap({
         const coords = boundary.geometry.coordinates;
         if (!coords || coords.length === 0) return;
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const processPolygon = (points: any[]) => {
           if (!points || points.length < 3) return;
-          const bmapPoints = points.map((coord: number[]) => 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const bmapPoints = points.map((coord: any) => 
             new window.BMapGL.Point(coord[0], coord[1])
           );
           const polygon = new window.BMapGL.Polygon(bmapPoints, {
@@ -196,6 +207,7 @@ export function HistoryMap({
 
         try {
           if (boundary.geometry.type === 'MultiPolygon') {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (coords as any[]).forEach((poly: any[]) => {
               if (poly && poly[0]) processPolygon(poly[0]);
             });

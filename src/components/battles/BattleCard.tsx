@@ -30,7 +30,6 @@ function getEraColor(entityId: string): string {
 
 export function BattleCard({ battle, onClick, selected, selectionMode, onSelect }: BattleCardProps) {
   const t = useTranslations();
-  const hasLocation = !!battle.location;
   const [showDetail, setShowDetail] = React.useState(false);
   
   const eraColor = getEraColor(battle.entityId);

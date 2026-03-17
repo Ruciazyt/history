@@ -14,7 +14,6 @@ interface BattleCompareProps {
 
 export function BattleCompare({ battle1, battle2, onClose }: BattleCompareProps) {
   const t = useTranslations();
-  const tEra = useTranslations('rulerEraName');
   
   const comparison = React.useMemo(() => compareBattles(battle1, battle2), [battle1, battle2]);
   const summary = React.useMemo(() => getComparisonSummary(comparison.comparison, t), [comparison, t]);

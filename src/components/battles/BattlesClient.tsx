@@ -24,7 +24,7 @@ const ERA_INFO: Record<string, { name: string; color: string }> = {
 export function BattlesClient({
   eras,
   events,
-  rulers,
+  rulers: _rulers,
   locale,
 }: {
   eras: Era[];

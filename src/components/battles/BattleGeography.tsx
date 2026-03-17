@@ -66,8 +66,6 @@ export function BattleGeography({
  * Individual region bar showing battle count and win rate
  */
 function RegionBar({ region }: { region: BattleCountByRegion }) {
-  const maxCount = 15; // approximate max for scaling
-  
   return (
     <div className="space-y-1">
       <div className="flex items-center justify-between text-sm">

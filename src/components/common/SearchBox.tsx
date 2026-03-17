@@ -20,7 +20,7 @@ interface SearchResult {
   year?: number;
 }
 
-export function SearchBox({ eras, events, rulers, locale = 'zh' }: SearchBoxProps) {
+export function SearchBox({ events, rulers, locale = 'zh' }: SearchBoxProps) {
   const router = useRouter();
   const [query, setQuery] = React.useState('');
   const [isOpen, setIsOpen] = React.useState(false);

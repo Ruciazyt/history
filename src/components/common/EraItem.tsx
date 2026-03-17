@@ -18,7 +18,6 @@ interface EraItemProps {
   era: Era;
   rulers: Ruler[];
   isOpen: boolean;
-  isSelected: boolean;
   selectedRulerId: string | null;
   onToggle: (id: string) => void;
   onSelectRuler: (id: string) => void;
@@ -29,7 +28,6 @@ export const EraItem = React.memo(function EraItem({
   era,
   rulers,
   isOpen,
-  isSelected,
   selectedRulerId,
   onToggle,
   onSelectRuler,

@@ -51,7 +51,7 @@ export function BattleTimeline({ battles, eras, tEra, onBattleClick }: BattleTim
       
       {/* Timeline entries */}
       <div className="space-y-0">
-        {battlesWithEra.map(({ battle, eraName, eraColor }, index) => {
+        {battlesWithEra.map(({ battle, eraName, eraColor }) => {
           const result = battle.battle?.result;
           const resultColor = 
             result === 'attacker_win' ? 'bg-green-500' :

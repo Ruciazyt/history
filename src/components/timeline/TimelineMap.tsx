@@ -6,6 +6,7 @@ import type { TimelineEvent, Territory } from '@/lib/history/data/timeline';
 const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   interface Window {
     BMapGL: any;
   }
@@ -18,7 +19,7 @@ interface TimelineMapProps {
 export function TimelineMap({ event }: TimelineMapProps) {
   const [mapReady, setMapReady] = React.useState(false);
   const mapContainerRef = React.useRef<HTMLDivElement>(null);
-  const mapRef = React.useRef<any>(null);
+  const mapRef = React.useRef<{ centerAndZoom: (point: unknown, zoom: number) => void; enableScrollWheelZoom: (enabled: boolean) => void; clearOverlays: () => void; addOverlay: (overlay: unknown) => void; Point: new (lng: number, lat: number) => unknown; Polygon: new (points: unknown[], options: unknown) => unknown } | null>(null);
 
   // 加载百度地图
   React.useEffect(() => {
@@ -27,9 +28,10 @@ export function TimelineMap({ event }: TimelineMapProps) {
     const initMap = () => {
       if (window.BMapGL && mapContainerRef.current) {
         try {
+          const defaultCenter = { lng: 108.95, lat: 34.34 };
           const center = event?.location 
             ? { lng: event.location.lon, lat: event.location.lat }
-            : { lng: 108.95, lat: 34.34 };
+            : defaultCenter;
           
           const map = new window.BMapGL.Map(mapContainerRef.current);
           map.centerAndZoom(new window.BMapGL.Point(center.lng, center.lat), 5);
@@ -45,7 +47,8 @@ export function TimelineMap({ event }: TimelineMapProps) {
 
     // 使用 JSONP 回调
     const callbackName = 'baiduMapCb_' + Date.now();
-    (window as any)[callbackName] = () => initMap();
+    const initMapWrapper = () => { initMap(); };
+    (window as unknown as Record<string, () => void>)[callbackName] = initMapWrapper;
 
     const script = document.createElement('script');
     script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}&callback=${callbackName}`;
@@ -53,7 +56,11 @@ export function TimelineMap({ event }: TimelineMapProps) {
     script.onload = () => console.log('百度地图 SDK 加载完成');
     document.head.appendChild(script);
 
-    return () => { delete (window as any)[callbackName]; };
+    return () => { 
+      if ((window as unknown as Record<string, unknown>)[callbackName]) {
+        delete (window as unknown as Record<string, unknown>)[callbackName]; 
+      }
+    };
   }, []);
 
   // 绘制多边形

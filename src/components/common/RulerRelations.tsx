@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import type { Ruler, RulerRelation } from '@/lib/history/types';
+import type { Ruler } from '@/lib/history/types';
 import { getRulerRelations, getRelationLabel } from '@/lib/history/rulerRelations';
 import { useTranslations } from 'next-intl';
 

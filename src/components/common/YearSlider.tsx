@@ -38,10 +38,6 @@ export function YearSlider({
     setIsDragging(true);
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
   React.useEffect(() => {
     if (!isDragging) return;
 
