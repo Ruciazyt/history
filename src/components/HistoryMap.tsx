@@ -10,8 +10,9 @@ import { YearSlider } from '@/components/common/YearSlider';
 
 const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
 
+// Use any type for third-party library - Baidu Map API
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   interface Window {
     BMapGL: any;
     BMapGLMarker: any;
@@ -42,7 +43,8 @@ export function HistoryMap({
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [mapReady, setMapReady] = React.useState(false);
   const mapContainerRef = React.useRef<HTMLDivElement>(null);
-  const mapRef = React.useRef<{ centerAndZoom: (point: unknown, zoom: number) => void; enableScrollWheelZoom: (enabled: boolean) => void; clearOverlays: () => void; addOverlay: (overlay: unknown) => void; Point: new (lng: number, lat: number) => unknown; Polygon: new (points: unknown[], options: unknown) => unknown } | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const mapRef = React.useRef<any>(null);
 
   React.useMemo(
     () => events?.find((e) => e.id === selectedId) ?? null,

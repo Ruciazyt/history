@@ -229,7 +229,7 @@ export function getBattlesWithMostCauses(
 export function getCauseResultCorrelation(
   events: Event[]
 ): Array<{ causeType: BattleCauseType; attackerWin: number; defenderWin: number; draw: number; label: string }> {
-  const correlation: Record<BattleCauseType, { attackerWin: number; defenderWin: number; draw: number }> = {} as any;
+  const correlation: Partial<Record<BattleCauseType, { attackerWin: number; defenderWin: number; draw: number }>> = {};
   
   // 初始化
   const causeTypes: BattleCauseType[] = [
@@ -249,21 +249,28 @@ export function getCauseResultCorrelation(
     
     const result = event.battle.result;
     for (const cause of event.battle.causes) {
+      const entry = correlation[cause.type];
+      if (!entry) continue;
       if (result === 'attacker_win') {
-        correlation[cause.type].attackerWin++;
+        entry.attackerWin++;
       } else if (result === 'defender_win') {
-        correlation[cause.type].defenderWin++;
+        entry.defenderWin++;
       } else if (result === 'draw') {
-        correlation[cause.type].draw++;
+        entry.draw++;
       }
     }
   }
   
-  return causeTypes.map(type => ({
-    causeType: type,
-    ...correlation[type],
-    label: getCauseTypeLabel(type),
-  })).filter(c => c.attackerWin + c.defenderWin + c.draw > 0);
+  return causeTypes.map(type => {
+    const corr = correlation[type];
+    return {
+      causeType: type,
+      attackerWin: corr?.attackerWin ?? 0,
+      defenderWin: corr?.defenderWin ?? 0,
+      draw: corr?.draw ?? 0,
+      label: getCauseTypeLabel(type),
+    };
+  }).filter(c => c.attackerWin + c.defenderWin + c.draw > 0);
 }
 
 /** 分析防御性战争 vs 进攻性战争的胜率 */

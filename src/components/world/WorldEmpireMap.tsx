@@ -8,8 +8,9 @@ import {
 
 const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
 
+// Use any type for third-party library - Baidu Map API
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   interface Window {
     BMapGL: any;
   }

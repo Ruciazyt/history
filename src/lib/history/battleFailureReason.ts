@@ -427,7 +427,7 @@ export function getMostCriticalFailureReasons(
 ): { type: FailureReasonType; label: string; criticalCount: number }[] {
   const failureReasonsMap = extractFailureReasons(events);
   
-  const criticalCounts: Record<FailureReasonType, number> = {} as any;
+  const criticalCounts: Partial<Record<FailureReasonType, number>> = {};
   
   for (const reasons of failureReasonsMap.values()) {
     for (const reason of reasons) {
