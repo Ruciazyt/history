@@ -1,5 +1,4 @@
 import type { Event, BattleType } from './types';
-import { getBattles } from './battles';
 
 // ============ Types ============
 

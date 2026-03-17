@@ -1,4 +1,4 @@
-import { Event, BattleImpact, BattleScale } from './types';
+import type { Event } from './types';
 
 /**
  * 战役因果链分析模块

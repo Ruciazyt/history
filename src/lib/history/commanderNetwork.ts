@@ -4,7 +4,7 @@
  * 分析指挥官之间的关系网络：合作与对立关系
  */
 
-import type { Event, BattleStrategy } from './types';
+import type { Event } from './types';
 
 /**
  * 指挥官关系类型

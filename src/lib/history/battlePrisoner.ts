@@ -3,7 +3,7 @@
  * 分析战役中的俘虏、囚犯情况
  */
 
-import type { Event, BattlePrisoner, PrisonerType, PrisonerTreatment, PrisonerSide, PrisonerSeverity } from './types';
+import type { Event, PrisonerType, PrisonerTreatment, PrisonerSide, PrisonerSeverity } from './types';
 
 /**
  * 获取俘虏类型的中文标签

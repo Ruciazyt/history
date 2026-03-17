@@ -1,4 +1,4 @@
-import type { Event, Era, BattleTerrain, BattleWeather, BattlePacing, BattleStrategy, BattleFormation } from './types';
+import type { Event, Era, BattleTerrain, BattleStrategy } from './types';
 import { getBattles } from './battles';
 
 /**

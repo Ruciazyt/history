@@ -1,5 +1,4 @@
-import type { Event, BattleTerrain, BattleWeather, BattlePacing, BattleStrategy, BattleScale } from './types';
-import { getBattles } from './battles';
+import type { Event } from './types';
 
 /**
  * 战役胜负预测分析模块

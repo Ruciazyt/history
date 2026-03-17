@@ -3,7 +3,7 @@
  * 分析战役在历史时间上的分布规律（世纪、朝代、时代）
  */
 
-import { Event, BattleType, BattleImpact, BattleScale } from './types';
+import { Event, BattleType } from './types';
 
 /** 世纪类型 */
 export type Century = {

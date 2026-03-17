@@ -18,7 +18,7 @@ export interface LocationSearchResult {
  * 搜索地点（基于现有事件数据）
  * 返回地点名称及相关的历史事件序列
  */
-export function searchLocation(query: string, locale: 'zh' | 'en' | 'ja'): LocationSearchResult[] {
+export function searchLocation(query: string, _locale: 'zh' | 'en' | 'ja'): LocationSearchResult[] {
   const lowerQuery = query.toLowerCase();
   
   // 收集所有地点

@@ -1,4 +1,4 @@
-import type { Event, RiverOperationType, RiverOperationResult, RiverPosition, BattleRiverOperation } from './types';
+import type { Event, RiverOperationType, RiverOperationResult, RiverPosition } from './types';
 import { getBattles } from './battles';
 
 /**

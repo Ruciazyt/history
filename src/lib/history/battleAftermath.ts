@@ -1,4 +1,4 @@
-import type { AftermathType, AftermathSeverity, AftermathScope, BattleAftermath, Event } from './types';
+import type { AftermathType, AftermathSeverity, AftermathScope, Event } from './types';
 import { getBattles } from './battles';
 
 /**

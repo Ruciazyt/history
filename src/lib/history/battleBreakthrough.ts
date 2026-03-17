@@ -1,4 +1,4 @@
-import type { Event, BattleBreakthrough, BreakthroughType, BreakthroughResult } from './types';
+import type { Event, BreakthroughType, BreakthroughResult } from './types';
 import { getBattles } from './battles';
 
 /**

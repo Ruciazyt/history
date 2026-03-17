@@ -3,7 +3,7 @@
  * 分析战役中的后勤、补给线、粮草等因素
  */
 
-import { Event, BattleLogistics, LogisticsType, SupplySource, SupplyStatus } from './types';
+import { Event, LogisticsType, SupplySource, SupplyStatus } from './types';
 
 /** 补给类型的中文标签 */
 export function getLogisticsTypeLabel(type: LogisticsType): string {

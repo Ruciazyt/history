@@ -6,11 +6,9 @@ import type { Era, Event, Ruler } from './types';
  */
 export function useHistoryData({
   eras,
-  events,
   rulers,
 }: {
   eras: Era[];
-  events: Event[];
   rulers: Ruler[];
 }) {
   const [openEraIds, setOpenEraIds] = useState<Set<string>>(new Set());

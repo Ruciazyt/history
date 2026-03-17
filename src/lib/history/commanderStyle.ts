@@ -99,17 +99,6 @@ function isFlexibleStrategy(strategy: BattleStrategy): boolean {
 }
 
 /**
- * 判断是否为战略型战术
- */
-function isStrategicStrategy(strategy: BattleStrategy): boolean {
-  // 战略型通常涉及多兵种配合、联盟等
-  const strategicStrategies: BattleStrategy[] = [
-    'alliance'
-  ];
-  return strategicStrategies.includes(strategy);
-}
-
-/**
  * 分析单场战役中某指挥官使用的战术风格
  */
 export function analyzeCommanderBattleStyle(

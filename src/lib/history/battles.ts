@@ -529,7 +529,7 @@ export function compareBattles(battle1: Event, battle2: Event): BattleComparison
  */
 export function getComparisonSummary(
   comparison: BattleComparison['comparison'],
-  t: (key: string) => string
+  _t: (key: string) => string
 ): string[] {
   const summary: string[] = [];
   

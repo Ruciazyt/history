@@ -1,18 +1,11 @@
-import type { Event, BattleType, BattleImpact } from './types';
+import type { Event } from './types';
 import {
   getBattles,
-  getBattleRegion,
-  getSeasonFromMonth,
-  getBattleMonth,
   getBattleStats,
-  getAttackerDefenderPattern,
-  getVictoryPatternBySeason,
-  getVictoryPatternByEra,
   getBattleCountByRegion,
   getAllBattleTypesStats,
   getAllBattleImpactsStats,
   getBattleSeasonality,
-  type BattleSeason,
 } from './battles';
 
 // ============ Outcome Correlation Types ============
@@ -387,7 +380,7 @@ export function getVictoryFactorInsights(battles: Event[]): VictoryFactorInsight
  */
 export function getKeyVictoryFactorsSummary(
   battles: Event[],
-  t?: (key: string) => string
+  _t?: (key: string) => string
 ): string[] {
   const battlesOnly = battles.filter(e => e.tags?.includes('war'));
   
