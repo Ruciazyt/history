@@ -23,6 +23,7 @@ export function TimelineMap({ event }: TimelineMapProps) {
   const mapRef = React.useRef<{ centerAndZoom: (point: unknown, zoom: number) => void; enableScrollWheelZoom: (enabled: boolean) => void; clearOverlays: () => void; addOverlay: (overlay: unknown) => void; Point: new (lng: number, lat: number) => unknown; Polygon: new (points: unknown[], options: unknown) => unknown } | null>(null);
 
   // 加载百度地图
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(() => {
     if (mapRef.current) return;
 
@@ -62,6 +63,7 @@ export function TimelineMap({ event }: TimelineMapProps) {
         delete (window as unknown as Record<string, unknown>)[callbackName]; 
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 绘制多边形

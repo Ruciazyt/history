@@ -1,4 +1,4 @@
-import type { Event, BattleTurningPoint, BattleTurningPointType } from './types';
+import type { Event, BattleTurningPointType } from './types';
 
 /**
  * 战役转折点分析模块
@@ -61,7 +61,7 @@ export function getTurningPointTypeStats(events: Event[]): Record<BattleTurningP
 export function getMostCommonTurningPointTypes(events: Event[]): { type: BattleTurningPointType; count: number }[] {
   const stats = getTurningPointTypeStats(events);
   return Object.entries(stats)
-    .filter(([_, count]) => count > 0)
+    .filter(([, count]) => count > 0)
     .sort((a, b) => b[1] - a[1])
     .map(([type, count]) => ({ type: type as BattleTurningPointType, count }));
 }

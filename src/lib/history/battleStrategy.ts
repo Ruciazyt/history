@@ -1,5 +1,4 @@
 import type { Event, BattleStrategy, BattleType } from './types';
-import { getBattles } from './battles';
 
 // ============ Types ============
 
@@ -197,7 +196,7 @@ export function getStrategyEffectiveness(
   }
   
   return Object.entries(results)
-    .filter(([_, count]) => count > 0)
+    .filter(([, count]) => count > 0)
     .map(([result, count]) => ({
       strategy,
       result: result as 'attacker_win' | 'defender_win' | 'draw' | 'inconclusive',

@@ -213,7 +213,7 @@ export function getWeatherInsights(battles: Event[]): string[] {
   
   // 找出进攻方优势天气
   const attackerAdvantage = Object.entries(analysis)
-    .filter(([_, data]) => data.total >= 2 && data.attackerWinRate > data.defenderWinRate)
+    .filter(([, data]) => data.total >= 2 && data.attackerWinRate > data.defenderWinRate)
     .sort((a, b) => b[1].attackerWinRate - a[1].attackerWinRate);
   
   if (attackerAdvantage.length > 0) {
@@ -228,7 +228,7 @@ export function getWeatherInsights(battles: Event[]): string[] {
   
   // 防守方优势天气
   const defenderAdvantage = Object.entries(analysis)
-    .filter(([_, data]) => data.total >= 2 && data.defenderWinRate > data.attackerWinRate)
+    .filter(([, data]) => data.total >= 2 && data.defenderWinRate > data.attackerWinRate)
     .sort((a, b) => b[1].defenderWinRate - a[1].defenderWinRate);
   
   if (defenderAdvantage.length > 0) {

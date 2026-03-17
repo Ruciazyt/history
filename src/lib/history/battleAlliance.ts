@@ -329,7 +329,7 @@ export function getAllianceMemberStats(events: Event[]): AllianceMemberStats[] {
     const alliance = battle.battle?.alliance;
     if (!alliance?.participants) continue;
     
-    const type = alliance.type || 'unknown';
+    // alliance type available if needed: const type = alliance.type || 'unknown';
     
     for (const participant of alliance.participants) {
       if (participant.role !== 'member') continue;

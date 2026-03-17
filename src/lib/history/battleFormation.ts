@@ -170,7 +170,7 @@ export function getMostEffectiveFormations(
   const correlation = getFormationOutcomeCorrelation(events);
   
   return Object.entries(correlation)
-    .filter(([_, data]) => data.total >= minBattles)
+    .filter(([, data]) => data.total >= minBattles)
     .map(([formation, data]) => {
       const winRate = data.attacker_win / data.total * 100;
       return { formation: formation as BattleFormation, winRate: Math.round(winRate), total: data.total };

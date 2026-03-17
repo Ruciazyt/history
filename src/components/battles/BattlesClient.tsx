@@ -24,12 +24,12 @@ const ERA_INFO: Record<string, { name: string; color: string }> = {
 export function BattlesClient({
   eras,
   events,
-  rulers: _rulers,
+  rulers,
   locale,
 }: {
   eras: Era[];
   events: Event[];
-  rulers: Ruler[];
+  rulers?: Ruler[];
   locale?: string;
 }) {
   const t = useTranslations();
@@ -184,7 +184,7 @@ export function BattlesClient({
             全部
           </button>
           {eraOptions.map((eraName) => {
-            const eraInfo = Object.entries(ERA_INFO).find(([_, info]) => info.name === eraName);
+            const eraInfo = Object.entries(ERA_INFO).find(([, info]) => info.name === eraName);
             const dotColor = eraInfo ? eraInfo[1] : 'bg-gray-400';
             
             return (
@@ -234,7 +234,7 @@ export function BattlesClient({
                 <div className="text-xs text-zinc-500 mb-2">各时期战役分布</div>
                 <div className="flex flex-wrap gap-2">
                   {battleCountByEra.map(({ eraName, count }) => {
-                    const eraInfo = Object.entries(ERA_INFO).find(([_, info]) => info.name === eraName);
+                    const eraInfo = Object.entries(ERA_INFO).find(([, info]) => info.name === eraName);
                     const dotColor = eraInfo ? eraInfo[1] : 'bg-gray-400';
                     return (
                       <span 
