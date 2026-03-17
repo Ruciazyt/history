@@ -31,7 +31,6 @@ describe('battleRiver', () => {
       titleKey: 'battle.changping',
       summaryKey: 'battle.changping.desc',
       tags: ['war'],
-      tags: ['war'],
       battle: {
         belligerents: { attacker: '秦', defender: '赵' },
         result: 'attacker_win' as const,
