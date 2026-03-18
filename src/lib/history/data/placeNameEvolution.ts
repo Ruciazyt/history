@@ -23,6 +23,7 @@ export interface PlaceEvolution {
 
 // 主要城市地名演变数据
 export const PLACE_EVOLUTIONS: PlaceEvolution[] = [
+  // ==================== 四大古都 ====================
   {
     modernName: '西安',
     coordinate: { lon: 108.94, lat: 34.34 },
@@ -92,6 +93,7 @@ export const PLACE_EVOLUTIONS: PlaceEvolution[] = [
       { name: '南京', startYear: 1949, endYear: 2026, dynasty: '现代' },
     ],
   },
+  // ==================== 开封（北宋都城） ====================
   {
     modernName: '开封',
     coordinate: { lon: 114.35, lat: 34.79 },
@@ -104,6 +106,7 @@ export const PLACE_EVOLUTIONS: PlaceEvolution[] = [
       { name: '开封', startYear: 1234, endYear: 1912, dynasty: '元明清' },
     ],
   },
+  // ==================== 杭州 ====================
   {
     modernName: '杭州',
     coordinate: { lon: 120.15, lat: 30.29 },
@@ -114,6 +117,7 @@ export const PLACE_EVOLUTIONS: PlaceEvolution[] = [
       { name: '杭州', startYear: 1276, endYear: 1912, dynasty: '元明清' },
     ],
   },
+  // ==================== 其他省会城市 ====================
   {
     modernName: '成都',
     coordinate: { lon: 104.07, lat: 30.67 },
@@ -122,6 +126,7 @@ export const PLACE_EVOLUTIONS: PlaceEvolution[] = [
       { name: '南京', startYear: 907, endYear: 925, dynasty: '五代·前蜀' },
       { name: '成都', startYear: 925, endYear: 1368, dynasty: '五代·后蜀宋元' },
       { name: '成都', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '成都', startYear: 1912, endYear: 2026, dynasty: '现代' },
     ],
   },
   {
@@ -131,6 +136,7 @@ export const PLACE_EVOLUTIONS: PlaceEvolution[] = [
       { name: '临湘', startYear: -202, endYear: 589, dynasty: '秦汉南北朝' },
       { name: '潭州', startYear: 589, endYear: 1104, dynasty: '隋唐宋' },
       { name: '长沙', startYear: 1104, endYear: 1912, dynasty: '宋明清' },
+      { name: '长沙', startYear: 1912, endYear: 2026, dynasty: '现代' },
     ],
   },
   {
@@ -139,6 +145,7 @@ export const PLACE_EVOLUTIONS: PlaceEvolution[] = [
     names: [
       { name: '番禺', startYear: -214, endYear: 589, dynasty: '秦汉六朝' },
       { name: '广州', startYear: 589, endYear: 1912, dynasty: '隋唐宋元明清' },
+      { name: '广州', startYear: 1912, endYear: 2026, dynasty: '现代' },
     ],
   },
   {
@@ -149,6 +156,286 @@ export const PLACE_EVOLUTIONS: PlaceEvolution[] = [
       { name: '沈阳', startYear: 200, endYear: 1625, dynasty: '汉晋元' },
       { name: '盛京', startYear: 1625, endYear: 1657, dynasty: '清初' },
       { name: '沈阳', startYear: 1657, endYear: 1912, dynasty: '清' },
+      { name: '沈阳', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  // ==================== 重要历史城市 ====================
+  {
+    modernName: '武汉',
+    coordinate: { lon: 114.31, lat: 30.52 },
+    names: [
+      { name: '江夏', startYear: -206, endYear: 589, dynasty: '秦汉南北朝' },
+      { name: '鄂州', startYear: 589, endYear: 958, dynasty: '隋唐五代' },
+      { name: '武汉', startYear: 958, endYear: 1912, dynasty: '宋元明清' },
+      { name: '武汉', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '郑州',
+    coordinate: { lon: 113.65, lat: 34.76 },
+    names: [
+      { name: '荥阳', startYear: -500, endYear: 580, dynasty: '战国秦隋' },
+      { name: '郑州', startYear: 580, endYear: 1912, dynasty: '隋唐宋明清' },
+      { name: '郑州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '济南',
+    coordinate: { lon: 116.99, lat: 36.67 },
+    names: [
+      { name: '历下', startYear: -500, endYear: 400, dynasty: '战国晋' },
+      { name: '济南', startYear: 400, endYear: 1912, dynasty: '南北朝明清' },
+      { name: '济南', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '太原',
+    coordinate: { lon: 112.53, lat: 37.87 },
+    names: [
+      { name: '晋阳', startYear: -500, endYear: 979, dynasty: '战国唐' },
+      { name: '太原', startYear: 979, endYear: 1912, dynasty: '宋元明清' },
+      { name: '太原', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '合肥',
+    coordinate: { lon: 117.28, lat: 31.86 },
+    names: [
+      { name: '合肥', startYear: -200, endYear: 580, dynasty: '秦汉南北朝' },
+      { name: '庐州', startYear: 580, endYear: 1368, dynasty: '隋元' },
+      { name: '合肥', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '合肥', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '南昌',
+    coordinate: { lon: 115.89, lat: 28.68 },
+    names: [
+      { name: '豫章', startYear: -200, endYear: 589, dynasty: '秦汉南北朝' },
+      { name: '南昌', startYear: 589, endYear: 1912, dynasty: '隋明清' },
+      { name: '南昌', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '昆明',
+    coordinate: { lon: 102.71, lat: 25.04 },
+    names: [
+      { name: '滇池', startYear: -100, endYear: 320, dynasty: '古滇' },
+      { name: '昆明', startYear: 320, endYear: 1912, dynasty: '唐宋元明清' },
+      { name: '昆明', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '贵阳',
+    coordinate: { lon: 106.71, lat: 26.57 },
+    names: [
+      { name: '贵州', startYear: 1100, endYear: 1912, dynasty: '宋元明清' },
+      { name: '贵阳', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '南宁',
+    coordinate: { lon: 108.33, lat: 22.84 },
+    names: [
+      { name: '邕州', startYear: 600, endYear: 1324, dynasty: '隋元' },
+      { name: '南宁', startYear: 1324, endYear: 1912, dynasty: '元明清' },
+      { name: '南宁', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '福州',
+    coordinate: { lon: 119.30, lat: 26.08 },
+    names: [
+      { name: '闽中', startYear: -200, endYear: 580, dynasty: '秦汉南北朝' },
+      { name: '福州', startYear: 580, endYear: 1912, dynasty: '隋明清' },
+      { name: '福州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '哈尔滨',
+    coordinate: { lon: 126.53, lat: 45.80 },
+    names: [
+      { name: '阿勒楚喀', startYear: 1700, endYear: 1900, dynasty: '清' },
+      { name: '哈尔滨', startYear: 1900, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '长春',
+    coordinate: { lon: 125.32, lat: 43.88 },
+    names: [
+      { name: '宽城子', startYear: 1800, endYear: 1900, dynasty: '清' },
+      { name: '长春', startYear: 1900, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '石家庄',
+    coordinate: { lon: 114.48, lat: 38.03 },
+    names: [
+      { name: '石门', startYear: 1925, endYear: 1947, dynasty: '民国' },
+      { name: '石家庄', startYear: 1947, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '乌鲁木齐',
+    coordinate: { lon: 87.62, lat: 43.83 },
+    names: [
+      { name: '迪化', startYear: 1755, endYear: 1954, dynasty: '清' },
+      { name: '乌鲁木齐', startYear: 1954, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '兰州',
+    coordinate: { lon: 103.83, lat: 36.06 },
+    names: [
+      { name: '金城', startYear: -200, endYear: 600, dynasty: '秦汉隋' },
+      { name: '兰州', startYear: 600, endYear: 1912, dynasty: '隋唐宋元明清' },
+      { name: '兰州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '西宁',
+    coordinate: { lon: 101.78, lat: 36.62 },
+    names: [
+      { name: '鄯州', startYear: 400, endYear: 1100, dynasty: '南北朝宋' },
+      { name: '西宁', startYear: 1100, endYear: 1912, dynasty: '宋元明清' },
+      { name: '西宁', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '呼和浩特',
+    coordinate: { lon: 111.73, lat: 40.84 },
+    names: [
+      { name: '归化', startYear: 1581, endYear: 1912, dynasty: '明清' },
+      { name: '呼和浩特', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '银川',
+    coordinate: { lon: 106.23, lat: 38.47 },
+    names: [
+      { name: '兴庆', startYear: 1000, endYear: 1227, dynasty: '西夏' },
+      { name: '宁夏', startYear: 1227, endYear: 1912, dynasty: '元明清' },
+      { name: '银川', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '拉萨',
+    coordinate: { lon: 91.11, lat: 29.65 },
+    names: [
+      { name: '逻些', startYear: 600, endYear: 1000, dynasty: '唐' },
+      { name: '拉萨', startYear: 1000, endYear: 2026, dynasty: '宋元明清现代' },
+    ],
+  },
+  {
+    modernName: '苏州',
+    coordinate: { lon: 120.62, lat: 31.30 },
+    names: [
+      { name: '吴县', startYear: -500, endYear: 589, dynasty: '战国南北朝' },
+      { name: '苏州', startYear: 589, endYear: 1912, dynasty: '隋清' },
+      { name: '苏州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '扬州',
+    coordinate: { lon: 119.42, lat: 32.39 },
+    names: [
+      { name: '广陵', startYear: -200, endYear: 600, dynasty: '秦汉南北朝' },
+      { name: '扬州', startYear: 600, endYear: 1912, dynasty: '隋明清' },
+      { name: '扬州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '镇江',
+    coordinate: { lon: 119.45, lat: 32.20 },
+    names: [
+      { name: '京口', startYear: -200, endYear: 589, dynasty: '秦汉南北朝' },
+      { name: '润州', startYear: 589, endYear: 1120, dynasty: '隋宋' },
+      { name: '镇江', startYear: 1120, endYear: 1912, dynasty: '宋明清' },
+      { name: '镇江', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '常州',
+    coordinate: { lon: 119.97, lat: 31.81 },
+    names: [
+      { name: '延陵', startYear: -500, endYear: 589, dynasty: '战国南北朝' },
+      { name: '常州', startYear: 589, endYear: 1912, dynasty: '隋明清' },
+      { name: '常州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '无锡',
+    coordinate: { lon: 120.30, lat: 31.57 },
+    names: [
+      { name: '无锡', startYear: -200, endYear: 1912, dynasty: '秦清' },
+      { name: '无锡', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '青岛',
+    coordinate: { lon: 120.38, lat: 36.07 },
+    names: [
+      { name: '胶州', startYear: -500, endYear: 1898, dynasty: '战国清' },
+      { name: '青岛', startYear: 1898, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '大连',
+    coordinate: { lon: 121.62, lat: 38.91 },
+    names: [
+      { name: '三山浦', startYear: 600, endYear: 1100, dynasty: '唐' },
+      { name: '大连', startYear: 1100, endYear: 1898, dynasty: '宋明清' },
+      { name: '大连', startYear: 1898, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '厦门',
+    coordinate: { lon: 118.09, lat: 24.46 },
+    names: [
+      { name: '嘉禾', startYear: 1000, endYear: 1380, dynasty: '宋元' },
+      { name: '厦门', startYear: 1380, endYear: 2026, dynasty: '明清现代' },
+    ],
+  },
+  {
+    modernName: '宁波',
+    coordinate: { lon: 121.55, lat: 29.87 },
+    names: [
+      { name: '明州', startYear: 700, endYear: 1368, dynasty: '唐元' },
+      { name: '宁波', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '宁波', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '桂林',
+    coordinate: { lon: 110.28, lat: 25.27 },
+    names: [
+      { name: '桂林', startYear: -200, endYear: 1912, dynasty: '秦清' },
+      { name: '桂林', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '保定',
+    coordinate: { lon: 115.47, lat: 38.87 },
+    names: [
+      { name: '保定', startYear: 1000, endYear: 1912, dynasty: '宋明清' },
+      { name: '保定', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '承德',
+    coordinate: { lon: 117.93, lat: 40.97 },
+    names: [
+      { name: '热河', startYear: 1700, endYear: 1912, dynasty: '清' },
+      { name: '承德', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '天津',
+    coordinate: { lon: 117.20, lat: 39.13 },
+    names: [
+      { name: '海津', startYear: 1200, endYear: 1400, dynasty: '金元' },
+      { name: '天津', startYear: 1400, endYear: 1912, dynasty: '明清' },
+      { name: '天津', startYear: 1912, endYear: 2026, dynasty: '现代' },
     ],
   },
 ];
@@ -156,22 +443,19 @@ export const PLACE_EVOLUTIONS: PlaceEvolution[] = [
 /**
  * 搜索地名演变
  */
-export function searchPlaceEvolution(
-  query: string
-): PlaceEvolution[] {
+export function searchPlaceEvolution(query: string): PlaceEvolution[] {
   const lowerQuery = query.toLowerCase();
-  return PLACE_EVOLUTIONS.filter((p) =>
-    p.modernName.toLowerCase().includes(lowerQuery) ||
-    p.names.some((n) => n.name.toLowerCase().includes(lowerQuery))
-  ).slice(0, 10);
+  return PLACE_EVOLUTIONS.filter(
+    (p) =>
+      p.modernName.toLowerCase().includes(lowerQuery) ||
+      p.names.some((n) => n.name.toLowerCase().includes(lowerQuery))
+  ).slice(0, 20);
 }
 
 /**
  * 获取某地的名称演变时间线
  */
-export function getPlaceEvolution(
-  modernName: string
-): PlaceEvolution | undefined {
+export function getPlaceEvolution(modernName: string): PlaceEvolution | undefined {
   return PLACE_EVOLUTIONS.find(
     (p) => p.modernName.toLowerCase() === modernName.toLowerCase()
   );
