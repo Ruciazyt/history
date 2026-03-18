@@ -11,6 +11,7 @@
     "test:run": "vitest run"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "echarts": "^6.0.0",
     "echarts-for-react": "^3.0.6",
     "maplibre-gl": "^5.19.0",
