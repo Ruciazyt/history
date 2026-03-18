@@ -552,8 +552,10 @@ export function getPredictionInsights(battle: Event): string[] {
     };
     const actualResult = resultLabels[battle.battle.result];
     
-    const predicted = prediction.predictedWinner === 'attacker' ? '进攻方胜利' : 
+    // Build prediction string (for potential future use)
+    const _predicted = prediction.predictedWinner === 'attacker' ? '进攻方胜利' : 
                       prediction.predictedWinner === 'defender' ? '防守方胜利' : '不确定';
+    void _predicted;
     
     if (prediction.predictedWinner === 'uncertain') {
       insights.push(`实际结果：${actualResult}（预测为不确定）`);

@@ -339,7 +339,8 @@ export function getTimeOfDayInsights(events: Event[]): string[] {
   if (total > 0) {
     const nightRatio = nightCount / total;
     const dayRatio = dayCount / total;
-
+    void dayRatio; // Mark as intentionally unused
+    
     if (nightRatio > 0.3) {
       insights.push('该时期夜间战斗较为频繁，体现了夜袭战术的广泛应用');
     } else if (nightRatio < 0.1) {

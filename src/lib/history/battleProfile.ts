@@ -540,10 +540,10 @@ export function getBattleProfile(events: Event[], eras: Era[], battleId: string)
 /**
  * 获取所有战役的画像摘要
  * @param events 所有事件数据
- * @param eras 所有时代数据
+ * @param _eras 所有时代数据（保留用于未来扩展）
  * @returns 画像摘要
  */
-export function getProfileSummary(events: Event[], eras: Era[]): ProfileSummary {
+export function getProfileSummary(events: Event[], _eras: Era[]): ProfileSummary {
   const battles = getBattles(events);
   const battleList = battles.filter(b => b.battle);
 

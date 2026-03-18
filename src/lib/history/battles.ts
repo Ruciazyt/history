@@ -2493,7 +2493,7 @@ export function getFactionVsFaction(battles: Event[], faction1: string, faction2
   }
   
   const faction1Wins = relevantBattles.filter(b => {
-    const { attacker, defender } = getBattleParties(b);
+    const { attacker } = getBattleParties(b);
     if (attacker === faction1) {
       return b.battle?.result === 'attacker_win';
     } else {
@@ -2502,7 +2502,7 @@ export function getFactionVsFaction(battles: Event[], faction1: string, faction2
   }).length;
   
   const faction2Wins = relevantBattles.filter(b => {
-    const { attacker, defender } = getBattleParties(b);
+    const { attacker } = getBattleParties(b);
     if (attacker === faction2) {
       return b.battle?.result === 'attacker_win';
     } else {

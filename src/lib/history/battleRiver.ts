@@ -400,6 +400,10 @@ export function getRiverSideAnalysis(events: Event[]): RiverSideAnalysis {
     }
   }
   
+  // Mark as intentionally unused for future analytics
+  void attackerWins;
+  void defenderWins;
+  
   const attackerOnly = riverBattles.filter(b => 
     b.battle?.riverOperations?.some(op => op.side === 'attacker') && 
     !b.battle.riverOperations.some(op => op.side === 'defender')
@@ -457,9 +461,11 @@ export function getRiverOperationInsights(events: Event[]): string[] {
   // River position advantage
   const positionAnalysis = getRiverPositionAnalysis(events);
   if (positionAnalysis.upstream.total > 0) {
-    const upstreamWinRate = positionAnalysis.upstream.total > 0 
+    // Calculate but not used in current implementation
+    const _upstreamWinRate = positionAnalysis.upstream.total > 0 
       ? ((positionAnalysis.upstream.attackerWin + positionAnalysis.upstream.defenderWin) / positionAnalysis.upstream.total * 100).toFixed(1)
       : '0';
+    void _upstreamWinRate;
     insights.push(`占据上游位置的战役占${positionAnalysis.upstream.total}场，上游优势在古代水战中被广泛认知。`);
   }
   

@@ -318,9 +318,9 @@ export function getIntelligenceSideAnalysis(events: Event[]): IntelligenceSideAn
   let defenderOperations = 0;
   let bothSidesOperations = 0;
   
+  // Track wins for potential future use
   let attackerWins = 0;
   let defenderWins = 0;
-  const totalWithIntel = intelBattles.length;
   
   for (const battle of intelBattles) {
     const sides = new Set(battle.battle?.intelligence?.map(i => i.side) || []);
@@ -335,6 +335,10 @@ export function getIntelligenceSideAnalysis(events: Event[]): IntelligenceSideAn
       bothSidesOperations++;
     }
   }
+  
+  // Mark as intentionally unused for future analytics
+  void attackerWins;
+  void defenderWins;
   
   const attackerOnly = intelBattles.filter(b => 
     b.battle?.intelligence?.some(i => i.side === 'attacker') && 
