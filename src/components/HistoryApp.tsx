@@ -229,13 +229,6 @@ export function HistoryApp({
                 >
                   🏛️ <span className="hidden sm:inline">{t('placeNames.title') || '地名演化'}</span>
                 </Link>
-                <button
-                  type="button"
-                  onClick={() => switchCiv('eurasian')}
-                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${HISTORY_APP_COLORS.quickLink.eurasian.bg} ${HISTORY_APP_COLORS.quickLink.eurasian.text} ${HISTORY_APP_COLORS.quickLink.eurasian.border}`}
-                >
-                  🌍 <span className="hidden sm:inline">欧亚对比</span>
-                </button>
               </div>
             </div>
           </div>
