@@ -214,7 +214,7 @@ describe('getMostInfluentialChains', () => {
   it('应按影响力排序', () => {
     const chains = getMostInfluentialChains(mockBattles);
     for (let i = 1; i < chains.length; i++) {
-      expect(chains[i - 1].totalImpact).toBeGreaterThanOrEqual(chains[i].totalImpact);
+      expect(chains[i - 1]!.totalImpact).toBeGreaterThanOrEqual(chains[i]!.totalImpact);
     }
   });
 
@@ -227,8 +227,8 @@ describe('getMostInfluentialChains', () => {
 describe('analyzeChainType', () => {
   it('应该分析因果链类型', () => {
     const chains = getMostInfluentialChains(mockBattles);
-    if (chains.length > 0 && chains[0].battles.length >= 2) {
-      const type = analyzeChainType(chains[0].battles);
+    if (chains.length > 0 && chains[0]!.battles.length >= 2) {
+      const type = analyzeChainType(chains[0]!.battles);
       expect(type).not.toBeNull();
       expect(type?.type).toBeDefined();
       expect(type?.description).toBeDefined();
@@ -237,7 +237,7 @@ describe('analyzeChainType', () => {
   });
 
   it('单战役应返回null', () => {
-    const type = analyzeChainType([mockBattles[0]]);
+    const type = analyzeChainType([mockBattles[0]!]);
     expect(type).toBeNull();
   });
 

@@ -119,15 +119,15 @@ const mockBattles: Event[] = [
 describe('battleTimeAnalysis', () => {
   describe('getBattleCentury', () => {
     it('should return correct century for BCE years', () => {
-      expect(getBattleCentury({ ...mockBattles[0], year: -1046 })).toBe(-11);
-      expect(getBattleCentury({ ...mockBattles[0], year: -100 })).toBe(-1);
-      expect(getBattleCentury({ ...mockBattles[0], year: -200 })).toBe(-2);
+      expect(getBattleCentury({ ...mockBattles[0]!, year: -1046 })).toBe(-11);
+      expect(getBattleCentury({ ...mockBattles[0]!, year: -100 })).toBe(-1);
+      expect(getBattleCentury({ ...mockBattles[0]!, year: -200 })).toBe(-2);
     });
 
     it('should return correct century for CE years', () => {
-      expect(getBattleCentury({ ...mockBattles[4], year: 200 })).toBe(2);
-      expect(getBattleCentury({ ...mockBattles[6], year: 1200 })).toBe(12);
-      expect(getBattleCentury({ ...mockBattles[7], year: 1644 })).toBe(17);
+      expect(getBattleCentury({ ...mockBattles[4]!, year: 200 })).toBe(2);
+      expect(getBattleCentury({ ...mockBattles[6]!, year: 1200 })).toBe(12);
+      expect(getBattleCentury({ ...mockBattles[7]!, year: 1644 })).toBe(17);
     });
   });
 
@@ -151,38 +151,38 @@ describe('battleTimeAnalysis', () => {
 
   describe('getBattleEraGroup', () => {
     it('should classify ancient era correctly', () => {
-      expect(getBattleEraGroup({ ...mockBattles[0], year: -1000 })).toBe('ancient');
-      expect(getBattleEraGroup({ ...mockBattles[0], year: -800 })).toBe('ancient');
+      expect(getBattleEraGroup({ ...mockBattles[0]!, year: -1000 })).toBe('ancient');
+      expect(getBattleEraGroup({ ...mockBattles[0]!, year: -800 })).toBe('ancient');
     });
 
     it('should classify spring-autumn era correctly', () => {
-      expect(getBattleEraGroup({ ...mockBattles[1], year: -770 })).toBe('spring-autumn');
-      expect(getBattleEraGroup({ ...mockBattles[1], year: -500 })).toBe('spring-autumn');
+      expect(getBattleEraGroup({ ...mockBattles[1]!, year: -770 })).toBe('spring-autumn');
+      expect(getBattleEraGroup({ ...mockBattles[1]!, year: -500 })).toBe('spring-autumn');
     });
 
     it('should classify warring-states era correctly', () => {
-      expect(getBattleEraGroup({ ...mockBattles[2], year: -476 })).toBe('warring-states');
-      expect(getBattleEraGroup({ ...mockBattles[2], year: -300 })).toBe('warring-states');
+      expect(getBattleEraGroup({ ...mockBattles[2]!, year: -476 })).toBe('warring-states');
+      expect(getBattleEraGroup({ ...mockBattles[2]!, year: -300 })).toBe('warring-states');
     });
 
     it('should classify imperial era correctly', () => {
-      expect(getBattleEraGroup({ ...mockBattles[3], year: -221 })).toBe('imperial');
-      expect(getBattleEraGroup({ ...mockBattles[4], year: 100 })).toBe('imperial');
+      expect(getBattleEraGroup({ ...mockBattles[3]!, year: -221 })).toBe('imperial');
+      expect(getBattleEraGroup({ ...mockBattles[4]!, year: 100 })).toBe('imperial');
     });
 
     it('should classify medieval era correctly', () => {
-      const medievalBattle = { ...mockBattles[0], year: 300 };
+      const medievalBattle = { ...mockBattles[0]!, year: 300 };
       expect(getBattleEraGroup(medievalBattle)).toBe('medieval');
     });
 
     it('should classify early-modern era correctly', () => {
-      const earlyModernBattle = { ...mockBattles[0], year: 600 };
+      const earlyModernBattle = { ...mockBattles[0]!, year: 600 };
       expect(getBattleEraGroup(earlyModernBattle)).toBe('early-modern');
     });
 
     it('should classify modern era correctly', () => {
-      expect(getBattleEraGroup({ ...mockBattles[7], year: 1400 })).toBe('modern');
-      expect(getBattleEraGroup({ ...mockBattles[7], year: 1644 })).toBe('modern');
+      expect(getBattleEraGroup({ ...mockBattles[7]!, year: 1400 })).toBe('modern');
+      expect(getBattleEraGroup({ ...mockBattles[7]!, year: 1644 })).toBe('modern');
     });
   });
 

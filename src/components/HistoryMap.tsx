@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import type { Position } from 'geojson';
+import type { Feature, Polygon, MultiPolygon } from 'geojson';
 import type { Event } from '@/lib/history/types';
 import { useTranslations } from 'next-intl';
 import { dynastyBoundaries } from '@/lib/history/data/dynastyBoundaries';
@@ -10,6 +10,8 @@ import { getBattles } from '@/lib/history/battles';
 import { YearSlider } from '@/components/common/YearSlider';
 
 const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
+
+type BoundaryFeature = Feature<Polygon | MultiPolygon>;
 
 declare global {
   interface Window {
@@ -66,11 +68,16 @@ export function HistoryMap({
     };
   }, [mappable, events]);
 
-  const activeBoundaries = React.useMemo(() => {
+  const activeBoundaries = React.useMemo((): Array<{ id: string; feature: BoundaryFeature }> => {
     if (!openEraIds || openEraIds.size === 0 || mode !== 'china') return [];
-    return Array.from(openEraIds)
-      .filter((id): id is string => !!dynastyBoundaries[id])
-      .map((id) => ({ id, feature: dynastyBoundaries[id] }));
+    const result: Array<{ id: string; feature: BoundaryFeature }> = [];
+    for (const id of openEraIds) {
+      const feature = dynastyBoundaries[id];
+      if (feature) {
+        result.push({ id, feature });
+      }
+    }
+    return result;
   }, [openEraIds, mode]);
 
   const worldBoundaries = React.useMemo(() => {
@@ -153,13 +160,13 @@ export function HistoryMap({
     // 绘制中国王朝边界
     if (mode === 'china') {
       activeBoundaries.forEach(({ feature }) => {
-        if (!feature.geometry.coordinates) return;
-        
         const coords = feature.geometry.coordinates;
-        const processPolygon = (points: Position[]) => {
-          if (!points || points.length < 3) return;
-          const bmapPoints = points.map((coord) => 
-            new window.BMapGL.Point(coord[0], coord[1])
+        if (!coords || coords.length === 0) return;
+
+        const processPolygon = (ring: number[][]) => {
+          if (!ring || ring.length < 3) return;
+          const bmapPoints = ring.map(
+            (coord) => new window.BMapGL.Point(coord[0], coord[1])
           );
           const polygon = new window.BMapGL.Polygon(bmapPoints, {
             strokeColor: '#DC6432',
@@ -172,11 +179,19 @@ export function HistoryMap({
 
         try {
           if (feature.geometry.type === 'MultiPolygon') {
-            (coords as Position[][]).forEach((poly) => {
-              if (poly && poly[0]) processPolygon(poly[0]);
-            });
-          } else if (feature.geometry.type === 'Polygon') {
-            processPolygon(coords[0] as Position[]);
+            // coords is number[][][][]: [polygon[polygonRing[point[lon,lat]]]]
+            const multi = coords as number[][][][];
+            for (const polygon of multi) {
+              if (polygon && polygon[0]) {
+                processPolygon(polygon[0]);
+              }
+            }
+          } else {
+            // coords is number[][][]: [ring[point[lon,lat]]]
+            const poly = coords as number[][][];
+            if (poly[0]) {
+              processPolygon(poly[0]);
+            }
           }
         } catch (e) {
           console.warn('Failed to draw boundary', e);
@@ -190,10 +205,10 @@ export function HistoryMap({
         const coords = boundary.geometry.coordinates;
         if (!coords || coords.length === 0) return;
 
-        const processPolygon = (points: Position[]) => {
-          if (!points || points.length < 3) return;
-          const bmapPoints = points.map((coord) => 
-            new window.BMapGL.Point(coord[0], coord[1])
+        const processPolygon = (ring: number[][]) => {
+          if (!ring || ring.length < 3) return;
+          const bmapPoints = ring.map(
+            (coord) => new window.BMapGL.Point(coord[0], coord[1])
           );
           const polygon = new window.BMapGL.Polygon(bmapPoints, {
             strokeColor: boundary.properties.color,
@@ -206,11 +221,19 @@ export function HistoryMap({
 
         try {
           if (boundary.geometry.type === 'MultiPolygon') {
-            (coords as Position[][]).forEach((poly) => {
-              if (poly && poly[0]) processPolygon(poly[0]);
-            });
-          } else if (boundary.geometry.type === 'Polygon') {
-            processPolygon(coords[0] as Position[]);
+            // coords is number[][][][]: [polygon[polygonRing[point[lon,lat]]]]
+            const multi = coords as number[][][][];
+            for (const polygon of multi) {
+              if (polygon && polygon[0]) {
+                processPolygon(polygon[0]);
+              }
+            }
+          } else {
+            // coords is number[][][]: [ring[point[lon,lat]]]
+            const poly = coords as number[][][];
+            if (poly[0]) {
+              processPolygon(poly[0]);
+            }
           }
         } catch (e) {
           console.warn('Failed to draw world boundary', e);

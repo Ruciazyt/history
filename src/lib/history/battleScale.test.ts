@@ -136,9 +136,9 @@ describe('battleScale', () => {
 
   describe('getBattleScale', () => {
     it('should return scale from battle', () => {
-      expect(getBattleScale(mockBattles[0])).toBe('massive');
-      expect(getBattleScale(mockBattles[1])).toBe('large');
-      expect(getBattleScale(mockBattles[5])).toBe('unknown'); // 无scale字段
+      expect(getBattleScale(mockBattles[0]!)).toBe('massive');
+      expect(getBattleScale(mockBattles[1]!)).toBe('large');
+      expect(getBattleScale(mockBattles[5]!)).toBe('unknown'); // 无scale字段
     });
   });
 
@@ -184,7 +184,7 @@ describe('battleScale', () => {
     it('should return stats for all scales', () => {
       const stats = getAllScalesStats(mockBattles);
       expect(stats.length).toBe(4);
-      expect(stats[0].scale).toBe('massive'); // 排序by total
+      expect(stats[0]!.scale).toBe('massive'); // 排序by total
     });
   });
 
@@ -192,9 +192,9 @@ describe('battleScale', () => {
     it('should calculate distribution', () => {
       const dist = getScaleDistribution(mockBattles);
       expect(dist.length).toBe(4);
-      expect(dist[0].scale).toBe('massive');
-      expect(dist[0].count).toBe(2);
-      expect(dist[0].percentage).toBeCloseTo(33.3, 1);
+      expect(dist[0]!.scale).toBe('massive');
+      expect(dist[0]!.count).toBe(2);
+      expect(dist[0]!.percentage).toBeCloseTo(33.3, 1);
     });
   });
 

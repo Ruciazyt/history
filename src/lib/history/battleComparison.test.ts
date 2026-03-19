@@ -266,7 +266,7 @@ describe('battleComparison', () => {
       const similar = findSimilarBattles(target, battles, 2);
       
       expect(similar.length).toBe(2);
-      expect(similar[0].battle.id).toBe('b1'); // Most similar
+      expect(similar[0]!.battle!.id).toBe('b1'); // Most similar
     });
 
     it('should exclude target battle from results', () => {

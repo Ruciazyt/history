@@ -189,7 +189,7 @@ describe('battleStrategy', () => {
     it('should return top strategies sorted by usage', () => {
       const mostUsed = getMostUsedStrategies(testBattles, 3);
       expect(mostUsed.length).toBeGreaterThan(0);
-      expect(mostUsed[0].totalUsages).toBeGreaterThanOrEqual(mostUsed[1].totalUsages);
+      expect(mostUsed[0]!.totalUsages).toBeGreaterThanOrEqual(mostUsed[1].totalUsages);
     });
   });
 
@@ -197,7 +197,7 @@ describe('battleStrategy', () => {
     it('should return strategies sorted by attacker win rate', () => {
       const mostEffective = getMostEffectiveStrategies(testBattles);
       // ambush has 100% win rate
-      expect(mostEffective[0].strategy).toBe('ambush');
+      expect(mostEffective[0]!.strategy).toBe('ambush');
     });
 
     it('should filter strategies with less than minimum usages', () => {
@@ -223,8 +223,8 @@ describe('battleStrategy', () => {
     it('should return effectiveness breakdown for a strategy', () => {
       const effectiveness = getStrategyEffectiveness(testBattles, 'ambush');
       expect(effectiveness.length).toBeGreaterThan(0);
-      expect(effectiveness[0].result).toBe('attacker_win');
-      expect(effectiveness[0].percentage).toBe(100);
+      expect(effectiveness[0]!.result).toBe('attacker_win');
+      expect(effectiveness[0]!.percentage).toBe(100);
     });
 
     it('should return empty array for unused strategy', () => {

@@ -150,7 +150,7 @@ describe('battlePacing', () => {
       const stats = getAllPacingStats(events);
       
       expect(stats.length).toBe(1);
-      expect(stats[0].pacing).toBe('surprise');
+      expect(stats[0]!.pacing).toBe('surprise');
     });
   });
 

@@ -135,7 +135,7 @@ describe('battleCasualties', () => {
 
   describe('getBattleCasualties', () => {
     it('should return casualties data for a battle', () => {
-      const battle = mockEvents[0];
+      const battle = mockEvents[0]!;
       const result = getBattleCasualties(battle);
       expect(result).toEqual({
         attacker: 5000,
@@ -181,9 +181,9 @@ describe('battleCasualties', () => {
   describe('getBloodiestBattles', () => {
     it('should return battles sorted by total casualties', () => {
       const result = getBloodiestBattles(mockEvents, 3);
-      expect(result[0].id).toBe('battle-2'); // 470000 casualties
-      expect(result[1].id).toBe('battle-4'); // 105000 casualties
-      expect(result[2].id).toBe('battle-1'); // 75000 casualties
+      expect(result[0]!.id).toBe('battle-2'); // 470000 casualties
+      expect(result[1]!.id).toBe('battle-4'); // 105000 casualties
+      expect(result[2]!.id).toBe('battle-1'); // 75000 casualties
     });
 
     it('should respect limit parameter', () => {
@@ -250,8 +250,8 @@ describe('battleCasualties', () => {
       expect(result).toHaveLength(4);
       
       const sortedByYear = [...result].sort((a, b) => a.year - b.year);
-      expect(sortedByYear[0].year).toBe(-1046);
-      expect(sortedByYear[3].year).toBe(-260);
+      expect(sortedByYear[0]!.year).toBe(-1046);
+      expect(sortedByYear[3]!.year).toBe(-260);
     });
 
     it('should filter by year range', () => {
