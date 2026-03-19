@@ -2,11 +2,11 @@
 
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
-import type { Era, Event, Ruler } from '@/lib/history/types';
+import type { Event, Ruler } from '@/lib/history/types';
 import { formatYear } from '@/lib/history/utils';
+import { Z_INDEX, LIGHT_THEME_COLORS } from '@/lib/history/constants';
 
 interface SearchBoxProps {
-  eras: Era[];
   events: Event[];
   rulers: Ruler[];
   locale?: string;
@@ -20,28 +20,31 @@ interface SearchResult {
   year?: number;
 }
 
-export function SearchBox({ events, rulers, locale = 'zh' }: SearchBoxProps) {
+import { useDebounce } from '@/lib/history/useBattleHooks';
+
+export const SearchBox = React.memo(function SearchBox({ events, rulers, locale = 'zh' }: SearchBoxProps) {
   const router = useRouter();
   const [query, setQuery] = React.useState('');
   const [isOpen, setIsOpen] = React.useState(false);
-  const [results, setResults] = React.useState<SearchResult[]>([]);
   const inputRef = React.useRef<HTMLInputElement>(null);
+  
+  // Debounce search query to reduce frequency
+  const debouncedQuery = useDebounce(query, 200);
 
-  // 搜索逻辑
-  React.useEffect(() => {
-    if (!query.trim()) {
-      setResults([]);
-      return;
+  // 使用 useMemo 缓存搜索结果
+  const results = React.useMemo<SearchResult[]>(() => {
+    if (!debouncedQuery.trim()) {
+      return [];
     }
 
-    const q = query.toLowerCase().trim();
-    const results: SearchResult[] = [];
+    const q = debouncedQuery.toLowerCase().trim();
+    const searchResults: SearchResult[] = [];
 
-    // 搜索帝王
+    // 搜索帝王 - 使用更高效的过滤
     for (const ruler of rulers) {
       const name = ruler.nameKey.replace('ruler.', '');
       if (name.includes(q) || ruler.id.includes(q)) {
-        results.push({
+        searchResults.push({
           type: 'ruler',
           id: ruler.id,
           title: ruler.nameKey,
@@ -58,7 +61,7 @@ export function SearchBox({ events, rulers, locale = 'zh' }: SearchBoxProps) {
       const isWar = event.tags?.includes('war');
       
       if (title.includes(q) || event.id.includes(q)) {
-        results.push({
+        searchResults.push({
           type: isWar ? 'battle' : 'event',
           id: event.id,
           title: event.titleKey,
@@ -68,17 +71,22 @@ export function SearchBox({ events, rulers, locale = 'zh' }: SearchBoxProps) {
       }
     }
 
-    setResults(results.slice(0, 8));
-  }, [query, events, rulers]);
+    return searchResults.slice(0, 8);
+  }, [debouncedQuery, events, rulers]);
 
-  const handleSelect = (result: SearchResult) => {
+  const handleSelect = React.useCallback((result: SearchResult) => {
     setQuery('');
     setIsOpen(false);
     // 根据类型跳转到对应页面或展示
     if (result.type === 'battle') {
       router.push(`/${locale}/battles`);
     }
-  };
+  }, [router, locale]);
+
+  const handleClear = React.useCallback(() => {
+    setQuery('');
+    inputRef.current?.focus();
+  }, []);
 
   return (
     <div className="relative">
@@ -93,10 +101,10 @@ export function SearchBox({ events, rulers, locale = 'zh' }: SearchBoxProps) {
           }}
           onFocus={() => setIsOpen(true)}
           placeholder="搜索帝王、战役..."
-          className="w-40 sm:w-48 lg:w-56 px-3 py-1.5 pl-8 text-sm bg-zinc-100 border border-transparent rounded-lg focus:bg-white focus:border-zinc-300 focus:outline-none transition-all"
+          className={`w-40 sm:w-48 lg:w-56 px-3 py-1.5 pl-8 text-sm ${LIGHT_THEME_COLORS.background} border border-transparent rounded-lg focus:${LIGHT_THEME_COLORS.surface} focus:${LIGHT_THEME_COLORS.border} focus:outline-none transition-all`}
         />
         <svg
-          className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400"
+          className={`absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 ${LIGHT_THEME_COLORS.textMuted}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -105,12 +113,8 @@ export function SearchBox({ events, rulers, locale = 'zh' }: SearchBoxProps) {
         </svg>
         {query && (
           <button
-            onClick={() => {
-              setQuery('');
-              setResults([]);
-              inputRef.current?.focus();
-            }}
-            className="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600"
+            onClick={handleClear}
+            className={`absolute right-2 top-1/2 -translate-y-1/2 ${LIGHT_THEME_COLORS.textMuted} hover:${LIGHT_THEME_COLORS.textSecondary}`}
           >
             ✕
           </button>
@@ -119,18 +123,21 @@ export function SearchBox({ events, rulers, locale = 'zh' }: SearchBoxProps) {
 
       {/* 搜索结果下拉 */}
       {isOpen && results.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-lg border border-zinc-200 py-1 z-50 max-h-80 overflow-y-auto">
+        <div 
+          className={`absolute top-full left-0 right-0 mt-1 ${LIGHT_THEME_COLORS.surface} rounded-lg shadow-lg border ${LIGHT_THEME_COLORS.border} py-1 max-h-80 overflow-y-auto`}
+          style={{ zIndex: Z_INDEX.dropdown }}
+        >
           {results.map((result) => (
             <button
               key={`${result.type}-${result.id}`}
               onClick={() => handleSelect(result)}
-              className="w-full px-3 py-2 text-left hover:bg-zinc-50 flex items-start gap-2"
+              className={`w-full px-3 py-2 text-left hover:${LIGHT_THEME_COLORS.background} flex items-start gap-2`}
             >
-              <span className="text-xs text-zinc-400 mt-0.5">{result.subtitle}</span>
+              <span className={`text-xs ${LIGHT_THEME_COLORS.textMuted} mt-0.5`}>{result.subtitle}</span>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-zinc-800 truncate">{result.title}</div>
+                <div className={`text-sm font-medium ${LIGHT_THEME_COLORS.text} truncate`}>{result.title}</div>
                 {result.year !== undefined && (
-                  <div className="text-xs text-zinc-400">{formatYear(result.year)}</div>
+                  <div className={`text-xs ${LIGHT_THEME_COLORS.textMuted}`}>{formatYear(result.year)}</div>
                 )}
               </div>
             </button>
@@ -140,8 +147,11 @@ export function SearchBox({ events, rulers, locale = 'zh' }: SearchBoxProps) {
 
       {/* 无结果提示 */}
       {isOpen && query && results.length === 0 && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-lg border border-zinc-200 py-3 z-50">
-          <div className="text-center text-sm text-zinc-400">未找到相关结果</div>
+        <div 
+          className={`absolute top-full left-0 right-0 mt-1 ${LIGHT_THEME_COLORS.surface} rounded-lg shadow-lg border ${LIGHT_THEME_COLORS.border} py-3`}
+          style={{ zIndex: Z_INDEX.dropdown }}
+        >
+          <div className={`text-center text-sm ${LIGHT_THEME_COLORS.textMuted}`}>未找到相关结果</div>
         </div>
       )}
 
@@ -154,4 +164,4 @@ export function SearchBox({ events, rulers, locale = 'zh' }: SearchBoxProps) {
       )}
     </div>
   );
-}
+});

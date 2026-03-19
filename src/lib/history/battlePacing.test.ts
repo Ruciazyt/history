@@ -17,20 +17,23 @@ import {
   getPacingSummary,
 } from './battlePacing';
 
-const createMockBattle = (overrides: Partial<Event['battle']> = {}): Event => ({
-  id: 'battle-1',
-  entityId: 'era-1',
-  year: -260,
-  titleKey: 'test.battle',
-  summaryKey: 'test.summary',
-  tags: ['war'],
-  location: { lon: 116.4, lat: 39.9, label: '长平' },
-  battle: {
-    belligerents: { attacker: '秦', defender: '赵' },
-    result: 'attacker_win',
-    ...overrides,
-  },
-});
+const createMockBattle = (overrides: Partial<Event['battle']> & { id?: string } = {}): Event => {
+  const { id: _id, ...battleOverrides } = overrides;
+  return {
+    id: _id || 'battle-1',
+    entityId: 'era-1',
+    year: -260,
+    titleKey: 'test.battle',
+    summaryKey: 'test.summary',
+    tags: ['war'],
+    location: { lon: 116.4, lat: 39.9, label: '长平' },
+    battle: {
+      belligerents: { attacker: '秦', defender: '赵' },
+      result: 'attacker_win',
+      ...battleOverrides,
+    },
+  };
+};
 
 describe('battlePacing', () => {
   describe('getPacingLabel', () => {

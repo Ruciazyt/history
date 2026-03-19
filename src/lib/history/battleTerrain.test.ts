@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { Event, BattleTerrain } from './types';
+import type { Event } from './types';
 import {
   getTerrainLabel,
   getUniqueTerrains,

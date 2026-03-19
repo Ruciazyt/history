@@ -367,8 +367,9 @@ export function getCasualtyInsights(events: Event[]): string[] {
   const byEra = getCasualtiesByEra(events);
   if (byEra.length > 1) {
     const sortedEras = [...byEra].sort((a, b) => b.averageCasualties - a.averageCasualties);
-    if (sortedEras[0].battleCount > 0) {
-      insights.push(`${sortedEras[0].eraName} 时期的战役平均伤亡最高，达到约 ${Math.round(sortedEras[0].averageCasualties).toLocaleString()} 人`);
+    const topEra = sortedEras[0];
+    if (topEra && topEra.battleCount > 0) {
+      insights.push(`${topEra.eraName} 时期的战役平均伤亡最高，达到约 ${Math.round(topEra.averageCasualties).toLocaleString()} 人`);
     }
   }
 

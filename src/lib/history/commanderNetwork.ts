@@ -137,24 +137,28 @@ export function buildCommanderNetwork(battles: Event[]): CommanderNetwork {
     // 同一方的指挥官：合作关关系
     for (let i = 0; i < attackers.length; i++) {
       for (let j = i + 1; j < attackers.length; j++) {
-        const key = [attackers[i], attackers[j]].sort().join('::') + '::collaborated';
-        if (!relationKeySet.has(key)) {
-          relationKeySet.add(key);
-          relations.push({
-            commander1: attackers[i],
-            commander2: attackers[j],
-            relationType: 'collaborated',
-            battleCount: 1,
-            battleIds: [battle.id],
-          });
-        } else {
-          const rel = relations.find(r => 
-            [r.commander1, r.commander2].sort().join('::') === [attackers[i], attackers[j]].sort().join('::') &&
-            r.relationType === 'collaborated'
-          );
-          if (rel) {
-            rel.battleCount++;
-            rel.battleIds.push(battle.id);
+        const cmd1 = attackers[i];
+        const cmd2 = attackers[j];
+        if (cmd1 && cmd2) {
+          const key = [cmd1, cmd2].sort().join('::') + '::collaborated';
+          if (!relationKeySet.has(key)) {
+            relationKeySet.add(key);
+            relations.push({
+              commander1: cmd1,
+              commander2: cmd2,
+              relationType: 'collaborated',
+              battleCount: 1,
+              battleIds: [battle.id],
+            });
+          } else {
+            const rel = relations.find(r => 
+              [r.commander1, r.commander2].sort().join('::') === [cmd1, cmd2].sort().join('::') &&
+              r.relationType === 'collaborated'
+            );
+            if (rel) {
+              rel.battleCount++;
+              rel.battleIds.push(battle.id);
+            }
           }
         }
       }
@@ -162,24 +166,28 @@ export function buildCommanderNetwork(battles: Event[]): CommanderNetwork {
     
     for (let i = 0; i < defenders.length; i++) {
       for (let j = i + 1; j < defenders.length; j++) {
-        const key = [defenders[i], defenders[j]].sort().join('::') + '::collaborated';
-        if (!relationKeySet.has(key)) {
-          relationKeySet.add(key);
-          relations.push({
-            commander1: defenders[i],
-            commander2: defenders[j],
-            relationType: 'collaborated',
-            battleCount: 1,
-            battleIds: [battle.id],
-          });
-        } else {
-          const rel = relations.find(r => 
-            [r.commander1, r.commander2].sort().join('::') === [defenders[i], defenders[j]].sort().join('::') &&
-            r.relationType === 'collaborated'
-          );
-          if (rel) {
-            rel.battleCount++;
-            rel.battleIds.push(battle.id);
+        const cmd1 = defenders[i];
+        const cmd2 = defenders[j];
+        if (cmd1 && cmd2) {
+          const key = [cmd1, cmd2].sort().join('::') + '::collaborated';
+          if (!relationKeySet.has(key)) {
+            relationKeySet.add(key);
+            relations.push({
+              commander1: cmd1,
+              commander2: cmd2,
+              relationType: 'collaborated',
+              battleCount: 1,
+              battleIds: [battle.id],
+            });
+          } else {
+            const rel = relations.find(r => 
+              [r.commander1, r.commander2].sort().join('::') === [cmd1, cmd2].sort().join('::') &&
+              r.relationType === 'collaborated'
+            );
+            if (rel) {
+              rel.battleCount++;
+              rel.battleIds.push(battle.id);
+            }
           }
         }
       }
@@ -573,27 +581,31 @@ export function getCommanderNetworkInsights(battles: Event[]): string[] {
   
   // 最常见的对手组合
   const topMatchups = getTopMatchups(battles, 1);
-  if (topMatchups.length > 0 && topMatchups[0].battles > 1) {
+  if (topMatchups.length > 0) {
     const matchup = topMatchups[0];
-    insights.push(
-      `${matchup.commander1} 与 ${matchup.commander2} 是最常见的对手，共对决 ${matchup.battles} 次`
-    );
+    if (matchup && matchup.battles > 1) {
+      insights.push(
+        `${matchup.commander1} 与 ${matchup.commander2} 是最常见的对手，共对决 ${matchup.battles} 次`
+      );
+    }
   }
   
   // 最默契的合作
   const topCollaborations = getTopCollaborations(battles, 1);
-  if (topCollaborations.length > 0 && topCollaborations[0].battles > 1) {
+  if (topCollaborations.length > 0) {
     const collab = topCollaborations[0];
-    insights.push(
-      `${collab.commander1} 与 ${collab.commander2} 是最佳搭档，合作 ${collab.battles} 场，胜 ${collab.wins} 场`
-    );
+    if (collab && collab.battles > 1) {
+      insights.push(
+        `${collab.commander1} 与 ${collab.commander2} 是最佳搭档，合作 ${collab.battles} 场，胜 ${collab.wins} 场`
+      );
+    }
   }
   
   // 战争时期集群
   const clusters = getCommanderClusters(battles);
   if (clusters.length > 0) {
     const latestCluster = clusters[0];
-    if (latestCluster.commanders.length >= 3) {
+    if (latestCluster && latestCluster.commanders.length >= 3) {
       const yearStr = latestCluster.year < 0 ? `${Math.abs(latestCluster.year)} BCE` : `${latestCluster.year} CE`;
       insights.push(
         `约 ${yearStr} 年是指挥官最活跃的时期，有 ${latestCluster.commanders.length} 位著名指挥官`

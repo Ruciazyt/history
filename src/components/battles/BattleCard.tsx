@@ -3,9 +3,11 @@
 import * as React from 'react';
 import type { Event } from '@/lib/history/types';
 import { formatYear } from '@/lib/history/utils';
-import { getBattleResultLabel } from '@/lib/history/battles';
+import { getBattleResultLabel, getBattleImpactLabel } from '@/lib/history/battles';
+import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, ERA_COLORS, COMMANDER_COLORS, SELECTION_COLORS, BATTLE_CARD_COLORS, FAVORITE_BUTTON_COLORS } from '@/lib/history/constants';
 import { useTranslations } from 'next-intl';
 import { BattleDetail } from './BattleDetail';
+import { useBattleFavorites } from '@/lib/history/useBattleHooks';
 
 interface BattleCardProps {
   battle: Event;
@@ -15,33 +17,43 @@ interface BattleCardProps {
   onSelect?: (battle: Event) => void;
 }
 
-// 朝代颜色映射
-const ERA_COLORS: Record<string, string> = {
-  'wz-western-zhou': 'from-amber-50 to-orange-50 border-amber-200',
-  'period-spring-autumn': 'from-blue-50 to-indigo-50 border-blue-200',
-  'period-warring-states': 'from-purple-50 to-red-50 border-red-200',
-  'qin': 'from-zinc-50 to-zinc-100 border-zinc-300',
-  'han': 'from-red-50 to-orange-50 border-red-200',
-};
-
-function getEraColor(entityId: string): string {
-  return ERA_COLORS[entityId] || 'from-gray-50 to-gray-100 border-gray-200';
+// 使用 constants 中的 ERA_COLORS 获取 era 样式
+function getEraStyles(entityId: string): { gradient: string; border: string } {
+  const eraColor = ERA_COLORS[entityId];
+  return {
+    gradient: eraColor?.gradient || BATTLE_CARD_COLORS.fallback.gradient,
+    border: eraColor?.border || BATTLE_CARD_COLORS.fallback.border,
+  };
 }
 
-export function BattleCard({ battle, onClick, selected, selectionMode, onSelect }: BattleCardProps) {
+export const BattleCard = React.memo(function BattleCard({ battle, onClick, selected, selectionMode, onSelect }: BattleCardProps) {
   const t = useTranslations();
   const [showDetail, setShowDetail] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
   
-  const eraColor = getEraColor(battle.entityId);
+  // 收藏功能
+  const { toggleFavorite, isFavorite } = useBattleFavorites();
+  const isFavorited = isFavorite(battle.id);
+  
+  const { gradient: eraGradient, border: eraBorder } = getEraStyles(battle.entityId);
   const battleResult = battle.battle?.result;
   
-  // 结果颜色
-  const resultColors: Record<string, string> = {
-    attacker_win: 'bg-red-500',
-    defender_win: 'bg-blue-500', 
-    draw: 'bg-gray-400',
-    inconclusive: 'bg-yellow-500',
-  };
+  // 结果颜色 - use constants
+  const resultBg = battleResult ? BATTLE_RESULT_COLORS[battleResult]?.bg : BATTLE_CARD_COLORS.result.default;
+  
+  // Handle keyboard navigation
+  const handleKeyDown = React.useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (selectionMode && onSelect) {
+        onSelect(battle);
+      } else if (onClick) {
+        onClick();
+      } else {
+        setShowDetail(true);
+      }
+    }
+  }, [battle, selectionMode, onSelect, onClick]);
   
   const handleClick = () => {
     if (selectionMode && onSelect) {
@@ -53,56 +65,110 @@ export function BattleCard({ battle, onClick, selected, selectionMode, onSelect 
     }
   };
   
+  // 处理收藏按钮点击 - 阻止事件冒泡避免触发卡片点击
+  const handleFavoriteClick = React.useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    toggleFavorite(battle.id);
+  }, [battle.id, toggleFavorite]);
+  
   return (
     <>
       <button
         type="button"
         onClick={handleClick}
-        className={`w-full text-left p-4 rounded-xl border bg-gradient-to-br ${eraColor} hover:shadow-md transition-all duration-200 hover:scale-[1.01] ${
-          selected ? 'ring-2 ring-red-500 ring-offset-2' : ''
-        } ${selectionMode ? 'cursor-pointer' : ''}`}
+        onKeyDown={handleKeyDown}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        aria-pressed={selected}
+        aria-label={`${t(battle.titleKey)} - ${formatYear(battle.year)}`}
+        className={`w-full text-left p-3 sm:p-4 rounded-xl border-2 bg-gradient-to-br ${eraGradient} ${eraBorder} hover:shadow-lg transition-all duration-200 ${
+          isHovered ? 'scale-[1.02] shadow-lg' : 'hover:scale-[1.01]'
+        } ${selected ? 'ring-2 ring-red-500 ring-offset-2' : ''} ${
+          selectionMode ? 'cursor-pointer' : ''
+        }`}
       >
-        <div className="flex items-start justify-between gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-3">
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               {selectionMode && (
-                <span className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                  selected ? 'bg-red-500 border-red-500' : 'border-gray-300'
+                <span className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                  selected ? SELECTION_COLORS.selected.bg : SELECTION_COLORS.unselected.border
                 }`}>
                   {selected && <span className="text-white text-xs">✓</span>}
                 </span>
               )}
-              <span className="text-sm font-bold text-gray-800">⚔️ {t(battle.titleKey)}</span>
+              <span className={`text-sm font-bold ${BATTLE_CARD_COLORS.container.title} truncate`}>⚔️ {t(battle.titleKey)}</span>
+              {/* 收藏按钮 */}
+              <button
+                type="button"
+                onClick={handleFavoriteClick}
+                onKeyDown={(e) => e.stopPropagation()}
+                aria-label={isFavorited ? '取消收藏' : '添加收藏'}
+                className={`shrink-0 p-1 rounded-full transition-colors ${
+                  isFavorited 
+                    ? FAVORITE_BUTTON_COLORS.favorited.bg 
+                    : FAVORITE_BUTTON_COLORS.default.bg
+                } ${isFavorited ? FAVORITE_BUTTON_COLORS.favorited.hover : FAVORITE_BUTTON_COLORS.default.hover}`}
+              >
+                <span className={`text-lg ${isFavorited ? FAVORITE_BUTTON_COLORS.favorited.text : FAVORITE_BUTTON_COLORS.default.text}`}>
+                  {isFavorited ? '❤️' : '🤍'}
+                </span>
+              </button>
             </div>
-            <div className="text-xs text-gray-500 mt-1 flex items-center gap-2">
-              <span className="inline-flex items-center px-2 py-0.5 bg-white/60 rounded-full">
+            <div className={`text-xs ${BATTLE_CARD_COLORS.container.subtitle} mt-1 flex flex-wrap gap-1.5 sm:gap-2`}>
+              <span className={`inline-flex items-center px-2 py-0.5 ${BATTLE_CARD_COLORS.container.badgeBg} rounded-full whitespace-nowrap`}>
                 📅 {formatYear(battle.year)}
               </span>
               {battle.location?.label && (
-                <span className="inline-flex items-center px-2 py-0.5 bg-white/60 rounded-full">
+                <span className={`inline-flex items-center px-2 py-0.5 ${BATTLE_CARD_COLORS.container.badgeBg} rounded-full whitespace-nowrap`}>
                   📍 {battle.location.label}
                 </span>
               )}
             </div>
           </div>
           {battleResult && (
-            <div className={`shrink-0 flex items-center gap-1.5 px-2 py-1 rounded-full text-white text-xs font-medium ${resultColors[battleResult] || 'bg-gray-400'}`}>
-              <span className="w-1.5 h-1.5 rounded-full bg-white/80"></span>
+            <div className={`shrink-0 flex items-center gap-1.5 px-2 py-1 rounded-full text-white text-xs font-medium ${resultBg} self-start sm:self-center`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${BATTLE_CARD_COLORS.commander.dot} ${BATTLE_CARD_COLORS.commander.pulse}`}></span>
               {battle.battle && getBattleResultLabel(battle.battle)}
             </div>
           )}
         </div>
         
         {battle.battle?.belligerents && (
-          <div className="mt-3 flex items-center justify-center gap-3 py-2 bg-white/50 rounded-lg">
-            <span className="text-sm font-semibold text-gray-700">{battle.battle.belligerents.attacker}</span>
+          <div className={`mt-3 flex items-center justify-center gap-3 py-2 ${BATTLE_CARD_COLORS.belligerents.container} rounded-lg`}>
+            <span className={`text-sm font-semibold ${BATTLE_CARD_COLORS.belligerents.text}`}>{battle.battle.belligerents.attacker}</span>
             <span className="text-lg">⚔️</span>
-            <span className="text-sm font-semibold text-gray-700">{battle.battle.belligerents.defender}</span>
+            <span className={`text-sm font-semibold ${BATTLE_CARD_COLORS.belligerents.text}`}>{battle.battle.belligerents.defender}</span>
+          </div>
+        )}
+
+        {/* Commanders - show if available */}
+        {battle.battle?.commanders && (
+          <div className="mt-2 flex flex-wrap gap-1">
+            {battle.battle.commanders.attacker?.slice(0, 2).map((cmd, i) => (
+              <span key={`att-${i}`} className={`inline-flex items-center px-2 py-0.5 ${COMMANDER_COLORS.attacker.bg} ${COMMANDER_COLORS.attacker.text} text-xs rounded`}>
+                👤 {cmd}
+              </span>
+            ))}
+            {battle.battle.commanders.defender?.slice(0, 2).map((cmd, i) => (
+              <span key={`def-${i}`} className={`inline-flex items-center px-2 py-0.5 ${COMMANDER_COLORS.defender.bg} ${COMMANDER_COLORS.defender.text} text-xs rounded`}>
+                👤 {cmd}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Impact badge */}
+        {battle.battle?.impact && battle.battle.impact !== 'unknown' && (
+          <div className="mt-2">
+            <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.bg || BATTLE_CARD_COLORS.impact.default} ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.text || BATTLE_CARD_COLORS.impact.textDefault}`}>
+              💎 {getBattleImpactLabel(battle.battle.impact)}
+            </span>
           </div>
         )}
         
         {battle.summaryKey && (
-          <div className="mt-2 text-xs text-gray-500 line-clamp-2">
+          <div className={`mt-2 text-xs ${BATTLE_CARD_COLORS.container.subtitle} line-clamp-2`}>
             {t(battle.summaryKey)}
           </div>
         )}
@@ -116,4 +182,4 @@ export function BattleCard({ battle, onClick, selected, selectionMode, onSelect 
       )}
     </>
   );
-}
+});

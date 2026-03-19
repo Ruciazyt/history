@@ -1,104 +1,180 @@
 'use client';
 
 import * as React from 'react';
-import type { TimelineEvent, Territory } from '@/lib/history/data/timeline';
+import Map, { Marker, Popup, NavigationControl, Source, Layer } from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
 
-const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
-
-// Use any type for third-party library - Baidu Map API
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare global {
-  interface Window {
-    BMapGL: any;
-  }
-}
+import type { TimelineEvent } from '@/lib/history/data/timeline';
+import { formatYear } from '@/lib/history/utils';
+import { useTranslations } from 'next-intl';
+import { TIMELINE_MAP_COLORS, UI_COLORS } from '@/lib/history/constants';
 
 interface TimelineMapProps {
   event: TimelineEvent | null;
 }
 
 export function TimelineMap({ event }: TimelineMapProps) {
-  const [mapReady, setMapReady] = React.useState(false);
-  const mapContainerRef = React.useRef<HTMLDivElement>(null);
-  const mapRef = React.useRef<{ centerAndZoom: (point: unknown, zoom: number) => void; enableScrollWheelZoom: (enabled: boolean) => void; clearOverlays: () => void; addOverlay: (overlay: unknown) => void; Point: new (lng: number, lat: number) => unknown; Polygon: new (points: unknown[], options: unknown) => unknown } | null>(null);
+  const t = useTranslations();
+  const [viewState, setViewState] = React.useState({
+    longitude: event?.location.lon ?? 108.95,
+    latitude: event?.location.lat ?? 34.34,
+    zoom: 4,
+    minZoom: 3,
+    maxZoom: 8,
+    pitch: 0,
+    bearing: 0,
+  });
+  const [popupInfo, setPopupInfo] = React.useState<string | null>(null);
 
-  // 加载百度地图
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  React.useEffect(() => {
-    if (mapRef.current) return;
-
-    const initMap = () => {
-      if (window.BMapGL && mapContainerRef.current) {
-        try {
-          const defaultCenter = { lng: 108.95, lat: 34.34 };
-          const center = event?.location 
-            ? { lng: event.location.lon, lat: event.location.lat }
-            : defaultCenter;
-          
-          const map = new window.BMapGL.Map(mapContainerRef.current);
-          map.centerAndZoom(new window.BMapGL.Point(center.lng, center.lat), 5);
-          map.enableScrollWheelZoom(true);
-          mapRef.current = map;
-          setMapReady(true);
-          console.log('✅ TimelineMap 百度地图加载成功');
-        } catch (e) {
-          console.error('初始化失败:', e);
-        }
-      }
+  // 生成 GeoJSON 数据
+  const geojsonData = React.useMemo(() => {
+    if (!event?.territories) return null;
+    
+    return {
+      type: 'FeatureCollection' as const,
+      features: event.territories.map((territory) => ({
+        type: 'Feature' as const,
+        properties: {
+          name: t(territory.factionNameKey),
+          color: territory.color,
+        },
+        geometry: {
+          type: 'Polygon' as const,
+          coordinates: [territory.polygon],
+        },
+      }))
     };
+  }, [event, t]);
 
-    // 使用 JSONP 回调
-    const callbackName = 'baiduMapCb_' + Date.now();
-    const initMapWrapper = () => { initMap(); };
-    (window as unknown as Record<string, () => void>)[callbackName] = initMapWrapper;
-
-    const script = document.createElement('script');
-    script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}&callback=${callbackName}`;
-    script.async = true;
-    script.onload = () => console.log('百度地图 SDK 加载完成');
-    document.head.appendChild(script);
-
-    return () => { 
-      if ((window as unknown as Record<string, unknown>)[callbackName]) {
-        delete (window as unknown as Record<string, unknown>)[callbackName]; 
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // 绘制多边形
   React.useEffect(() => {
-    if (!mapRef.current || !mapReady || !event?.territories) return;
-
-    const map = mapRef.current;
-    map.clearOverlays();
-
-    event.territories.forEach((territory: Territory) => {
-      if (!territory.polygon || territory.polygon.length < 3) return;
-
-      const points = territory.polygon.map((coord: number[]) => 
-        new window.BMapGL.Point(coord[0], coord[1])
-      );
-
-      const polygon = new window.BMapGL.Polygon(points, {
-        strokeColor: territory.color,
-        strokeWeight: 2,
-        fillColor: territory.color,
-        fillOpacity: 0.35,
+    if (event) {
+      setViewState({
+        longitude: event.location.lon,
+        latitude: event.location.lat,
+        zoom: 5,
+        minZoom: 3,
+        maxZoom: 8,
+        pitch: 0,
+        bearing: 0,
       });
-
-      map.addOverlay(polygon);
-    });
-  }, [mapReady, event]);
+    }
+  }, [event]);
 
   return (
-    <div className="relative w-full h-full rounded-lg overflow-hidden border border-zinc-700">
-      {!mapReady && (
-        <div className="absolute inset-0 flex items-center justify-center bg-zinc-900 text-zinc-400 z-10">
-          Loading... {BAIDU_MAP_AK ? '(AK已配置)' : '(AK未配置)'}
+    <div className={`relative w-full h-full rounded-lg overflow-hidden border ${TIMELINE_MAP_COLORS.container}`}>
+      <Map
+        {...viewState}
+        onMove={evt => setViewState(prev => ({ ...prev, ...evt.viewState }))}
+        // 限制视野在中国附近
+        maxBounds={[[73.0, 17.5], [135.5, 54.5]]}
+        mapStyle="https://tiles.openfreemap.org/styles/liberty"
+        style={{ width: '100%', height: '100%' }}
+        attributionControl={false}
+      >
+        <NavigationControl position="top-right" />
+
+        {/* 势力范围多边形 */}
+        {geojsonData && (
+          <Source id="territories" type="geojson" data={geojsonData}>
+            {/* 填充层 */}
+            <Layer
+              id="territory-fill"
+              type="fill"
+              paint={{
+                'fill-color': ['get', 'color'],
+                'fill-opacity': 0.35,
+              }}
+            />
+            {/* 边框层 */}
+            <Layer
+              id="territory-line"
+              type="line"
+              paint={{
+                'line-color': ['get', 'color'],
+                'line-width': 2,
+                'line-opacity': 0.9,
+              }}
+            />
+          </Source>
+        )}
+
+        {event && (
+          <>
+            {/* 事件地点标记 */}
+            <Marker
+              longitude={event.location.lon}
+              latitude={event.location.lat}
+              anchor="bottom"
+              onClick={e => {
+                e.originalEvent.stopPropagation();
+                setPopupInfo(event.location.nameKey);
+              }}
+            >
+              <div className={`w-5 h-5 ${TIMELINE_MAP_COLORS.marker.bg} rounded-full ${TIMELINE_MAP_COLORS.marker.border} shadow-lg cursor-pointer animate-pulse flex items-center justify-center`}>
+                <span className={TIMELINE_MAP_COLORS.marker.icon}>📍</span>
+              </div>
+            </Marker>
+
+            {/* 势力名称标签 */}
+            {event.factions?.map((faction, index) => (
+              <Marker
+                key={index}
+                longitude={event.location.lon + (index - (event.factions!.length - 1) / 2) * 8}
+                latitude={event.location.lat + 2}
+                anchor="center"
+              >
+                <div 
+                  className={`px-2 sm:px-3 py-1 rounded-lg text-xs sm:text-sm font-medium shadow-lg border-2 whitespace-nowrap ${UI_COLORS.text.primary}`}
+                  style={{ backgroundColor: faction.color, borderColor: faction.color }}
+                >
+                  {t(faction.nameKey)}
+                </div>
+              </Marker>
+            ))}
+
+            {/* 弹出信息 */}
+            {popupInfo && (
+              <Popup
+                longitude={event.location.lon}
+                latitude={event.location.lat}
+                anchor="top"
+                onClose={() => setPopupInfo(null)}
+                closeButton={false}
+              >
+                <div className="text-sm p-1">
+                  <p className="font-semibold">{t(popupInfo)}</p>
+                  <p className={TIMELINE_MAP_COLORS.popup.text}>{formatYear(event.year)}</p>
+                </div>
+              </Popup>
+            )}
+          </>
+        )}
+      </Map>
+
+      {/* 年份指示器 - 移动端更小 */}
+      {event && (
+        <div className={`absolute top-2 sm:top-4 left-2 sm:left-4 ${TIMELINE_MAP_COLORS.overlay.bg} ${TIMELINE_MAP_COLORS.overlay.backdrop} px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg`}>
+          <span className="text-lg sm:text-2xl font-bold text-white">{formatYear(event.year)}</span>
         </div>
       )}
-      <div ref={mapContainerRef} className="w-full h-full" />
+
+      {/* 势力范围图例 - 移动端更小 */}
+      {event?.territories && event.territories.length > 0 && (
+        <div className={`absolute bottom-2 sm:bottom-4 left-2 sm:left-4 ${TIMELINE_MAP_COLORS.overlay.bg} ${TIMELINE_MAP_COLORS.overlay.backdrop} px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg max-w-[60%] sm:max-w-none`}>
+          <p className={`text-xs ${TIMELINE_MAP_COLORS.legend.title} mb-1 sm:mb-2 hidden sm:block`}>势力范围</p>
+          <div className="flex flex-wrap gap-1 sm:gap-2">
+            {event.territories.map((territory, index) => (
+              <div key={index} className="flex items-center gap-1">
+                <div 
+                  className={`w-2 sm:w-3 h-2 sm:h-3 ${TIMELINE_MAP_COLORS.legend.itemBg}`}
+                  style={{ backgroundColor: territory.color }}
+                />
+                <span className={`text-xs ${TIMELINE_MAP_COLORS.legend.text} whitespace-nowrap`}>{t(territory.factionNameKey)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

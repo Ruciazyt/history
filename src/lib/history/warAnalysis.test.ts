@@ -13,7 +13,7 @@ import {
   getWarOutcomePatterns,
   getWarInsights,
 } from './warAnalysis';
-import type { Event, BattleType } from './types';
+import type { Event } from './types';
 
 const mockBattles: Event[] = [
   {

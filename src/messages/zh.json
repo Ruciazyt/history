@@ -1452,21 +1452,26 @@
     "yan": "燕"
   },
   "nav": {
-    "battles": "战役",
-    "world": "欧亚",
-    "location": "地名"
+    "battles": "战役"
   },
-  "location": {
-    "title": "地名演变查询",
-    "description": "输入地名查看其历史演变",
-    "placeholder": "输入地名，如：长安、洛阳、邯郸...",
-    "events": "个相关事件",
-    "noResults": "未找到相关地点",
-    "back": "返回搜索"
+  "favorites": {
+    "title": "收藏夹",
+    "backToBattles": "返回战役",
+    "clearAll": "清空",
+    "noFavoritesTitle": "暂无收藏",
+    "noFavoritesDesc": "点击任意战役卡片上的心形图标来添加收藏。",
+    "browseBattles": "浏览战役"
   },
-  "world": {
-    "eurasian": "欧亚大陆",
-    "eastAsia": "东亚"
+  "battleCompare": {
+    "title": "⚔️ 战役对比",
+    "close": "关闭",
+    "result": "结果",
+    "belligerents": "参战方",
+    "attacker": "进攻方",
+    "defender": "防守方",
+    "commanders": "指挥官",
+    "summary": "战役概述",
+    "closeComparison": "关闭对比"
   },
   "matrix": {
     "title": "时间轴矩阵",
@@ -1553,5 +1558,34 @@
   "event.ws-223-qin-conquers-chu": {
     "title": "秦灭楚",
     "summary": "秦国灭楚国，战国七雄格局进一步改变。"
+  },
+  "battleOfTheDay": {
+    "title": "今日战役",
+    "badge": "今日推荐",
+    "viewDetail": "点击查看详情"
+  },
+  "grid": {
+    "title": "欧亚对比网格",
+    "eurasian": "欧亚",
+    "eastAsia": "东亚",
+    "activeEmpires": "个活跃政权",
+    "quickJump": "快速跳转",
+    "timeline": "时间导航",
+    "activeAtYear": "{year} 活跃政权",
+    "noActive": "无活跃政权",
+    "ce1": "公元1年",
+    "region": {
+      "china": "中国",
+      "korea": "朝鲜半岛",
+      "japan": "日本",
+      "central-asia": "中亚",
+      "west": "西方",
+      "vietnam": "越南"
+    }
+  },
+  "placeNames": {
+    "title": "地名演化",
+    "noResults": "未找到匹配的城市",
+    "activeEmpires": "个地名"
   }
 }

@@ -93,8 +93,8 @@ export function getTurningPointsByParty(events: Event[]): Record<string, number>
 /**
  * 获取转折点影响分析（对哪方有利）
  */
-export function getTurningPointImpactStats(events: Event[]): Record<string, number> {
-  const stats: Record<string, number> = {
+export function getTurningPointImpactStats(events: Event[]): { positive: number; negative: number; neutral: number; unknown: number } {
+  const stats = {
     positive: 0,
     negative: 0,
     neutral: 0,
@@ -218,7 +218,9 @@ export function getTurningPointInsights(events: Event[]): string[] {
     };
     
     const topType = commonTypes[0];
-    insights.push(`最常见的转折点是"${typeLabels[topType.type] || topType.type}"，出现了${topType.count}次`);
+    if (topType) {
+      insights.push(`最常见的转折点是"${typeLabels[topType.type] || topType.type}"，出现了${topType.count}次`);
+    }
   }
 
   // 分析转折点与胜负的关联
@@ -242,14 +244,18 @@ export function getTurningPointInsights(events: Event[]): string[] {
     const attackerFavorable = correlations.filter(c => c.attackerWins > c.defenderWins * 1.5);
     if (attackerFavorable.length > 0) {
       const top = attackerFavorable[0];
-      insights.push(`"${typeLabels[top.type] || top.type}"类型的转折点对进攻方较为有利`);
+      if (top) {
+        insights.push(`"${typeLabels[top.type] || top.type}"类型的转折点对进攻方较为有利`);
+      }
     }
     
     // 找出对防守方最有利的转折点
     const defenderFavorable = correlations.filter(c => c.defenderWins > c.attackerWins * 1.5);
     if (defenderFavorable.length > 0) {
       const top = defenderFavorable[0];
-      insights.push(`"${typeLabels[top.type] || top.type}"类型的转折点对防守方较为有利`);
+      if (top) {
+        insights.push(`"${typeLabels[top.type] || top.type}"类型的转折点对防守方较为有利`);
+      }
     }
   }
 

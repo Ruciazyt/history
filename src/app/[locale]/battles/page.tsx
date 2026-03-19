@@ -1,12 +1,23 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
-import type { Metadata } from 'next';
 
 import { CHINA_ERAS } from '@/lib/history/data/chinaEras';
 import { CHINA_EVENTS } from '@/lib/history/data/chinaEvents';
-import { CHINA_RULERS } from '@/lib/history/data/chinaRulers';
 import { BattlesClient } from '@/components/battles/BattlesClient';
 import { locales, type Locale } from '@/i18n/routing';
+
+const localeNames: Record<string, string> = {
+  zh: '战役地图',
+  en: 'Battle Maps',
+  ja: '戦いのマップ',
+};
+
+const localeDescriptions: Record<string, string> = {
+  zh: '中国历史战役地图 - 查看战役详情、地理位置与历史影响',
+  en: 'Chinese history battle maps - View battle details, geographic locations and historical impact',
+  ja: '中国歴史の戦いのマップ - 戦の詳細、地理的位置、历史的影响を表示',
+};
 
 export async function generateMetadata({
   params,
@@ -14,18 +25,17 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const titles: Record<string, string> = {
-    zh: '历史战役 - 中国战争地图',
-    en: 'Historical Battles - Chinese War Maps',
-  };
-  const descriptions: Record<string, string> = {
-    zh: '探索中国历史上的经典战役，包括长平之战、马陵之战、城濮之战等。分析战役战略、指挥官、胜负因素。',
-    en: 'Explore classic battles in Chinese history including Changping, Maling, and Chengpu. Analyze battle strategies and outcomes.',
-  };
+  const name = localeNames[locale] || localeNames.zh;
+  const description = localeDescriptions[locale] || localeDescriptions.zh;
   
   return {
-    title: titles[locale] || titles.zh,
-    description: descriptions[locale] || descriptions.zh,
+    title: `${name} | History Atlas`,
+    description,
+    openGraph: {
+      title: name,
+      description,
+      type: 'website',
+    },
   };
 }
 
@@ -42,7 +52,7 @@ export default async function BattlesPage({
 
   return (
     <NextIntlClientProvider messages={messages} locale={locale}>
-      <BattlesClient eras={CHINA_ERAS} events={CHINA_EVENTS} rulers={CHINA_RULERS} locale={locale} />
+      <BattlesClient eras={CHINA_ERAS} events={CHINA_EVENTS} locale={locale} />
     </NextIntlClientProvider>
   );
 }

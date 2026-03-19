@@ -183,7 +183,7 @@ export function getScaleDistribution(battles: Event[]): ScaleDistribution[] {
  */
 export function getMostCommonScale(battles: Event[]): ScaleDistribution | null {
   const distribution = getScaleDistribution(battles);
-  return distribution.length > 0 ? distribution[0] : null;
+  return distribution.length > 0 ? (distribution[0] ?? null) : null;
 }
 
 /**
@@ -344,16 +344,16 @@ export function getScaleOutcomeInsight(battles: Event[]): ScaleInsight | null {
 
   correlation.forEach(corr => {
     if (corr.total >= 2) { // 至少2场战役才统计
-      if (corr.attackerWinRate > highestWinRate.attackerWinRate) {
+      if (corr.attackerWinRate > (highestWinRate?.attackerWinRate ?? 0)) {
         highestWinRate = corr;
       }
-      if (corr.attackerWinRate < lowestWinRate.attackerWinRate) {
+      if (lowestWinRate && corr.attackerWinRate < lowestWinRate.attackerWinRate) {
         lowestWinRate = corr;
       }
     }
   });
 
-  if (highestWinRate.scale === lowestWinRate.scale) return null;
+  if (!highestWinRate || !lowestWinRate || highestWinRate.scale === lowestWinRate.scale) return null;
 
   const highestScaleName = getScaleName(highestWinRate.scale);
   const lowestScaleName = getScaleName(lowestWinRate.scale);
@@ -374,6 +374,7 @@ export function getScaleDistributionInsight(battles: Event[]): ScaleInsight | nu
   if (distribution.length === 0) return null;
 
   const mostCommon = distribution[0];
+  if (!mostCommon) return null;
   const mostCommonName = getScaleName(mostCommon.scale);
 
   return {
@@ -393,6 +394,7 @@ export function getScaleTypeInsight(battles: Event[]): ScaleInsight | null {
 
   // 找出最常见的规模-类型组合
   const top = correlation[0];
+  if (!top) return null;
 
   const scaleName = getScaleName(top.scale);
   const typeNames: Record<BattleType, string> = {

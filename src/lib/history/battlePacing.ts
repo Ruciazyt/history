@@ -253,19 +253,21 @@ export function getPacingInsights(events: Event[]): string[] {
   // 找出最常见的作战节奏
   const sortedByCount = [...allStats].sort((a, b) => b.totalBattles - a.totalBattles);
   const mostCommon = sortedByCount[0];
-  insights.push(`最常见的作战节奏是${mostCommon.label}，共${mostCommon.totalBattles}场战役。`);
+  if (mostCommon) {
+    insights.push(`最常见的作战节奏是${mostCommon.label}，共${mostCommon.totalBattles}场战役。`);
+  }
   
   // 找出进攻方胜率最高的节奏
   const sortedByAttackerWin = [...allStats].sort((a, b) => b.attackerWinRate - a.attackerWinRate);
   const bestAttackerPacing = sortedByAttackerWin[0];
-  if (bestAttackerPacing.totalBattles >= 2) {
+  if (bestAttackerPacing && bestAttackerPacing.totalBattles >= 2) {
     insights.push(`进攻方在${bestAttackerPacing.label}中胜率最高，达到${(bestAttackerPacing.attackerWinRate * 100).toFixed(1)}%。`);
   }
   
   // 找出防守方胜率最高的节奏
   const sortedByDefenderWin = [...allStats].sort((a, b) => b.defenderWinRate - a.defenderWinRate);
   const bestDefenderPacing = sortedByDefenderWin[0];
-  if (bestDefenderPacing.totalBattles >= 2) {
+  if (bestDefenderPacing && bestDefenderPacing.totalBattles >= 2) {
     insights.push(`防守方在${bestDefenderPacing.label}中表现最好，胜率达${(bestDefenderPacing.defenderWinRate * 100).toFixed(1)}%。`);
   }
   
@@ -302,12 +304,14 @@ export function getTimeOfDayInsights(events: Event[]): string[] {
   // 找出最常见的作战时间段
   const sortedByCount = [...allStats].sort((a, b) => b.totalBattles - a.totalBattles);
   const mostCommon = sortedByCount[0];
-  insights.push(`大多数战役发生在${mostCommon.label}，共${mostCommon.totalBattles}场。`);
+  if (mostCommon) {
+    insights.push(`大多数战役发生在${mostCommon.label}，共${mostCommon.totalBattles}场。`);
+  }
   
   // 进攻方最佳时间段
   const sortedByAttackerWin = [...allStats].sort((a, b) => b.attackerWinRate - a.attackerWinRate);
   const bestAttackerTime = sortedByAttackerWin[0];
-  if (bestAttackerTime.totalBattles >= 2) {
+  if (bestAttackerTime && bestAttackerTime.totalBattles >= 2) {
     insights.push(`进攻方在${bestAttackerTime.label}发起攻击时胜率最高，达${(bestAttackerTime.attackerWinRate * 100).toFixed(1)}%。`);
   }
   

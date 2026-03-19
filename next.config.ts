@@ -4,7 +4,24 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 const nextConfig: NextConfig = {
-  // Keep config minimal for MVP.
+  // Production optimizations
+  poweredByHeader: false,
+  
+  // Enable compression
+  compress: true,
+  
+  // Image optimization (for future use)
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
+  
+  // Experimental features for better performance
+  experimental: {
+    optimizePackageImports: ['react', 'react-dom', 'next-intl'],
+  },
+  
+  // Enable strict mode for better development
+  reactStrictMode: true,
 };
 
 export default withNextIntl(nextConfig);

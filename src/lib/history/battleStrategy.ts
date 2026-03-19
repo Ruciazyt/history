@@ -182,7 +182,7 @@ export function getStrategyEffectiveness(
   
   if (total === 0) return [];
   
-  const results: Record<string, number> = {
+  const results: { attacker_win: number; defender_win: number; draw: number; inconclusive: number } = {
     attacker_win: 0,
     defender_win: 0,
     draw: 0,
@@ -190,8 +190,15 @@ export function getStrategyEffectiveness(
   };
   
   for (const battle of strategyBattles) {
-    if (battle.battle?.result) {
-      results[battle.battle.result]++;
+    const battleResult = battle.battle?.result;
+    if (battleResult === 'attacker_win') {
+      results.attacker_win++;
+    } else if (battleResult === 'defender_win') {
+      results.defender_win++;
+    } else if (battleResult === 'draw') {
+      results.draw++;
+    } else if (battleResult === 'inconclusive') {
+      results.inconclusive++;
     }
   }
   
@@ -300,9 +307,9 @@ export function getStrategyInsights(battles: Event[]): string[] {
   }
   
   // Most effective strategies
-  if (mostEffective.length > 0 && mostEffective[0].totalUsages >= 2) {
-    const effective = mostEffective[0];
-    insights.push(`${getStrategyLabel(effective.strategy)}战术的进攻方胜率最高，达到${effective.winRate}%`);
+  const topEffective = mostEffective[0];
+  if (mostEffective.length > 0 && topEffective && topEffective.totalUsages >= 2) {
+    insights.push(`${getStrategyLabel(topEffective.strategy)}战术的进攻方胜率最高，达到${topEffective.winRate}%`);
   }
   
   // Attacker-favoring strategies

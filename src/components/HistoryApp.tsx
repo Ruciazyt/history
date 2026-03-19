@@ -9,9 +9,11 @@ import { HistoryMap } from '@/components/HistoryMap';
 import { WorldEmpireMap } from '@/components/world/WorldEmpireMap';
 import { TimelineSlider } from '@/components/world/TimelineSlider';
 import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
+import { ThemeToggle } from '@/components/common/ThemeToggle';
 import { RulerRelations } from '@/components/common/RulerRelations';
 import { SearchBox } from '@/components/common/SearchBox';
 import { useTranslations } from 'next-intl';
+import { ERA_COLORS, HISTORY_APP_COLORS, ERA_ITEM_COLORS, HISTORY_APP_EXTRA_COLORS } from '@/lib/history/constants';
 
 import { worldComparisonEra, eastAsiaComparisonEra } from '@/lib/history/data/worldEras';
 import { worldComparisonRulers, eastAsiaRulers } from '@/lib/history/data/worldRulers';
@@ -55,12 +57,12 @@ export function HistoryApp({
     [worldYear, civMode]
   );
   
-  const activeEras = React.useMemo(
-    () => civMode === 'china' ? eras : civMode === 'eurasian' ? [worldComparisonEra] : [eastAsiaComparisonEra],
+  const activeEras = React.useMemo(() => 
+    civMode === 'china' ? eras : civMode === 'eurasian' ? [worldComparisonEra] : [eastAsiaComparisonEra],
     [civMode, eras]
   );
-  const activeRulers = React.useMemo(
-    () => civMode === 'china' ? rulers : civMode === 'eurasian' ? worldComparisonRulers : eastAsiaRulers,
+  const activeRulers = React.useMemo(() => 
+    civMode === 'china' ? rulers : civMode === 'eurasian' ? worldComparisonRulers : eastAsiaRulers,
     [civMode, rulers]
   );
 
@@ -105,8 +107,8 @@ export function HistoryApp({
   const [windowYears, setWindowYears] = React.useState<number>(50);
   const [year, setYear] = React.useState<number>(clamp(-350, min, max));
 
-  const timelineMin = selectedRuler?.startYear ?? selectedEra.startYear;
-  const timelineMax = selectedRuler?.endYear ?? selectedEra.endYear;
+  const timelineMin = selectedRuler?.startYear ?? selectedEra?.startYear ?? min;
+  const timelineMax = selectedRuler?.endYear ?? selectedEra?.endYear ?? max;
 
   // Keep year within selection (ruler reign if selected; otherwise era).
   React.useEffect(() => {
@@ -149,18 +151,19 @@ export function HistoryApp({
   }, [currentEraEvents, otherEraEvents]);
 
   return (
-    <div className="flex h-screen flex-col bg-zinc-50 text-zinc-900">
+    <div className={`flex h-screen flex-col ${HISTORY_APP_COLORS.container.bg} ${HISTORY_APP_COLORS.container.text}`}>
       {/* Header - 移动端优化 */}
-      <header className="shrink-0 border-b border-zinc-200 bg-white">
+      <header className={`shrink-0 border-b ${HISTORY_APP_COLORS.header.border} ${HISTORY_APP_COLORS.header.bg}`}>
         <div className="flex w-full flex-col gap-2 px-3 py-3 sm:px-4 sm:py-4">
           {/* Top row: title + locale */}
           <div className="flex items-center justify-between">
             <div className="flex-1 min-w-0">
-              <div className="text-xs sm:text-sm text-zinc-500 truncate">{t('app.title')}</div>
-              <h1 className="text-base sm:text-lg font-semibold truncate">{t('app.subtitle')}</h1>
+              <div className={`text-xs sm:text-sm ${HISTORY_APP_COLORS.header.title.small} truncate`}>{t('app.title')}</div>
+              <h1 className={`text-base sm:text-lg font-semibold truncate`}>{t('app.subtitle')}</h1>
             </div>
             <div className="flex items-center gap-2 shrink-0 ml-2">
-              <SearchBox eras={eras} events={events} rulers={rulers} locale={currentLocale} />
+              <ThemeToggle />
+              <SearchBox events={events} rulers={rulers} locale={currentLocale} />
               <LocaleSwitcher />
             </div>
           </div>
@@ -169,36 +172,22 @@ export function HistoryApp({
           <div className="overflow-x-auto scrollbar-hide py-1 -mx-1 px-1">
             <div className="flex items-center gap-2 sm:gap-3">
               {/* Civilization switcher */}
-              <div className="flex rounded-lg border border-zinc-200 bg-zinc-100 p-0.5 text-xs sm:text-sm shrink-0">
+              <div className={`flex rounded-lg ${HISTORY_APP_COLORS.civSwitcher.container} p-0.5 text-xs sm:text-sm shrink-0`}>
                 <button
                   type="button"
                   onClick={() => switchCiv('china')}
-                  className={`rounded-md px-2 sm:px-3 py-1 transition-colors whitespace-nowrap ${civMode === 'china' ? 'bg-white text-zinc-900 shadow-sm font-medium' : 'text-zinc-500 hover:text-zinc-700'}`}
+                  className={`rounded-md px-2 sm:px-3 py-1 transition-colors whitespace-nowrap ${civMode === 'china' ? `${HISTORY_APP_COLORS.civSwitcher.active.bg} ${HISTORY_APP_COLORS.civSwitcher.active.text} ${HISTORY_APP_COLORS.civSwitcher.active.shadow} ${HISTORY_APP_COLORS.civSwitcher.active.font}` : HISTORY_APP_COLORS.civSwitcher.inactive}`}
                 >
                   🏯 中国史
-                </button>
-                <button
-                  type="button"
-                  onClick={() => switchCiv('eurasian')}
-                  className={`rounded-md px-2 sm:px-3 py-1 transition-colors whitespace-nowrap ${civMode === 'eurasian' ? 'bg-white text-zinc-900 shadow-sm font-medium' : 'text-zinc-500 hover:text-zinc-700'}`}
-                >
-                  🌍 欧亚
-                </button>
-                <button
-                  type="button"
-                  onClick={() => switchCiv('east-asia')}
-                  className={`rounded-md px-2 sm:px-3 py-1 transition-colors whitespace-nowrap ${civMode === 'east-asia' ? 'bg-white text-zinc-900 shadow-sm font-medium' : 'text-zinc-500 hover:text-zinc-700'}`}
-                >
-                  🌏 东亚
                 </button>
               </div>
               
               {/* Era info */}
-              <div className="text-xs sm:text-sm text-zinc-600 hidden sm:block">
-                <span className="font-medium">{t(selectedEra.nameKey)}</span>
-                <span className="mx-2 text-zinc-300">|</span>
+              <div className={`text-xs sm:text-sm ${HISTORY_APP_COLORS.eraInfo.text} hidden sm:block`}>
+                <span className={HISTORY_APP_COLORS.eraInfo.font}>{selectedEra ? t(selectedEra.nameKey) : ''}</span>
+                <span className={`mx-2 ${HISTORY_APP_EXTRA_COLORS.divider.default}`}>|</span>
                 <span>
-                  {formatYear(selectedEra.startYear)}–{formatYear(selectedEra.endYear)}
+                  {selectedEra ? `${formatYear(selectedEra.startYear)}–${formatYear(selectedEra.endYear)}` : ''}
                 </span>
               </div>
               
@@ -206,34 +195,41 @@ export function HistoryApp({
               <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                 <Link
                   href={`/${currentLocale}/timeline`}
-                  className="px-2 sm:px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 rounded-lg text-xs sm:text-sm text-zinc-700 transition-colors border border-zinc-200 whitespace-nowrap"
+                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${HISTORY_APP_COLORS.quickLink.timeline.bg} ${HISTORY_APP_COLORS.quickLink.timeline.text} ${HISTORY_APP_COLORS.quickLink.timeline.border}`}
                 >
                   📜 <span className="hidden sm:inline">{t('event.viewTimeline')}</span>
                 </Link>
                 <Link
                   href={`/${currentLocale}/matrix`}
-                  className="px-2 sm:px-3 py-1.5 bg-blue-50 hover:bg-blue-100 rounded-lg text-xs sm:text-sm text-blue-700 transition-colors border border-blue-200 whitespace-nowrap"
+                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${HISTORY_APP_COLORS.quickLink.matrix.bg} ${HISTORY_APP_COLORS.quickLink.matrix.text} ${HISTORY_APP_COLORS.quickLink.matrix.border}`}
                 >
                   ⊞ <span className="hidden sm:inline">{t('matrix.title')}</span>
                 </Link>
                 <Link
                   href={`/${currentLocale}/battles`}
-                  className="px-2 sm:px-3 py-1.5 bg-red-50 hover:bg-red-100 rounded-lg text-xs sm:text-sm text-red-700 transition-colors border border-red-200 whitespace-nowrap"
+                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${HISTORY_APP_COLORS.quickLink.battles.bg} ${HISTORY_APP_COLORS.quickLink.battles.text} ${HISTORY_APP_COLORS.quickLink.battles.border}`}
                 >
                   ⚔️ <span className="hidden sm:inline">{t('nav.battles')}</span>
                 </Link>
-                <Link
-                  href={`/${currentLocale}/world`}
-                  className="px-2 sm:px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 rounded-lg text-xs sm:text-sm text-emerald-700 transition-colors border border-emerald-200 whitespace-nowrap"
+                {/* <Link
+                  href={`/${currentLocale}/grid`}
+                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100`}
                 >
-                  🌍 <span className="hidden sm:inline">{t('nav.world')}</span>
+                  🌍 <span className="hidden sm:inline">{t('grid.title') || '对比网格'}</span>
                 </Link>
                 <Link
-                  href={`/${currentLocale}/location`}
-                  className="px-2 sm:px-3 py-1.5 bg-purple-50 hover:bg-purple-100 rounded-lg text-xs sm:text-sm text-purple-700 transition-colors border border-purple-200 whitespace-nowrap"
+                  href={`/${currentLocale}/place-names`}
+                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap bg-green-50 text-green-700 border border-green-200 hover:bg-green-100`}
                 >
-                  📍 <span className="hidden sm:inline">{t('nav.location')}</span>
-                </Link>
+                  🏛️ <span className="hidden sm:inline">{t('placeNames.title') || '地名演化'}</span>
+                </Link> */}
+                <button
+                  type="button"
+                  onClick={() => switchCiv('eurasian')}
+                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${HISTORY_APP_COLORS.quickLink.eurasian.bg} ${HISTORY_APP_COLORS.quickLink.eurasian.text} ${HISTORY_APP_COLORS.quickLink.eurasian.border}`}
+                >
+                  🌍 <span className="hidden sm:inline">欧亚对比</span>
+                </button>
               </div>
             </div>
           </div>
@@ -241,13 +237,13 @@ export function HistoryApp({
       </header>
 
       <div className="flex w-full flex-1 flex-col overflow-hidden px-2 sm:px-4 py-2 sm:py-4">
-        <div className="grid h-full grid-cols-1 gap-2 sm:gap-4 overflow-hidden lg:grid-cols-[380px_minmax(0,1fr)_280px] xl:grid-cols-[420px_minmax(0,1fr)_320px]">
+        <div className="grid h-full grid-cols-1 gap-2 sm:gap-4 overflow-hidden lg:grid-cols-[280px_minmax(0,1fr)_180px] xl:grid-cols-[280px_minmax(0,1fr)_200px]">
           {/* Left: global vertical timeline */}
-          <aside className="flex max-h-full flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white">
-            <div className="shrink-0 border-b border-zinc-200 bg-white p-2 sm:p-3">
+          <aside className={`flex max-h-full flex-col overflow-hidden rounded-xl border ${HISTORY_APP_COLORS.sidebar.container.border} ${HISTORY_APP_COLORS.sidebar.container.bg}`}>
+            <div className={`shrink-0 border-b ${HISTORY_APP_COLORS.sidebar.header.border} ${HISTORY_APP_COLORS.sidebar.header.bg} p-2 sm:p-3`}>
               <div className="flex items-baseline justify-between gap-3">
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{t('ui.eras')}</div>
+                  <div className={`text-xs font-semibold uppercase tracking-wide ${HISTORY_APP_COLORS.sidebar.header.text}`}>{t('ui.eras')}</div>
                 </div>
               </div>
             </div>
@@ -255,7 +251,7 @@ export function HistoryApp({
               {activeEras.map((era) => {
                 const isOpen = openEraIds.has(era.id);
                 const eraRulers = activeRulers.filter((r) => r.eraId === era.id);
-                const eraColor = ERA_COLORS[era.id] || { bg: 'bg-zinc-50', text: 'text-zinc-700', dot: 'bg-zinc-400' };
+                const eraColor = ERA_COLORS[era.id] || ERA_ITEM_COLORS.default;
                 const isMultiPolity = era.isParallelPolities && era.polities;
                 
                 // 多国并立时期：按polity分组
@@ -269,30 +265,30 @@ export function HistoryApp({
                   : null;
                 
                 return (
-                  <div key={era.id} className={`border-b border-zinc-100 last:border-0 ${isOpen ? eraColor.bg : ''}`}>
+                  <div key={era.id} className={`border-b ${HISTORY_APP_COLORS.sidebar.eraItem.border} last:border-0 ${isOpen ? eraColor.bg : ''}`}>
                     <button
                       type="button"
                       onClick={() => toggleEra(era.id)}
-                      className="flex w-full items-center gap-2 px-2 py-2.5 text-left hover:bg-zinc-100/50 sm:px-3 transition-colors"
+                      className={`flex w-full items-center gap-2 px-2 py-2.5 text-left ${HISTORY_APP_COLORS.sidebar.eraItem.hover} sm:px-3 transition-colors`}
                     >
                       <span className={`w-2 h-2 rounded-full shrink-0 ${eraColor.dot}`}></span>
                       <span className={`flex-1 font-semibold ${eraColor.text} text-sm sm:text-base`}>
                         {t(era.nameKey)}
-                        {isMultiPolity && <span className="text-xs ml-1 text-zinc-400">（多国并立）</span>}
+                        {isMultiPolity && <span className={`text-xs ml-1 ${HISTORY_APP_EXTRA_COLORS.multiPolity.text}`}>（多国并立）</span>}
                       </span>
-                      <span className="text-xs text-zinc-400 hidden sm:inline">
+                      <span className={`text-xs ${HISTORY_APP_COLORS.sidebar.eraItem.year} hidden sm:inline`}>
                         {formatYear(era.startYear)}–{formatYear(era.endYear)}
                       </span>
-                      <span className="text-xs text-zinc-300">{isOpen ? '▼' : '▶'}</span>
+                      <span className={`text-xs ${HISTORY_APP_EXTRA_COLORS.arrow.text}`}>{isOpen ? '▼' : '▶'}</span>
                     </button>
                     {isOpen && (
-                      <div className="bg-zinc-50 px-2 py-1 sm:px-3 sm:py-2">
+                      <div className={`${eraColor.bg} px-2 py-1 sm:px-3 sm:py-2`}>
                         {isMultiPolity && rulersByPolity ? (
                           // 多国并立时期：表格形式（纵轴为时间）
                           <div className="overflow-x-auto">
                             <table className="w-full text-xs sm:text-sm border-collapse">
                               <thead>
-                                <tr className="text-left text-zinc-500 border-b border-zinc-200">
+                                <tr className={`text-left ${HISTORY_APP_COLORS.sidebar.table.header.text} border-b ${HISTORY_APP_COLORS.sidebar.table.header.border}`}>
                                   <th className="px-2 py-2 font-medium w-16 shrink-0">年份</th>
                                   {era.polities?.map(p => (
                                     <th key={p.id} className="px-2 py-2 font-medium min-w-[100px]">{t(p.nameKey)}</th>
@@ -312,10 +308,10 @@ export function HistoryApp({
                                   }, {} as Record<number, typeof eraRulers>);
                                   const years = Object.keys(rulersByYear).map(Number).sort((a, b) => a - b);
                                   return years.map(year => {
-                                    const rulers = rulersByYear[year];
+                                    const rulers = rulersByYear[year] || [];
                                     return (
-                                      <tr key={year} className="border-b border-zinc-100 last:border-0 hover:bg-zinc-100/50">
-                                        <td className="px-2 py-2 text-zinc-500 font-medium shrink-0 w-16">
+                                      <tr key={year} className={`border-b ${HISTORY_APP_COLORS.sidebar.table.row.border} last:border-0 ${HISTORY_APP_COLORS.sidebar.table.row.hover}`}>
+                                        <td className={`px-2 py-2 ${HISTORY_APP_COLORS.sidebar.table.row.year} shrink-0 w-16`}>
                                           {formatYear(year)}
                                         </td>
                                         {era.polities?.map(p => {
@@ -328,7 +324,7 @@ export function HistoryApp({
                                                 type="button"
                                                 onClick={() => setSelectedRulerId(r.id)}
                                                 className={`w-full text-left rounded px-2 py-1.5 truncate ${
-                                                  isActive ? 'bg-blue-100 text-blue-800 font-medium' : 'hover:bg-zinc-100 text-zinc-700'
+                                                  isActive ? HISTORY_APP_COLORS.sidebar.table.rulerButton.active : HISTORY_APP_COLORS.sidebar.table.rulerButton.inactive
                                                 }`}
                                               >
                                                 <div>{t(r.nameKey)}</div>
@@ -356,7 +352,7 @@ export function HistoryApp({
                                 type="button"
                                 onClick={() => setSelectedRulerId(r.id)}
                                 className={`flex w-full items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-left text-xs sm:text-sm ${
-                                  isActive ? 'bg-blue-100 text-blue-800' : 'hover:bg-zinc-100 text-zinc-600'
+                                  isActive ? HISTORY_APP_COLORS.sidebar.rulerList.active : HISTORY_APP_COLORS.sidebar.rulerList.inactive
                                 }`}
                               >
                                 <span className="truncate flex items-center gap-1">
@@ -371,7 +367,7 @@ export function HistoryApp({
                                     </>
                                   )}
                                 </span>
-                                <span className="shrink-0 text-zinc-400">
+                                <span className={`shrink-0 ${HISTORY_APP_COLORS.sidebar.eraItem.year}`}>
                                   {formatYear(r.startYear)}–{formatYear(r.endYear)}
                                 </span>
                               </button>
@@ -388,17 +384,17 @@ export function HistoryApp({
 
           {/* Center: map + time controls */}
           <section className="flex min-h-0 flex-col gap-2 sm:gap-3 overflow-hidden">
-            <div className="rounded-xl border border-zinc-200 bg-white p-2 sm:p-3">
+            <div className={`rounded-xl border ${HISTORY_APP_COLORS.timeline.container.border} ${HISTORY_APP_COLORS.timeline.container.bg} p-2 sm:p-3`}>
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0">
-                  <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{t('ui.timeline')}</div>
-                  <div className="text-xs sm:text-sm text-zinc-800">
-                    <span className="font-semibold">{formatYear(year)}</span>
-                    <span className="mx-1.5 sm:mx-2 text-zinc-300">|</span>
+                  <div className={`text-xs font-semibold uppercase tracking-wide ${HISTORY_APP_COLORS.timeline.header.text}`}>{t('ui.timeline')}</div>
+                  <div className={`text-xs sm:text-sm ${HISTORY_APP_EXTRA_COLORS.eventTitle.default}`}>
+                    <span className={HISTORY_APP_COLORS.timeline.header.year}>{formatYear(year)}</span>
+                    <span className={`mx-1.5 sm:mx-2 ${HISTORY_APP_EXTRA_COLORS.divider.default}`}>|</span>
                     <span className="hidden sm:inline">{t('ui.window.label')}: </span>
-                    <span className="font-semibold">{t('ui.window.years', { count: windowYears })}</span>
-                    <span className="mx-1.5 sm:mx-2 text-zinc-300 hidden sm:inline">|</span>
-                    <span className="text-zinc-600 hidden sm:inline">{rangeLabel(year, windowYears)}</span>
+                    <span className={HISTORY_APP_COLORS.timeline.header.window}>{t('ui.window.years', { count: windowYears })}</span>
+                    <span className={`mx-1.5 sm:mx-2 ${HISTORY_APP_EXTRA_COLORS.divider.default} hidden sm:inline`}>|</span>
+                    <span className={`${HISTORY_APP_EXTRA_COLORS.rangeLabel.text} hidden sm:inline`}>{rangeLabel(year, windowYears)}</span>
                   </div>
                 </div>
 
@@ -410,19 +406,19 @@ export function HistoryApp({
                       onClick={() => setWindowYears(w)}
                       className={`shrink-0 rounded-lg px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium transition-colors ${
                         windowYears === w
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
+                          ? HISTORY_APP_COLORS.timeline.windowButton.active.bg + ' ' + HISTORY_APP_COLORS.timeline.windowButton.active.text
+                          : HISTORY_APP_COLORS.timeline.windowButton.inactive.bg + ' ' + HISTORY_APP_COLORS.timeline.windowButton.inactive.text + ' ' + HISTORY_APP_COLORS.timeline.windowButton.inactive.hover
                       }`}
                     >
                       {w}年
                     </button>
                   ))}
-                  <div className="flex items-center gap-1 border-l border-zinc-200 pl-2 ml-1">
+                  <div className={`flex items-center gap-1 border-l ${HISTORY_APP_EXTRA_COLORS.sidebar.nav.border} ${HISTORY_APP_EXTRA_COLORS.sidebar.nav.padding}`}>
                     <button
                       type="button"
                       onClick={() => setYear((y) => y - windowYears)}
                       disabled={year - windowYears < timelineMin}
-                      className="rounded-lg bg-zinc-100 p-1.5 text-zinc-600 hover:bg-zinc-200 disabled:opacity-50"
+                      className={`rounded-lg p-1.5 ${HISTORY_APP_COLORS.timeline.navButton.bg} ${HISTORY_APP_COLORS.timeline.navButton.text} ${HISTORY_APP_COLORS.timeline.navButton.hover} ${HISTORY_APP_COLORS.timeline.navButton.disabled}`}
                     >
                       ◀
                     </button>
@@ -430,7 +426,7 @@ export function HistoryApp({
                       type="button"
                       onClick={() => setYear((y) => y + windowYears)}
                       disabled={year + windowYears > timelineMax}
-                      className="rounded-lg bg-zinc-100 p-1.5 text-zinc-600 hover:bg-zinc-200 disabled:opacity-50"
+                      className={`rounded-lg p-1.5 ${HISTORY_APP_COLORS.timeline.navButton.bg} ${HISTORY_APP_COLORS.timeline.navButton.text} ${HISTORY_APP_COLORS.timeline.navButton.hover} ${HISTORY_APP_COLORS.timeline.navButton.disabled}`}
                     >
                       ▶
                     </button>
@@ -439,7 +435,7 @@ export function HistoryApp({
               </div>
             </div>
 
-            <div className="flex-1 min-h-0 rounded-xl border border-zinc-200 bg-white overflow-hidden">
+            <div className={`flex-1 min-h-0 rounded-xl border ${HISTORY_APP_COLORS.mapContainer.border} ${HISTORY_APP_COLORS.mapContainer.bg} overflow-hidden`}>
               {civMode === 'china' ? (
                 <HistoryMap events={mapEvents} openEraIds={openEraIds} />
               ) : (
@@ -464,9 +460,9 @@ export function HistoryApp({
           </section>
 
           {/* Right: events */}
-          <aside className="flex max-h-full flex-col overflow-hidden rounded-xl border border-zinc-200 bg-white">
-            <div className="shrink-0 border-b border-zinc-200 bg-white p-2 sm:p-3">
-              <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+          <aside className={`flex max-h-full flex-col overflow-hidden rounded-xl border ${HISTORY_APP_COLORS.eventsSidebar.container.border} ${HISTORY_APP_COLORS.eventsSidebar.container.bg}`}>
+            <div className={`shrink-0 border-b ${HISTORY_APP_COLORS.eventsSidebar.header.border} ${HISTORY_APP_COLORS.eventsSidebar.header.bg} p-2 sm:p-3`}>
+              <div className={`text-xs font-semibold uppercase tracking-wide ${HISTORY_APP_COLORS.eventsSidebar.header.text}`}>
                 {t('ui.events')} ({currentEraEvents.length})
               </div>
             </div>
@@ -478,16 +474,16 @@ export function HistoryApp({
                   return (
                     <div
                       key={e.id}
-                      className="border-b border-zinc-100 px-2 py-2 last:border-0 sm:px-3"
+                      className={`border-b ${HISTORY_APP_COLORS.eventsSidebar.eventItem.border} px-2 py-2 last:border-0 sm:px-3`}
                     >
-                      <div className="text-xs text-zinc-400">
+                      <div className={`text-xs ${HISTORY_APP_COLORS.eventsSidebar.eventItem.year}`}>
                         {formatYear(e.year)} {eraName ? `· ${eraName}` : ''}
                       </div>
-                      <div className="mt-0.5 text-sm font-medium text-zinc-800">
+                      <div className={`mt-0.5 text-sm font-medium ${HISTORY_APP_EXTRA_COLORS.eventTitle.default}`}>
                         {t(e.titleKey)}
                       </div>
                       {e.tags && e.tags.includes('war') && (
-                        <div className="mt-1 inline-flex items-center gap-1 rounded bg-red-50 px-1.5 py-0.5 text-xs text-red-600">
+                        <div className={`mt-1 inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs ${HISTORY_APP_COLORS.eventsSidebar.eventItem.warBadge.bg} ${HISTORY_APP_COLORS.eventsSidebar.eventItem.warBadge.text}`}>
                           ⚔️ 战役
                         </div>
                       )}
@@ -495,12 +491,12 @@ export function HistoryApp({
                   );
                 })
               ) : (
-                <div className="p-4 text-center text-sm text-zinc-400">{t('ui.noEvents')}</div>
+                <div className={`p-4 text-center text-sm ${HISTORY_APP_COLORS.eventsSidebar.empty}`}>{t('ui.noEvents')}</div>
               )}
               {otherEraEvents.length > 0 && (
                 <>
-                  <div className="border-t border-zinc-200 bg-zinc-50 px-2 py-2 sm:px-3">
-                    <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+                  <div className={`border-t ${HISTORY_APP_COLORS.eventsSidebar.compare.header.border} ${HISTORY_APP_COLORS.eventsSidebar.compare.header.bg} px-2 py-2 sm:px-3`}>
+                    <div className={`text-xs font-semibold uppercase tracking-wide ${HISTORY_APP_COLORS.eventsSidebar.compare.header.text}`}>
                       {t('ui.compare')} ({otherEraEvents.length})
                     </div>
                   </div>
@@ -510,12 +506,12 @@ export function HistoryApp({
                     return (
                       <div
                         key={e.id}
-                        className="border-b border-zinc-100 px-2 py-2 last:border-0 sm:px-3"
+                        className={`border-b ${HISTORY_APP_COLORS.eventsSidebar.eventItem.border} px-2 py-2 last:border-0 sm:px-3`}
                       >
-                        <div className="text-xs text-zinc-400">
+                        <div className={`text-xs ${HISTORY_APP_COLORS.eventsSidebar.eventItem.year}`}>
                           {formatYear(e.year)} {eraName ? `· ${eraName}` : ''}
                         </div>
-                        <div className="mt-0.5 text-sm text-zinc-600">{t(e.titleKey)}</div>
+                        <div className={`mt-0.5 text-sm ${HISTORY_APP_EXTRA_COLORS.eventTitle.light}`}>{t(e.titleKey)}</div>
                       </div>
                     );
                   })}
@@ -525,35 +521,35 @@ export function HistoryApp({
 
             {/* Ruler detail inline */}
             {selectedRuler ? (
-              <div className="shrink-0 border-t border-zinc-200 bg-white p-2 sm:p-3">
+              <div className={`shrink-0 border-t ${HISTORY_APP_COLORS.rulerDetail.container.border} ${HISTORY_APP_COLORS.rulerDetail.container.bg} p-2 sm:p-3`}>
                 <div className="flex items-start justify-between gap-2 sm:gap-3">
                   <div className="min-w-0">
-                    <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{t('ui.rulerDetail')}</div>
+                    <div className={`text-xs font-semibold uppercase tracking-wide ${HISTORY_APP_COLORS.rulerDetail.header.text}`}>{t('ui.rulerDetail')}</div>
                     <div className="mt-1 flex items-center gap-2 flex-wrap">
-                      <span className="truncate text-sm sm:text-base font-semibold text-zinc-900">{t(selectedRuler.nameKey)}</span>
+                      <span className={`truncate text-sm sm:text-base font-semibold ${HISTORY_APP_COLORS.rulerDetail.header.name}`}>{t(selectedRuler.nameKey)}</span>
                       {selectedRuler.eraNameKey && (
-                        <span className="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded">
+                        <span className={`text-xs px-1.5 py-0.5 rounded ${HISTORY_APP_COLORS.rulerDetail.header.eraBadge.bg} ${HISTORY_APP_COLORS.rulerDetail.header.eraBadge.text}`}>
                           {tEra(selectedRuler.eraNameKey)}
                         </span>
                       )}
                     </div>
-                    <div className="mt-0.5 text-xs text-zinc-500">
+                    <div className={`mt-0.5 text-xs ${HISTORY_APP_COLORS.rulerDetail.header.year}`}>
                       {formatYear(selectedRuler.startYear)}–{formatYear(selectedRuler.endYear)}
                     </div>
                   </div>
                   <button
                     type="button"
-                    className="shrink-0 rounded-lg border border-zinc-200 bg-white px-2 py-1 text-xs text-zinc-700 hover:bg-zinc-50"
+                    className={`shrink-0 rounded-lg border ${HISTORY_APP_COLORS.rulerDetail.closeButton.border} ${HISTORY_APP_COLORS.rulerDetail.closeButton.bg} px-2 py-1 text-xs ${HISTORY_APP_COLORS.rulerDetail.closeButton.text} ${HISTORY_APP_COLORS.rulerDetail.closeButton.hover}`}
                     onClick={() => setSelectedRulerId(null)}
                   >
                     {t('ui.clearRuler')}
                   </button>
                 </div>
                 {selectedRuler.highlightKey ? (
-                  <div className="mt-2 text-xs sm:text-sm text-zinc-700">{t(selectedRuler.highlightKey)}</div>
+                  <div className={`mt-2 text-xs sm:text-sm ${HISTORY_APP_COLORS.rulerDetail.highlight}`}>{t(selectedRuler.highlightKey)}</div>
                 ) : null}
                 {selectedRuler.bioKey ? (
-                  <div className="mt-2 text-xs sm:text-sm text-zinc-600">{t(selectedRuler.bioKey)}</div>
+                  <div className={`mt-2 text-xs sm:text-sm ${HISTORY_APP_COLORS.rulerDetail.bio}`}>{t(selectedRuler.bioKey)}</div>
                 ) : null}
                 <RulerRelations
                   ruler={selectedRuler}
@@ -562,7 +558,7 @@ export function HistoryApp({
                 />
               </div>
             ) : (
-              <div className="shrink-0 border-t border-zinc-200 bg-white p-2 sm:p-3 text-xs text-zinc-500">{t('ui.seedNote')}</div>
+              <div className={`shrink-0 border-t ${HISTORY_APP_COLORS.rulerDetail.container.border} ${HISTORY_APP_COLORS.rulerDetail.container.bg} p-2 sm:p-3 text-xs ${HISTORY_APP_COLORS.rulerDetail.seedNote}`}>{t('ui.seedNote')}</div>
             )}
           </aside>
         </div>
@@ -570,17 +566,3 @@ export function HistoryApp({
     </div>
   );
 }
-
-// 朝代颜色映射
-const ERA_COLORS: Record<string, { bg: string; text: string; dot: string }> = {
-  'wz-western-zhou': { bg: 'bg-amber-50', text: 'text-amber-700', dot: 'bg-amber-500' },
-  'period-spring-autumn': { bg: 'bg-blue-50', text: 'text-blue-700', dot: 'bg-blue-500' },
-  'period-warring-states': { bg: 'bg-purple-50', text: 'text-purple-700', dot: 'bg-purple-500' },
-  'qin': { bg: 'bg-zinc-100', text: 'text-zinc-700', dot: 'bg-zinc-600' },
-  'han': { bg: 'bg-red-50', text: 'text-red-700', dot: 'bg-red-500' },
-  'xin': { bg: 'bg-orange-50', text: 'text-orange-700', dot: 'bg-orange-500' },
-  'eastern-han': { bg: 'bg-orange-50', text: 'text-orange-700', dot: 'bg-orange-500' },
-  'three-kingdoms': { bg: 'bg-green-50', text: 'text-green-700', dot: 'bg-green-500' },
-};
-
-// Era colors

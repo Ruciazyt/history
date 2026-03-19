@@ -3,7 +3,7 @@
  * 分析战役在历史时间上的分布规律（世纪、朝代、时代）
  */
 
-import { Event, BattleType } from './types';
+import type { Event, BattleType } from './types';
 
 /** 世纪类型 */
 export type Century = {
@@ -243,36 +243,42 @@ export function getTimeDistributionInsights(battles: Event[]): TimeInsight[] {
   const centuryDist = getCenturyDistribution(battles);
   if (centuryDist.length > 0) {
     const topCentury = centuryDist[0];
-    insights.push({
-      type: 'century_distribution',
-      title: '战役世纪分布',
-      description: `${topCentury.label}战役数量最多，共${topCentury.count}场，占总数的${topCentury.percentage}%。`,
-      data: topCentury,
-    });
+    if (topCentury) {
+      insights.push({
+        type: 'century_distribution',
+        title: '战役世纪分布',
+        description: `${topCentury.label}战役数量最多，共${topCentury.count}场，占总数的${topCentury.percentage}%。`,
+        data: topCentury,
+      });
+    }
   }
 
   // 时代分布洞察
   const eraDist = getEraDistribution(battles);
   if (eraDist.length > 0) {
     const topEra = eraDist[0];
-    insights.push({
-      type: 'era_distribution',
-      title: '战役时代分布',
-      description: `${topEra.label}时期战役最为频繁，共有${topEra.count}场战役记录。`,
-      data: topEra,
-    });
+    if (topEra) {
+      insights.push({
+        type: 'era_distribution',
+        title: '战役时代分布',
+        description: `${topEra.label}时期战役最为频繁，共有${topEra.count}场战役记录。`,
+        data: topEra,
+      });
+    }
   }
 
   // 高峰期洞察
   const peaks = getPeakPeriods(battles, 1);
   if (peaks.length > 0) {
     const peak = peaks[0];
-    insights.push({
-      type: 'peak_period',
-      title: '战役高峰期',
-      description: `${peak.label}是中国历史上战役最高发的时期，共发生${peak.count}场战役。`,
-      data: peak,
-    });
+    if (peak) {
+      insights.push({
+        type: 'peak_period',
+        title: '战役高峰期',
+        description: `${peak.label}是中国历史上战役最高发的时期，共发生${peak.count}场战役。`,
+        data: peak,
+      });
+    }
   }
 
   return insights;

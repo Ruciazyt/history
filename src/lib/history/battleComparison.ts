@@ -281,8 +281,6 @@ export function getBattleComparisonInsights(
   
   // 查找匹配的维度
   const matchingDims = comparisons.filter(c => c.isMatch);
-  // differentDims could be used for future features
-  // const differentDims = comparisons.filter(c => !c.isMatch);
   
   // 相似点
   if (matchingDims.length > 0) {
@@ -307,7 +305,6 @@ export function getBattleComparisonInsights(
   if (yearComparison) {
     const yearDiff = Math.abs(battle1.year - battle2.year);
     if (yearDiff > 0) {
-      // earlier battle available if needed: const earlier = battle1.year < battle2.year ? battle1.titleKey : battle2.titleKey;
       insights.push(`时间相差约 ${yearDiff} 年`);
     }
   }

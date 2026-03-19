@@ -313,13 +313,13 @@ export function getWarInsights(battles: Event[]): string[] {
 
   // Most active periods
   if (activeWars.length > 0) {
-    const mostActive = activeWars[0];
+    const mostActive = activeWars[0]!;
     insights.push(`最激烈的战争时期包含${mostActive.battleCount}场战役`);
   }
 
   // Longest wars
-  if (longestWars.length > 0 && longestWars[0].duration > 0) {
-    insights.push(`持续时间最长的战争长达${longestWars[0].duration}年`);
+  if (longestWars.length > 0 && longestWars[0]!.duration > 0) {
+    insights.push(`持续时间最长的战争长达${longestWars[0]!.duration}年`);
   }
 
   // Average battles per war

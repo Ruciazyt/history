@@ -2,8 +2,10 @@
 
 import * as React from 'react';
 import type { Event } from '@/lib/history/types';
-import { compareBattles, getComparisonSummary, getBattleResultLabel } from '@/lib/history/battles';
+import { compareBattles, getComparisonSummary, getBattleResultLabel, getBattleImpactLabel } from '@/lib/history/battles';
 import { formatYear } from '@/lib/history/utils';
+import { STRATEGY_LABELS, Z_INDEX, PARTY_COLORS, BATTLE_IMPACT_COLORS, BATTLE_COMPARE_GRADIENTS, STRATEGY_BADGE_COLORS, COMPARISON_SUMMARY_COLORS, BATTLE_DETAIL_COLORS, BATTLE_COMPARE_COLORS, BATTLE_COMPARE_VIEW_COLORS } from '@/lib/history/constants';
+import { useEscapeKey } from '@/lib/history/useBattleHooks';
 import { useTranslations } from 'next-intl';
 
 interface BattleCompareProps {
@@ -16,32 +18,25 @@ export function BattleCompare({ battle1, battle2, onClose }: BattleCompareProps)
   const t = useTranslations();
   
   const comparison = React.useMemo(() => compareBattles(battle1, battle2), [battle1, battle2]);
-  const summary = React.useMemo(() => getComparisonSummary(comparison.comparison, t), [comparison, t]);
+  const summary = React.useMemo(() => getComparisonSummary(comparison.comparison), [comparison]);
   
-  // Handle escape key
-  React.useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [onClose]);
+  // Use existing hook for escape key handling
+  useEscapeKey(onClose);
   
   const renderBattleSide = (battle: Event, side: 'left' | 'right') => {
-    const eraColor = side === 'left' ? 'from-red-50 to-orange-50' : 'from-blue-50 to-indigo-50';
-    const borderColor = side === 'left' ? 'border-red-200' : 'border-blue-200';
-    const badgeColor = side === 'left' ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700';
+    const partyColors = side === 'left' ? PARTY_COLORS.attacker : PARTY_COLORS.defender;
+    const eraGradient = side === 'left' ? BATTLE_COMPARE_GRADIENTS.attacker : BATTLE_COMPARE_GRADIENTS.defender;
     
     return (
-      <div className={`flex-1 bg-gradient-to-b ${eraColor} rounded-xl p-4 border ${borderColor}`}>
+      <div className={`flex-1 bg-gradient-to-b ${eraGradient} rounded-xl p-4 border ${partyColors.border}`}>
         {/* Header */}
         <div className="text-center mb-4">
-          <h3 className="text-lg font-bold text-zinc-800">{t(battle.titleKey)}</h3>
-          <div className="text-sm text-zinc-500 mt-1">
+          <h3 className={`text-lg font-bold ${BATTLE_COMPARE_COLORS.header.title}`}>{t(battle.titleKey)}</h3>
+          <div className={`text-sm ${BATTLE_COMPARE_COLORS.header.year} mt-1`}>
             {formatYear(battle.year)}
           </div>
           {battle.location?.label && (
-            <div className="text-xs text-zinc-400 mt-1 flex items-center justify-center gap-1">
+            <div className={`text-xs ${BATTLE_COMPARE_COLORS.header.location} mt-1 flex items-center justify-center gap-1`}>
               📍 {battle.location.label}
             </div>
           )}
@@ -50,8 +45,8 @@ export function BattleCompare({ battle1, battle2, onClose }: BattleCompareProps)
         {/* Result */}
         {battle.battle?.result && (
           <div className="mb-4">
-            <div className="text-xs text-zinc-500 mb-1 text-center">结果</div>
-            <div className={`text-center px-3 py-2 rounded-lg ${badgeColor}`}>
+            <div className={`text-xs ${BATTLE_COMPARE_COLORS.label} mb-1 text-center`}>{t('battleCompare.result')}</div>
+            <div className={`text-center px-3 py-2 rounded-lg ${partyColors.badge}`}>
               {getBattleResultLabel(battle.battle)}
             </div>
           </div>
@@ -60,18 +55,18 @@ export function BattleCompare({ battle1, battle2, onClose }: BattleCompareProps)
         {/* Belligerents */}
         {battle.battle?.belligerents && (
           <div className="space-y-2">
-            <div className="text-xs text-zinc-500 mb-1 text-center">参战方</div>
-            <div className={`flex items-center justify-between gap-2 p-2 rounded-lg ${side === 'left' ? 'bg-red-100' : 'bg-blue-100'}`}>
+            <div className={`text-xs ${BATTLE_COMPARE_COLORS.label} mb-1 text-center`}>{t('battleCompare.belligerents')}</div>
+            <div className={`flex items-center justify-between gap-2 p-2 rounded-lg ${partyColors.bg}`}>
               <div className="flex-1 text-center">
-                <div className="text-xs text-zinc-500">进攻方</div>
-                <div className={`font-semibold ${side === 'left' ? 'text-red-700' : 'text-blue-700'}`}>
+                <div className={`text-xs ${BATTLE_COMPARE_COLORS.label}`}>{t('battleCompare.attacker')}</div>
+                <div className={`font-semibold ${BATTLE_COMPARE_VIEW_COLORS.belligerents.attacker}`}>
                   {battle.battle.belligerents.attacker}
                 </div>
               </div>
               <div className="text-lg">⚔️</div>
               <div className="flex-1 text-center">
-                <div className="text-xs text-zinc-500">防守方</div>
-                <div className={`font-semibold ${side === 'left' ? 'text-blue-700' : 'text-red-700'}`}>
+                <div className={`text-xs ${BATTLE_COMPARE_COLORS.label}`}>{t('battleCompare.defender')}</div>
+                <div className={`font-semibold ${BATTLE_COMPARE_VIEW_COLORS.belligerents.defender}`}>
                   {battle.battle.belligerents.defender}
                 </div>
               </div>
@@ -79,10 +74,45 @@ export function BattleCompare({ battle1, battle2, onClose }: BattleCompareProps)
           </div>
         )}
         
+        {/* Impact */}
+        {battle.battle?.impact && battle.battle.impact !== 'unknown' && (
+          <div className="mt-3 text-center">
+            <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.bg || 'bg-zinc-100'} ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.text || 'text-zinc-500'}`}>
+              💎 {getBattleImpactLabel(battle.battle.impact)}
+            </span>
+          </div>
+        )}
+        
+        {/* Commanders */}
+        {(battle.battle?.commanders?.attacker?.length || battle.battle?.commanders?.defender?.length) && (
+          <div className={`mt-3 pt-3 border-t ${BATTLE_COMPARE_COLORS.section.divider}`}>
+            <div className={`text-xs ${BATTLE_COMPARE_COLORS.commander.label} mb-2`}>指挥官</div>
+            <div className="flex flex-wrap justify-center gap-1">
+              {battle.battle?.commanders?.attacker?.map((cmd, i) => (
+                <span key={`att-${i}`} className={`px-2 py-0.5 ${partyColors.badge} ${BATTLE_COMPARE_COLORS.commander.badge}`}>👤 {cmd}</span>
+              ))}
+              {battle.battle?.commanders?.defender?.map((cmd, i) => (
+                <span key={`def-${i}`} className={`px-2 py-0.5 ${side === 'left' ? PARTY_COLORS.defender.badge : PARTY_COLORS.attacker.badge} ${BATTLE_COMPARE_COLORS.commander.badge}`}>👤 {cmd}</span>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {/* Strategy */}
+        {battle.battle?.strategy && battle.battle.strategy.length > 0 && (
+          <div className="mt-3 flex flex-wrap justify-center gap-1">
+            {battle.battle.strategy.filter(s => s !== 'unknown').slice(0, 3).map((s, i) => (
+              <span key={i} className={`px-2 py-0.5 ${STRATEGY_BADGE_COLORS.bg} ${STRATEGY_BADGE_COLORS.text} text-xs rounded`}>
+                {STRATEGY_LABELS[s] || s}
+              </span>
+            ))}
+          </div>
+        )}
+        
         {/* Summary */}
-        <div className="mt-4 pt-4 border-t border-zinc-200">
-          <div className="text-xs text-zinc-500 mb-2">战役概述</div>
-          <p className="text-sm text-zinc-600 leading-relaxed">
+        <div className={`mt-4 pt-4 border-t ${BATTLE_COMPARE_COLORS.section.divider}`}>
+          <div className={`text-xs ${BATTLE_COMPARE_COLORS.overview.label} mb-2`}>战役概述</div>
+          <p className={`text-sm ${BATTLE_COMPARE_COLORS.overview.text} leading-relaxed`}>
             {t(battle.summaryKey)}
           </p>
         </div>
@@ -92,26 +122,27 @@ export function BattleCompare({ battle1, battle2, onClose }: BattleCompareProps)
   
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 flex items-center justify-center p-0 sm:p-4"
+      style={{ zIndex: Z_INDEX.modal }}
       role="dialog"
       aria-modal="true"
     >
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className={`absolute inset-0 ${BATTLE_COMPARE_VIEW_COLORS.overlay}`}
         onClick={onClose}
       />
       
-      {/* Modal */}
-      <div className="relative w-full max-w-4xl bg-white rounded-xl shadow-2xl max-h-[90vh] overflow-hidden">
+      {/* Modal - full screen on mobile */}
+      <div className={`relative w-full h-full sm:w-full sm:max-w-4xl sm:h-auto sm:rounded-xl ${BATTLE_COMPARE_VIEW_COLORS.modal} overflow-hidden flex flex-col`}>
         {/* Header */}
-        <div className="sticky top-0 bg-gradient-to-r from-red-600 to-blue-600 text-white p-4 rounded-t-xl">
-          <div className="flex items-start justify-between gap-4">
-            <h2 className="text-xl font-bold">⚔️ 战役对比</h2>
+        <div className={`shrink-0 ${BATTLE_COMPARE_VIEW_COLORS.header} p-3 sm:p-4`}>
+          <div className="flex items-center justify-between gap-2">
+            <h2 className="text-lg sm:text-xl font-bold">{t('battleCompare.title')}</h2>
             <button
               onClick={onClose}
-              className="shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-colors"
-              aria-label="Close"
+              className={`shrink-0 w-9 h-9 sm:w-8 sm:h-8 flex items-center justify-center rounded-full ${BATTLE_COMPARE_VIEW_COLORS.closeButton.bg} ${BATTLE_COMPARE_VIEW_COLORS.closeButton.hover} transition-colors text-lg sm:text-base`}
+              aria-label={t('battleCompare.close')}
             >
               ✕
             </button>
@@ -119,12 +150,12 @@ export function BattleCompare({ battle1, battle2, onClose }: BattleCompareProps)
         </div>
         
         {/* Comparison summary */}
-        <div className="bg-amber-50 px-4 py-3 border-b border-amber-100">
-          <div className="flex flex-wrap gap-2 justify-center">
+        <div className={`shrink-0 ${COMPARISON_SUMMARY_COLORS.container} px-3 sm:px-4 py-2 sm:py-3 border-b ${COMPARISON_SUMMARY_COLORS.border}`}>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center">
             {summary.map((item, i) => (
               <span 
                 key={i}
-                className="px-3 py-1 bg-amber-100 text-amber-700 text-sm rounded-full"
+                className={`px-2 sm:px-3 py-0.5 sm:py-1 ${COMPARISON_SUMMARY_COLORS.badge} text-xs sm:text-sm rounded-full`}
               >
                 {item}
               </span>
@@ -133,19 +164,19 @@ export function BattleCompare({ battle1, battle2, onClose }: BattleCompareProps)
         </div>
         
         {/* Content */}
-        <div className="p-4 overflow-y-auto max-h-[calc(90vh-200px)]">
-          <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex-1 overflow-y-auto p-3 sm:p-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             {renderBattleSide(battle1, 'left')}
             {renderBattleSide(battle2, 'right')}
           </div>
         </div>
         
         {/* Footer */}
-        <div className="sticky bottom-0 bg-zinc-50 p-4 rounded-b-xl border-t border-zinc-200">
+        <div className={`shrink-0 ${BATTLE_DETAIL_COLORS.section.bg} p-3 sm:p-4 border-t ${BATTLE_DETAIL_COLORS.section.border}`}>
           <div className="flex justify-center">
             <button
               onClick={onClose}
-              className="px-6 py-2 bg-zinc-600 text-white rounded-lg hover:bg-zinc-700 transition-colors"
+              className={`w-full sm:w-auto px-6 py-2.5 sm:py-2 ${BATTLE_DETAIL_COLORS.closeButton} text-white rounded-lg transition-colors text-base sm:text-sm`}
             >
               关闭对比
             </button>

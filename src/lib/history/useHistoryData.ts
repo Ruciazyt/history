@@ -9,6 +9,7 @@ export function useHistoryData({
   rulers,
 }: {
   eras: Era[];
+  events?: Event[];
   rulers: Ruler[];
 }) {
   const [openEraIds, setOpenEraIds] = useState<Set<string>>(new Set());

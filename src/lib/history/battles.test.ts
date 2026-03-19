@@ -4,6 +4,8 @@ import {
   getBattleResultLabel, 
   sortBattlesByYear,
   getBattlesByYearRange,
+  getRandomBattle,
+  getBattleOfTheDay,
   getBattleParties,
   isBattleComplete,
   separateBattlesAndEvents,
@@ -110,8 +112,8 @@ describe('battles', () => {
       expect(getBattleResultLabel(undefined)).toBe('');
     });
 
-    it('should return empty string for unknown result', () => {
-      expect(getBattleResultLabel({ result: 'unknown' as any })).toBe('');
+    it('should return empty string for undefined result', () => {
+      expect(getBattleResultLabel({})).toBe('');
     });
   });
 
@@ -148,6 +150,80 @@ describe('battles', () => {
     it('should return empty array when no battles in range', () => {
       const battles = getBattlesByYearRange(mockEvents, 100, 200);
       expect(battles).toHaveLength(0);
+    });
+  });
+
+  describe('getRandomBattle', () => {
+    it('should return undefined for empty events', () => {
+      expect(getRandomBattle([])).toBeUndefined();
+    });
+
+    it('should return undefined when no battles exist', () => {
+      const nonBattleEvents: Event[] = [
+        { id: 'e1', entityId: 'era1', year: -500, titleKey: 't', summaryKey: 's', tags: [] },
+      ];
+      expect(getRandomBattle(nonBattleEvents)).toBeUndefined();
+    });
+
+    it('should return a battle from the events', () => {
+      const battle = getRandomBattle(mockEvents);
+      expect(battle).toBeDefined();
+      expect(battle?.tags).toContain('war');
+    });
+
+    it('should always return a battle from mockEvents (mockEvents has 2 battles)', () => {
+      // Run multiple times — with 2 battles the probability of consistently
+      // hitting the same battle 10 times is (0.5)^10, which is vanishingly small
+      // if the implementation is truly random; this is a smoke test.
+      let found = false;
+      for (let i = 0; i < 20; i++) {
+        const battle = getRandomBattle(mockEvents);
+        if (battle?.id === 'battle-1' || battle?.id === 'battle-2') {
+          found = true;
+          break;
+        }
+      }
+      expect(found).toBe(true);
+    });
+  });
+
+  describe('getBattleOfTheDay', () => {
+    it('should return undefined for empty events', () => {
+      expect(getBattleOfTheDay([])).toBeUndefined();
+    });
+
+    it('should return undefined when no battles exist', () => {
+      const nonBattleEvents: Event[] = [
+        { id: 'e1', entityId: 'era1', year: -500, titleKey: 't', summaryKey: 's', tags: [] },
+      ];
+      expect(getBattleOfTheDay(nonBattleEvents)).toBeUndefined();
+    });
+
+    it('should return a battle from the events', () => {
+      const battle = getBattleOfTheDay(mockEvents);
+      expect(battle).toBeDefined();
+      expect(battle?.tags).toContain('war');
+    });
+
+    it('should return the same battle for the same date', () => {
+      const date = new Date('2026-03-19');
+      const battle1 = getBattleOfTheDay(mockEvents, date);
+      const battle2 = getBattleOfTheDay(mockEvents, date);
+      expect(battle1?.id).toBe(battle2?.id);
+    });
+
+    it('should return the same battle for different times on the same day', () => {
+      const morning = new Date('2026-03-19T08:00:00');
+      const evening = new Date('2026-03-19T20:00:00');
+      const battle1 = getBattleOfTheDay(mockEvents, morning);
+      const battle2 = getBattleOfTheDay(mockEvents, evening);
+      expect(battle1?.id).toBe(battle2?.id);
+    });
+
+    it('should use today as default date', () => {
+      // Just verify it doesn't throw and returns a valid result
+      const battle = getBattleOfTheDay(mockEvents);
+      expect(battle).toBeDefined();
     });
   });
 
@@ -440,7 +516,75 @@ describe('battles', () => {
       expect(getEraColor('han')).toBe('#dc2626');
     });
 
-    it('should return default color for unknown era', () => {
+    it('should return correct color for han-western', () => {
+      expect(getEraColor('han-western')).toBe('#dc2626');
+    });
+
+    it('should return correct color for han-eastern', () => {
+      expect(getEraColor('han-eastern')).toBe('#f97316');
+    });
+
+    it('should return correct color for three-kingdoms', () => {
+      expect(getEraColor('three-kingdoms')).toBe('#22c55e');
+    });
+
+    it('should return correct color for tang', () => {
+      expect(getEraColor('tang')).toBe('#f97316');
+    });
+
+    it('should return correct color for song', () => {
+      expect(getEraColor('song')).toBe('#8b5cf6');
+    });
+
+    it('should return correct color for yuan', () => {
+      expect(getEraColor('yuan')).toBe('#06b6d4');
+    });
+
+    it('should return correct color for ming', () => {
+      expect(getEraColor('ming')).toBe('#d97706');
+    });
+
+    it('should return correct color for qing', () => {
+      expect(getEraColor('qing')).toBe('#16a34a');
+    });
+
+    it('should return correct color for wz-western-zhou', () => {
+      expect(getEraColor('wz-western-zhou')).toBe('#f59e0b');
+    });
+
+    it('should return correct color for xin', () => {
+      expect(getEraColor('xin')).toBe('#eab308');
+    });
+
+    it('should return correct color for jin-western', () => {
+      expect(getEraColor('jin-western')).toBe('#06b6d4');
+    });
+
+    it('should return correct color for jin-eastern-16k', () => {
+      expect(getEraColor('jin-eastern-16k')).toBe('#14b8a6');
+    });
+
+    it('should return correct color for southern-northern', () => {
+      expect(getEraColor('southern-northern')).toBe('#6366f1');
+    });
+
+    it('should return correct color for sui', () => {
+      expect(getEraColor('sui')).toBe('#ec4899');
+    });
+
+    it('should return correct color for five-dynasties-ten-kingdoms', () => {
+      expect(getEraColor('five-dynasties-ten-kingdoms')).toBe('#ec4899');
+    });
+
+    it('should return correct color for roc', () => {
+      expect(getEraColor('roc')).toBe('#2563eb');
+    });
+
+    it('should return correct color for prc', () => {
+      expect(getEraColor('prc')).toBe('#dc2626');
+    });
+
+    it('should return correct color for unknown era', () => {
       expect(getEraColor('unknown-era')).toBe('#6b7280');
     });
   });
@@ -1009,10 +1153,8 @@ describe('battles', () => {
       },
     };
 
-    const t = (key: string): string => key;
-
     it('should generate summary for year difference', () => {
-      const summary = getComparisonSummary(mockComparison.comparison, t);
+      const summary = getComparisonSummary(mockComparison.comparison);
       expect(summary).toContain('时间相差 100 年');
     });
 
@@ -1020,12 +1162,12 @@ describe('battles', () => {
       const summary = getComparisonSummary({
         ...mockComparison.comparison,
         yearDiff: 0,
-      }, t);
+      });
       expect(summary).toContain('同年发生');
     });
 
     it('should generate summary for different era', () => {
-      const summary = getComparisonSummary(mockComparison.comparison, t);
+      const summary = getComparisonSummary(mockComparison.comparison);
       expect(summary).not.toContain('同一时期');
     });
 
@@ -1033,7 +1175,7 @@ describe('battles', () => {
       const summary = getComparisonSummary({
         ...mockComparison.comparison,
         sameEra: true,
-      }, t);
+      });
       expect(summary).toContain('同一时期');
     });
 
@@ -1041,7 +1183,7 @@ describe('battles', () => {
       const summary = getComparisonSummary({
         ...mockComparison.comparison,
         locationDistance: 50,
-      }, t);
+      });
       expect(summary).toContain('地理位置接近');
     });
 
@@ -1049,7 +1191,7 @@ describe('battles', () => {
       const summary = getComparisonSummary({
         ...mockComparison.comparison,
         locationDistance: 500,
-      }, t);
+      });
       expect(summary).toContain('相距约 500 km');
     });
   });
@@ -1078,6 +1220,7 @@ describe('battles', () => {
           entityId: 'era1',
           year: -500,
           titleKey: 'battle.draw',
+          summaryKey: 'battle.draw.summary',
           tags: ['war'],
           battle: { result: 'draw' },
         },
@@ -1096,6 +1239,7 @@ describe('battles', () => {
           entityId: 'era1',
           year: -500,
           titleKey: 'battle.inconclusive',
+          summaryKey: 'battle.inconclusive.summary',
           tags: ['war'],
           battle: { result: 'inconclusive' },
         },
@@ -1141,6 +1285,7 @@ describe('battles', () => {
           year: -500,
           month: 4, // spring
           titleKey: 'battle.spring',
+          summaryKey: 'battle.spring.summary',
           tags: ['war'],
           battle: { result: 'attacker_win' },
         },
@@ -1150,6 +1295,7 @@ describe('battles', () => {
           year: -400,
           month: 10, // autumn
           titleKey: 'battle.autumn',
+          summaryKey: 'battle.autumn.summary',
           tags: ['war'],
           battle: { result: 'defender_win' },
         },
@@ -1170,6 +1316,7 @@ describe('battles', () => {
           entityId: 'era1',
           year: -500,
           titleKey: 'battle.no-month',
+          summaryKey: 'battle.no-month.summary',
           tags: ['war'],
           battle: { result: 'attacker_win' },
         },
@@ -1190,6 +1337,7 @@ describe('battles', () => {
           year: -632,
           month: 4,
           titleKey: 'b1',
+          summaryKey: 'b1.summary',
           tags: ['war'],
           battle: { result: 'attacker_win' },
         },
@@ -1199,6 +1347,7 @@ describe('battles', () => {
           year: -260,
           month: 7,
           titleKey: 'b2',
+          summaryKey: 'b2.summary',
           tags: ['war'],
           battle: { result: 'attacker_win' },
         },
@@ -1208,6 +1357,7 @@ describe('battles', () => {
           year: -200,
           month: 10,
           titleKey: 'b3',
+          summaryKey: 'b3.summary',
           tags: ['war'],
           battle: { result: 'attacker_win' },
         },
@@ -1234,6 +1384,7 @@ describe('battles', () => {
           entityId: 'era1',
           year: -500,
           titleKey: 'battle.single',
+          summaryKey: 'battle.single.summary',
           tags: ['war'],
           battle: { result: 'attacker_win' },
         },
@@ -1257,6 +1408,7 @@ describe('battles', () => {
         entityId: 'han',
         year: -200,
         titleKey: 'battle.central',
+        summaryKey: 'battle.central.summary',
         tags: ['war'],
         location: { lon: 114.0, lat: 34.5, label: '中原' },
         battle: { result: 'attacker_win' },
@@ -1266,6 +1418,7 @@ describe('battles', () => {
         entityId: 'han',
         year: -180,
         titleKey: 'battle.north',
+        summaryKey: 'battle.north.summary',
         tags: ['war'],
         location: { lon: 116.0, lat: 38.0, label: '华北' },
         battle: { result: 'defender_win' },
@@ -1275,6 +1428,7 @@ describe('battles', () => {
         entityId: 'han',
         year: -150,
         titleKey: 'battle.jiangdong',
+        summaryKey: 'battle.jiangdong.summary',
         tags: ['war'],
         location: { lon: 119.0, lat: 31.0, label: '江东' },
         battle: { result: 'attacker_win' },
@@ -1284,6 +1438,7 @@ describe('battles', () => {
         entityId: 'han',
         year: -140,
         titleKey: 'battle.jiangdong2',
+        summaryKey: 'battle.jiangdong2.summary',
         tags: ['war'],
         location: { lon: 120.0, lat: 30.0, label: '江东' },
         battle: { result: 'attacker_win' },
@@ -1293,6 +1448,7 @@ describe('battles', () => {
         entityId: 'han',
         year: -100,
         titleKey: 'battle.noloc',
+        summaryKey: 'battle.noloc.summary',
         tags: ['war'],
         battle: { result: 'draw' },
       },

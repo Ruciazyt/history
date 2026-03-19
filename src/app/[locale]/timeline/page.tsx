@@ -1,8 +1,41 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 
 import { locales, type Locale } from '@/i18n/routing';
 import { TimelineClient } from '@/components/timeline/TimelineClient';
+
+const localeNames: Record<string, string> = {
+  zh: '历史时间线',
+  en: 'Historical Timeline',
+  ja: '歴史年表',
+};
+
+const localeDescriptions: Record<string, string> = {
+  zh: '中国历史时间线 - 按朝代和年份浏览历史事件',
+  en: 'Chinese historical timeline - Browse historical events by dynasty and year',
+  ja: '中国歴史年表 - 朝代別、年別で歴史的出来事を閲覧',
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const name = localeNames[locale] || localeNames.zh;
+  const description = localeDescriptions[locale] || localeDescriptions.zh;
+  
+  return {
+    title: `${name} | History Atlas`,
+    description,
+    openGraph: {
+      title: name,
+      description,
+      type: 'website',
+    },
+  };
+}
 
 export default async function TimelinePage({
   params,

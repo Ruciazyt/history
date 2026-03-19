@@ -34,138 +34,6 @@ export const CHINA_EVENTS: Event[] = [
         source: '《史记》记载',
         reliability: 'medium',
       },
-      causes: [
-        {
-          type: 'dynastic-conflict',
-          description: '商朝末年，周部族崛起寻求取代商朝统治',
-          parties: ['周', '商'],
-          severity: 'critical',
-          duration: 100,
-        },
-        {
-          type: 'political-rivalry',
-          description: '周文王姬昌积聚力量，与商朝争夺天下霸权',
-          parties: ['周', '商'],
-          severity: 'critical',
-          duration: 50,
-        },
-        {
-          type: 'preemptive-attack',
-          description: '周武王趁商朝主力东征之际发起突袭',
-          parties: ['周', '商'],
-          severity: 'major',
-        },
-      ],
-      armaments: [
-        { type: 'chariot', side: 'attacker', isPrimary: true, count: 300, description: '周军战车' },
-        { type: 'infantry', side: 'attacker', count: 45000, description: '周军步兵' },
-        { type: 'sword', side: 'attacker', count: 10000, description: '周军剑士' },
-        { type: 'spear', side: 'attacker', count: 20000, description: '周军矛兵' },
-        { type: 'dagger-axe', side: 'defender', count: 15000, description: '商军戈兵' },
-        { type: 'bow', side: 'attacker', count: 8000, description: '周军弓箭手' },
-        { type: 'shield', side: 'both', description: '盾牌' },
-        { type: 'armor', side: 'both', description: '铠甲' },
-      ],
-      literature: [
-        {
-          source: 'shangshu',
-          chapter: '牧誓',
-          description: '武王伐纣，牧野之战',
-          reliability: 'high',
-          characteristics: ['诏令原文', '开国之战'],
-        },
-        {
-          source: 'shiji',
-          chapter: '周本纪',
-          description: '周武王灭商之战详细记载',
-          reliability: 'high',
-          characteristics: ['详细描写', '开国之战'],
-        },
-        {
-          source: 'zizhitongjian',
-          chapter: '周纪',
-          description: '武王伐纣时间线',
-          reliability: 'high',
-          characteristics: ['编年体', '宏观视角'],
-        },
-      ],
-      formations: [
-        {
-          formation: 'frontal-attack',
-          description: '周军以战车为核心进行正面突击，突破商军阵线',
-          side: 'attacker',
-          characteristics: ['战车冲击', '正面突击', '勇气'],
-          isInnovative: true,
-        },
-        {
-          formation: 'defensive',
-          description: '商军临时组建防御阵型，但士气低落',
-          side: 'defender',
-          characteristics: ['防守', '士气低落', '被动'],
-        },
-      ],
-      heritage: [
-        {
-          type: 'idiom-proverb',
-          name: '临阵倒戈',
-          description: '比喻在战斗中投向对方。出自牧野之战商军倒戈',
-          significance: 'national',
-          relatedFigures: ['姬发', '帝辛'],
-        },
-        {
-          type: 'idiom-proverb',
-          name: '伐无道',
-          description: '讨伐没有道义的人',
-          significance: 'national',
-        },
-        {
-          type: 'temple',
-          name: '太公祠',
-          description: '祭祀姜子牙（姜太公）的祠堂',
-          location: '山东临淄',
-          significance: 'national',
-        },
-        {
-          type: 'tomb',
-          name: '周武王陵',
-          description: '周武王姬发的陵墓',
-          location: '陕西西安',
-          significance: 'national',
-        },
-        {
-          type: 'memorial',
-          name: '牧野大战纪念馆',
-          description: '纪念牧野之战的专题纪念馆',
-          location: '河南卫辉',
-          significance: 'regional',
-        },
-        {
-          type: 'archaeological-site',
-          name: '牧野古战场',
-          description: '牧野之战古战场遗址',
-          location: '河南卫辉',
-          significance: 'regional',
-        },
-        {
-          type: 'literary-work',
-          name: '《尚书·牧誓》',
-          description: '周武王伐纣的誓师词',
-          significance: 'national',
-          relatedFigures: ['姬发'],
-        },
-        {
-          type: 'film-tv',
-          name: '《封神演义》',
-          description: '小说/电视剧改编，讲述牧野之战历史背景',
-          significance: 'national',
-        },
-        {
-          type: 'festival',
-          name: '祭祀大典',
-          description: '各地举办祭祀姜子牙的活动',
-          significance: 'regional',
-        },
-      ],
     },
   },
   {
@@ -184,6 +52,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.wz-1040-fengjian.title',
     summaryKey: 'event.wz-1040-fengjian.summary',
     tags: ['institution'],
+    location: { lon: 108.9, lat: 34.2, label: '镐京' },
   },
   {
     id: 'wz-841-gonghe',
@@ -192,6 +61,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.wz-841-gonghe.title',
     summaryKey: 'event.wz-841-gonghe.summary',
     tags: ['politics'],
+    location: { lon: 108.9, lat: 34.2, label: '镐京' },
   },
   {
     id: 'wz-771-quanrong',
@@ -230,6 +100,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.sa-707-xuge.title',
     summaryKey: 'event.sa-707-xuge.summary',
     tags: ['war', 'zhou'],
+    location: { lon: 113.6, lat: 34.4, label: '繻葛' },
   },
   {
     id: 'sa-651-kuiqiu',
@@ -238,6 +109,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.sa-651-kuiqiu.title',
     summaryKey: 'event.sa-651-kuiqiu.summary',
     tags: ['diplomacy', 'hegemony'],
+    location: { lon: 115.3, lat: 34.4, label: '葵丘' },
   },
   {
     id: 'sa-597-bi',
@@ -265,6 +137,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.sa-594-tax.title',
     summaryKey: 'event.sa-594-tax.summary',
     tags: ['institution'],
+    location: { lon: 116.99, lat: 35.59, label: '曲阜' },
   },
   {
     id: 'sa-551-confucius',
@@ -326,166 +199,7 @@ export const CHINA_EVENTS: Event[] = [
           phase: '诱敌阶段',
         },
       ],
-      aftermath: [
-        {
-          type: 'political-upheaval',
-          description: '晋国确立中原霸主地位',
-          affectedParties: ['晋国', '楚国', '中原诸侯'],
-          severity: 'significant',
-          scope: 'continental',
-          isLongTerm: true,
-          duration: 50,
-        },
-        {
-          type: 'territorial-change',
-          description: '楚国北上受阻，战略收缩',
-          affectedParties: ['楚国'],
-          severity: 'moderate',
-          scope: 'regional',
-        },
-      ],
-      causes: [
-        {
-          type: 'alliance-obligation',
-          description: '晋国履行对宋国的联盟义务，出兵援救',
-          parties: ['晋国', '宋国', '楚国'],
-          severity: 'major',
-        },
-        {
-          type: 'territorial-dispute',
-          description: '楚国试图染指中原，与晋国争夺势力范围',
-          parties: ['晋国', '楚国'],
-          severity: 'major',
-          duration: 30,
-        },
-        {
-          type: 'political-rivalry',
-          description: '晋楚两国争夺春秋时期的霸主地位',
-          parties: ['晋国', '楚国'],
-          severity: 'critical',
-          duration: 50,
-        },
-      ],
-      armaments: [
-        { type: 'chariot', side: 'attacker', isPrimary: true, count: 700, description: '晋军战车' },
-        { type: 'infantry', side: 'attacker', count: 2000, description: '晋军步兵' },
-        { type: 'cavalry', side: 'attacker', count: 500, description: '晋军骑兵' },
-        { type: 'spear', side: 'both', count: 3000, description: '长矛' },
-        { type: 'bow', side: 'attacker', count: 1000, description: '弓箭手' },
-        { type: 'shield', side: 'both', description: '盾牌' },
-        { type: 'sword', side: 'both', description: '剑' },
-      ],
-      literature: [
-        {
-          source: 'zuozhuan',
-          chapter: '僖公二十八年',
-          description: '晋楚城濮之战详细记载',
-          reliability: 'high',
-          characteristics: ['详细描写', '外交分析', '经典之战'],
-        },
-        {
-          source: 'guoyu',
-          description: '晋语中城濮之战的记载',
-          reliability: 'medium',
-          characteristics: ['国别体', '外交辞令'],
-        },
-        {
-          source: 'shiji',
-          chapter: '晋世家',
-          description: '晋文公称霸之战',
-          reliability: 'high',
-          characteristics: ['详细描写', '人物刻画'],
-        },
-      ],
-      formations: [
-        {
-          formation: 'flanking',
-          description: '晋军左右两翼夹击楚军侧翼',
-          side: 'attacker',
-          characteristics: ['夹击', '侧翼突破', '战术机动'],
-          isInnovative: true,
-        },
-        {
-          formation: 'defensive',
-          description: '楚军主力布阵防守，但被晋军突破',
-          side: 'defender',
-          characteristics: ['防守', '被动挨打'],
-        },
-      ],
-      heritage: [
-        {
-          type: 'idiom-proverb',
-          name: '退避三舍',
-          description: '比喻对人让步或回避。出自晋文公退避三舍故事',
-          significance: 'national',
-          relatedFigures: ['晋文公', '楚成王'],
-        },
-        {
-          type: 'place-name',
-          name: '城濮',
-          description: '山东鄄城西南',
-          location: '山东鄄城',
-          significance: 'regional',
-        },
-        {
-          type: 'museum',
-          name: '城濮之战纪念馆',
-          description: '纪念城濮之战的专题纪念馆',
-          location: '山东鄄城',
-          significance: 'local',
-          establishedYear: 2000,
-        },
-        {
-          type: 'literary-work',
-          name: '《左传·僖公二十八年》',
-          description: '详细记载城濮之战的经过',
-          significance: 'national',
-          relatedFigures: ['左丘明'],
-        },
-      ],
-      riverOperations: [
-        {
-          type: 'ford-crossing',
-          description: '晋军渡黄河迎击楚军',
-          riverName: '黄河',
-          side: 'attacker',
-          result: 'success',
-          position: 'midstream',
-        },
-      ],
-      logistics: [
-        {
-          type: 'food-provision',
-          description: '晋军"退避三舍"，获得当地诸侯的粮草支持',
-          side: 'attacker',
-          source: 'allied-support',
-          status: 'adequate',
-        },
-        {
-          type: 'supply-line',
-          description: '晋军以逸待劳，保障后勤补给线',
-          side: 'attacker',
-          source: 'home-base',
-          status: 'adequate',
-        },
-        {
-          type: 'food-provision',
-          description: '楚军孤军深入，后勤补给困难',
-          side: 'defender',
-          source: 'local-levy',
-          status: 'strained',
-        },
-      ],
     },
-  },
-  {
-    id: 'sa-551-confucius',
-    entityId: 'period-spring-autumn',
-    year: -551,
-    titleKey: 'event.sa-551-confucius.title',
-    summaryKey: 'event.sa-551-confucius.summary',
-    tags: ['culture', 'philosophy'],
-    location: { lon: 116.99, lat: 35.59, label: 'Qufu' },
   },
   {
     id: 'sa-506-boju',
@@ -541,69 +255,6 @@ export const CHINA_EVENTS: Event[] = [
           phase: '战中',
         },
       ],
-      causes: [
-        {
-          type: 'territorial-dispute',
-          description: '吴楚两国争夺江淮地区的控制权',
-          parties: ['吴国', '楚国'],
-          severity: 'major',
-          duration: 20,
-        },
-        {
-          type: 'revenge',
-          description: '吴国报复楚国多年来的侵扰',
-          parties: ['吴国', '楚国'],
-          severity: 'major',
-          duration: 10,
-        },
-        {
-          type: 'expansionism',
-          description: '吴国试图北上争霸',
-          parties: ['吴国'],
-          severity: 'major',
-        },
-      ],
-      armaments: [
-        { type: 'chariot', side: 'attacker', count: 3000, description: '吴军战车' },
-        { type: 'cavalry', side: 'attacker', isPrimary: true, count: 6000, description: '吴军骑兵' },
-        { type: 'infantry', side: 'attacker', count: 30000, description: '吴军步兵' },
-        { type: 'spear', side: 'attacker', count: 35000, description: '长矛兵' },
-        { type: 'bow', side: 'attacker', count: 10000, description: '吴军弓箭手' },
-        { type: 'halberd', side: 'defender', count: 20000, description: '楚军戟兵' },
-        { type: 'sword', side: 'both', description: '剑' },
-        { type: 'shield', side: 'defender', description: '盾牌' },
-        { type: 'dagger-axe', side: 'both', description: '戈' },
-      ],
-      literature: [
-        {
-          source: 'zuozhuan',
-          description: '吴楚柏举之战详细记载',
-          reliability: 'high',
-          characteristics: ['详细描写', '经典之战'],
-        },
-        {
-          source: 'shiji',
-          chapter: '吴太伯世家',
-          description: '吴王阖闾称霸之战',
-          reliability: 'high',
-          characteristics: ['人物刻画', '开疆拓土'],
-        },
-      ],
-      formations: [
-        {
-          formation: 'cavalry-flank',
-          description: '吴军使用骑兵进行侧翼迂回作战',
-          side: 'attacker',
-          characteristics: ['骑兵', '迂回', '快速突击'],
-          isInnovative: true,
-        },
-        {
-          formation: 'center-break',
-          description: '吴军集中兵力突破楚军中央防线',
-          side: 'attacker',
-          characteristics: ['中央突破', '分割包围'],
-        },
-      ],
     },
   },
 
@@ -615,6 +266,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-453-three-jin.title',
     summaryKey: 'event.ws-453-three-jin.summary',
     tags: ['politics'],
+    location: { lon: 111.5, lat: 36.1, label: '晋阳' },
   },
   {
     id: 'ws-356-shangyang-reform',
@@ -679,151 +331,6 @@ export const CHINA_EVENTS: Event[] = [
           phase: '诱敌阶段',
         },
       ],
-      aftermath: [
-        {
-          type: 'military-weakening',
-          description: '魏国主力部队损失惨重，国力衰退',
-          affectedParties: ['魏国'],
-          severity: 'significant',
-          scope: 'continental',
-          isLongTerm: true,
-          duration: 30,
-        },
-        {
-          type: 'political-upheaval',
-          description: '齐国声威大振，成为战国七雄之一',
-          affectedParties: ['齐国', '魏国'],
-          severity: 'significant',
-          scope: 'regional',
-          isLongTerm: true,
-        },
-      ],
-      causes: [
-        {
-          type: 'revenge',
-          description: '齐国报复魏国桂陵之战战败之仇',
-          parties: ['齐国', '魏国'],
-          severity: 'major',
-          duration: 3,
-        },
-        {
-          type: 'territorial-dispute',
-          description: '齐魏两国争夺中原地区霸权',
-          parties: ['齐国', '魏国'],
-          severity: 'major',
-          duration: 10,
-        },
-        {
-          type: 'expansionism',
-          description: '齐国试图遏制魏国扩张',
-          parties: ['齐国', '魏国'],
-          severity: 'minor',
-        },
-      ],
-      armaments: [
-        { type: 'chariot', side: 'attacker', isPrimary: true, count: 500, description: '齐军战车' },
-        { type: 'infantry', side: 'attacker', count: 8000, description: '齐军步兵' },
-        { type: 'cavalry', side: 'attacker', count: 300, description: '齐军骑兵' },
-        { type: 'spear', side: 'both', count: 10000, description: '长矛' },
-        { type: 'bow', side: 'attacker', count: 2000, description: '齐军弓箭手' },
-        { type: 'crossbow', side: 'attacker', count: 10000, description: '弩兵' },
-        { type: 'dagger-axe', side: 'defender', description: '魏军戈兵' },
-        { type: 'sword', side: 'both', description: '剑' },
-        { type: 'shield', side: 'both', description: '盾牌' },
-      ],
-      literature: [
-        {
-          source: 'shiji',
-          chapter: '孙子吴起列传',
-          description: '孙膑庞涓马陵之战',
-          reliability: 'high',
-          characteristics: ['军事分析', '经典之战', '谋略描写'],
-        },
-        {
-          source: 'zizhitongjian',
-          chapter: '周纪',
-          description: '马陵之战时间线',
-          reliability: 'medium',
-          characteristics: ['编年体', '宏观视角'],
-        },
-      ],
-      formations: [
-        {
-          formation: 'long-wedge',
-          description: '孙膑采用减灶计，诱导魏军进入狭窄山谷后用锥形阵突破',
-          side: 'attacker',
-          characteristics: ['伏击', '诱导', '突破'],
-          isInnovative: true,
-        },
-        {
-          formation: 'retreating',
-          description: '庞涓率军追击齐军，进入马陵狭道',
-          side: 'defender',
-          characteristics: ['追击', '中计'],
-        },
-      ],
-      heritage: [
-        {
-          type: 'idiom-proverb',
-          name: '减灶计',
-          description: '故意减少军灶以迷惑敌人的计谋。出自孙膑马陵之战',
-          significance: 'national',
-          relatedFigures: ['孙膑', '庞涓'],
-        },
-        {
-          type: 'idiom-proverb',
-          name: '围魏救赵',
-          description: '原指战国时齐军用围攻魏国的方法迫使魏国撤军救赵，后指袭击敌人后方以迫使敌人撤兵',
-          significance: 'national',
-          relatedFigures: ['孙膑', '庞涓'],
-        },
-        {
-          type: 'place-name',
-          name: '马陵',
-          description: '山东郯城马陵山，相传为马陵之战古战场',
-          location: '山东郯城',
-          significance: 'regional',
-        },
-        {
-          type: 'literary-work',
-          name: '《孙膑兵法》',
-          description: '孙膑所著兵书，记载马陵之战战例',
-          significance: 'national',
-          relatedFigures: ['孙膑'],
-        },
-        {
-          type: 'film-tv',
-          name: '《孙子兵法》电视剧',
-          description: '影视作品再现马陵之战',
-          significance: 'national',
-        },
-      ],
-      riverOperations: [
-        {
-          type: 'river-ambush',
-          description: '马陵河谷伏击战',
-          riverName: '马陵河',
-          side: 'attacker',
-          result: 'success',
-          position: 'downstream',
-          decisive: true,
-        },
-      ],
-      logistics: [
-        {
-          type: 'supply-line',
-          description: '齐军诱敌深入，确保退路补给线安全',
-          side: 'attacker',
-          source: 'home-base',
-          status: 'adequate',
-        },
-        {
-          type: 'food-provision',
-          description: '齐军每日减少灶台，迷惑魏军以为齐军溃逃',
-          side: 'attacker',
-          status: 'adequate',
-        },
-      ],
     },
   },
   {
@@ -833,6 +340,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-307-hufu-qishe.title',
     summaryKey: 'event.ws-307-hufu-qishe.summary',
     tags: ['reform', 'military', 'zhao'],
+    location: { lon: 114.5, lat: 36.6, label: '邯郸' },
   },
   {
     id: 'ws-284-yan-attack-qi',
@@ -874,6 +382,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ws-256-zhou-ends.title',
     summaryKey: 'event.ws-256-zhou-ends.summary',
     tags: ['politics'],
+    location: { lon: 112.45, lat: 34.62, label: '洛阳' },
   },
   {
     id: 'ws-260-changping',
@@ -927,204 +436,6 @@ export const CHINA_EVENTS: Event[] = [
           party: 'defender',
           impact: 'negative',
           phase: '相持阶段',
-        },
-      ],
-      aftermath: [
-        {
-          type: 'military-weakening',
-          description: '赵国主力军队损失殆尽，元气大伤',
-          affectedParties: ['赵国'],
-          severity: 'massive',
-          scope: 'continental',
-          isLongTerm: true,
-          duration: 40,
-        },
-        {
-          type: 'territorial-change',
-          description: '秦国占领上党地区',
-          affectedParties: ['秦国', '赵国'],
-          severity: 'significant',
-          scope: 'regional',
-        },
-        {
-          type: 'political-upheaval',
-          description: '东方六国无力抵抗秦国统一的趋势',
-          affectedParties: ['六国'],
-          severity: 'massive',
-          scope: 'continental',
-          isLongTerm: true,
-        },
-      ],
-      causes: [
-        {
-          type: 'territorial-dispute',
-          description: '秦赵两国争夺上党地区的控制权',
-          parties: ['秦国', '赵国'],
-          severity: 'critical',
-          duration: 5,
-        },
-        {
-          type: 'expansionism',
-          description: '秦国实施远交近攻战略，意图消灭赵国',
-          parties: ['秦国'],
-          severity: 'critical',
-        },
-        {
-          type: 'political-rivalry',
-          description: '秦赵两国在战国后期的政治和军事竞争',
-          parties: ['秦国', '赵国'],
-          severity: 'major',
-          duration: 30,
-        },
-      ],
-      armaments: [
-        { type: 'cavalry', side: 'attacker', isPrimary: true, count: 10000, description: '秦军骑兵' },
-        { type: 'infantry', side: 'attacker', count: 50000, description: '秦军步兵' },
-        { type: 'spear', side: 'attacker', count: 60000, description: '长矛兵' },
-        { type: 'bow', side: 'attacker', count: 20000, description: '秦军弓箭手' },
-        { type: 'sword', side: 'defender', count: 10000, description: '赵军剑士' },
-        { type: 'halberd', side: 'defender', count: 30000, description: '戟兵' },
-        { type: 'chariot', side: 'both', count: 1000, description: '战车' },
-        { type: 'shield', side: 'both', description: '盾牌' },
-        { type: 'armor', side: 'both', description: '铠甲' },
-      ],
-      literature: [
-        {
-          source: 'shiji',
-          chapter: '赵世家',
-          description: '秦赵长平之战详细记载',
-          reliability: 'high',
-          characteristics: ['详细描写', '军事分析', '经典之战'],
-        },
-        {
-          source: 'zizhitongjian',
-          chapter: '周纪',
-          description: '长平之战时间线',
-          reliability: 'high',
-          characteristics: ['编年体', '宏观视角'],
-        },
-        {
-          source: 'hanshu',
-          description: '汉书中关于长平之战的记载',
-          reliability: 'medium',
-          characteristics: ['史料补充'],
-        },
-      ],
-      formations: [
-        {
-          formation: 'encirclement',
-          description: '白起指挥秦军采用锥形阵和包围阵型围困赵军',
-          side: 'attacker',
-          characteristics: ['包围', '分割', '消耗'],
-          isInnovative: true,
-        },
-        {
-          formation: 'defensive',
-          description: '赵军被迫结阵防守，等待援军',
-          side: 'defender',
-          characteristics: ['防守', '等待'],
-        },
-      ],
-      surrender: [
-        {
-          type: 'mass-surrender',
-          description: '赵军在断粮四十六天后，四十五万赵军向秦军投降',
-          side: 'defender',
-          severity: 'massive',
-          number: 450000,
-          treatment: 'executed',
-          involvesKeyPerson: false,
-          impact: 'decisive',
-        },
-      ],
-      commandersLoss: [
-        {
-          name: '赵括',
-          type: 'killed-in-action',
-          description: '赵括率军突围时被秦军射杀',
-          side: 'defender',
-          severity: 'critical',
-          phase: '突围阶段',
-          isKeyCommander: true,
-        },
-      ],
-      heritage: [
-        {
-          type: 'idiom-proverb',
-          name: '纸上谈兵',
-          description: '比喻空谈理论，不能解决实际问题。出自赵括长平之败',
-          significance: 'national',
-          relatedFigures: ['赵括', '白起'],
-        },
-        {
-          type: 'idiom-proverb',
-          name: '负荆请罪',
-          description: '比喻主动向人认错、道歉。出自蔺相如与廉颇的故事',
-          significance: 'national',
-          relatedFigures: ['廉颇', '蔺相如'],
-        },
-        {
-          type: 'memorial',
-          name: '长平之战纪念馆',
-          description: '位于山西省高平市，展示长平之战历史',
-          location: '山西高平',
-          significance: 'regional',
-          establishedYear: 1995,
-        },
-        {
-          type: 'archaeological-site',
-          name: '长平古战场遗址',
-          description: '战国时期长平之战古战场考古遗址',
-          location: '山西高平',
-          significance: 'national',
-        },
-        {
-          type: 'literary-work',
-          name: '《史记·赵世家》',
-          description: '司马迁所著，详细记载长平之战经过',
-          significance: 'national',
-          relatedFigures: ['司马迁'],
-        },
-        {
-          type: 'film-tv',
-          name: '《大秦帝国》',
-          description: '电视剧再现长平之战场景',
-          significance: 'national',
-        },
-      ],
-      riverOperations: [
-        {
-          type: 'river-crossing',
-          description: '秦军渡过丹水实施包围',
-          riverName: '丹水',
-          side: 'attacker',
-          result: 'success',
-          position: 'upstream',
-          decisive: true,
-        },
-      ],
-      logistics: [
-        {
-          type: 'food-provision',
-          description: '秦军断赵粮道，赵军后勤补给被切断',
-          side: 'defender',
-          source: 'home-base',
-          status: 'cut-off',
-          decisive: true,
-        },
-        {
-          type: 'supply-line',
-          description: '秦军建立稳固的补给线，确保前线粮草供应',
-          side: 'attacker',
-          source: 'home-base',
-          status: 'adequate',
-        },
-        {
-          type: 'food-provision',
-          description: '赵军断粮四十六天，士兵相互残食',
-          side: 'defender',
-          status: 'depleted',
-          decisive: true,
         },
       ],
     },
@@ -1268,6 +579,76 @@ export const CHINA_EVENTS: Event[] = [
     location: { lon: 109.0, lat: 34.33, label: 'Xianyang' },
   },
 
+  // Chu-Han Contention - 巨鹿之战
+  {
+    id: 'ch-207-juliu',
+    entityId: 'period-chu-han',
+    year: -207,
+    titleKey: 'event.ch-207-juliu.title',
+    summaryKey: 'event.ch-207-juliu.summary',
+    tags: ['war', 'chu', 'han'],
+    location: { lon: 114.9, lat: 37.5, label: '巨鹿' },
+    battle: {
+      belligerents: {
+        attacker: '项羽楚军',
+        defender: '秦军',
+      },
+      result: 'attacker_win',
+      battleType: 'civil-war',
+      impact: 'decisive',
+      scale: 'massive',
+      commanders: {
+        attacker: ['项羽', '英布', '蒲将军'],
+        defender: ['章邯', '王离'],
+      },
+      strategy: ['offensive', 'encirclement', 'ambush'],
+      terrain: ['plains', 'marsh'],
+      casualties: {
+        attacker: 20000,
+        defender: 200000,
+        attackerCasualtyType: 'killed',
+        defenderCasualtyType: 'killed',
+        source: '《史记》《项羽本纪》记载',
+        reliability: 'medium',
+      },
+    },
+  },
+
+  // Chu-Han Contention - 垓下之战
+  {
+    id: 'ch-202-gaixia',
+    entityId: 'period-chu-han',
+    year: -202,
+    titleKey: 'event.ch-202-gaixia.title',
+    summaryKey: 'event.ch-202-gaixia.summary',
+    tags: ['war', 'chu', 'han'],
+    location: { lon: 116.8, lat: 33.4, label: '垓下' },
+    battle: {
+      belligerents: {
+        attacker: '刘邦汉军',
+        defender: '项羽楚军',
+      },
+      result: 'attacker_win',
+      battleType: 'civil-war',
+      impact: 'decisive',
+      scale: 'massive',
+      commanders: {
+        attacker: ['刘邦', '韩信', '彭越', '英布'],
+        defender: ['项羽', '虞姬'],
+      },
+      strategy: ['encirclement', 'offensive'],
+      terrain: ['plains'],
+      casualties: {
+        attacker: 30000,
+        defender: 100000,
+        attackerCasualtyType: 'killed',
+        defenderCasualtyType: 'killed',
+        source: '《史记》《项羽本纪》记载',
+        reliability: 'medium',
+      },
+    },
+  },
+
   // Qin
   {
     id: 'qin-214-lingqu',
@@ -1276,6 +657,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.qin-214-lingqu.title',
     summaryKey: 'event.qin-214-lingqu.summary',
     tags: ['infrastructure'],
+    location: { lon: 111.2, lat: 25.0, label: '桂林' },
   },
   {
     id: 'qin-210-first-emperor-death',
@@ -1284,6 +666,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.qin-210-first-emperor-death.title',
     summaryKey: 'event.qin-210-first-emperor-death.summary',
     tags: ['politics'],
+    location: { lon: 109.0, lat: 34.33, label: '咸阳' },
   },
   {
     id: 'qin-209-dazexiang',
@@ -1292,6 +675,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.qin-209-dazexiang.title',
     summaryKey: 'event.qin-209-dazexiang.summary',
     tags: ['revolt'],
+    location: { lon: 115.4, lat: 34.5, label: '大泽乡' },
   },
 
   // Western Han
@@ -1311,6 +695,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.han-154-seven-states.title',
     summaryKey: 'event.han-154-seven-states.summary',
     tags: ['revolt'],
+    location: { lon: 112.45, lat: 34.62, label: '洛阳' },
   },
   {
     id: 'han-138-zhangqian',
@@ -1319,6 +704,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.han-138-zhangqian.title',
     summaryKey: 'event.han-138-zhangqian.summary',
     tags: ['diplomacy'],
+    location: { lon: 108.94, lat: 34.34, label: '长安' },
   },
 
   // Eastern Han
@@ -1329,6 +715,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.eh-105-paper.title',
     summaryKey: 'event.eh-105-paper.summary',
     tags: ['technology'],
+    location: { lon: 112.45, lat: 34.62, label: '洛阳' },
   },
   {
     id: 'eh-184-yellow-turbans',
@@ -1337,6 +724,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.eh-184-yellow-turbans.title',
     summaryKey: 'event.eh-184-yellow-turbans.summary',
     tags: ['revolt'],
+    location: { lon: 114.9, lat: 37.5, label: '巨鹿' },
   },
   {
     id: 'eh-220-han-ends',
@@ -1345,6 +733,133 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.eh-220-han-ends.title',
     summaryKey: 'event.eh-220-han-ends.summary',
     tags: ['politics'],
+    location: { lon: 112.45, lat: 34.62, label: '洛阳' },
+  },
+
+  // Three Kingdoms - 官渡之战
+  {
+    id: 'tk-200-guandu',
+    entityId: 'period-three-kingdoms',
+    year: 200,
+    titleKey: 'event.tk-200-guandu.title',
+    summaryKey: 'event.tk-200-guandu.summary',
+    tags: ['war', 'three-kingdoms'],
+    location: { lon: 114.0, lat: 35.0, label: '官渡' },
+    battle: {
+      belligerents: {
+        attacker: '曹操军',
+        defender: '袁绍军',
+      },
+      result: 'attacker_win',
+      battleType: 'civil-war',
+      impact: 'decisive',
+      scale: 'large',
+      commanders: {
+        attacker: ['曹操', '关羽', '张辽'],
+        defender: ['袁绍', '颜良', '文丑'],
+      },
+      strategy: ['defensive', 'ambush', 'pincer'],
+      terrain: ['plains'],
+      casualties: {
+        attacker: 8000,
+        defender: 100000,
+        attackerCasualtyType: 'killed',
+        defenderCasualtyType: 'killed',
+        source: '《三国演义》《三国志》记载',
+        reliability: 'high',
+      },
+    },
+  },
+
+  // Three Kingdoms - 赤壁之战
+  {
+    id: 'tk-208-chibi',
+    entityId: 'period-three-kingdoms',
+    year: 208,
+    titleKey: 'event.tk-208-chibi.title',
+    summaryKey: 'event.tk-208-chibi.summary',
+    tags: ['war', 'three-kingdoms', 'turningPoint'],
+    location: { lon: 113.0, lat: 30.0, label: '赤壁' },
+    battle: {
+      belligerents: {
+        attacker: '曹操军',
+        defender: '孙刘联军',
+      },
+      result: 'defender_win',
+      battleType: 'defense',
+      impact: 'decisive',
+      scale: 'massive',
+      commanders: {
+        attacker: ['曹操', '曹纯', '蔡瑁'],
+        defender: ['周瑜', '刘备', '诸葛亮', '鲁肃', '黄盖'],
+      },
+      strategy: ['defensive', 'fire', 'alliance'],
+      terrain: ['water'],
+      pacing: 'rapid',
+      timeOfDay: 'evening',
+      casualties: {
+        attacker: 200000,
+        defender: 5000,
+        attackerCasualtyType: 'killed',
+        defenderCasualtyType: 'killed',
+        source: '《三国演义》《三国志》记载',
+        reliability: 'medium',
+      },
+      turningPoints: [
+        {
+          type: 'fire-attack',
+          description: '黄盖火攻曹军战船',
+          impact: 'positive',
+        },
+        {
+          type: 'weather-change',
+          description: '东风突起，火势蔓延',
+          impact: 'positive',
+        },
+      ],
+    },
+  },
+
+  // Three Kingdoms - 夷陵之战
+  {
+    id: 'tk-222-yiling',
+    entityId: 'period-three-kingdoms',
+    year: 222,
+    titleKey: 'event.tk-222-yiling.title',
+    summaryKey: 'event.tk-222-yiling.summary',
+    tags: ['war', 'three-kingdoms'],
+    location: { lon: 111.0, lat: 30.5, label: '夷陵' },
+    battle: {
+      belligerents: {
+        attacker: '刘备蜀军',
+        defender: '孙权吴军',
+      },
+      result: 'defender_win',
+      battleType: 'civil-war',
+      impact: 'major',
+      scale: 'large',
+      commanders: {
+        attacker: ['刘备', '冯习', '张南'],
+        defender: ['陆逊', '朱然', '韩当'],
+      },
+      strategy: ['defensive', 'fire', 'guerrilla'],
+      terrain: ['mountains', 'forest'],
+      casualties: {
+        attacker: 80000,
+        defender: 15000,
+        attackerCasualtyType: 'killed',
+        defenderCasualtyType: 'killed',
+        source: '《三国演义》《三国志》记载',
+        reliability: 'high',
+      },
+      turningPoints: [
+        {
+          type: 'fire-attack',
+          description: '陆逊火烧连营七百里',
+          impact: 'positive',
+        },
+      ],
+    },
   },
 
   // Sui
@@ -1355,6 +870,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.sui-589-unify.title',
     summaryKey: 'event.sui-589-unify.summary',
     tags: ['unification'],
+    location: { lon: 118.8, lat: 32.1, label: '健康' },
   },
   {
     id: 'sui-605-grand-canal',
@@ -1363,6 +879,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.sui-605-grand-canal.title',
     summaryKey: 'event.sui-605-grand-canal.summary',
     tags: ['infrastructure'],
+    location: { lon: 112.45, lat: 34.62, label: '洛阳' },
   },
 
   // Tang
@@ -1373,6 +890,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.tang-618-founded.title',
     summaryKey: 'event.tang-618-founded.summary',
     tags: ['founding'],
+    location: { lon: 108.94, lat: 34.34, label: '长安' },
   },
   {
     id: 'tang-755-anlushan',
@@ -1381,6 +899,55 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.tang-755-anlushan.title',
     summaryKey: 'event.tang-755-anlushan.summary',
     tags: ['revolt'],
+    location: { lon: 116.4, lat: 40.0, label: '范阳' },
+  },
+
+  // Eastern Jin - 淝水之战
+  {
+    id: 'ej-383-feishui',
+    entityId: 'jin-eastern',
+    year: 383,
+    titleKey: 'event.ej-383-feishui.title',
+    summaryKey: 'event.ej-383-feishui.summary',
+    tags: ['war', 'jin', 'turningPoint'],
+    location: { lon: 118.8, lat: 31.3, label: '淝水' },
+    battle: {
+      belligerents: {
+        attacker: '前秦军',
+        defender: '东晋军',
+      },
+      result: 'defender_win',
+      battleType: 'defense',
+      impact: 'decisive',
+      scale: 'massive',
+      commanders: {
+        attacker: ['苻坚', '苻融', '慕容垂'],
+        defender: ['谢玄', '谢石', '刘牢之'],
+      },
+      strategy: ['defensive', 'offensive', 'guerrilla'],
+      terrain: ['water', 'plains'],
+      pacing: 'rapid',
+      casualties: {
+        attacker: 700000,
+        defender: 20000,
+        attackerCasualtyType: 'killed',
+        defenderCasualtyType: 'killed',
+        source: '《晋书》《淝水之战》记载',
+        reliability: 'high',
+      },
+      turningPoints: [
+        {
+          type: 'strategic-mistake',
+          description: '苻坚误判晋军实力，轻敌冒进',
+          impact: 'positive',
+        },
+        {
+          type: 'defection',
+          description: '朱序倒戈，喊话秦军已败',
+          impact: 'positive',
+        },
+      ],
+    },
   },
 
   // Song
@@ -1391,6 +958,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.song-960-founded.title',
     summaryKey: 'event.song-960-founded.summary',
     tags: ['founding'],
+    location: { lon: 114.3, lat: 34.8, label: '开封' },
   },
   {
     id: 'song-1127-jingkang',
@@ -1399,6 +967,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.song-1127-jingkang.title',
     summaryKey: 'event.song-1127-jingkang.summary',
     tags: ['war', 'politics'],
+    location: { lon: 114.3, lat: 34.8, label: '开封' },
   },
 
   // Yuan
@@ -1409,6 +978,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.yuan-1271-founded.title',
     summaryKey: 'event.yuan-1271-founded.summary',
     tags: ['founding'],
+    location: { lon: 116.4, lat: 39.9, label: '大都' },
   },
 
   // Ming
@@ -1419,6 +989,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ming-1368-founded.title',
     summaryKey: 'event.ming-1368-founded.summary',
     tags: ['founding'],
+    location: { lon: 118.8, lat: 32.1, label: '南京' },
   },
   {
     id: 'ming-1405-zhenghe',
@@ -1427,6 +998,50 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.ming-1405-zhenghe.title',
     summaryKey: 'event.ming-1405-zhenghe.summary',
     tags: ['maritime'],
+    location: { lon: 118.8, lat: 32.1, label: '南京' },
+  },
+
+  // Ming - 萨尔浒之战
+  {
+    id: 'ming-1619-sahulu',
+    entityId: 'ming',
+    year: 1619,
+    titleKey: 'event.ming-1619-sahulu.title',
+    summaryKey: 'event.ming-1619-sahulu.summary',
+    tags: ['war', 'ming', 'qing', 'turningPoint'],
+    location: { lon: 124.5, lat: 42.0, label: '萨尔浒' },
+    battle: {
+      belligerents: {
+        attacker: '后金军',
+        defender: '明军',
+      },
+      result: 'attacker_win',
+      battleType: 'invasion',
+      impact: 'decisive',
+      scale: 'massive',
+      commanders: {
+        attacker: ['努尔哈赤', '代善', '皇太极', '莽古尔泰'],
+        defender: ['杨镐', '杜松', '刘綎', '李如柏'],
+      },
+      strategy: ['offensive', 'pincer', 'ambush'],
+      terrain: ['mountains', 'plains'],
+      pacing: 'rapid',
+      casualties: {
+        attacker: 5000,
+        defender: 45000,
+        attackerCasualtyType: 'killed',
+        defenderCasualtyType: 'killed',
+        source: '《明史》《清实录》记载',
+        reliability: 'high',
+      },
+      turningPoints: [
+        {
+          type: 'reinforcement-arrival',
+          description: '努尔哈赤采取各个击破战术',
+          impact: 'positive',
+        },
+      ],
+    },
   },
 
   // Qing
@@ -1437,6 +1052,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.qing-1644-founded.title',
     summaryKey: 'event.qing-1644-founded.summary',
     tags: ['founding'],
+    location: { lon: 116.4, lat: 39.9, label: '北京' },
   },
   {
     id: 'qing-1840-opium',
@@ -1445,6 +1061,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.qing-1840-opium.title',
     summaryKey: 'event.qing-1840-opium.summary',
     tags: ['war'],
+    location: { lon: 113.3, lat: 23.1, label: '广州' },
   },
 
   // ROC
@@ -1455,6 +1072,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.roc-1911-xinhai.title',
     summaryKey: 'event.roc-1911-xinhai.summary',
     tags: ['revolution'],
+    location: { lon: 114.3, lat: 30.6, label: '武昌' },
   },
 
   // PRC
@@ -1465,6 +1083,7 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.prc-1949-founded.title',
     summaryKey: 'event.prc-1949-founded.summary',
     tags: ['founding'],
+    location: { lon: 116.4, lat: 39.9, label: '北京' },
   },
   {
     id: 'prc-1978-reform',
@@ -1473,5 +1092,9 @@ export const CHINA_EVENTS: Event[] = [
     titleKey: 'event.prc-1978-reform.title',
     summaryKey: 'event.prc-1978-reform.summary',
     tags: ['reform'],
+    location: { lon: 116.4, lat: 39.9, label: '北京' },
   },
 ];
+;
+;
+;

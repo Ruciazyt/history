@@ -1,4 +1,4 @@
-import type { Event } from './types';
+import { Event } from './types';
 
 /**
  * 战役因果链分析模块
@@ -117,7 +117,7 @@ export function buildBattleChainGraph(battles: Event[]): Map<string, BattleChain
       const battle1 = battles[i];
       const battle2 = battles[j];
       
-      if (hasTemporalCausalRelation(battle1, battle2)) {
+      if (battle1 && battle2 && hasTemporalCausalRelation(battle1, battle2)) {
         const probability = getCausalProbability(battle1, battle2);
         
         if (probability > 0.4) {
@@ -211,12 +211,15 @@ export function getMostInfluentialChains(battles: Event[], limit: number = 5): B
                        b.battle?.impact === 'major' ? 2 : 1;
       }
       
-      chains.push({
-        rootBattle: chain[0],
-        battles: chain,
-        length: chain.length,
-        totalImpact,
-      });
+      const rootBattle = chain[0];
+      if (rootBattle) {
+        chains.push({
+          rootBattle,
+          battles: chain,
+          length: chain.length,
+          totalImpact,
+        });
+      }
     }
   }
   
@@ -240,6 +243,8 @@ export function analyzeChainType(battles: Event[]): ChainInsight | null {
   for (let i = 0; i < battles.length - 1; i++) {
     const current = battles[i];
     const next = battles[i + 1];
+    
+    if (!current || !next) continue;
     
     // 规模升级
     const scaleOrder = ['small', 'medium', 'large', 'massive'];
@@ -284,11 +289,13 @@ export function analyzeChainType(battles: Event[]): ChainInsight | null {
   }
   
   const battleIds = battles.map(b => b.id);
+  const firstBattle = battles[0];
+  const lastBattle = battles[battles.length - 1];
   
   if (maxCount === escalationCount) {
     return {
       type: 'escalation',
-      description: `战役规模逐步升级，从${battles[0].battle?.scale}到${battles[battles.length - 1].battle?.scale}，冲突强度不断增加`,
+      description: `战役规模逐步升级，从${firstBattle?.battle?.scale ?? '未知'}到${lastBattle?.battle?.scale ?? '未知'}，冲突强度不断增加`,
       battles: battleIds,
       confidence: Math.min(0.5 + escalationCount * 0.15, 0.9),
     };

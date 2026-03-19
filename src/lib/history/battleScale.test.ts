@@ -18,7 +18,6 @@ import {
   hasScaleData,
   getScaleDistributionInsight,
   getScaleOutcomeInsight,
-  getScaleTypeInsight,
   getScaleInsights,
 } from './battleScale';
 import { Event } from './types';

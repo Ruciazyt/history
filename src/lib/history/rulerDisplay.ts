@@ -1,5 +1,7 @@
-import type { Ruler, Era } from './types';
+import type { Ruler, Era, Event } from './types';
 import { formatYear } from './utils';
+
+export type { Ruler, Era, Event };
 
 /**
  * 获取帝王显示名称（谥号+名字）

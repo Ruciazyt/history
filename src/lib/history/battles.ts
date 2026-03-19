@@ -1,4 +1,6 @@
-import type { Event } from './types';
+import type { Event, BattleType, BattleImpact } from './types';
+
+export type { Event };
 
 /**
  * Filter events to get only battles (wars)
@@ -24,6 +26,20 @@ export function getBattleResultLabel(result?: Event['battle']): string {
 }
 
 /**
+ * Get battle impact label in Chinese
+ */
+export function getBattleImpactLabel(impact?: string): string {
+  if (!impact) return '';
+  const labels: Record<string, string> = {
+    decisive: '决定性战役',
+    major: '重要战役',
+    minor: '小型战役',
+    unknown: '未知',
+  };
+  return labels[impact] || impact;
+}
+
+/**
  * Sort battles by year (ascending by default)
  */
 export function sortBattlesByYear(battles: Event[], ascending = true): Event[] {
@@ -42,6 +58,37 @@ export function getBattlesByYearRange(
 ): Event[] {
   const battles = getBattles(events);
   return battles.filter(b => b.year >= startYear && b.year <= endYear);
+}
+
+/**
+ * Get a random battle from events.
+ * Returns undefined if no battles exist in the events array.
+ */
+export function getRandomBattle(events: Event[]): Event | undefined {
+  const battles = getBattles(events);
+  if (battles.length === 0) return undefined;
+  return battles[Math.floor(Math.random() * battles.length)];
+}
+
+/**
+ * Get the "battle of the day" — a deterministic random battle seeded by date.
+ * The same date always returns the same battle, making it suitable for
+ * "今日战役" / "Battle of the Day" features.
+ *
+ * @param events  - Full event list
+ * @param date    - Optional date for seeding (defaults to today).
+ *                  Pass a custom Date to get a deterministic result for testing.
+ */
+export function getBattleOfTheDay(events: Event[], date?: Date): Event | undefined {
+  const battles = getBattles(events);
+  if (battles.length === 0) return undefined;
+
+  const d = date ?? new Date();
+  // Use year + month + day as a numeric seed so the same calendar day always
+  // maps to the same battle index.
+  const seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+  const index = seed % battles.length;
+  return battles[index];
 }
 
 /**
@@ -188,25 +235,32 @@ export type BattleTimelineEntry = {
 };
 
 /**
- * Get timeline color for era
+ * Get timeline color for era.
+ * Must use the same era IDs as chinaEras.ts.
  */
 export function getEraColor(eraId: string): string {
   const colorMap: Record<string, string> = {
+    'wz-western-zhou': '#f59e0b', // amber
     'period-spring-autumn': '#3b82f6', // blue
     'period-warring-states': '#a855f7', // purple
     'qin': '#52525b', // zinc
-    'han': '#dc2626', // red
-    'wz-western-zhou': '#f59e0b', // amber
-    'wz-eastern-zhou': '#f59e0b',
-    'period-three-kingdoms': '#ef4444',
-    'period-north-south': '#22c55e',
-    'sui': '#14b8a6',
-    'tang': '#f97316',
-    'period-five-dynasties': '#ec4899',
-    'song': '#8b5cf6',
-    'yuan': '#06b6d4',
-    'ming': '#eab308',
-    'qing': '#65a30d',
+    'han-western': '#dc2626', // red
+    'han': '#dc2626', // alias
+    'xin': '#eab308', // yellow
+    'han-eastern': '#f97316', // orange
+    'three-kingdoms': '#22c55e', // green
+    'jin-western': '#06b6d4', // cyan
+    'jin-eastern-16k': '#14b8a6', // teal
+    'southern-northern': '#6366f1', // indigo
+    'sui': '#ec4899', // pink
+    'tang': '#f97316', // orange
+    'five-dynasties-ten-kingdoms': '#ec4899', // pink
+    'song': '#8b5cf6', // violet
+    'yuan': '#06b6d4', // cyan
+    'ming': '#d97706', // amber
+    'qing': '#16a34a', // emerald
+    'roc': '#2563eb', // blue
+    'prc': '#dc2626', // red
   };
   return colorMap[eraId] || '#6b7280';
 }
@@ -243,9 +297,13 @@ export function groupBattlesByWar(battles: Event[]): BattleWarGroup[] {
   
   // Sort wars by first battle year
   const result: BattleWarGroup[] = [];
-  const sortedWars = Array.from(warGroups.entries()).sort(
-    (a, b) => a[1][0].year - b[1][0].year
-  );
+  const sortedWars = Array.from(warGroups.entries())
+    .filter(([, battles]) => battles.length > 0)
+    .sort((a, b) => {
+      const aFirst = a[1][0];
+      const bFirst = b[1][0];
+      return (aFirst?.year ?? 0) - (bFirst?.year ?? 0);
+    });
   
   for (const [warName, warBattles] of sortedWars) {
     result.push({ warName, battles: warBattles });
@@ -528,8 +586,7 @@ export function compareBattles(battle1: Event, battle2: Event): BattleComparison
  * Generate comparison summary text
  */
 export function getComparisonSummary(
-  comparison: BattleComparison['comparison'],
-  _t: (key: string) => string
+  comparison: BattleComparison['comparison']
 ): string[] {
   const summary: string[] = [];
   
@@ -1396,14 +1453,16 @@ function extractStreaks(results: BattleResult[], streakType: 'win' | 'loss'): Ba
     } else {
       // Streak broken
       if (currentStreak.length >= 2) {
+        const firstBattle = currentStreak[0];
+        const battleData = firstBattle?.battle?.battle;
+        const belligerents = battleData?.belligerents;
+        const participantSide = firstBattle?.participant === 'attacker' ? 'attacker' : 'defender';
         streaks.push({
-          participant: currentStreak[0].battle.battle?.belligerents?.[
-            currentStreak[0].participant === 'attacker' ? 'attacker' : 'defender'
-          ] || '',
+          participant: belligerents?.[participantSide] ?? '',
           streakType,
           length: currentStreak.length,
-          startYear: currentStreak[0].year,
-          endYear: currentStreak[currentStreak.length - 1].year,
+          startYear: firstBattle?.year ?? 0,
+          endYear: currentStreak[currentStreak.length - 1]?.year ?? 0,
           battles: currentStreak.map(r => r.battle),
           isLongest: false,
         });
@@ -1414,14 +1473,16 @@ function extractStreaks(results: BattleResult[], streakType: 'win' | 'loss'): Ba
   
   // Handle last streak
   if (currentStreak.length >= 2) {
+    const firstBattle = currentStreak[0];
+    const battleData = firstBattle?.battle?.battle;
+    const belligerents = battleData?.belligerents;
+    const participantSide = firstBattle?.participant === 'attacker' ? 'attacker' : 'defender';
     streaks.push({
-      participant: currentStreak[0].battle.battle?.belligerents?.[
-        currentStreak[0].participant === 'attacker' ? 'attacker' : 'defender'
-      ] || '',
+      participant: belligerents?.[participantSide] ?? '',
       streakType,
       length: currentStreak.length,
-      startYear: currentStreak[0].year,
-      endYear: currentStreak[currentStreak.length - 1].year,
+      startYear: firstBattle?.year ?? 0,
+      endYear: currentStreak[currentStreak.length - 1]?.year ?? 0,
       battles: currentStreak.map(r => r.battle),
       isLongest: false,
     });
@@ -1674,8 +1735,8 @@ export function getCommanderStats(battles: Event[], commander: string): Commande
   let lastBattleYear = 0;
   
   if (sortedBattles.length > 0) {
-    firstBattleYear = sortedBattles[0].battle.year;
-    lastBattleYear = sortedBattles[sortedBattles.length - 1].battle.year;
+    firstBattleYear = sortedBattles[0]?.battle?.year ?? 0;
+    lastBattleYear = sortedBattles[sortedBattles.length - 1]?.battle?.year ?? 0;
   }
   
   for (const { battle, side } of commanderBattles) {
@@ -1836,8 +1897,6 @@ export function hasCommanderData(battles: Event[]): boolean {
 }
 
 // ==================== Battle Type Analysis ====================
-
-import type { BattleType, BattleImpact } from './types';
 
 /** Battle type statistics */
 export type BattleTypeStats = {
@@ -2169,7 +2228,7 @@ export function getBattleTypeInsights(battles: Event[]): BattleTypeInsight[] {
  */
 export function getMostCommonBattleType(battles: Event[]): BattleTypeStats | null {
   const stats = getAllBattleTypesStats(battles);
-  return stats.length > 0 ? stats[0] : null;
+  return stats.length > 0 ? (stats[0] ?? null) : null;
 }
 
 /**
@@ -2286,7 +2345,7 @@ export function getImpactDistribution(battles: Event[]): { impact: BattleImpact;
  */
 export function getMostCommonImpact(battles: Event[]): BattleImpactStats | null {
   const stats = getAllBattleImpactsStats(battles);
-  return stats.length > 0 ? stats[0] : null;
+  return stats.length > 0 ? (stats[0] ?? null) : null;
 }
 
 /**
@@ -2531,9 +2590,13 @@ export function getTopRivalries(battles: Event[], limit = 10): FactionVsFaction[
   
   for (let i = 0; i < factions.length; i++) {
     for (let j = i + 1; j < factions.length; j++) {
-      const rivalry = getFactionVsFaction(battles, factions[i], factions[j]);
-      if (rivalry && rivalry.battles.length > 0) {
-        rivalries.push(rivalry);
+      const factionI = factions[i];
+      const factionJ = factions[j];
+      if (factionI && factionJ) {
+        const rivalry = getFactionVsFaction(battles, factionI, factionJ);
+        if (rivalry && rivalry.battles.length > 0) {
+          rivalries.push(rivalry);
+        }
       }
     }
   }
@@ -2590,12 +2653,14 @@ export function getFactionInsights(battles: Event[]): FactionInsight[] {
     .sort((a, b) => b.attackerWinRate - a.attackerWinRate);
   if (aggressiveFactions.length > 0) {
     const aggressive = aggressiveFactions[0];
-    insights.push({
-      faction: aggressive.name,
-      insight: `${aggressive.name} 作为进攻方时胜率高达 ${aggressive.attackerWinRate.toFixed(1)}%，是最具进攻性的势力`,
-      confidence: aggressive.asAttacker >= 5 ? 'high' : 'medium',
-      stat: `${aggressive.attackerWinRate.toFixed(1)}% 进攻胜率`,
-    });
+    if (aggressive) {
+      insights.push({
+        faction: aggressive.name,
+        insight: `${aggressive.name} 作为进攻方时胜率高达 ${aggressive.attackerWinRate.toFixed(1)}%，是最具进攻性的势力`,
+        confidence: aggressive.asAttacker >= 5 ? 'high' : 'medium',
+        stat: `${aggressive.attackerWinRate.toFixed(1)}% 进攻胜率`,
+      });
+    }
   }
   
   // Most defensive (defender wins)
@@ -2604,27 +2669,31 @@ export function getFactionInsights(battles: Event[]): FactionInsight[] {
     .sort((a, b) => b.defenderWinRate - a.defenderWinRate);
   if (defensiveFactions.length > 0) {
     const defensive = defensiveFactions[0];
-    insights.push({
-      faction: defensive.name,
-      insight: `${defensive.name} 作为防守方时表现出色，防守胜率达 ${defensive.defenderWinRate.toFixed(1)}%`,
-      confidence: defensive.asDefender >= 5 ? 'high' : 'medium',
-      stat: `${defensive.defenderWinRate.toFixed(1)}% 防守胜率`,
-    });
+    if (defensive) {
+      insights.push({
+        faction: defensive.name,
+        insight: `${defensive.name} 作为防守方时表现出色，防守胜率达 ${defensive.defenderWinRate.toFixed(1)}%`,
+        confidence: defensive.asDefender >= 5 ? 'high' : 'medium',
+        stat: `${defensive.defenderWinRate.toFixed(1)}% 防守胜率`,
+      });
+    }
   }
   
   // Longest military history
   const sortedByHistory = [...allStats].sort((a, b) => 
     (b.yearRange.end - b.yearRange.start) - (a.yearRange.end - a.yearRange.start)
   );
-  if (sortedByHistory.length > 0 && sortedByHistory[0].yearRange.end !== sortedByHistory[0].yearRange.start) {
+  if (sortedByHistory.length > 0) {
     const longestHistory = sortedByHistory[0];
-    const span = longestHistory.yearRange.end - longestHistory.yearRange.start;
-    insights.push({
-      faction: longestHistory.name,
-      insight: `${longestHistory.name} 军事活动跨度最长，持续约 ${span} 年`,
-      confidence: 'medium',
-      stat: `约 ${span} 年`,
-    });
+    if (longestHistory && longestHistory.yearRange.end !== longestHistory.yearRange.start) {
+      const span = longestHistory.yearRange.end - longestHistory.yearRange.start;
+      insights.push({
+        faction: longestHistory.name,
+        insight: `${longestHistory.name} 军事活动跨度最长，持续约 ${span} 年`,
+        confidence: 'medium',
+        stat: `约 ${span} 年`,
+      });
+    }
   }
   
   return insights;

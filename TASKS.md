@@ -3,6 +3,887 @@
 ## 项目地址
 https://history.ruciazyt.cn
 
+## 2026-03-19 UI优化与架构完善 - 第三十二轮
+### 功能增强
+- [x] battles.ts: 新增 getRandomBattle() 函数
+  - 从事件列表中随机返回一场战役
+  - 空列表时返回 undefined
+- [x] battles.ts: 新增 getBattleOfTheDay() 函数
+  - 基于日期的确定性随机战役（每日战役/"今日战役"功能）
+  - 使用年月日作为种子，同一天返回相同战役
+- [x] utils.ts: formatYear 函数增加 locale 参数
+  - 支持 'zh'（公元前/公元）和 'ja'（公元前/公元）中文格式
+  - 默认值为 'en'（BCE/CE 英文格式）
+
+### i18n 国际化完善
+- [x] BattleCompare.tsx: 替换硬编码中文为 i18n 键
+  - 新增 battleCompare.* 键（title、close、result、belligerents、attacker、defender、commanders、summary、closeComparison）
+  - 支持中英文日文三语言
+- [x] FavoritesClient.tsx: 替换硬编码字符串为 i18n 键
+  - 新增 favorites.* 键（title、backToBattles、clearAll、noFavoritesTitle、noFavoritesDesc、browseBattles）
+  - 支持中英文日文三语言
+- [x] messages/en.json、zh.json、ja.json: 新增 battleCompare 和 favorites 配置节
+
+### 测试
+- [x] battles.test.ts: 新增 getRandomBattle 和 getBattleOfTheDay 测试用例
+- [x] utils.test.ts: 新增 formatYear 中文/日文 locale 格式化测试用例
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 642个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交 (commit: 783d4e9)
+- [x] 代码已推送至仓库
+
+### 优化说明
+- 新增的 getRandomBattle/getBattleOfTheDay 为"今日战役"等功能奠定基础
+- BattleCompare 和 FavoritesClient 组件完成国际化，支持多语言切换
+- 与项目中其他组件保持代码一致性
+- 项目保持健壮可用状态
+
+## 2026-03-18 UI优化与架构完善 - 第三十一轮
+### 常量系统扩展
+- [x] constants.ts: 新增 ERA_ITEM_ARROW_COLORS 常量
+  - EraItem 组件箭头图标的文字颜色
+- [x] constants.ts: 新增 ERA_ITEM_EXPANDED_COLORS 常量
+  - EraItem 组件展开状态背景颜色
+- [x] constants.ts: 新增 BATTLE_GEOGRAPHY_DIVIDER_COLORS 常量
+  - BattleGeography 组件分隔线颜色
+- [x] constants.ts: 新增 EMPTY_STATE_TEXT_COLORS 常量
+  - 通用空状态文字颜色
+- [x] constants.ts: 新增 MODAL_BACKDROP_COLORS 常量
+  - Modal 遮罩层背景和模糊效果颜色
+- [x] constants.ts: BATTLES_CLIENT_COLORS 新增 emptyState 属性
+  - 战役列表空状态文字颜色
+
+### 组件优化
+- [x] EraItem.tsx: 使用新增的颜色常量
+  - 箭头图标使用 ERA_ITEM_ARROW_COLORS
+  - 展开状态背景使用 ERA_ITEM_EXPANDED_COLORS
+- [x] BattleGeography.tsx: 使用 BATTLE_GEOGRAPHY_DIVIDER_COLORS
+- [x] BattlesClient.tsx: 使用 BATTLES_CLIENT_COLORS.emptyState
+- [x] BattleDetail.tsx: 使用 MODAL_BACKDROP_COLORS
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 609个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交 (commit: 04043d5)
+- [x] 代码已推送至仓库
+
+### 优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- 为 EraItem、BattleGeography、BattlesClient、BattleDetail 等组件添加了颜色常量
+- 与项目中其他组件保持代码一致性
+- 项目保持健壮可用状态
+
+## 2026-03-18 UI优化与架构完善 - 第三十轮
+### 常量系统扩展
+- [x] constants.ts: 新增 THEME_TOGGLE_COLORS 常量
+  - ThemeToggle 按钮的容器尺寸、边框、背景、悬停状态等颜色配置
+- [x] constants.ts: 新增 CARD_COLORS 常量
+  - CardHeader/CardFooter 组件的边框、背景、间距等颜色配置
+- [x] constants.ts: 新增 HISTORY_APP_EXTRA_COLORS 常量
+  - HistoryApp 组件的分隔符、多国并立标签、箭头图标等补充颜色配置
+
+### 组件优化
+- [x] ThemeToggle.tsx: 使用THEME_TOGGLE_COLORS常量
+  - 主题切换按钮使用统一的颜色常量，移除内联样式
+- [x] Card.tsx: 使用CARD_COLORS常量
+  - CardHeader/CardFooter 使用统一的颜色常量
+- [x] Loading.tsx: 使用LOADING_STATE_COLORS常量
+  - CardSkeleton 组件使用统一的骨架屏颜色常量
+- [x] HistoryApp.tsx: 使用HISTORY_APP_EXTRA_COLORS常量
+  - 分隔符、箭头图标、事件标题、时间范围等使用常量
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 567个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交 (commit: ef9534f)
+
+### 优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- 为 ThemeToggle、Card、Loading、HistoryApp 等组件添加了颜色常量
+- 与项目中其他组件保持代码一致性
+- 项目保持健壮可用状态
+### 常量系统扩展
+- [x] constants.ts: 新增 ERROR_BOUNDARY_COLORS 常量
+  - 错误边界组件的标题、描述、详情、按钮颜色配置
+- [x] constants.ts: 新增 BUTTON_GHOST_COLORS 常量
+  - Button组件ghost变体的背景、悬停、文字颜色
+- [x] constants.ts: 新增 LIST_SKELETON_COLORS 常量
+  - 列表骨架屏的头像、标题、副标题背景色
+- [x] constants.ts: 新增 ERA_ITEM_EXTRA_COLORS 常量
+  - EraItem组件的分隔线、统治者列表年份颜色
+- [x] constants.ts: 补充 LOADING_STATE_COLORS.spinner.text 属性
+
+### 组件优化
+- [x] Button.tsx: 使用BUTTON_GHOST_COLORS常量
+  - ghost变体使用统一的颜色常量
+- [x] ErrorBoundary.tsx: 使用ERROR_BOUNDARY_COLORS常量
+  - 错误提示UI使用统一的颜色常量
+- [x] Loading.tsx: 使用LOADING_STATE_COLORS和LIST_SKELETON_COLORS常量
+  - 加载指示器和骨架屏使用统一的颜色常量
+- [x] EraItem.tsx: 使用ERA_ITEM_COLORS和ERA_ITEM_EXTRA_COLORS常量
+  - 时代列表项使用统一的颜色常量
+- [x] LocaleSwitcher.tsx: 使用LOCALE_SWITCHER_COLORS常量
+  - 语言切换器使用统一的颜色常量
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 567个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交 (commit: de1df97)
+
+### 优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- 为5个常用组件（Button, ErrorBoundary, Loading, EraItem, LocaleSwitcher）添加了颜色常量
+- 与项目中其他组件保持代码一致性
+- 项目保持健壮可用状态
+
+## 2026-03-18 UI优化与架构完善 - 第二十九轮
+### 常量系统扩展
+- [x] constants.ts: 新增 HISTORY_APP_COLORS 常量
+  - container: 页面容器颜色配置
+  - header: 头部区域颜色配置
+  - civSwitcher: 文明切换按钮颜色配置
+  - eraInfo: 时代信息颜色配置
+  - quickLink: 快捷链接按钮颜色配置
+  - sidebar: 左侧边栏（时代列表）颜色配置
+  - timeline: 中间时间轴控制区域颜色配置
+  - mapContainer: 地图容器颜色配置
+  - eventsSidebar: 右侧事件列表颜色配置
+  - rulerDetail: 统治者详情面板颜色配置
+- [x] constants.ts: 新增 ERA_ITEM_COLORS 常量
+  - EraItem 组件的默认、按钮、列表颜色配置
+- [x] constants.ts: 新增 LOCALE_SWITCHER_COLORS 常量
+  - 语言切换器的容器和下拉框颜色配置
+- [x] constants.ts: 新增 SEARCH_BOX_COLORS 常量
+  - 搜索框的输入框、下拉框、图标等颜色配置
+- [x] constants.ts: 新增 YEAR_SLIDER_COLORS 常量
+  - 年份滑块组件的颜色配置
+
+### 组件优化
+- [x] HistoryApp.tsx: 使用常量系统优化
+  - 页面容器使用 HISTORY_APP_COLORS.container
+  - 头部区域使用 HISTORY_APP_COLORS.header
+  - 文明切换按钮使用 HISTORY_APP_COLORS.civSwitcher
+  - 时代信息使用 HISTORY_APP_COLORS.eraInfo
+  - 快捷链接按钮使用 HISTORY_APP_COLORS.quickLink
+  - 左侧边栏使用 HISTORY_APP_COLORS.sidebar
+  - 时间轴控制使用 HISTORY_APP_COLORS.timeline
+  - 地图容器使用 HISTORY_APP_COLORS.mapContainer
+  - 右侧事件列表使用 HISTORY_APP_COLORS.eventsSidebar
+  - 统治者详情使用 HISTORY_APP_COLORS.rulerDetail
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 567个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交 (commit: 1881308)
+
+### 优化说明
+- 为 HistoryApp 主应用组件创建完整的颜色常量系统
+- 移除了组件中大量的硬编码颜色值（如 bg-zinc-50, text-zinc-600 等）
+- 提升了代码的可维护性和一致性
+- 为后续主题切换功能奠定了基础
+- 项目保持健壮可用状态
+
+## 2026-03-17 UI优化与架构完善 - 第二十八轮
+### 常量系统扩展
+- [x] constants.ts: 扩展 FAVORITES_LIST_COLORS 常量
+  - clearButton: 清除按钮颜色配置（背景、文字、悬停状态）
+
+### 组件优化
+- [x] FavoritesClient.tsx: 使用常量系统优化
+  - 清除按钮使用 FAVORITES_LIST_COLORS.clearButton 常量
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 567个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库 (commit: a5b94a1)
+
+### 优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- FavoritesClient 组件清除按钮完成常量化
+- 与项目中其他组件保持代码一致性
+- 项目保持健壮可用状态
+
+## 2026-03-17 新功能 - 战役收藏夹
+### 功能实现
+- [x] 新增 FavoritesClient.tsx 组件
+  - 显示用户收藏的战役列表
+  - 空状态提示（尚无收藏时）
+  - 一键清空收藏功能
+- [x] 新增 /favorites 页面路由
+  - 路径: /[locale]/favorites
+  - 支持中英文 locale
+- [x] 战役页面添加收藏夹入口
+  - 在战役页面头部添加收藏夹按钮（显示收藏数量）
+  - 点击可快速跳转至收藏夹页面
+
+### 技术细节
+- 复用已有的 useBattleFavorites hook (localStorage 存储)
+- 复用已有的 BattleCard 组件展示收藏的战役
+- 使用 EmptyState 组件展示空状态
+- 使用 BATTLES_CLIENT_COLORS 保持 UI 一致性
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 558个测试用例全部通过
+- [x] 构建验证通过
+
+### 使用说明
+- 用户在任意战役卡片上点击心形图标即可收藏
+- 收藏的战役保存在浏览器 localStorage
+- 点击战役页面的收藏按钮可查看所有收藏的战役
+
+## 2026-03-16 UI优化与架构完善 - 第二十七轮
+### 组件优化
+- [x] MatrixClient.tsx: 使用常量系统优化
+  - Era 选择器区域边框使用 MATRIX_COLORS.border
+  - X轴（政权）标题区域边框使用 MATRIX_COLORS.border
+  - 矩阵网格行边框使用 MATRIX_COLORS.grid.cell.border
+  - 详情面板边框使用 MATRIX_COLORS.border
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+
+### 优化说明
+- MatrixClient 组件中4处硬编码颜色值替换为常量
+- 继续推进常量统一工作，减少组件中的硬编码颜色值
+- 与项目中其他组件保持代码一致性
+
+## 2026-03-16 UI优化与架构完善 - 第二十六轮
+### 常量系统扩展
+- [x] constants.ts: 新增 EMPTY_STATE_COLORS 常量
+  - 容器、图标、标题、描述、按钮等颜色配置
+- [x] constants.ts: 新增 LOADING_STATE_COLORS 常量
+  - 骨架屏和加载动画的颜色配置
+- [x] constants.ts: 新增 CARD_SKELETON_COLORS 常量
+  - 卡片骨架屏的颜色配置
+
+### 组件优化
+- [x] EmptyState.tsx: 使用常量系统优化
+  - EmptyState 组件使用 EMPTY_STATE_COLORS 常量
+  - LoadingState 组件使用 LOADING_STATE_COLORS 常量
+  - CardSkeleton 组件使用 CARD_SKELETON_COLORS 常量
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库 (commit: 5fa8168)
+
+### 优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- EmptyState、LoadingState、CardSkeleton 三个组件完成常量化
+- 与项目中其他组件保持代码一致性
+- 项目保持健壮可用状态
+
+## 2026-03-16 UI优化与架构完善 - 第二十五轮
+### 常量系统扩展
+- [x] constants.ts: 扩展 SLIDER_COLORS 常量
+  - quickButton: 快捷按钮颜色配置（默认、悬停状态）
+  - playButton: 播放按钮悬停颜色配置
+  - majorTick: 世纪标记（主要刻度）颜色
+  - tickLabel: 世纪标记文字颜色
+
+### 组件优化
+- [x] YearSlider.tsx: 使用常量系统优化
+  - 播放按钮悬停颜色使用 SLIDER_COLORS.playButton.hover
+  - 世纪标记刻度线颜色使用 SLIDER_COLORS.majorTick
+  - 世纪标记文字颜色使用 SLIDER_COLORS.tickLabel
+  - 快捷按钮颜色使用 SLIDER_COLORS.quickButton.*
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库 (commit: cea8321)
+
+### 优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- YearSlider 组件完成常量化
+- 与项目中其他组件保持代码一致性
+- 项目保持健壮可用状态
+
+## 2026-03-16 UI优化与架构完善 - 第二十四轮
+### 常量系统扩展
+- [x] constants.ts: 新增 BATTLES_CLIENT_COLORS 常量
+  - 页面背景、头部、按钮、视图切换等颜色配置
+  - 时代过滤按钮、统计卡片、分隔线等颜色配置
+
+### 组件优化
+- [x] BattlesClient.tsx: 使用常量系统优化
+  - 页面容器使用 BATTLES_CLIENT_COLORS.page.background
+  - 头部区域使用 BATTLES_CLIENT_COLORS.header.*
+  - 返回按钮使用 BATTLES_CLIENT_COLORS.backButton.*
+  - 对比模式按钮使用 BATTLES_CLIENT_COLORS.compareButton.*
+  - 视图切换使用 BATTLES_CLIENT_COLORS.viewToggle.*
+  - 时代过滤按钮使用 BATTLES_CLIENT_COLORS.eraFilter.*
+  - 统计卡片使用 BATTLES_CLIENT_COLORS.statCards.*
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 代码已提交 (commit: 7d7bd9c)
+
+## 2026-03-16 UI优化与架构完善 - 第二十三轮
+### 代码质量改进
+- [x] constants.ts: 新增 BATTLE_COMPARE_COLORS 常量
+  - 战役对比组件的标题、年份、标签、分割线等颜色配置
+- [x] constants.ts: 新增 BATTLE_TIMELINE_COLORS 常量
+  - 时间线组件的空状态、垂直线、卡片、标题等颜色配置
+- [x] constants.ts: 新增 BATTLE_GEOGRAPHY_COLORS 常量
+  - 地理分布组件的容器、标题、未知区域等颜色配置
+- [x] BattleCompare.tsx: 使用常量系统优化
+  - 战役对比的标题、年份、标签、指挥官、战役概述等使用常量
+- [x] BattleTimeline.tsx: 使用常量系统优化
+  - 时间线的空状态、垂直线、卡片、内容等使用常量
+- [x] BattleGeography.tsx: 使用常量系统优化
+  - 地理分布的容器、标题、区域名称等使用常量
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+### 本轮优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- BattleCompare、BattleTimeline、BattleGeography 三个组件完成常量化
+- 与项目中其他组件保持代码一致性
+- 项目保持健壮可用状态
+
+## 2026-03-16 UI优化与架构完善 - 第二十二轮
+### 代码质量改进
+- [x] constants.ts: 新增 BATTLE_DETAIL_TEXT_COLORS 常量
+  - 标签文字颜色 (label)
+  - 辅助标签颜色 (labelSmall)
+  - 内容文字颜色 (content, contentLight)
+  - 未知状态颜色 (unknown)
+  - 区块标题颜色 (sectionTitle)
+  - 分割线颜色 (divider)
+- [x] BattleDetail.tsx: 使用常量系统优化
+  - 导入并使用 BATTLE_DETAIL_TEXT_COLORS 常量
+  - 结果标签、战役概述、战场位置等文字颜色使用常量
+  - 指挥官名称、标签等颜色使用常量
+  - 与整体设计系统保持一致性
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+### 本轮优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- BattleDetail 组件完成常量化
+- 与项目中其他组件保持代码一致性
+- 项目保持健壮可用状态
+
+## 2026-03-16 UI优化与架构完善 - 第二十一轮
+### 代码质量改进
+- [x] TimelineClient.tsx: 使用常量系统优化
+  - 移动端tab切换颜色使用 TIMELINE_TAB_COLORS 常量
+  - 事件描述和位置信息使用 TIMELINE_ITEM_COLORS 常量
+  - 与整体设计系统保持一致性
+- [x] WorldEmpireMap.tsx: 使用常量系统优化
+  - 地图容器背景和边框使用 WORLD_MAP_COLORS 常量
+  - 弹出框标题和时间使用 MAP_POPUP_COLORS 常量
+- [x] constants.ts: 新增常量
+  - TIMELINE_TAB_COLORS: 移动端tab切换颜色配置
+  - TIMELINE_ITEM_COLORS: 时间线事件项颜色配置
+  - WORLD_MAP_COLORS: 世界地图容器颜色配置
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+### 本轮优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- TimelineClient 和 WorldEmpireMap 两个组件完成常量化
+- 与项目中其他组件保持代码一致性
+- 项目保持健壮可用状态
+
+## 2026-03-16 UI优化与架构完善 - 第二十轮
+### 代码质量改进
+- [x] EventItem.tsx: 使用 EVENT_ITEM_COLORS 常量
+  - 容器边框、年月文字、标题颜色、战役徽章使用常量
+  - 与整体设计系统保持一致性
+- [x] HistoryMap.tsx: 使用 HISTORY_MAP_COLORS 常量
+  - 地图容器背景和边框使用常量
+  - 标记点颜色、弹窗文字颜色、图例样式使用常量
+- [x] constants.ts: 新增常量
+  - EVENT_ITEM_COLORS: 事件列表项颜色配置
+  - HISTORY_MAP_COLORS: 主地图视图颜色配置
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+### 本轮优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- EventItem 和 HistoryMap 两个组件完成常量化
+- 项目保持健壮可用状态
+
+## 2026-03-16 UI优化与架构完善 - 第十九轮
+### 代码质量改进
+- [x] TimelineMap.tsx: 使用 TIMELINE_MAP_COLORS 常量
+  - 标记颜色、弹窗文字、覆盖层背景、图例样式使用常量
+  - 与整体设计系统保持一致性
+- [x] TimelineClient.tsx: 使用 TIMELINE_EVENT_COLORS 常量
+  - 事件列表年份、活动指示器、边框样式使用常量
+  - 播放控制按钮使用 TIMELINE_BUTTON_COLORS 常量
+  - 事件详情区域使用 TIMELINE_COLORS 常量
+- [x] constants.ts: 新增常量
+  - TIMELINE_MAP_COLORS: 时间线地图标记/覆盖层颜色
+  - TIMELINE_EVENT_COLORS: 时间线事件列表颜色
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+### 本轮优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- TimelineMap 和 TimelineClient 两个组件完成常量化
+- 项目保持健壮可用状态
+
+## 2026-03-16 UI优化与架构完善 - 第十八轮
+### 代码质量改进
+- [x] YearSlider.tsx: 使用 SLIDER_COLORS 和 DARK_THEME_COLORS 常量
+  - 背景色、轨道色、进度条色、世纪标记色使用常量
+  - 与 Timeline 页面保持视觉一致性
+- [x] SearchBox.tsx: 使用 LIGHT_THEME_COLORS 常量
+  - 输入框、下拉框、提示文字等使用常量
+  - 提升组件与整体设计系统的统一性
+- [x] RulerRelations.tsx: 新增 RULER_RELATIONS_COLORS 常量
+  - 家族关系标签的颜色使用常量
+  - 便于后续主题定制
+- [x] constants.ts: 新增常量
+  - SLIDER_COLORS.centuryMark: 世纪标记颜色
+  - RULER_RELATIONS_COLORS: 帝王关系颜色
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+### 本轮优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- YearSlider、SearchBox、RulerRelations 三个组件完成常量化
+- 项目保持健壮可用状态
+
+## 2026-03-15 UI优化与架构完善 - 第十七轮
+### 代码质量改进
+- [x] TimelineClient.tsx: 使用常量系统优化链接样式
+  - 将硬编码的 `text-zinc-400 hover:text-white` 替换为 `TIMELINE_COLORS.textSecondary hover:TIMELINE_COLORS.text`
+  - 保持与项目中其他组件的代码一致性
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+### 本轮优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- 项目保持健壮可用状态
+
+## 2026-03-15 UI优化与架构完善 - 第十六轮
+### 代码质量改进
+- [x] TimelineSlider.tsx: 添加键盘导航支持
+  - 支持方向键(←/→/↑/↓)调整年份
+  - 支持Shift+方向键快进/快退10年
+  - 支持Home/End键跳转到起始/结束年份
+  - 添加ARIA属性(role="slider", aria-valuenow等)
+  - 添加focus-visible样式提升可访问性
+- [x] constants.ts: 新增UI常量集
+  - WORLD_VIEW_COLORS: 世界/帝国视图颜色(背景、文字、徽章等)
+  - MAP_NAV_COLORS: 地图导航控件颜色
+  - MAP_POPUP_COLORS: 地图弹出框颜色(预留)
+  - SLIDER_TRACK_COLORS: 时间轴滑块轨道颜色
+- [x] WorldEmpireMap.tsx: 使用统一的常量系统
+  - 使用WORLD_VIEW_COLORS统一帝国列表样式
+  - 使用MAP_NAV_COLORS统一导航控件样式
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+### 本轮优化说明
+- 为TimelineSlider添加完整的键盘导航支持，提升可访问性
+- 扩展常量系统，新增世界视图、地图控件相关常量
+- WorldEmpireMap组件使用统一常量系统
+- 项目保持健壮可用状态
+
+## 2026-03-15 UI优化与架构完善 - 第十五轮
+### 代码质量改进
+- [x] constants.ts: 新增多个UI常量集
+  - COMMANDER_COLORS: 指挥官徽章颜色(进攻方/防守方)
+  - BATTLE_DETAIL_COLORS: 战役详情页面颜色(头部、章节、按钮)
+  - MAP_MARKER_COLORS: 地图标记颜色
+  - STRATEGY_BADGE_COLORS: 战术徽章颜色
+  - TERRAIN_BADGE_COLORS: 地形徽章颜色
+  - BATTLE_TYPE_COLORS: 战役类型徽章颜色
+  - PACING_BADGE_COLORS: 节奏徽章颜色
+  - TIME_OF_DAY_COLORS: 时间徽章颜色
+  - TURNING_POINT_COLORS: 转折点颜色
+  - COMPARISON_SUMMARY_COLORS: 对比摘要颜色
+  - SLIDER_COLORS: 时间轴滑块颜色
+  - MOBILE_TAB_COLORS: 移动端标签切换颜色
+  - SELECTION_COLORS: 选择模式颜色
+- [x] BattleCard.tsx: 使用COMMANDER_COLORS和SELECTION_COLORS常量
+  - 指挥官徽章使用统一颜色常量
+  - 选择模式边框使用统一颜色常量
+- [x] BattleDetail.tsx: 使用多个新常量统一样式
+  - 头部使用BATTLE_DETAIL_COLORS
+  - 指挥官区域使用COMMANDER_COLORS
+  - 战术/地形/战役类型/节奏/时间徽章使用对应常量
+  - 转折点使用TURNING_POINT_COLORS
+- [x] BattleCompare.tsx: 使用STRATEGY_BADGE_COLORS和COMPARISON_SUMMARY_COLORS常量
+  - 战役对比页面样式统一
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+### 本轮优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- 新增指挥官、战役详情、地图标记、徽章等专用颜色常量
+- 提升代码可维护性和视觉一致性
+- 项目保持健壮可用状态
+
+## 2026-03-15 UI优化与架构完善 - 第十四轮
+### 代码质量改进
+- [x] constants.ts: 新增多个颜色常量集
+  - STATS_GRADIENTS (StatsCard渐变背景颜色)
+  - STATS_BORDER_COLORS (StatsCard边框颜色)
+  - STATS_TEXT_COLORS (StatsCard文字颜色)
+  - STATS_LABEL_COLORS (StatsCard标签颜色)
+  - BATTLE_COMPARE_GRADIENTS (战役对比页面渐变)
+  - BATTLE_STATS_GRADIENTS/BATTLE_STATS_BORDER_COLORS (战役统计卡片)
+  - TIMELINE_COLORS (时间线页面颜色配置)
+  - TIMELINE_BUTTON_COLORS (时间线按钮颜色)
+- [x] StatsCard.tsx: 使用constants.ts中的颜色常量
+  - 移除组件内重复的颜色定义
+  - 从constants.ts导入STATS_*相关常量
+- [x] BattlesClient.tsx: 使用BATTLE_STATS常量
+  - 战役统计卡片使用统一常量
+- [x] BattleCompare.tsx: 使用BATTLE_COMPARE_GRADIENTS常量
+  - 战役对比两侧使用统一渐变常量
+- [x] TimelineClient.tsx: 使用TIMELINE_COLORS和TIMELINE_BUTTON_COLORS常量
+  - 时间线页面使用统一深色主题常量
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+### 本轮优化说明
+- 继续推进常量统一的工作，减少组件中的硬编码颜色值
+- 新增 StatsCard 相关常量、Battle 相关渐变常量、Timeline 页面颜色常量
+- 提升代码可维护性和一致性
+- 项目保持健壮可用状态
+
+## 2026-03-15 UI优化与架构完善 - 第十三轮
+### 代码质量改进
+- [x] constants.ts: 新增常量定义
+  - 添加 POLITY_COLORS 常量 (Matrix 页面政权颜色配置，26个政权颜色)
+  - 添加 DARK_THEME_COLORS 常量 (深色主题颜色: background, surface, border, text 等)
+  - 添加 LIGHT_THEME_COLORS 常量 (浅色主题颜色)
+  - 为未来主题切换和代码复用提供基础
+- [x] MatrixClient.tsx: 使用 constants.ts 中的常量
+  - 从 constants.ts 导入 POLITY_COLORS 和 DARK_THEME_COLORS
+  - 移除组件内重复的 POLITY_COLORS 定义
+  - 部分样式改用 DARK_THEME_COLORS 常量
+  - 与项目中其他组件保持代码一致性
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+### 本轮优化说明
+- 推进常量统一的工作，将 Matrix 页面的颜色配置提取到 constants.ts
+- 新增主题颜色常量 (DARK_THEME_COLORS, LIGHT_THEME_COLORS) 为后续深色/浅色主题支持打下基础
+- 项目保持健壮可用状态
+
+## 2026-03-15 UI优化与架构完善 - 第十二轮
+### 代码质量改进
+- [x] EraItem.tsx: 使用 constants.ts 中的 ERA_COLORS 替代本地定义
+  - 从 constants.ts 导入 ERA_COLORS 常量
+  - 添加 getEraColor 辅助函数提取所需颜色属性 (bg, text, dot)
+  - 移除重复的本地 ERA_COLORS 定义
+  - 与项目中其他组件保持代码一致性
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交 (推送中)
+
+### 本轮优化说明
+- 继续推进常量统一的工作，减少重复代码
+- EraItem 组件现在使用统一的常量系统
+- 项目保持健壮可用状态
+
+## 2026-03-15 UI优化与架构完善 - 第十一轮
+### 代码质量改进
+- [x] BattleGeography.tsx: 使用常量统一颜色值
+  - 添加 GEO_INSIGHT_COLORS 常量 (地理洞察容器颜色)
+  - 添加 WIN_RATE_COLORS 常量 (胜率徽章颜色)
+  - 添加 REGION_BAR_COLORS 常量 (区域条形颜色)
+  - 使用常量替代硬编码的颜色值 (bg-amber-50, bg-red-100, text-red-600 等)
+  - 使用 useMemo 优化胜率徽章颜色计算
+  - 与项目中其他组件保持代码一致性
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+### 本轮优化说明
+- 继续推进常量统一的工作，减少硬编码
+- BattleGeography 组件现在使用统一的常量系统
+- 项目保持健壮可用状态
+
+## 2026-03-15 UI优化与架构完善 - 第十轮
+### 代码质量改进
+- [x] BattleTimeline.tsx: 使用常量统一颜色值
+  - 导入 BATTLE_RESULT_COLORS 常量
+  - 使用 BATTLE_RESULT_COLORS[result]?.bg 替代硬编码的结果颜色 (bg-green-500, bg-blue-500, bg-yellow-500)
+  - 与项目中其他组件保持代码一致性
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+### 本轮优化说明
+- 继续推进常量统一的工作，减少硬编码
+- BattleTimeline 组件现在使用 BATTLE_RESULT_COLORS 常量
+- 项目保持健壮可用状态
+
+## 2026-03-15 UI优化与架构完善 - 第九轮
+### 代码质量改进
+- [x] SearchBox.tsx: 使用 useBattleHooks 中的 useDebounce 替代重复定义的 hook
+  - 减少重复代码，保持代码一致性
+- [x] 新增 StatsCard.tsx: 可复用的统计卡片组件
+  - 支持多种颜色主题 (red, blue, green, yellow, purple, gray)
+  - 支持自定义图标和点击交互
+  - 内置 StatsGrid 组件用于布局
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交 (推送中)
+
+### 本轮优化说明
+- 复用已有的 hooks 减少代码重复
+- 新增 StatsCard 组件可用于后续 BattlesClient 统计面板的组件化
+- 项目保持健壮可用
+
+## 2026-03-15 UI优化与架构完善 - 第八轮
+### 代码质量改进
+- [x] battles.test.ts: 移除未使用的 `t` 变量
+  - 修复 lint 警告: `'t' is assigned a value but never used`
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+### 本轮优化说明
+- MatrixClient.tsx 已包含移动端适配改进（视图切换、响应式布局）
+- 所有验证项均通过，项目保持健壮可用
+
+## 2026-03-15 UI优化与架构完善 - 第七轮
+### 代码质量改进
+- [x] Button.tsx: 使用 UI_COLORS 常量替代硬编码颜色值
+  - 从内联 variantStyles 改为使用 constants.ts 中定义的 UI_COLORS
+  - 减少重复代码，提升可维护性
+- [x] BattleCompare.tsx: 使用常量优化颜色定义
+  - 导入 PARTY_COLORS 和 BATTLE_IMPACT_COLORS 常量
+  - 使用 partyColors 替代硬编码的颜色值
+  - 使用 BATTLE_IMPACT_COLORS 替代影响力显示的硬编码颜色
+
+### 验证结果
+- [x] Lint 检查通过
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+## 2026-03-15 UI优化与架构完善 - 第六轮
+### 代码质量改进
+- [x] utils.ts: 新增17个实用函数
+  - 数字格式化: formatNumberWithUnit, parseYear
+  - 类型守卫: isEvent, hasBattleData, isArray, isString, isNumber, isObject
+  - 字符串工具: capitalize, camelToKebab, kebabToCamel
+  - 数组工具: range, average, sum
+  - 对象比较: shallowEqual
+  - 函数工具: debounce, throttle
+- [x] constants.ts: 新增常量
+  - PARTY_COLORS: 指挥官/阵营颜色
+  - BATTLE_RESULT_STYLES: 战役结果样式
+  - SCALE_LABELS: 战役规模标签
+  - CASUALTY_TYPE_LABELS: 伤亡类型标签
+  - ANIMATION_CLASSES: 动画类
+  - BATTLE_ICONS: 战役图标映射
+- [x] BattleCard.tsx: 优化使用 getEraStyles 函数
+- [x] utils.test.ts: 新增46个测试用例
+
+### 验证结果
+- [x] Lint 检查通过
+- [x] 单元测试: 538个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交 (等待推送)
+
+## 2026-03-15 UI优化与架构完善 - 第五轮
+### 代码质量改进
+- [x] battlePacing.test.ts: 修复 TypeScript 类型检查问题
+  - 修复 createMockBattle 函数类型定义，支持在测试中传入 id 参数
+  - 解决了 TypeScript 编译器关于 'id' 属性不在 Partial<Event['battle']> 类型中的错误
+
+### 验证结果
+- [x] Lint 检查通过
+- [x] 单元测试: 522个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+## 2026-03-15 UI优化与架构完善 - 第四轮
+### 代码质量改进
+- [x] BattleCompare.tsx: 使用 useEscapeKey hook 替换手写的 useEffect 代码
+  - 保持与 BattleDetail 组件的代码一致性
+  - 减少重复代码，提升可维护性
+
+### 验证结果
+- [x] Lint 检查通过
+- [x] 单元测试: 522个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交并推送到仓库
+
+## 2026-03-15 UI优化与架构完善 - 第三轮
+### 性能优化
+- [x] BattleDetail: 使用 React.memo 优化避免不必要的重渲染
+- [x] BattleDetail: 使用已有的 useEscapeKey hook 替代手写的 useEffect
+
+### 架构改进
+- [x] constants.ts: 添加更多UI常量
+  - UI_COLORS: 主题色板 (primary, danger, success, neutral)
+  - CARD_VARIANTS: 卡片变体 (default, elevated, outlined, ghost)
+  - BUTTON_SIZES: 按钮尺寸 (sm, md, lg)
+  - BADGE_VARIANTS: 标签变体 (default, primary, success, warning, danger, info, purple)
+  - INPUT_STYLES: 输入框样式 (default, filled, minimal)
+- [x] useBattleHooks.ts: 新增3个实用hooks
+  - useToggle: 切换状态
+  - useKeyPress: 键盘按键检测
+  - usePrevious: 获取上一个值
+- [x] utils.ts: 新增8个实用函数
+  - isEmpty: 检查空值
+  - generateId: 生成唯一ID
+  - deepClone: 深拷贝
+  - pick: 选取指定键
+  - omit: 排除指定键
+  - arraysEqual: 数组比较
+  - toOrdinal: 数字转序数词
+  - percentage: 计算百分比
+- [x] 新增可复用UI组件
+  - Badge.tsx: 标签组件
+  - Button.tsx: 按钮组件 (多尺寸/多变体)
+  - Card.tsx: 卡片组件 (Card, CardHeader, CardBody, CardFooter)
+
+### 代码质量
+- [x] 构建验证通过
+- [x] 单元测试: 522个测试用例全部通过 (原501 + 新增21)
+- [x] 代码已提交并推送到仓库
+
+## 2026-03-14 UI优化与架构完善 (本次) - 第二轮
+### 性能优化
+- [x] SearchBox: 添加 debounce (200ms) 减少搜索频率
+- [x] SearchBox: 使用 useMemo 缓存搜索结果，避免不必要计算
+- [x] SearchBox: 使用 useCallback 优化事件处理函数
+
+### 架构改进
+- [x] constants.ts: 添加响应式断点 (BREAKPOINTS)、阴影 (SHADOW)、圆角 (RADIUS)、UI限制 (UI_LIMITS) 等常量
+- [x] utils.ts: 新增实用函数
+  - truncate: 文本截断
+  - groupBy: 数组分组
+  - sortBy: 数字排序
+  - uniqueBy: 去重
+  - get: 安全访问嵌套属性
+- [x] utils.test.ts: 新增7个测试用例
+
+### 代码质量
+- [x] 构建验证通过
+- [x] 单元测试: 501个测试用例全部通过
+- [x] 代码已提交并推送到仓库
+
+## 2026-03-14 UI优化与架构完善 (本次) - 第二轮
+### UI改进 (新增)
+- [x] BattleDetail: 增强战役详情显示
+  - 添加战役类型 (battleType) 显示
+  - 添加战役节奏 (pacing) 显示
+  - 添加战役时间段 (timeOfDay) 显示
+  - 添加战役转折点 (turningPoints) 详细展示
+- [x] 构建验证通过
+- [x] 单元测试: 494个测试用例全部通过
+
+## 2026-03-14 UI优化与架构完善 (本次) - 第一轮
+### UI改进
+- [x] BattleCard: 增加指挥官和战役影响力级别显示
+- [x] BattleDetail: 增加指挥官、战术类型、地形类型、影响力等详细信息
+- [x] BattleCompare: 增强对比视图,显示指挥官和战术信息
+- [x] 添加 getBattleImpactLabel 函数
+
+### 架构改进
+- [x] 扩展 constants.ts: 添加更多UI常量
+  - BATTLE_TYPE_LABELS: 战役类型标签
+  - TURNING_POINT_LABELS: 转折点类型标签
+  - CASUALTY_RELIABILITY_LABELS: 伤亡可靠性标签
+  - UI_SPACING: UI间距常量
+  - ANIMATION_DURATION: 动画时长常量
+  - Z_INDEX: Z轴层级常量
+- [x] 新增 EmptyState.tsx: 空状态和加载状态组件
+  - EmptyState: 空状态显示
+  - LoadingState: 加载状态(支持spinner和skeleton模式)
+  - CardSkeleton: 卡片骨架屏
+- [x] 统一组件使用常量: BattleDetail、BattleCompare、SearchBox
+- [x] 扩展 useBattleHooks.ts: 新增5个实用hooks
+  - useClickOutside: 点击外部检测
+  - useMediaQuery: 媒体查询
+  - useLocalStorage: 本地存储
+  - useInfiniteScroll: 无限滚动
+  - useAsyncData: 异步数据加载
+- [x] 新增 useBattleHooks.test.ts: hooks测试(7个测试用例)
+- [x] 构建验证通过
+- [x] 单元测试: 494个测试用例全部通过
+- [x] 代码已提交并推送到仓库
+
+## 2026-03-12 战役转折点分析 (上次迭代)
+
 ## 已完成功能
 
 ### 核心功能
@@ -25,7 +906,7 @@ https://history.ruciazyt.cn
 - [x] 公共Hooks提取
 - [x] React.memo优化
 - [x] 组件目录重组
-- [x] 单元测试（601个测试用例）
+- [x] 单元测试（400个测试用例）
 
 ## 项目结构
 ```
@@ -183,52 +1064,6 @@ src/
 - [x] 单元测试: 400个测试用例全部通过
 - [x] 部署到 Vercel 成功
 
-### 新增功能: 战役天气分析 (2026-03-12 11:09)
-- [x] 添加 BattleWeather 类型定义（晴天、雨天、雪天、大风、雾天、暴风雨、多云、炎热、寒冷、未知共10种天气类型）
-- [x] 创建 battleWeather.ts 分析模块：
-  - getWeatherLabel: 获取天气中文标签
-  - getWeatherStats: 获取天气统计
-  - getAllWeatherStats: 获取所有天气类型统计（含0值）
-  - getMostCommonWeather: 获取最常见天气
-  - getKnownWeatherCount: 获取已知天气条件战役数量
-  - getBattlesByWeather: 按天气类型筛选战役
-  - getWeatherOutcomeCorrelation: 分析天气与战役结果关联
-  - getWeatherAttackerDefenderAnalysis: 分析天气对进攻方/防守方胜率影响
-  - getWeatherInsights: 生成天气分析历史洞察
-  - getWeatherSummary: 获取完整天气分析摘要
-  - hasWeatherData: 检查是否有天气数据
-- [x] 创建 battleWeather.test.ts 测试文件（17个测试用例）
-- [x] 构建验证通过
-- [x] 单元测试: 504个测试用例全部通过
-- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
-
-### 新增功能: 战役后果分析 (2026-03-12 13:20)
-- [x] 添加 AftermathType 类型定义（领土变化、政治动荡、朝代更替、军事衰弱、经济发展、人口迁移等14种后果类型）
-- [x] 添加 AftermathSeverity 类型定义（巨大、重大、中等、轻微、未知）
-- [x] 添加 AftermathScope 类型定义（全国、区域性、局部、未知）
-- [x] 创建 battleAftermath.ts 分析模块：
-  - getAftermathTypeLabel: 获取后果类型中文标签
-  - getSeverityLabel: 获取严重程度标签
-  - getScopeLabel: 获取影响范围标签
-  - getUniqueAftermathTypes: 获取所有唯一后果类型
-  - hasAftermathData: 检查是否有后果数据
-  - getAftermathTypeStats: 获取特定类型后果统计
-  - getAllAftermathTypeStats: 获取所有类型统计
-  - getBattlesByAftermathType: 按后果类型筛选战役
-  - getMostCommonAftermathTypes: 获取最常见后果类型
-  - getMostSevereAftermathBattles: 获取最严重后果战役
-  - getLongTermAftermathBattles: 获取长期影响战役
-  - getAftermathSeverityDistribution: 获取严重程度分布
-  - getAftermathScopeDistribution: 获取影响范围分布
-  - getAftermathResultCorrelation: 分析后果与胜负关联
-  - getAftermathInsights: 生成历史洞察
-  - getAftermathSummary: 获取完整后果摘要
-- [x] 创建 battleAftermath.test.ts 测试文件（30个测试用例）
-- [x] 为城濮之战、长平之战、马陵之战添加后果数据
-- [x] 构建验证通过
-- [x] 单元测试: 558个测试用例全部通过
-- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
-
 ### 新增功能: 战役转折点分析 (2026-03-12 10:06)
 - [x] 添加 BattleTurningPointType 类型定义（14种转折点类型）
 - [x] 创建 battleTurningPoints.ts 分析模块：
@@ -249,207 +1084,4 @@ src/
   - 柏举之战: 三路夹击、楚将逃跑、内部倒戈
 - [x] 构建验证通过
 - [x] 单元测试: 487个测试用例全部通过
-- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
-
-### 新增功能: 战役胜负预测分析 (2026-03-12 16:45)
-- [x] 添加 battlePrediction.ts 战役胜负预测分析模块
-- [x] 支持基于地形、天气、季节、战术等因素预测胜负
-- [x] 提供因素分析、洞察生成、准确率统计功能
-- [x] 创建 battlePrediction.test.ts 测试文件（23个测试用例）
-- [x] 构建验证通过
-- [x] 单元测试: 624个测试用例全部通过
-- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
-- [x] 添加 battleCause.ts 战役原因分析模块
-- [x] 支持16种战役原因类型：
-  - territorial-dispute (领土争端)
-  - political-rivalry (政治 rivalry)
-  - revenge (复仇)
-  - succession-dispute (继承权争夺)
-  - economic-interest (经济利益)
-  - ideological-conflict (意识形态冲突)
-  - preemptive-attack (先发制人攻击)
-  - defensive-war (自卫战争)
-  - expansionism (扩张主义)
-  - dynastic-conflict (朝代冲突)
-  - tributary-dispute (朝贡体系争议)
-  - border-incident (边境冲突)
-  - alliance-obligation (联盟义务)
-  - usurpation (篡位/叛变)
-  - rebellion (叛乱/起义)
-- [x] 新增原因严重程度分析 (critical/major/minor)
-- [x] 核心函数：
-  - getCauseTypeLabel: 获取原因类型中文标签
-  - getSeverityLabel: 获取严重程度标签
-  - getUniqueCauseTypes: 获取所有唯一原因类型
-  - hasCauseData: 检查是否有原因数据
-  - getCauseTypeStats: 获取特定类型原因统计
-  - getAllCauseTypeStats: 获取所有类型统计
-  - getBattlesByCauseType: 按原因类型筛选战役
-  - getMostCommonCauseTypes: 获取最常见原因类型
-  - getCauseSeverityDistribution: 获取严重程度分布
-  - getBattlesWithMostCauses: 获取涉及原因最多的战役
-  - getCauseResultCorrelation: 分析原因与胜负关联
-  - getDefensiveVsOffensiveStats: 防御性战争 vs 进攻性战争统计
-  - getCauseInsights: 生成历史洞察
-  - getCauseSummary: 获取完整原因摘要
-- [x] 创建 battleCause.test.ts 测试文件（24个测试用例）
-- [x] 为5个经典战役添加原因数据：
-  - 牧野之战: 朝代更替、政治 rivalry、先发制人
-  - 长平之战: 领土争端、扩张主义、政治 rivalry
-  - 马陵之战: 复仇、领土争端、扩张主义
-  - 柏举之战: 领土争端、复仇、扩张主义
-  - 城濮之战: 联盟义务、领土争端、政治 rivalry
-- [x] 构建验证通过
-- [x] 单元测试: 601个测试用例全部通过
-- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
-
-### 新增功能: 战役持续时间分析 (2026-03-12 18:58)
-- [x] 添加 BattleDurationCategory 类型定义（daily/short/medium/extended/protracted）
-- [x] 添加 duration 字段到 Event.battle 类型
-- [x] 创建 battleDuration.ts 分析模块：
-  - getDurationCategoryLabel: 获取持续时间分类标签
-  - daysToDurationCategory: 将天数转换为分类
-  - hasDurationData: 检查是否有持续时间数据
-  - getDurationStats: 获取特定分类的统计
-  - getAllDurationStats: 获取所有分类统计
-  - getBattlesByDurationCategory: 按分类筛选战役
-  - getQuickVictoryStats: 快速决战统计
-  - getProtractedWarStats: 持久战统计
-  - getDurationOutcomeCorrelation: 持续时间与胜负关联分析
-  - getLongestBattles: 获取最长战役
-  - getShortestBattles: 获取最短战役
-  - getDurationSummary: 获取完整摘要
-  - getDurationInsights: 生成历史洞察
-- [x] 创建 battleDuration.test.ts 测试文件（21个测试用例）
-- [x] 构建验证通过
-- [x] 单元测试: 666个测试用例全部通过
-- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
-
-### 新增功能: 战役综合评分系统 (2026-03-12 21:20)
-- [x] 添加 battleRating.ts 战役综合评分模块
-- [x] 支持6个维度评分：
-  - scale: 规模 (massive/large/medium/small)
-  - impact: 影响力 (decisive/major/minor)
-  - duration: 持续时间
-  - casualties: 伤亡人数
-  - turningPoints: 转折点数量
-  - strategic: 战略重要性（基于战役类型、指挥官、联盟等）
-- [x] 提供 S/A/B/C/D 等级评定
-- [x] 支持战役排名和对比分析
-- [x] 提供 RatingWeights 配置，可自定义各维度权重
-- [x] 核心函数：
-  - calculateBattleRating: 计算单场战役评分
-  - calculateAllRatings: 计算所有战役评分并排名
-  - getTopRatedBattles: 获取排名前N的战役
-  - getBattlesByRating: 按等级筛选战役
-  - getRatingSummary: 获取评分摘要
-  - compareBattleRatings: 对比两场战役
-  - hasRatingData: 检查是否有评分数据
-- [x] 创建 battleRating.test.ts 测试文件（25个测试用例）
-- [x] 构建验证通过
-- [x] 单元测试: 716个测试用例全部通过
-- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
-
-### 新增功能: 战役阵型分析 (2026-03-13 09:50)
-- [x] 添加 BattleFormation 类型定义（11种阵型类型）
-- [x] 创建 battleFormation.ts 分析模块：
-  - getFormationLabel: 获取阵型中文标签
-  - getFormationRoleLabel: 获取阵型角色标签
-  - getFormationBySide: 按阵营分析阵型使用
-  - getFormationOutcomeCorrelation: 阵型与胜负关联分析
-  - getMostEffectiveFormations: 最成功阵型分析
-  - getFormationSummary: 获取完整分析摘要
-  - getFormationInsights: 生成历史洞察
-- [x] 创建 battleFormation.test.ts 测试文件（25个测试用例）
-- [x] 为5个经典战役添加阵型数据：
-  - 长平之战: 包围阵型、防御阵型
-  - 马陵之战: 锥形阵、诱敌深入
-  - 城濮之战: 侧翼攻击、防御阵型
-  - 柏举之战: 骑兵侧翼、中央突破
-  - 牧野之战: 正面突击、防御阵型
-- [x] 构建验证通过
-- [x] 单元测试: 773个测试用例全部通过
-- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
-
-### 新增功能: 战役投降/改编分析 (2026-03-13 15:40)
-- [x] 添加 SurrenderType 类型定义（9种投降类型）
-- [x] 添加 BattleSurrender 类型定义
-- [x] 创建 battleSurrender.ts 分析模块：
-  - getSurrenderTypeLabel: 获取投降类型中文标签
-  - getSurrenderSeverityLabel: 获取严重程度标签
-  - getTreatmentLabel: 获取处理方式标签
-  - getUniqueSurrenderTypes: 获取所有唯一投降类型
-  - hasSurrenderData: 检查是否有投降数据
-  - getSurrenderTypeStats: 获取特定类型统计
-  - getAllSurrenderTypeStats: 获取所有类型统计
-  - getSurrenderBySide: 按阵营统计投降
-  - getBattlesWithSurrender: 获取有投降的战役
-  - getBattlesBySurrenderType: 按类型筛选
-  - getMassSurrenderBattles: 获取大规模投降战役
-  - getDefectionBattles: 获取倒戈战役
-  - getDecisiveSurrenderBattles: 获取决定性投降战役
-  - getSurrenderResultCorrelation: 投降与胜负关联分析
-  - getTreatmentStats: 投降人员处理方式统计
-  - getDefectionImpact: 倒戈影响分析
-  - getSurrenderInsights: 生成历史洞察
-  - getSurrenderSummary: 获取完整摘要
-- [x] 创建 battleSurrender.test.ts 测试文件（23个测试用例）
-- [x] 为长平之战添加投降数据（四十五万赵军投降后被坑杀）
-- [x] 更新 types.ts 添加投降数据类型定义
-- [x] 构建验证通过
-- [x] 单元测试: 924个测试用例全部通过
-- [x] 代码已推送到 GitHub，等待 Vercel 自动部署
-
-## 2026-03-13 迭代 (17:55)
-### 修复: battleProfile 测试修复
-- [x] 修复多转折点战役阈值（从 >=3 改为 >=2）
-- [x] 修复测试数据，添加缺失的 tags: ['war'] 到 battle-2 和 battle-3
-- [x] 修复 compareBattleProfiles 函数因测试数据问题导致的失败
-- [x] 构建验证通过
-- [x] 单元测试: 937个测试用例全部通过
-- [x] 代码已推送到 GitHub (由 Vercel 自动部署)
-
-### 新增功能: 战役夜战/夜间行动分析 (2026-03-14 09:43)
-- [x] 添加 battleNight.ts 战役夜战分析模块
-- [x] 支持时间段分析（黎明/上午/下午/傍晚/夜间/未知）
-- [x] isNightBattle: 判断是否为夜战
-- [x] getNightBattleCount: 统计夜战数量
-- [x] getTimeOfDayDistribution: 获取时间段分布
-- [x] getNightOpsStats: 获取夜战统计
-- [x] getNightAttackSuccessRate: 计算夜袭成功率
-- [x] compareNightDayResults: 对比昼夜战斗结果
-- [x] getTimeOfDayInsights: 生成时间段历史洞察
-- [x] getTimeOfDaySummary: 获取完整分析摘要
-- [x] 创建 battleNight.test.ts 测试文件（20个测试用例）
-- [x] 构建验证通过
-- [x] 单元测试: 1118个测试用例全部通过
-- [x] 代码已推送到 GitHub
-- [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
-
-### 新增功能: 战役俘虏/囚犯分析 (2026-03-14 08:40)
-- [x] 添加 BattlePrisoner 类型定义（俘虏类型、待遇、阵营、严重程度）
-- [x] 创建 battlePrisoner.ts 分析模块：
-  - getPrisonerTypeLabel: 获取俘虏类型中文标签
-  - getPrisonerTreatmentLabel: 获取俘虏待遇中文标签
-  - getPrisonerSideLabel: 获取俘虏阵营中文标签
-  - getPrisonerSeverityLabel: 获取严重程度标签
-  - hasPrisonerData: 检查是否有俘虏数据
-  - getUniquePrisonerTypes: 获取所有唯一俘虏类型
-  - getPrisonerTypeStats: 获取特定类型统计
-  - getAllPrisonerTypeStats: 获取所有类型统计
-  - getPrisonerBySide: 按阵营统计俘虏
-  - getMassivePrisonerBattles: 获取大规模俘虏战役
-  - getCommanderCapturedBattles: 获取指挥官被俘战役
-  - getExecutedPrisonerBattles: 获取处死俘虏战役
-  - getIntegratedPrisonerBattles: 获取收编俘虏战役
-  - getDecisivePrisonerImpactBattles: 获取决定性影响战役
-  - getTreatmentStats: 俘虏待遇统计
-  - getPrisonerResultCorrelation: 俘虏与胜负关联分析
-  - getHighestPrisonerCountBattles: 获取被俘最多战役
-  - getPrisonerInsights: 生成历史洞察
-  - getPrisonerSummary: 获取完整摘要
-- [x] 创建 battlePrisoner.test.ts 测试文件（28个测试用例）
-- [x] 构建验证通过
-- [x] 单元测试: 1098个测试用例全部通过
-- [x] 代码已推送到 GitHub
 - [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)

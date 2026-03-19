@@ -1172,21 +1172,26 @@
     }
   },
   "nav": {
-    "battles": "戦い",
-    "world": "世界",
-    "location": "地名"
+    "battles": "戦い"
   },
-  "location": {
-    "title": "地名変遷検索",
-    "description": "地名を入力して歴史的変遷を表示",
-    "placeholder": "地名を入力例：長安、洛陽...",
-    "events": "件の関連事項",
-    "noResults": "結果が見つかりません",
-    "back": "検索に戻る"
+  "favorites": {
+    "title": "お気に入り",
+    "backToBattles": "戦いに戻る",
+    "clearAll": "すべてクリア",
+    "noFavoritesTitle": "お気に入りがありません",
+    "noFavoritesDesc": "戦いカードのハートアイコンをクリックしてお気に入りに追加しましょう。",
+    "browseBattles": "戦いを探す"
   },
-  "world": {
-    "eurasian": "ユーラシア",
-    "eastAsia": "東アジア"
+  "battleCompare": {
+    "title": "⚔️ 戦い比較",
+    "close": "閉じる",
+    "result": "結果",
+    "belligerents": "交戦国",
+    "attacker": "攻撃側",
+    "defender": "防御側",
+    "commanders": "指揮官",
+    "summary": "戦い概要",
+    "closeComparison": "比較を閉じる"
   },
   "matrix": {
     "title": "時系列マトリックス",
@@ -1308,5 +1313,10 @@
   "empire_ly-dynasty": "李朝",
   "empire_le-dynasty": "黎朝",
   "empire_nguyen-dynasty": "阮朝",
-  "empires_active": "帝国"
+  "empires_active": "帝国",
+  "battleOfTheDay": {
+    "title": "今日の戦い",
+    "badge": "今日のおすすめ",
+    "viewDetail": "詳細を見る"
+  }
 }

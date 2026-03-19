@@ -1,21 +1,33 @@
-import type { Metadata } from 'next';
-import { Analytics } from '@vercel/analytics/next';
+import type { Metadata, Viewport } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
-// Use system fonts to avoid Google Fonts fetch issues
-// import { Geist, Geist_Mono } from 'next/font/google';
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+});
+
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+});
 
 export const metadata: Metadata = {
-  title: 'History Atlas - 中国历史地图集',
-  description: '探索中国历史帝王关系、战役地图、时间线可视化。了解春秋战国、秦汉等历史时期的政治格局与战争。',
-  keywords: ['中国历史', '历史地图', '战役', '帝王', '春秋战国', '秦汉', '历史学习'],
-  authors: [{ name: 'History Atlas' }],
+  title: 'History Atlas',
+  description: 'History learning atlas MVP',
+  keywords: ['history', 'atlas', 'China', 'dynasty', 'timeline', 'map'],
+  authors: [{ name: 'History Atlas Team' }],
   openGraph: {
-    title: 'History Atlas - 中国历史地图集',
-    description: '探索中国历史帝王关系、战役地图、时间线可视化',
+    title: 'History Atlas',
+    description: 'History learning atlas MVP',
     type: 'website',
-    locale: 'zh_CN',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
@@ -25,9 +37,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh">
-      <body className="antialiased">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
-        <Analytics />
       </body>
     </html>
   );

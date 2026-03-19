@@ -1,168 +1,202 @@
 'use client';
 
 import * as React from 'react';
+import Map, {
+  Marker,
+  Popup,
+  NavigationControl,
+  Source,
+  Layer,
+  type MapLib,
+} from 'react-map-gl/maplibre';
+import maplibregl from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
+
+import { formatYear } from '@/lib/history/utils';
 import { useTranslations } from 'next-intl';
 import {
   getActiveBoundaries,
+  type WorldBoundary,
 } from '@/lib/history/data/worldBoundaries';
-
-const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
-
-// Use any type for third-party library - Baidu Map API
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare global {
-  interface Window {
-    BMapGL: any;
-  }
-}
+import { WORLD_VIEW_COLORS, MAP_NAV_COLORS, WORLD_MAP_COLORS, MAP_POPUP_COLORS } from '@/lib/history/constants';
 
 interface WorldEmpireMapProps {
   year: number;
   mode: 'eurasian' | 'east-asia';
   initialCenter?: { lon: number; lat: number };
   initialZoom?: number;
-  onYearChange?: (year: number) => void;
-}
-
-// 根据模式获取不同的中心点和缩放级别
-function getMapConfig(mode: 'eurasian' | 'east-asia') {
-  switch (mode) {
-    case 'eurasian':
-      return { center: { lon: 90, lat: 40 }, zoom: 2 }; // 欧亚大陆中心
-    case 'east-asia':
-      return { center: { lon: 110, lat: 35 }, zoom: 3 }; // 东亚中心
-    default:
-      return { center: { lon: 90, lat: 35 }, zoom: 2 };
-  }
 }
 
 export function WorldEmpireMap({
   year,
   mode,
+  initialCenter = { lon: 90, lat: 35 },
+  initialZoom = 2,
 }: WorldEmpireMapProps) {
   const t = useTranslations();
-  const [mapReady, setMapReady] = React.useState(false);
-  const mapContainerRef = React.useRef<HTMLDivElement>(null);
-  const mapRef = React.useRef<{ centerAndZoom: (point: unknown, zoom: number) => void; enableScrollWheelZoom: (enabled: boolean) => void; clearOverlays: () => void; addOverlay: (overlay: unknown) => void; Point: new (lng: number, lat: number) => unknown; Polygon: new (points: unknown[], options: unknown) => unknown } | null>(null);
-  
-  // 根据模式获取地图配置
-  const mapConfig = React.useMemo(() => getMapConfig(mode), [mode]);
-  const { center: initialCenter, zoom: initialZoom } = mapConfig;
+  const [selectedEmpire, setSelectedEmpire] = React.useState<WorldBoundary | null>(null);
 
+  // 获取当前年份活跃的帝国
   const activeBoundaries = React.useMemo(
     () => getActiveBoundaries(year, mode),
     [year, mode]
   );
 
-  // 加载百度地图
-  React.useEffect(() => {
-    // 如果地图已初始化，先清除
-    if (mapRef.current) {
-      mapRef.current = null;
-    }
-
-    const initMap = () => {
-      if (window.BMapGL && mapContainerRef.current) {
-        try {
-          // 每次重新创建地图实例
-          const map = new window.BMapGL.Map(mapContainerRef.current);
-          map.centerAndZoom(new window.BMapGL.Point(initialCenter.lon, initialCenter.lat), initialZoom);
-          map.enableScrollWheelZoom(true);
-          mapRef.current = map;
-          setMapReady(true);
-          console.log(`✅ WorldEmpireMap 百度地图加载成功 (mode: ${mode})`);
-        } catch (e) {
-          console.error('初始化失败:', e);
-        }
-      }
-    };
-
-    const callbackName = 'baiduMapCb_' + Date.now();
-    const initMapWrapper = () => { initMap(); };
-    (window as unknown as Record<string, () => void>)[callbackName] = initMapWrapper;
-
-    const script = document.createElement('script');
-    script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}&callback=${callbackName}`;
-    script.async = true;
-    document.head.appendChild(script);
-
-    return () => { 
-      if ((window as unknown as Record<string, unknown>)[callbackName]) {
-        delete (window as unknown as Record<string, unknown>)[callbackName];
-      }
-      // 清理地图实例
-      if (mapRef.current) {
-        mapRef.current = null;
-      }
-    };
-  }, [mode, initialCenter.lon, initialCenter.lat, initialZoom]);
-
-  // 绘制边界
-  React.useEffect(() => {
-    if (!mapRef.current || !mapReady) return;
-
-    const map = mapRef.current;
-    map.clearOverlays();
-
-    activeBoundaries.forEach((boundary) => {
-      const coords = boundary.geometry.coordinates;
-      if (!coords || coords.length === 0) return;
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const processPolygon = (points: any[]) => {
-        if (!points || points.length < 3) return;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const bmapPoints = points.map((coord: any) => 
-          new window.BMapGL.Point(coord[0], coord[1])
-        );
-        const polygon = new window.BMapGL.Polygon(bmapPoints, {
-          strokeColor: boundary.properties.color,
-          strokeWeight: 2,
-          fillColor: boundary.properties.color,
-          fillOpacity: 0.35,
-        });
-        map.addOverlay(polygon);
-      };
-
-      try {
-        if (boundary.geometry.type === 'MultiPolygon') {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (coords as any[]).forEach((poly: any[]) => {
-            if (poly && poly[0]) processPolygon(poly[0]);
-          });
-        } else if (boundary.geometry.type === 'Polygon') {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          processPolygon(coords[0] as any[]);
-        }
-      } catch (e) {
-        console.warn('绘制边界失败', e);
-      }
-    });
-  }, [mapReady, activeBoundaries]);
-
   return (
-    <div className="h-full w-full overflow-hidden rounded-xl border border-zinc-200 bg-white relative">
-      {!mapReady && (
-        <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 text-zinc-400 z-10">
-          Loading... {BAIDU_MAP_AK ? '(AK已配置)' : '(AK未配置)'}
+    <div className={`h-full w-full overflow-hidden rounded-xl border ${WORLD_MAP_COLORS.container.border} ${WORLD_MAP_COLORS.container.bg} relative`}>
+      <Map
+        mapLib={maplibregl as unknown as MapLib}
+        initialViewState={{
+          longitude: initialCenter.lon,
+          latitude: initialCenter.lat,
+          zoom: initialZoom,
+        }}
+        style={{ width: '100%', height: '100%' }}
+        mapStyle="https://tiles.openfreemap.org/styles/liberty"
+        onClick={() => setSelectedEmpire(null)}
+      >
+        <div className={`absolute ${MAP_NAV_COLORS.container}`}>
+          <NavigationControl visualizePitch />
         </div>
-      )}
-      <div ref={mapContainerRef} className="w-full h-full" />
-      
-      {/* 底部帝国列表 */}
-      <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-zinc-200 p-3">
-        <div className="flex flex-wrap gap-2">
+
+        {/* 帝国边界 */}
+        {activeBoundaries.map((boundary, index) => (
+          <Source
+            key={`${boundary.properties.nameKey}-${index}`}
+            id={`empire-${index}`}
+            type="geojson"
+            data={boundary}
+          >
+            <Layer
+              id={`empire-fill-${index}`}
+              type="fill"
+              paint={{
+                'fill-color': boundary.properties.color,
+                'fill-opacity': 0.35,
+              }}
+            />
+            <Layer
+              id={`empire-line-${index}`}
+              type="line"
+              paint={{
+                'line-color': boundary.properties.color,
+                'line-width': 2,
+                'line-opacity': 0.8,
+              }}
+            />
+          </Source>
+        ))}
+
+        {/* 帝国中心点标记 */}
+        {activeBoundaries.map((boundary, index) => {
+          // 使用加权质心算法计算多边形中心（基于面积加权）
+          const polygonCoords = boundary.geometry.type === 'Polygon'
+            ? boundary.geometry.coordinates[0]
+            : boundary.geometry.type === 'MultiPolygon'
+            ? boundary.geometry.coordinates[0]?.[0]
+            : undefined;
+          const coords = polygonCoords ?? [];
+
+          if (coords.length === 0) return null;
+
+          // 计算多边形质心（Shoelace公式的加权版本）
+          const validCoords = coords.filter(c => c && c[0] !== undefined && c[1] !== undefined);
+          if (validCoords.length < 3) return null;
+
+          // 简单算术平均作为备选（对于 GeoJSON 标准坐标序列已经足够）
+          let centerLon = 0;
+          let centerLat = 0;
+          for (const c of validCoords) {
+            centerLon += c[0] ?? 0;
+            centerLat += c[1] ?? 0;
+          }
+          centerLon /= validCoords.length;
+          centerLat /= validCoords.length;
+
+          return (
+            <Marker
+              key={`marker-${index}`}
+              longitude={centerLon}
+              latitude={centerLat}
+              anchor="center"
+            >
+              <button
+                type="button"
+                onClick={(ev) => {
+                  ev.stopPropagation();
+                  setSelectedEmpire(boundary);
+                }}
+                onKeyDown={(ev) => {
+                  if (ev.key === 'Enter' || ev.key === ' ') {
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                    setSelectedEmpire(boundary);
+                  }
+                }}
+                className="px-2 py-1 text-xs font-bold text-white rounded-full shadow-md hover:scale-110 transition-transform focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1"
+                style={{ backgroundColor: boundary.properties.color }}
+                aria-label={`${t(boundary.properties.nameKey)} — ${formatYear(boundary.properties.startYear)} to ${formatYear(boundary.properties.endYear)}`}
+              >
+                {t(boundary.properties.nameKey)}
+              </button>
+            </Marker>
+          );
+        })}
+
+        {/* 选中帝国弹出框 */}
+        {selectedEmpire ? (
+          <Popup
+            longitude={
+              selectedEmpire.geometry.type === 'Polygon'
+                ? selectedEmpire.geometry.coordinates[0]?.[0]?.[0] ?? 0
+                : selectedEmpire.geometry.coordinates[0]?.[0]?.[0]?.[0] ?? 0
+            }
+            latitude={
+              selectedEmpire.geometry.type === 'Polygon'
+                ? selectedEmpire.geometry.coordinates[0]?.[0]?.[1] ?? 0
+                : selectedEmpire.geometry.coordinates[0]?.[0]?.[0]?.[1] ?? 0
+            }
+            anchor="top"
+            closeButton
+            closeOnClick={false}
+            onClose={() => setSelectedEmpire(null)}
+            maxWidth="280px"
+          >
+            <div className={`${MAP_POPUP_COLORS.container}`}>
+              <div className="flex items-center gap-2">
+                <div
+                  className={MAP_POPUP_COLORS.dot}
+                  style={{ backgroundColor: selectedEmpire.properties.color }}
+                />
+                <h3 className={MAP_POPUP_COLORS.title}>
+                  {t(selectedEmpire.properties.nameKey)}
+                </h3>
+              </div>
+              <div className={MAP_POPUP_COLORS.subtitle}>
+                {formatYear(selectedEmpire.properties.startYear)} — {formatYear(selectedEmpire.properties.endYear)}
+              </div>
+            </div>
+          </Popup>
+        ) : null}
+      </Map>
+
+      {/* 当前活跃帝国列表 */}
+      <div className={`absolute left-3 top-3 z-10 ${WORLD_VIEW_COLORS.background} ${WORLD_VIEW_COLORS.backdrop} rounded-lg p-2 max-w-[200px]`}>
+        <div className={`text-xs ${WORLD_VIEW_COLORS.textSecondary} mb-1`}>
+          {year > 0 ? year : Math.abs(year)} {year < 0 ? 'BCE' : 'CE'}
+        </div>
+        <div className="flex flex-wrap gap-1">
           {activeBoundaries.map((b, i) => (
             <span
               key={i}
-              className="px-1.5 py-0.5 text-[10px] text-white rounded"
+              className={WORLD_VIEW_COLORS.empireBadge}
               style={{ backgroundColor: b.properties.color }}
             >
               {t(b.properties.nameKey)}
             </span>
           ))}
           {activeBoundaries.length === 0 && (
-            <span className="text-xs text-white/50">No empires</span>
+            <span className={`text-xs ${WORLD_VIEW_COLORS.textMuted}`}>No empires</span>
           )}
         </div>
       </div>

@@ -16,7 +16,7 @@ import {
   getStrategyDistributionByEra,
   getStrategySummary,
 } from './battleStrategy';
-import type { Event, BattleStrategy } from './types';
+import type { Event } from './types';
 
 // Test battles with strategy data
 const testBattles: Event[] = [

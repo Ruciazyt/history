@@ -6,7 +6,6 @@ import {
   getBattleSeasonality,
   getMostActiveSeason,
   getSeasonalityInsight,
-  type BattleSeason,
   type Event,
 } from './battles';
 

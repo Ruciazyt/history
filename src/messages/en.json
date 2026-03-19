@@ -1215,21 +1215,26 @@
     "yan": "Yan"
   },
   "nav": {
-    "battles": "Battles",
-    "world": "World",
-    "location": "Location"
+    "battles": "Battles"
   },
-  "location": {
-    "title": "Location History",
-    "description": "Search a place to see its historical evolution",
-    "placeholder": "Enter location name, e.g. Chang'an, Luoyang...",
-    "events": "events",
-    "noResults": "No results found",
-    "back": "Back to search"
+  "favorites": {
+    "title": "Favorites",
+    "backToBattles": "Back to Battles",
+    "clearAll": "Clear All",
+    "noFavoritesTitle": "No Favorites Yet",
+    "noFavoritesDesc": "Start adding battles to your favorites by clicking the heart icon on any battle card.",
+    "browseBattles": "Browse Battles"
   },
-  "world": {
-    "eurasian": "Eurasia",
-    "eastAsia": "East Asia"
+  "battleCompare": {
+    "title": "⚔️ Battle Comparison",
+    "close": "Close",
+    "result": "Result",
+    "belligerents": "Belligerents",
+    "attacker": "Attacker",
+    "defender": "Defender",
+    "commanders": "Commanders",
+    "summary": "Battle Summary",
+    "closeComparison": "Close Comparison"
   },
   "matrix": {
     "title": "Timeline Matrix",
@@ -1351,5 +1356,34 @@
   "empire_ly-dynasty": "Ly Dynasty",
   "empire_le-dynasty": "Le Dynasty",
   "empire_nguyen-dynasty": "Nguyen Dynasty",
-  "empires_active": "empires"
+  "empires_active": "empires",
+  "battleOfTheDay": {
+    "title": "Battle of the Day",
+    "badge": "Today's Pick",
+    "viewDetail": "View Details"
+  },
+  "grid": {
+    "title": "Eurasian Comparison Grid",
+    "eurasian": "Eurasian",
+    "eastAsia": "East Asia",
+    "activeEmpires": "active polities",
+    "quickJump": "Quick Jump",
+    "timeline": "Timeline",
+    "activeAtYear": "{year} Active",
+    "noActive": "No active polities",
+    "ce1": "Year 1 CE",
+    "region": {
+      "china": "China",
+      "korea": "Korea",
+      "japan": "Japan",
+      "central-asia": "Central Asia",
+      "west": "West",
+      "vietnam": "Vietnam"
+    }
+  },
+  "placeNames": {
+    "title": "Place Name Evolution",
+    "noResults": "No matching cities found",
+    "activeEmpires": "places"
+  }
 }

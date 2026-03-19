@@ -379,8 +379,7 @@ export function getVictoryFactorInsights(battles: Event[]): VictoryFactorInsight
  * Get summary of key victory factors
  */
 export function getKeyVictoryFactorsSummary(
-  battles: Event[],
-  _t?: (key: string) => string
+  battles: Event[]
 ): string[] {
   const battlesOnly = battles.filter(e => e.tags?.includes('war'));
   

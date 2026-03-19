@@ -14,10 +14,6 @@ import {
   getEraTypeCorrelation,
   getTimeDistributionInsights,
   getTimeDistributionSummary,
-  type CenturyDistribution,
-  type EraDistribution,
-  type PeakPeriod,
-  type TimeInsight,
 } from './battleTimeAnalysis';
 import { Event } from './types';
 
