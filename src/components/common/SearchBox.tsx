@@ -20,13 +20,17 @@ interface SearchResult {
   year?: number;
 }
 
-import { useDebounce } from '@/lib/history/useBattleHooks';
+import { useDebounce, useClickOutside } from '@/lib/history/useBattleHooks';
 
 export const SearchBox = React.memo(function SearchBox({ events, rulers, locale = 'zh' }: SearchBoxProps) {
   const router = useRouter();
   const [query, setQuery] = React.useState('');
   const [isOpen, setIsOpen] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside the search container
+  useClickOutside(containerRef, React.useCallback(() => setIsOpen(false), []));
 
   // Debounce search query to reduce frequency
   const debouncedQuery = useDebounce(query, 200);
@@ -88,7 +92,7 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
   }, []);
 
   return (
-    <div className="relative">
+    <div ref={containerRef} className="relative">
       <div className="relative">
         <input
           ref={inputRef}
@@ -99,6 +103,16 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
             setIsOpen(true);
           }}
           onFocus={() => setIsOpen(true)}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setIsOpen(false);
+              inputRef.current?.blur();
+            }
+          }}
+          aria-expanded={isOpen}
+          aria-haspopup="listbox"
+          aria-autocomplete="list"
+          role="combobox"
           placeholder="搜索帝王、战役..."
           className="w-40 sm:w-48 lg:w-56 px-3 py-1.5 pl-8 text-sm bg-zinc-50 dark:bg-zinc-800 border border-transparent dark:border-zinc-700 rounded-lg focus:bg-white dark:focus:bg-zinc-700 focus:border-zinc-300 dark:focus:border-zinc-500 focus:outline-none transition-all text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
         />
@@ -152,14 +166,6 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
         >
           <div className="text-center text-sm text-zinc-400 dark:text-zinc-500">未找到相关结果</div>
         </div>
-      )}
-
-      {/* Click outside to close */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-40"
-          onClick={() => setIsOpen(false)}
-        />
       )}
     </div>
   );

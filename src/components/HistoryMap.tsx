@@ -150,6 +150,13 @@ export function HistoryMap({
     };
   }, [mapCenter.lon, mapCenter.lat, mapZoom]);
 
+  // Re-center and re-zoom the map when mode changes after initial load
+  React.useEffect(() => {
+    if (!mapRef.current || !mapReady) return;
+    const map = mapRef.current;
+    map.centerAndZoom(new window.BMapGL.Point(mapCenter.lon, mapCenter.lat), mapZoom);
+  }, [mode, mapReady, mapCenter, mapZoom]);
+
   // 绘制内容
   React.useEffect(() => {
     if (!mapRef.current || !mapReady) return;
