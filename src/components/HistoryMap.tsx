@@ -1,8 +1,7 @@
 'use client';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import * as React from 'react';
+import type { Position } from 'geojson';
 import type { Event } from '@/lib/history/types';
 import { useTranslations } from 'next-intl';
 import { dynastyBoundaries } from '@/lib/history/data/dynastyBoundaries';
@@ -14,7 +13,9 @@ const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
 
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     BMapGL: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     BMapGLMarker: any;
   }
 }
@@ -68,7 +69,7 @@ export function HistoryMap({
   const activeBoundaries = React.useMemo(() => {
     if (!openEraIds || openEraIds.size === 0 || mode !== 'china') return [];
     return Array.from(openEraIds)
-      .filter((id) => dynastyBoundaries[id])
+      .filter((id): id is string => !!dynastyBoundaries[id])
       .map((id) => ({ id, feature: dynastyBoundaries[id] }));
   }, [openEraIds, mode]);
 
@@ -154,11 +155,9 @@ export function HistoryMap({
         if (!feature.geometry.coordinates) return;
         
         const coords = feature.geometry.coordinates;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const processPolygon = (points: any[]) => {
+        const processPolygon = (points: Position[]) => {
           if (!points || points.length < 3) return;
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const bmapPoints = points.map((coord: any) => 
+          const bmapPoints = points.map((coord) => 
             new window.BMapGL.Point(coord[0], coord[1])
           );
           const polygon = new window.BMapGL.Polygon(bmapPoints, {
@@ -172,12 +171,11 @@ export function HistoryMap({
 
         try {
           if (feature.geometry.type === 'MultiPolygon') {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (coords as any[]).forEach((poly: any[]) => {
+            (coords as Position[][]).forEach((poly) => {
               if (poly && poly[0]) processPolygon(poly[0]);
             });
           } else if (feature.geometry.type === 'Polygon') {
-            processPolygon(coords[0]);
+            processPolygon(coords[0] as Position[]);
           }
         } catch (e) {
           console.warn('Failed to draw boundary', e);
@@ -191,11 +189,9 @@ export function HistoryMap({
         const coords = boundary.geometry.coordinates;
         if (!coords || coords.length === 0) return;
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const processPolygon = (points: any[]) => {
+        const processPolygon = (points: Position[]) => {
           if (!points || points.length < 3) return;
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const bmapPoints = points.map((coord: any) => 
+          const bmapPoints = points.map((coord) => 
             new window.BMapGL.Point(coord[0], coord[1])
           );
           const polygon = new window.BMapGL.Polygon(bmapPoints, {
@@ -209,12 +205,11 @@ export function HistoryMap({
 
         try {
           if (boundary.geometry.type === 'MultiPolygon') {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            (coords as any[]).forEach((poly: any[]) => {
+            (coords as Position[][]).forEach((poly) => {
               if (poly && poly[0]) processPolygon(poly[0]);
             });
           } else if (boundary.geometry.type === 'Polygon') {
-            processPolygon(coords[0]);
+            processPolygon(coords[0] as Position[]);
           }
         } catch (e) {
           console.warn('Failed to draw world boundary', e);
