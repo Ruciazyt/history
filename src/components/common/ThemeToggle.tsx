@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import { useTheme } from './ThemeContext';
-import { THEME_TOGGLE_COLORS } from '@/lib/history/constants';
 
 interface ThemeToggleProps {
   className?: string;
@@ -14,7 +13,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
   return (
     <button
       onClick={toggleTheme}
-      className={`${THEME_TOGGLE_COLORS.button.container} ${THEME_TOGGLE_COLORS.button.dimensions} ${THEME_TOGGLE_COLORS.button.border} ${THEME_TOGGLE_COLORS.button.bg} ${THEME_TOGGLE_COLORS.button.cursor} ${THEME_TOGGLE_COLORS.button.fontSize} ${THEME_TOGGLE_COLORS.button.transition} ${THEME_TOGGLE_COLORS.hover.bg} ${className || ''}`}
+      className={`inline-flex items-center justify-center w-9 h-9 border-none rounded-lg bg-transparent cursor-pointer text-lg transition-colors duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 ${className || ''}`}
       aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
       title={theme === 'light' ? '深色模式' : '浅色模式'}
     >

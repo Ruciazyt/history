@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import type { Event, Ruler } from '@/lib/history/types';
 import { formatYear } from '@/lib/history/utils';
-import { Z_INDEX, LIGHT_THEME_COLORS } from '@/lib/history/constants';
+import { Z_INDEX } from '@/lib/history/constants';
 
 interface SearchBoxProps {
   events: Event[];
@@ -27,11 +27,11 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
   const [query, setQuery] = React.useState('');
   const [isOpen, setIsOpen] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
-  
+
   // Debounce search query to reduce frequency
   const debouncedQuery = useDebounce(query, 200);
 
-  // 使用 useMemo 缓存搜索结果
+  // Cache search results with useMemo
   const results = React.useMemo<SearchResult[]>(() => {
     if (!debouncedQuery.trim()) {
       return [];
@@ -40,7 +40,7 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
     const q = debouncedQuery.toLowerCase().trim();
     const searchResults: SearchResult[] = [];
 
-    // 搜索帝王 - 使用更高效的过滤
+    // Search rulers
     for (const ruler of rulers) {
       const name = ruler.nameKey.replace('ruler.', '');
       if (name.includes(q) || ruler.id.includes(q)) {
@@ -54,12 +54,12 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
       }
     }
 
-    // 搜索战役/事件
+    // Search events
     for (const event of events) {
       const titleKey = event.titleKey;
       const title = titleKey.replace('event.', '').replace('.title', '');
       const isWar = event.tags?.includes('war');
-      
+
       if (title.includes(q) || event.id.includes(q)) {
         searchResults.push({
           type: isWar ? 'battle' : 'event',
@@ -77,7 +77,6 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
   const handleSelect = React.useCallback((result: SearchResult) => {
     setQuery('');
     setIsOpen(false);
-    // 根据类型跳转到对应页面或展示
     if (result.type === 'battle') {
       router.push(`/${locale}/battles`);
     }
@@ -101,10 +100,10 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
           }}
           onFocus={() => setIsOpen(true)}
           placeholder="搜索帝王、战役..."
-          className={`w-40 sm:w-48 lg:w-56 px-3 py-1.5 pl-8 text-sm ${LIGHT_THEME_COLORS.background} border border-transparent rounded-lg focus:${LIGHT_THEME_COLORS.surface} focus:${LIGHT_THEME_COLORS.border} focus:outline-none transition-all`}
+          className="w-40 sm:w-48 lg:w-56 px-3 py-1.5 pl-8 text-sm bg-zinc-50 dark:bg-zinc-800 border border-transparent dark:border-zinc-700 rounded-lg focus:bg-white dark:focus:bg-zinc-700 focus:border-zinc-300 dark:focus:border-zinc-500 focus:outline-none transition-all text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
         />
         <svg
-          className={`absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 ${LIGHT_THEME_COLORS.textMuted}`}
+          className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400 dark:text-zinc-500"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -114,30 +113,30 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
         {query && (
           <button
             onClick={handleClear}
-            className={`absolute right-2 top-1/2 -translate-y-1/2 ${LIGHT_THEME_COLORS.textMuted} hover:${LIGHT_THEME_COLORS.textSecondary}`}
+            className="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
           >
             ✕
           </button>
         )}
       </div>
 
-      {/* 搜索结果下拉 */}
+      {/* Search results dropdown */}
       {isOpen && results.length > 0 && (
-        <div 
-          className={`absolute top-full left-0 right-0 mt-1 ${LIGHT_THEME_COLORS.surface} rounded-lg shadow-lg border ${LIGHT_THEME_COLORS.border} py-1 max-h-80 overflow-y-auto`}
+        <div
+          className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-zinc-800 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700 py-1 max-h-80 overflow-y-auto"
           style={{ zIndex: Z_INDEX.dropdown }}
         >
           {results.map((result) => (
             <button
               key={`${result.type}-${result.id}`}
               onClick={() => handleSelect(result)}
-              className={`w-full px-3 py-2 text-left hover:${LIGHT_THEME_COLORS.background} flex items-start gap-2`}
+              className="w-full px-3 py-2 text-left hover:bg-zinc-50 dark:hover:bg-zinc-700 flex items-start gap-2"
             >
-              <span className={`text-xs ${LIGHT_THEME_COLORS.textMuted} mt-0.5`}>{result.subtitle}</span>
+              <span className="text-xs text-zinc-400 dark:text-zinc-500 mt-0.5">{result.subtitle}</span>
               <div className="flex-1 min-w-0">
-                <div className={`text-sm font-medium ${LIGHT_THEME_COLORS.text} truncate`}>{result.title}</div>
+                <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100 truncate">{result.title}</div>
                 {result.year !== undefined && (
-                  <div className={`text-xs ${LIGHT_THEME_COLORS.textMuted}`}>{formatYear(result.year)}</div>
+                  <div className="text-xs text-zinc-400 dark:text-zinc-500">{formatYear(result.year)}</div>
                 )}
               </div>
             </button>
@@ -145,17 +144,17 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
         </div>
       )}
 
-      {/* 无结果提示 */}
+      {/* No results */}
       {isOpen && query && results.length === 0 && (
-        <div 
-          className={`absolute top-full left-0 right-0 mt-1 ${LIGHT_THEME_COLORS.surface} rounded-lg shadow-lg border ${LIGHT_THEME_COLORS.border} py-3`}
+        <div
+          className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-zinc-800 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700 py-3"
           style={{ zIndex: Z_INDEX.dropdown }}
         >
-          <div className={`text-center text-sm ${LIGHT_THEME_COLORS.textMuted}`}>未找到相关结果</div>
+          <div className="text-center text-sm text-zinc-400 dark:text-zinc-500">未找到相关结果</div>
         </div>
       )}
 
-      {/* 点击外部关闭 */}
+      {/* Click outside to close */}
       {isOpen && (
         <div
           className="fixed inset-0 z-40"

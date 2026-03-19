@@ -5,10 +5,8 @@ import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { locales, type Locale } from '@/i18n/routing';
-import { LOCALE_SWITCHER_COLORS } from '@/lib/history/constants';
 
 function stripLocale(pathname: string) {
-  // localePrefix is "always". If pathname starts with /en|/ja|/zh, strip it.
   for (const l of locales) {
     const prefix = `/${l}`;
     if (pathname === prefix) return '/';
@@ -29,7 +27,7 @@ export function LocaleSwitcher() {
   const pathname = usePathname();
 
   return (
-    <label className={`inline-flex items-center gap-2 text-sm ${LOCALE_SWITCHER_COLORS.container.text}`}>
+    <label className="inline-flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
       <span className="sr-only">Language</span>
       <select
         value={locale}
@@ -39,7 +37,7 @@ export function LocaleSwitcher() {
           const nextPath = `/${next}${rest}`;
           router.push(nextPath);
         }}
-        className={`rounded-lg border ${LOCALE_SWITCHER_COLORS.select.border} ${LOCALE_SWITCHER_COLORS.select.bg} ${LOCALE_SWITCHER_COLORS.select.text} px-2 py-1 text-sm`}
+        className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-2 py-1 text-sm cursor-pointer"
       >
         {locales.map((l) => (
           <option key={l} value={l}>

@@ -1,8 +1,242 @@
 @import "tailwindcss";
 
+/* ─── Theming: CSS Custom Properties ─────────────────────────────────────────
+ * HISTORY_APP_COLORS in colors.ts reads these via `var(...)` references.
+ * By changing [data-theme="dark"] values the entire app switches theme.
+ * ─────────────────────────────────────────────────────────────────────────── */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Surface layers */
+  --surface: #ffffff;
+  --surface-hover: #f4f4f5;
+
+  /* Borders */
+  --border: #e4e4e7;
+  --border-strong: #d4d4d8;
+
+  /* Text */
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+  --text-inverse: #fafafa;
+
+  /* Accent colors */
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+
+  /* Semantic — light theme values */
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #e4e4e7;
+  --sidebar-header-bg: #ffffff;
+  --sidebar-header-text: #71717a;
+  --sidebar-era-bg: #f4f4f5;
+  --sidebar-era-text: #3f3f46;
+  --sidebar-era-year: #a1a1aa;
+  --sidebar-era-dot: #a1a1aa;
+  --sidebar-ruler-active-bg: #dbeafe;
+  --sidebar-ruler-active-text: #1e40af;
+  --sidebar-ruler-inactive-text: #52525b;
+  --sidebar-table-header-text: #71717a;
+  --sidebar-table-header-border: #e4e4e7;
+  --sidebar-table-row-border: #f4f4f5;
+  --sidebar-table-row-hover: #f4f4f5;
+  --sidebar-table-row-year: #71717a;
+
+  --header-bg: #ffffff;
+  --header-border: #e4e4f7;
+  --header-title-small: #71717a;
+  --header-title-large: #18181b;
+
+  --civ-switcher-container-bg: #f4f4f5;
+  --civ-switcher-active-bg: #ffffff;
+  --civ-switcher-active-text: #18181b;
+  --civ-switcher-active-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --civ-switcher-inactive-text: #71717a;
+
+  --timeline-bg: #ffffff;
+  --timeline-border: #e4e4e7;
+  --timeline-header-text: #71717a;
+  --timeline-year: #18181b;
+  --timeline-window: #18181b;
+  --timeline-range: #52525b;
+  --timeline-win-btn-active-bg: #3b82f6;
+  --timeline-win-btn-active-text: #ffffff;
+  --timeline-win-btn-inactive-bg: #f4f4f5;
+  --timeline-win-btn-inactive-text: #52525b;
+  --timeline-win-btn-inactive-hover: #e4e4e7;
+  --timeline-nav-bg: #f4f4f5;
+  --timeline-nav-text: #52525b;
+  --timeline-nav-hover: #e4e4e7;
+
+  --events-sidebar-bg: #ffffff;
+  --events-sidebar-border: #e4e4e7;
+  --events-sidebar-header-bg: #ffffff;
+  --events-sidebar-header-text: #71717a;
+  --events-sidebar-event-border: #f4f4f5;
+  --events-sidebar-event-year: #a1a1aa;
+  --events-sidebar-event-title: #18181b;
+  --events-sidebar-empty: #a1a1aa;
+  --events-sidebar-war-badge-bg: #fef2f2;
+  --events-sidebar-war-badge-text: #dc2626;
+  --events-sidebar-compare-header-bg: #fafafa;
+  --events-sidebar-compare-header-border: #e4e4e7;
+  --events-sidebar-compare-header-text: #71717a;
+  --events-sidebar-compare-title: #71717a;
+
+  --ruler-detail-bg: #ffffff;
+  --ruler-detail-border: #e4e4e7;
+  --ruler-detail-header-text: #71717a;
+  --ruler-detail-header-name: #18181b;
+  --ruler-detail-header-year: #a1a1aa;
+  --ruler-detail-era-badge-bg: #fef3c7;
+  --ruler-detail-era-badge-text: #b45309;
+  --ruler-detail-close-border: #e4e4e7;
+  --ruler-detail-close-bg: #ffffff;
+  --ruler-detail-close-text: #52525b;
+  --ruler-detail-close-hover: #f4f4f5;
+  --ruler-detail-highlight: #3f3f46;
+  --ruler-detail-bio: #52525b;
+  --ruler-detail-seed-note: #a1a1aa;
+
+  --container-bg: #fafafa;
+  --container-text: #18181b;
+
+  --era-info-text: #52525b;
+  --era-info-font-weight: font-medium;
+  --divider: #e4e4e7;
+  --multi-polity-text: #a1a1aa;
+  --arrow-text: #d4d4d8;
+  --event-title-default: #18181b;
+  --event-title-light: #52525b;
+  --range-label-text: #52525b;
+
+  --quick-link-timeline-bg: #f4f4f5;
+  --quick-link-timeline-text: #3f3f46;
+  --quick-link-timeline-border: #e4e4e7;
+  --quick-link-matrix-bg: #eff6ff;
+  --quick-link-matrix-text: #1d4ed8;
+  --quick-link-matrix-border: #bfdbfe;
+  --quick-link-battles-bg: #fef2f2;
+  --quick-link-battles-text: #b91c1c;
+  --quick-link-battles-border: #fecaca;
+  --quick-link-eurasian-bg: #faf5ff;
+  --quick-link-eurasian-text: #7e22ce;
+  --quick-link-eurasian-border: #e9d5ff;
+}
+
+[data-theme="dark"] {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --surface: #18181b;
+  --surface-hover: #27272a;
+  --border: #3f3f46;
+  --border-strong: #52525b;
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-inverse: #18181b;
+  --accent: #60a5fa;
+  --accent-hover: #3b82f6;
+
+  --sidebar-bg: #18181b;
+  --sidebar-border: #3f3f46;
+  --sidebar-header-bg: #18181b;
+  --sidebar-header-text: #71717a;
+  --sidebar-era-bg: #27272a;
+  --sidebar-era-text: #e4e4e7;
+  --sidebar-era-year: #71717a;
+  --sidebar-era-dot: #71717a;
+  --sidebar-ruler-active-bg: #1e3a5f;
+  --sidebar-ruler-active-text: #93c5fd;
+  --sidebar-ruler-inactive-text: #a1a1aa;
+  --sidebar-table-header-text: #71717a;
+  --sidebar-table-header-border: #3f3f46;
+  --sidebar-table-row-border: #27272a;
+  --sidebar-table-row-hover: #27272a;
+  --sidebar-table-row-year: #71717a;
+
+  --header-bg: #18181b;
+  --header-border: #3f3f46;
+  --header-title-small: #71717a;
+  --header-title-large: #fafafa;
+
+  --civ-switcher-container-bg: #27272a;
+  --civ-switcher-active-bg: #3f3f46;
+  --civ-switcher-active-text: #fafafa;
+  --civ-switcher-active-shadow: none;
+  --civ-switcher-inactive-text: #a1a1aa;
+
+  --timeline-bg: #18181b;
+  --timeline-border: #3f3f46;
+  --timeline-header-text: #71717a;
+  --timeline-year: #fafafa;
+  --timeline-window: #fafafa;
+  --timeline-range: #a1a1aa;
+  --timeline-win-btn-active-bg: #2563eb;
+  --timeline-win-btn-active-text: #ffffff;
+  --timeline-win-btn-inactive-bg: #27272a;
+  --timeline-win-btn-inactive-text: #a1a1aa;
+  --timeline-win-btn-inactive-hover: #3f3f46;
+  --timeline-nav-bg: #27272a;
+  --timeline-nav-text: #a1a1aa;
+  --timeline-nav-hover: #3f3f46;
+
+  --events-sidebar-bg: #18181b;
+  --events-sidebar-border: #3f3f46;
+  --events-sidebar-header-bg: #18181b;
+  --events-sidebar-header-text: #71717a;
+  --events-sidebar-event-border: #27272a;
+  --events-sidebar-event-year: #71717a;
+  --events-sidebar-event-title: #e4e4e7;
+  --events-sidebar-empty: #71717a;
+  --events-sidebar-war-badge-bg: #450a0a;
+  --events-sidebar-war-badge-text: #fca5a5;
+  --events-sidebar-compare-header-bg: #09090b;
+  --events-sidebar-compare-header-border: #3f3f46;
+  --events-sidebar-compare-header-text: #71717a;
+  --events-sidebar-compare-title: #71717a;
+
+  --ruler-detail-bg: #18181b;
+  --ruler-detail-border: #3f3f46;
+  --ruler-detail-header-text: #71717a;
+  --ruler-detail-header-name: #fafafa;
+  --ruler-detail-header-year: #71717a;
+  --ruler-detail-era-badge-bg: #451a03;
+  --ruler-detail-era-badge-text: #fcd34d;
+  --ruler-detail-close-border: #3f3f46;
+  --ruler-detail-close-bg: #27272a;
+  --ruler-detail-close-text: #a1a1aa;
+  --ruler-detail-close-hover: #3f3f46;
+  --ruler-detail-highlight: #a1a1aa;
+  --ruler-detail-bio: #71717a;
+  --ruler-detail-seed-note: #71717a;
+
+  --container-bg: #09090b;
+  --container-text: #fafafa;
+
+  --era-info-text: #a1a1aa;
+  --divider: #3f3f46;
+  --multi-polity-text: #71717a;
+  --arrow-text: #52525b;
+  --event-title-default: #e4e4e7;
+  --event-title-light: #71717a;
+  --range-label-text: #a1a1aa;
+
+  --quick-link-timeline-bg: #27272a;
+  --quick-link-timeline-text: #a1a1aa;
+  --quick-link-timeline-border: #3f3f46;
+  --quick-link-matrix-bg: #1e3a5f;
+  --quick-link-matrix-text: #93c5fd;
+  --quick-link-matrix-border: #1e40af;
+  --quick-link-battles-bg: #450a0a;
+  --quick-link-battles-text: #fca5a5;
+  --quick-link-battles-border: #7f1d1d;
+  --quick-link-eurasian-bg: #3b0764;
+  --quick-link-eurasian-text: #e9d5ff;
+  --quick-link-eurasian-border: #581c87;
 }
 
 @theme inline {
@@ -10,27 +244,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  
-  /* Custom utilities */
   --animate-spin-slow: spin 2s linear infinite;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-/* Manual theme toggle support */
-[data-theme="dark"] {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
-[data-theme="light"] {
-  --background: #ffffff;
-  --foreground: #171717;
 }
 
 body {
@@ -39,51 +253,40 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Hide scrollbar but keep functionality */
+/* ─── Utility classes using CSS variables ──────────────────────────────────── */
+.bg-surface { background-color: var(--surface); }
+.hover-surface:hover { background-color: var(--surface-hover); }
+.border-theme { border-color: var(--border); }
+.border-theme-strong { border-color: var(--border-strong); }
+.text-theme-primary { color: var(--text-primary); }
+.text-theme-secondary { color: var(--text-secondary); }
+.text-theme-muted { color: var(--text-muted); }
+.text-theme-inverse { color: var(--text-inverse); }
+
+/* ─── Scrollbar utilities ──────────────────────────────────────────────────── */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-/* Focus visible styles for accessibility - applied to interactive elements only */
+/* ─── Accessibility ─────────────────────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
-/* Disable animations for reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .animate-spin {
-    animation: none !important;
-  }
-  
+  .animate-spin,
   .animate-pulse {
     animation: none !important;
   }
 }
 
-/* Scrollbar styling for larger screens */
+/* ─── Scrollbar styling (light/dark aware) ─────────────────────────────────── */
 @media (min-width: 768px) {
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 4px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #a1a1a1;
-  }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: var(--surface); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 }
