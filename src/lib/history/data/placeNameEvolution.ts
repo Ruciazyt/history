@@ -122,10 +122,12 @@ export const PLACE_EVOLUTIONS: PlaceEvolution[] = [
     modernName: '成都',
     coordinate: { lon: 104.07, lat: 30.67 },
     names: [
-      { name: '成都', startYear: -311, endYear: 907, dynasty: '古蜀秦汉隋唐' },
-      { name: '南京', startYear: 907, endYear: 925, dynasty: '五代·前蜀' },
+      { name: '成都', startYear: -311, endYear: 221, dynasty: '古蜀秦' },
+      { name: '蜀郡', startYear: 221, endYear: 265, dynasty: '秦汉' },
+      { name: '成都', startYear: 265, endYear: 907, dynasty: '魏晋隋唐' },
+      { name: '成都', startYear: 907, endYear: 925, dynasty: '五代·前蜀' },
       { name: '成都', startYear: 925, endYear: 1368, dynasty: '五代·后蜀宋元' },
-      { name: '成都', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '成都府', startYear: 1368, endYear: 1912, dynasty: '明清' },
       { name: '成都', startYear: 1912, endYear: 2026, dynasty: '现代' },
     ],
   },
@@ -183,8 +185,11 @@ export const PLACE_EVOLUTIONS: PlaceEvolution[] = [
     modernName: '济南',
     coordinate: { lon: 116.99, lat: 36.67 },
     names: [
-      { name: '历下', startYear: -500, endYear: 400, dynasty: '战国晋' },
-      { name: '济南', startYear: 400, endYear: 1912, dynasty: '南北朝明清' },
+      { name: '历下', startYear: -500, endYear: -200, dynasty: '战国' },
+      { name: '济南', startYear: -200, endYear: 589, dynasty: '秦汉魏晋南北朝' },
+      { name: '齐州', startYear: 589, endYear: 1000, dynasty: '隋唐宋' },
+      { name: '济南府', startYear: 1000, endYear: 1368, dynasty: '宋金元' },
+      { name: '济南', startYear: 1368, endYear: 1912, dynasty: '明清' },
       { name: '济南', startYear: 1912, endYear: 2026, dynasty: '现代' },
     ],
   },
@@ -863,6 +868,477 @@ export const PLACE_EVOLUTIONS: PlaceEvolution[] = [
     names: [
       { name: '揭阳', startYear: 500, endYear: 1912, dynasty: '南北朝明清' },
       { name: '揭阳', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  // ==================== 第二批新增城市 ====================
+  // ----- 山东 -----
+  {
+    modernName: '烟台',
+    coordinate: { lon: 121.45, lat: 37.47 },
+    names: [
+      { name: '芝罘', startYear: 600, endYear: 1398, dynasty: '唐明' },
+      { name: '烟台', startYear: 1398, endYear: 1912, dynasty: '明清' },
+      { name: '烟台', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '威海',
+    coordinate: { lon: 122.12, lat: 37.51 },
+    names: [
+      { name: '威海', startYear: 1398, endYear: 1898, dynasty: '明清' },
+      { name: '威海', startYear: 1898, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '潍坊',
+    coordinate: { lon: 119.17, lat: 36.71 },
+    names: [
+      { name: '潍州', startYear: 700, endYear: 1368, dynasty: '唐元' },
+      { name: '潍县', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '潍坊', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '淄博',
+    coordinate: { lon: 118.05, lat: 36.82 },
+    names: [
+      { name: '临淄', startYear: -800, endYear: 1000, dynasty: '春秋清' },
+      { name: '淄博', startYear: 1955, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '临沂',
+    coordinate: { lon: 118.36, lat: 35.11 },
+    names: [
+      { name: '琅琊', startYear: -300, endYear: 580, dynasty: '战国南北朝' },
+      { name: '临沂', startYear: 580, endYear: 1912, dynasty: '隋明清' },
+      { name: '临沂', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '济宁',
+    coordinate: { lon: 116.59, lat: 35.41 },
+    names: [
+      { name: '任城', startYear: -200, endYear: 600, dynasty: '秦汉魏晋' },
+      { name: '济州', startYear: 600, endYear: 1368, dynasty: '唐宋元' },
+      { name: '济宁', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '济宁', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '泰安',
+    coordinate: { lon: 117.09, lat: 36.19 },
+    names: [
+      { name: '奉高', startYear: -100, endYear: 580, dynasty: '汉南北朝' },
+      { name: '泰安', startYear: 580, endYear: 1000, dynasty: '隋宋' },
+      { name: '泰安', startYear: 1000, endYear: 1912, dynasty: '金明清' },
+      { name: '泰安', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '德州',
+    coordinate: { lon: 116.36, lat: 37.44 },
+    names: [
+      { name: '安德', startYear: -200, endYear: 600, dynasty: '秦汉隋' },
+      { name: '德州', startYear: 600, endYear: 1368, dynasty: '唐宋元' },
+      { name: '德州', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '德州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '聊城',
+    coordinate: { lon: 115.99, lat: 36.46 },
+    names: [
+      { name: '东昌', startYear: 600, endYear: 1368, dynasty: '隋元' },
+      { name: '聊城', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '聊城', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '滨州',
+    coordinate: { lon: 117.97, lat: 37.38 },
+    names: [
+      { name: '渤海', startYear: -200, endYear: 500, dynasty: '秦汉南北朝' },
+      { name: '滨州', startYear: 900, endYear: 1912, dynasty: '五代明清' },
+      { name: '滨州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '菏泽',
+    coordinate: { lon: 115.44, lat: 35.23 },
+    names: [
+      { name: '曹州', startYear: 500, endYear: 1368, dynasty: '南北朝元' },
+      { name: '菏泽', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '菏泽', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '枣庄',
+    coordinate: { lon: 117.33, lat: 34.82 },
+    names: [
+      { name: '峄县', startYear: -200, endYear: 1200, dynasty: '秦金' },
+      { name: '滕州', startYear: 1200, endYear: 1368, dynasty: '金元' },
+      { name: '枣庄', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '枣庄', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '日照',
+    coordinate: { lon: 119.53, lat: 35.42 },
+    names: [
+      { name: '日照', startYear: 1117, endYear: 1912, dynasty: '金明清' },
+      { name: '日照', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '莱芜',
+    coordinate: { lon: 117.66, lat: 36.21 },
+    names: [
+      { name: '莱芜', startYear: 1133, endYear: 1912, dynasty: '金明清' },
+      { name: '莱芜', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  // ----- 江苏 -----
+  {
+    modernName: '南通',
+    coordinate: { lon: 120.89, lat: 32.01 },
+    names: [
+      { name: '通州', startYear: 958, endYear: 1912, dynasty: '宋明清' },
+      { name: '南通', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '徐州',
+    coordinate: { lon: 117.28, lat: 34.21 },
+    names: [
+      { name: '彭城', startYear: -200, endYear: 589, dynasty: '秦汉魏晋南北朝' },
+      { name: '徐州', startYear: 589, endYear: 1912, dynasty: '隋唐宋元明清' },
+      { name: '徐州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '连云港',
+    coordinate: { lon: 119.22, lat: 34.60 },
+    names: [
+      { name: '海州', startYear: -200, endYear: 1912, dynasty: '秦清' },
+      { name: '连云港', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '盐城',
+    coordinate: { lon: 120.15, lat: 33.35 },
+    names: [
+      { name: '盐城', startYear: -200, endYear: 600, dynasty: '秦汉南北朝' },
+      { name: '盐城', startYear: 600, endYear: 1912, dynasty: '隋唐宋元明清' },
+      { name: '盐城', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '淮安',
+    coordinate: { lon: 119.02, lat: 33.60 },
+    names: [
+      { name: '淮阴', startYear: -200, endYear: 589, dynasty: '秦汉魏晋南北朝' },
+      { name: '楚州', startYear: 589, endYear: 1129, dynasty: '隋唐北宋' },
+      { name: '淮安', startYear: 1129, endYear: 1912, dynasty: '南宋明清' },
+      { name: '淮安', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '泰州',
+    coordinate: { lon: 119.92, lat: 32.46 },
+    names: [
+      { name: '海陵', startYear: -200, endYear: 600, dynasty: '秦汉南北朝' },
+      { name: '泰州', startYear: 600, endYear: 1912, dynasty: '唐宋元明清' },
+      { name: '泰州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '宿迁',
+    coordinate: { lon: 118.30, lat: 33.97 },
+    names: [
+      { name: '宿迁', startYear: -200, endYear: 600, dynasty: '秦汉南北朝' },
+      { name: '宿迁', startYear: 600, endYear: 1912, dynasty: '隋唐宋元明清' },
+      { name: '宿迁', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  // ----- 浙江 -----
+  {
+    modernName: '温州',
+    coordinate: { lon: 120.70, lat: 28.00 },
+    names: [
+      { name: '温州', startYear: 675, endYear: 1912, dynasty: '唐宋元明清' },
+      { name: '温州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '嘉兴',
+    coordinate: { lon: 120.76, lat: 30.75 },
+    names: [
+      { name: '秀州', startYear: 600, endYear: 1120, dynasty: '唐宋' },
+      { name: '嘉兴', startYear: 1120, endYear: 1912, dynasty: '宋明清' },
+      { name: '嘉兴', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '湖州',
+    coordinate: { lon: 120.09, lat: 30.87 },
+    names: [
+      { name: '乌程', startYear: -200, endYear: 589, dynasty: '秦汉魏晋南北朝' },
+      { name: '湖州', startYear: 589, endYear: 1912, dynasty: '隋唐宋元明清' },
+      { name: '湖州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '绍兴',
+    coordinate: { lon: 120.58, lat: 30.00 },
+    names: [
+      { name: '会稽', startYear: -200, endYear: 589, dynasty: '秦汉魏晋南北朝' },
+      { name: '越州', startYear: 589, endYear: 1130, dynasty: '隋唐北宋' },
+      { name: '绍兴府', startYear: 1130, endYear: 1912, dynasty: '南宋明清' },
+      { name: '绍兴', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '金华',
+    coordinate: { lon: 119.65, lat: 29.09 },
+    names: [
+      { name: '婺州', startYear: 600, endYear: 1368, dynasty: '隋元' },
+      { name: '金华', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '金华', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '衢州',
+    coordinate: { lon: 118.87, lat: 28.94 },
+    names: [
+      { name: '衢州', startYear: 600, endYear: 1912, dynasty: '唐宋元明清' },
+      { name: '衢州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '舟山',
+    coordinate: { lon: 122.20, lat: 30.00 },
+    names: [
+      { name: '昌国', startYear: 1070, endYear: 1389, dynasty: '宋元' },
+      { name: '定海', startYear: 1389, endYear: 1840, dynasty: '明清' },
+      { name: '舟山', startYear: 1950, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '台州',
+    coordinate: { lon: 121.13, lat: 28.66 },
+    names: [
+      { name: '临海', startYear: -200, endYear: 600, dynasty: '秦汉魏晋南北朝' },
+      { name: '台州', startYear: 600, endYear: 1912, dynasty: '隋唐宋元明清' },
+      { name: '台州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '丽水',
+    coordinate: { lon: 119.92, lat: 28.45 },
+    names: [
+      { name: '括苍', startYear: -100, endYear: 600, dynasty: '秦汉魏晋南北朝' },
+      { name: '处州', startYear: 600, endYear: 1368, dynasty: '隋元' },
+      { name: '处州', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '丽水', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  // ----- 福建 -----
+  {
+    modernName: '泉州',
+    coordinate: { lon: 118.68, lat: 24.90 },
+    names: [
+      { name: '闽越', startYear: -200, endYear: 200, dynasty: '秦汉' },
+      { name: '泉州', startYear: 711, endYear: 1000, dynasty: '唐宋' },
+      { name: '泉州', startYear: 1000, endYear: 1368, dynasty: '宋元' },
+      { name: '泉州府', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '泉州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '漳州',
+    coordinate: { lon: 117.65, lat: 24.52 },
+    names: [
+      { name: '漳州', startYear: 686, endYear: 1912, dynasty: '唐宋元明清' },
+      { name: '漳州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '莆田',
+    coordinate: { lon: 119.01, lat: 25.46 },
+    names: [
+      { name: '莆田', startYear: 800, endYear: 1912, dynasty: '唐宋元明清' },
+      { name: '莆田', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '宁德',
+    coordinate: { lon: 119.55, lat: 26.67 },
+    names: [
+      { name: '宁德', startYear: 936, endYear: 1912, dynasty: '五代明清' },
+      { name: '宁德', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '三明',
+    coordinate: { lon: 117.64, lat: 26.27 },
+    names: [
+      { name: '三明', startYear: 1956, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '南平',
+    coordinate: { lon: 118.17, lat: 26.65 },
+    names: [
+      { name: '南平', startYear: 200, endYear: 1912, dynasty: '汉明清' },
+      { name: '南平', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '龙岩',
+    coordinate: { lon: 117.02, lat: 25.08 },
+    names: [
+      { name: '龙岩', startYear: 736, endYear: 1912, dynasty: '唐宋元明清' },
+      { name: '龙岩', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  // ----- 四川 -----
+  {
+    modernName: '绵阳',
+    coordinate: { lon: 104.68, lat: 31.47 },
+    names: [
+      { name: '涪城', startYear: -200, endYear: 600, dynasty: '秦汉魏晋南北朝' },
+      { name: '绵阳', startYear: 600, endYear: 1912, dynasty: '隋唐宋元明清' },
+      { name: '绵阳', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '自贡',
+    coordinate: { lon: 104.78, lat: 29.34 },
+    names: [
+      { name: '自贡', startYear: 1737, endYear: 1912, dynasty: '清' },
+      { name: '自贡', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '攀枝花',
+    coordinate: { lon: 101.72, lat: 26.59 },
+    names: [
+      { name: '攀枝花', startYear: 1965, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '泸州',
+    coordinate: { lon: 105.44, lat: 28.87 },
+    names: [
+      { name: '江阳', startYear: -100, endYear: 600, dynasty: '秦汉南北朝' },
+      { name: '泸州', startYear: 600, endYear: 1912, dynasty: '隋唐宋元明清' },
+      { name: '泸州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '德阳',
+    coordinate: { lon: 104.40, lat: 31.13 },
+    names: [
+      { name: '德阳', startYear: 634, endYear: 1912, dynasty: '唐宋元明清' },
+      { name: '德阳', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '广元',
+    coordinate: { lon: 105.83, lat: 32.44 },
+    names: [
+      { name: '利州', startYear: 550, endYear: 1130, dynasty: '南北朝南宋' },
+      { name: '广元', startYear: 1130, endYear: 1912, dynasty: '南宋明清' },
+      { name: '广元', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '遂宁',
+    coordinate: { lon: 105.59, lat: 30.53 },
+    names: [
+      { name: '遂宁', startYear: 1000, endYear: 1912, dynasty: '宋明清' },
+      { name: '遂宁', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '内江',
+    coordinate: { lon: 105.06, lat: 29.58 },
+    names: [
+      { name: '内江', startYear: 1000, endYear: 1912, dynasty: '宋明清' },
+      { name: '内江', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '乐山',
+    coordinate: { lon: 103.77, lat: 29.56 },
+    names: [
+      { name: '嘉州', startYear: 560, endYear: 1125, dynasty: '南北朝北宋' },
+      { name: '乐山', startYear: 1125, endYear: 1912, dynasty: '南宋明清' },
+      { name: '乐山', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '资阳',
+    coordinate: { lon: 104.62, lat: 30.13 },
+    names: [
+      { name: '资中', startYear: -200, endYear: 600, dynasty: '秦汉魏晋南北朝' },
+      { name: '资州', startYear: 600, endYear: 1368, dynasty: '唐元' },
+      { name: '资阳', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '资阳', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '眉山',
+    coordinate: { lon: 103.85, lat: 30.07 },
+    names: [
+      { name: '眉州', startYear: 600, endYear: 1368, dynasty: '隋元' },
+      { name: '眉山', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '眉山', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '宜宾',
+    coordinate: { lon: 104.63, lat: 28.77 },
+    names: [
+      { name: '戎州', startYear: 500, endYear: 1120, dynasty: '南北朝北宋' },
+      { name: '宜宾', startYear: 1120, endYear: 1912, dynasty: '南宋明清' },
+      { name: '宜宾', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '广安',
+    coordinate: { lon: 106.63, lat: 30.48 },
+    names: [
+      { name: '广安', startYear: 1000, endYear: 1912, dynasty: '宋明清' },
+      { name: '广安', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '达州',
+    coordinate: { lon: 107.47, lat: 31.22 },
+    names: [
+      { name: '通州', startYear: 500, endYear: 600, dynasty: '南北朝' },
+      { name: '达州', startYear: 600, endYear: 1912, dynasty: '唐宋元明清' },
+      { name: '达州', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '雅安',
+    coordinate: { lon: 103.00, lat: 30.01 },
+    names: [
+      { name: '雅州', startYear: 600, endYear: 1368, dynasty: '隋元' },
+      { name: '雅安', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '雅安', startYear: 1912, endYear: 2026, dynasty: '现代' },
+    ],
+  },
+  {
+    modernName: '巴中',
+    coordinate: { lon: 106.77, lat: 31.87 },
+    names: [
+      { name: '巴州', startYear: 500, endYear: 1368, dynasty: '南北朝元' },
+      { name: '巴中', startYear: 1368, endYear: 1912, dynasty: '明清' },
+      { name: '巴中', startYear: 1912, endYear: 2026, dynasty: '现代' },
     ],
   },
 ];
