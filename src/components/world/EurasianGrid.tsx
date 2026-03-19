@@ -403,17 +403,25 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                           setSelectedPolity(selectedPolity === polity.id ? null : polity.id);
                         }}
                       >
-                        {/* Polity name label */}
+                        {/* Polity name label - centered, larger, bold */}
                         <div
-                          className="absolute left-2 right-2 text-[10px] font-semibold leading-tight truncate transition-opacity"
+                          className="absolute inset-x-2 text-sm font-bold leading-tight text-center truncate pointer-events-none"
                           style={{
                             color: polity.color,
                             top: '50%',
                             transform: 'translateY(-50%)',
-                            opacity: height > 20 ? 1 : isHovered || isActive ? 1 : 0,
+                            opacity: height > 24 ? 1 : isHovered || isActive ? 1 : 0,
+                            textShadow: '0 1px 2px rgba(255,255,255,0.8), 0 -1px 2px rgba(255,255,255,0.8)',
                           }}
                         >
                           {t(polity.nameKey)}
+                        </div>
+                        {/* Start year - top right corner */}
+                        <div
+                          className="absolute right-2 top-0.5 text-[10px] font-medium opacity-75"
+                          style={{ color: polity.color }}
+                        >
+                          {formatYear(polity.startYear)}
                         </div>
 
                         {/* Tooltip on hover */}
