@@ -212,10 +212,16 @@ export function HistoryApp({
                   ⚔️ <span className="hidden sm:inline">{t('nav.battles')}</span>
                 </Link>
                 <Link
+                  href={`/${currentLocale}/world`}
+                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap bg-cyan-50 text-cyan-700 border border-cyan-200 hover:bg-cyan-100`}
+                >
+                  🌍 <span className="hidden sm:inline">世界</span>
+                </Link>
+                <Link
                   href={`/${currentLocale}/grid`}
                   className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100`}
                 >
-                  🌍 <span className="hidden sm:inline">{t('grid.title') || '对比网格'}</span>
+                  📊 <span className="hidden sm:inline">{t('grid.title') || '对比网格'}</span>
                 </Link>
                 <Link
                   href={`/${currentLocale}/place-names`}
