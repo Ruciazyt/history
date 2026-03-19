@@ -7,6 +7,9 @@ import {
   getRulerYearRange,
   formatRulerYears,
   getEraPolities,
+  isParallelPolitiesEra,
+  getRulerPolityId,
+  hasRulerPolity,
   type Ruler,
 } from './rulerDisplay';
 import type { Era } from './types';
@@ -372,6 +375,102 @@ describe('rulerDisplay', () => {
     });
   });
 });
+
+  describe('isParallelPolitiesEra', () => {
+    it('should return true for parallel polities era', () => {
+      const era = mockEras[1]; // warring-states with isParallelPolities=true
+      expect(isParallelPolitiesEra(era)).toBe(true);
+    });
+
+    it('should return false for non-parallel polities era', () => {
+      const era = mockEras[0]; // western-zhou
+      expect(isParallelPolitiesEra(era)).toBe(false);
+    });
+
+    it('should return false when isParallelPolities is undefined', () => {
+      const era: Era = {
+        id: 'test-era',
+        nameKey: 'era.test',
+        startYear: -500,
+        endYear: -400,
+      };
+      expect(isParallelPolitiesEra(era)).toBe(false);
+    });
+
+    it('should return false when isParallelPolities is explicitly false', () => {
+      const era: Era = {
+        id: 'test-era',
+        nameKey: 'era.test',
+        startYear: -500,
+        endYear: -400,
+        isParallelPolities: false,
+      };
+      expect(isParallelPolitiesEra(era)).toBe(false);
+    });
+  });
+
+  describe('getRulerPolityId', () => {
+    it('should return polityId when ruler has one', () => {
+      const ruler: Ruler = {
+        id: 'ws-qin-huiwen',
+        eraId: 'period-warring-states',
+        polityId: 'ws-qin',
+        nameKey: 'ruler.ws-qin-huiwen',
+        startYear: -337,
+        endYear: -311,
+      };
+      expect(getRulerPolityId(ruler)).toBe('ws-qin');
+    });
+
+    it('should return undefined when ruler has no polityId', () => {
+      const ruler = mockRulers[0]; // zhou-wu has no polityId
+      expect(getRulerPolityId(ruler)).toBeUndefined();
+    });
+
+    it('should return empty string for ruler with empty polityId', () => {
+      const ruler: Ruler = {
+        id: 'test',
+        eraId: 'test',
+        nameKey: 'ruler.test',
+        startYear: 0,
+        endYear: 0,
+        polityId: '',
+      };
+      // getRulerPolityId returns the value as-is (empty string is a truthy falsy value)
+      expect(getRulerPolityId(ruler)).toBe('');
+    });
+  });
+
+  describe('hasRulerPolity', () => {
+    it('should return true when ruler has polityId', () => {
+      const ruler: Ruler = {
+        id: 'ws-qin-huiwen',
+        eraId: 'period-warring-states',
+        polityId: 'ws-qin',
+        nameKey: 'ruler.ws-qin-huiwen',
+        startYear: -337,
+        endYear: -311,
+      };
+      expect(hasRulerPolity(ruler)).toBe(true);
+    });
+
+    it('should return false when ruler has no polityId', () => {
+      const ruler = mockRulers[0]; // zhou-wu has no polityId
+      expect(hasRulerPolity(ruler)).toBe(false);
+    });
+
+    it('should return false for ruler with empty polityId string', () => {
+      const ruler: Ruler = {
+        id: 'test',
+        eraId: 'test',
+        nameKey: 'ruler.test',
+        startYear: 0,
+        endYear: 0,
+        polityId: '',
+      };
+      expect(hasRulerPolity(ruler)).toBe(false);
+    });
+  });
 
   describe('Edge Cases', () => {
     it('should handle minimal ruler data', () => {
