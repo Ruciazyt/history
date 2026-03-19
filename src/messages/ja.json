@@ -1344,7 +1344,9 @@
   "battleOfTheDay": {
     "title": "今日の戦い",
     "badge": "今日のおすすめ",
-    "viewDetail": "詳細を見る"
+    "viewDetail": "詳細を見る",
+    "expand": "今日の戦いを表示",
+    "collapse": "折りたたむ"
   },
   "location": {
     "title": "地名変化查询",

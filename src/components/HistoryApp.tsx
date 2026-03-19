@@ -14,6 +14,7 @@ import { RulerRelations } from '@/components/common/RulerRelations';
 import { SearchBox } from '@/components/common/SearchBox';
 import { useTranslations } from 'next-intl';
 import { ERA_COLORS, ERA_ITEM_COLORS } from '@/lib/history/constants';
+import { BattleOfTheDayCard } from '@/components/battles/BattleOfTheDayCard';
 import { useHistoryAppColors } from '@/lib/history/useHistoryAppColors';
 
 import { worldComparisonEra, eastAsiaComparisonEra } from '@/lib/history/data/worldEras';
@@ -106,6 +107,7 @@ export function HistoryApp({
 
   }, [activeEras, activeRulers, selectedRulerId, openEraIds]);
 
+  const [battleOfDayCollapsed, setBattleOfDayCollapsed] = React.useState(false);
   const [windowYears, setWindowYears] = React.useState<number>(50);
   const [year, setYear] = React.useState<number>(clamp(-350, min, max));
 
@@ -429,6 +431,21 @@ export function HistoryApp({
                 </div>
               </div>
             </div>
+
+            {/* Battle of the Day banner */}
+            {!battleOfDayCollapsed && (
+              <div className="shrink-0">
+                <BattleOfTheDayCard events={events} />
+              </div>
+            )}
+            <button
+              type="button"
+              onClick={() => setBattleOfDayCollapsed((v) => !v)}
+              className={`w-full flex items-center justify-center gap-1.5 py-1.5 text-xs rounded-lg border transition-colors ${C.sidebar.eraItem.hover} border-transparent hover:border ${C.sidebar.eraItem.border}`}
+            >
+              <span className="opacity-60">{battleOfDayCollapsed ? '📅' : '▲'}</span>
+              <span className={C.sidebar.eraItem.year}>{battleOfDayCollapsed ? t('battleOfTheDay.expand') : t('battleOfTheDay.collapse')}</span>
+            </button>
 
             <div className={`flex-1 min-h-0 rounded-xl border ${C.mapContainer.border} ${C.mapContainer.bg} overflow-hidden`}>
               {civMode === 'china' ? (

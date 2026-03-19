@@ -1388,7 +1388,9 @@
   "battleOfTheDay": {
     "title": "Battle of the Day",
     "badge": "Today's Pick",
-    "viewDetail": "View Details"
+    "viewDetail": "View Details",
+    "expand": "Show Battle of the Day",
+    "collapse": "Collapse"
   },
   "grid": {
     "title": "Eurasian Comparison Grid",

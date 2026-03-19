@@ -1590,7 +1590,9 @@
   "battleOfTheDay": {
     "title": "今日战役",
     "badge": "今日推荐",
-    "viewDetail": "点击查看详情"
+    "viewDetail": "点击查看详情",
+    "expand": "展开今日战役",
+    "collapse": "收起"
   },
   "grid": {
     "title": "欧亚对比网格",
