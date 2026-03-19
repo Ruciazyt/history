@@ -211,7 +211,7 @@ export function HistoryApp({
                 >
                   ⚔️ <span className="hidden sm:inline">{t('nav.battles')}</span>
                 </Link>
-                {/* <Link
+                <Link
                   href={`/${currentLocale}/grid`}
                   className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100`}
                 >
@@ -222,7 +222,7 @@ export function HistoryApp({
                   className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap bg-green-50 text-green-700 border border-green-200 hover:bg-green-100`}
                 >
                   🏛️ <span className="hidden sm:inline">{t('placeNames.title') || '地名演化'}</span>
-                </Link> */}
+                </Link>
                 <button
                   type="button"
                   onClick={() => switchCiv('eurasian')}
