@@ -119,9 +119,8 @@ export function HistoryMap({
           map.enableScrollWheelZoom(true);
           mapRef.current = map;
           setMapReady(true);
-          console.log('✅ HistoryMap 百度地图加载成功');
         } catch (e) {
-          console.error('初始化失败:', e);
+          console.error('Failed to initialize Baidu Map:', e);
         }
       }
     };
@@ -135,10 +134,12 @@ export function HistoryMap({
     script.async = true;
     document.head.appendChild(script);
 
-    return () => { 
-      if ((window as unknown as Record<string, unknown>)[callbackName]) {
-        delete (window as unknown as Record<string, unknown>)[callbackName]; 
+    return () => {
+      // Cleanup: remove script tag from DOM and delete callback
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
       }
+      delete (window as unknown as Record<string, unknown>)[callbackName];
     };
   }, [mapCenter.lon, mapCenter.lat, mapZoom]);
 

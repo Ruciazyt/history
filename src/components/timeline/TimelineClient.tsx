@@ -87,7 +87,7 @@ export function TimelineClient({ locale }: { locale: string }) {
       <header className={`flex items-center justify-between px-3 sm:px-6 py-3 sm:py-4 ${TIMELINE_COLORS.surface} border-b ${TIMELINE_COLORS.border} shrink-0`}>
         <div className="flex items-center gap-2 sm:gap-4">
           <Link href={`/${locale}`} className={`${TIMELINE_COLORS.textSecondary} hover:${TIMELINE_COLORS.text} transition-colors text-sm sm:text-base`}>
-            ← 返回
+            ← {t('timeline.back')}
           </Link>
           <h1 className="text-base sm:text-xl font-bold truncate">{t('timeline.title')}</h1>
         </div>
@@ -102,7 +102,7 @@ export function TimelineClient({ locale }: { locale: string }) {
             mobileView === 'list' ? `${TIMELINE_TAB_COLORS.active.border} ${TIMELINE_TAB_COLORS.active.text}` : `${TIMELINE_TAB_COLORS.inactive.border} ${TIMELINE_TAB_COLORS.inactive.text}`
           }`}
         >
-          📋 事件列表
+          📋 {t('timeline.eventList')}
         </button>
         <button
           onClick={() => setMobileView('detail')}
@@ -110,7 +110,7 @@ export function TimelineClient({ locale }: { locale: string }) {
             mobileView === 'detail' ? `${TIMELINE_TAB_COLORS.active.border} ${TIMELINE_TAB_COLORS.active.text}` : `${TIMELINE_TAB_COLORS.inactive.border} ${TIMELINE_TAB_COLORS.inactive.text}`
           }`}
         >
-          🗺️ 地图详情
+          🗺️ {t('timeline.mapDetail')}
         </button>
       </div>
 

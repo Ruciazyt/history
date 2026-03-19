@@ -43,7 +43,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
             <button
               onClick={onClose}
               className={`shrink-0 w-9 h-9 sm:w-8 sm:h-8 flex items-center justify-center rounded-full ${BATTLE_DETAIL_COLORS.header.close} transition-colors text-lg sm:text-base`}
-              aria-label="关闭"
+              aria-label={t('battleDetail.close')}
             >
               ✕
             </button>
@@ -59,7 +59,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
           {/* Result badge */}
           {battle.battle?.result && (
             <div className="flex items-center gap-2">
-              <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>结果：</span>
+              <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{t('battleDetail.result')}</span>
               <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                 BATTLE_RESULT_STYLES[battle.battle.result]?.badge || BATTLE_RESULT_STYLES.unknown?.badge || 'bg-zinc-100 text-zinc-700'
               }`}>
@@ -71,17 +71,17 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
           {/* Belligerents */}
           {battle.battle?.belligerents && (
             <div className={`${BATTLE_DETAIL_COLORS.section.bg} rounded-lg p-4`}>
-              <h3 className={`text-sm font-semibold ${BATTLE_DETAIL_TEXT_COLORS.sectionTitle} mb-3`}>参战双方</h3>
+              <h3 className={`text-sm font-semibold ${BATTLE_DETAIL_TEXT_COLORS.sectionTitle} mb-3`}>{t('battleDetail.belligerents')}</h3>
               <div className="flex items-center justify-between gap-4">
                 <div className="flex-1 text-center">
-                  <div className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.labelSmall} mb-1`}>进攻方</div>
+                  <div className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.labelSmall} mb-1`}>{t('battleDetail.attacker')}</div>
                   <div className={`font-semibold ${BATTLE_DETAIL_COLORS.belligerents.attacker}`}>
                     {battle.battle.belligerents.attacker}
                   </div>
                 </div>
                 <div className="text-2xl">⚔️</div>
                 <div className="flex-1 text-center">
-                  <div className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.labelSmall} mb-1`}>防守方</div>
+                  <div className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.labelSmall} mb-1`}>{t('battleDetail.defender')}</div>
                   <div className={`font-semibold ${BATTLE_DETAIL_COLORS.belligerents.defender}`}>
                     {battle.battle.belligerents.defender}
                   </div>
@@ -92,7 +92,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
           
           {/* Summary */}
           <div>
-            <h3 className={`text-sm font-semibold ${BATTLE_DETAIL_TEXT_COLORS.sectionTitle} mb-2`}>战役概述</h3>
+            <h3 className={`text-sm font-semibold ${BATTLE_DETAIL_TEXT_COLORS.sectionTitle} mb-2`}>{t('battleDetail.summary')}</h3>
             <p className={`${BATTLE_DETAIL_TEXT_COLORS.content} text-sm leading-relaxed`}>
               {t(battle.summaryKey)}
             </p>
@@ -103,7 +103,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
             <div className="flex items-start gap-2">
               <span className="text-lg">📍</span>
               <div>
-                <div className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.content}`}>战场位置</div>
+                <div className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.content}`}>{t('battleDetail.location')}</div>
                 <div className={`text-sm ${BATTLE_DETAIL_TEXT_COLORS.contentLight}`}>
                   {battle.location.label}
                   {battle.location.lat && battle.location.lon && (
@@ -119,7 +119,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
           {/* Impact - new field */}
           {battle.battle?.impact && battle.battle.impact !== 'unknown' && (
             <div className="flex items-center gap-2">
-              <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>影响力：</span>
+              <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{t('battleDetail.impact')}</span>
               <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                 BATTLE_IMPACT_COLORS[battle.battle.impact]?.bg || 'bg-zinc-100'
               } ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.text || 'text-zinc-700'}`}>
@@ -131,24 +131,24 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
           {/* Commanders */}
           {(battle.battle?.commanders?.attacker?.length || battle.battle?.commanders?.defender?.length) && (
             <div className={`${BATTLE_DETAIL_COLORS.section.bg} rounded-lg p-4`}>
-              <h3 className={`text-sm font-semibold ${BATTLE_DETAIL_TEXT_COLORS.sectionTitle} mb-3`}>主要指挥官</h3>
+              <h3 className={`text-sm font-semibold ${BATTLE_DETAIL_TEXT_COLORS.sectionTitle} mb-3`}>{t('battleDetail.commanders')}</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <div className={`text-xs ${COMMANDER_COLORS.attacker.label} mb-1`}>进攻方</div>
+                  <div className={`text-xs ${COMMANDER_COLORS.attacker.label} mb-1`}>{t('battleDetail.attacker')}</div>
                   {battle.battle?.commanders?.attacker?.map((cmd, i) => (
                     <div key={i} className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.content}`}>👤 {cmd}</div>
                   ))}
                   {!battle.battle?.commanders?.attacker?.length && (
-                    <div className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.unknown}`}>不明</div>
+                    <div className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.unknown}`}>{t('battleDetail.unknown')}</div>
                   )}
                 </div>
                 <div>
-                  <div className={`text-xs ${COMMANDER_COLORS.defender.label} mb-1`}>防守方</div>
+                  <div className={`text-xs ${COMMANDER_COLORS.defender.label} mb-1`}>{t('battleDetail.defender')}</div>
                   {battle.battle?.commanders?.defender?.map((cmd, i) => (
                     <div key={i} className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.content}`}>👤 {cmd}</div>
                   ))}
                   {!battle.battle?.commanders?.defender?.length && (
-                    <div className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.unknown}`}>不明</div>
+                    <div className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.unknown}`}>{t('battleDetail.unknown')}</div>
                   )}
                 </div>
               </div>
@@ -158,7 +158,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
           {/* Strategy */}
           {battle.battle?.strategy && battle.battle.strategy.length > 0 && (
             <div className="flex items-start gap-2">
-              <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>战术：</span>
+              <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{t('battleDetail.strategy')}</span>
               <div className="flex flex-wrap gap-1">
                 {battle.battle.strategy.filter(s => s !== 'unknown').map((s, i) => (
                   <span key={i} className={`px-2 py-0.5 ${STRATEGY_BADGE_COLORS.bg} ${STRATEGY_BADGE_COLORS.text} text-xs rounded`}>
@@ -172,7 +172,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
           {/* Terrain */}
           {battle.battle?.terrain && battle.battle.terrain.length > 0 && (
             <div className="flex items-start gap-2">
-              <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>地形：</span>
+              <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{t('battleDetail.terrain')}</span>
               <div className="flex flex-wrap gap-1">
                 {battle.battle.terrain.filter(t => t !== 'unknown').map((t, i) => (
                   <span key={i} className={`px-2 py-0.5 ${TERRAIN_BADGE_COLORS.bg} ${TERRAIN_BADGE_COLORS.text} text-xs rounded`}>
@@ -186,7 +186,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
           {/* Battle Type */}
           {battle.battle?.battleType && battle.battle.battleType !== 'unknown' && (
             <div className="flex items-center gap-2">
-              <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>战役类型：</span>
+              <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{t('battleDetail.battleType')}</span>
               <span className={`px-3 py-1 ${BATTLE_TYPE_COLORS.bg} ${BATTLE_TYPE_COLORS.text} text-xs rounded-full`}>
                 {getBattleTypeName(battle.battle.battleType)}
               </span>
@@ -198,7 +198,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
             <div className="flex flex-wrap gap-3">
               {battle.battle?.pacing && battle.battle.pacing !== 'unknown' && (
                 <div className="flex items-center gap-2">
-                  <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>节奏：</span>
+                  <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{t('battleDetail.pacing')}</span>
                   <span className={`px-2 py-0.5 ${PACING_BADGE_COLORS.bg} ${PACING_BADGE_COLORS.text} text-xs rounded`}>
                     {getPacingLabel(battle.battle.pacing)}
                   </span>
@@ -206,7 +206,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
               )}
               {battle.battle?.timeOfDay && battle.battle.timeOfDay !== 'unknown' && (
                 <div className="flex items-center gap-2">
-                  <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>时间：</span>
+                  <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{t('battleDetail.timeOfDay')}</span>
                   <span className={`px-2 py-0.5 ${TIME_OF_DAY_COLORS.bg} ${TIME_OF_DAY_COLORS.text} text-xs rounded`}>
                     {getTimeOfDayLabel(battle.battle.timeOfDay)}
                   </span>
@@ -218,7 +218,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
           {/* Turning Points */}
           {battle.battle?.turningPoints && battle.battle.turningPoints.length > 0 && (
             <div className={`${TURNING_POINT_COLORS.container} rounded-lg p-4`}>
-              <h3 className={`text-sm font-semibold ${BATTLE_DETAIL_TEXT_COLORS.sectionTitle} mb-3`}>关键转折点</h3>
+              <h3 className={`text-sm font-semibold ${BATTLE_DETAIL_TEXT_COLORS.sectionTitle} mb-3`}>{t('battleDetail.turningPoints')}</h3>
               <div className="space-y-2">
                 {battle.battle.turningPoints.filter(tp => tp.type !== 'unknown').map((tp, i) => (
                   <div key={i} className="flex items-start gap-2 text-sm">
@@ -255,7 +255,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
           {/* Sources */}
           {battle.sources && battle.sources.length > 0 && (
             <div>
-              <h3 className={`text-sm font-semibold ${BATTLE_DETAIL_TEXT_COLORS.sectionTitle} mb-2`}>参考资料</h3>
+              <h3 className={`text-sm font-semibold ${BATTLE_DETAIL_TEXT_COLORS.sectionTitle} mb-2`}>{t('battleDetail.sources')}</h3>
               <ul className="space-y-1">
                 {battle.sources.map((source, i) => (
                   <li key={i}>

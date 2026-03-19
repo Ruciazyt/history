@@ -1314,6 +1314,33 @@
   "empire_le-dynasty": "黎朝",
   "empire_nguyen-dynasty": "阮朝",
   "empires_active": "帝国",
+  "timeline": {
+    "title": "歴史タイムライン",
+    "selectProcess": "歴史プロセスを選択",
+    "play": "再生",
+    "pause": "一時停止",
+    "eventList": "イベントリスト",
+    "mapDetail": "地図詳解"
+  },
+  "battleDetail": {
+    "close": "閉じる",
+    "result": "結果：",
+    "belligerents": "交戦国",
+    "attacker": "攻撃側",
+    "defender": "防衛側",
+    "summary": "戦闘概要",
+    "location": "戦場位置",
+    "impact": "影響力：",
+    "commanders": "主要指揮官",
+    "unknown": "不明",
+    "strategy": "戦略：",
+    "terrain": "地形：",
+    "battleType": "戦闘類型：",
+    "pacing": "ペース：",
+    "timeOfDay": "時間帯：",
+    "turningPoints": "転換点",
+    "sources": "参考文献"
+  },
   "battleOfTheDay": {
     "title": "今日の戦い",
     "badge": "今日のおすすめ",

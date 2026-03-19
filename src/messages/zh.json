@@ -1386,6 +1386,8 @@
     "selectProcess": "选择历史进程",
     "play": "播放",
     "pause": "暂停",
+    "eventList": "事件列表",
+    "mapDetail": "地图详情",
     "anti-qin": "反秦建汉",
     "anti-qin-desc": "从陈胜吴广起义到刘邦建立汉朝的历史进程",
     "three-kingdoms": "三国鼎立",
@@ -1558,6 +1560,25 @@
   "event.ws-223-qin-conquers-chu": {
     "title": "秦灭楚",
     "summary": "秦国灭楚国，战国七雄格局进一步改变。"
+  },
+  "battleDetail": {
+    "close": "关闭",
+    "result": "结果：",
+    "belligerents": "参战双方",
+    "attacker": "进攻方",
+    "defender": "防守方",
+    "summary": "战役概述",
+    "location": "战场位置",
+    "impact": "影响力：",
+    "commanders": "主要指挥官",
+    "unknown": "不明",
+    "strategy": "战术：",
+    "terrain": "地形：",
+    "battleType": "战役类型：",
+    "pacing": "节奏：",
+    "timeOfDay": "时间：",
+    "turningPoints": "关键转折点",
+    "sources": "参考资料"
   },
   "battleOfTheDay": {
     "title": "今日战役",
