@@ -1196,7 +1196,14 @@
     "ye": "Ye (Handan, Hebei)",
     "red-cliffs": "Red Cliffs (Chibi, Hubei)",
     "chengdu": "Chengdu",
-    "jianye": "Jianye (Nanjing, Jiangsu)"
+    "jianye": "Jianye (Nanjing, Jiangsu)",
+    "title": "Place Name Evolution",
+    "description": "Enter a modern place name to explore its historical name changes",
+    "placeholder": "Enter modern place name, e.g. Xi'an, Beijing, Nanjing...",
+    "noResults": "No matching places found",
+    "back": "Back to search",
+    "modernLabel": "Modern",
+    "historyNames": "Historical Names"
   },
   "faction": {
     "qin": "Qin",

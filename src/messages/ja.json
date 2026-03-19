@@ -1345,5 +1345,24 @@
     "title": "今日の戦い",
     "badge": "今日のおすすめ",
     "viewDetail": "詳細を見る"
+  },
+  "location": {
+    "title": "地名変化查询",
+    "description": "現代地名を入力し、古代名称の歴史的変遷を表示",
+    "placeholder": "現代地名を入力、例：西安、北京、南京...",
+    "noResults": "関連する地点が見つかりません",
+    "back": "検索に戻る",
+    "modernLabel": "現代",
+    "historyNames": "歴史名称",
+    "daze": "大沢郷（安徽宿州）",
+    "xianyang": "咸陽",
+    "julu": "鉅鹿（河北邢台）",
+    "chang-an": "長安",
+    "gaixia": "垓下（安徽霊璧）",
+    "luoyang": "洛陽",
+    "ye": "鄴城（河北邯鄲）",
+    "red-cliffs": "赤壁（湖北赤壁）",
+    "chengdu": "成都",
+    "jianye": "建業（江蘇南京）"
   }
 }

@@ -36,8 +36,8 @@ export function LocationClient({ locale: _locale }: LocationClientProps) {
 
   // 计算年代范围
   const getTimeRange = (startYear: number, endYear: number): string => {
-    const start = formatYear(startYear);
-    const end = endYear >= 2026 ? '现代' : formatYear(endYear);
+    const start = formatYear(startYear, locale);
+    const end = endYear >= 2026 ? t('location.modernLabel') : formatYear(endYear, locale);
     return `${start} - ${end}`;
   };
 
@@ -47,10 +47,10 @@ export function LocationClient({ locale: _locale }: LocationClientProps) {
         {/* 标题 */}
         <header className="mb-8">
           <h1 className="text-3xl font-bold mb-2">
-            📍 {t('location.title') || '地名演变查询'}
+            📍 {t('location.title')}
           </h1>
           <p className="text-zinc-400">
-            {t('location.description') || '输入现代地名，查看其古代名称的历史变迁'}
+            {t('location.description')}
           </p>
         </header>
 
@@ -60,7 +60,7 @@ export function LocationClient({ locale: _locale }: LocationClientProps) {
             type="text"
             value={query}
             onChange={(e) => handleSearch(e.target.value)}
-            placeholder={t('location.placeholder') || '输入现代地名，如：西安、北京、南京...'}
+            placeholder={t('location.placeholder')}
             className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-lg focus:outline-none focus:border-blue-500"
             autoFocus
           />
@@ -106,13 +106,13 @@ export function LocationClient({ locale: _locale }: LocationClientProps) {
               }}
               className="mb-4 text-blue-400 hover:text-blue-300"
             >
-              ← {t('location.back') || '返回搜索'}
+              ← {t('location.back')}
             </button>
 
             <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-6">
               <h2 className="text-2xl font-bold mb-2">{selectedPlace.modernName}</h2>
               <p className="text-zinc-400 text-sm mb-6">
-                共 {selectedPlace.names.length} 个历史名称
+                {selectedPlace.names.length} {t('location.historyNames')}
               </p>
 
               {/* 时间线 */}
@@ -156,3 +156,4 @@ export function LocationClient({ locale: _locale }: LocationClientProps) {
     </div>
   );
 }
+;

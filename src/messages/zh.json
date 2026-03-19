@@ -1433,7 +1433,14 @@
     "ye": "邺城（河北邯郸）",
     "red-cliffs": "赤壁（湖北赤壁）",
     "chengdu": "成都",
-    "jianye": "建业（江苏南京）"
+    "jianye": "建业（江苏南京）",
+    "title": "地名演变查询",
+    "description": "输入现代地名，查看其古代名称的历史变迁",
+    "placeholder": "输入现代地名，如：西安、北京、南京...",
+    "noResults": "未找到相关地点",
+    "back": "返回搜索",
+    "modernLabel": "现代",
+    "historyNames": "历史名称"
   },
   "faction": {
     "qin": "秦",
