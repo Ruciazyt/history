@@ -9,7 +9,7 @@ interface LocationClientProps {
   locale: string;
 }
 
-export function LocationClient({ locale: _locale }: LocationClientProps) {
+export function LocationClient({ locale }: LocationClientProps) {
   const t = useTranslations();
   const [query, setQuery] = React.useState('');
   const [results, setResults] = React.useState<PlaceEvolution[]>([]);

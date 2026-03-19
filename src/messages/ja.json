@@ -1364,5 +1364,29 @@
     "red-cliffs": "赤壁（湖北赤壁）",
     "chengdu": "成都",
     "jianye": "建業（江蘇南京）"
+  },
+  "grid": {
+    "title": "ユーラシア比較グリッド",
+    "eurasian": "ユーラシア",
+    "eastAsia": "東アジア",
+    "activeEmpires": "アクティブ政体",
+    "quickJump": "クイックジャンプ",
+    "timeline": "タイムライン",
+    "activeAtYear": "{year} アクティブ",
+    "noActive": "アクティブ政体なし",
+    "ce1": "紀元1年",
+    "region": {
+      "china": "中国",
+      "korea": "朝鮮半島",
+      "japan": "日本",
+      "centralAsia": "中央アジア",
+      "west": "西方",
+      "vietnam": "ベトナム"
+    }
+  },
+  "placeNames": {
+    "title": "地名変化",
+    "noResults": "一致する都市が見つかりません",
+    "activeEmpires": "箇所"
   }
 }
