@@ -136,6 +136,12 @@ export function HistoryMap({
     const initMapWrapper = () => { initMap(); };
     (window as unknown as Record<string, () => void>)[callbackName] = initMapWrapper;
 
+    // Only load Baidu Map script when API key is configured
+    if (!BAIDU_MAP_AK) {
+      console.warn('[HistoryMap] NEXT_PUBLIC_BAIDU_MAP_AK is not configured — map will not load');
+      return;
+    }
+
     const script = document.createElement('script');
     script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}&callback=${callbackName}`;
     script.async = true;
@@ -284,8 +290,20 @@ export function HistoryMap({
 
       <div className="flex-1 relative">
         {!mapReady && (
-          <div className="absolute inset-0 flex items-center justify-center bg-zinc-100 text-zinc-400 z-10">
-            Loading... {BAIDU_MAP_AK ? '(AK已配置)' : '(AK未配置)'}
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-zinc-100 dark:bg-zinc-800 text-zinc-400 z-10">
+            {!BAIDU_MAP_AK ? (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                </svg>
+                <span className="text-sm">地图需要配置 API Key</span>
+              </>
+            ) : (
+              <>
+                <div className="w-6 h-6 border-2 border-zinc-300 border-t-zinc-600 rounded-full animate-spin" aria-hidden="true" />
+                <span className="text-sm">加载地图中...</span>
+              </>
+            )}
           </div>
         )}
         <div ref={mapContainerRef} className="w-full h-full" />
