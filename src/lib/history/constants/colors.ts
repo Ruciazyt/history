@@ -345,7 +345,21 @@ export const POLITY_COLORS: Record<string, string> = {
   'fdtk-later-han': '#228B22',
   'fdtk-later-zhou': '#FF8C00',
 } as const;
-export const DARK_THEME_COLORS = {
+
+/**
+ * Shared theme color interface used by both light and dark themes.
+ */
+export type ThemeColors = {
+  background: string;
+  surface: string;
+  border: string;
+  text: string;
+  textSecondary: string;
+  textMuted: string;
+  hover?: string;
+};
+
+export const DARK_THEME_COLORS: ThemeColors = {
   background: 'bg-zinc-900',
   surface: 'bg-zinc-800',
   border: 'border-zinc-700',

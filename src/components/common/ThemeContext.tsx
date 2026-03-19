@@ -1,6 +1,11 @@
 'use client';
 
 import * as React from 'react';
+import {
+  DARK_THEME_COLORS,
+  LIGHT_THEME_COLORS,
+  type ThemeColors,
+} from '@/lib/history/constants';
 
 export type Theme = 'light' | 'dark';
 
@@ -10,6 +15,11 @@ interface ThemeContextValue {
   setTheme: (theme: Theme) => void;
   /** Whether the theme has been hydrated from localStorage/system preference */
   mounted: boolean;
+  /**
+   * Returns the appropriate theme colors based on the current theme.
+   * Returns LIGHT_THEME_COLORS when not yet mounted to avoid SSR mismatch.
+   */
+  themeColors: ThemeColors;
 }
 
 export const ThemeContext = React.createContext<ThemeContextValue | undefined>(undefined);
@@ -61,7 +71,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [theme, setTheme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme, mounted }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme, mounted, themeColors: mounted ? (theme === 'dark' ? DARK_THEME_COLORS : LIGHT_THEME_COLORS) : LIGHT_THEME_COLORS }}>
       {children}
     </ThemeContext.Provider>
   );

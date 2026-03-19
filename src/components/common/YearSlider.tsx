@@ -3,7 +3,8 @@
 import * as React from 'react';
 import { formatYear } from '@/lib/history/utils';
 import { useTranslations } from 'next-intl';
-import { SLIDER_COLORS, DARK_THEME_COLORS } from '@/lib/history/constants';
+import { SLIDER_COLORS } from '@/lib/history/constants';
+import { useTheme } from './ThemeContext';
 
 interface YearSliderProps {
   year: number;
@@ -23,6 +24,7 @@ export function YearSlider({
   onPlayToggle,
 }: YearSliderProps) {
   const t = useTranslations();
+  const { themeColors } = useTheme();
   const sliderRef = React.useRef<HTMLDivElement>(null);
   const stateRef = React.useRef({ year, minYear, maxYear, onYearChange });
 
@@ -95,7 +97,7 @@ export function YearSlider({
   }, [minYear, maxYear]);
 
   return (
-    <div className={`w-full ${SLIDER_COLORS.background} ${DARK_THEME_COLORS.text} px-4 py-3 rounded-t-xl`}>
+    <div className={`w-full ${SLIDER_COLORS.background} ${themeColors.text} px-4 py-3 rounded-t-xl`}>
       {/* 年份显示和播放按钮 */}
       <div className="flex items-center justify-between mb-3">
         <div className="text-2xl font-bold tabular-nums">
