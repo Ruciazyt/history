@@ -5,7 +5,7 @@ import type { Event } from './types';
 describe('utils', () => {
   describe('formatYear', () => {
     it('should format positive years as CE', () => {
-      expect(formatYear(0)).toBe('0 CE');
+      expect(formatYear(0)).toBe('1 CE'); // Year 0 does not exist historically; mapped to 1 CE
       expect(formatYear(1)).toBe('1 CE');
       expect(formatYear(2024)).toBe('2024 CE');
     });
@@ -16,8 +16,8 @@ describe('utils', () => {
       expect(formatYear(-1046)).toBe('1046 BCE');
     });
 
-    it('should handle year 0 correctly', () => {
-      expect(formatYear(0)).toBe('0 CE');
+    it('should handle year 0 correctly (maps to 1 CE — no year 0 exists historically)', () => {
+      expect(formatYear(0)).toBe('1 CE');
     });
 
     it('should format positive years in Chinese locale (zh)', () => {
@@ -31,8 +31,8 @@ describe('utils', () => {
       expect(formatYear(-1046, 'zh')).toBe('公元前1046年');
     });
 
-    it('should handle year 0 in Chinese locale (zh)', () => {
-      expect(formatYear(0, 'zh')).toBe('公元0年');
+    it('should handle year 0 in Chinese locale (zh) — maps to 公元1年 (no year 0 historically)', () => {
+      expect(formatYear(0, 'zh')).toBe('公元1年');
     });
 
     it('should format positive years in Japanese locale (ja)', () => {
@@ -45,8 +45,8 @@ describe('utils', () => {
       expect(formatYear(-100, 'ja')).toBe('公元前100年');
     });
 
-    it('should handle year 0 in Japanese locale (ja)', () => {
-      expect(formatYear(0, 'ja')).toBe('公元0年');
+    it('should handle year 0 in Japanese locale (ja) — maps to 公元1年 (no year 0 historically)', () => {
+      expect(formatYear(0, 'ja')).toBe('公元1年');
     });
   });
 

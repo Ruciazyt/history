@@ -141,6 +141,7 @@ export function YearSlider({
           aria-valuemin={minYear}
           aria-valuemax={maxYear}
           aria-valuenow={year}
+          aria-valuetext={formatYear(year)}
           tabIndex={0}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}

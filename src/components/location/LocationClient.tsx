@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
 import { searchPlaceEvolution, getPlaceEvolution, type PlaceEvolution } from '@/lib/history/data/placeNameEvolution';
+import { formatYear } from '@/lib/history/utils';
 
 interface LocationClientProps {
   locale: string;
@@ -31,14 +32,6 @@ export function LocationClient({ locale: _locale }: LocationClientProps) {
     if (evolution) {
       setSelectedPlace(evolution);
     }
-  };
-
-  // 格式化年份
-  const formatYear = (year: number): string => {
-    if (year < 0) {
-      return `公元前${Math.abs(year)}年`;
-    }
-    return `公元${year}年`;
   };
 
   // 计算年代范围

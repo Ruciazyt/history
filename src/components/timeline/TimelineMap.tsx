@@ -115,22 +115,29 @@ export function TimelineMap({ event }: TimelineMapProps) {
               </div>
             </Marker>
 
-            {/* 势力名称标签 */}
-            {event.factions?.map((faction, index) => (
-              <Marker
-                key={index}
-                longitude={event.location.lon + (index - (event.factions!.length - 1) / 2) * 8}
-                latitude={event.location.lat + 2}
-                anchor="center"
-              >
-                <div 
-                  className={`px-2 sm:px-3 py-1 rounded-lg text-xs sm:text-sm font-medium shadow-lg border-2 whitespace-nowrap ${UI_COLORS.text.primary}`}
-                  style={{ backgroundColor: faction.color, borderColor: faction.color }}
+            {/* 势力名称标签 — 使用相对经纬度偏移，保持在标记附近 */}
+            {event.factions?.map((faction, index) => {
+              // 使用较小的相对偏移（度），并根据 faction 数量动态调整
+              const count = event.factions!.length;
+              const offsetStep = 4; // 每相邻标签间隔 4 度
+              const offset = (index - (count - 1) / 2) * offsetStep;
+              return (
+                <Marker
+                  key={index}
+                  longitude={event.location.lon + offset}
+                  latitude={event.location.lat + 1.5}
+                  anchor="center"
                 >
-                  {t(faction.nameKey)}
-                </div>
-              </Marker>
-            ))}
+                  <div
+                    className={`px-2 sm:px-3 py-1 rounded-lg text-xs sm:text-sm font-medium shadow-lg border-2 whitespace-nowrap ${UI_COLORS.text.primary} max-w-[120px] sm:max-w-none overflow-hidden text-ellipsis`}
+                    style={{ backgroundColor: faction.color, borderColor: faction.color }}
+                    title={t(faction.nameKey)}
+                  >
+                    {t(faction.nameKey)}
+                  </div>
+                </Marker>
+              );
+            })}
 
             {/* 弹出信息 */}
             {popupInfo && (
