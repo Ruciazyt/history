@@ -216,6 +216,12 @@ export function HistoryApp({
                   ⚔️ <span className="hidden sm:inline">{t('nav.battles')}</span>
                 </Link>
                 <Link
+                  href={`/${currentLocale}/commanders`}
+                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.battles.bg} ${C.quickLink.battles.text} ${C.quickLink.battles.border}`}
+                >
+                  👑 <span className="hidden sm:inline">{t('nav.commanders')}</span>
+                </Link>
+                <Link
                   href={`/${currentLocale}/world`}
                   className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.eurasian.bg} ${C.quickLink.eurasian.text} ${C.quickLink.eurasian.border} hover:opacity-90`}
                 >

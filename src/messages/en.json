@@ -1224,7 +1224,8 @@
     "yan": "Yan"
   },
   "nav": {
-    "battles": "Battles"
+    "battles": "Battles",
+    "commanders": "Commander Network"
   },
   "favorites": {
     "title": "Favorites",
@@ -1424,5 +1425,26 @@
     "activePolities": "{count} active polities",
     "noRecords": "No records",
     "yearLabel": "Year"
+  },
+  "commanders": {
+    "noData": "No commander data",
+    "noDataDesc": "No commander information in current battle data",
+    "totalCommanders": "Total Commanders",
+    "totalRelations": "Total Relations",
+    "collaborations": "Collaborations",
+    "matchups": "Matchups",
+    "mostActive": "Most Active",
+    "tabs": {
+      "commanders": "Commanders",
+      "collaborations": "Best Partners",
+      "matchups": "Classic Rivalries",
+      "insights": "Insights"
+    },
+    "topCollaborations": "Best Partners",
+    "topMatchups": "Classic Rivalries",
+    "insights": "Commander Insights",
+    "noCollaborations": "No collaboration data",
+    "noMatchups": "No matchup data",
+    "noInsights": "No insight data"
   }
 }

@@ -1190,7 +1190,8 @@
     "yan": "燕"
   },
   "nav": {
-    "battles": "戦い"
+    "battles": "戦い",
+    "commanders": "指揮官ネットワーク"
   },
   "favorites": {
     "title": "お気に入り",
@@ -1417,5 +1418,26 @@
     "activePolities": "{count} 個の政权",
     "noRecords": "記録なし",
     "yearLabel": "年"
+  },
+  "commanders": {
+    "noData": "指揮官データなし",
+    "noDataDesc": "現在の戦いデータに指揮官情報がありません",
+    "totalCommanders": "指揮官総数",
+    "totalRelations": "関係総数",
+    "collaborations": "協力関係",
+    "matchups": "対決関係",
+    "mostActive": "最もアクティブ",
+    "tabs": {
+      "commanders": "指揮官",
+      "collaborations": "最佳パートナー",
+      "matchups": "クラシック対決",
+      "insights": "インサイト"
+    },
+    "topCollaborations": "最佳パートナー",
+    "topMatchups": "クラシック対決",
+    "insights": "指揮官インサイト",
+    "noCollaborations": "協力データなし",
+    "noMatchups": "対決データなし",
+    "noInsights": "インサイトデータなし"
   }
 }

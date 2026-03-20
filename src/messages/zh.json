@@ -1461,7 +1461,8 @@
     "yan": "燕"
   },
   "nav": {
-    "battles": "战役"
+    "battles": "战役",
+    "commanders": "指挥官网络"
   },
   "favorites": {
     "title": "收藏夹",
@@ -1626,5 +1627,26 @@
     "activePolities": "{count} 个政权",
     "noRecords": "无记录",
     "yearLabel": "年份"
+  },
+  "commanders": {
+    "noData": "暂无指挥官数据",
+    "noDataDesc": "当前战役数据中没有指挥官信息",
+    "totalCommanders": "指挥官总数",
+    "totalRelations": "关系总数",
+    "collaborations": "合作关系",
+    "matchups": "对决关系",
+    "mostActive": "最活跃",
+    "tabs": {
+      "commanders": "指挥官",
+      "collaborations": "最佳搭档",
+      "matchups": "经典对决",
+      "insights": "洞察"
+    },
+    "topCollaborations": "最佳搭档",
+    "topMatchups": "经典对决",
+    "insights": "指挥官洞察",
+    "noCollaborations": "暂无合作数据",
+    "noMatchups": "暂无对决数据",
+    "noInsights": "暂无洞察数据"
   }
 }
