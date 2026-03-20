@@ -75,7 +75,8 @@ export function TimelineSlider({
   return (
     <div className="bg-zinc-900/95 backdrop-blur-sm border-t border-zinc-700 px-4 py-3">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-lg font-bold text-white min-w-[80px]">{displayYear}</span>
+        {/* Mobile: larger year display for easier reading */}
+        <span className="text-xl sm:text-lg font-bold text-white min-w-[80px]">{displayYear}</span>
         <div className="flex items-center gap-2">
           {activeEmpires.length > 0 && (
             <span className="text-xs text-zinc-400">
@@ -85,17 +86,17 @@ export function TimelineSlider({
         </div>
       </div>
 
-      {/* 滑块轨道 */}
+      {/* 滑块轨道 - mobile: larger touch targets */}
       <div
         ref={sliderRef}
-        className="relative h-8 cursor-pointer select-none"
+        className="relative h-12 sm:h-8 cursor-pointer select-none"
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}
       >
-        {/* 轨道背景 */}
-        <div className="absolute top-1/2 left-0 right-0 h-2 bg-zinc-700 rounded-full -translate-y-1/2">
+        {/* 轨道背景 - mobile: taller track */}
+        <div className="absolute top-1/2 left-0 right-0 h-2 sm:h-2 bg-zinc-700 rounded-full -translate-y-1/2 touch-none">
           {/* 世纪标记 */}
           {Array.from({ length: Math.ceil((maxYear - minYear) / 100) + 1 }).map((_, i) => {
             const centuryYear = Math.ceil(minYear / 100) * 100 + i * 100;
@@ -113,23 +114,23 @@ export function TimelineSlider({
 
         {/* 已选择区域 */}
         <div
-          className="absolute top-1/2 left-0 h-2 bg-blue-500 rounded-full -translate-y-1/2"
+          className="absolute top-1/2 left-0 h-2 sm:h-2 bg-blue-500 rounded-full -translate-y-1/2 touch-none"
           style={{ width: `${positionPercent}%` }}
         />
 
-        {/* 滑块把手 */}
+        {/* 滑块把手 - mobile: larger thumb */}
         <div
-          className="absolute top-1/2 w-5 h-5 bg-white rounded-full shadow-lg -translate-y-1/2 -translate-x-1/2 transition-transform hover:scale-110"
+          className="absolute top-1/2 w-6 h-6 sm:w-5 sm:h-5 bg-white rounded-full shadow-lg -translate-y-1/2 -translate-x-1/2 transition-transform hover:scale-110 active:scale-125 touch-none"
           style={{ left: `${positionPercent}%` }}
         >
           <div className="absolute inset-1 bg-blue-500 rounded-full" />
         </div>
       </div>
 
-      {/* 年份刻度标签 */}
+      {/* 年份刻度标签 - mobile: show start/end years */}
       <div className="flex justify-between mt-1 text-xs text-zinc-500">
         <span>{formatYear(minYear)}</span>
-        <span>{formatYear(Math.floor((minYear + maxYear) / 2))}</span>
+        <span className="sm:hidden">{formatYear(Math.floor((minYear + maxYear) / 2))}</span>
         <span>{formatYear(maxYear)}</span>
       </div>
     </div>

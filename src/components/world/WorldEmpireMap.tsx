@@ -42,6 +42,39 @@ export function WorldEmpireMap({
     [year, mode]
   );
 
+  // 预计算每个帝国的中心点（避免在 JSX map 中调用 useMemo）
+  const empireCenters = React.useMemo<Record<number, { lon: number; lat: number } | null>>(() => {
+    const centers: Record<number, { lon: number; lat: number } | null> = {};
+    activeBoundaries.forEach((boundary, index) => {
+      const polygonCoords = boundary.geometry.type === 'Polygon'
+        ? boundary.geometry.coordinates[0]
+        : boundary.geometry.type === 'MultiPolygon'
+        ? boundary.geometry.coordinates[0]?.[0]
+        : undefined;
+      const coords = polygonCoords ?? [];
+
+      if (coords.length === 0) {
+        centers[index] = null;
+        return;
+      }
+
+      const validCoords = coords.filter(c => c && c[0] !== undefined && c[1] !== undefined);
+      if (validCoords.length < 3) {
+        centers[index] = null;
+        return;
+      }
+
+      let centerLon = 0;
+      let centerLat = 0;
+      for (const c of validCoords) {
+        centerLon += c[0] ?? 0;
+        centerLat += c[1] ?? 0;
+      }
+      centers[index] = { lon: centerLon / validCoords.length, lat: centerLat / validCoords.length };
+    });
+    return centers;
+  }, [activeBoundaries]);
+
   return (
     <div className={`h-full w-full overflow-hidden rounded-xl border ${WORLD_MAP_COLORS.container.border} ${WORLD_MAP_COLORS.container.bg} relative`}>
       <Map
@@ -89,35 +122,14 @@ export function WorldEmpireMap({
 
         {/* 帝国中心点标记 */}
         {activeBoundaries.map((boundary, index) => {
-          // 使用加权质心算法计算多边形中心（基于面积加权）
-          const polygonCoords = boundary.geometry.type === 'Polygon'
-            ? boundary.geometry.coordinates[0]
-            : boundary.geometry.type === 'MultiPolygon'
-            ? boundary.geometry.coordinates[0]?.[0]
-            : undefined;
-          const coords = polygonCoords ?? [];
-
-          if (coords.length === 0) return null;
-
-          // 计算多边形质心（Shoelace公式的加权版本）
-          const validCoords = coords.filter(c => c && c[0] !== undefined && c[1] !== undefined);
-          if (validCoords.length < 3) return null;
-
-          // 简单算术平均作为备选（对于 GeoJSON 标准坐标序列已经足够）
-          let centerLon = 0;
-          let centerLat = 0;
-          for (const c of validCoords) {
-            centerLon += c[0] ?? 0;
-            centerLat += c[1] ?? 0;
-          }
-          centerLon /= validCoords.length;
-          centerLat /= validCoords.length;
+          const center = empireCenters[index];
+          if (!center) return null;
 
           return (
             <Marker
               key={`marker-${index}`}
-              longitude={centerLon}
-              latitude={centerLat}
+              longitude={center.lon}
+              latitude={center.lat}
               anchor="center"
             >
               <button

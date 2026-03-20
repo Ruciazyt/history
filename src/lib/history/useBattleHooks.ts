@@ -1,7 +1,8 @@
 /**
  * Shared hooks for History Atlas components
  */
-import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
+import type { RefObject, DependencyList } from 'react';
 import type { Event } from './types';
 
 /**
@@ -95,11 +96,11 @@ export function useModal() {
  * Hook for keyboard accessibility (Escape key)
  */
 export function useEscapeKey(onEscape: () => void) {
-  const escapeHandler = React.useCallback((e: KeyboardEvent) => {
+  const escapeHandler = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') onEscape();
   }, [onEscape]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.addEventListener('keydown', escapeHandler);
     return () => document.removeEventListener('keydown', escapeHandler);
   }, [escapeHandler]);
@@ -178,7 +179,7 @@ export function useDebounce<T>(value: T, delay: number): T {
  * Hook for click outside detection
  */
 export function useClickOutside(
-  ref: React.RefObject<HTMLElement | null>,
+  ref: RefObject<HTMLElement | null>,
   handler: () => void
 ) {
   useEffect(() => {
@@ -286,7 +287,7 @@ export function useInfiniteScroll(
  */
 export function useAsyncData<T>(
   fetcher: () => Promise<T>,
-  deps: React.DependencyList = []
+  deps: DependencyList = []
 ) {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -366,9 +367,9 @@ export function useKeyPress(targetKey: string, callback: () => void) {
  * Hook for previous value
  */
 export function usePrevious<T>(value: T): T | undefined {
-  const ref = React.useRef<T | undefined>(undefined);
+  const ref = useRef<T | undefined>(undefined);
   
-  React.useEffect(() => {
+  useEffect(() => {
     ref.current = value;
   }, [value]);
   
@@ -382,15 +383,15 @@ export function usePrevious<T>(value: T): T | undefined {
 export function useBattleFavorites() {
   const [favorites, setFavorites] = useLocalStorage<string[]>('battle-favorites', []);
 
-  const addFavorite = React.useCallback((battleId: string) => {
+  const addFavorite = useCallback((battleId: string) => {
     setFavorites((prev) => prev.includes(battleId) ? prev : [...prev, battleId]);
   }, [setFavorites]);
 
-  const removeFavorite = React.useCallback((battleId: string) => {
+  const removeFavorite = useCallback((battleId: string) => {
     setFavorites((prev) => prev.filter((id) => id !== battleId));
   }, [setFavorites]);
 
-  const toggleFavorite = React.useCallback((battleId: string) => {
+  const toggleFavorite = useCallback((battleId: string) => {
     setFavorites((prev) =>
       prev.includes(battleId)
         ? prev.filter((id) => id !== battleId)
@@ -398,12 +399,12 @@ export function useBattleFavorites() {
     );
   }, [setFavorites]);
 
-  const isFavorite = React.useCallback(
+  const isFavorite = useCallback(
     (battleId: string) => favorites.includes(battleId),
     [favorites]
   );
 
-  const clearFavorites = React.useCallback(() => {
+  const clearFavorites = useCallback(() => {
     setFavorites([]);
   }, [setFavorites]);
   

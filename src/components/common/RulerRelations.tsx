@@ -12,7 +12,7 @@ interface RulerRelationsProps {
   onRulerClick?: (rulerId: string) => void;
 }
 
-export function RulerRelations({ ruler, allRulers, onRulerClick }: RulerRelationsProps) {
+export const RulerRelations = React.memo(function RulerRelations({ ruler, allRulers, onRulerClick }: RulerRelationsProps) {
   const t = useTranslations();
   const relations = React.useMemo(() => getRulerRelations(ruler, allRulers), [ruler, allRulers]);
   
@@ -36,4 +36,4 @@ export function RulerRelations({ ruler, allRulers, onRulerClick }: RulerRelation
       </div>
     </div>
   );
-}
+});

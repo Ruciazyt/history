@@ -290,3 +290,33 @@ body {
   ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 }
+
+/* ─── Mobile Drawer Animations ─────────────────────────────────────────────── */
+.drawer-overlay {
+  transition: opacity 0.3s ease;
+}
+
+.drawer-content {
+  transition: transform 0.3s ease;
+}
+
+/* Left drawer */
+.drawer-enter { transform: translateX(-100%); }
+.drawer-enter-active { transform: translateX(0); }
+.drawer-exit-active { transform: translateX(-100%); }
+
+/* Right drawer */
+.drawer-right.drawer-enter { transform: translateX(100%); }
+.drawer-right.drawer-enter-active { transform: translateX(0); }
+.drawer-right.drawer-exit-active { transform: translateX(100%); }
+
+/* ─── Bottom Navigation ──────────────────────────────────────────────────────── */
+.bottom-nav {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ─── iPhone Safe Area ──────────────────────────────────────────────────────── */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}

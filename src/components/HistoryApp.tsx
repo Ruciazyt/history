@@ -12,6 +12,9 @@ import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 import { ThemeToggle } from '@/components/common/ThemeToggle';
 import { RulerRelations } from '@/components/common/RulerRelations';
 import { SearchBox } from '@/components/common/SearchBox';
+import { BottomNav } from '@/components/common/BottomNav';
+import { EraDrawer } from '@/components/common/EraDrawer';
+import { EventsDrawer } from '@/components/common/EventsDrawer';
 import { useTranslations } from 'next-intl';
 import { ERA_COLORS, ERA_ITEM_COLORS } from '@/lib/history/constants';
 import { BattleOfTheDayCard } from '@/components/battles/BattleOfTheDayCard';
@@ -82,6 +85,10 @@ export function HistoryApp({
   }, []);
 
   const [selectedRulerId, setSelectedRulerId] = React.useState<string | null>(null);
+
+  // Mobile drawer states
+  const [eraDrawerOpen, setEraDrawerOpen] = React.useState(false);
+  const [eventsDrawerOpen, setEventsDrawerOpen] = React.useState(false);
 
   const switchCiv = React.useCallback((mode: 'china' | 'eurasian' | 'east-asia') => {
     setCivMode(mode);
@@ -156,19 +163,49 @@ export function HistoryApp({
 
   return (
     <div className={`flex h-screen flex-col ${C.container.bg} ${C.container.text}`}>
-      {/* Header - 移动端优化 */}
+      {/* Header */}
       <header className={`shrink-0 border-b ${C.header.border} ${C.header.bg}`}>
         <div className="flex w-full flex-col gap-2 px-3 py-3 sm:px-4 sm:py-4">
-          {/* Top row: title + locale */}
+          {/* Top row: title + locale - mobile: hamburger + title + events icon */}
           <div className="flex items-center justify-between">
-            <div className="flex-1 min-w-0">
-              <div className={`text-xs sm:text-sm ${C.header.title.small} truncate`}>{t('app.title')}</div>
-              <h1 className={`text-base sm:text-lg font-semibold truncate`}>{t('app.subtitle')}</h1>
+            <div className="flex items-center gap-2 flex-1 min-w-0">
+              {/* Mobile: hamburger menu button */}
+              <button
+                type="button"
+                onClick={() => setEraDrawerOpen(true)}
+                className="rounded-lg p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors lg:hidden"
+                style={{ minWidth: '44px', minHeight: '44px' }}
+                aria-label="打开朝代菜单"
+              >
+                <span className="text-lg">☰</span>
+              </button>
+              <div className="flex-1 min-w-0">
+                <div className={`text-xs sm:text-sm ${C.header.title.small} truncate`}>{t('app.title')}</div>
+                <h1 className={`text-base sm:text-lg font-semibold truncate`}>{t('app.subtitle')}</h1>
+              </div>
             </div>
-            <div className="flex items-center gap-2 shrink-0 ml-2">
-              <ThemeToggle />
-              <SearchBox events={events} rulers={rulers} locale={currentLocale} />
-              <LocaleSwitcher />
+            <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+              {/* Mobile: events button */}
+              <button
+                type="button"
+                onClick={() => setEventsDrawerOpen(true)}
+                className="rounded-lg p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors lg:hidden"
+                style={{ minWidth: '44px', minHeight: '44px' }}
+                aria-label="打开事件列表"
+              >
+                <span className="text-lg">📋</span>
+              </button>
+              {/* Desktop only controls */}
+              <div className="hidden lg:flex items-center gap-2 shrink-0">
+                <ThemeToggle />
+                <SearchBox events={events} rulers={rulers} locale={currentLocale} />
+                <LocaleSwitcher />
+              </div>
+              {/* Mobile: theme + locale icons */}
+              <div className="flex lg:hidden items-center gap-1">
+                <ThemeToggle />
+                <LocaleSwitcher />
+              </div>
             </div>
           </div>
           
@@ -195,8 +232,8 @@ export function HistoryApp({
                 </span>
               </div>
               
-              {/* Quick links */}
-              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+              {/* Quick links - desktop only */}
+              <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 shrink-0">
                 <Link
                   href={`/${currentLocale}/timeline`}
                   className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.timeline.bg} ${C.quickLink.timeline.text} ${C.quickLink.timeline.border}`}
@@ -239,10 +276,10 @@ export function HistoryApp({
         </div>
       </header>
 
-      <div className="flex w-full flex-1 flex-col overflow-hidden px-2 sm:px-4 py-2 sm:py-4">
+      <div className="flex w-full flex-1 flex-col overflow-hidden px-2 sm:px-4 py-2 sm:py-4 pb-[72px] lg:pb-4">
         <div className="grid h-full grid-cols-1 gap-2 sm:gap-4 overflow-hidden lg:grid-cols-[280px_minmax(0,1fr)_180px] xl:grid-cols-[280px_minmax(0,1fr)_200px]">
-          {/* Left: global vertical timeline */}
-          <aside className={`flex max-h-full flex-col overflow-hidden rounded-xl border ${C.sidebar.container.border} ${C.sidebar.container.bg}`}>
+          {/* Left: global vertical timeline - desktop only */}
+          <aside className={`hidden lg:flex max-h-full flex-col overflow-hidden rounded-xl border ${C.sidebar.container.border} ${C.sidebar.container.bg}`}>
             <div className={`shrink-0 border-b ${C.sidebar.header.border} ${C.sidebar.header.bg} p-2 sm:p-3`}>
               <div className="flex items-baseline justify-between gap-3">
                 <div>
@@ -477,8 +514,8 @@ export function HistoryApp({
             </div>
           </section>
 
-          {/* Right: events */}
-          <aside className={`flex max-h-full flex-col overflow-hidden rounded-xl border ${C.eventsSidebar.container.border} ${C.eventsSidebar.container.bg}`}>
+          {/* Right: events - desktop only */}
+          <aside className={`hidden lg:flex max-h-full flex-col overflow-hidden rounded-xl border ${C.eventsSidebar.container.border} ${C.eventsSidebar.container.bg}`}>
             <div className={`shrink-0 border-b ${C.eventsSidebar.header.border} ${C.eventsSidebar.header.bg} p-2 sm:p-3`}>
               <div className={`text-xs font-semibold uppercase tracking-wide ${C.eventsSidebar.header.text}`}>
                 {t('ui.events')} ({currentEraEvents.length})
@@ -581,6 +618,30 @@ export function HistoryApp({
           </aside>
         </div>
       </div>
+
+      {/* Mobile: Bottom Navigation */}
+      <BottomNav locale={currentLocale} />
+
+      {/* Mobile: Era Drawer (left side) */}
+      <EraDrawer
+        isOpen={eraDrawerOpen}
+        onClose={() => setEraDrawerOpen(false)}
+        activeEras={activeEras}
+        activeRulers={activeRulers}
+        openEraIds={openEraIds}
+        selectedRulerId={selectedRulerId}
+        onToggleEra={toggleEra}
+        onSelectRuler={setSelectedRulerId}
+      />
+
+      {/* Mobile: Events Drawer (right side) */}
+      <EventsDrawer
+        isOpen={eventsDrawerOpen}
+        onClose={() => setEventsDrawerOpen(false)}
+        currentEraEvents={currentEraEvents}
+        otherEraEvents={otherEraEvents}
+        activeEras={activeEras}
+      />
     </div>
   );
 }

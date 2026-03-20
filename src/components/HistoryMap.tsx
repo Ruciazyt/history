@@ -133,12 +133,13 @@ export function HistoryMap({
     };
 
     const callbackName = 'baiduMapCb_' + Date.now();
-    const initMapWrapper = () => { initMap(); };
-    (window as unknown as Record<string, () => void>)[callbackName] = initMapWrapper;
+    (window as unknown as Record<string, () => void>)[callbackName] = () => { initMap(); };
 
     // Only load Baidu Map script when API key is configured
     if (!BAIDU_MAP_AK) {
       console.warn('[HistoryMap] NEXT_PUBLIC_BAIDU_MAP_AK is not configured — map will not load');
+      // Clean up the callback we just registered
+      delete (window as unknown as Record<string, unknown>)[callbackName];
       return;
     }
 
@@ -148,11 +149,14 @@ export function HistoryMap({
     document.head.appendChild(script);
 
     return () => {
-      // Cleanup: remove script tag from DOM and delete callback
+      // Cleanup: remove script tag from DOM, delete callback, and clear map ref
       if (script.parentNode) {
         script.parentNode.removeChild(script);
       }
       delete (window as unknown as Record<string, unknown>)[callbackName];
+      // Reset map state so re-mounting can reinitialize cleanly
+      mapRef.current = null;
+      setMapReady(false);
     };
   }, [mapCenter.lon, mapCenter.lat, mapZoom]);
 
