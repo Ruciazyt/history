@@ -3,6 +3,42 @@
 ## 项目地址
 https://history.ruciazyt.cn
 
+## 2026-03-20 UI优化与架构完善 - 第三十三轮
+### i18n国际化完善
+- [x] WorldTimeline.tsx: 新增useTranslations支持
+  - 页面标题、活跃政权数、无记录提示、年份标签等使用i18n键
+  - 替换硬编码中文字符串为t('world.*')键
+- [x] WorldClient.tsx: 传递locale prop给WorldTimeline组件
+- [x] messages/en.json、zh.json、ja.json: 新增world配置节
+  - title: 页面标题
+  - activePolities: 活跃政权计数模板
+  - noRecords: 无记录提示
+  - yearLabel: 年份标签
+
+### 年份格式化修复
+- [x] WorldTimeline.tsx: 使用formatYear工具函数替代本地formatYearShort
+  - 支持多语言BCE/CE（英文）和公元前/公元（中文/日文）格式
+  - 移除重复的formatYearShort本地函数
+- [x] WorldEmpireMap.tsx: 修复年份显示使用formatYear工具函数
+  - 替换硬编码的BCE/CE字符串为formatYear(year)
+
+### UI优化
+- [x] HistoryApp.tsx: 世界导航链接使用i18n键
+  - 硬编码'世界'替换为t('world.title')
+
+### 验证结果
+- [x] Lint检查通过 (0错误, 0警告)
+- [x] 单元测试: 693个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交 (commit: 09822b4)
+- [x] 代码已推送至仓库
+
+### 优化说明
+- 完成了WorldTimeline组件的国际化改造，支持多语言切换
+- 统一使用formatYear工具函数处理年份显示，保持代码一致性
+- 世界导航链接现在支持国际化显示
+- 项目保持健壮可用状态
+
 ## 2026-03-19 UI优化与架构完善 - 第三十二轮
 ### 功能增强
 - [x] battles.ts: 新增 getRandomBattle() 函数
