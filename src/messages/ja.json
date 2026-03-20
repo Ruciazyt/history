@@ -1403,9 +1403,10 @@
       "china": "中国",
       "korea": "朝鮮半島",
       "japan": "日本",
-      "centralAsia": "中央アジア",
       "west": "西方",
-      "vietnam": "ベトナム"
+      "vietnam": "ベトナム",
+      "central-asia": "中央アジア",
+      "other": "その他"
     }
   },
   "placeNames": {

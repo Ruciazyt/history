@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
-import { eurasianBoundaries, eastAsiaBoundaries, getWorldEraBounds, getActiveBoundaries } from '@/lib/history/data/worldBoundaries';
+import { eurasianBoundaries, eastAsiaBoundaries, getWorldEraBounds, getActiveBoundaries, type WorldBoundary } from '@/lib/history/data/worldBoundaries';
 import { formatYear } from '@/lib/history/utils';
 import { HISTORY_APP_COLORS } from '@/lib/history/constants';
 
@@ -29,154 +29,83 @@ interface RegionColumn {
   }>;
 }
 
-// Build grid columns from world boundaries
+/** Region classification helper: categorize a boundary into a region column */
+type RegionId = 'china' | 'korea' | 'japan' | 'central-asia' | 'west' | 'vietnam' | 'other';
+
+const CHINA_NAMES = new Set(['秦朝', '西汉', '东汉', '唐朝', '宋朝', '元朝', '明朝', '清朝']);
+const KOREA_NAMES = new Set(['高丽王朝', '朝鲜王朝']);
+const JAPAN_NAMES = new Set(['平安时代', '江户时代']);
+const VIETNAM_NAMES = new Set(['李朝', '黎朝', '阮朝']);
+// Central Asia: Mongolian, Indian-subcontinent empires and steppe empires
+const CENTRAL_ASIA_NAMES = new Set(['蒙古帝国', '孔雀王朝', '莫卧儿帝国']);
+// West: Rome, Persian, Islamic, Hellenistic empires
+const WEST_NAMES = new Set(['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚']);
+
+function classifyRegion(boundary: WorldBoundary): RegionId {
+  const name = boundary.properties.name;
+  if (CHINA_NAMES.has(name)) return 'china';
+  if (KOREA_NAMES.has(name)) return 'korea';
+  if (JAPAN_NAMES.has(name)) return 'japan';
+  if (VIETNAM_NAMES.has(name)) return 'vietnam';
+  if (CENTRAL_ASIA_NAMES.has(name)) return 'central-asia';
+  if (WEST_NAMES.has(name)) return 'west';
+  return 'other';
+}
+
+/** Column definitions with region metadata */
+const COLUMN_DEFINITIONS: Record<RegionId, { labelKey: string; bgColor: string; headerBg: string }> = {
+  china: { labelKey: 'grid.region.china', bgColor: 'bg-red-50/40', headerBg: 'bg-red-100 border-red-200' },
+  korea: { labelKey: 'grid.region.korea', bgColor: 'bg-blue-50/40', headerBg: 'bg-blue-100 border-blue-200' },
+  japan: { labelKey: 'grid.region.japan', bgColor: 'bg-pink-50/40', headerBg: 'bg-pink-100 border-pink-200' },
+  'central-asia': { labelKey: 'grid.region.central-asia', bgColor: 'bg-amber-50/40', headerBg: 'bg-amber-100 border-amber-200' },
+  west: { labelKey: 'grid.region.west', bgColor: 'bg-purple-50/40', headerBg: 'bg-purple-100 border-purple-200' },
+  vietnam: { labelKey: 'grid.region.vietnam', bgColor: 'bg-green-50/40', headerBg: 'bg-green-100 border-green-200' },
+  other: { labelKey: 'grid.region.other', bgColor: 'bg-zinc-50/40', headerBg: 'bg-zinc-100 border-zinc-200' },
+};
+
+// Build grid columns from world boundaries (deduplicated, using shared data source)
 function buildEurasianColumns(mode: GridMode): RegionColumn[] {
-  if (mode === 'eurasian') {
-    return [
-      {
-        id: 'china',
-        labelKey: 'grid.region.china',
-        bgColor: 'bg-red-50/40',
-        headerBg: 'bg-red-100 border-red-200',
-        bounds: { minYear: -300, maxYear: 1912 },
-        polities: eurasianBoundaries
-          .filter(b => {
-            const name = b.properties.name;
-            return ['秦朝', '西汉', '东汉', '唐朝', '宋朝', '元朝', '明朝', '清朝'].includes(name);
-          })
-          .map(b => ({
-            id: b.properties.nameKey,
-            nameKey: b.properties.nameKey,
-            startYear: b.properties.startYear,
-            endYear: b.properties.endYear,
-            color: b.properties.color,
-          })),
-      },
-      {
-        id: 'korea',
-        labelKey: 'grid.region.korea',
-        bgColor: 'bg-blue-50/40',
-        headerBg: 'bg-blue-100 border-blue-200',
-        bounds: { minYear: -200, maxYear: 1912 },
-        polities: [
-          { id: 'goguryeo', nameKey: 'empire_goguryeo', startYear: -37, endYear: 668, color: '#14B8A6' },
-          { id: 'baekje', nameKey: 'empire_baekje', startYear: -18, endYear: 660, color: '#0D9488' },
-          { id: 'silla', nameKey: 'empire_silla', startYear: -57, endYear: 935, color: '#06B6D4' },
-          { id: 'goryeo', nameKey: 'empire_goryeo', startYear: 918, endYear: 1392, color: '#14B8A6' },
-          { id: 'joseon', nameKey: 'empire_joseon', startYear: 1392, endYear: 1912, color: '#0D9488' },
-        ],
-      },
-      {
-        id: 'japan',
-        labelKey: 'grid.region.japan',
-        bgColor: 'bg-pink-50/40',
-        headerBg: 'bg-pink-100 border-pink-200',
-        bounds: { minYear: -200, maxYear: 1912 },
-        polities: [
-          { id: 'yamato', nameKey: 'empire_yamato', startYear: -660, endYear: 1185, color: '#EC4899' },
-          { id: 'kamakura', nameKey: 'empire_kamakura', startYear: 1185, endYear: 1333, color: '#DB2777' },
-          { id: 'muromachi', nameKey: 'empire_muromachi', startYear: 1336, endYear: 1573, color: '#BE185D' },
-          { id: 'edo', nameKey: 'empire_edo', startYear: 1603, endYear: 1868, color: '#9D174D' },
-        ],
-      },
-      {
-        id: 'central-asia',
-        labelKey: 'grid.region.central-asia',
-        bgColor: 'bg-amber-50/40',
-        headerBg: 'bg-amber-100 border-amber-200',
-        bounds: { minYear: -550, maxYear: 1912 },
-        polities: [
-          { id: 'xiongnu', nameKey: 'empire_xiongnu', startYear: -209, endYear: 460, color: '#F59E0B' },
-          { id: 'yuezhi', nameKey: 'empire_yuezhi', startYear: -176, endYear: 450, color: '#D97706' },
-          { id: 'kushan', nameKey: 'empire_kushan', startYear: 30, endYear: 375, color: '#CA8A04' },
-          { id: 'xianbei', nameKey: 'empire_xianbei', startYear: 200, endYear: 534, color: '#EAB308' },
-          { id: 'gagajuddin', nameKey: 'empire_hephthalite', startYear: 420, endYear: 560, color: '#A16207' },
-        ],
-      },
-      {
-        id: 'west',
-        labelKey: 'grid.region.west',
-        bgColor: 'bg-purple-50/40',
-        headerBg: 'bg-purple-100 border-purple-200',
-        bounds: { minYear: -500, maxYear: 1912 },
-        polities: [
-          { id: 'rome-republic', nameKey: 'empire_rome-republic', startYear: -500, endYear: -27, color: '#7C3AED' },
-          { id: 'rome-empire', nameKey: 'empire_rome-empire', startYear: -27, endYear: 395, color: '#9333EA' },
-          { id: 'byzantine', nameKey: 'empire_byzantine', startYear: 395, endYear: 1453, color: '#8B5CF6' },
-          { id: 'ottoman', nameKey: 'empire_ottoman', startYear: 1299, endYear: 1922, color: '#A855F7' },
-          { id: 'achaemenid', nameKey: 'empire_achaemenid', startYear: -550, endYear: -330, color: '#E11D48' },
-          { id: 'parthian', nameKey: 'empire_parthian', startYear: -247, endYear: 224, color: '#BE185D' },
-          { id: 'sassanid', nameKey: 'empire_sassanid', startYear: 224, endYear: 651, color: '#9D174D' },
-        ],
-      },
-    ];
-  } else {
-    // east-asia mode
-    return [
-      {
-        id: 'china',
-        labelKey: 'grid.region.china',
-        bgColor: 'bg-red-50/40',
-        headerBg: 'bg-red-100 border-red-200',
-        bounds: { minYear: -221, maxYear: 1912 },
-        polities: eastAsiaBoundaries
-          .filter(b => {
-            const name = b.properties.name;
-            return ['秦朝', '西汉', '东汉', '唐朝', '宋朝', '元朝', '明朝', '清朝'].includes(name);
-          })
-          .map(b => ({
-            id: b.properties.nameKey,
-            nameKey: b.properties.nameKey,
-            startYear: b.properties.startYear,
-            endYear: b.properties.endYear,
-            color: b.properties.color,
-          })),
-      },
-      {
-        id: 'japan',
-        labelKey: 'grid.region.japan',
-        bgColor: 'bg-pink-50/40',
-        headerBg: 'bg-pink-100 border-pink-200',
-        bounds: { minYear: -660, maxYear: 1912 },
-        polities: [
-          { id: 'yamato', nameKey: 'empire_yamato', startYear: -660, endYear: 710, color: '#EC4899' },
-          { id: 'nara', nameKey: 'empire_nara', startYear: 710, endYear: 794, color: '#DB2777' },
-          { id: 'heian', nameKey: 'empire_heian', startYear: 794, endYear: 1185, color: '#BE185D' },
-          { id: 'kamakura', nameKey: 'empire_kamakura', startYear: 1185, endYear: 1333, color: '#9D174D' },
-          { id: 'muromachi', nameKey: 'empire_muromachi', startYear: 1336, endYear: 1573, color: '#831843' },
-          { id: 'edo', nameKey: 'empire_edo', startYear: 1603, endYear: 1868, color: '#9D174D' },
-        ],
-      },
-      {
-        id: 'korea',
-        labelKey: 'grid.region.korea',
-        bgColor: 'bg-blue-50/40',
-        headerBg: 'bg-blue-100 border-blue-200',
-        bounds: { minYear: -200, maxYear: 1912 },
-        polities: [
-          { id: 'goguryeo', nameKey: 'empire_goguryeo', startYear: -37, endYear: 668, color: '#14B8A6' },
-          { id: 'baekje', nameKey: 'empire_baekje', startYear: -18, endYear: 660, color: '#0D9488' },
-          { id: 'silla', nameKey: 'empire_silla', startYear: -57, endYear: 935, color: '#06B6D4' },
-          { id: 'goryeo', nameKey: 'empire_goryeo', startYear: 918, endYear: 1392, color: '#14B8A6' },
-          { id: 'joseon', nameKey: 'empire_joseon', startYear: 1392, endYear: 1897, color: '#0D9488' },
-        ],
-      },
-      {
-        id: 'vietnam',
-        labelKey: 'grid.region.vietnam',
-        bgColor: 'bg-green-50/40',
-        headerBg: 'bg-green-100 border-green-200',
-        bounds: { minYear: -200, maxYear: 1945 },
-        polities: [
-          { id: 'viet-tribes', nameKey: 'empire_viet-tribes', startYear: -200, endYear: 111, color: '#22C55E' },
-          { id: 'ly-dynasty', nameKey: 'empire_ly-dynasty', startYear: 1009, endYear: 1225, color: '#16A34A' },
-          { id: 'tran-dynasty', nameKey: 'empire_tran-dynasty', startYear: 1225, endYear: 1400, color: '#15803D' },
-          { id: 'le-dynasty', nameKey: 'empire_le-dynasty', startYear: 1428, endYear: 1788, color: '#166534' },
-          { id: 'nguyen-dynasty', nameKey: 'empire_nguyen-dynasty', startYear: 1802, endYear: 1945, color: '#14532D' },
-        ],
-      },
-    ];
+  const boundaries = mode === 'eurasian' ? eurasianBoundaries : eastAsiaBoundaries;
+  const { min, max } = getWorldEraBounds(mode);
+
+  // Group boundaries by region
+  const byRegion = new Map<RegionId, WorldBoundary[]>();
+  for (const b of boundaries) {
+    const region = classifyRegion(b);
+    if (!byRegion.has(region)) byRegion.set(region, []);
+    byRegion.get(region)!.push(b);
   }
+
+  // Build columns for regions that have data
+  const columns: RegionColumn[] = [];
+  for (const [regionId, regionBoundaries] of byRegion) {
+    if (regionBoundaries.length === 0) continue;
+    const def = COLUMN_DEFINITIONS[regionId];
+    columns.push({
+      id: regionId,
+      labelKey: def.labelKey,
+      bgColor: def.bgColor,
+      headerBg: def.headerBg,
+      bounds: { minYear: min, maxYear: max },
+      polities: regionBoundaries.map(b => ({
+        id: b.properties.nameKey,
+        nameKey: b.properties.nameKey,
+        startYear: b.properties.startYear,
+        endYear: b.properties.endYear,
+        color: b.properties.color,
+      })),
+    });
+  }
+
+  // Ensure consistent column order
+  const order: RegionId[] = ['china', 'japan', 'korea', 'vietnam', 'central-asia', 'west'];
+  columns.sort((a, b) => {
+    const ai = order.indexOf(a.id as RegionId);
+    const bi = order.indexOf(b.id as RegionId);
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+  });
+
+  return columns;
 }
 
 // Convert year to pixel Y position
@@ -235,12 +164,12 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
     return yearToY(currentYear, minYear, maxYear, gridHeight);
   }, [currentYear, minYear, maxYear, gridHeight]);
 
-  const handleYearClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleYearClick = React.useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const y = e.clientY - rect.top;
     const year = Math.round(minYear + (y / gridHeight) * (maxYear - minYear));
     setCurrentYear(Math.max(minYear, Math.min(maxYear, year)));
-  };
+  }, [minYear, maxYear, gridHeight]);
 
   return (
     <div className={`flex h-screen flex-col ${HISTORY_APP_COLORS.container.bg} ${HISTORY_APP_COLORS.container.text}`}>
