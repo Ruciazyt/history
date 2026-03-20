@@ -1314,6 +1314,9 @@
   "empire_le-dynasty": "黎朝",
   "empire_nguyen-dynasty": "阮朝",
   "empires_active": "帝国",
+  "empires": {
+    "active": "帝国"
+  },
   "timeline": {
     "title": "歴史タイムライン",
     "selectProcess": "歴史プロセスを選択",

@@ -1366,6 +1366,9 @@
   "empire_le-dynasty": "Le Dynasty",
   "empire_nguyen-dynasty": "Nguyen Dynasty",
   "empires_active": "empires",
+  "empires": {
+    "active": "empires"
+  },
   "battleDetail": {
     "close": "Close",
     "result": "Result:",
