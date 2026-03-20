@@ -178,7 +178,7 @@ export function useDebounce<T>(value: T, delay: number): T {
  * Hook for click outside detection
  */
 export function useClickOutside(
-  ref: React.RefObject<HTMLElement>,
+  ref: React.RefObject<HTMLElement | null>,
   handler: () => void
 ) {
   useEffect(() => {
