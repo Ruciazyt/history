@@ -1620,5 +1620,11 @@
     "title": "地名演化",
     "noResults": "未找到匹配的城市",
     "activeEmpires": "个地名"
+  },
+  "world": {
+    "title": "欧亚对比",
+    "activePolities": "{count} 个政权",
+    "noRecords": "无记录",
+    "yearLabel": "年份"
   }
 }

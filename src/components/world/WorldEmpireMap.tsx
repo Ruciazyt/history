@@ -183,7 +183,7 @@ export function WorldEmpireMap({
       {/* 当前活跃帝国列表 */}
       <div className={`absolute left-3 top-3 z-10 ${WORLD_VIEW_COLORS.background} ${WORLD_VIEW_COLORS.backdrop} rounded-lg p-2 max-w-[200px]`}>
         <div className={`text-xs ${WORLD_VIEW_COLORS.textSecondary} mb-1`}>
-          {year > 0 ? year : Math.abs(year)} {year < 0 ? 'BCE' : 'CE'}
+          {formatYear(year)}
         </div>
         <div className="flex flex-wrap gap-1">
           {activeBoundaries.map((b, i) => (

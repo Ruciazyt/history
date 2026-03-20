@@ -1411,5 +1411,11 @@
     "title": "地名変化",
     "noResults": "一致する都市が見つかりません",
     "activeEmpires": "箇所"
+  },
+  "world": {
+    "title": "ユーラシア比較",
+    "activePolities": "{count} 個の政权",
+    "noRecords": "記録なし",
+    "yearLabel": "年"
   }
 }

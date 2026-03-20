@@ -1418,5 +1418,11 @@
     "title": "Place Name Evolution",
     "noResults": "No matching cities found",
     "activeEmpires": "places"
+  },
+  "world": {
+    "title": "Eurasian Timeline",
+    "activePolities": "{count} active polities",
+    "noRecords": "No records",
+    "yearLabel": "Year"
   }
 }

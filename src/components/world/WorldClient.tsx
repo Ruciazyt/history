@@ -13,11 +13,12 @@ interface WorldClientProps {
 const WORLD_MIN_YEAR = -500;  // 公元前500年
 const WORLD_MAX_YEAR = 1900;  // 公元1900年
 
-export function WorldClient({}: WorldClientProps) {
+export function WorldClient({ locale }: WorldClientProps) {
   return (
     <WorldTimeline 
       minYear={WORLD_MIN_YEAR} 
-      maxYear={WORLD_MAX_YEAR} 
+      maxYear={WORLD_MAX_YEAR}
+      locale={locale}
     />
   );
 }
