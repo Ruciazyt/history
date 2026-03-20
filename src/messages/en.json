@@ -1387,7 +1387,11 @@
     "pacing": "Pacing:",
     "timeOfDay": "Time:",
     "turningPoints": "Turning Points",
-    "sources": "References"
+    "sources": "References",
+    "similarBattles": "Similar Battles",
+    "similarBattlesDesc": "Battles you might also be interested in",
+    "similarBattleItem": "View",
+    "noSimilarBattles": "No similar battles found"
   },
   "battleOfTheDay": {
     "title": "Battle of the Day",

@@ -9,17 +9,28 @@ import { STRATEGY_LABELS, TERRAIN_LABELS, TURNING_POINT_LABELS, Z_INDEX, BATTLE_
 import { getBattleTypeName } from '@/lib/history/battles';
 import { getPacingLabel, getTimeOfDayLabel } from '@/lib/history/battlePacing';
 import { useEscapeKey } from '@/lib/history/useBattleHooks';
+import { findSimilarBattles } from '@/lib/history/battleComparison';
 
 interface BattleDetailProps {
   battle: Event;
   onClose: () => void;
+  /** Optional: all events for computing similar battles */
+  allEvents?: Event[];
+  /** Optional: callback when user clicks a similar battle */
+  onBattleClick?: (battle: Event) => void;
 }
 
-export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }: BattleDetailProps) {
+export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, allEvents, onBattleClick }: BattleDetailProps) {
   const t = useTranslations();
   
   // Use existing useEscapeKey hook for escape key handling
   useEscapeKey(onClose);
+
+  // Compute similar battles
+  const similarBattles = React.useMemo(() => {
+    if (!allEvents || allEvents.length === 0) return [];
+    return findSimilarBattles(battle, allEvents, 3);
+  }, [battle, allEvents]);
   
   return (
     <div 
@@ -270,6 +281,75 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose }
                   </li>
                 ))}
               </ul>
+            </div>
+          )}
+
+          {/* Similar Battles */}
+          {similarBattles.length > 0 && (
+            <div className={`${BATTLE_DETAIL_COLORS.section.bg} rounded-lg p-4`}>
+              <h3 className={`text-sm font-semibold ${BATTLE_DETAIL_TEXT_COLORS.sectionTitle} mb-1`}>
+                🤝 {t('battleDetail.similarBattles')}
+              </h3>
+              <p className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.labelSmall} mb-3`}>
+                {t('battleDetail.similarBattlesDesc')}
+              </p>
+              <div className="space-y-2">
+                {similarBattles.map(({ battle: similar, similarity }) => (
+                  <div
+                    key={similar.id}
+                    className="flex items-center justify-between gap-2 p-2 rounded-lg bg-white dark:bg-zinc-700/50 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer border border-zinc-100 dark:border-zinc-600"
+                    onClick={() => onBattleClick?.(similar)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onBattleClick?.(similar); }}
+                  >
+                    <div className="min-w-0 flex-1">
+                      <div className={`text-sm font-medium truncate ${BATTLE_DETAIL_TEXT_COLORS.content}`}>
+                        ⚔️ {t(similar.titleKey)}
+                      </div>
+                      <div className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.labelSmall} flex items-center gap-1.5`}>
+                        <span>{formatYear(similar.year)}</span>
+                        {similar.location?.label && (
+                          <>
+                            <span>·</span>
+                            <span>{similar.location.label}</span>
+                          </>
+                        )}
+                        {similar.battle?.result && (
+                          <>
+                            <span>·</span>
+                            <span className={
+                              similar.battle.result === 'attacker_win' ? 'text-green-600' :
+                              similar.battle.result === 'defender_win' ? 'text-red-600' : 'text-zinc-500'
+                            }>
+                              {getBattleResultLabel(similar.battle)}
+                            </span>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                    <div className="shrink-0 flex items-center gap-2">
+                      <span className={`text-xs px-1.5 py-0.5 rounded ${
+                        similarity >= 0.7 ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' :
+                        similarity >= 0.4 ? 'bg-zinc-100 text-zinc-600 dark:bg-zinc-700 dark:text-zinc-400' :
+                        'bg-zinc-50 text-zinc-400 dark:bg-zinc-800 dark:text-zinc-500'
+                      }`}>
+                        {Math.round(similarity * 100)}%
+                      </span>
+                      <span className={`text-xs font-medium ${BATTLE_DETAIL_TEXT_COLORS.link}`}>
+                        {t('battleDetail.similarBattleItem')} →
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* No similar battles message */}
+          {similarBattles.length === 0 && allEvents && allEvents.length > 1 && (
+            <div className={`text-center py-2 text-xs ${BATTLE_DETAIL_TEXT_COLORS.labelSmall}`}>
+              {t('battleDetail.noSimilarBattles')}
             </div>
           )}
         </div>

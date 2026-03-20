@@ -339,7 +339,9 @@ export function BattlesClient({
       {selectedBattle && (
         <BattleDetail 
           battle={selectedBattle} 
-          onClose={() => setSelectedBattle(null)} 
+          onClose={() => setSelectedBattle(null)}
+          allEvents={events}
+          onBattleClick={(battle) => setSelectedBattle(battle)}
         />
       )}
       

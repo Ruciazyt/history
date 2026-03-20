@@ -1589,7 +1589,11 @@
     "pacing": "节奏：",
     "timeOfDay": "时间：",
     "turningPoints": "关键转折点",
-    "sources": "参考资料"
+    "sources": "参考资料",
+    "similarBattles": "相似战役",
+    "similarBattlesDesc": "你可能还感兴趣的战役",
+    "similarBattleItem": "查看",
+    "noSimilarBattles": "暂无相似战役"
   },
   "battleOfTheDay": {
     "title": "今日战役",

@@ -1361,7 +1361,11 @@
     "pacing": "ペース：",
     "timeOfDay": "時間帯：",
     "turningPoints": "転換点",
-    "sources": "参考文献"
+    "sources": "参考文献",
+    "similarBattles": "類似战役",
+    "similarBattlesDesc": "你也感兴趣的战役",
+    "similarBattleItem": "見る",
+    "noSimilarBattles": "類似战役なし"
   },
   "battleOfTheDay": {
     "title": "今日の戦い",

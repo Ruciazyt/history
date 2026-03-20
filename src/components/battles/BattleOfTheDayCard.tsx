@@ -123,7 +123,7 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
       </button>
 
       {showDetail && (
-        <BattleDetail battle={battle} onClose={() => setShowDetail(false)} />
+        <BattleDetail battle={battle} onClose={() => setShowDetail(false)} allEvents={events} />
       )}
     </>
   );
