@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { 
   getBattles, 
   getBattleResultLabel, 
+  getBattleImpactLabel,
   sortBattlesByYear,
   getBattlesByYearRange,
   getRandomBattle,
@@ -114,6 +115,36 @@ describe('battles', () => {
 
     it('should return empty string for undefined result', () => {
       expect(getBattleResultLabel({})).toBe('');
+    });
+  });
+
+  describe('getBattleImpactLabel', () => {
+    it('should return correct label for decisive', () => {
+      expect(getBattleImpactLabel('decisive')).toBe('决定性战役');
+    });
+
+    it('should return correct label for major', () => {
+      expect(getBattleImpactLabel('major')).toBe('重要战役');
+    });
+
+    it('should return correct label for minor', () => {
+      expect(getBattleImpactLabel('minor')).toBe('小型战役');
+    });
+
+    it('should return correct label for unknown', () => {
+      expect(getBattleImpactLabel('unknown')).toBe('未知');
+    });
+
+    it('should return empty string for undefined', () => {
+      expect(getBattleImpactLabel(undefined)).toBe('');
+    });
+
+    it('should return empty string for empty string', () => {
+      expect(getBattleImpactLabel('')).toBe('');
+    });
+
+    it('should return the original value for unknown impact type', () => {
+      expect(getBattleImpactLabel('some-unknown-type')).toBe('some-unknown-type');
     });
   });
 

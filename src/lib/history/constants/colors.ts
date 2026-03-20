@@ -1137,6 +1137,11 @@ export const HISTORY_APP_COLORS = {
       text: 'text-purple-700',
       border: 'border-purple-200',
     },
+    placeNames: {
+      bg: 'bg-green-50 hover:bg-green-100',
+      text: 'text-green-700',
+      border: 'border-green-200',
+    },
   },
   // 左侧边栏 - Era 列表
   sidebar: {

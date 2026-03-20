@@ -28,6 +28,7 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
   const [isOpen, setIsOpen] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const listboxId = React.useId();
 
   // Close dropdown when clicking outside the search container
   useClickOutside(containerRef, React.useCallback(() => setIsOpen(false), []));
@@ -110,6 +111,7 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
             }
           }}
           aria-expanded={isOpen}
+          aria-controls={listboxId}
           aria-haspopup="listbox"
           aria-autocomplete="list"
           role="combobox"
@@ -137,6 +139,8 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
       {/* Search results dropdown */}
       {isOpen && results.length > 0 && (
         <div
+          id={listboxId}
+          role="listbox"
           className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-zinc-800 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700 py-1 max-h-80 overflow-y-auto"
           style={{ zIndex: Z_INDEX.dropdown }}
         >

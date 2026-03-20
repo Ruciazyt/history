@@ -4,6 +4,7 @@ import path from 'path';
 export default defineConfig({
   test: {
     environment: 'jsdom',
+    globals: true,
     // Run tests in parallel for better performance
     pool: 'forks',
     // Coverage configuration
@@ -15,6 +16,8 @@ export default defineConfig({
     isolate: true,
     // Global test timeout
     testTimeout: 10000,
+    // Setup files for jest-dom matchers
+    setupFiles: ['./src/test/setup.ts'],
   },
   resolve: {
     alias: {

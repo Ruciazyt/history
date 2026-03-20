@@ -64,6 +64,11 @@ export function useHistoryAppColors() {
           text: 'text-zinc-300',
           border: 'border-zinc-700',
         },
+        placeNames: {
+          bg: 'bg-zinc-800 hover:bg-zinc-700',
+          text: 'text-zinc-300',
+          border: 'border-zinc-700',
+        },
       },
       sidebar: {
         container: {

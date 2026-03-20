@@ -217,13 +217,13 @@ export function HistoryApp({
                 </Link>
                 <Link
                   href={`/${currentLocale}/world`}
-                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap bg-cyan-50 text-cyan-700 border border-cyan-200 hover:bg-cyan-100`}
+                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.eurasian.bg} ${C.quickLink.eurasian.text} ${C.quickLink.eurasian.border} hover:opacity-90`}
                 >
                   🌍 <span className="hidden sm:inline">世界</span>
                 </Link>
                 <Link
                   href={`/${currentLocale}/place-names`}
-                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap bg-green-50 text-green-700 border border-green-200 hover:bg-green-100`}
+                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.placeNames.bg} ${C.quickLink.placeNames.text} ${C.quickLink.placeNames.border} hover:opacity-90`}
                 >
                   🏛️ <span className="hidden sm:inline">{t('placeNames.title') || '地名演化'}</span>
                 </Link>
@@ -326,7 +326,7 @@ export function HistoryApp({
                                               >
                                                 <div>{t(r.nameKey)}</div>
                                                 {r.eraNameKey && (
-                                                  <div className="text-amber-600 text-xs">{tEra(r.eraNameKey)}</div>
+                                                  <div className={`${C.rulerDetail.header.eraBadge.text} text-xs`}>{tEra(r.eraNameKey)}</div>
                                                 )}
                                               </button>
                                             </td>
@@ -359,7 +359,7 @@ export function HistoryApp({
                                     <>
                                       <span>{t(r.nameKey)}</span>
                                       {r.eraNameKey && (
-                                        <span className="text-amber-600 text-xs">{tEra(r.eraNameKey)}</span>
+                                        <span className={`${C.rulerDetail.header.eraBadge.text} text-xs`}>{tEra(r.eraNameKey)}</span>
                                       )}
                                     </>
                                   )}
