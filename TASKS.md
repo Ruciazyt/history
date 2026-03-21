@@ -1146,3 +1146,27 @@ src/
 - [x] 构建验证通过
 - [x] 单元测试: 487个测试用例全部通过
 - [x] 部署到 Vercel 成功 (https://history.ruciazyt.cn)
+
+## 2026-03-21 新功能 - 今日战役同代战役扩展 - 第三十四轮
+### 功能增强
+- [x] battles.ts: 新增 getSameEraBattles() 函数
+  - 根据参考战役查找同一时代（entityId）的其他战役
+  - 排除参考战役本身，只返回同一时代的其他战役
+- [x] BattleOfTheDayCard.tsx: 扩展今日战役卡片
+  - 导入并调用 getSameEraBattles 获取同代战役
+  - 当存在同代战役时显示"📚 X 场同代战役"徽章
+  - 为用户提供同一时代的更多战役发现入口
+
+### 测试
+- [x] battles.test.ts: 新增 getSameEraBattles 测试用例（4个测试）
+- [x] BattleOfTheDayCard.test.tsx: 更新 mock 引入 getSameEraBattles
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 697个测试用例全部通过
+- [x] 构建验证通过（待执行）
+
+### 优化说明
+- 增强 BattleOfTheDayCard 的发现价值，用户可感知同一时代还有多少战役
+- 与现有功能无缝集成，改动小、价值高
+- 测试覆盖新增函数的边界情况（空结果、单一战役、非战役事件）

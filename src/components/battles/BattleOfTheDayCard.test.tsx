@@ -27,6 +27,7 @@ vi.mock('./BattleDetail', () => ({
 // Mock the battles module to control getBattleOfTheDay
 vi.mock('@/lib/history/battles', () => ({
   getBattleOfTheDay: vi.fn(),
+  getSameEraBattles: vi.fn(() => []),
   getBattleResultLabel: vi.fn(() => ''),
   getBattleImpactLabel: vi.fn(() => ''),
 }));
@@ -52,6 +53,7 @@ describe('BattleOfTheDayCard', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(battlesModule.getBattleOfTheDay).mockReset();
+    vi.mocked(battlesModule.getSameEraBattles).mockReset();
   });
 
   describe('null guard', () => {

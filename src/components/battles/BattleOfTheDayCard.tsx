@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import type { Event } from '@/lib/history/types';
-import { getBattleOfTheDay } from '@/lib/history/battles';
+import { getBattleOfTheDay, getSameEraBattles } from '@/lib/history/battles';
 import { formatYear } from '@/lib/history/utils';
 import { getBattleResultLabel, getBattleImpactLabel } from '@/lib/history/battles';
 import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, ERA_COLORS, BATTLE_CARD_COLORS, BATTLE_OF_THE_DAY_COLORS, COMMANDER_COLORS } from '@/lib/history/constants';
@@ -28,6 +28,10 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
   const [isHovered, setIsHovered] = React.useState(false);
 
   const battle = React.useMemo(() => getBattleOfTheDay(events), [events]);
+  const sameEraBattles = React.useMemo(
+    () => (battle ? getSameEraBattles(events, battle) : []),
+    [events, battle]
+  );
 
   if (!battle) return null;
 
@@ -113,6 +117,11 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
             {battle.battle?.impact && battle.battle.impact !== 'unknown' && (
               <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.bg || 'bg-zinc-100'} ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.text || 'text-zinc-600'}`}>
                 💎 {t(getBattleImpactLabel(battle.battle.impact))}
+              </span>
+            )}
+            {sameEraBattles.length > 0 && (
+              <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium ${BATTLE_OF_THE_DAY_COLORS.badgeItem.bg}`}>
+                📚 {sameEraBattles.length} 场同代战役
               </span>
             )}
           </div>

@@ -7,6 +7,8 @@ import {
   getBattlesByYearRange,
   getRandomBattle,
   getBattleOfTheDay,
+  getBattlesOnThisDay,
+  getSameEraBattles,
   getBattleParties,
   isBattleComplete,
   separateBattlesAndEvents,
@@ -255,6 +257,95 @@ describe('battles', () => {
       // Just verify it doesn't throw and returns a valid result
       const battle = getBattleOfTheDay(mockEvents);
       expect(battle).toBeDefined();
+    });
+  });
+
+  describe('getSameEraBattles', () => {
+    it('should return battles from the same era', () => {
+      const referenceBattle = mockEvents[0]; // entityId: 'era1'
+      const result = getSameEraBattles(mockEvents, referenceBattle);
+      // Should include battle-2 (era1, different from battle-1) but not battle-1 itself
+      expect(result.every((b) => b.entityId === 'era1')).toBe(true);
+      expect(result.some((b) => b.id === 'battle-2')).toBe(true);
+    });
+
+    it('should exclude the reference battle itself', () => {
+      const referenceBattle = mockEvents[0];
+      const result = getSameEraBattles(mockEvents, referenceBattle);
+      expect(result.some((b) => b.id === referenceBattle.id)).toBe(false);
+    });
+
+    it('should return empty array when no other battles in same era', () => {
+      // Use a battle with a unique entityId not shared by other battles
+      const uniqueBattle: Event = {
+        id: 'unique-battle',
+        entityId: 'era-unique',
+        year: -100,
+        titleKey: 'unique',
+        summaryKey: 'unique',
+        tags: ['war'],
+        battle: { result: 'attacker_win', belligerents: { attacker: 'A', defender: 'B' } },
+      };
+      const result = getSameEraBattles([...mockEvents, uniqueBattle], uniqueBattle);
+      expect(result).toHaveLength(0);
+    });
+
+    it('should return empty array for non-battle events', () => {
+      const referenceBattle = mockEvents[0];
+      const nonBattleEvents: Event[] = [
+        { id: 'e1', entityId: 'era1', year: -500, titleKey: 't', summaryKey: 's', tags: [] },
+      ];
+      const result = getSameEraBattles(nonBattleEvents, referenceBattle);
+      expect(result).toHaveLength(0);
+    });
+  });
+
+  describe('getBattlesOnThisDay', () => {
+    it('should return empty array for empty events', () => {
+      expect(getBattlesOnThisDay([])).toEqual([]);
+    });
+
+    it('should return empty array when no battles in events', () => {
+      const nonBattleEvents: Event[] = [
+        { id: 'e1', entityId: 'era1', year: -500, titleKey: 't', summaryKey: 's', tags: [] },
+      ];
+      expect(getBattlesOnThisDay(nonBattleEvents)).toEqual([]);
+    });
+
+    it('should return up to limit battles deterministically', () => {
+      const result = getBattlesOnThisDay(mockEvents);
+      expect(result.length).toBeGreaterThan(0);
+      expect(result.length).toBeLessThanOrEqual(3);
+    });
+
+    it('should return same results for same date', () => {
+      const date = new Date(2024, 5, 15); // June 15, 2024
+      const result1 = getBattlesOnThisDay(mockEvents, date);
+      const result2 = getBattlesOnThisDay(mockEvents, date);
+      expect(result1).toEqual(result2);
+    });
+
+    it('should return results for different dates without throwing', () => {
+      const date1 = new Date(2024, 0, 1);
+      const date2 = new Date(2024, 11, 31);
+      const result1 = getBattlesOnThisDay(mockEvents, date1);
+      const result2 = getBattlesOnThisDay(mockEvents, date2);
+      expect(Array.isArray(result1)).toBe(true);
+      expect(Array.isArray(result2)).toBe(true);
+    });
+
+    it('should respect custom limit parameter', () => {
+      const result1 = getBattlesOnThisDay(mockEvents, undefined, 1);
+      const result2 = getBattlesOnThisDay(mockEvents, undefined, 5);
+      expect(result1.length).toBeLessThanOrEqual(1);
+      expect(result2.length).toBeLessThanOrEqual(5);
+    });
+
+    it('should return battles sorted by year ascending', () => {
+      const result = getBattlesOnThisDay(mockEvents);
+      for (let i = 1; i < result.length; i++) {
+        expect(result[i - 1].year).toBeLessThanOrEqual(result[i].year);
+      }
     });
   });
 

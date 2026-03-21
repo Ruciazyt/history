@@ -10,7 +10,17 @@ export function getBattles(events: Event[]): Event[] {
 }
 
 /**
- * Get battle result i18n key
+ * Get battles from the same era (entityId) as a reference battle.
+ * Excludes the reference battle itself.
+ */
+export function getSameEraBattles(events: Event[], referenceBattle: Event): Event[] {
+  return events.filter(
+    (e) => e.tags?.includes('war') && e.entityId === referenceBattle.entityId && e.id !== referenceBattle.id
+  );
+}
+
+/**
+ * Get battle label in Chinese
  */
 export function getBattleResultLabel(result?: Event['battle']): string {
   if (!result) return '';
@@ -89,6 +99,41 @@ export function getBattleOfTheDay(events: Event[], date?: Date): Event | undefin
   const seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
   const index = seed % battles.length;
   return battles[index];
+}
+
+/**
+ * Get battles for "历史上的今天" (Battle of This Day) feature.
+ * Since battle data only contains year (not specific month/day), this function
+ * uses the date to deterministically select a window of battles, giving the
+ * illusion of "today's historical battles" in a fun, engaging way.
+ *
+ * Uses the date to generate a reproducible selection of 1-3 battles,
+ * making each day feel like a curated historical moment.
+ *
+ * @param events  - Full event list
+ * @param date    - Optional date (defaults to today)
+ * @param limit   - Maximum number of battles to return (default 3)
+ * @returns Deterministically-selected battles for the given date, sorted by year
+ */
+export function getBattlesOnThisDay(events: Event[], date?: Date, limit = 3): Event[] {
+  const battles = getBattles(events);
+  if (battles.length === 0) return [];
+
+  const d = date ?? new Date();
+  // Seed from year + month + day for deterministic daily selection
+  const seed = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+
+  // Use seed to pick a sliding window start position
+  const startIndex = seed % battles.length;
+  const result: Event[] = [];
+
+  // Collect up to `limit` battles wrapping around the array
+  for (let i = 0; i < limit; i++) {
+    const idx = (startIndex + i) % battles.length;
+    if (battles[idx]) result.push(battles[idx]);
+  }
+
+  return result.sort((a, b) => a.year - b.year);
 }
 
 /**
