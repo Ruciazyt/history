@@ -20,7 +20,7 @@ export function TimelineSlider({
   activeEmpires,
   t,
 }: TimelineSliderProps) {
-  const [isDragging, setIsDragging] = React.useState(false);
+  const [_isDragging, setIsDragging] = React.useState(false);
   const sliderRef = React.useRef<HTMLDivElement>(null);
 
   // 使用 ref 存储最新值，避免闭包问题

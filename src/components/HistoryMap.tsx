@@ -3,7 +3,6 @@
 import * as React from 'react';
 import type { Feature, Polygon, MultiPolygon } from 'geojson';
 import type { Event } from '@/lib/history/types';
-import { useTranslations } from 'next-intl';
 import { dynastyBoundaries } from '@/lib/history/data/dynastyBoundaries';
 import { getBattles } from '@/lib/history/battles';
 
@@ -31,8 +30,6 @@ export function HistoryMap({
   /** Zoom level on initial load */
   initialZoom?: number;
 }) {
-  const t = useTranslations();
-  const [selectedId, setSelectedId] = React.useState<string | null>(null);
   const [mapReady, setMapReady] = React.useState(false);
   const mapContainerRef = React.useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -177,9 +174,6 @@ export function HistoryMap({
         fillOpacity: 0.8,
       });
 
-      circle.addEventListener('click', () => {
-        setSelectedId(e.id);
-      });
       map.addOverlay(circle);
     });
   }, [mapReady, activeBoundaries, normalEvents, battles]);
