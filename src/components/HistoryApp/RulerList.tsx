@@ -12,8 +12,13 @@ interface RulerListProps {
   isOpen: boolean;
   selectedRulerId: string | null;
   onSelectRuler: (id: string) => void;
-  sidebarColors: typeof HISTORY_APP_COLORS.sidebar;
-  _extraColors?: typeof HISTORY_APP_EXTRA_COLORS;
+  // Use a loose type to accommodate both light-mode literal types (bg-zinc-50)
+  // and dark-mode string types (bg-zinc-800) returned by useHistoryAppColors
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  sidebarColors: any;
+  /** @deprecated Not used in JSX; kept for type compatibility */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  _extraColors?: any;
 }
 
 export function RulerList({

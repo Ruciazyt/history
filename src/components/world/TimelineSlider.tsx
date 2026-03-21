@@ -24,10 +24,10 @@ export function TimelineSlider({
   const sliderRef = React.useRef<HTMLDivElement>(null);
 
   // 使用 ref 存储最新值，避免闭包问题
-  const stateRef = React.useRef({ minYear, maxYear, onYearChange });
+  const stateRef = React.useRef({ year, minYear, maxYear, onYearChange });
   React.useEffect(() => {
-    stateRef.current = { minYear, maxYear, onYearChange };
-  }, [minYear, maxYear, onYearChange]);
+    stateRef.current = { year, minYear, maxYear, onYearChange };
+  }, [year, minYear, maxYear, onYearChange]);
 
   // 格式化显示的年份
   const displayYear = React.useMemo(() => formatYear(year), [year]);
@@ -39,7 +39,7 @@ export function TimelineSlider({
   );
 
   // 更新年份的逻辑
-  const updateYear = React.useCallback((e: React.PointerEvent) => {
+  const updateYear = React.useCallback((e: React.PointerEvent | MouseEvent) => {
     if (!sliderRef.current) return;
     const { minYear: min, maxYear: max, onYearChange: onChange } = stateRef.current;
     const rect = sliderRef.current.getBoundingClientRect();
@@ -61,15 +61,41 @@ export function TimelineSlider({
 
   const handlePointerMove = React.useCallback(
     (e: React.PointerEvent) => {
-      if (isDragging) {
-        updateYear(e);
-      }
+      if (e.buttons === 0) return;
+      updateYear(e);
     },
-    [isDragging, updateYear]
+    [updateYear]
   );
 
   const handlePointerUp = React.useCallback(() => {
     setIsDragging(false);
+  }, []);
+
+  // 键盘导航支持 (左右方向键，以1年为单位，Shift+方向键以10年为单位)
+  const handleKeyDown = React.useCallback((e: React.KeyboardEvent) => {
+    const { year: y, minYear: min, maxYear: max, onYearChange: onChange } = stateRef.current;
+    const step = Math.max(1, Math.floor((max - min) / 100));
+    let newYear = y;
+
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      newYear = Math.max(min, y - (e.shiftKey ? step * 10 : step));
+    } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      newYear = Math.min(max, y + (e.shiftKey ? step * 10 : step));
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      newYear = min;
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      newYear = max;
+    } else {
+      return;
+    }
+
+    if (newYear !== y) {
+      onChange(newYear);
+    }
   }, []);
 
   return (
@@ -90,10 +116,18 @@ export function TimelineSlider({
       <div
         ref={sliderRef}
         className="relative h-12 sm:h-8 cursor-pointer select-none"
+        role="slider"
+        aria-label="世界帝国年份滑块"
+        aria-valuemin={minYear}
+        aria-valuemax={maxYear}
+        aria-valuenow={year}
+        aria-valuetext={displayYear}
+        tabIndex={0}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}
+        onKeyDown={handleKeyDown}
       >
         {/* 轨道背景 - mobile: taller track */}
         <div className="absolute top-1/2 left-0 right-0 h-2 sm:h-2 bg-zinc-700 rounded-full -translate-y-1/2 touch-none">
