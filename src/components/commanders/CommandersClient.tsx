@@ -77,7 +77,7 @@ const COMMANDERS_COLORS = {
 
 type Tab = 'commanders' | 'collaborations' | 'matchups' | 'insights';
 
-function WinRateBadge({ winRate }: { winRate: number }) {
+function WinRateBadge({ winRate, t }: { winRate: number; t: ReturnType<typeof useTranslations> }) {
   const cls =
     winRate >= 60
       ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300'
@@ -86,7 +86,7 @@ function WinRateBadge({ winRate }: { winRate: number }) {
       : 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300';
   return (
     <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold ${cls}`}>
-      {winRate}% 胜率
+      {winRate}% {t('commanders.winRate')}
     </span>
   );
 }
@@ -94,6 +94,7 @@ function WinRateBadge({ winRate }: { winRate: number }) {
 function CommanderCard({
   node,
   index,
+  t,
 }: {
   node: {
     name: string;
@@ -107,6 +108,7 @@ function CommanderCard({
     lastBattle?: number;
   };
   index: number;
+  t: ReturnType<typeof useTranslations>;
 }) {
   return (
     <div
@@ -132,22 +134,22 @@ function CommanderCard({
             )}
           </div>
         </div>
-        <WinRateBadge winRate={node.winRate} />
+        <WinRateBadge winRate={node.winRate} t={t} />
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-2 mb-3">
         <div className={`text-center rounded-lg p-2 bg-zinc-50 dark:bg-zinc-700/50`}>
           <div className={`text-sm font-bold ${COMMANDERS_COLORS.commanderCard.name}`}>{node.battles}</div>
-          <div className={`text-xs ${COMMANDERS_COLORS.commanderCard.stat}`}>参战</div>
+          <div className={`text-xs ${COMMANDERS_COLORS.commanderCard.stat}`}>{t('commanders.participated')}</div>
         </div>
         <div className={`text-center rounded-lg p-2 bg-green-50 dark:bg-green-900/20`}>
           <div className={`text-sm font-bold text-green-600 dark:text-green-400`}>{node.wins}</div>
-          <div className={`text-xs ${COMMANDERS_COLORS.commanderCard.stat}`}>胜</div>
+          <div className={`text-xs ${COMMANDERS_COLORS.commanderCard.stat}`}>{t('commanders.wins')}</div>
         </div>
         <div className={`text-center rounded-lg p-2 bg-red-50 dark:bg-red-900/20`}>
           <div className={`text-sm font-bold text-red-600 dark:text-red-400`}>{node.losses}</div>
-          <div className={`text-xs ${COMMANDERS_COLORS.commanderCard.stat}`}>败</div>
+          <div className={`text-xs ${COMMANDERS_COLORS.commanderCard.stat}`}>{t('commanders.losses')}</div>
         </div>
       </div>
 
@@ -278,7 +280,7 @@ export function CommandersClient({
               👑 {t('nav.commanders') || '指挥官网络'}
             </h1>
             <span className={`text-xs px-2 py-0.5 rounded-full ${COMMANDERS_COLORS.header.badge.bg} ${COMMANDERS_COLORS.header.badge.text}`}>
-              {summary?.totalCommanders || 0} 位指挥官
+              {t('commanders.commanderCount', { count: summary?.totalCommanders || 0 })}
             </span>
           </div>
           <LocaleSwitcher />
@@ -339,7 +341,7 @@ export function CommandersClient({
         {activeTab === 'commanders' && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {topCommanders.slice(0, 30).map((node, i) => (
-              <CommanderCard key={node.name} node={node} index={i} />
+              <CommanderCard key={node.name} node={node} index={i} t={t} />
             ))}
           </div>
         )}
@@ -369,11 +371,11 @@ export function CommandersClient({
                       </span>
                     </div>
                     <span className={`px-2 py-0.5 rounded text-xs font-semibold ${COMMANDERS_COLORS.collaborationCard.badge}`}>
-                      {collab.battles} 场
+                      {t('commanders.battleCount', { count: collab.battles })}
                     </span>
                   </div>
                   <div className={`text-sm ${COMMANDERS_COLORS.collaborationCard.stat}`}>
-                    🤝 合作 {collab.battles} 场 · 胜 {collab.wins} 场
+                    🤝 {t('commanders.collaborationStat', { battles: collab.battles, wins: collab.wins })}
                   </div>
                 </div>
               ))}
@@ -411,22 +413,22 @@ export function CommandersClient({
                       </span>
                     </div>
                     <span className={`px-2 py-0.5 rounded text-xs font-semibold ${COMMANDERS_COLORS.matchupCard.badge}`}>
-                      {matchup.battles} 场
+                      {t('commanders.battleCount', { count: matchup.battles })}
                     </span>
                   </div>
                   <div className="flex items-center gap-3 text-sm">
                     <span className="text-green-600 dark:text-green-400 font-medium">
-                      {matchup.commander1Wins} 胜
+                      {matchup.commander1Wins} {t('commanders.wins')}
                     </span>
                     <span className={COMMANDERS_COLORS.vs}>—</span>
                     <span className="text-red-600 dark:text-red-400 font-medium">
-                      {matchup.commander2Wins} 胜
+                      {matchup.commander2Wins} {t('commanders.wins')}
                     </span>
                     {matchup.draws > 0 && (
                       <>
                         <span className={COMMANDERS_COLORS.vs}>·</span>
                         <span className={COMMANDERS_COLORS.matchupCard.stat}>
-                          {matchup.draws} 平
+                          {matchup.draws} {t('commanders.draws')}
                         </span>
                       </>
                     )}
