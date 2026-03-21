@@ -27,7 +27,10 @@
     "chaos": "混乱期",
     "rulerDetail": "統治者",
     "clearRuler": "選択解除",
-    "seedNote": "サンプルデータはMVP用です。年代・地点は概算です。"
+    "seedNote": "サンプルデータはMVP用です。年代・地点は概算です。",
+    "openEraMenu": "王朝メニューを開く",
+    "openEventsList": "イベントリストを開く",
+    "year": "年"
   },
   "locale": {
     "zh": "中文",

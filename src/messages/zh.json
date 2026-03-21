@@ -27,7 +27,10 @@
     "chaos": "混乱时期",
     "rulerDetail": "统治者信息",
     "clearRuler": "取消选择",
-    "seedNote": "示例数据用于 MVP 迭代；年代与地点为近似值。"
+    "seedNote": "示例数据用于 MVP 迭代；年代与地点为近似值。",
+    "openEraMenu": "打开朝代菜单",
+    "openEventsList": "打开事件列表",
+    "year": "年份"
   },
   "locale": {
     "zh": "中文",

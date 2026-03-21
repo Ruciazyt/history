@@ -19,6 +19,7 @@ import { useTranslations } from 'next-intl';
 import { ERA_COLORS, ERA_ITEM_COLORS } from '@/lib/history/constants';
 import { BattleOfTheDayCard } from '@/components/battles/BattleOfTheDayCard';
 import { useHistoryAppColors } from '@/lib/history/useHistoryAppColors';
+import { RulerList } from '@/components/HistoryApp/RulerList';
 
 import { worldComparisonEra, eastAsiaComparisonEra } from '@/lib/history/data/worldEras';
 import { worldComparisonRulers, eastAsiaRulers } from '@/lib/history/data/worldRulers';
@@ -175,7 +176,7 @@ export function HistoryApp({
                 onClick={() => setEraDrawerOpen(true)}
                 className="rounded-lg p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors lg:hidden"
                 style={{ minWidth: '44px', minHeight: '44px' }}
-                aria-label="打开朝代菜单"
+                aria-label={t('ui.openEraMenu')}
               >
                 <span className="text-lg">☰</span>
               </button>
@@ -191,7 +192,7 @@ export function HistoryApp({
                 onClick={() => setEventsDrawerOpen(true)}
                 className="rounded-lg p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors lg:hidden"
                 style={{ minWidth: '44px', minHeight: '44px' }}
-                aria-label="打开事件列表"
+                aria-label={t('ui.openEventsList')}
               >
                 <span className="text-lg">📋</span>
               </button>
@@ -292,18 +293,6 @@ export function HistoryApp({
                 const isOpen = openEraIds.has(era.id);
                 const eraRulers = activeRulers.filter((r) => r.eraId === era.id);
                 const eraColor = ERA_COLORS[era.id] || ERA_ITEM_COLORS.default;
-                const isMultiPolity = era.isParallelPolities && era.polities;
-                
-                // 多国并立时期：按polity分组
-                const rulersByPolity = isMultiPolity 
-                  ? eraRulers.reduce((acc, r) => {
-                      const polityId = r.polityId || 'other';
-                      if (!acc[polityId]) acc[polityId] = [];
-                      acc[polityId].push(r);
-                      return acc;
-                    }, {} as Record<string, typeof eraRulers>)
-                  : null;
-                
                 return (
                   <div key={era.id} className={`border-b ${C.sidebar.eraItem.border} last:border-0 ${isOpen ? eraColor.bg : ''}`}>
                     <button
@@ -314,108 +303,22 @@ export function HistoryApp({
                       <span className={`w-2 h-2 rounded-full shrink-0 ${eraColor.dot}`}></span>
                       <span className={`flex-1 font-semibold ${eraColor.text} text-sm sm:text-base`}>
                         {t(era.nameKey)}
-                        {isMultiPolity && <span className={`text-xs ml-1 ${EXTRA.multiPolity.text}`}>（多国并立）</span>}
+                        {era.isParallelPolities && <span className={`text-xs ml-1 ${EXTRA.multiPolity.text}`}>（多国并立）</span>}
                       </span>
                       <span className={`text-xs ${C.sidebar.eraItem.year} hidden sm:inline`}>
                         {formatYear(era.startYear)}–{formatYear(era.endYear)}
                       </span>
                       <span className={`text-xs ${EXTRA.arrow.text}`}>{isOpen ? '▼' : '▶'}</span>
                     </button>
-                    {isOpen && (
-                      <div className={`${eraColor.bg} px-2 py-1 sm:px-3 sm:py-2`}>
-                        {isMultiPolity && rulersByPolity ? (
-                          // 多国并立时期：表格形式（纵轴为时间）
-                          <div className="overflow-x-auto">
-                            <table className="w-full text-xs sm:text-sm border-collapse">
-                              <thead>
-                                <tr className={`text-left ${C.sidebar.table.header.text} border-b ${C.sidebar.table.header.border}`}>
-                                  <th className="px-2 py-2 font-medium w-16 shrink-0">年份</th>
-                                  {era.polities?.map(p => (
-                                    <th key={p.id} className="px-2 py-2 font-medium min-w-[100px]">{t(p.nameKey)}</th>
-                                  ))}
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {(() => {
-                                  // 按年份排序所有统治者
-                                  const allRulers = eraRulers.sort((a, b) => a.startYear - b.startYear);
-                                  // 按起始年份分组
-                                  const rulersByYear = allRulers.reduce((acc, r) => {
-                                    const year = r.startYear;
-                                    if (!acc[year]) acc[year] = [];
-                                    acc[year].push(r);
-                                    return acc;
-                                  }, {} as Record<number, typeof eraRulers>);
-                                  const years = Object.keys(rulersByYear).map(Number).sort((a, b) => a - b);
-                                  return years.map(year => {
-                                    const rulers = rulersByYear[year] || [];
-                                    return (
-                                      <tr key={year} className={`border-b ${C.sidebar.table.row.border} last:border-0 ${C.sidebar.table.row.hover}`}>
-                                        <td className={`px-2 py-2 ${C.sidebar.table.row.year} shrink-0 w-16`}>
-                                          {formatYear(year)}
-                                        </td>
-                                        {era.polities?.map(p => {
-                                          const r = rulers.find(r => r.polityId === p.id);
-                                          if (!r) return <td key={p.id} className="px-2 py-2"></td>;
-                                          const isActive = selectedRulerId === r.id;
-                                          return (
-                                            <td key={p.id} className="px-2 py-1">
-                                              <button
-                                                type="button"
-                                                onClick={() => setSelectedRulerId(r.id)}
-                                                className={`w-full text-left rounded px-2 py-1.5 truncate ${
-                                                  isActive ? C.sidebar.table.rulerButton.active : C.sidebar.table.rulerButton.inactive
-                                                }`}
-                                              >
-                                                <div>{t(r.nameKey)}</div>
-                                                {r.eraNameKey && (
-                                                  <div className={`${C.rulerDetail.header.eraBadge.text} text-xs`}>{tEra(r.eraNameKey)}</div>
-                                                )}
-                                              </button>
-                                            </td>
-                                          );
-                                        })}
-                                      </tr>
-                                    );
-                                  });
-                                })()}
-                              </tbody>
-                            </table>
-                          </div>
-                        ) : (
-                          // 普通时期：列表形式
-                          eraRulers.map((r) => {
-                            const isActive = selectedRulerId === r.id;
-                            return (
-                              <button
-                                key={r.id}
-                                type="button"
-                                onClick={() => setSelectedRulerId(r.id)}
-                                className={`flex w-full items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-left text-xs sm:text-sm ${
-                                  isActive ? C.sidebar.rulerList.active : C.sidebar.rulerList.inactive
-                                }`}
-                              >
-                                <span className="truncate flex items-center gap-1">
-                                  {r.isDynastyBlock ? (
-                                    <span className="font-semibold">{t(r.nameKey)}</span>
-                                  ) : (
-                                    <>
-                                      <span>{t(r.nameKey)}</span>
-                                      {r.eraNameKey && (
-                                        <span className={`${C.rulerDetail.header.eraBadge.text} text-xs`}>{tEra(r.eraNameKey)}</span>
-                                      )}
-                                    </>
-                                  )}
-                                </span>
-                                <span className={`shrink-0 ${C.sidebar.eraItem.year}`}>
-                                  {formatYear(r.startYear)}–{formatYear(r.endYear)}
-                                </span>
-                              </button>
-                            );
-                          })
-                        )}
-                      </div>
-                    )}
+                    <RulerList
+                      eraRulers={eraRulers}
+                      era={era}
+                      isOpen={isOpen}
+                      selectedRulerId={selectedRulerId}
+                      onSelectRuler={setSelectedRulerId}
+                      sidebarColors={C.sidebar}
+                      _extraColors={EXTRA}
+                    />
                   </div>
                 );
               })}
