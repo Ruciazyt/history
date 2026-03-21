@@ -56,7 +56,7 @@ const BattleCompareSide = React.memo(function BattleCompareSide({ battle, side, 
         <div className="mb-4">
           <div className={`text-xs ${BATTLE_COMPARE_COLORS.label} mb-1 text-center`}>{t('battleCompare.result')}</div>
           <div className={`text-center px-3 py-2 rounded-lg ${partyColors.badge}`}>
-            {getBattleResultLabel(battle.battle)}
+            {t(getBattleResultLabel(battle.battle))}
           </div>
         </div>
       )}
@@ -87,7 +87,7 @@ const BattleCompareSide = React.memo(function BattleCompareSide({ battle, side, 
       {battle.battle?.impact && battle.battle.impact !== 'unknown' && (
         <div className="mt-3 text-center">
           <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.bg || 'bg-zinc-100'} ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.text || 'text-zinc-500'}`}>
-            💎 {getBattleImpactLabel(battle.battle.impact)}
+            💎 {t(getBattleImpactLabel(battle.battle.impact))}
           </span>
         </div>
       )}

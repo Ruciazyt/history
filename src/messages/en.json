@@ -1370,6 +1370,110 @@
   "empires": {
     "active": "empires"
   },
+  "battle": {
+    "result": {
+      "attacker_win": "Attacker Victory",
+      "defender_win": "Defender Victory",
+      "draw": "Draw",
+      "inconclusive": "Inconclusive"
+    },
+    "impact": {
+      "decisive": "Decisive Battle",
+      "major": "Major Battle",
+      "minor": "Minor Battle",
+      "unknown": "Unknown"
+    },
+    "strategy": {
+      "ambush": "Ambush",
+      "fire": "Fire Attack",
+      "water": "Water Attack",
+      "encirclement": "Encirclement",
+      "siege": "Siege",
+      "pincer": "Pincer Movement",
+      "feigned_retreat": "Feigned Retreat",
+      "alliance": "Allied Forces",
+      "defensive": "Defensive",
+      "offensive": "Offensive",
+      "guerrilla": "Guerrilla Warfare",
+      "unknown": "Unknown"
+    },
+    "terrain": {
+      "plains": "Plains",
+      "mountains": "Mountains",
+      "hills": "Hills",
+      "water": "Water",
+      "desert": "Desert",
+      "plateau": "Plateau",
+      "forest": "Forest",
+      "marsh": "Marsh",
+      "coastal": "Coastal",
+      "urban": "Urban",
+      "pass": "Pass",
+      "unknown": "Unknown"
+    },
+    "pacing": {
+      "surprise": "Surprise Attack",
+      "rapid": "Rapid Decision",
+      "extended": "Prolonged War",
+      "siege": "Siege War",
+      "unknown": "Unknown"
+    },
+    "timeOfDay": {
+      "dawn": "Dawn",
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening",
+      "night": "Night",
+      "unknown": "Unknown"
+    },
+    "type": {
+      "founding": "Founding War",
+      "unification": "Unification War",
+      "conquest": "Conquest",
+      "defense": "Defense War",
+      "rebellion": "Rebellion",
+      "civil_war": "Civil War",
+      "frontier": "Frontier Battle",
+      "invasion": "Invasion",
+      "unknown": "Unknown"
+    },
+    "turningPoint": {
+      "commander_death": "Commander Killed",
+      "commander_captured": "Commander Captured",
+      "flank_collapse": "Flank Collapse",
+      "reinforcement_arrival": "Reinforcements Arrived",
+      "supply_disruption": "Supply Disruption",
+      "weather_change": "Weather Change",
+      "defection": "Defection",
+      "strategic_mistake": "Strategic Mistake",
+      "fortification_breach": "Fortification Breached",
+      "ambush_triggered": "Ambush Triggered",
+      "morale_collapse": "Morale Collapse",
+      "trap_triggered": "Trap Triggered",
+      "fire_attack": "Fire Attack Success",
+      "flood_attack": "Flood Attack Success",
+      "unknown": "Unknown"
+    },
+    "casualty": {
+      "reliability": {
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low"
+      },
+      "killed": "Killed",
+      "wounded": "Wounded",
+      "captured": "Captured",
+      "missing": "Missing",
+      "combined": "Casualties"
+    },
+    "scale": {
+      "massive": "Massive Scale",
+      "large": "Large Scale",
+      "medium": "Medium Scale",
+      "small": "Small Scale",
+      "unknown": "Unknown"
+    }
+  },
   "battleDetail": {
     "close": "Close",
     "result": "Result:",
@@ -1392,6 +1496,9 @@
     "similarBattlesDesc": "Battles you might also be interested in",
     "similarBattleItem": "View",
     "noSimilarBattles": "No similar battles found"
+  },
+  "battleTimeline": {
+    "noData": "No battle data"
   },
   "battleOfTheDay": {
     "title": "Battle of the Day",

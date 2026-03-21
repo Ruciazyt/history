@@ -40,7 +40,7 @@ export const BattleTimeline = React.memo(function BattleTimeline({ battles, eras
         <svg className="w-16 h-16 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
-        <p>暂无战役数据</p>
+        <p>{t('battleTimeline.noData')}</p>
       </div>
     );
   }
@@ -84,7 +84,7 @@ export const BattleTimeline = React.memo(function BattleTimeline({ battles, eras
                     </h3>
                     {result && (
                       <span className={`shrink-0 px-2 py-0.5 rounded text-xs font-medium ${resultColor} text-white`}>
-                        {getBattleResultLabel({ result })}
+                        {t(getBattleResultLabel({ result }))}
                       </span>
                     )}
                   </div>

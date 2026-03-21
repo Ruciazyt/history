@@ -74,7 +74,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
               <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                 BATTLE_RESULT_STYLES[battle.battle.result]?.badge || BATTLE_RESULT_STYLES.unknown?.badge || 'bg-zinc-100 text-zinc-700'
               }`}>
-                {getBattleResultLabel(battle.battle)}
+                {t(getBattleResultLabel(battle.battle))}
               </span>
             </div>
           )}
@@ -134,7 +134,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
               <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                 BATTLE_IMPACT_COLORS[battle.battle.impact]?.bg || 'bg-zinc-100'
               } ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.text || 'text-zinc-700'}`}>
-                {getBattleImpactLabel(battle.battle.impact)}
+                {t(getBattleImpactLabel(battle.battle.impact))}
               </span>
             </div>
           )}
@@ -173,7 +173,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
               <div className="flex flex-wrap gap-1">
                 {battle.battle.strategy.filter(s => s !== 'unknown').map((s, i) => (
                   <span key={i} className={`px-2 py-0.5 ${STRATEGY_BADGE_COLORS.bg} ${STRATEGY_BADGE_COLORS.text} text-xs rounded`}>
-                    {STRATEGY_LABELS[s] || s}
+                    {t(STRATEGY_LABELS[s])}
                   </span>
                 ))}
               </div>
@@ -187,7 +187,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
               <div className="flex flex-wrap gap-1">
                 {battle.battle.terrain.filter(t => t !== 'unknown').map((t, i) => (
                   <span key={i} className={`px-2 py-0.5 ${TERRAIN_BADGE_COLORS.bg} ${TERRAIN_BADGE_COLORS.text} text-xs rounded`}>
-                    {TERRAIN_LABELS[t] || t}
+                    {t(TERRAIN_LABELS[t])}
                   </span>
                 ))}
               </div>
@@ -199,7 +199,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
             <div className="flex items-center gap-2">
               <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{t('battleDetail.battleType')}</span>
               <span className={`px-3 py-1 ${BATTLE_TYPE_COLORS.bg} ${BATTLE_TYPE_COLORS.text} text-xs rounded-full`}>
-                {getBattleTypeName(battle.battle.battleType)}
+                {t(getBattleTypeName(battle.battle.battleType))}
               </span>
             </div>
           )}
@@ -211,7 +211,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
                 <div className="flex items-center gap-2">
                   <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{t('battleDetail.pacing')}</span>
                   <span className={`px-2 py-0.5 ${PACING_BADGE_COLORS.bg} ${PACING_BADGE_COLORS.text} text-xs rounded`}>
-                    {getPacingLabel(battle.battle.pacing)}
+                    {t(getPacingLabel(battle.battle.pacing))}
                   </span>
                 </div>
               )}
@@ -219,7 +219,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
                 <div className="flex items-center gap-2">
                   <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{t('battleDetail.timeOfDay')}</span>
                   <span className={`px-2 py-0.5 ${TIME_OF_DAY_COLORS.bg} ${TIME_OF_DAY_COLORS.text} text-xs rounded`}>
-                    {getTimeOfDayLabel(battle.battle.timeOfDay)}
+                    {t(getTimeOfDayLabel(battle.battle.timeOfDay))}
                   </span>
                 </div>
               )}
@@ -239,7 +239,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
                     }`} />
                     <div>
                       <span className={`px-1.5 py-0.5 bg-white ${BATTLE_DETAIL_TEXT_COLORS.label} text-xs rounded border ${TURNING_POINT_COLORS.containerBorder}`}>
-                        {TURNING_POINT_LABELS[tp.type] || tp.type}
+                        {t(TURNING_POINT_LABELS[tp.type])}
                       </span>
                       <span className={`ml-2 ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{tp.description}</span>
                     </div>

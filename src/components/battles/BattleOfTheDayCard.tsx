@@ -54,7 +54,7 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
           </span>
           {battleResult && (
             <div className={`ml-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full text-white text-xs font-medium ${resultBg}`}>
-              {battle.battle && getBattleResultLabel(battle.battle)}
+              {battle.battle && t(getBattleResultLabel(battle.battle))}
             </div>
           )}
         </div>
@@ -112,7 +112,7 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
           <div className="flex flex-wrap gap-1.5">
             {battle.battle?.impact && battle.battle.impact !== 'unknown' && (
               <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.bg || 'bg-zinc-100'} ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.text || 'text-zinc-600'}`}>
-                💎 {getBattleImpactLabel(battle.battle.impact)}
+                💎 {t(getBattleImpactLabel(battle.battle.impact))}
               </span>
             )}
           </div>

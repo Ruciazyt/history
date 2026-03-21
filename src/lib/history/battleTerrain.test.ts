@@ -176,12 +176,12 @@ const mockEvents: Event[] = [
 
 describe('battleTerrain', () => {
   describe('getTerrainLabel', () => {
-    it('should return correct Chinese labels', () => {
-      expect(getTerrainLabel('plains')).toBe('平原');
-      expect(getTerrainLabel('mountains')).toBe('山地');
-      expect(getTerrainLabel('water')).toBe('水域');
-      expect(getTerrainLabel('forest')).toBe('森林');
-      expect(getTerrainLabel('hills')).toBe('丘陵');
+    it('should return correct i18n keys', () => {
+      expect(getTerrainLabel('plains')).toBe('battle.terrain.plains');
+      expect(getTerrainLabel('mountains')).toBe('battle.terrain.mountains');
+      expect(getTerrainLabel('water')).toBe('battle.terrain.water');
+      expect(getTerrainLabel('forest')).toBe('battle.terrain.forest');
+      expect(getTerrainLabel('hills')).toBe('battle.terrain.hills');
     });
 
     it('should return empty string for undefined', () => {
@@ -220,7 +220,7 @@ describe('battleTerrain', () => {
     it('should calculate correct stats for plains', () => {
       const stats = getTerrainStats(mockEvents, 'plains');
       expect(stats.terrain).toBe('plains');
-      expect(stats.label).toBe('平原');
+      expect(stats.label).toBe('battle.terrain.plains');
       expect(stats.totalBattles).toBe(5); // battle1, battle5, battle6, battle10 + battle with plains in battle4
       expect(stats.attackerWins).toBe(4); // battle1, battle5, battle6, battle4
       expect(stats.defenderWins).toBe(1); // battle10

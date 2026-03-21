@@ -129,7 +129,7 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
           {battleResult && (
             <div className={`shrink-0 flex items-center gap-1.5 px-2 py-1 rounded-full text-white text-xs font-medium ${resultBg} self-start sm:self-center`}>
               <span className={`w-1.5 h-1.5 rounded-full ${BATTLE_CARD_COLORS.commander.dot} ${BATTLE_CARD_COLORS.commander.pulse}`}></span>
-              {battle.battle && getBattleResultLabel(battle.battle)}
+              {battle.battle && t(getBattleResultLabel(battle.battle))}
             </div>
           )}
         </div>
@@ -162,7 +162,7 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
         {battle.battle?.impact && battle.battle.impact !== 'unknown' && (
           <div className="mt-2">
             <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.bg || BATTLE_CARD_COLORS.impact.default} ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.text || BATTLE_CARD_COLORS.impact.textDefault}`}>
-              💎 {getBattleImpactLabel(battle.battle.impact)}
+              💎 {t(getBattleImpactLabel(battle.battle.impact))}
             </span>
           </div>
         )}

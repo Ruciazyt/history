@@ -10,33 +10,33 @@ export function getBattles(events: Event[]): Event[] {
 }
 
 /**
- * Get battle label in Chinese
+ * Get battle result i18n key
  */
 export function getBattleResultLabel(result?: Event['battle']): string {
   if (!result) return '';
   const battleResult = result.result;
   if (!battleResult) return '';
-  const labels: Record<string, string> = {
-    attacker_win: '进攻方胜利',
-    defender_win: '防守方胜利',
-    draw: '平局',
-    inconclusive: '胜负未明',
+  const keys: Record<string, string> = {
+    attacker_win: 'battle.result.attacker_win',
+    defender_win: 'battle.result.defender_win',
+    draw: 'battle.result.draw',
+    inconclusive: 'battle.result.inconclusive',
   };
-  return labels[battleResult] || '';
+  return keys[battleResult] || '';
 }
 
 /**
- * Get battle impact label in Chinese
+ * Get battle impact i18n key
  */
 export function getBattleImpactLabel(impact?: string): string {
   if (!impact) return '';
-  const labels: Record<string, string> = {
-    decisive: '决定性战役',
-    major: '重要战役',
-    minor: '小型战役',
-    unknown: '未知',
+  const keys: Record<string, string> = {
+    decisive: 'battle.impact.decisive',
+    major: 'battle.impact.major',
+    minor: 'battle.impact.minor',
+    unknown: 'battle.impact.unknown',
   };
-  return labels[impact] || impact;
+  return keys[impact] || '';
 }
 
 /**
@@ -1915,18 +1915,18 @@ export type BattleTypeStats = {
  * Get Chinese name for battle type
  */
 export function getBattleTypeName(type: BattleType): string {
-  const names: Record<BattleType, string> = {
-    'founding': '开国之战',
-    'unification': '统一战争',
-    'conquest': '征服战',
-    'defense': '防御战',
-    'rebellion': '叛乱/起义',
-    'civil-war': '内战',
-    'frontier': '边疆战役',
-    'invasion': '入侵/外敌',
-    'unknown': '未知类型',
+  const keys: Record<BattleType, string> = {
+    'founding': 'battle.type.founding',
+    'unification': 'battle.type.unification',
+    'conquest': 'battle.type.conquest',
+    'defense': 'battle.type.defense',
+    'rebellion': 'battle.type.rebellion',
+    'civil-war': 'battle.type.civil_war',
+    'frontier': 'battle.type.frontier',
+    'invasion': 'battle.type.invasion',
+    'unknown': 'battle.type.unknown',
   };
-  return names[type] || '未知类型';
+  return keys[type] || 'battle.type.unknown';
 }
 
 /**

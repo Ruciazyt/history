@@ -2,34 +2,34 @@ import type { BattlePacing, BattleTimeOfDay, Event } from './types';
 import { getBattles } from './battles';
 
 /**
- * 获取战役节奏标签（中文）
+ * Get pacing i18n key
  */
 export function getPacingLabel(pacing?: BattlePacing): string {
   if (!pacing) return '';
-  const labels: Record<string, string> = {
-    surprise: '突袭战',
-    rapid: '快速决战',
-    extended: '持久战',
-    siege: '围城战',
-    unknown: '未知',
+  const keys: Record<string, string> = {
+    surprise: 'battle.pacing.surprise',
+    rapid: 'battle.pacing.rapid',
+    extended: 'battle.pacing.extended',
+    siege: 'battle.pacing.siege',
+    unknown: 'battle.pacing.unknown',
   };
-  return labels[pacing] || '';
+  return keys[pacing] || '';
 }
 
 /**
- * 获取战役时间段标签（中文）
+ * Get time of day i18n key
  */
 export function getTimeOfDayLabel(timeOfDay?: BattleTimeOfDay): string {
   if (!timeOfDay) return '';
-  const labels: Record<string, string> = {
-    dawn: '黎明',
-    morning: '上午',
-    afternoon: '下午',
-    evening: '傍晚',
-    night: '夜间',
-    unknown: '未知',
+  const keys: Record<string, string> = {
+    dawn: 'battle.timeOfDay.dawn',
+    morning: 'battle.timeOfDay.morning',
+    afternoon: 'battle.timeOfDay.afternoon',
+    evening: 'battle.timeOfDay.evening',
+    night: 'battle.timeOfDay.night',
+    unknown: 'battle.timeOfDay.unknown',
   };
-  return labels[timeOfDay] || '';
+  return keys[timeOfDay] || '';
 }
 
 /**

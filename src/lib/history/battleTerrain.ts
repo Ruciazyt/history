@@ -6,21 +6,21 @@ import { getBattles } from './battles';
  */
 export function getTerrainLabel(terrain?: BattleTerrain): string {
   if (!terrain) return '';
-  const labels: Record<string, string> = {
-    plains: '平原',
-    mountains: '山地',
-    hills: '丘陵',
-    water: '水域',
-    desert: '沙漠',
-    plateau: '高原',
-    forest: '森林',
-    marsh: '沼泽',
-    coastal: '沿海',
-    urban: '城市',
-    pass: '关隘',
-    unknown: '未知',
+  const keys: Record<string, string> = {
+    plains: 'battle.terrain.plains',
+    mountains: 'battle.terrain.mountains',
+    hills: 'battle.terrain.hills',
+    water: 'battle.terrain.water',
+    desert: 'battle.terrain.desert',
+    plateau: 'battle.terrain.plateau',
+    forest: 'battle.terrain.forest',
+    marsh: 'battle.terrain.marsh',
+    coastal: 'battle.terrain.coastal',
+    urban: 'battle.terrain.urban',
+    pass: 'battle.terrain.pass',
+    unknown: 'battle.terrain.unknown',
   };
-  return labels[terrain] || '';
+  return keys[terrain] || '';
 }
 
 /**

@@ -80,7 +80,7 @@ export function TimelineSlider({
         <div className="flex items-center gap-2">
           {activeEmpires.length > 0 && (
             <span className="text-xs text-zinc-400">
-              {activeEmpires.length} {t('empires.active') || '个帝国'}
+              {activeEmpires.length} {t('empires.active')}
             </span>
           )}
         </div>

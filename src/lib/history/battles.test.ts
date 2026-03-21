@@ -97,16 +97,16 @@ describe('battles', () => {
   });
 
   describe('getBattleResultLabel', () => {
-    it('should return correct label for attacker win', () => {
-      expect(getBattleResultLabel({ result: 'attacker_win' })).toBe('进攻方胜利');
+    it('should return correct i18n key for attacker win', () => {
+      expect(getBattleResultLabel({ result: 'attacker_win' })).toBe('battle.result.attacker_win');
     });
 
-    it('should return correct label for defender win', () => {
-      expect(getBattleResultLabel({ result: 'defender_win' })).toBe('防守方胜利');
+    it('should return correct i18n key for defender win', () => {
+      expect(getBattleResultLabel({ result: 'defender_win' })).toBe('battle.result.defender_win');
     });
 
-    it('should return correct label for draw', () => {
-      expect(getBattleResultLabel({ result: 'draw' })).toBe('平局');
+    it('should return correct i18n key for draw', () => {
+      expect(getBattleResultLabel({ result: 'draw' })).toBe('battle.result.draw');
     });
 
     it('should return empty string for undefined', () => {
@@ -119,20 +119,20 @@ describe('battles', () => {
   });
 
   describe('getBattleImpactLabel', () => {
-    it('should return correct label for decisive', () => {
-      expect(getBattleImpactLabel('decisive')).toBe('决定性战役');
+    it('should return correct i18n key for decisive', () => {
+      expect(getBattleImpactLabel('decisive')).toBe('battle.impact.decisive');
     });
 
-    it('should return correct label for major', () => {
-      expect(getBattleImpactLabel('major')).toBe('重要战役');
+    it('should return correct i18n key for major', () => {
+      expect(getBattleImpactLabel('major')).toBe('battle.impact.major');
     });
 
-    it('should return correct label for minor', () => {
-      expect(getBattleImpactLabel('minor')).toBe('小型战役');
+    it('should return correct i18n key for minor', () => {
+      expect(getBattleImpactLabel('minor')).toBe('battle.impact.minor');
     });
 
-    it('should return correct label for unknown', () => {
-      expect(getBattleImpactLabel('unknown')).toBe('未知');
+    it('should return correct i18n key for unknown', () => {
+      expect(getBattleImpactLabel('unknown')).toBe('battle.impact.unknown');
     });
 
     it('should return empty string for undefined', () => {
@@ -143,8 +143,8 @@ describe('battles', () => {
       expect(getBattleImpactLabel('')).toBe('');
     });
 
-    it('should return the original value for unknown impact type', () => {
-      expect(getBattleImpactLabel('some-unknown-type')).toBe('some-unknown-type');
+    it('should return empty string for unknown impact type', () => {
+      expect(getBattleImpactLabel('some-unknown-type')).toBe('');
     });
   });
 

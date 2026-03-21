@@ -1572,6 +1572,110 @@
     "title": "秦灭楚",
     "summary": "秦国灭楚国，战国七雄格局进一步改变。"
   },
+  "battle": {
+    "result": {
+      "attacker_win": "进攻方胜利",
+      "defender_win": "防守方胜利",
+      "draw": "平局",
+      "inconclusive": "胜负未明"
+    },
+    "impact": {
+      "decisive": "决定性战役",
+      "major": "重要战役",
+      "minor": "小型战役",
+      "unknown": "未知"
+    },
+    "strategy": {
+      "ambush": "伏击",
+      "fire": "火攻",
+      "water": "水攻",
+      "encirclement": "包围",
+      "siege": "攻城",
+      "pincer": "钳形攻势",
+      "feigned_retreat": "诱敌深入",
+      "alliance": "联盟作战",
+      "defensive": "防御作战",
+      "offensive": "进攻作战",
+      "guerrilla": "游击战",
+      "unknown": "未知"
+    },
+    "terrain": {
+      "plains": "平原",
+      "mountains": "山地",
+      "hills": "丘陵",
+      "water": "水域",
+      "desert": "沙漠",
+      "plateau": "高原",
+      "forest": "森林",
+      "marsh": "沼泽",
+      "coastal": "沿海",
+      "urban": "城镇",
+      "pass": "关隘",
+      "unknown": "未知"
+    },
+    "pacing": {
+      "surprise": "突袭战",
+      "rapid": "快速决战",
+      "extended": "持久战",
+      "siege": "围城战",
+      "unknown": "未知"
+    },
+    "timeOfDay": {
+      "dawn": "黎明",
+      "morning": "上午",
+      "afternoon": "下午",
+      "evening": "傍晚",
+      "night": "夜间",
+      "unknown": "未知"
+    },
+    "type": {
+      "founding": "开国之战",
+      "unification": "统一战争",
+      "conquest": "征服战",
+      "defense": "防御战",
+      "rebellion": "叛乱/起义",
+      "civil_war": "内战",
+      "frontier": "边疆战役",
+      "invasion": "入侵/外敌",
+      "unknown": "未知"
+    },
+    "turningPoint": {
+      "commander_death": "指挥官阵亡",
+      "commander_captured": "指挥官被俘",
+      "flank_collapse": "侧翼崩溃",
+      "reinforcement_arrival": "援军到达",
+      "supply_disruption": "补给中断",
+      "weather_change": "天气突变",
+      "defection": "倒戈/背叛",
+      "strategic_mistake": "战略失误",
+      "fortification_breach": "防线突破",
+      "ambush_triggered": "伏击触发",
+      "morale_collapse": "士气崩溃",
+      "trap_triggered": "陷阱触发",
+      "fire_attack": "火攻成功",
+      "flood_attack": "水攻成功",
+      "unknown": "未知"
+    },
+    "casualty": {
+      "reliability": {
+        "high": "可靠",
+        "medium": "一般",
+        "low": "存疑"
+      },
+      "killed": "阵亡",
+      "wounded": "受伤",
+      "captured": "被俘",
+      "missing": "失踪",
+      "combined": "伤亡"
+    },
+    "scale": {
+      "massive": "超大规模",
+      "large": "大规模",
+      "medium": "中等规模",
+      "small": "小规模",
+      "unknown": "未知"
+    }
+  },
   "battleDetail": {
     "close": "关闭",
     "result": "结果：",
@@ -1594,6 +1698,9 @@
     "similarBattlesDesc": "你可能还感兴趣的战役",
     "similarBattleItem": "查看",
     "noSimilarBattles": "暂无相似战役"
+  },
+  "battleTimeline": {
+    "noData": "暂无战役数据"
   },
   "battleOfTheDay": {
     "title": "今日战役",

@@ -1344,6 +1344,110 @@
     "eventList": "イベントリスト",
     "mapDetail": "地図詳解"
   },
+  "battle": {
+    "result": {
+      "attacker_win": "攻撃側勝利",
+      "defender_win": "防衛側勝利",
+      "draw": "引分",
+      "inconclusive": "決着不明"
+    },
+    "impact": {
+      "decisive": "決定的な戦い",
+      "major": "重要な戦い",
+      "minor": "小規模な戦い",
+      "unknown": "不明"
+    },
+    "strategy": {
+      "ambush": "伏撃",
+      "fire": "火攻",
+      "water": "水攻",
+      "encirclement": "包囲",
+      "siege": "攻城戦",
+      "pincer": "钳形作戦",
+      "feigned_retreat": "偽退",
+      "alliance": "連合作戦",
+      "defensive": "防御作戦",
+      "offensive": "攻撃作戦",
+      "guerrilla": "游撃戦",
+      "unknown": "不明"
+    },
+    "terrain": {
+      "plains": "平原",
+      "mountains": "山地",
+      "hills": "丘陵",
+      "water": "水域",
+      "desert": "砂漠",
+      "plateau": "高原",
+      "forest": "森林",
+      "marsh": "沼沢",
+      "coastal": "沿岸",
+      "urban": "都市",
+      "pass": "関所",
+      "unknown": "不明"
+    },
+    "pacing": {
+      "surprise": "奇襲",
+      "rapid": "速決戦",
+      "extended": "持久戦",
+      "siege": "包囲戦",
+      "unknown": "不明"
+    },
+    "timeOfDay": {
+      "dawn": "夜明け",
+      "morning": "午前",
+      "afternoon": "午後",
+      "evening": "夕方",
+      "night": "夜",
+      "unknown": "不明"
+    },
+    "type": {
+      "founding": "建國の戦い",
+      "unification": "統一戦争",
+      "conquest": "征伐",
+      "defense": "防御戦",
+      "rebellion": "反乱",
+      "civil_war": "内戦",
+      "frontier": "辺境の戦い",
+      "invasion": "侵略",
+      "unknown": "不明"
+    },
+    "turningPoint": {
+      "commander_death": "指揮官戦死",
+      "commander_captured": "指揮官捕虜",
+      "flank_collapse": "側面崩壊",
+      "reinforcement_arrival": "増援到着",
+      "supply_disruption": "補給断絶",
+      "weather_change": "天気変化",
+      "defection": "寝返り",
+      "strategic_mistake": "戦略ミス",
+      "fortification_breach": "防御線突破",
+      "ambush_triggered": "伏撃発動",
+      "morale_collapse": "士気崩壊",
+      "trap_triggered": "罠発動",
+      "fire_attack": "火攻成功",
+      "flood_attack": "水攻成功",
+      "unknown": "不明"
+    },
+    "casualty": {
+      "reliability": {
+        "high": "可靠",
+        "medium": "普通",
+        "low": "疑問"
+      },
+      "killed": "戦死",
+      "wounded": "負傷",
+      "captured": "捕虜",
+      "missing": "失踪",
+      "combined": "死傷"
+    },
+    "scale": {
+      "massive": "超大規模",
+      "large": "大規模",
+      "medium": "中規模",
+      "small": "小規模",
+      "unknown": "不明"
+    }
+  },
   "battleDetail": {
     "close": "閉じる",
     "result": "結果：",
@@ -1366,6 +1470,9 @@
     "similarBattlesDesc": "你也感兴趣的战役",
     "similarBattleItem": "見る",
     "noSimilarBattles": "類似战役なし"
+  },
+  "battleTimeline": {
+    "noData": "戦いデータなし"
   },
   "battleOfTheDay": {
     "title": "今日の戦い",

@@ -37,24 +37,24 @@ const createMockBattle = (overrides: Partial<Event['battle']> & { id?: string } 
 
 describe('battlePacing', () => {
   describe('getPacingLabel', () => {
-    it('should return correct Chinese label for each pacing type', () => {
-      expect(getPacingLabel('surprise')).toBe('突袭战');
-      expect(getPacingLabel('rapid')).toBe('快速决战');
-      expect(getPacingLabel('extended')).toBe('持久战');
-      expect(getPacingLabel('siege')).toBe('围城战');
-      expect(getPacingLabel('unknown')).toBe('未知');
+    it('should return correct i18n key for each pacing type', () => {
+      expect(getPacingLabel('surprise')).toBe('battle.pacing.surprise');
+      expect(getPacingLabel('rapid')).toBe('battle.pacing.rapid');
+      expect(getPacingLabel('extended')).toBe('battle.pacing.extended');
+      expect(getPacingLabel('siege')).toBe('battle.pacing.siege');
+      expect(getPacingLabel('unknown')).toBe('battle.pacing.unknown');
       expect(getPacingLabel(undefined)).toBe('');
     });
   });
 
   describe('getTimeOfDayLabel', () => {
-    it('should return correct Chinese label for each time of day', () => {
-      expect(getTimeOfDayLabel('dawn')).toBe('黎明');
-      expect(getTimeOfDayLabel('morning')).toBe('上午');
-      expect(getTimeOfDayLabel('afternoon')).toBe('下午');
-      expect(getTimeOfDayLabel('evening')).toBe('傍晚');
-      expect(getTimeOfDayLabel('night')).toBe('夜间');
-      expect(getTimeOfDayLabel('unknown')).toBe('未知');
+    it('should return correct i18n key for each time of day', () => {
+      expect(getTimeOfDayLabel('dawn')).toBe('battle.timeOfDay.dawn');
+      expect(getTimeOfDayLabel('morning')).toBe('battle.timeOfDay.morning');
+      expect(getTimeOfDayLabel('afternoon')).toBe('battle.timeOfDay.afternoon');
+      expect(getTimeOfDayLabel('evening')).toBe('battle.timeOfDay.evening');
+      expect(getTimeOfDayLabel('night')).toBe('battle.timeOfDay.night');
+      expect(getTimeOfDayLabel('unknown')).toBe('battle.timeOfDay.unknown');
       expect(getTimeOfDayLabel(undefined)).toBe('');
     });
   });
@@ -248,7 +248,7 @@ describe('battlePacing', () => {
       const insights = getPacingInsights(events);
       
       expect(insights.length).toBeGreaterThan(0);
-      expect(insights[0]).toContain('突袭战');
+      expect(insights[0]).toContain('battle.pacing.surprise');
     });
 
     it('should return empty array when no pacing data', () => {
