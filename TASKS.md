@@ -3,6 +3,31 @@
 ## 项目地址
 https://history.ruciazyt.cn
 
+## 2026-03-21 UI优化与架构完善 - 第三十四轮（续）
+### 测试修复
+- [x] battles.test.ts: 更新 getBattleResultLabel/getBattleImpactLabel 测试
+  - 测试现在期望 i18n 键（如 'battle.result.attacker_win'）而非中文标签
+  - 测试描述从 "correct label" 改为 "correct i18n key"
+  - 未知影响类型测试从期望原值改为期望空字符串
+- [x] battlePacing.test.ts: 更新 getPacingLabel/getTimeOfDayLabel 测试
+  - 测试现在期望 i18n 键（如 'battle.pacing.surprise'）而非中文标签
+  - getPacingInsights 测试期望包含 i18n 键而非中文
+- [x] battleTerrain.test.ts: 更新 getTerrainLabel/getTerrainStats 测试
+  - 测试现在期望 i18n 键（如 'battle.terrain.plains'）而非中文标签
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 693个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交 (commit: b3dfc2e)
+- [x] 代码已推送至仓库
+
+### 优化说明
+- 测试现在与 lib 函数的 i18n-key 返回设计保持一致
+- lib 函数（getBattleResultLabel 等）返回 i18n 键，组件使用 t() 翻译
+- 这是之前 i18n 重构的配套修复，确保测试与代码行为匹配
+- 项目保持健壮可用状态
+
 ## 2026-03-20 UI优化与架构完善 - 第三十三轮
 ### i18n国际化完善
 - [x] WorldTimeline.tsx: 新增useTranslations支持
