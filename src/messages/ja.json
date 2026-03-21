@@ -1482,7 +1482,8 @@
     "badge": "今日のおすすめ",
     "viewDetail": "詳細を見る",
     "expand": "今日の戦いを表示",
-    "collapse": "折りたたむ"
+    "collapse": "折りたたむ",
+    "sameEraBattles": "{n} 件の同時代の戦い"
   },
   "location": {
     "title": "地名変化查询",

@@ -1508,7 +1508,8 @@
     "badge": "Today's Pick",
     "viewDetail": "View Details",
     "expand": "Show Battle of the Day",
-    "collapse": "Collapse"
+    "collapse": "Collapse",
+    "sameEraBattles": "{n} same-era battles"
   },
   "grid": {
     "title": "Eurasian Comparison Grid",

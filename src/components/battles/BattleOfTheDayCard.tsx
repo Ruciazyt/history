@@ -121,7 +121,7 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
             )}
             {sameEraBattles.length > 0 && (
               <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium ${BATTLE_OF_THE_DAY_COLORS.badgeItem.bg}`}>
-                📚 {sameEraBattles.length} 场同代战役
+                📚 {t('battleOfTheDay.sameEraBattles', { n: sameEraBattles.length })}
               </span>
             )}
           </div>
