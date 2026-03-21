@@ -174,45 +174,50 @@ export function HistoryMap({
     const map = mapRef.current;
     map.clearOverlays();
 
+    // Helper function to draw a polygon boundary on the map
+    const drawPolygon = (ring: number[][], strokeColor: string, fillOpacity: number) => {
+      if (!ring || ring.length < 3) return;
+      const bmapPoints = ring.map(
+        (coord) => new window.BMapGL.Point(coord[0], coord[1])
+      );
+      const polygon = new window.BMapGL.Polygon(bmapPoints, {
+        strokeColor,
+        strokeWeight: 2,
+        fillColor: strokeColor,
+        fillOpacity,
+      });
+      map.addOverlay(polygon);
+    };
+
+    // Helper function to process GeoJSON coordinates and draw polygons
+    const processBoundaryCoords = (coords: number[][][] | number[][][][], strokeColor: string, fillOpacity: number) => {
+      try {
+        if (Array.isArray(coords) && coords.length > 0 && Array.isArray(coords[0]) && coords[0].length > 0) {
+          // Check if it's a MultiPolygon (first element is array of rings)
+          if (Array.isArray(coords[0][0]) && Array.isArray(coords[0][0][0]) && typeof coords[0][0][0][0] === 'number') {
+            // It's a simple Polygon: coords[0] is the ring
+            drawPolygon(coords[0] as number[][], strokeColor, fillOpacity);
+          } else {
+            // It's a MultiPolygon: coords is number[][][][]
+            const multi = coords as number[][][][];
+            for (const polygon of multi) {
+              if (polygon && polygon[0]) {
+                drawPolygon(polygon[0], strokeColor, fillOpacity);
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to draw boundary', e);
+      }
+    };
+
     // 绘制中国王朝边界
     if (mode === 'china') {
       activeBoundaries.forEach(({ feature }) => {
         const coords = feature.geometry.coordinates;
         if (!coords || coords.length === 0) return;
-
-        const processPolygon = (ring: number[][]) => {
-          if (!ring || ring.length < 3) return;
-          const bmapPoints = ring.map(
-            (coord) => new window.BMapGL.Point(coord[0], coord[1])
-          );
-          const polygon = new window.BMapGL.Polygon(bmapPoints, {
-            strokeColor: '#DC6432',
-            strokeWeight: 2,
-            fillColor: '#DC6432',
-            fillOpacity: 0.2,
-          });
-          map.addOverlay(polygon);
-        };
-
-        try {
-          if (feature.geometry.type === 'MultiPolygon') {
-            // coords is number[][][][]: [polygon[polygonRing[point[lon,lat]]]]
-            const multi = coords as number[][][][];
-            for (const polygon of multi) {
-              if (polygon && polygon[0]) {
-                processPolygon(polygon[0]);
-              }
-            }
-          } else {
-            // coords is number[][][]: [ring[point[lon,lat]]]
-            const poly = coords as number[][][];
-            if (poly[0]) {
-              processPolygon(poly[0]);
-            }
-          }
-        } catch (e) {
-          console.warn('Failed to draw boundary', e);
-        }
+        processBoundaryCoords(coords, '#DC6432', 0.2);
       });
     }
 
@@ -221,40 +226,7 @@ export function HistoryMap({
       worldBoundaries.forEach((boundary) => {
         const coords = boundary.geometry.coordinates;
         if (!coords || coords.length === 0) return;
-
-        const processPolygon = (ring: number[][]) => {
-          if (!ring || ring.length < 3) return;
-          const bmapPoints = ring.map(
-            (coord) => new window.BMapGL.Point(coord[0], coord[1])
-          );
-          const polygon = new window.BMapGL.Polygon(bmapPoints, {
-            strokeColor: boundary.properties.color,
-            strokeWeight: 2,
-            fillColor: boundary.properties.color,
-            fillOpacity: 0.25,
-          });
-          map.addOverlay(polygon);
-        };
-
-        try {
-          if (boundary.geometry.type === 'MultiPolygon') {
-            // coords is number[][][][]: [polygon[polygonRing[point[lon,lat]]]]
-            const multi = coords as number[][][][];
-            for (const polygon of multi) {
-              if (polygon && polygon[0]) {
-                processPolygon(polygon[0]);
-              }
-            }
-          } else {
-            // coords is number[][][]: [ring[point[lon,lat]]]
-            const poly = coords as number[][][];
-            if (poly[0]) {
-              processPolygon(poly[0]);
-            }
-          }
-        } catch (e) {
-          console.warn('Failed to draw world boundary', e);
-        }
+        processBoundaryCoords(coords, boundary.properties.color, 0.25);
       });
     }
 

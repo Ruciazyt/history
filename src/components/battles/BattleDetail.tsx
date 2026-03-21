@@ -173,7 +173,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
               <div className="flex flex-wrap gap-1">
                 {battle.battle.strategy.filter(s => s !== 'unknown').map((s, i) => (
                   <span key={i} className={`px-2 py-0.5 ${STRATEGY_BADGE_COLORS.bg} ${STRATEGY_BADGE_COLORS.text} text-xs rounded`}>
-                    {t(STRATEGY_LABELS[s])}
+                    {STRATEGY_LABELS[s] ? t(STRATEGY_LABELS[s]) : s}
                   </span>
                 ))}
               </div>
@@ -185,9 +185,9 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
             <div className="flex items-start gap-2">
               <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{t('battleDetail.terrain')}</span>
               <div className="flex flex-wrap gap-1">
-                {battle.battle.terrain.filter(t => t !== 'unknown').map((t, i) => (
+                {battle.battle.terrain.filter(terr => terr !== 'unknown').map((terr, i) => (
                   <span key={i} className={`px-2 py-0.5 ${TERRAIN_BADGE_COLORS.bg} ${TERRAIN_BADGE_COLORS.text} text-xs rounded`}>
-                    {t(TERRAIN_LABELS[t])}
+                    {TERRAIN_LABELS[terr] ? t(TERRAIN_LABELS[terr]) : terr}
                   </span>
                 ))}
               </div>
@@ -239,7 +239,10 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
                     }`} />
                     <div>
                       <span className={`px-1.5 py-0.5 bg-white ${BATTLE_DETAIL_TEXT_COLORS.label} text-xs rounded border ${TURNING_POINT_COLORS.containerBorder}`}>
-                        {t(TURNING_POINT_LABELS[tp.type])}
+                        {(() => {
+                          const label = TURNING_POINT_LABELS[tp.type];
+                          return label ? t(label) : tp.type;
+                        })()}
                       </span>
                       <span className={`ml-2 ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{tp.description}</span>
                     </div>
