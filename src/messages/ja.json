@@ -1532,7 +1532,8 @@
     "title": "ユーラシア比較",
     "activePolities": "{count} 個の政权",
     "noRecords": "記録なし",
-    "yearLabel": "年"
+    "yearLabel": "年",
+    "ariaLabel": "世界帝国タイムラインスライダー"
   },
   "commanders": {
     "noData": "指揮官データなし",

@@ -1539,7 +1539,8 @@
     "title": "Eurasian Timeline",
     "activePolities": "{count} active polities",
     "noRecords": "No records",
-    "yearLabel": "Year"
+    "yearLabel": "Year",
+    "ariaLabel": "World empire timeline slider"
   },
   "commanders": {
     "noData": "No commander data",

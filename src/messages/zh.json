@@ -1741,7 +1741,8 @@
     "title": "欧亚对比",
     "activePolities": "{count} 个政权",
     "noRecords": "无记录",
-    "yearLabel": "年份"
+    "yearLabel": "年份",
+    "ariaLabel": "世界帝国年份滑块"
   },
   "commanders": {
     "noData": "暂无指挥官数据",

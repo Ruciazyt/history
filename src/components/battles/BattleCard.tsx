@@ -17,7 +17,7 @@ interface BattleCardProps {
   onSelect?: (battle: Event) => void;
 }
 
-// 使用 constants 中的 ERA_COLORS 获取 era 样式
+// Get era styles using ERA_COLORS from constants
 function getEraStyles(entityId: string): { gradient: string; border: string } {
   const eraColor = ERA_COLORS[entityId];
   return {
@@ -31,7 +31,7 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
   const [showDetail, setShowDetail] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
   
-  // 收藏功能
+  // Favorites functionality
   const { toggleFavorite, isFavorite } = useBattleFavorites();
   const isFavorited = isFavorite(battle.id);
   
@@ -65,7 +65,7 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
     }
   };
   
-  // 处理收藏按钮点击 - 阻止事件冒泡避免触发卡片点击
+  // Handle favorite button click - prevent event bubbling to avoid triggering card click
   const handleFavoriteClick = React.useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     toggleFavorite(battle.id);

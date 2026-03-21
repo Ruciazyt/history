@@ -36,13 +36,13 @@ export function WorldEmpireMap({
   const t = useTranslations();
   const [selectedEmpire, setSelectedEmpire] = React.useState<WorldBoundary | null>(null);
 
-  // 获取当前年份活跃的帝国
+  // Get active empires for the current year
   const activeBoundaries = React.useMemo(
     () => getActiveBoundaries(year, mode),
     [year, mode]
   );
 
-  // 预计算每个帝国的中心点（避免在 JSX map 中调用 useMemo）
+  // Pre-compute empire centers to avoid calling useMemo inside JSX map
   const empireCenters = React.useMemo<Record<number, { lon: number; lat: number } | null>>(() => {
     const centers: Record<number, { lon: number; lat: number } | null> = {};
     activeBoundaries.forEach((boundary, index) => {
@@ -92,7 +92,7 @@ export function WorldEmpireMap({
           <NavigationControl visualizePitch />
         </div>
 
-        {/* 帝国边界 */}
+        {/* Empire boundaries */}
         {activeBoundaries.map((boundary, index) => (
           <Source
             key={`${boundary.properties.nameKey}-${index}`}
@@ -120,7 +120,7 @@ export function WorldEmpireMap({
           </Source>
         ))}
 
-        {/* 帝国中心点标记 */}
+        {/* Empire center markers */}
         {activeBoundaries.map((boundary, index) => {
           const center = empireCenters[index];
           if (!center) return null;
@@ -155,7 +155,7 @@ export function WorldEmpireMap({
           );
         })}
 
-        {/* 选中帝国弹出框 */}
+        {/* Selected empire popup */}
         {selectedEmpire ? (
           <Popup
             longitude={
@@ -192,7 +192,7 @@ export function WorldEmpireMap({
         ) : null}
       </Map>
 
-      {/* 当前活跃帝国列表 */}
+      {/* Currently active empire list */}
       <div className={`absolute left-3 top-3 z-10 ${WORLD_VIEW_COLORS.background} ${WORLD_VIEW_COLORS.backdrop} rounded-lg p-2 max-w-[200px]`}>
         <div className={`text-xs ${WORLD_VIEW_COLORS.textSecondary} mb-1`}>
           {formatYear(year)}

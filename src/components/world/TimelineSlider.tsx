@@ -117,7 +117,7 @@ export function TimelineSlider({
         ref={sliderRef}
         className="relative h-12 sm:h-8 cursor-pointer select-none"
         role="slider"
-        aria-label="世界帝国年份滑块"
+        aria-label={t('world.ariaLabel')}
         aria-valuemin={minYear}
         aria-valuemax={maxYear}
         aria-valuenow={year}
