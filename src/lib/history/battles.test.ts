@@ -37,6 +37,7 @@ import {
   getAllParticipantsStreakStats,
   getTopStreaks,
   getStreakInsights,
+  getSimilarBattles,
 } from './battles';
 import type { Event } from './types';
 
@@ -1836,6 +1837,141 @@ describe('battles', () => {
       const stats = getParticipantStreakStats(drawBattles, 'A军');
       // Single win is not counted as a win streak (need at least 2)
       expect(stats.longestWinStreak).toBe(0);
+    });
+  });
+
+  describe('getSimilarBattles', () => {
+    const makeBattle = (overrides: Partial<import('./types').Event> = {}): import('./types').Event => ({
+      id: 'b0',
+      entityId: 'era0',
+      year: 0,
+      titleKey: 't0',
+      summaryKey: 's0',
+      ...overrides,
+    });
+
+    it('should return empty array when favorites is empty', () => {
+      const battles = [makeBattle({ id: 'b1' })];
+      const result = getSimilarBattles(battles, [], 6);
+      expect(result).toEqual([]);
+    });
+
+    it('should exclude battles already in favorites', () => {
+      const battles = [
+        makeBattle({ id: 'fav1', entityId: 'era1' }),
+        makeBattle({ id: 'cand1', entityId: 'era1' }),
+      ];
+      const result = getSimilarBattles(battles, ['fav1'], 6);
+      expect(result.map(b => b.id)).not.toContain('fav1');
+      expect(result.length).toBeGreaterThan(0);
+    });
+
+    it('should score +3 for same era', () => {
+      const battles = [
+        makeBattle({ id: 'fav', entityId: 'era1' }),
+        makeBattle({ id: 'sameEra', entityId: 'era1' }),
+        makeBattle({ id: 'diffEra', entityId: 'era2' }),
+      ];
+      const result = getSimilarBattles(battles, ['fav'], 6);
+      // sameEra has score=3 (same era), diffEra has score=0 so is excluded
+      expect(result[0].id).toBe('sameEra');
+      expect(result.map(b => b.id)).not.toContain('diffEra');
+    });
+
+    it('should score +3 for each shared commander', () => {
+      const battles = [
+        makeBattle({
+          id: 'fav',
+          battle: {
+            commanders: { attacker: ['曹操', '刘备'], defender: ['袁绍'] },
+          },
+        }),
+        makeBattle({
+          id: 'sharedAttacker',
+          battle: {
+            commanders: { attacker: ['曹操'], defender: ['孙权'] },
+          },
+        }),
+        makeBattle({
+          id: 'sharedDefender',
+          battle: {
+            commanders: { attacker: ['周瑜'], defender: ['袁绍'] },
+          },
+        }),
+        makeBattle({
+          id: 'noShare',
+          battle: {
+            commanders: { attacker: ['诸葛亮'], defender: ['司马懿'] },
+          },
+        }),
+      ];
+      const result = getSimilarBattles(battles, ['fav'], 6);
+      const ids = result.map(b => b.id);
+      // sharedAttacker has曹操=+3, sharedDefender has袁绍=+3
+      // Both should outrank noShare (score 0)
+      expect(ids.indexOf('sharedAttacker')).toBeLessThan(ids.indexOf('noShare'));
+      expect(ids.indexOf('sharedDefender')).toBeLessThan(ids.indexOf('noShare'));
+    });
+
+    it('should score +2 for same battle type', () => {
+      const battles = [
+        makeBattle({ id: 'fav', battle: { battleType: '包围战' as any } }),
+        makeBattle({ id: 'sameType', battle: { battleType: '包围战' as any } }),
+        makeBattle({ id: 'diffType', battle: { battleType: '野战' as any } }),
+      ];
+      const result = getSimilarBattles(battles, ['fav'], 6);
+      expect(result[0].id).toBe('sameType');
+    });
+
+    it('should score +1 for same result', () => {
+      const battles = [
+        makeBattle({ id: 'fav', battle: { result: 'attacker_win' as any } }),
+        makeBattle({ id: 'sameResult', battle: { result: 'attacker_win' as any } }),
+        makeBattle({ id: 'diffResult', battle: { result: 'defender_win' as any } }),
+      ];
+      const result = getSimilarBattles(battles, ['fav'], 6);
+      expect(result[0].id).toBe('sameResult');
+    });
+
+    it('should respect the limit parameter', () => {
+      const battles = Array.from({ length: 20 }, (_, i) =>
+        makeBattle({ id: `b${i}`, entityId: 'era1' })
+      );
+      const result = getSimilarBattles(battles, ['b0'], 5);
+      expect(result.length).toBeLessThanOrEqual(5);
+    });
+
+    it('should sort by score descending, then by year ascending', () => {
+      const battles = [
+        makeBattle({ id: 'fav', entityId: 'era1' }),
+        makeBattle({ id: 'score3', entityId: 'era1', year: -200 }),
+        makeBattle({ id: 'score2', entityId: 'era2', year: -100 }),  // only same type
+        makeBattle({ id: 'score1', battle: { battleType: '包围战' as any } }), // same type
+      ];
+      // score3 has +3 (same era), score1 has +2 (same type), score2 has +1 (same type+era?)
+      // Wait score2 entityId='era2' not same as fav's era1, so only +1 from result?
+      // Actually favorite 'fav' has no battleType so no +2
+      // Let's trace: score3=+3(era), score1=+2(type), score2=+1(result from fav's undefined)
+      // Actually fav has no result so score2 gets 0 from result. Let me be more explicit.
+      const favBattle = { id: 'fav', entityId: 'era1', year: -150, battle: { battleType: '野战' as any, result: 'attacker_win' as any } };
+      const scoreHigh = { ...favBattle, id: 'scoreHigh', year: -100, entityId: 'era1' };
+      const scoreMed = { ...favBattle, id: 'scoreMed', year: -50, entityId: 'era2' };
+      const scoreLow = { ...favBattle, id: 'scoreLow', year: 0, entityId: 'era3' };
+      const battles2 = [favBattle, scoreHigh, scoreMed, scoreLow];
+      const result = getSimilarBattles(battles2 as any, ['fav'], 6);
+      expect(result[0].id).toBe('scoreHigh'); // score=6 (era+type+result)
+      expect(result[1].id).toBe('scoreMed');  // score=3 (type+result)
+      expect(result[2].id).toBe('scoreLow');  // score=2 (type+result but later year)
+    });
+
+    it('should return empty array when no battles match any criteria', () => {
+      const battles = [
+        makeBattle({ id: 'fav', entityId: 'era1' }),
+        makeBattle({ id: 'orphan', entityId: 'era999', battle: {} }),
+      ];
+      const result = getSimilarBattles(battles, ['fav'], 6);
+      // orphan has no era match, no commanders, no type, no result
+      expect(result.map(b => b.id)).not.toContain('orphan');
     });
   });
 });

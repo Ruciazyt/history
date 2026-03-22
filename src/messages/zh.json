@@ -1779,5 +1779,14 @@
     "noCollaborations": "暂无合作数据",
     "noMatchups": "暂无对决数据",
     "noInsights": "暂无洞察数据"
+  },
+  "onThisDay": {
+    "title": "历史上的今天",
+    "found": "找到 {count} 场战役/事件",
+    "noEvents": "今天暂无记录",
+    "noEventsHint": "换个日期试试？",
+    "featured": "今日精选",
+    "allEvents": "全部 ({count} 场)",
+    "viewDetail": "查看详情"
   }
 }
