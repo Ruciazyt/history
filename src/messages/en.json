@@ -1237,7 +1237,9 @@
     "clearAll": "Clear All",
     "noFavoritesTitle": "No Favorites Yet",
     "noFavoritesDesc": "Start adding battles to your favorites by clicking the heart icon on any battle card.",
-    "browseBattles": "Browse Battles"
+    "browseBattles": "Browse Battles",
+    "recommendations": "Battles You Might Like",
+    "recommendationsEmpty": "Add more favorites to discover recommendations"
   },
   "battleCompare": {
     "title": "⚔️ Battle Comparison",

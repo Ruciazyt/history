@@ -1474,7 +1474,9 @@
     "clearAll": "清空",
     "noFavoritesTitle": "暂无收藏",
     "noFavoritesDesc": "点击任意战役卡片上的心形图标来添加收藏。",
-    "browseBattles": "浏览战役"
+    "browseBattles": "浏览战役",
+    "recommendations": "你可能感兴趣的战役",
+    "recommendationsEmpty": "收藏更多战役后发现更多推荐"
   },
   "battleCompare": {
     "title": "⚔️ 战役对比",
