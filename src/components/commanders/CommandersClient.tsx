@@ -16,6 +16,7 @@ import { COMMANDER_COLORS } from '@/lib/history/constants';
 import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 import { useTranslations } from 'next-intl';
 import { EmptyState } from '@/components/common/EmptyState';
+import { CommanderNetworkGraph } from './CommanderNetworkGraph';
 
 const COMMANDERS_COLORS = {
   page: {
@@ -75,7 +76,7 @@ const COMMANDERS_COLORS = {
   },
 };
 
-type Tab = 'commanders' | 'collaborations' | 'matchups' | 'insights';
+type Tab = 'commanders' | 'collaborations' | 'matchups' | 'insights' | 'network';
 
 function WinRateBadge({ winRate, t }: { winRate: number; t: ReturnType<typeof useTranslations> }) {
   const cls =
@@ -196,6 +197,7 @@ export function CommandersClient({
 }) {
   const t = useTranslations();
   const [activeTab, setActiveTab] = React.useState<Tab>('commanders');
+  const [selectedCommander, setSelectedCommander] = React.useState<string | null>(null);
 
   const battles = React.useMemo(() => events.filter((e) => e.battle?.commanders), [events]);
   const hasData = React.useMemo(() => hasCommanderNetworkData(battles), [battles]);
@@ -316,7 +318,7 @@ export function CommandersClient({
 
         {/* Tabs */}
         <div className="px-4 pb-3 flex gap-1">
-          {(['commanders', 'collaborations', 'matchups', 'insights'] as Tab[]).map((tab) => (
+          {(['commanders', 'collaborations', 'matchups', 'insights', 'network'] as Tab[]).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -330,7 +332,8 @@ export function CommandersClient({
               {tab === 'collaborations' && '🤝 '}
               {tab === 'matchups' && '⚔️ '}
               {tab === 'insights' && '💡 '}
-              {t(`commanders.tabs.${tab}`)}
+              {tab === 'network' && '🕸️ '}
+              {tab === 'network' ? (t('commanders.tabs.network') || '关系网络') : t(`commanders.tabs.${tab}`)}
             </button>
           ))}
         </div>
@@ -463,6 +466,80 @@ export function CommandersClient({
             ) : (
               <div className={`text-sm ${COMMANDERS_COLORS.commanderCard.stat}`}>
                 {t('commanders.noInsights') || '暂无洞察数据'}
+              </div>
+            )}
+          </div>
+        )}
+
+        {activeTab === 'network' && (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <h2 className={`text-base font-semibold ${COMMANDERS_COLORS.section.title}`}>
+                🕸️ {t('commanders.tabs.network') || '关系网络'}
+              </h2>
+              {selectedCommander && (
+                <button
+                  type="button"
+                  onClick={() => setSelectedCommander(null)}
+                  className={`text-xs px-2 py-1 rounded-lg border ${COMMANDERS_COLORS.commanderCard.border} ${COMMANDERS_COLORS.commanderCard.stat} hover:opacity-80`}
+                >
+                  ✕ 清除选择
+                </button>
+              )}
+            </div>
+            <div className="rounded-xl border ${COMMANDERS_COLORS.commanderCard.border} overflow-hidden bg-zinc-50 dark:bg-zinc-900/50" style={{ height: 420 }}>
+              <CommanderNetworkGraph
+                events={events}
+                selectedCommander={selectedCommander}
+                onCommanderClick={(name) => setSelectedCommander((prev) => (prev === name ? null : name))}
+              />
+            </div>
+            {selectedCommander && (
+              <div className="rounded-xl border p-4 ${COMMANDERS_COLORS.commanderCard.bg} ${COMMANDERS_COLORS.commanderCard.border}">
+                <div className={`text-sm font-semibold mb-2 ${COMMANDERS_COLORS.commanderCard.name}`}>
+                  👤 {selectedCommander}
+                </div>
+                {(() => {
+                  const node = topCommanders.find((n) => n.name === selectedCommander);
+                  if (!node) return null;
+                  return (
+                    <div className="text-sm space-y-1">
+                      <div className={COMMANDERS_COLORS.commanderCard.stat}>
+                        ⚔️ {node.battles} 场战役 · {node.winRate}% 胜率
+                      </div>
+                      {node.collaborators.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mt-2">
+                          <span className={`text-xs ${COMMANDERS_COLORS.commanderCard.stat}`}>🤝 搭档:</span>
+                          {node.collaborators.slice(0, 5).map((c) => (
+                            <button
+                              key={c}
+                              type="button"
+                              onClick={() => setSelectedCommander(c)}
+                              className={`text-xs px-2 py-0.5 rounded-full ${COMMANDER_COLORS.attacker.bg} ${COMMANDER_COLORS.attacker.text}`}
+                            >
+                              {c}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                      {node.opponents.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          <span className={`text-xs ${COMMANDERS_COLORS.commanderCard.stat}`}>⚔️ 对手:</span>
+                          {node.opponents.slice(0, 5).map((c) => (
+                            <button
+                              key={c}
+                              type="button"
+                              onClick={() => setSelectedCommander(c)}
+                              className={`text-xs px-2 py-0.5 rounded-full ${COMMANDER_COLORS.defender.bg} ${COMMANDER_COLORS.defender.text}`}
+                            >
+                              {c}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
               </div>
             )}
           </div>
