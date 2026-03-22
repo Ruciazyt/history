@@ -39,7 +39,7 @@ export function OnThisDayClient({
       const battleIndex = battles.indexOf(b);
       // Deterministic pick: match battle's "slot" against today's slot
       const pickSeed = (b.year * 37 + battleIndex * 13) % battles.length;
-      const daySeed = (year * 10000 + targetMonth * 100 + targetDay) % battles.length;
+      const daySeed = (year! * 10000 + targetMonth! * 100 + targetDay!) % battles.length;
       return pickSeed === daySeed;
     }).sort((a, b) => a.year - b.year);
   }, [events, selectedDate]);
@@ -48,7 +48,7 @@ export function OnThisDayClient({
   const featuredBattle = React.useMemo(() => {
     if (battlesOnThisDay.length === 0) return null;
     const [year, month, day] = selectedDate.split('-').map(Number);
-    const seed = year * 10000 + month * 100 + day;
+    const seed = year! * 10000 + month! * 100 + day!;
     const index = seed % battlesOnThisDay.length;
     return battlesOnThisDay[index];
   }, [battlesOnThisDay, selectedDate]);
