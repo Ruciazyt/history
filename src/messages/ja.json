@@ -1571,13 +1571,10 @@
     "noMatchups": "対決データなし",
     "noInsights": "インサイトデータなし"
   },
-  "onThisDay": {
+  "thisDayInHistory": {
     "title": "歴史上の今日",
-    "found": "{count} 件の戦い/出来事が見つかりました",
-    "noEvents": "この日の記録はありません",
-    "noEventsHint": "別の日付を試しますか？",
-    "featured": "今日のおすすめ",
-    "allEvents": "すべて ({count})",
-    "viewDetail": "詳細を見る"
+    "battlesFound": "件の関連戦い",
+    "expand": "すべて表示",
+    "collapse": "折りたたむ"
   }
 }

@@ -1578,13 +1578,10 @@
     "noMatchups": "No matchup data",
     "noInsights": "No insight data"
   },
-  "onThisDay": {
-    "title": "On This Day",
-    "found": "{count} battle(s)/event(s) found",
-    "noEvents": "No events on this day",
-    "noEventsHint": "Try another date?",
-    "featured": "Featured Today",
-    "allEvents": "All ({count})",
-    "viewDetail": "View Details"
+  "thisDayInHistory": {
+    "title": "This Day in History",
+    "battlesFound": "related battles",
+    "expand": "Show All",
+    "collapse": "Collapse"
   }
 }

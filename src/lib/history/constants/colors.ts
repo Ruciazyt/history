@@ -1492,3 +1492,27 @@ export const BATTLE_OF_THE_DAY_COLORS = {
   cta: 'text-amber-700',
 } as const;
 
+
+export const THIS_DAY_IN_HISTORY_COLORS = {
+  container: {
+    border: 'border-emerald-200',
+    bg: 'bg-emerald-50/60',
+  },
+  badge: {
+    bg: 'bg-gradient-to-r from-emerald-100 to-teal-100',
+    text: 'text-emerald-800',
+  },
+  subtitle: 'text-gray-500',
+  badgeItem: {
+    bg: 'bg-white/60',
+  },
+  belligerents: {
+    container: 'bg-white/50',
+    text: 'text-gray-700',
+    vs: 'text-emerald-500',
+  },
+  toggle: {
+    btn: 'bg-emerald-100 text-emerald-700',
+    hover: 'hover:bg-emerald-200',
+  },
+} as const;

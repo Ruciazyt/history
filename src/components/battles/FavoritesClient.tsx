@@ -96,7 +96,7 @@ export function FavoritesClient({ battles, locale = 'zh' }: FavoritesClientProps
                     {t('favorites.recommendations')}
                   </h2>
                 </div>
-                <p className={`text-sm mb-4 ${BATTLES_CLIENT_COLORS.subtitle || 'text-zinc-500'}`}>
+                <p className="text-sm mb-4 text-zinc-500">
                   {t('favorites.recommendationsEmpty')}
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

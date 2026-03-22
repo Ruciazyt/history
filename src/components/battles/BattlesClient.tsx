@@ -10,6 +10,7 @@ import { BattleDetail } from '@/components/battles/BattleDetail';
 import { BattleCompare } from '@/components/battles/BattleCompare';
 import { BattleGeography } from '@/components/battles/BattleGeography';
 import { BattleOfTheDayCard } from '@/components/battles/BattleOfTheDayCard';
+import { ThisDayInHistoryCard } from '@/components/battles/ThisDayInHistoryCard';
 import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 import { useTranslations } from 'next-intl';
 import { BATTLES_CLIENT_COLORS, ERA_COLORS } from '@/lib/history/constants';
@@ -302,6 +303,11 @@ export function BattlesClient({
         {/* Battle of the Day - featured card */}
         <div className="mb-6">
           <BattleOfTheDayCard events={events} />
+        </div>
+
+        {/* This Day in History */}
+        <div className="mb-6">
+          <ThisDayInHistoryCard events={events} />
         </div>
 
         {displayedBattles.length > 0 ? (

@@ -122,7 +122,7 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
           aria-haspopup="listbox"
           aria-autocomplete="list"
           role="combobox"
-          placeholder={SEARCH_LABELS[locale]?.placeholder ?? defaultLabels.placeholder}
+          placeholder={SEARCH_LABELS[locale]?.placeholder ?? SEARCH_LABELS['zh']?.placeholder ?? ''}
           className="w-40 sm:w-48 lg:w-56 px-3 py-1.5 pl-8 text-sm bg-zinc-50 dark:bg-zinc-800 border border-transparent dark:border-zinc-700 rounded-lg focus:bg-white dark:focus:bg-zinc-700 focus:border-zinc-300 dark:focus:border-zinc-500 focus:outline-none transition-all text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
         />
         <svg
@@ -176,7 +176,7 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
           className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-zinc-800 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700 py-3"
           style={{ zIndex: Z_INDEX.dropdown }}
         >
-          <div className="text-center text-sm text-zinc-400 dark:text-zinc-500">{(SEARCH_LABELS[locale] ?? defaultLabels).noResults}</div>
+          <div className="text-center text-sm text-zinc-400 dark:text-zinc-500">{SEARCH_LABELS[locale]?.noResults ?? SEARCH_LABELS['zh']?.noResults ?? ''}</div>
         </div>
       )}
     </div>
