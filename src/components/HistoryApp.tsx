@@ -261,13 +261,13 @@ export function HistoryApp({
                 </Link>
                 <Link
                   href={`/${currentLocale}/world`}
-                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.eurasian.bg} ${C.quickLink.eurasian.text} ${C.quickLink.eurasian.border} hover:opacity-90`}
+                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.eurasian.bg} ${C.quickLink.eurasian.text} ${C.quickLink.eurasian.border}`}
                 >
                   🌍 <span className="hidden sm:inline">{t('world.title')}</span>
                 </Link>
                 <Link
                   href={`/${currentLocale}/place-names`}
-                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.placeNames.bg} ${C.quickLink.placeNames.text} ${C.quickLink.placeNames.border} hover:opacity-90`}
+                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.placeNames.bg} ${C.quickLink.placeNames.text} ${C.quickLink.placeNames.border}`}
                 >
                   🏛️ <span className="hidden sm:inline">{t('placeNames.title')}</span>
                 </Link>

@@ -38,6 +38,7 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
   const { gradient: eraGradient, border: eraBorder, text: eraText } = getEraStyles(battle.entityId);
   const battleResult = battle.battle?.result;
   const resultBg = battleResult ? BATTLE_RESULT_COLORS[battleResult]?.bg : BATTLE_CARD_COLORS.result.default;
+  const resultText = battleResult ? BATTLE_RESULT_COLORS[battleResult]?.text : 'text-zinc-700';
 
   return (
     <>
@@ -57,7 +58,7 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
             📅 {t('battleOfTheDay.badge')}
           </span>
           {battleResult && (
-            <div className={`ml-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full text-white text-xs font-medium ${resultBg}`}>
+            <div className={`ml-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${resultBg} ${resultText}`}>
               {battle.battle && t(getBattleResultLabel(battle.battle))}
             </div>
           )}
