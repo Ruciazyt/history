@@ -47,7 +47,7 @@ export const Button = React.memo(function Button({
       className={`
         inline-flex items-center justify-center font-medium
         ${sizeStyles.padding} ${sizeStyles.text} ${sizeStyles.radius}
-        ${colorStyles.bg} ${colorStyles.hover} text-white
+        ${colorStyles.bg} ${colorStyles.hover} ${colorStyles.text}
         disabled:opacity-50 disabled:cursor-not-allowed
         transition-colors duration-200
         ${className}
