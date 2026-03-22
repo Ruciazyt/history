@@ -20,7 +20,7 @@ export const RulerRelations = React.memo(function RulerRelations({ ruler, allRul
   
   return (
     <div className={`mt-2 pt-2 border-t ${RULER_RELATIONS_COLORS.container.border}`}>
-      <div className={`text-xs ${RULER_RELATIONS_COLORS.label.text} mb-1`}>{t('ruler.relations') || '家族关系'}</div>
+      <div className={`text-xs ${RULER_RELATIONS_COLORS.label.text} mb-1`}>{t('ruler.relations')}</div>
       <div className="flex flex-wrap gap-1">
         {relations.map(({ ruler: relRuler, relation }) => (
           <button

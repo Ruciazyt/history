@@ -245,7 +245,7 @@ export function CommandersClient({
               </Link>
               <div className="w-px h-5 bg-zinc-200 dark:bg-zinc-700"></div>
               <h1 className={`text-lg font-bold ${COMMANDERS_COLORS.header.title}`}>
-                👑 {t('nav.commanders') || '指挥官网络'}
+                👑 {t('nav.commanders')}
               </h1>
             </div>
             <LocaleSwitcher />
@@ -254,8 +254,8 @@ export function CommandersClient({
         <div className="flex items-center justify-center min-h-[60vh]">
           <EmptyState
             icon="👑"
-            title={t('commanders.noData') || '暂无指挥官数据'}
-            description={t('commanders.noDataDesc') || '当前战役数据中没有指挥官信息'}
+            title={t('commanders.noData')}
+            description={t('commanders.noDataDesc')}
           />
         </div>
       </div>
@@ -279,7 +279,7 @@ export function CommandersClient({
             </Link>
             <div className="w-px h-5 bg-zinc-200 dark:bg-zinc-700"></div>
             <h1 className={`text-lg font-bold ${COMMANDERS_COLORS.header.title}`}>
-              👑 {t('nav.commanders') || '指挥官网络'}
+              👑 {t('nav.commanders')}
             </h1>
             <span className={`text-xs px-2 py-0.5 rounded-full ${COMMANDERS_COLORS.header.badge.bg} ${COMMANDERS_COLORS.header.badge.text}`}>
               {t('commanders.commanderCount', { count: summary?.totalCommanders || 0 })}
@@ -352,7 +352,7 @@ export function CommandersClient({
         {activeTab === 'collaborations' && (
           <div className="space-y-3">
             <h2 className={`text-base font-semibold ${COMMANDERS_COLORS.section.title}`}>
-              🤝 {t('commanders.topCollaborations') || '最佳搭档'}
+              🤝 {t('commanders.topCollaborations')}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {topCollaborations.map((collab, i) => (
@@ -384,7 +384,7 @@ export function CommandersClient({
               ))}
               {topCollaborations.length === 0 && (
                 <div className={`text-sm ${COMMANDERS_COLORS.commanderCard.stat}`}>
-                  {t('commanders.noCollaborations') || '暂无合作数据'}
+                  {t('commanders.noCollaborations')}
                 </div>
               )}
             </div>
@@ -394,7 +394,7 @@ export function CommandersClient({
         {activeTab === 'matchups' && (
           <div className="space-y-3">
             <h2 className={`text-base font-semibold ${COMMANDERS_COLORS.section.title}`}>
-              ⚔️ {t('commanders.topMatchups') || '经典对决'}
+              ⚔️ {t('commanders.topMatchups')}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {topMatchups.map((matchup, i) => (
@@ -440,7 +440,7 @@ export function CommandersClient({
               ))}
               {topMatchups.length === 0 && (
                 <div className={`text-sm ${COMMANDERS_COLORS.commanderCard.stat}`}>
-                  {t('commanders.noMatchups') || '暂无对决数据'}
+                  {t('commanders.noMatchups')}
                 </div>
               )}
             </div>
@@ -450,7 +450,7 @@ export function CommandersClient({
         {activeTab === 'insights' && (
           <div className="space-y-3">
             <h2 className={`text-base font-semibold ${COMMANDERS_COLORS.section.title}`}>
-              💡 {t('commanders.insights') || '指挥官洞察'}
+              💡 {t('commanders.insights')}
             </h2>
             {insights.length > 0 ? (
               <div className="space-y-2">
@@ -465,7 +465,7 @@ export function CommandersClient({
               </div>
             ) : (
               <div className={`text-sm ${COMMANDERS_COLORS.commanderCard.stat}`}>
-                {t('commanders.noInsights') || '暂无洞察数据'}
+                {t('commanders.noInsights')}
               </div>
             )}
           </div>

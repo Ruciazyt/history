@@ -178,7 +178,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-lg font-bold text-zinc-900">
-              🌍 {t('grid.title') || '欧亚对比网格'}
+              🌍 {t('grid.title')}
             </h1>
             <div className="flex items-center gap-4 text-sm text-zinc-500 mt-0.5">
               <span className="font-semibold text-zinc-700">
@@ -186,7 +186,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
               </span>
               <span>|</span>
               <span>
-                {activePolities.length} {t('grid.activeEmpires') || '个活跃政权'}
+                {activePolities.length} {t('grid.activeEmpires')}
               </span>
             </div>
           </div>
@@ -201,7 +201,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
               }`}
             >
-              🌍 {t('grid.eurasian') || '欧亚'}
+              🌍 {t('grid.eurasian')}
             </button>
             <button
               type="button"
@@ -212,7 +212,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
               }`}
             >
-              🌏 {t('grid.eastAsia') || '东亚'}
+              🌏 {t('grid.eastAsia')}
             </button>
           </div>
         </div>
@@ -383,7 +383,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
 
           {/* Grid bottom: quick century buttons */}
           <div className={`shrink-0 border-t border-zinc-200 bg-white px-4 py-2 flex items-center gap-1 flex-wrap`}>
-            <span className="text-xs text-zinc-500 mr-2">{t('grid.quickJump') || '快速跳转'}:</span>
+            <span className="text-xs text-zinc-500 mr-2">{t('grid.quickJump')}:</span>
             {[-500, -300, -200, -100, 0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900].map(year => (
               <button
                 key={year}
@@ -412,7 +412,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
           <div className="flex-1 overflow-y-auto p-2 space-y-1">
             {activePolities.length === 0 ? (
               <div className="text-xs text-zinc-400 p-2 text-center">
-                {t('grid.noActive') || '无活跃政权'}
+                {t('grid.noActive')}
               </div>
             ) : (
               activePolities.map(b => (
@@ -446,7 +446,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
           {/* Mini timeline navigation */}
           <div className={`shrink-0 border-t border-zinc-200 bg-zinc-50 p-3`}>
             <div className="text-xs font-semibold text-zinc-600 mb-2">
-              {t('grid.timeline') || '时间导航'}
+              {t('grid.timeline')}
             </div>
             <div className="relative h-24 bg-zinc-100 rounded-lg overflow-hidden">
               {/* Mini polity bands */}
@@ -516,7 +516,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                 onClick={() => setCurrentYear(1)}
                 className="px-1.5 py-0.5 rounded bg-red-100 text-red-600 text-[10px] hover:bg-red-200 ml-auto"
               >
-                {t('grid.ce1') || '公元1年'}
+                {t('grid.ce1')}
               </button>
             </div>
           </div>

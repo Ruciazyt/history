@@ -474,7 +474,8 @@
     "ea-vn-tranth": "Tran Hue",
     "ea-vn-leithanh": "Le Thanh Tong",
     "ea-vn-quangtrung": "Quang Trung",
-    "ea-vn-gialong": "Gia Long"
+    "ea-vn-gialong": "Gia Long",
+    "relations": "Family Relations"
   },
   "rulerBio": {
     "qinshihuang": "China's first emperor, who unified the warring states in 221 BCE. He standardized writing, weights and measures, built the Great Wall and vast road networks, and established the centralized imperial system that would last over 2,000 years.",
@@ -1371,7 +1372,7 @@
   "empire_nguyen-dynasty": "Nguyen Dynasty",
   "empires_active": "empires",
   "empires": {
-    "active": "empires"
+    "active": "active empires"
   },
   "battle": {
     "result": {

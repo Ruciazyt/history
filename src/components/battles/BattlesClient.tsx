@@ -121,7 +121,7 @@ export function BattlesClient({
               {t('ui.back')}
             </Link>
             <div className={`w-px h-5 ${BATTLES_CLIENT_COLORS.divider}`}></div>
-            <h1 className={`text-lg font-bold ${BATTLES_CLIENT_COLORS.title}`}>⚔️ {t('nav.battles') || '战役'}</h1>
+            <h1 className={`text-lg font-bold ${BATTLES_CLIENT_COLORS.title}`}>⚔️ {t('nav.battles')}</h1>
           </div>
           <div className="flex items-center gap-2">
             <span className={`text-xs ${BATTLES_CLIENT_COLORS.badge.text} ${BATTLES_CLIENT_COLORS.badge.background} px-2 py-1 rounded-full`}>

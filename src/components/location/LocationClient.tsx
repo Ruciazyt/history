@@ -92,7 +92,7 @@ export function LocationClient({ locale }: LocationClientProps) {
         {/* 暂无结果 */}
         {query.length >= 2 && results.length === 0 && (
           <div className="text-center text-zinc-500 py-8">
-            {t('location.noResults') || '未找到相关地点'}
+            {t('location.noResults')}
           </div>
         )}
 
