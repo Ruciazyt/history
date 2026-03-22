@@ -12,6 +12,13 @@ interface SearchBoxProps {
   locale?: string;
 }
 
+const SEARCH_LABELS: Record<string, { placeholder: string; noResults: string }> = {
+  zh: { placeholder: '搜索帝王、战役...', noResults: '未找到相关结果' },
+  en: { placeholder: 'Search rulers, battles...', noResults: 'No results found' },
+  ja: { placeholder: '帝王・戦いを検索...', noResults: '結果が見つかりません' },
+};
+const defaultLabels = SEARCH_LABELS['zh'];
+
 interface SearchResult {
   type: 'ruler' | 'event' | 'battle';
   id: string;
@@ -115,7 +122,7 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
           aria-haspopup="listbox"
           aria-autocomplete="list"
           role="combobox"
-          placeholder="搜索帝王、战役..."
+          placeholder={SEARCH_LABELS[locale]?.placeholder ?? defaultLabels.placeholder}
           className="w-40 sm:w-48 lg:w-56 px-3 py-1.5 pl-8 text-sm bg-zinc-50 dark:bg-zinc-800 border border-transparent dark:border-zinc-700 rounded-lg focus:bg-white dark:focus:bg-zinc-700 focus:border-zinc-300 dark:focus:border-zinc-500 focus:outline-none transition-all text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
         />
         <svg
@@ -129,6 +136,7 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
         {query && (
           <button
             onClick={handleClear}
+            aria-label="Clear search"
             className="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
           >
             ✕
@@ -154,7 +162,7 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100 truncate">{result.title}</div>
                 {result.year !== undefined && (
-                  <div className="text-xs text-zinc-400 dark:text-zinc-500">{formatYear(result.year)}</div>
+                  <div className="text-xs text-zinc-400 dark:text-zinc-500">{formatYear(result.year, locale)}</div>
                 )}
               </div>
             </button>
@@ -168,7 +176,7 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
           className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-zinc-800 rounded-lg shadow-lg border border-zinc-200 dark:border-zinc-700 py-3"
           style={{ zIndex: Z_INDEX.dropdown }}
         >
-          <div className="text-center text-sm text-zinc-400 dark:text-zinc-500">未找到相关结果</div>
+          <div className="text-center text-sm text-zinc-400 dark:text-zinc-500">{(SEARCH_LABELS[locale] ?? defaultLabels).noResults}</div>
         </div>
       )}
     </div>
