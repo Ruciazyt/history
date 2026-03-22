@@ -10,6 +10,7 @@ import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 import { useBattleFavorites } from '@/lib/history/useBattleHooks';
 import { BATTLES_CLIENT_COLORS, FAVORITES_LIST_COLORS } from '@/lib/history/constants';
 import { useTranslations } from 'next-intl';
+import { getSimilarBattles } from '@/lib/history/battles';
 
 interface FavoritesClientProps {
   battles: Event[];
@@ -24,6 +25,12 @@ export function FavoritesClient({ battles, locale = 'zh' }: FavoritesClientProps
   // Filter battles that are in favorites
   const favoriteBattles = React.useMemo(() => {
     return battles.filter(battle => favorites.includes(battle.id));
+  }, [battles, favorites]);
+
+  // Recommended battles based on favorites
+  const recommendedBattles = React.useMemo(() => {
+    if (favorites.length === 0) return [];
+    return getSimilarBattles(battles, favorites, 6);
   }, [battles, favorites]);
   
   // Navigate to battles page
@@ -79,6 +86,29 @@ export function FavoritesClient({ battles, locale = 'zh' }: FavoritesClientProps
                 />
               ))}
             </div>
+
+            {/* Recommendations section */}
+            {recommendedBattles.length > 0 && (
+              <div className="mt-10">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-xl">💡</span>
+                  <h2 className={`text-lg font-bold ${BATTLES_CLIENT_COLORS.title}`}>
+                    {t('favorites.recommendations')}
+                  </h2>
+                </div>
+                <p className={`text-sm mb-4 ${BATTLES_CLIENT_COLORS.subtitle || 'text-zinc-500'}`}>
+                  {t('favorites.recommendationsEmpty')}
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {recommendedBattles.map((battle) => (
+                    <BattleCard 
+                      key={battle.id} 
+                      battle={battle}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </>
         ) : (
           <EmptyState

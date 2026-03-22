@@ -2743,3 +2743,64 @@ export function getFactionInsights(battles: Event[]): FactionInsight[] {
   
   return insights;
 }
+
+/**
+ * Get battles similar to a set of favorite battles, for recommendation.
+ * Scores by: same era (+3), shared commander (+3 each), same battle type (+2), same result (+1).
+ * Excludes battles already in favorites.
+ */
+export function getSimilarBattles(
+  battles: Event[],
+  favoriteIds: string[],
+  limit = 6
+): Event[] {
+  const favorites = battles.filter((b) => favoriteIds.includes(b.id));
+  if (favorites.length === 0) return [];
+
+  const favoriteSet = new Set(favoriteIds);
+
+  // Collect favorite commanders
+  const favoriteCommanders = new Set<string>();
+  for (const fav of favorites) {
+    for (const c of fav.battle?.commanders?.attacker ?? []) favoriteCommanders.add(c);
+    for (const c of fav.battle?.commanders?.defender ?? []) favoriteCommanders.add(c);
+  }
+
+  // Collect favorite era IDs
+  const favoriteEras = new Set(favorites.map((f) => f.entityId));
+
+  // Collect favorite battle types
+  const favoriteTypes = new Set(favorites.map((f) => f.battle?.battleType).filter(Boolean));
+
+  // Collect favorite results
+  const favoriteResults = new Set(favorites.map((f) => f.battle?.result).filter(Boolean));
+
+  type Scored = { battle: Event; score: number };
+  const scored: Scored[] = [];
+
+  for (const battle of battles) {
+    if (favoriteSet.has(battle.id)) continue;
+
+    let score = 0;
+
+    if (favoriteEras.has(battle.entityId)) score += 3;
+
+    const bCommanders = [
+      ...(battle.battle?.commanders?.attacker ?? []),
+      ...(battle.battle?.commanders?.defender ?? []),
+    ];
+    for (const c of bCommanders) {
+      if (favoriteCommanders.has(c)) score += 3;
+    }
+
+    if (battle.battle?.battleType && favoriteTypes.has(battle.battle.battleType)) score += 2;
+
+    if (battle.battle?.result && favoriteResults.has(battle.battle.result)) score += 1;
+
+    if (score > 0) scored.push({ battle, score });
+  }
+
+  scored.sort((a, b) => b.score - a.score || a.battle.year - b.battle.year);
+
+  return scored.slice(0, limit).map((s) => s.battle);
+}
