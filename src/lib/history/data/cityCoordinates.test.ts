@@ -21,10 +21,10 @@ describe('cityCoordinates', () => {
     });
 
     it('each city should have name and coordinates', () => {
-      Object.entries(chinaCityCoordinates).forEach(([key, city]) => {
+      Object.entries(chinaCityCoordinates).forEach(([_key, city]) => {
         expect(city).toHaveProperty('name');
         expect(city).toHaveProperty('coordinates');
-        expect(city.name).toBe(key);
+        expect(city.name).toBe(_key);
         expect(city.coordinates).toBeInstanceOf(Array);
         expect(city.coordinates).toHaveLength(2);
       });
@@ -32,7 +32,7 @@ describe('cityCoordinates', () => {
 
     it('coordinates should be valid [longitude, latitude] pairs', () => {
       // China geographic bounds: longitude 73-135, latitude 18-54
-      Object.entries(chinaCityCoordinates).forEach(([key, city]) => {
+      Object.entries(chinaCityCoordinates).forEach(([_key, city]) => {
         const [lng, lat] = city.coordinates;
         expect(lng).toBeGreaterThanOrEqual(73);
         expect(lng).toBeLessThanOrEqual(135);

@@ -1203,7 +1203,9 @@
     "clearAll": "すべてクリア",
     "noFavoritesTitle": "お気に入りがありません",
     "noFavoritesDesc": "戦いカードのハートアイコンをクリックしてお気に入りに追加しましょう。",
-    "browseBattles": "戦いを探す"
+    "browseBattles": "戦いを探す",
+    "addFavorite": "お気に入りに追加",
+    "removeFavorite": "お気に入りから削除"
   },
   "battleCompare": {
     "title": "⚔️ 戦い比較",

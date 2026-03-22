@@ -103,7 +103,7 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
                 type="button"
                 onClick={handleFavoriteClick}
                 onKeyDown={(e) => e.stopPropagation()}
-                aria-label={isFavorited ? '取消收藏' : '添加收藏'}
+                aria-label={isFavorited ? t('favorites.removeFavorite') : t('favorites.addFavorite')}
                 className={`shrink-0 p-1 rounded-full transition-colors ${
                   isFavorited 
                     ? FAVORITE_BUTTON_COLORS.favorited.bg 
