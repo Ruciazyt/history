@@ -173,7 +173,6 @@ export function HistoryMap({
         fillColor: '#DC2626',
         fillOpacity: 0.8,
       });
-
       map.addOverlay(circle);
     });
   }, [mapReady, activeBoundaries, normalEvents, battles]);

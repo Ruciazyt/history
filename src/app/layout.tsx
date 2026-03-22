@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   description: 'History learning atlas MVP',
   keywords: ['history', 'atlas', 'China', 'dynasty', 'timeline', 'map'],
   authors: [{ name: 'History Atlas Team' }],
+  icons: {
+    icon: '/favicon.svg',
+  },
   openGraph: {
     title: 'History Atlas',
     description: 'History learning atlas MVP',
@@ -37,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh">
+    <html>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
