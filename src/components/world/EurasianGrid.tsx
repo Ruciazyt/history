@@ -41,7 +41,7 @@ const CENTRAL_ASIA_NAMES = new Set(['蒙古帝国', '孔雀王朝', '莫卧儿�
 // West: Rome, Persian, Islamic, Hellenistic, Egyptian empires (prefix matches for names with suffixes)
 const WEST_NAMES = new Set(['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '古埃及', '托勒密埃及']);
 // Extended matches: prefixes for boundary names that have additional suffixes
-const CHINA_NAMESMatches = ['蜀', '吴', '晋', '隋', '南北朝', '五代'];
+const CHINA_NAMESMatches = ['蜀', '吴', '晋', '隋', '南北朝', '五代', '三国'];
 const KOREA_NAMESMatches: string[] = [];
 const JAPAN_NAMESMatches: string[] = [];
 const VIETNAM_NAMESMatches: string[] = [];

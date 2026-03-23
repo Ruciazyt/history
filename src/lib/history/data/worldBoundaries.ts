@@ -346,6 +346,18 @@ export const eurasianBoundaries: WorldBoundary[] = [
     },
   },
 
+  // ═══ 中国王朝 (China) — Three Kingdoms / Medieval period ═══
+  {
+    type: 'Feature',
+    properties: { name: '三国', nameKey: 'empire_three-kingdoms', startYear: 220, endYear: 280, color: '#B91C1C' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [78, 36], [85, 30], [95, 22], [110, 18], [125, 22], [125, 38], [105, 45], [88, 44], [70, 38], [78, 36],
+      ]],
+    },
+  },
+
   // ═══ 印度河文明 (Indus Valley / Harappan) ═══
   {
     type: 'Feature',
@@ -390,6 +402,16 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
       type: 'Polygon',
       coordinates: [[
         [78, 36], [85, 30], [105, 15], [125, 20], [125, 42], [105, 48], [78, 44], [70, 38], [78, 36],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '三国', nameKey: 'empire_three-kingdoms', startYear: 220, endYear: 280, color: '#B91C1C' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [78, 36], [85, 30], [105, 18], [125, 22], [125, 40], [105, 45], [85, 44], [70, 38], [78, 36],
       ]],
     },
   },
