@@ -180,6 +180,17 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
     return active;
   }, [currentYear, mode]);
 
+  // Per-column active polity count for column header badges
+  const activeCountByColumn = React.useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const col of columns) {
+      counts[col.id] = col.polities.filter(
+        p => currentYear >= p.startYear && currentYear <= p.endYear
+      ).length;
+    }
+    return counts;
+  }, [columns, currentYear]);
+
   // Year tick marks (every 100 years)
   const yearTicks = React.useMemo(() => {
     const ticks: number[] = [];
@@ -272,11 +283,16 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
             {columns.map(col => (
               <div
                 key={col.id}
-                className={`flex-1 min-w-[120px] border-r border-zinc-200 ${col.headerBg} px-2 py-2 text-center`}
+                className={`flex-1 min-w-[120px] border-r border-zinc-200 ${col.headerBg} px-2 py-2 text-center flex flex-col items-center gap-0.5`}
               >
                 <span className="text-sm font-semibold text-zinc-700">
                   {t(col.labelKey) || col.id}
                 </span>
+                {activeCountByColumn[col.id] > 0 && (
+                  <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-white/80 text-zinc-600 ring-1 ring-zinc-200">
+                    {activeCountByColumn[col.id]}
+                  </span>
+                )}
               </div>
             ))}
           </div>
