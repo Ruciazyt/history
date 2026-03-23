@@ -283,6 +283,26 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   );
                 })}
 
+                {/* Era boundary labels */}
+                {[
+                  { year: 500, label: '中世纪', bgClass: 'bg-amber-100/80 text-amber-700' },
+                  { year: 1500, label: '近代', bgClass: 'bg-stone-100/80 text-stone-600' },
+                ].filter(e => e.year > minYear && e.year < maxYear).map(era => {
+                  const y = yearToY(era.year, minYear, maxYear, gridHeight);
+                  return (
+                    <div
+                      key={era.label}
+                      className={`absolute left-0 right-0 flex items-center pointer-events-none z-20`}
+                      style={{ top: y }}
+                    >
+                      <div className={`w-10 text-[9px] font-semibold px-0.5 text-center rounded-sm ${era.bgClass}`}>
+                        {era.label}
+                      </div>
+                      <div className="flex-1 h-px bg-amber-300/60" />
+                    </div>
+                  );
+                })}
+
                 {/* Current year indicator line on Y-axis */}
                 <div
                   className="absolute left-0 right-0 h-0.5 bg-red-500 z-10"
@@ -296,9 +316,30 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
               {columns.map(col => (
                 <div
                   key={col.id}
-                  className={`flex-1 min-w-[120px] relative border-r border-zinc-100 ${col.bgColor} cursor-crosshair`}
+                  className={`flex-1 min-w-[120px] relative border-r border-zinc-100 ${col.bgColor} cursor-crosshair overflow-hidden`}
                   onClick={handleYearClick}
                 >
+                  {/* Era band backgrounds */}
+                  {(() => {
+                    const bands: Array<{ label: string; start: number; end: number; bgClass: string }> = [
+                      { label: '古代', start: minYear, end: 500, bgClass: 'bg-amber-50/70' },
+                      { label: '中世纪', start: 500, end: 1500, bgClass: 'bg-stone-50/60' },
+                      { label: '近代', start: 1500, end: maxYear, bgClass: 'bg-blue-50/50' },
+                    ];
+                    return bands.map(band => {
+                      const topY = yearToY(Math.max(band.start, minYear), minYear, maxYear, gridHeight);
+                      const bottomY = yearToY(Math.min(band.end, maxYear), minYear, maxYear, gridHeight);
+                      const height = Math.max(bottomY - topY, 2);
+                      return (
+                        <div
+                          key={band.label}
+                          className={`absolute left-0 right-0 pointer-events-none ${band.bgClass}`}
+                          style={{ top: topY, height }}
+                        />
+                      );
+                    });
+                  })()}
+
                   {/* Background grid lines */}
                   {yearTicks.map(year => {
                     const y = yearToY(year, minYear, maxYear, gridHeight);
