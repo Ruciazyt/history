@@ -34,7 +34,7 @@ type RegionId = 'china' | 'korea' | 'japan' | 'central-asia' | 'west' | 'vietnam
 
 const CHINA_NAMES = new Set(['秦朝', '西汉', '东汉', '唐朝', '宋朝', '元朝', '明朝', '清朝']);
 const KOREA_NAMES = new Set(['高丽王朝', '朝鲜王朝']);
-const JAPAN_NAMES = new Set(['平安时代', '江户时代', '飞鸟时代', '室町时代']);
+const JAPAN_NAMES = new Set(['平安时代', '江户时代', '飞鸟时代', '室町时代', '弥生时代', '大和时代', '奈良时代']);
 const VIETNAM_NAMES = new Set(['李朝', '黎朝', '阮朝']);
 // Central Asia: Mongolian, Indian-subcontinent, Southeast Asian maritime empires
 const CENTRAL_ASIA_NAMES = new Set(['蒙古帝国', '孔雀王朝', '贵霜帝国', '莫卧儿帝国', '印度河文明', '萨塔瓦哈纳', '室利佛逝']);

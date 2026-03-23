@@ -589,7 +589,27 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   // ═══ 日本 (Japan) ═══
   {
     type: 'Feature',
-    properties: { name: '飞鸟时代', nameKey: 'empire_asuka', startYear: 592, endYear: 710, color: '#F472B6' },
+    properties: { name: '弥生时代', nameKey: 'empire_yayoi', startYear: -300, endYear: 250, color: '#F472B6' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [128, 31], [130, 33], [132, 35], [135, 37], [140, 38], [142, 37], [141, 33], [130, 30], [128, 31],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '大和时代', nameKey: 'empire_yamato', startYear: 250, endYear: 592, color: '#EC4899' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [128, 32], [130, 34], [133, 36], [136, 38], [140, 38], [142, 35], [141, 32], [130, 30], [128, 32],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '飞鸟时代', nameKey: 'empire_asuka', startYear: 592, endYear: 710, color: '#DB2777' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -599,7 +619,17 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '平安时代', nameKey: 'empire_heian', startYear: 794, endYear: 1185, color: '#EC4899' },
+    properties: { name: '奈良时代', nameKey: 'empire_nara', startYear: 710, endYear: 794, color: '#9D174D' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [129, 32], [130, 34], [133, 36], [136, 38], [140, 38], [142, 35], [141, 32], [130, 30], [129, 32],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '平安时代', nameKey: 'empire_heian', startYear: 794, endYear: 1185, color: '#BE185D' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
