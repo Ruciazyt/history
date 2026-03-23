@@ -67,7 +67,12 @@ export const ERA_BANDS: EraBandDef[] = [
 export const ERA_BOUNDARY_YEARS = [500, 1500] as const;
 
 /** Quick-jump century buttons shown at the bottom of the grid */
-export const QUICK_JUMP_YEARS = [-500, -300, -200, -100, 0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900] as const;
+export const QUICK_JUMP_YEARS = [
+  -2500, -2000, -1500, -1000, -500,
+  -300, -200, -100, 0, 100, 200, 300, 400, 500,
+  600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500,
+  1600, 1700, 1800, 1900,
+] as const;
 
 export function classifyRegion(boundary: WorldBoundary): RegionId {
   const name = boundary.properties.name;
