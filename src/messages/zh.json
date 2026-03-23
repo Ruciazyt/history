@@ -1768,7 +1768,19 @@
   "placeNames": {
     "title": "地名演化",
     "noResults": "未找到匹配的城市",
-    "activeEmpires": "个地名"
+    "activeEmpires": "个地名",
+    "pageDescription": "城市在不同历史时期的名称变化",
+    "searchPlaceholder": "搜索城市名称...",
+    "citiesCount": "个城市",
+    "regionCities": "{} 个城市",
+    "currentIndicator": "当前",
+    "toggleLocale": "EN",
+    "toggleLocaleAlt": "中文",
+    "collaborators": "搭档",
+    "opponents": "对手",
+    "battles": "场战役",
+    "winRate": "胜率",
+    "eraNames": "个名称"
   },
   "world": {
     "title": "欧亚对比",

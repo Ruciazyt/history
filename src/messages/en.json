@@ -1591,7 +1591,19 @@
   "placeNames": {
     "title": "Place Name Evolution",
     "noResults": "No matching cities found",
-    "activeEmpires": "places"
+    "activeEmpires": "places",
+    "pageDescription": "How city names changed throughout history",
+    "searchPlaceholder": "Search city names...",
+    "citiesCount": "cities",
+    "regionCities": "{} cities",
+    "currentIndicator": "Current",
+    "toggleLocale": "EN",
+    "toggleLocaleAlt": "Chinese",
+    "collaborators": "Collaborators",
+    "opponents": "Opponents",
+    "battles": "battles",
+    "winRate": "win rate",
+    "eraNames": "names"
   },
   "world": {
     "title": "Eurasian Timeline",

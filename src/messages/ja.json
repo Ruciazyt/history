@@ -1584,7 +1584,19 @@
   "placeNames": {
     "title": "地名変化",
     "noResults": "一致する都市が見つかりません",
-    "activeEmpires": "箇所"
+    "activeEmpires": "箇所",
+    "pageDescription": "都市の名前の歴史的変化",
+    "searchPlaceholder": "都市名を検索...",
+    "citiesCount": "都市",
+    "regionCities": "{} 都市",
+    "currentIndicator": "現在",
+    "toggleLocale": "EN",
+    "toggleLocaleAlt": "日本語",
+    "collaborators": "パートナー",
+    "opponents": "対戦相手",
+    "battles": "戦闘",
+    "winRate": "勝利率",
+    "eraNames": "名称"
   },
   "world": {
     "title": "ユーラシア比較",
