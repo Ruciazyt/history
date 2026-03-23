@@ -103,7 +103,11 @@
       "china": "China",
       "rome": "Rome/Byzantine/Ottoman",
       "persia": "Persia",
-      "islam": "Islamic Caliphates"
+      "islam": "Islamic Caliphates",
+      "egypt": "Egypt",
+      "indus": "Indus Valley",
+      "mesopotamia": "Mesopotamia",
+      "hellenistic": "Hellenistic Greece"
     },
     "ea": {
       "china": "China",
