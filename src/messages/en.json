@@ -1613,5 +1613,16 @@
     "battlesFound": "related battles",
     "expand": "Show All",
     "collapse": "Collapse"
+  },
+  "onThisDay": {
+    "title": "On This Day",
+    "found": "{count} related battles",
+    "noEvents": "No events found",
+    "featured": "Featured Battle",
+    "viewDetail": "View Details",
+    "allEvents": "All {count} battles",
+    "noEventsHint": "Try another date",
+    "monthLabel": "",
+    "dayLabel": ""
   }
 }

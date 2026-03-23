@@ -110,7 +110,7 @@ export function OnThisDayClient({
                 <option key={i} value={String(i + 1).padStart(2, '0')}>{getMonthName(i + 1)}</option>
               ))}
             </select>
-            <span className={`text-sm ${BATTLES_CLIENT_COLORS.eraFilter.inactive.text}`}>月</span>
+            <span className={`text-sm ${BATTLES_CLIENT_COLORS.eraFilter.inactive.text}`}>{t('onThisDay.monthLabel')}</span>
             <select
               value={day}
               onChange={(e) => {
@@ -123,7 +123,7 @@ export function OnThisDayClient({
                 <option key={i} value={String(i + 1).padStart(2, '0')}>{i + 1}</option>
               ))}
             </select>
-            <span className={`text-sm ${BATTLES_CLIENT_COLORS.eraFilter.inactive.text}`}>日</span>
+            <span className={`text-sm ${BATTLES_CLIENT_COLORS.eraFilter.inactive.text}`}>{t('onThisDay.dayLabel')}</span>
           </div>
           <span className={`text-xs ${BATTLES_CLIENT_COLORS.eraFilter.inactive.text}`}>
             {battlesOnThisDay.length > 0 

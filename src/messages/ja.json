@@ -1606,5 +1606,16 @@
     "battlesFound": "件の関連戦い",
     "expand": "すべて表示",
     "collapse": "折りたたむ"
+  },
+  "onThisDay": {
+    "title": "歴史上の今日",
+    "found": "{count}件の関連戦い",
+    "noEvents": "イベントなし",
+    "featured": "厳選戦い",
+    "viewDetail": "詳細を見る",
+    "allEvents": "すべて {count}件",
+    "noEventsHint": "他の日付を試してください",
+    "monthLabel": "月",
+    "dayLabel": "日"
   }
 }

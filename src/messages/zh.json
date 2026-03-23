@@ -1794,5 +1794,16 @@
     "expand": "展开全部",
     "collapse": "收起"
   },
-  "empire_three-kingdoms": "三国"
+  "empire_three-kingdoms": "三国",
+  "onThisDay": {
+    "title": "历史上的今天",
+    "found": "{count} 场战役",
+    "noEvents": "暂无事件",
+    "featured": "精选战役",
+    "viewDetail": "查看详情",
+    "allEvents": "全部 {count} 场",
+    "noEventsHint": "选择其他日期试试",
+    "monthLabel": "月",
+    "dayLabel": "日"
+  }
 }
