@@ -475,7 +475,27 @@
     "ea-vn-leithanh": "黎聖宗",
     "ea-vn-quangtrung": "光中皇帝（阮恵）",
     "ea-vn-gialong": "嘉隆帝（阮福映）",
-    "relations": "家族関係"
+    "relations": "家族関係",
+    "wc-cn-3k-dyn": "三国時代",
+    "wc-cn-han-dyn": "漢朝",
+    "wc-cn-jin-dyn": "晋・南北朝",
+    "wc-cn-ming-dyn": "明朝",
+    "wc-cn-qin-dyn": "秦朝",
+    "wc-cn-qing-dyn": "清朝",
+    "wc-cn-song-dyn": "宋朝",
+    "wc-cn-sui-dyn": "隋唐",
+    "wc-cn-yuan-dyn": "元朝",
+    "wc-is-abbasid-dyn": "アッバース朝",
+    "wc-is-mongol-dyn": "イルハン国",
+    "wc-is-rashidun-dyn": "正統カリフ時代",
+    "wc-is-timurid-dyn": "ティムール帝国",
+    "wc-pe-parthian-dyn": "パルティア",
+    "wc-pe-seleucid-dyn": "セレウコス朝",
+    "wc-ro-byz-fall-dyn": "ビザンツ後期",
+    "wc-ro-byzantine-dyn": "ビザンツ帝国",
+    "wc-ro-ottoman-dyn": "オスマン帝国",
+    "wc-ro-republic-dyn": "ローマ共和国",
+    "wc-ro-west-dyn": "西ローマ帝国"
   },
   "rulerBio": {
     "qinshihuang": "中国历史上首位完成大一统的皇帝。13岁即位，亲政后用10年灭六国，建立中国第一个中央集权封建王朝。推行郡县制、统一文字度量衡、修驰道、筑长城，奠定两千年帝制基础。",
@@ -963,7 +983,8 @@
     "ea-kr-goryeo": "1231年蒙古入侵；1251年高丽大藏经（八万大藏经）；高丽青瓷（12世纪）；1392年李成桂篡位建朝鲜。",
     "ea-kr-joseon": "1392年建国；1443年训民正音（韩文）创制；1592年壬辰倭乱李舜臣龟船；朱子学立国；科举制度完善。",
     "ea-vn-tran": "1258、1285、1288年三次击退蒙古；陈兴道白藤江之战；越南民族独立精神确立。",
-    "ea-vn-le": "1427年驱逐明朝；1428年黎利建后黎朝；圣宗洪德改革全盛；字喃文学（翘传前身）；1788年西山朝篡位。"
+    "ea-vn-le": "1427年驱逐明朝；1428年黎利建后黎朝；圣宗洪德改革全盛；字喃文学（翘传前身）；1788年西山朝篡位。",
+    "wc-ro-suleiman": "スレイマン大帝"
   },
   "event": {
     "sa-770-zhou-east": {

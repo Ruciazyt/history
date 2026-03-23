@@ -475,7 +475,27 @@
     "ea-vn-leithanh": "Le Thanh Tong",
     "ea-vn-quangtrung": "Quang Trung",
     "ea-vn-gialong": "Gia Long",
-    "relations": "Family Relations"
+    "relations": "Family Relations",
+    "wc-cn-3k-dyn": "Three Kingdoms",
+    "wc-cn-han-dyn": "Han Dynasty",
+    "wc-cn-jin-dyn": "Jin / N-S Dynasties",
+    "wc-cn-ming-dyn": "Ming Dynasty",
+    "wc-cn-qin-dyn": "Qin Dynasty",
+    "wc-cn-qing-dyn": "Qing Dynasty",
+    "wc-cn-song-dyn": "Song Dynasty",
+    "wc-cn-sui-dyn": "Sui-Tang",
+    "wc-cn-yuan-dyn": "Yuan Dynasty",
+    "wc-is-abbasid-dyn": "Abbasid Caliphate",
+    "wc-is-mongol-dyn": "Ilkhanate",
+    "wc-is-rashidun-dyn": "Rashidun Caliphate",
+    "wc-is-timurid-dyn": "Timurid Empire",
+    "wc-pe-parthian-dyn": "Parthian Empire",
+    "wc-pe-seleucid-dyn": "Seleucid Empire",
+    "wc-ro-byz-fall-dyn": "Byzantine Late Period",
+    "wc-ro-byzantine-dyn": "Byzantine Empire",
+    "wc-ro-ottoman-dyn": "Ottoman Empire",
+    "wc-ro-republic-dyn": "Roman Republic",
+    "wc-ro-west-dyn": "Western Rome"
   },
   "rulerBio": {
     "qinshihuang": "China's first emperor, who unified the warring states in 221 BCE. He standardized writing, weights and measures, built the Great Wall and vast road networks, and established the centralized imperial system that would last over 2,000 years.",
@@ -963,7 +983,8 @@
     "ea-kr-goryeo": "1231年蒙古入侵；1251年高丽大藏经（八万大藏经）；高丽青瓷（12世纪）；1392年李成桂篡位建朝鲜。",
     "ea-kr-joseon": "1392年建国；1443年训民正音（韩文）创制；1592年壬辰倭乱李舜臣龟船；朱子学立国；科举制度完善。",
     "ea-vn-tran": "1258、1285、1288年三次击退蒙古；陈兴道白藤江之战；越南民族独立精神确立。",
-    "ea-vn-le": "1427年驱逐明朝；1428年黎利建后黎朝；圣宗洪德改革全盛；字喃文学（翘传前身）；1788年西山朝篡位。"
+    "ea-vn-le": "1427年驱逐明朝；1428年黎利建后黎朝；圣宗洪德改革全盛；字喃文学（翘传前身）；1788年西山朝篡位。",
+    "wc-ro-suleiman": "Suleiman the Magnificent"
   },
   "event": {
     "viewTimeline": "View Timeline",
