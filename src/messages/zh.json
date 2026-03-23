@@ -1744,6 +1744,11 @@
       "west": "西方",
       "vietnam": "越南",
       "other": "其他"
+    },
+    "eraBand": {
+      "ancient": "古代",
+      "medieval": "中世纪",
+      "earlyModern": "近代"
     }
   },
   "placeNames": {

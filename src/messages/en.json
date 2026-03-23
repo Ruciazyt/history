@@ -1564,6 +1564,11 @@
       "west": "West",
       "vietnam": "Vietnam",
       "other": "Other"
+    },
+    "eraBand": {
+      "ancient": "Ancient",
+      "medieval": "Medieval",
+      "earlyModern": "Early Modern"
     }
   },
   "placeNames": {

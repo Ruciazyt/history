@@ -1557,6 +1557,11 @@
       "vietnam": "ベトナム",
       "central-asia": "中央アジア",
       "other": "その他"
+    },
+    "eraBand": {
+      "ancient": "古代",
+      "medieval": "中世",
+      "earlyModern": "近世"
     }
   },
   "placeNames": {

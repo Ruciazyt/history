@@ -285,18 +285,18 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
 
                 {/* Era boundary labels */}
                 {[
-                  { year: 500, label: '中世纪', bgClass: 'bg-amber-100/80 text-amber-700' },
-                  { year: 1500, label: '近代', bgClass: 'bg-stone-100/80 text-stone-600' },
+                  { year: 500, labelKey: 'grid.eraBand.medieval', bgClass: 'bg-amber-100/80 text-amber-700' },
+                  { year: 1500, labelKey: 'grid.eraBand.earlyModern', bgClass: 'bg-stone-100/80 text-stone-600' },
                 ].filter(e => e.year > minYear && e.year < maxYear).map(era => {
                   const y = yearToY(era.year, minYear, maxYear, gridHeight);
                   return (
                     <div
-                      key={era.label}
+                      key={era.labelKey}
                       className={`absolute left-0 right-0 flex items-center pointer-events-none z-20`}
                       style={{ top: y }}
                     >
                       <div className={`w-10 text-[9px] font-semibold px-0.5 text-center rounded-sm ${era.bgClass}`}>
-                        {era.label}
+                        {t(era.labelKey)}
                       </div>
                       <div className="flex-1 h-px bg-amber-300/60" />
                     </div>
@@ -321,10 +321,10 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                 >
                   {/* Era band backgrounds */}
                   {(() => {
-                    const bands: Array<{ label: string; start: number; end: number; bgClass: string }> = [
-                      { label: '古代', start: minYear, end: 500, bgClass: 'bg-amber-50/70' },
-                      { label: '中世纪', start: 500, end: 1500, bgClass: 'bg-stone-50/60' },
-                      { label: '近代', start: 1500, end: maxYear, bgClass: 'bg-blue-50/50' },
+                    const bands: Array<{ labelKey: string; start: number; end: number; bgClass: string }> = [
+                      { labelKey: 'grid.eraBand.ancient', start: minYear, end: 500, bgClass: 'bg-amber-50/70' },
+                      { labelKey: 'grid.eraBand.medieval', start: 500, end: 1500, bgClass: 'bg-stone-50/60' },
+                      { labelKey: 'grid.eraBand.earlyModern', start: 1500, end: maxYear, bgClass: 'bg-blue-50/50' },
                     ];
                     return bands.map(band => {
                       const topY = yearToY(Math.max(band.start, minYear), minYear, maxYear, gridHeight);
@@ -332,7 +332,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                       const height = Math.max(bottomY - topY, 2);
                       return (
                         <div
-                          key={band.label}
+                          key={band.labelKey}
                           className={`absolute left-0 right-0 pointer-events-none ${band.bgClass}`}
                           style={{ top: topY, height }}
                         />
