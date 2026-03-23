@@ -316,6 +316,19 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   );
                 })}
 
+                {/* Ancient era label at top when grid starts before 500 */}
+                {minYear < ERA_BOUNDARY_YEARS[0] && ERA_BANDS[0] && (
+                  <div
+                    className="absolute left-0 right-0 flex items-center pointer-events-none z-20"
+                    style={{ top: 0 }}
+                  >
+                    <div className={`w-10 text-[9px] font-semibold px-0.5 text-center rounded-sm ${ERA_BANDS[0].badgeClass}`}>
+                      {t(ERA_BANDS[0].labelKey)}
+                    </div>
+                    <div className="flex-1 h-px bg-amber-300/60" />
+                  </div>
+                )}
+
                 {/* Era boundary labels */}
                 {ERA_BOUNDARY_YEARS.map((boundaryYear, idx) => {
                   if (boundaryYear <= minYear || boundaryYear >= maxYear) return null;
