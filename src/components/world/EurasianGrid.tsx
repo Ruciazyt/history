@@ -316,6 +316,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   // The label belongs to the era AFTER this boundary
                   const bandIdx = idx + 1; // ERA_BANDS[0] = ancient (before 500), [1] = medieval, [2] = earlyModern
                   const band = ERA_BANDS[bandIdx];
+                  if (!band) return null;
                   return (
                     <div
                       key={boundaryYear}
@@ -352,6 +353,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                     { band: ERA_BANDS[1], start: ERA_BOUNDARY_YEARS[0], end: ERA_BOUNDARY_YEARS[1] },
                     { band: ERA_BANDS[2], start: ERA_BOUNDARY_YEARS[1], end: maxYear },
                   ].map(({ band, start, end }) => {
+                    if (!band) return null;
                     const topY = yearToY(start, minYear, maxYear, gridHeight);
                     const bottomY = yearToY(end, minYear, maxYear, gridHeight);
                     const height = Math.max(bottomY - topY, 2);
