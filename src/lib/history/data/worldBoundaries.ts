@@ -371,6 +371,52 @@ export const eurasianBoundaries: WorldBoundary[] = [
     },
   },
 
+  // ═══ 亚述/巴比伦 (Mesopotamia: Assyria & Babylon) ═══
+  {
+    type: 'Feature',
+    properties: { name: '阿卡德帝国', nameKey: 'empire_akkadian', startYear: -2334, endYear: -2154, color: '#92400E' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [40, 32], [48, 34], [52, 36], [55, 40], [52, 44], [45, 44], [38, 40], [36, 35],
+        [38, 32], [40, 32],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '古巴比伦', nameKey: 'empire_old-babylon', startYear: -1894, endYear: -1595, color: '#B45309' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [38, 30], [44, 32], [50, 34], [52, 38], [48, 42], [42, 42], [36, 38], [34, 33],
+        [36, 30], [38, 30],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '亚述帝国', nameKey: 'empire_assyrian', startYear: -911, endYear: -609, color: '#78350F' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [36, 30], [42, 32], [50, 36], [58, 40], [60, 42], [55, 46], [45, 46], [38, 42],
+        [32, 38], [34, 32], [36, 30],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '新巴比伦', nameKey: 'empire_neobabylon', startYear: -626, endYear: -539, color: '#A16207' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [36, 28], [42, 30], [50, 34], [56, 38], [52, 42], [44, 42], [36, 38], [32, 33],
+        [34, 28], [36, 28],
+      ]],
+    },
+  },
+
   // ═══ 塞琉古帝国 (Seleucid Empire) ═══
   {
     type: 'Feature',
