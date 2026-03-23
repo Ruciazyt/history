@@ -258,6 +258,48 @@ export const eurasianBoundaries: WorldBoundary[] = [
     },
   },
 
+  // ═══ 埃及文明 (Egypt) ═══
+  {
+    type: 'Feature',
+    properties: { name: '古埃及', nameKey: 'empire_egypt-old', startYear: -2686, endYear: -2181, color: '#EAB308' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [25, 31], [30, 31], [35, 32], [35, 28], [30, 24], [25, 24], [25, 31],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '古埃及', nameKey: 'empire_egypt-middle', startYear: -2055, endYear: -1650, color: '#CA8A04' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [25, 31], [30, 31], [35, 32], [35, 28], [30, 24], [25, 24], [25, 31],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '古埃及', nameKey: 'empire_egypt-new', startYear: -1550, endYear: -1069, color: '#A16207' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [25, 31], [32, 31], [38, 32], [40, 28], [35, 22], [28, 22], [25, 24], [25, 31],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '托勒密埃及', nameKey: 'empire_egypt-ptolemaic', startYear: -332, endYear: -30, color: '#854D0E' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [22, 31], [32, 31], [38, 32], [40, 28], [32, 22], [25, 24], [22, 28], [22, 31],
+      ]],
+    },
+  },
+
   // ═══ 其他帝国 ═══
   {
     type: 'Feature',
