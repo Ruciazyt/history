@@ -345,6 +345,17 @@ export const eurasianBoundaries: WorldBoundary[] = [
       ]],
     },
   },
+  {
+    type: 'Feature',
+    properties: { name: '赫梯帝国', nameKey: 'empire_hittite', startYear: -1650, endYear: -1178, color: '#7C3AED' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [26, 40], [32, 42], [38, 40], [42, 38], [44, 36], [42, 34], [38, 33],
+        [34, 34], [30, 36], [28, 38], [26, 40],
+      ]],
+    },
+  },
 
   // ═══ 中国王朝 (China) — Three Kingdoms / Medieval period ═══
   {

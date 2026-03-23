@@ -39,14 +39,14 @@ const VIETNAM_NAMES = new Set(['李朝', '黎朝', '阮朝']);
 // Central Asia: Mongolian, Indian-subcontinent, Southeast Asian maritime empires
 const CENTRAL_ASIA_NAMES = new Set(['蒙古帝国', '孔雀王朝', '莫卧儿帝国', '印度河文明', '萨塔瓦哈纳', '室利佛逝']);
 // West: Rome, Persian, Islamic, Hellenistic, Egyptian, Mesopotamian empires (prefix matches for names with suffixes)
-const WEST_NAMES = new Set(['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '古埃及', '托勒密埃及', '亚述', '巴比伦', '阿卡德']);
+const WEST_NAMES = new Set(['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '古埃及', '托勒密埃及', '亚述', '巴比伦', '阿卡德', '赫梯']);
 // Extended matches: prefixes for boundary names that have additional suffixes
 const CHINA_NAMESMatches = ['蜀', '吴', '晋', '隋', '南北朝', '五代', '三国'];
 const KOREA_NAMESMatches: string[] = [];
 const JAPAN_NAMESMatches: string[] = [];
 const VIETNAM_NAMESMatches: string[] = [];
 const CENTRAL_ASIA_NAMESMatches: string[] = [];
-const WEST_NAMESMatches = ['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '塞琉古', '亚述', '巴比伦', '阿卡德'];
+const WEST_NAMESMatches = ['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '塞琉古', '亚述', '巴比伦', '阿卡德', '赫梯'];
 
 /** Era band configuration: defines historical period dividers shown on the grid */
 interface EraBandDef {
