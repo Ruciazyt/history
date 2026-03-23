@@ -349,6 +349,17 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
+    properties: { name: '贵霜帝国', nameKey: 'empire_kushan', startYear: 30, endYear: 375, color: '#A855F7' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [60, 30], [70, 28], [80, 32], [90, 38], [85, 45], [75, 48], [65, 46], [55, 40],
+        [55, 34], [60, 30],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
     properties: { name: '莫卧儿帝国', nameKey: 'empire_mughal', startYear: 1526, endYear: 1857, color: '#CA8A04' },
     geometry: {
       type: 'Polygon',
