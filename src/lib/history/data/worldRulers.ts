@@ -26,6 +26,19 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-ro-suleiman', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-suleiman', bioKey: 'rulerBio.wc-ro-suleiman', highlightKey: 'rulerHighlight.wc-ro-suleiman', startYear: 1520, endYear: 1566 },
   { id: 'wc-ro-ottoman-late', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-ottoman-dyn', bioKey: 'rulerBio.wc-ro-ottoman-late', startYear: 1566, endYear: 1912 , isDynastyBlock: true },
 
+  // ── Egypt (mapped to wc-rome "west" column) ───────────────────────────
+  { id: 'wc-eg-old-kingdom', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-eg-old-kingdom', bioKey: 'rulerBio.wc-eg-old-kingdom', startYear: -2686, endYear: -2181 , isDynastyBlock: true },
+  { id: 'wc-eg-middle-kingdom', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-eg-middle-kingdom', bioKey: 'rulerBio.wc-eg-middle-kingdom', startYear: -2055, endYear: -1650 , isDynastyBlock: true },
+  { id: 'wc-eg-new-kingdom', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-eg-new-kingdom', bioKey: 'rulerBio.wc-eg-new-kingdom', startYear: -1550, endYear: -1069 , isDynastyBlock: true },
+  { id: 'wc-eg-ramesses', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-eg-ramesses', bioKey: 'rulerBio.wc-eg-ramesses', highlightKey: 'rulerHighlight.wc-eg-ramesses', startYear: -1279, endYear: -1213 },
+  { id: 'wc-eg-late-ptolemaic', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-eg-ptolemaic', bioKey: 'rulerBio.wc-eg-ptolemaic', startYear: -332, endYear: -30 , isDynastyBlock: true },
+
+  // ── Indus Valley / Maurya (mapped to wc-persia "central-asia" column) ──
+  { id: 'wc-iv-indus', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-iv-indus', bioKey: 'rulerBio.wc-iv-indus', startYear: -2600, endYear: -1900 , isDynastyBlock: true },
+  { id: 'wc-iv-maurya', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-iv-maurya', bioKey: 'rulerBio.wc-iv-maurya', startYear: -322, endYear: -185 , isDynastyBlock: true },
+  { id: 'wc-iv-chandragupta', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-iv-chandragupta', bioKey: 'rulerBio.wc-iv-chandragupta', highlightKey: 'rulerHighlight.wc-iv-chandragupta', startYear: -322, endYear: -298 },
+  { id: 'wc-iv-ashoka', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-iv-ashoka', bioKey: 'rulerBio.wc-iv-ashoka', highlightKey: 'rulerHighlight.wc-iv-ashoka', startYear: -268, endYear: -232 },
+
   // ── Persia ─────────────────────────────────────────────
   { id: 'wc-pe-cyrus', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-cyrus', bioKey: 'rulerBio.wc-pe-cyrus', highlightKey: 'rulerHighlight.wc-pe-cyrus', startYear: -550, endYear: -530 },
   { id: 'wc-pe-darius', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-darius', bioKey: 'rulerBio.wc-pe-darius', highlightKey: 'rulerHighlight.wc-pe-darius', startYear: -522, endYear: -486 },

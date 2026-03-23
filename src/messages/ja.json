@@ -1628,5 +1628,26 @@
     "monthLabel": "月",
     "dayLabel": "日"
   },
-  "empire_holy-roman": "神聖ローマ帝国"
+  "empire_holy-roman": "神聖ローマ帝国",
+  "ruler.wc-eg-old-kingdom": "古王国エジプト",
+  "ruler.wc-eg-middle-kingdom": "中王国エジプト",
+  "ruler.wc-eg-new-kingdom": "新王国エジプト",
+  "ruler.wc-eg-ramesses": "ラムセス2世",
+  "ruler.wc-eg-ptolemaic": "プトレマイオス朝エジプト",
+  "ruler.wc-iv-indus": "インダス文明",
+  "ruler.wc-iv-maurya": "Maurya帝国",
+  "ruler.wc-iv-chandragupta": "Chandragupta Maurya",
+  "ruler.wc-iv-ashoka": "Ashoka",
+  "rulerBio.wc-eg-old-kingdom": "吉薩のピラミッドを築いた時代。",
+  "rulerBio.wc-eg-middle-kingdom": "文化復興と拡張的时代。",
+  "rulerBio.wc-eg-new-kingdom": "エジプト最盛期。",
+  "rulerBio.wc-eg-ramesses": "最も強力なファラオ。",
+  "rulerBio.wc-eg-ptolemaic": "プトレマイオス1世が建国したギリシャ語王朝。",
+  "rulerBio.wc-iv-indus": "高度な都市計画を持つハラッパ文明。",
+  "rulerBio.wc-iv-maurya": "インド亜大陸的大部分を統一した最初の帝国。",
+  "rulerBio.wc-iv-chandragupta": "Maurya帝国の建国者。",
+  "rulerBio.wc-iv-ashoka": "好戦的な皇帝돌转向上 Buddhism.",
+  "rulerHighlight.wc-eg-ramesses": "最强のファラオ",
+  "rulerHighlight.wc-iv-chandragupta": "Maurya建国者",
+  "rulerHighlight.wc-iv-ashoka": "Buddhist皇帝"
 }

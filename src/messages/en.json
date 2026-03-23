@@ -1635,5 +1635,26 @@
     "monthLabel": "",
     "dayLabel": ""
   },
-  "empire_holy-roman": "Holy Roman Empire"
+  "empire_holy-roman": "Holy Roman Empire",
+  "ruler.wc-eg-old-kingdom": "Old Kingdom Egypt",
+  "ruler.wc-eg-middle-kingdom": "Middle Kingdom Egypt",
+  "ruler.wc-eg-new-kingdom": "New Kingdom Egypt",
+  "ruler.wc-eg-ramesses": "Ramesses II",
+  "ruler.wc-eg-ptolemaic": "Ptolemaic Egypt",
+  "ruler.wc-iv-indus": "Indus Valley Civilization",
+  "ruler.wc-iv-maurya": "Maurya Empire",
+  "ruler.wc-iv-chandragupta": "Chandragupta Maurya",
+  "ruler.wc-iv-ashoka": "Ashoka",
+  "rulerBio.wc-eg-old-kingdom": "The Old Kingdom built the pyramids of Giza.",
+  "rulerBio.wc-eg-middle-kingdom": "A period of文艺复兴 and expansion.",
+  "rulerBio.wc-eg-new-kingdom": "Egypt at its peak power, including the Ramesside period.",
+  "rulerBio.wc-eg-ramesses": "Ramesses II, Egypts most powerful pharaoh.",
+  "rulerBio.wc-eg-ptolemaic": "Greek-speaking dynasty founded by Ptolemy I.",
+  "rulerBio.wc-iv-indus": "Harappan civilization with advanced urban planning.",
+  "rulerBio.wc-iv-maurya": "First empire to unify most of Indian subcontinent.",
+  "rulerBio.wc-iv-chandragupta": "Founder of the Maurya Empire.",
+  "rulerBio.wc-iv-ashoka": "Ashoka the Great, converted to Buddhism after Kalinga war.",
+  "rulerHighlight.wc-eg-ramesses": "Most powerful pharaoh",
+  "rulerHighlight.wc-iv-chandragupta": "Maurya founder",
+  "rulerHighlight.wc-iv-ashoka": "Buddhist emperor"
 }

@@ -3,7 +3,7 @@ import type { Era } from '@/lib/history/types';
 export const worldComparisonEra: Era = {
   id: 'world-comparison',
   nameKey: 'era.world-comparison',
-  startYear: -500,
+  startYear: -2700,
   endYear: 1912,
   isParallelPolities: true,
   polities: [
