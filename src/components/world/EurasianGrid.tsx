@@ -58,13 +58,20 @@ interface EraBandDef {
 }
 
 export const ERA_BANDS: EraBandDef[] = [
-  { labelKey: 'grid.eraBand.ancient',    bgClass: 'bg-amber-50/70',  badgeClass: 'bg-amber-100/80 text-amber-700' },
-  { labelKey: 'grid.eraBand.medieval',   bgClass: 'bg-stone-50/60', badgeClass: 'bg-amber-100/80 text-amber-700' },
-  { labelKey: 'grid.eraBand.earlyModern', bgClass: 'bg-blue-50/50',  badgeClass: 'bg-stone-100/80 text-stone-600' },
+  { labelKey: 'grid.eraBand.ancient',    bgClass: 'bg-amber-50/70',   badgeClass: 'bg-amber-100/80 text-amber-700' },
+  { labelKey: 'grid.eraBand.medieval',   bgClass: 'bg-stone-50/60',   badgeClass: 'bg-stone-200/80 text-stone-700' },
+  { labelKey: 'grid.eraBand.earlyModern', bgClass: 'bg-blue-50/50',   badgeClass: 'bg-blue-100/80 text-blue-700' },
 ];
 
 /** Era band boundary years (chronological order) */
 export const ERA_BOUNDARY_YEARS = [500, 1500] as const;
+
+/** Returns the era band index (0=ancient, 1=medieval, 2=earlyModern) for a given year */
+export function getEraBandIndex(year: number): number {
+  if (year < ERA_BOUNDARY_YEARS[0]) return 0;
+  if (year < ERA_BOUNDARY_YEARS[1]) return 1;
+  return 2;
+}
 
 /** Quick-jump century buttons shown at the bottom of the grid */
 export const QUICK_JUMP_YEARS = [
@@ -491,7 +498,10 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
           {/* Active polities at current year */}
           <div className={`shrink-0 border-b border-zinc-200 ${HISTORY_APP_COLORS.sidebar.header.bg} p-3`}>
             <div className={`text-xs font-semibold uppercase tracking-wide ${HISTORY_APP_COLORS.sidebar.header.text}`}>
-              {t('grid.activeAtYear', { year: formatYear(currentYear) }) || `${formatYear(currentYear)} 活跃政权`}
+              {t('grid.activeAtYear', { year: formatYear(currentYear) })}
+            </div>
+            <div className={`mt-0.5 text-[10px] font-medium px-1.5 py-0.5 rounded-md w-fit ${ERA_BANDS[getEraBandIndex(currentYear)]!.badgeClass}`}>
+              {t(ERA_BANDS[getEraBandIndex(currentYear)]!.labelKey)}
             </div>
           </div>
           <div className="flex-1 overflow-y-auto p-2 space-y-1">
