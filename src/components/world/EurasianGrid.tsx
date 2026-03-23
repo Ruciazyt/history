@@ -421,6 +421,16 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                           {formatYear(polity.startYear)}
                         </div>
 
+                        {/* End year - bottom right corner (only for tall bands where tooltip doesn't appear) */}
+                        {height > 30 && (
+                          <div
+                            className="absolute right-2 bottom-0.5 text-[10px] font-medium opacity-75"
+                            style={{ color: polity.color }}
+                          >
+                            {formatYear(polity.endYear)}
+                          </div>
+                        )}
+
                         {/* Tooltip on hover */}
                         {isHovered && height <= 30 && (
                           <div
