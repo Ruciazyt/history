@@ -38,17 +38,25 @@ const JAPAN_NAMES = new Set(['平安时代', '江户时代']);
 const VIETNAM_NAMES = new Set(['李朝', '黎朝', '阮朝']);
 // Central Asia: Mongolian, Indian-subcontinent empires and steppe empires
 const CENTRAL_ASIA_NAMES = new Set(['蒙古帝国', '孔雀王朝', '莫卧儿帝国', '印度河文明']);
-// West: Rome, Persian, Islamic, Hellenistic, Egyptian empires
+// West: Rome, Persian, Islamic, Hellenistic, Egyptian empires (prefix matches for names with suffixes)
 const WEST_NAMES = new Set(['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '古埃及', '托勒密埃及']);
+// Extended matches: prefixes for boundary names that have additional suffixes
+const CHINA_NAMESMatches = ['蜀', '吴', '晋', '隋', '南北朝', '五代'];
+const KOREA_NAMESMatches: string[] = [];
+const JAPAN_NAMESMatches: string[] = [];
+const VIETNAM_NAMESMatches: string[] = [];
+const CENTRAL_ASIA_NAMESMatches: string[] = [];
+const WEST_NAMESMatches = ['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚'];
 
 function classifyRegion(boundary: WorldBoundary): RegionId {
   const name = boundary.properties.name;
-  if (CHINA_NAMES.has(name)) return 'china';
-  if (KOREA_NAMES.has(name)) return 'korea';
-  if (JAPAN_NAMES.has(name)) return 'japan';
-  if (VIETNAM_NAMES.has(name)) return 'vietnam';
-  if (CENTRAL_ASIA_NAMES.has(name)) return 'central-asia';
-  if (WEST_NAMES.has(name)) return 'west';
+  // Use prefix matching since boundary names include suffixes (e.g. "罗马帝国" matches "罗马")
+  if (CHINA_NAMES.has(name) || CHINA_NAMESMatches.some(n => name.startsWith(n))) return 'china';
+  if (KOREA_NAMES.has(name) || KOREA_NAMESMatches.some(n => name.startsWith(n))) return 'korea';
+  if (JAPAN_NAMES.has(name) || JAPAN_NAMESMatches.some(n => name.startsWith(n))) return 'japan';
+  if (VIETNAM_NAMES.has(name) || VIETNAM_NAMESMatches.some(n => name.startsWith(n))) return 'vietnam';
+  if (CENTRAL_ASIA_NAMES.has(name) || CENTRAL_ASIA_NAMESMatches.some(n => name.startsWith(n))) return 'central-asia';
+  if (WEST_NAMES.has(name) || WEST_NAMESMatches.some(n => name.startsWith(n))) return 'west';
   return 'other';
 }
 
