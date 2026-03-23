@@ -37,7 +37,7 @@ const KOREA_NAMES = new Set(['高丽王朝', '朝鲜王朝']);
 const JAPAN_NAMES = new Set(['平安时代', '江户时代']);
 const VIETNAM_NAMES = new Set(['李朝', '黎朝', '阮朝']);
 // Central Asia: Mongolian, Indian-subcontinent empires and steppe empires
-const CENTRAL_ASIA_NAMES = new Set(['蒙古帝国', '孔雀王朝', '莫卧儿帝国']);
+const CENTRAL_ASIA_NAMES = new Set(['蒙古帝国', '孔雀王朝', '莫卧儿帝国', '印度河文明']);
 // West: Rome, Persian, Islamic, Hellenistic, Egyptian empires
 const WEST_NAMES = new Set(['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '古埃及', '托勒密埃及']);
 

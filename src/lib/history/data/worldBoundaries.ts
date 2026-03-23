@@ -345,6 +345,19 @@ export const eurasianBoundaries: WorldBoundary[] = [
       ]],
     },
   },
+
+  // ═══ 印度河文明 (Indus Valley / Harappan) ═══
+  {
+    type: 'Feature',
+    properties: { name: '印度河文明', nameKey: 'empire_indus-valley', startYear: -2600, endYear: -1900, color: '#D97706' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [62, 28], [68, 27], [75, 25], [78, 28], [76, 32], [70, 35], [65, 34], [60, 30],
+        [62, 28],
+      ]],
+    },
+  },
 ];
 
 // 东亚主要帝国边界
