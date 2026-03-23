@@ -300,6 +300,19 @@ export const eurasianBoundaries: WorldBoundary[] = [
     },
   },
 
+  // ═══ 神圣罗马帝国 (Holy Roman Empire) ═══
+  {
+    type: 'Feature',
+    properties: { name: '神圣罗马帝国', nameKey: 'empire_holy-roman', startYear: 962, endYear: 1806, color: '#B8860B' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [5, 47], [8, 48], [10, 49], [12, 50], [14, 51], [16, 52], [18, 53], [20, 54],
+        [18, 55], [14, 54], [10, 52], [6, 50], [4, 48], [5, 47],
+      ]],
+    },
+  },
+
   // ═══ 其他帝国 ═══
   {
     type: 'Feature',
