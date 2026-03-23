@@ -370,6 +370,45 @@ export const eurasianBoundaries: WorldBoundary[] = [
       ]],
     },
   },
+
+  // ═══ 塞琉古帝国 (Seleucid Empire) ═══
+  {
+    type: 'Feature',
+    properties: { name: '塞琉古帝国', nameKey: 'empire_seleucid', startYear: -312, endYear: -63, color: '#C2410C' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [28, 36], [38, 32], [48, 36], [55, 42], [70, 42], [80, 38], [75, 32], [60, 28],
+        [48, 28], [38, 32], [28, 36],
+      ]],
+    },
+  },
+
+  // ═══ 萨塔瓦哈纳王国 (Satavahana Kingdom) ═══
+  {
+    type: 'Feature',
+    properties: { name: '萨塔瓦哈纳', nameKey: 'empire_satavahana', startYear: -200, endYear: 220, color: '#B45309' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [72, 16], [80, 15], [85, 18], [88, 22], [85, 26], [78, 28], [72, 24], [70, 18],
+        [72, 16],
+      ]],
+    },
+  },
+
+  // ═══ 室利佛逝帝国 (Srivijaya Empire) ═══
+  {
+    type: 'Feature',
+    properties: { name: '室利佛逝', nameKey: 'empire_srivijaya', startYear: 600, endYear: 1295, color: '#15803D' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [95, 8], [105, 2], [115, 5], [118, 10], [115, 18], [105, 20], [95, 15], [90, 8],
+        [95, 8],
+      ]],
+    },
+  },
 ];
 
 // 东亚主要帝国边界
