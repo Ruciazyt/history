@@ -517,6 +517,41 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
               {t('grid.timeline')}
             </div>
             <div className="relative h-24 bg-zinc-100 rounded-lg overflow-hidden">
+              {/* Century tick marks */}
+              {(() => {
+                const miniTicks: number[] = [];
+                const startCentury = Math.ceil(minYear / 100) * 100;
+                for (let y = startCentury; y <= maxYear; y += 100) {
+                  miniTicks.push(y);
+                }
+                return miniTicks.map(year => {
+                  const y = yearToY(year, minYear, maxYear, 96);
+                  return (
+                    <div
+                      key={year}
+                      className="absolute left-0 right-0 flex items-center"
+                      style={{ top: y }}
+                    >
+                      <div className="w-4 text-[8px] text-zinc-400 text-right pr-0.5 leading-none">
+                        {year > 0 ? `${year / 100 | 0}` : `${Math.abs(year / 100 | 0)}c`}
+                      </div>
+                      <div className="flex-1 h-px bg-zinc-300/60" />
+                    </div>
+                  );
+                });
+              })()}
+              {/* Era boundary tick marks */}
+              {ERA_BOUNDARY_YEARS.map(boundaryYear => {
+                if (boundaryYear <= minYear || boundaryYear >= maxYear) return null;
+                const y = yearToY(boundaryYear, minYear, maxYear, 96);
+                return (
+                  <div
+                    key={boundaryYear}
+                    className="absolute left-0 right-0 h-px bg-amber-400/60 z-10 pointer-events-none"
+                    style={{ top: y }}
+                  />
+                );
+              })}
               {/* Mini polity bands */}
               {columns.flatMap(col =>
                 col.polities.map(polity => {
@@ -539,9 +574,11 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
               )}
               {/* Current year line */}
               <div
-                className="absolute left-0 right-0 h-0.5 bg-red-500 z-10"
+                className="absolute left-0 right-0 h-0.5 bg-red-500 z-20"
                 style={{ top: currentYearLineY / (gridHeight / 96) }}
-              />
+              >
+                <div className="absolute -left-0.5 -top-1 w-1.5 h-1.5 bg-red-500 rounded-full" />
+              </div>
             </div>
 
             {/* Timeline controls */}
