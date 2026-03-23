@@ -39,7 +39,7 @@ import {
   getStreakInsights,
   getSimilarBattles,
 } from './battles';
-import type { Event } from './types';
+import type { Event, BattleType } from './types';
 
 describe('battles', () => {
   const mockEvents: Event[] = [
@@ -1915,9 +1915,9 @@ describe('battles', () => {
 
     it('should score +2 for same battle type', () => {
       const battles = [
-        makeBattle({ id: 'fav', battle: { battleType: '包围战' as any } }),
-        makeBattle({ id: 'sameType', battle: { battleType: '包围战' as any } }),
-        makeBattle({ id: 'diffType', battle: { battleType: '野战' as any } }),
+        makeBattle({ id: 'fav', battle: { battleType: 'conquest' as BattleType } }),
+        makeBattle({ id: 'sameType', battle: { battleType: 'conquest' as BattleType } }),
+        makeBattle({ id: 'diffType', battle: { battleType: 'defense' as BattleType } }),
       ];
       const result = getSimilarBattles(battles, ['fav'], 6);
       expect(result[0].id).toBe('sameType');
@@ -1925,9 +1925,9 @@ describe('battles', () => {
 
     it('should score +1 for same result', () => {
       const battles = [
-        makeBattle({ id: 'fav', battle: { result: 'attacker_win' as any } }),
-        makeBattle({ id: 'sameResult', battle: { result: 'attacker_win' as any } }),
-        makeBattle({ id: 'diffResult', battle: { result: 'defender_win' as any } }),
+        makeBattle({ id: 'fav', battle: { result: 'attacker_win' as const } }),
+        makeBattle({ id: 'sameResult', battle: { result: 'attacker_win' as const } }),
+        makeBattle({ id: 'diffResult', battle: { result: 'defender_win' as const } }),
       ];
       const result = getSimilarBattles(battles, ['fav'], 6);
       expect(result[0].id).toBe('sameResult');
@@ -1942,23 +1942,16 @@ describe('battles', () => {
     });
 
     it('should sort by score descending, then by year ascending', () => {
-      const battles = [
-        makeBattle({ id: 'fav', entityId: 'era1' }),
-        makeBattle({ id: 'score3', entityId: 'era1', year: -200 }),
-        makeBattle({ id: 'score2', entityId: 'era2', year: -100 }),  // only same type
-        makeBattle({ id: 'score1', battle: { battleType: '包围战' as any } }), // same type
-      ];
-      // score3 has +3 (same era), score1 has +2 (same type), score2 has +1 (same type+era?)
-      // Wait score2 entityId='era2' not same as fav's era1, so only +1 from result?
-      // Actually favorite 'fav' has no battleType so no +2
-      // Let's trace: score3=+3(era), score1=+2(type), score2=+1(result from fav's undefined)
-      // Actually fav has no result so score2 gets 0 from result. Let me be more explicit.
-      const favBattle = { id: 'fav', entityId: 'era1', year: -150, battle: { battleType: '野战' as any, result: 'attacker_win' as any } };
-      const scoreHigh = { ...favBattle, id: 'scoreHigh', year: -100, entityId: 'era1' };
-      const scoreMed = { ...favBattle, id: 'scoreMed', year: -50, entityId: 'era2' };
-      const scoreLow = { ...favBattle, id: 'scoreLow', year: 0, entityId: 'era3' };
-      const battles2 = [favBattle, scoreHigh, scoreMed, scoreLow];
-      const result = getSimilarBattles(battles2 as any, ['fav'], 6);
+      // favBattle has battleType='defense' and result='attacker_win'
+      // scoreHigh: same era + same type + same result → score=6
+      // scoreMed:  same type + same result (different era) → score=3
+      // scoreLow:  same type + same result (different era, later year) → score=2
+      const favBattle = makeBattle({ id: 'fav', entityId: 'era1', year: -150, battle: { battleType: 'defense' as BattleType, result: 'attacker_win' as const } });
+      const scoreHigh = makeBattle({ id: 'scoreHigh', entityId: 'era1', year: -100, battle: { battleType: 'defense' as BattleType, result: 'attacker_win' as const } });
+      const scoreMed = makeBattle({ id: 'scoreMed', entityId: 'era2', year: -50, battle: { battleType: 'defense' as BattleType, result: 'attacker_win' as const } });
+      const scoreLow = makeBattle({ id: 'scoreLow', entityId: 'era3', year: 0, battle: { battleType: 'defense' as BattleType, result: 'attacker_win' as const } });
+      const battles: Event[] = [favBattle, scoreHigh, scoreMed, scoreLow];
+      const result = getSimilarBattles(battles, ['fav'], 6);
       expect(result[0].id).toBe('scoreHigh'); // score=6 (era+type+result)
       expect(result[1].id).toBe('scoreMed');  // score=3 (type+result)
       expect(result[2].id).toBe('scoreLow');  // score=2 (type+result but later year)

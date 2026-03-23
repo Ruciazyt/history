@@ -17,7 +17,6 @@ const SEARCH_LABELS: Record<string, { placeholder: string; noResults: string }> 
   en: { placeholder: 'Search rulers, battles...', noResults: 'No results found' },
   ja: { placeholder: '帝王・戦いを検索...', noResults: '結果が見つかりません' },
 };
-const defaultLabels = SEARCH_LABELS['zh'];
 
 interface SearchResult {
   type: 'ruler' | 'event' | 'battle';
