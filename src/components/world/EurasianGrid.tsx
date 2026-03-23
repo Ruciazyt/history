@@ -48,6 +48,27 @@ const VIETNAM_NAMESMatches: string[] = [];
 const CENTRAL_ASIA_NAMESMatches: string[] = [];
 const WEST_NAMESMatches = ['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '塞琉古', '亚述', '巴比伦', '阿卡德'];
 
+/** Era band configuration: defines historical period dividers shown on the grid */
+interface EraBandDef {
+  labelKey: string;
+  /** Background CSS class applied to the era band in the grid column */
+  bgClass: string;
+  /** Label badge CSS class shown on the Y-axis */
+  badgeClass: string;
+}
+
+const ERA_BANDS: EraBandDef[] = [
+  { labelKey: 'grid.eraBand.ancient',    bgClass: 'bg-amber-50/70',  badgeClass: 'bg-amber-100/80 text-amber-700' },
+  { labelKey: 'grid.eraBand.medieval',   bgClass: 'bg-stone-50/60', badgeClass: 'bg-amber-100/80 text-amber-700' },
+  { labelKey: 'grid.eraBand.earlyModern', bgClass: 'bg-blue-50/50',  badgeClass: 'bg-stone-100/80 text-stone-600' },
+];
+
+/** Era band boundary years (chronological order) */
+const ERA_BOUNDARY_YEARS = [500, 1500] as const;
+
+/** Quick-jump century buttons shown at the bottom of the grid */
+const QUICK_JUMP_YEARS = [-500, -300, -200, -100, 0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900] as const;
+
 function classifyRegion(boundary: WorldBoundary): RegionId {
   const name = boundary.properties.name;
   // Use prefix matching since boundary names include suffixes (e.g. "罗马帝国" matches "罗马")
@@ -284,19 +305,20 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                 })}
 
                 {/* Era boundary labels */}
-                {[
-                  { year: 500, labelKey: 'grid.eraBand.medieval', bgClass: 'bg-amber-100/80 text-amber-700' },
-                  { year: 1500, labelKey: 'grid.eraBand.earlyModern', bgClass: 'bg-stone-100/80 text-stone-600' },
-                ].filter(e => e.year > minYear && e.year < maxYear).map(era => {
-                  const y = yearToY(era.year, minYear, maxYear, gridHeight);
+                {ERA_BOUNDARY_YEARS.map((boundaryYear, idx) => {
+                  if (boundaryYear <= minYear || boundaryYear >= maxYear) return null;
+                  const y = yearToY(boundaryYear, minYear, maxYear, gridHeight);
+                  // The label belongs to the era AFTER this boundary
+                  const bandIdx = idx + 1; // ERA_BANDS[0] = ancient (before 500), [1] = medieval, [2] = earlyModern
+                  const band = ERA_BANDS[bandIdx];
                   return (
                     <div
-                      key={era.labelKey}
-                      className={`absolute left-0 right-0 flex items-center pointer-events-none z-20`}
+                      key={boundaryYear}
+                      className="absolute left-0 right-0 flex items-center pointer-events-none z-20"
                       style={{ top: y }}
                     >
-                      <div className={`w-10 text-[9px] font-semibold px-0.5 text-center rounded-sm ${era.bgClass}`}>
-                        {t(era.labelKey)}
+                      <div className={`w-10 text-[9px] font-semibold px-0.5 text-center rounded-sm ${band.badgeClass}`}>
+                        {t(band.labelKey)}
                       </div>
                       <div className="flex-1 h-px bg-amber-300/60" />
                     </div>
@@ -320,25 +342,22 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   onClick={handleYearClick}
                 >
                   {/* Era band backgrounds */}
-                  {(() => {
-                    const bands: Array<{ labelKey: string; start: number; end: number; bgClass: string }> = [
-                      { labelKey: 'grid.eraBand.ancient', start: minYear, end: 500, bgClass: 'bg-amber-50/70' },
-                      { labelKey: 'grid.eraBand.medieval', start: 500, end: 1500, bgClass: 'bg-stone-50/60' },
-                      { labelKey: 'grid.eraBand.earlyModern', start: 1500, end: maxYear, bgClass: 'bg-blue-50/50' },
-                    ];
-                    return bands.map(band => {
-                      const topY = yearToY(Math.max(band.start, minYear), minYear, maxYear, gridHeight);
-                      const bottomY = yearToY(Math.min(band.end, maxYear), minYear, maxYear, gridHeight);
-                      const height = Math.max(bottomY - topY, 2);
-                      return (
-                        <div
-                          key={band.labelKey}
-                          className={`absolute left-0 right-0 pointer-events-none ${band.bgClass}`}
-                          style={{ top: topY, height }}
-                        />
-                      );
-                    });
-                  })()}
+                  {[
+                    { band: ERA_BANDS[0], start: minYear, end: ERA_BOUNDARY_YEARS[0] },
+                    { band: ERA_BANDS[1], start: ERA_BOUNDARY_YEARS[0], end: ERA_BOUNDARY_YEARS[1] },
+                    { band: ERA_BANDS[2], start: ERA_BOUNDARY_YEARS[1], end: maxYear },
+                  ].map(({ band, start, end }) => {
+                    const topY = yearToY(start, minYear, maxYear, gridHeight);
+                    const bottomY = yearToY(end, minYear, maxYear, gridHeight);
+                    const height = Math.max(bottomY - topY, 2);
+                    return (
+                      <div
+                        key={band.labelKey}
+                        className={`absolute left-0 right-0 pointer-events-none ${band.bgClass}`}
+                        style={{ top: topY, height }}
+                      />
+                    );
+                  })}
 
                   {/* Background grid lines */}
                   {yearTicks.map(year => {
@@ -433,7 +452,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
           {/* Grid bottom: quick century buttons */}
           <div className={`shrink-0 border-t border-zinc-200 bg-white px-4 py-2 flex items-center gap-1 flex-wrap`}>
             <span className="text-xs text-zinc-500 mr-2">{t('grid.quickJump')}:</span>
-            {[-500, -300, -200, -100, 0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900].map(year => (
+            {QUICK_JUMP_YEARS.map(year => (
               <button
                 key={year}
                 type="button"
