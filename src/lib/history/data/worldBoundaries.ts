@@ -578,11 +578,31 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   // ═══ 日本 (Japan) ═══
   {
     type: 'Feature',
+    properties: { name: '飞鸟时代', nameKey: 'empire_asuka', startYear: 592, endYear: 710, color: '#F472B6' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [129, 32], [130, 34], [132, 36], [136, 38], [140, 38], [142, 36], [141, 32], [130, 30], [129, 32],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
     properties: { name: '平安时代', nameKey: 'empire_heian', startYear: 794, endYear: 1185, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
         [129, 32], [130, 34], [132, 36], [136, 38], [140, 38], [142, 36], [141, 32], [130, 30], [129, 32],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '室町时代', nameKey: 'empire_muromachi', startYear: 1336, endYear: 1573, color: '#9D174D' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [129, 32], [131, 34], [134, 36], [139, 38], [142, 38], [143, 35], [141, 32], [135, 31], [129, 32],
       ]],
     },
   },

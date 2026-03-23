@@ -1588,7 +1588,9 @@
   "empire_nguyen-dynasty": "阮朝",
   "empires_active": "个帝国",
   "empires": {
-    "active": "个帝国"
+    "active": "个帝国",
+    "asuka": "飞鸟时代",
+    "muromachi": "室町时代"
   },
   "event.ws-223-qin-conquers-chu": {
     "title": "秦灭楚",

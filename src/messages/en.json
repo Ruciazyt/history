@@ -1411,7 +1411,9 @@
   "empire_nguyen-dynasty": "Nguyen Dynasty",
   "empires_active": "empires",
   "empires": {
-    "active": "active empires"
+    "active": "active empires",
+    "asuka": "Asuka Period",
+    "muromachi": "Muromachi Period"
   },
   "battle": {
     "result": {

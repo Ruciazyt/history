@@ -1380,7 +1380,9 @@
   "empire_nguyen-dynasty": "阮朝",
   "empires_active": "帝国",
   "empires": {
-    "active": "帝国"
+    "active": "帝国",
+    "asuka": "飛鳥時代",
+    "muromachi": "室町時代"
   },
   "timeline": {
     "title": "歴史タイムライン",
