@@ -57,19 +57,19 @@ interface EraBandDef {
   badgeClass: string;
 }
 
-const ERA_BANDS: EraBandDef[] = [
+export const ERA_BANDS: EraBandDef[] = [
   { labelKey: 'grid.eraBand.ancient',    bgClass: 'bg-amber-50/70',  badgeClass: 'bg-amber-100/80 text-amber-700' },
   { labelKey: 'grid.eraBand.medieval',   bgClass: 'bg-stone-50/60', badgeClass: 'bg-amber-100/80 text-amber-700' },
   { labelKey: 'grid.eraBand.earlyModern', bgClass: 'bg-blue-50/50',  badgeClass: 'bg-stone-100/80 text-stone-600' },
 ];
 
 /** Era band boundary years (chronological order) */
-const ERA_BOUNDARY_YEARS = [500, 1500] as const;
+export const ERA_BOUNDARY_YEARS = [500, 1500] as const;
 
 /** Quick-jump century buttons shown at the bottom of the grid */
-const QUICK_JUMP_YEARS = [-500, -300, -200, -100, 0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900] as const;
+export const QUICK_JUMP_YEARS = [-500, -300, -200, -100, 0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900] as const;
 
-function classifyRegion(boundary: WorldBoundary): RegionId {
+export function classifyRegion(boundary: WorldBoundary): RegionId {
   const name = boundary.properties.name;
   // Use prefix matching since boundary names include suffixes (e.g. "罗马帝国" matches "罗马")
   if (CHINA_NAMES.has(name) || CHINA_NAMESMatches.some(n => name.startsWith(n))) return 'china';
@@ -93,7 +93,7 @@ const COLUMN_DEFINITIONS: Record<RegionId, { labelKey: string; bgColor: string; 
 };
 
 // Build grid columns from world boundaries (deduplicated, using shared data source)
-function buildEurasianColumns(mode: GridMode): RegionColumn[] {
+export function buildEurasianColumns(mode: GridMode): RegionColumn[] {
   const boundaries = mode === 'eurasian' ? eurasianBoundaries : eastAsiaBoundaries;
   const { min, max } = getWorldEraBounds(mode);
 
@@ -138,7 +138,7 @@ function buildEurasianColumns(mode: GridMode): RegionColumn[] {
 }
 
 // Convert year to pixel Y position
-function yearToY(year: number, minYear: number, maxYear: number, heightPx: number): number {
+export function yearToY(year: number, minYear: number, maxYear: number, heightPx: number): number {
   return ((year - minYear) / (maxYear - minYear)) * heightPx;
 }
 
