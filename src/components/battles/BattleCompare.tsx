@@ -138,12 +138,14 @@ export function BattleCompare({ battle1, battle2, onClose }: BattleCompareProps)
   // Use existing hook for escape key handling
   useEscapeKey(onClose);
 
+  const titleId = React.useId();
   return (
     <div
       className="fixed inset-0 flex items-center justify-center p-0 sm:p-4"
       style={{ zIndex: Z_INDEX.modal }}
       role="dialog"
       aria-modal="true"
+      aria-labelledby={titleId}
     >
       {/* Backdrop */}
       <div
@@ -156,7 +158,7 @@ export function BattleCompare({ battle1, battle2, onClose }: BattleCompareProps)
         {/* Header */}
         <div className={`shrink-0 ${BATTLE_COMPARE_VIEW_COLORS.header} p-3 sm:p-4`}>
           <div className="flex items-center justify-between gap-2">
-            <h2 className="text-lg sm:text-xl font-bold">{t('battleCompare.title')}</h2>
+            <h2 id={titleId} className="text-lg sm:text-xl font-bold">{t('battleCompare.title')}</h2>
             <button
               onClick={onClose}
               className={`shrink-0 w-9 h-9 sm:w-8 sm:h-8 flex items-center justify-center rounded-full ${BATTLE_COMPARE_VIEW_COLORS.closeButton.bg} ${BATTLE_COMPARE_VIEW_COLORS.closeButton.hover} transition-colors text-lg sm:text-base`}

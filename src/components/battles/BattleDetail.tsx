@@ -32,12 +32,14 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
     return findSimilarBattles(battle, allEvents, 3);
   }, [battle, allEvents]);
   
+  const titleId = React.useId();
   return (
     <div 
       className="fixed inset-0 flex items-center justify-center p-0 sm:p-4"
       style={{ zIndex: Z_INDEX.modal }}
       role="dialog"
       aria-modal="true"
+      aria-labelledby={titleId}
     >
       {/* Backdrop */}
       <div 
@@ -50,7 +52,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
         {/* Header */}
         <div className={`shrink-0 ${BATTLE_DETAIL_COLORS.header.bg} ${BATTLE_DETAIL_COLORS.header.text} p-3 sm:p-4 rounded-t-xl`}>
           <div className="flex items-start justify-between gap-2">
-            <h2 className="text-base sm:text-lg font-bold line-clamp-2">{t(battle.titleKey)}</h2>
+            <h2 id={titleId} className="text-base sm:text-lg font-bold line-clamp-2">{t(battle.titleKey)}</h2>
             <button
               onClick={onClose}
               className={`shrink-0 w-9 h-9 sm:w-8 sm:h-8 flex items-center justify-center rounded-full ${BATTLE_DETAIL_COLORS.header.close} transition-colors text-lg sm:text-base`}
