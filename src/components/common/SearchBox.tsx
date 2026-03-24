@@ -2,9 +2,11 @@
 
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import type { Event, Ruler } from '@/lib/history/types';
 import { formatYear } from '@/lib/history/utils';
 import { Z_INDEX } from '@/lib/history/constants';
+import { useDebounce, useClickOutside } from '@/lib/history/useBattleHooks';
 
 interface SearchBoxProps {
   events: Event[];
@@ -21,14 +23,17 @@ const SEARCH_LABELS: Record<string, { placeholder: string; noResults: string }> 
 interface SearchResult {
   type: 'ruler' | 'event' | 'battle';
   id: string;
+  /** i18n key — kept for matching */
+  titleKey: string;
+  /** Translated display title */
   title: string;
   subtitle: string;
   year?: number;
 }
 
-import { useDebounce, useClickOutside } from '@/lib/history/useBattleHooks';
-
 export const SearchBox = React.memo(function SearchBox({ events, rulers, locale = 'zh' }: SearchBoxProps) {
+  const t = useTranslations();
+  const tRuler = useTranslations('rulerEraName');
   const router = useRouter();
   const [query, setQuery] = React.useState('');
   const [isOpen, setIsOpen] = React.useState(false);
@@ -51,31 +56,34 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
     const q = debouncedQuery.toLowerCase().trim();
     const searchResults: SearchResult[] = [];
 
-    // Search rulers
+    // Search rulers — match raw key or translated name
     for (const ruler of rulers) {
-      const name = ruler.nameKey.replace('ruler.', '');
-      if (name.includes(q) || ruler.id.includes(q)) {
+      const translatedName = t(ruler.nameKey);
+      const rawName = ruler.nameKey.replace('ruler.', '');
+      if (rawName.includes(q) || translatedName.includes(q) || ruler.id.includes(q)) {
         searchResults.push({
           type: 'ruler',
           id: ruler.id,
-          title: ruler.nameKey,
-          subtitle: `👤 ${ruler.eraId}`,
+          titleKey: ruler.nameKey,
+          title: translatedName,
+          subtitle: ruler.eraNameKey ? `👤 ${tRuler(ruler.eraNameKey)}` : `👤 ${ruler.eraId}`,
           year: ruler.startYear,
         });
       }
     }
 
-    // Search events
+    // Search events — match raw key or translated title
     for (const event of events) {
-      const titleKey = event.titleKey;
-      const title = titleKey.replace('event.', '').replace('.title', '');
+      const translatedTitle = t(event.titleKey);
+      const rawTitle = event.titleKey.replace('event.', '').replace('.title', '');
       const isWar = event.tags?.includes('war');
 
-      if (title.includes(q) || event.id.includes(q)) {
+      if (rawTitle.includes(q) || translatedTitle.includes(q) || event.id.includes(q)) {
         searchResults.push({
           type: isWar ? 'battle' : 'event',
           id: event.id,
-          title: event.titleKey,
+          titleKey: event.titleKey,
+          title: translatedTitle,
           subtitle: isWar ? '⚔️ 战役' : '📅 事件',
           year: event.year,
         });
@@ -83,7 +91,7 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
     }
 
     return searchResults.slice(0, 8);
-  }, [debouncedQuery, events, rulers]);
+  }, [debouncedQuery, events, rulers, t, tRuler]);
 
   const handleSelect = React.useCallback((result: SearchResult) => {
     setQuery('');
