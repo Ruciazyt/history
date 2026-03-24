@@ -2,16 +2,18 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import type { Event } from '@/lib/history/types';
 
-// Mock next-intl at the top level — must return an object with useTranslations
+// Mock next-intl at the top level — must return an object with useTranslations and useLocale
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => {
     const map: Record<string, string> = {
       'battleOfTheDay.title': '今日战役',
       'battleOfTheDay.badge': '今日推荐',
       'battleOfTheDay.viewDetail': '查看详情',
+      'onThisDay.title': '历史上的今天',
     };
     return map[key] ?? key;
   },
+  useLocale: () => 'zh',
 }));
 
 // Mock BattleDetail

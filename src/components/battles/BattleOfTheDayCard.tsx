@@ -1,12 +1,13 @@
 'use client';
 
 import * as React from 'react';
+import Link from 'next/link';
 import type { Event } from '@/lib/history/types';
 import { getBattleOfTheDay, getSameEraBattles } from '@/lib/history/battles';
 import { formatYear } from '@/lib/history/utils';
 import { getBattleResultLabel, getBattleImpactLabel } from '@/lib/history/battles';
 import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, ERA_COLORS, BATTLE_CARD_COLORS, BATTLE_OF_THE_DAY_COLORS, COMMANDER_COLORS } from '@/lib/history/constants';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { BattleDetail } from './BattleDetail';
 
 interface BattleOfTheDayCardProps {
@@ -24,6 +25,7 @@ function getEraStyles(entityId: string): { gradient: string; border: string; tex
 
 export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ events }: BattleOfTheDayCardProps) {
   const t = useTranslations();
+  const locale = useLocale();
   const [showDetail, setShowDetail] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
 
@@ -126,9 +128,18 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
               </span>
             )}
           </div>
-          <span className={`shrink-0 text-xs font-medium ${BATTLE_OF_THE_DAY_COLORS.cta}`}>
-            {t('battleOfTheDay.viewDetail')} →
-          </span>
+          <div className="flex items-center gap-3 shrink-0">
+            <Link
+              href={`/${locale}/on-this-day`}
+              onClick={(e) => e.stopPropagation()}
+              className={`shrink-0 text-xs font-medium ${BATTLE_OF_THE_DAY_COLORS.cta} hover:underline`}
+            >
+              📅 {t('onThisDay.title')} →
+            </Link>
+            <span className={`shrink-0 text-xs font-medium ${BATTLE_OF_THE_DAY_COLORS.cta}`}>
+              {t('battleOfTheDay.viewDetail')} →
+            </span>
+          </div>
         </div>
       </button>
 
