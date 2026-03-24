@@ -63,8 +63,11 @@ export const ERA_BANDS: EraBandDef[] = [
   { labelKey: 'grid.eraBand.earlyModern', bgClass: 'bg-blue-50/50',   badgeClass: 'bg-blue-100/80 text-blue-700' },
 ];
 
-/** Era band boundary years (chronological order) */
-export const ERA_BOUNDARY_YEARS = [500, 1500] as const;
+/** Era band boundary years (chronological order)
+ * 476 = Fall of Western Roman Empire (476 CE)
+ * 1500 = Age of Discovery / Early Modern threshold
+ */
+export const ERA_BOUNDARY_YEARS = [476, 1500] as const;
 
 /** Returns the era band index (0=ancient, 1=medieval, 2=earlyModern) for a given year */
 export function getEraBandIndex(year: number): number {

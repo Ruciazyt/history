@@ -262,9 +262,10 @@ describe('EurasianGrid pure functions', () => {
     });
 
     it('boundaries define ancient/medieval/earlyModern transitions', () => {
-      // ERA_BOUNDARY_YEARS = [500, 1500]
-      // ancient: before 500, medieval: 500-1500, earlyModern: after 1500
-      expect(ERA_BOUNDARY_YEARS[0]).toBe(500);
+      // ERA_BOUNDARY_YEARS = [476, 1500]
+      // ancient: before 476, medieval: 476-1500, earlyModern: after 1500
+      // 476 = Fall of Western Roman Empire
+      expect(ERA_BOUNDARY_YEARS[0]).toBe(476);
       expect(ERA_BOUNDARY_YEARS[1]).toBe(1500);
     });
   });
