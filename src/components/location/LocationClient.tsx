@@ -78,7 +78,7 @@ export function LocationClient({ locale }: LocationClientProps) {
                 <div className="flex justify-between items-center">
                   <span className="font-medium text-lg">{place.modernName}</span>
                   <span className="text-sm text-zinc-500">
-                    {place.names.length} 个历史名称
+                    {place.names.length} {t('location.historyNames')}
                   </span>
                 </div>
                 <div className="text-sm text-zinc-400 mt-1">
