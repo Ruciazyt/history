@@ -433,6 +433,18 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                     );
                   })}
 
+                  {/* Era boundary separator lines across each column */}
+                  {ERA_BOUNDARY_YEARS.map(boundaryYear => {
+                    if (boundaryYear <= minYear || boundaryYear >= maxYear) return null;
+                    const y = yearToY(boundaryYear, minYear, maxYear, gridHeight);
+                    return (
+                      <div
+                        key={`era-line-${boundaryYear}`}
+                        className="absolute left-0 right-0 h-px bg-amber-400/50 pointer-events-none z-[3]"
+                      />
+                    );
+                  })}
+
                   {/* Polity bands */}
                   {col.polities.map(polity => {
                     const topY = yearToY(polity.startYear, minYear, maxYear, gridHeight);
