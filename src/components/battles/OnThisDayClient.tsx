@@ -53,23 +53,8 @@ export function OnThisDayClient({
     return battlesOnThisDay[index];
   }, [battlesOnThisDay, selectedDate]);
 
-  const monthNames = [
-    '一月', '二月', '三月', '四月', '五月', '六月',
-    '七月', '八月', '九月', '十月', '十一月', '十二月',
-  ];
-  const monthNamesEn = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December',
-  ];
-  const monthNamesJa = [
-    '1月', '2月', '3月', '4月', '5月', '6月',
-    '7月', '8月', '9月', '10月', '11月', '12月',
-  ];
-
   const getMonthName = (m: number) => {
-    if (currentLocale === 'en') return monthNamesEn[m - 1];
-    if (currentLocale === 'ja') return monthNamesJa[m - 1];
-    return monthNames[m - 1];
+    return t(`ui.months.${m}`);
   };
 
   const [year, month, day] = selectedDate.split('-').map(Number);
