@@ -576,6 +576,24 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
               {t('grid.timeline')}
             </div>
             <div className="relative h-24 bg-zinc-100 rounded-lg overflow-hidden">
+              {/* Era band backgrounds for visual context */}
+              {[
+                { band: ERA_BANDS[0], start: minYear, end: ERA_BOUNDARY_YEARS[0] },
+                { band: ERA_BANDS[1], start: ERA_BOUNDARY_YEARS[0], end: ERA_BOUNDARY_YEARS[1] },
+                { band: ERA_BANDS[2], start: ERA_BOUNDARY_YEARS[1], end: maxYear },
+              ].map(({ band, start, end }) => {
+                if (!band) return null;
+                const topY = yearToY(start, minYear, maxYear, 96);
+                const bottomY = yearToY(end, minYear, maxYear, 96);
+                const height = Math.max(bottomY - topY, 2);
+                return (
+                  <div
+                    key={band.labelKey}
+                    className={`absolute left-0 right-0 pointer-events-none ${band.bgClass}`}
+                    style={{ top: topY, height }}
+                  />
+                );
+              })}
               {/* Century tick marks */}
               {(() => {
                 const miniTicks: number[] = [];
