@@ -358,6 +358,29 @@ export const eurasianBoundaries: WorldBoundary[] = [
       ]],
     },
   },
+
+  // ═══ 印度帝国 (Indian Empires) ═══
+  {
+    type: 'Feature',
+    properties: { name: '笈多帝国', nameKey: 'empire_gupta', startYear: 320, endYear: 550, color: '#D97706' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [72, 22], [82, 22], [88, 28], [88, 34], [82, 38], [74, 36], [68, 30], [72, 22],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '朱罗帝国', nameKey: 'empire_chola', startYear: -300, endYear: 1279, color: '#B45309' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [76, 8], [80, 8], [83, 13], [80, 22], [76, 24], [72, 18], [74, 10], [76, 8],
+      ]],
+    },
+  },
+
   {
     type: 'Feature',
     properties: { name: '莫卧儿帝国', nameKey: 'empire_mughal', startYear: 1526, endYear: 1857, color: '#CA8A04' },

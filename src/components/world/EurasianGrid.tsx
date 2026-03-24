@@ -45,7 +45,7 @@ const CHINA_NAMESMatches = ['蜀', '吴', '晋', '隋', '南北朝', '五代', '
 const KOREA_NAMESMatches: string[] = [];
 const JAPAN_NAMESMatches: string[] = [];
 const VIETNAM_NAMESMatches: string[] = [];
-const CENTRAL_ASIA_NAMESMatches: string[] = ['贵霜'];
+const CENTRAL_ASIA_NAMESMatches: string[] = ['贵霜', '笈多', '朱罗'];
 const WEST_NAMESMatches = ['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '塞琉古', '亚述', '巴比伦', '阿卡德', '赫梯', '神圣'];
 
 /** Era band configuration: defines historical period dividers shown on the grid */
@@ -592,7 +592,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                       style={{ top: y }}
                     >
                       <div className="w-4 text-[8px] text-zinc-400 text-right pr-0.5 leading-none">
-                        {year > 0 ? `${year / 100 | 0}` : `${Math.abs(year / 100 | 0)}c`}
+                        {year > 0 ? `${Math.floor((year - 1) / 100) + 1}` : `${Math.abs(Math.floor((year + 99) / 100))}c`}
                       </div>
                       <div className="flex-1 h-px bg-zinc-300/60" />
                     </div>
