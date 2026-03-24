@@ -255,7 +255,7 @@ export function HistoryApp({
                 </Link>
                 <Link
                   href={`/${currentLocale}/commanders`}
-                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.battles.bg} ${C.quickLink.battles.text} ${C.quickLink.battles.border}`}
+                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.commanders.bg} ${C.quickLink.commanders.text} ${C.quickLink.commanders.border}`}
                 >
                   👑 <span className="hidden sm:inline">{t('nav.commanders')}</span>
                 </Link>

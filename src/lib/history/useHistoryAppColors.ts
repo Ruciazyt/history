@@ -59,6 +59,11 @@ export function useHistoryAppColors() {
           text: 'text-zinc-300',
           border: 'border-zinc-700',
         },
+        commanders: {
+          bg: 'bg-zinc-800 hover:bg-zinc-700',
+          text: 'text-zinc-300',
+          border: 'border-zinc-700',
+        },
         eurasian: {
           bg: 'bg-zinc-800 hover:bg-zinc-700',
           text: 'text-zinc-300',

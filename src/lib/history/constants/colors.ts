@@ -1132,6 +1132,11 @@ export const HISTORY_APP_COLORS = {
       text: 'text-red-700',
       border: 'border-red-200',
     },
+    commanders: {
+      bg: 'bg-amber-50 hover:bg-amber-100',
+      text: 'text-amber-700',
+      border: 'border-amber-200',
+    },
     eurasian: {
       bg: 'bg-purple-50 hover:bg-purple-100',
       text: 'text-purple-700',
