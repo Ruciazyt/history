@@ -291,9 +291,9 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                 <span className="text-sm font-semibold text-zinc-700">
                   {t(col.labelKey) || col.id}
                 </span>
-                {activeCountByColumn[col.id] > 0 && (
+                {(activeCountByColumn[col.id] ?? 0) > 0 && (
                   <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-white/80 text-zinc-600 ring-1 ring-zinc-200">
-                    {activeCountByColumn[col.id]}
+                    {activeCountByColumn[col.id] ?? 0}
                   </span>
                 )}
               </div>
