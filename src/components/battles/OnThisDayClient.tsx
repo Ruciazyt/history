@@ -91,7 +91,7 @@ export function OnThisDayClient({
               }}
               className={`px-3 py-1.5 rounded-lg text-sm font-medium border ${BATTLES_CLIENT_COLORS.eraFilter.inactive.bg} ${BATTLES_CLIENT_COLORS.eraFilter.inactive.text} ${BATTLES_CLIENT_COLORS.eraFilter.inactive.border}`}
             >
-              {monthNames.map((_name, i) => (
+              {Array.from({ length: 12 }, (_, i) => (
                 <option key={i} value={String(i + 1).padStart(2, '0')}>{getMonthName(i + 1)}</option>
               ))}
             </select>

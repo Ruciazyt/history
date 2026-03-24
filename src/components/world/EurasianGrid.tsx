@@ -441,6 +441,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                       <div
                         key={`era-line-${boundaryYear}`}
                         className="absolute left-0 right-0 h-px bg-amber-400/50 pointer-events-none z-[3]"
+                        style={{ top: y }}
                       />
                     );
                   })}
@@ -539,20 +540,30 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
           {/* Grid bottom: quick century buttons */}
           <div className={`shrink-0 border-t border-zinc-200 bg-white px-4 py-2 flex items-center gap-1 flex-wrap`}>
             <span className="text-xs text-zinc-500 mr-2">{t('grid.quickJump')}:</span>
-            {QUICK_JUMP_YEARS.map(year => (
-              <button
-                key={year}
-                type="button"
-                onClick={() => setCurrentYear(year)}
-                className={`px-1.5 py-0.5 rounded text-[10px] transition-colors ${
-                  Math.abs(currentYear - year) < 50
-                    ? 'bg-red-100 text-red-700 font-semibold'
-                    : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200'
-                }`}
-              >
-                {formatYear(year)}
-              </button>
-            ))}
+            {QUICK_JUMP_YEARS.map(year => {
+              const eraIdx = getEraBandIndex(year);
+              const eraClasses = [
+                'bg-amber-50 text-amber-700 hover:bg-amber-100',
+                'bg-stone-100 text-stone-600 hover:bg-stone-200',
+                'bg-blue-50 text-blue-700 hover:bg-blue-100',
+              ];
+              const isCurrent = Math.abs(currentYear - year) < 50;
+              return (
+                <button
+                  key={year}
+                  type="button"
+                  onClick={() => setCurrentYear(year)}
+                  className={`px-1.5 py-0.5 rounded text-[10px] transition-colors ${
+                    isCurrent
+                      ? 'bg-red-100 text-red-700 font-semibold ring-1 ring-red-200'
+                      : `${eraClasses[eraIdx]} font-medium`
+                  }`}
+                  title={t(ERA_BANDS[eraIdx]!.labelKey)}
+                >
+                  {formatYear(year)}
+                </button>
+              );
+            })}
           </div>
         </div>
 
