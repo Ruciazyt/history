@@ -33,6 +33,12 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-eg-ramesses', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-eg-ramesses', bioKey: 'rulerBio.wc-eg-ramesses', highlightKey: 'rulerHighlight.wc-eg-ramesses', startYear: -1279, endYear: -1213 },
   { id: 'wc-eg-late-ptolemaic', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-eg-ptolemaic', bioKey: 'rulerBio.wc-eg-ptolemaic', startYear: -332, endYear: -30 , isDynastyBlock: true },
 
+  // ── Mesopotamia (Assyria / Babylon) ──────────────────────────────────
+  { id: 'wc-me-akkadian', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-akkadian', bioKey: 'rulerBio.wc-me-akkadian', startYear: -2334, endYear: -2279 , isDynastyBlock: true },
+  { id: 'wc-me-hammurabi', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-hammurabi', bioKey: 'rulerBio.wc-me-hammurabi', highlightKey: 'rulerHighlight.wc-me-hammurabi', startYear: -1792, endYear: -1750 },
+  { id: 'wc-me-assyrian', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-assyrian-dyn', bioKey: 'rulerBio.wc-me-assyrian', startYear: -1363, endYear: -609 , isDynastyBlock: true },
+  { id: 'wc-me-nebuchadnezzar', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-nebuchadnezzar', bioKey: 'rulerBio.wc-me-nebuchadnezzar', highlightKey: 'rulerHighlight.wc-me-nebuchadnezzar', startYear: -605, endYear: -562 },
+
   // ── Indus Valley / Maurya (mapped to wc-persia "central-asia" column) ──
   { id: 'wc-iv-indus', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-iv-indus', bioKey: 'rulerBio.wc-iv-indus', startYear: -2600, endYear: -1900 , isDynastyBlock: true },
   { id: 'wc-iv-maurya', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-iv-maurya', bioKey: 'rulerBio.wc-iv-maurya', startYear: -322, endYear: -185 , isDynastyBlock: true },
@@ -48,6 +54,12 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-pe-ardashir', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-ardashir', bioKey: 'rulerBio.wc-pe-ardashir', startYear: 224, endYear: 241 },
   { id: 'wc-pe-shapur', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-shapur', bioKey: 'rulerBio.wc-pe-shapur', highlightKey: 'rulerHighlight.wc-pe-shapur', startYear: 241, endYear: 651 },
   { id: 'wc-pe-safavid', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-safavid', bioKey: 'rulerBio.wc-pe-safavid', startYear: 1501, endYear: 1736 },
+
+  // ── Hellenistic Greece ─────────────────────────────────
+  { id: 'wc-he-alexander', eraId: 'world-comparison', polityId: 'wc-hellenistic', nameKey: 'ruler.wc-he-alexander', bioKey: 'rulerBio.wc-he-alexander', highlightKey: 'rulerHighlight.wc-he-alexander', startYear: -336, endYear: -323 },
+  { id: 'wc-he-seleucid', eraId: 'world-comparison', polityId: 'wc-hellenistic', nameKey: 'ruler.wc-he-seleucid-dyn', bioKey: 'rulerBio.wc-he-seleucid', startYear: -312, endYear: -63 , isDynastyBlock: true },
+  { id: 'wc-he-antigonid', eraId: 'world-comparison', polityId: 'wc-hellenistic', nameKey: 'ruler.wc-he-antigonid-dyn', bioKey: 'rulerBio.wc-he-antigonid', startYear: -306, endYear: -168 , isDynastyBlock: true },
+  { id: 'wc-he-ptolemaic', eraId: 'world-comparison', polityId: 'wc-hellenistic', nameKey: 'ruler.wc-he-ptolemaic-dyn', bioKey: 'rulerBio.wc-he-ptolemaic', startYear: -305, endYear: -30 , isDynastyBlock: true },
 
   // ── Islam ──────────────────────────────────────────────
   { id: 'wc-is-muhammad', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-muhammad', bioKey: 'rulerBio.wc-is-muhammad', highlightKey: 'rulerHighlight.wc-is-muhammad', startYear: 610, endYear: 632 },
