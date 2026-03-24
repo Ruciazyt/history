@@ -1872,5 +1872,22 @@
   "rulerBio.wc-is-timur": "ティムール（タムーラン）；ペルシア・アナトリア・インドを征服；サマルキャンドを再建；残忍だが芸術のパトロン。",
   "rulerBio.wc-is-timurid-late": "ティムール朝の衰退；バーブルがインドでムガル帝国を建国；ペルシア文化の影響が広まる。",
   "rulerBio.wc-is-ilkhanate": "ペルシアのモンゴル・イル汗国；イスラームに改宗；ペルシア細密画のパトロン。",
-  "rulerBio.wc-is-akbar": "アクバル大王；ムガル帝国がインド全体に拡大；宗教寛容政策；合一宗教ディーン・イラヒーを創始。"
+  "rulerBio.wc-is-akbar": "アクバル大王；ムガル帝国がインド全体に拡大；宗教寛容政策；合一宗教ディーン・イラヒーを創始。",
+
+  "era.world-comparison": "世界文明",
+  "era.east-asia-comparison": "東アジア",
+
+  "polity.wc.china": "中国",
+  "polity.wc.rome": "ローマ／オスマン",
+  "polity.wc.persia": "ペルシア",
+  "polity.wc.islam": "イスラーム帝国",
+  "polity.wc.egypt": "エジプト",
+  "polity.wc.indus": "インダス Valley／インド",
+  "polity.wc.mesopotamia": "メソポタミア",
+  "polity.wc.hellenistic": "ヘレニズム王国",
+
+  "polity.ea.china": "中国",
+  "polity.ea.japan": "日本",
+  "polity.ea.korea": "朝鲜",
+  "polity.ea.vietnam": "ベトナム"
 }

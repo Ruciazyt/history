@@ -1849,5 +1849,22 @@
   "rulerBio.wc-is-timur": "Timur (Tamerlane); conqured Persia, Anatolia, India; Samarkand rebuilt; brutal but patron of arts.",
   "rulerBio.wc-is-timurid-late": "Timurid decline; Babur founded Mughal Empire in India; Persian cultural influence spread.",
   "rulerBio.wc-is-ilkhanate": "Mongol Ilkhanate in Persia; convert to Islam; patronage of Persian miniature painting.",
-  "rulerBio.wc-is-akbar": "Akbar the Great; Mughal Empire extended across India; religious tolerance policy; Din-i Ilahi syncretic faith."
+  "rulerBio.wc-is-akbar": "Akbar the Great; Mughal Empire extended across India; religious tolerance policy; Din-i Ilahi syncretic faith.",
+
+  "era.world-comparison": "World Civilizations",
+  "era.east-asia-comparison": "East Asia",
+
+  "polity.wc.china": "China",
+  "polity.wc.rome": "Rome / Ottoman",
+  "polity.wc.persia": "Persia",
+  "polity.wc.islam": "Islamic Caliphates",
+  "polity.wc.egypt": "Egypt",
+  "polity.wc.indus": "Indus Valley / India",
+  "polity.wc.mesopotamia": "Mesopotamia",
+  "polity.wc.hellenistic": "Hellenistic Kingdoms",
+
+  "polity.ea.china": "China",
+  "polity.ea.japan": "Japan",
+  "polity.ea.korea": "Korea",
+  "polity.ea.vietnam": "Vietnam"
 }

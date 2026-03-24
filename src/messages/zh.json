@@ -1927,5 +1927,22 @@
   "rulerHighlight.wc-ro-suleiman": "奥斯曼苏丹（1520–1566年）；帝国鼎盛期；被誉为\"大帝\"。",
   "empire_kushan": "贵霜帝国",
   "empire_gupta": "笈多帝国",
-  "empire_chola": "朱罗帝国"
+  "empire_chola": "朱罗帝国",
+
+  "era.world-comparison": "世界文明对比",
+  "era.east-asia-comparison": "东亚对比",
+
+  "polity.wc.china": "中国",
+  "polity.wc.rome": "罗马/奥斯曼",
+  "polity.wc.persia": "波斯",
+  "polity.wc.islam": "伊斯兰帝国",
+  "polity.wc.egypt": "埃及",
+  "polity.wc.indus": "印度河/印度",
+  "polity.wc.mesopotamia": "美索不达米亚",
+  "polity.wc.hellenistic": "希腊化王国",
+
+  "polity.ea.china": "中国",
+  "polity.ea.japan": "日本",
+  "polity.ea.korea": "朝鲜",
+  "polity.ea.vietnam": "越南"
 }
