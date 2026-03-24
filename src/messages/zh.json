@@ -1975,10 +1975,8 @@
   "empire_kushan": "贵霜帝国",
   "empire_gupta": "笈多帝国",
   "empire_chola": "朱罗帝国",
-
   "era.world-comparison": "世界文明对比",
   "era.east-asia-comparison": "东亚对比",
-
   "polity.wc.china": "中国",
   "polity.wc.rome": "罗马/奥斯曼",
   "polity.wc.persia": "波斯",
@@ -1987,9 +1985,9 @@
   "polity.wc.indus": "印度河/印度",
   "polity.wc.mesopotamia": "美索不达米亚",
   "polity.wc.hellenistic": "希腊化王国",
-
   "polity.ea.china": "中国",
   "polity.ea.japan": "日本",
   "polity.ea.korea": "朝鲜",
-  "polity.ea.vietnam": "越南"
+  "polity.ea.vietnam": "越南",
+  "rulerBio.wc-ro-byz-fall": "1204年十字军洗劫君士坦丁堡，帝国元气大伤；帕里奥洛格斯王朝时期有所恢复；1453年奥斯曼苏丹穆罕默德二世攻陷君士坦丁堡，千年帝国终结。"
 }

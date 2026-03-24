@@ -1873,10 +1873,8 @@
   "rulerBio.wc-is-timurid-late": "ティムール朝の衰退；バーブルがインドでムガル帝国を建国；ペルシア文化の影響が広まる。",
   "rulerBio.wc-is-ilkhanate": "ペルシアのモンゴル・イル汗国；イスラームに改宗；ペルシア細密画のパトロン。",
   "rulerBio.wc-is-akbar": "アクバル大王；ムガル帝国がインド全体に拡大；宗教寛容政策；合一宗教ディーン・イラヒーを創始。",
-
   "era.world-comparison": "世界文明",
   "era.east-asia-comparison": "東アジア",
-
   "polity.wc.china": "中国",
   "polity.wc.rome": "ローマ／オスマン",
   "polity.wc.persia": "ペルシア",
@@ -1885,9 +1883,9 @@
   "polity.wc.indus": "インダス Valley／インド",
   "polity.wc.mesopotamia": "メソポタミア",
   "polity.wc.hellenistic": "ヘレニズム王国",
-
   "polity.ea.china": "中国",
   "polity.ea.japan": "日本",
   "polity.ea.korea": "朝鲜",
-  "polity.ea.vietnam": "ベトナム"
+  "polity.ea.vietnam": "ベトナム",
+  "rulerBio.wc-ro-byz-fall": "1204年第四回十字軍がコンスタンティノポリスを略奪；帝国は分裂；パレオロゴス王朝下で回復；1453年オスマン蘇丹メフメト2世が都市を陥落させ、千年帝国は終焉を迎えた。"
 }

@@ -1808,7 +1808,6 @@
   "rulerBio.ea-vn-tran": "Classical Vietnamese golden age; repelled three Mongol invasions (1258, 1285, 1288); Tran dynasty was culturally flourishing.",
   "rulerBio.ea-vn-le": "Later Lê dynasty; independence from Ming; Thăng Long (Hanoi) as capital; Vietnamese territorial peak in 15th century.",
   "rulerBio.ea-vn-nguyen": "Last Vietnamese imperial dynasty; Nguyen dynasty from 1802 to 1945 (with gap during French colonial period).",
-
   "rulerBio.wc-cn-qin": "First unified Chinese empire; standardized weights, measures, and writing; built the beginnings of the Great Wall.",
   "rulerBio.wc-cn-han": "Golden age of Chinese civilization; Silk Road trade; Confucianism as state ideology established.",
   "rulerBio.wc-cn-3k": "Three rival kingdoms (Wei, Shu, Wu); Romance of the Three Kingdoms legend; era of military generals.",
@@ -1818,7 +1817,6 @@
   "rulerBio.wc-cn-yuan": "Mongol rule over China; Marco Polo visited; drama and painting flourished under Mongol patronage.",
   "rulerBio.wc-cn-ming": "Restored Chinese rule; Forbidden City built; Zheng He's maritime expeditions; porcelain and silk exports.",
   "rulerBio.wc-cn-qing": "Manchu rule; largest territory in Chinese history; Canton System of trade; faced rebellions in 19th century.",
-
   "rulerBio.wc-ro-republic": "Roman Republic lasted 500 years; Senate governed; Punic Wars against Carthage; conquest of Mediterranean.",
   "rulerBio.wc-ro-caesar": "Julius Caesar; conquered Gaul; crossed Rubicon 49 BC; dictator; assassination led to end of Republic.",
   "rulerBio.wc-ro-augustus": "First emperor; Pax Romana began; Roman Empire at its peak; patron of Virgil and Augustus architecture.",
@@ -1830,7 +1828,6 @@
   "rulerBio.wc-ro-heraclius": "Heraclius; empire at war with Persia and Arabs; Greek replaced Latin as official language.",
   "rulerBio.wc-ro-suleiman": "Suleiman the Magnificent; golden age of Ottoman culture; legal reforms; siege of Vienna 1529.",
   "rulerBio.wc-ro-ottoman-late": "Ottoman Empire declined; Treaty of Karlowitz 1699; Tanzimat reforms; World War I dissolution 1922.",
-
   "rulerBio.wc-pe-cyrus": "Cyrus the Great; founded Achaemenid Empire; freed Babylonian Jews; respected local customs of conquered peoples.",
   "rulerBio.wc-pe-darius": "Darius I; organized satrapies; Royal Road; Persepolis built; invaded Greece; Marathon 490 BC.",
   "rulerBio.wc-pe-xerxes": "Xerxes I; invaded Greece; Thermopylae and Salamis 480 BC; built Gate of All Nations at Persepolis.",
@@ -1839,7 +1836,6 @@
   "rulerBio.wc-pe-ardashir": "Ardashir I; founded Sassanid Empire; revived Zoroastrianism as state religion; rivalry with Rome began.",
   "rulerBio.wc-pe-shapur": "Shapur I; defeated Roman Emperor Valerian; Zoroastrian scripture compiled; cultural golden age.",
   "rulerBio.wc-pe-safavid": "Safavid Persia; Twelver Shia Islam declared state religion; Isfahan golden age of art and architecture.",
-
   "rulerBio.wc-is-muhammad": "Prophet Muhammad; founded Islam 610 AD; migrated to Medina 622; conquered Mecca 630; Quran revealed.",
   "rulerBio.wc-is-rashidun": "Four Rightly Guided Caliphs; rapid Arab conquests; Persia, Egypt, and Levant conquered.",
   "rulerBio.wc-is-umayyad": "Umayyad Caliphate; capital Damascus; Arabic became lingua franca; mosque architecture flourished.",
@@ -1850,10 +1846,8 @@
   "rulerBio.wc-is-timurid-late": "Timurid decline; Babur founded Mughal Empire in India; Persian cultural influence spread.",
   "rulerBio.wc-is-ilkhanate": "Mongol Ilkhanate in Persia; convert to Islam; patronage of Persian miniature painting.",
   "rulerBio.wc-is-akbar": "Akbar the Great; Mughal Empire extended across India; religious tolerance policy; Din-i Ilahi syncretic faith.",
-
   "era.world-comparison": "World Civilizations",
   "era.east-asia-comparison": "East Asia",
-
   "polity.wc.china": "China",
   "polity.wc.rome": "Rome / Ottoman",
   "polity.wc.persia": "Persia",
@@ -1862,9 +1856,9 @@
   "polity.wc.indus": "Indus Valley / India",
   "polity.wc.mesopotamia": "Mesopotamia",
   "polity.wc.hellenistic": "Hellenistic Kingdoms",
-
   "polity.ea.china": "China",
   "polity.ea.japan": "Japan",
   "polity.ea.korea": "Korea",
-  "polity.ea.vietnam": "Vietnam"
+  "polity.ea.vietnam": "Vietnam",
+  "rulerBio.wc-ro-byz-fall": "1204 Fourth Crusade sacked Constantinople; empire fragmented; recovery under Palaeologan dynasty; 1453 Ottoman Sultan Mehmed II captured the city, ending the千年 empire."
 }
