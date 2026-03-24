@@ -335,6 +335,22 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   );
                 })}
 
+                {/* Year 0 — BCE/CE separator marker */}
+                {minYear < 0 && maxYear > 0 && (() => {
+                  const y0 = yearToY(0, minYear, maxYear, gridHeight);
+                  return (
+                    <div
+                      className="absolute left-0 right-0 flex items-center pointer-events-none z-20"
+                      style={{ top: y0 }}
+                    >
+                      <div className="w-8 text-right pr-1 text-[10px] font-bold text-purple-600 leading-none">
+                        0
+                      </div>
+                      <div className="flex-1 h-px bg-purple-400" />
+                    </div>
+                  );
+                })()}
+
                 {/* Ancient era label at top when grid starts before 500 */}
                 {minYear < ERA_BOUNDARY_YEARS[0] && ERA_BANDS[0] && (
                   <div
@@ -453,7 +469,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                             color: polity.color,
                             top: '50%',
                             transform: 'translateY(-50%)',
-                            opacity: height > 24 ? 1 : isHovered || isActive ? 1 : 0,
+                            opacity: height > 30 ? 1 : isHovered || isActive ? 1 : 0,
                             textShadow: '0 1px 2px rgba(255,255,255,0.8), 0 -1px 2px rgba(255,255,255,0.8)',
                           }}
                         >
@@ -477,18 +493,21 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                           </div>
                         )}
 
-                        {/* Tooltip on hover */}
-                        {isHovered && height <= 30 && (
-                          <div
-                            className="absolute left-1/2 -translate-x-1/2 bottom-full mb-1 px-2 py-1 rounded-lg text-[10px] font-medium whitespace-nowrap z-20 shadow-lg"
-                            style={{
-                              backgroundColor: polity.color,
-                              color: 'white',
-                            }}
-                          >
-                            {t(polity.nameKey)} · {formatYear(polity.startYear)}–{formatYear(polity.endYear)}
-                          </div>
-                        )}
+                        {/* Tooltip on hover — flips above/below based on proximity to grid edge */}
+                        {isHovered && height <= 30 && (() => {
+                          const tooltipFlip = topY < 40; // flip above when near top edge
+                          return (
+                            <div
+                              className={`absolute left-1/2 -translate-x-1/2 ${tooltipFlip ? 'top-full mt-1' : 'bottom-full mb-1'} px-2 py-1 rounded-lg text-[10px] font-medium whitespace-nowrap z-20 shadow-lg`}
+                              style={{
+                                backgroundColor: polity.color,
+                                color: 'white',
+                              }}
+                            >
+                              {t(polity.nameKey)} · {formatYear(polity.startYear)}–{formatYear(polity.endYear)}
+                            </div>
+                          );
+                        })()}
                       </div>
                     );
                   })}
