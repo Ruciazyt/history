@@ -1676,8 +1676,8 @@
     "viewDetail": "View Details",
     "allEvents": "All {count} battles",
     "noEventsHint": "Try another date",
-    "monthLabel": "",
-    "dayLabel": ""
+    "monthLabel": "/",
+    "dayLabel": "/"
   },
   "empire_holy-roman": "Holy Roman Empire",
   "ruler.wc-eg-old-kingdom": "Old Kingdom Egypt",

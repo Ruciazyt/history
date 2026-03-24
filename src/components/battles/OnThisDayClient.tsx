@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import type { Era, Event } from '@/lib/history/types';
+import type { Event } from '@/lib/history/types';
 import { getBattles } from '@/lib/history/battles';
 import { BattleCard } from '@/components/battles/BattleCard';
 import { BattleDetail } from '@/components/battles/BattleDetail';
@@ -11,11 +11,9 @@ import { useTranslations } from 'next-intl';
 import { BATTLES_CLIENT_COLORS } from '@/lib/history/constants';
 
 export function OnThisDayClient({
-  eras: _eras,
   events,
   locale,
 }: {
-  eras: Era[];
   events: Event[];
   locale?: string;
 }) {

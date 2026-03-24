@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 
-import { CHINA_ERAS } from '@/lib/history/data/chinaEras';
 import { CHINA_EVENTS } from '@/lib/history/data/chinaEvents';
 import { OnThisDayClient } from '@/components/battles/OnThisDayClient';
 import { locales, type Locale } from '@/i18n/routing';
@@ -52,7 +51,7 @@ export default async function OnThisDayPage({
 
   return (
     <NextIntlClientProvider messages={messages} locale={locale}>
-      <OnThisDayClient eras={CHINA_ERAS} events={CHINA_EVENTS} locale={locale} />
+      <OnThisDayClient events={CHINA_EVENTS} locale={locale} />
     </NextIntlClientProvider>
   );
 }
