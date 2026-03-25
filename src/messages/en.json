@@ -1881,5 +1881,95 @@
     "legend": "Legend"
   },
   "empire_hellenistic": "Hellenistic Kingdoms",
-  "empire_greco-bactrian": "Greco-Bactrian Kingdom"
+  "empire_greco-bactrian": "Greco-Bactrian Kingdom",
+  "quiz": {
+    "title": "Battle Quiz",
+    "setup": {
+      "title": "Start Quiz",
+      "description": "Test your knowledge of ancient battles with multiple-choice questions!",
+      "questionType": "Question Type",
+      "difficulty": "Difficulty",
+      "start": "Start Challenge"
+    },
+    "type": {
+      "commander": "Commander",
+      "result": "Outcome",
+      "year": "Year",
+      "terrain": "Terrain",
+      "scale": "Scale",
+      "mixed": "Mixed"
+    },
+    "difficulty": {
+      "easy": "Easy",
+      "normal": "Normal",
+      "hard": "Hard"
+    },
+    "question": {
+      "commander": {
+        "attacker": "Who was the commander of the attacking side in {battle}?",
+        "defender": "Who was the commander of the defending side in {battle}?"
+      },
+      "result": "In {battle} ({attacker} vs {defender}), who won?",
+      "year": "In which year did {battle} take place?",
+      "terrain": "What was the main terrain of {battle}?",
+      "scale": "What was the scale of {battle}?"
+    },
+    "option": {
+      "attacker_win": "Attacker wins",
+      "defender_win": "Defender wins",
+      "draw": "Draw",
+      "inconclusive": "Inconclusive",
+      "unknown": "Unknown"
+    },
+    "terrain": {
+      "plains": "Plains",
+      "mountains": "Mountains",
+      "hills": "Hills",
+      "water": "Water",
+      "desert": "Desert",
+      "plateau": "Plateau",
+      "forest": "Forest",
+      "marsh": "Marsh",
+      "coastal": "Coastal",
+      "urban": "Urban",
+      "pass": "Pass",
+      "unknown": "Unknown"
+    },
+    "scale": {
+      "massive": "Massive",
+      "large": "Large",
+      "medium": "Medium",
+      "small": "Small",
+      "unknown": "Unknown"
+    },
+    "era": {
+      "westernZhou": "Western Zhou period",
+      "springAutumn": "Spring and Autumn period",
+      "warringStates": "Warring States period",
+      "chenhan": "Qin-Han period",
+      "threeKingdoms": "Three Kingdoms period"
+    },
+    "explanation": {
+      "commander": "Commander information for {battle} is based on historical records.",
+      "result": "The outcome of this battle is based on historical analysis.",
+      "year": "The year of this battle is referenced from historical texts.",
+      "terrain": "Terrain analysis is based on the battle location and geography.",
+      "scale": "Battle scale is estimated from historical records of troop numbers."
+    },
+    "feedback": {
+      "correct": "Correct!",
+      "wrong": "Wrong! The correct answer was:"
+    },
+    "progress": "Question {current} / {total}",
+    "score": "Score",
+    "streak": "streak",
+    "bestStreak": "Best Streak",
+    "next": "Next Question",
+    "finish": "See Results",
+    "result": {
+      "title": "Quiz Complete!",
+      "score": "{correct} / {total} correct",
+      "bestStreak": "Best Streak: {streak}"
+    }
+  }
 }
