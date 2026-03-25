@@ -325,6 +325,31 @@ export const eurasianBoundaries: WorldBoundary[] = [
       ]],
     },
   },
+
+  // ═══ 希腊化诸王国 (Hellenistic Successor States) ═══
+  {
+    type: 'Feature',
+    properties: { name: '继业者王国', nameKey: 'empire_hellenistic', startYear: -323, endYear: -168, color: '#F97316' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [15, 38], [20, 40], [28, 42], [40, 42], [50, 40], [58, 38], [65, 36],
+        [60, 32], [50, 30], [38, 30], [25, 32], [15, 34], [12, 36], [15, 38],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '希腊-巴克特里亚', nameKey: 'empire_greco-bactrian', startYear: -250, endYear: 125, color: '#EA580C' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [60, 30], [68, 32], [75, 38], [80, 42], [78, 46], [70, 48], [62, 46],
+        [58, 40], [56, 34], [58, 30], [60, 30],
+      ]],
+    },
+  },
+
   {
     type: 'Feature',
     properties: { name: '蒙古帝国', nameKey: 'empire_mongol', startYear: 1206, endYear: 1368, color: '#0D9488' },

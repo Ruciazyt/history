@@ -45,8 +45,8 @@ const CHINA_NAMESMatches = ['蜀', '吴', '晋', '隋', '南北朝', '五代', '
 const KOREA_NAMESMatches: string[] = [];
 const JAPAN_NAMESMatches: string[] = [];
 const VIETNAM_NAMESMatches: string[] = [];
-const CENTRAL_ASIA_NAMESMatches: string[] = ['贵霜', '笈多', '朱罗'];
-const WEST_NAMESMatches = ['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '塞琉古', '亚述', '巴比伦', '阿卡德', '赫梯', '神圣'];
+const CENTRAL_ASIA_NAMESMatches: string[] = ['贵霜', '笈多', '朱罗', '希腊-巴克特里亚'];
+const WEST_NAMESMatches = ['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '塞琉古', '亚述', '巴比伦', '阿卡德', '赫梯', '神圣', '继业者'];
 
 /** Era band configuration: defines historical period dividers shown on the grid */
 interface EraBandDef {
