@@ -33,6 +33,7 @@ function rangeLabel(centerYear: number, windowYears: number) {
 }
 
 function yearBounds(eras: Era[]) {
+  if (eras.length === 0) return { min: 0, max: 0 };
   const min = Math.min(...eras.map((e) => e.startYear));
   const max = Math.max(...eras.map((e) => e.endYear));
   return { min, max };

@@ -902,6 +902,7 @@ export const BATTLES_CLIENT_COLORS = {
     hover: 'hover:text-zinc-900',
   },
   title: 'text-zinc-900',
+  subtitle: 'text-zinc-500',
   badge: {
     background: 'bg-zinc-100',
     text: 'text-zinc-500',
