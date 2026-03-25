@@ -248,7 +248,7 @@ export function TimelineMap({ event }: TimelineMapProps) {
       {/* Legend */}
       {event?.territories && event.territories.length > 0 && mapReady && (
         <div className={`absolute bottom-2 sm:bottom-4 left-2 sm:left-4 ${TIMELINE_MAP_COLORS.overlay.bg} ${TIMELINE_MAP_COLORS.overlay.backdrop} px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg max-w-[60%] sm:max-w-none`}>
-          <p className={`text-xs ${TIMELINE_MAP_COLORS.legend.title} mb-1 sm:mb-2 hidden sm:block`}>势力范围</p>
+          <p className={`text-xs ${TIMELINE_MAP_COLORS.legend.title} mb-1 sm:mb-2 hidden sm:block`}>{t('map.legend')}</p>
           <div className="flex flex-wrap gap-1 sm:gap-2">
             {event.territories.map((territory, index) => (
               <div key={index} className="flex items-center gap-1">

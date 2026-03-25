@@ -1416,8 +1416,6 @@
   "empire_indus-valley": "インダス文明",
   "empire_kushan": "クシャーナ帝国",
   "empire_gupta": "グプタ朝",
-  "empire_hellenistic": "ヘレニズム諸王国",
-  "empire_greco-bactrian": "グリーコ＝巴克特リア王国",
   "empire_chola": "チョラ朝",
   "empire_akkadian": "アッカド帝国",
   "empire_old-babylon": "古バビロニア",
@@ -1935,12 +1933,7 @@
   "polity.ea.korea": "朝鲜",
   "polity.ea.vietnam": "ベトナム",
   "rulerBio.wc-ro-byz-fall": "1204年第四回十字軍がコンスタンティノポリスを略奪；帝国は分裂；パレオロゴス王朝下で回復；1453年オスマン蘇丹メフメト2世が都市を陥落させ、千年帝国は終焉を迎えた。",
-  "ruler.wc-iv-gupta-dyn": "グpta朝",
-  "rulerBio.wc-iv-gupta": "纪元後320年頃から550年頃の古典期インドの黄金時代。",
-  "ruler.wc-iv-samudragupta": "サムドラグプタ",
-  "rulerBio.wc-iv-samudragupta": "インド亜大陸の大部分を征服した武将。芸術と音楽の庇護者。",
-  "rulerHighlight.wc-iv-samudragupta": "グpta朝の軍事的天才",
-  "ruler.wc-iv-chandragupta-ii": "チャンドラグプタ2世",
-  "rulerBio.wc-iv-chandragupta-ii": "グpta朝の絶頂期を統治した。「ビクラマディティヤ」の名で知られる。",
-  "rulerHighlight.wc-iv-chandragupta-ii": "グpta朝の黄金時代"
+  "map": {
+    "legend": "凡例"
+  }
 }
