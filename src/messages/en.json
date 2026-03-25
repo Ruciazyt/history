@@ -1878,5 +1878,13 @@
   "polity.ea.japan": "Japan",
   "polity.ea.korea": "Korea",
   "polity.ea.vietnam": "Vietnam",
-  "rulerBio.wc-ro-byz-fall": "1204 Fourth Crusade sacked Constantinople; empire fragmented; recovery under Palaeologan dynasty; 1453 Ottoman Sultan Mehmed II captured the city, ending the千年 empire."
+  "rulerBio.wc-ro-byz-fall": "1204 Fourth Crusade sacked Constantinople; empire fragmented; recovery under Palaeologan dynasty; 1453 Ottoman Sultan Mehmed II captured the city, ending the千年 empire.",
+  "ruler.wc-iv-gupta-dyn": "Gupta Dynasty",
+  "rulerBio.wc-iv-gupta": "Classical Indian golden age, spanning c. 320-550 CE.",
+  "ruler.wc-iv-samudragupta": "Samudragupta",
+  "rulerBio.wc-iv-samudragupta": "Conquered much of the Indian subcontinent; patron of arts and music.",
+  "rulerHighlight.wc-iv-samudragupta": "Gupta military genius",
+  "ruler.wc-iv-chandragupta-ii": "Chandragupta II",
+  "rulerBio.wc-iv-chandragupta-ii": "Reigned during the height of the Gupta Empire; known as Vikramaditya.",
+  "rulerHighlight.wc-iv-chandragupta-ii": "Gupta golden age"
 }

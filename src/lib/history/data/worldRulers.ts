@@ -45,6 +45,11 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-iv-chandragupta', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-chandragupta', bioKey: 'rulerBio.wc-iv-chandragupta', highlightKey: 'rulerHighlight.wc-iv-chandragupta', startYear: -322, endYear: -298 },
   { id: 'wc-iv-ashoka', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-ashoka', bioKey: 'rulerBio.wc-iv-ashoka', highlightKey: 'rulerHighlight.wc-iv-ashoka', startYear: -268, endYear: -232 },
 
+  // ── Gupta Empire (India) ───────────────────────────────────────────────
+  { id: 'wc-iv-gupta', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-gupta-dyn', bioKey: 'rulerBio.wc-iv-gupta', startYear: 320, endYear: 550 , isDynastyBlock: true },
+  { id: 'wc-iv-samudragupta', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-samudragupta', bioKey: 'rulerBio.wc-iv-samudragupta', highlightKey: 'rulerHighlight.wc-iv-samudragupta', startYear: 335, endYear: 380 },
+  { id: 'wc-iv-chandragupta-ii', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-chandragupta-ii', bioKey: 'rulerBio.wc-iv-chandragupta-ii', highlightKey: 'rulerHighlight.wc-iv-chandragupta-ii', startYear: 375, endYear: 415 },
+
   // ── Persia ─────────────────────────────────────────────
   { id: 'wc-pe-cyrus', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-cyrus', bioKey: 'rulerBio.wc-pe-cyrus', highlightKey: 'rulerHighlight.wc-pe-cyrus', startYear: -550, endYear: -530 },
   { id: 'wc-pe-darius', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-darius', bioKey: 'rulerBio.wc-pe-darius', highlightKey: 'rulerHighlight.wc-pe-darius', startYear: -522, endYear: -486 },
