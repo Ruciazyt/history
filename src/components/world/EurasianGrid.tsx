@@ -166,6 +166,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
   const [currentYear, setCurrentYear] = React.useState<number>(1);
   const [hoveredPolity, setHoveredPolity] = React.useState<string | null>(null);
   const [selectedPolity, setSelectedPolity] = React.useState<string | null>(null);
+  const [hoveredColumn, setHoveredColumn] = React.useState<string | null>(null);
 
   const columns = React.useMemo(() => buildEurasianColumns(mode), [mode]);
   const { min: minYear, max: maxYear } = React.useMemo(() => {
@@ -396,11 +397,16 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
               </div>
 
               {/* Grid columns */}
-              {columns.map(col => (
+              {columns.map(col => {
+                const isColHovered = hoveredColumn === col.id;
+                const isColDimmed = hoveredColumn !== null && !isColHovered;
+                return (
                 <div
                   key={col.id}
-                  className={`flex-1 min-w-[160px] sm:min-w-[200px] relative border-r border-zinc-100 ${col.bgColor} cursor-crosshair overflow-hidden`}
+                  className={`flex-1 min-w-[160px] sm:min-w-[200px] relative border-r border-zinc-100 ${col.bgColor} cursor-crosshair overflow-hidden transition-opacity duration-200 ${isColDimmed ? 'opacity-30' : 'opacity-100'}`}
                   onClick={handleYearClick}
+                  onMouseEnter={() => setHoveredColumn(col.id)}
+                  onMouseLeave={() => setHoveredColumn(null)}
                 >
                   {/* Era band backgrounds */}
                   {[
@@ -533,7 +539,8 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                     <div className="absolute -left-1 -top-1.5 w-2 h-2 bg-red-500 rounded-full" />
                   </div>
                 </div>
-              ))}
+              );
+              })}
             </div>
           </div>
 
