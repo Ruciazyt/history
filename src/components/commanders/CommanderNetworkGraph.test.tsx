@@ -203,7 +203,6 @@ describe('CommanderNetworkGraph', () => {
     it('calls onCommanderClick when a node is clicked', () => {
       const onClick = vi.fn();
       render(<CommanderNetworkGraph events={battlesWithCommanders} onCommanderClick={onClick} />);
-      const circles = document.querySelectorAll('svg circle');
       // Find a circle that is a node (not badge, glow, etc.) - nodes have cursor pointer
       const nodeGroups = document.querySelectorAll('svg g[style*="cursor: pointer"]');
       if (nodeGroups.length > 0) {
