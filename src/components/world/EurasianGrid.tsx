@@ -157,8 +157,8 @@ export function yearToY(year: number, minYear: number, maxYear: number, heightPx
   return ((year - minYear) / (maxYear - minYear)) * heightPx;
 }
 
-const YEAR_HEIGHT = 3; // pixels per year
-const MIN_GRID_HEIGHT = 600;
+const YEAR_HEIGHT = 8; // pixels per year
+const MIN_GRID_HEIGHT = 1200;
 
 export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
   const t = useTranslations();
@@ -286,9 +286,9 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
             {columns.map(col => (
               <div
                 key={col.id}
-                className={`flex-1 min-w-[120px] border-r border-zinc-200 ${col.headerBg} px-2 py-2 text-center flex flex-col items-center gap-0.5`}
+                className={`flex-1 min-w-[160px] sm:min-w-[200px] border-r border-zinc-200 ${col.headerBg} px-3 py-2.5 text-center flex flex-col items-center gap-0.5`}
               >
-                <span className="text-sm font-semibold text-zinc-700">
+                <span className="text-base font-semibold text-zinc-700">
                   {t(col.labelKey) || col.id}
                 </span>
                 {(activeCountByColumn[col.id] ?? 0) > 0 && (
@@ -399,7 +399,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
               {columns.map(col => (
                 <div
                   key={col.id}
-                  className={`flex-1 min-w-[120px] relative border-r border-zinc-100 ${col.bgColor} cursor-crosshair overflow-hidden`}
+                  className={`flex-1 min-w-[160px] sm:min-w-[200px] relative border-r border-zinc-100 ${col.bgColor} cursor-crosshair overflow-hidden`}
                   onClick={handleYearClick}
                 >
                   {/* Era band backgrounds */}
@@ -477,12 +477,12 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                       >
                         {/* Polity name label - centered, larger, bold */}
                         <div
-                          className="absolute inset-x-2 text-sm font-bold leading-tight text-center truncate pointer-events-none"
+                          className="absolute inset-x-2 text-base font-bold leading-tight text-center truncate pointer-events-none select-none"
                           style={{
                             color: polity.color,
                             top: '50%',
                             transform: 'translateY(-50%)',
-                            opacity: height > 30 ? 1 : isHovered || isActive ? 1 : 0,
+                            opacity: height > 20 ? 1 : isHovered || isActive ? 1 : 0,
                             textShadow: '0 1px 2px rgba(255,255,255,0.8), 0 -1px 2px rgba(255,255,255,0.8)',
                           }}
                         >
@@ -497,7 +497,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                         </div>
 
                         {/* End year - bottom right corner (only for tall bands where tooltip doesn't appear) */}
-                        {height > 30 && (
+                        {height > 20 && (
                           <div
                             className="absolute right-2 bottom-0.5 text-[10px] font-medium opacity-75"
                             style={{ color: polity.color }}
@@ -568,7 +568,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
         </div>
 
         {/* Right sidebar: active polities + navigation */}
-        <aside className={`w-52 xl:w-64 shrink-0 border-l border-zinc-200 bg-white flex flex-col overflow-hidden`}>
+        <aside className={`w-44 xl:w-56 shrink-0 border-l border-zinc-200 bg-white flex flex-col overflow-hidden`}>
           {/* Active polities at current year */}
           <div className={`shrink-0 border-b border-zinc-200 ${HISTORY_APP_COLORS.sidebar.header.bg} p-3`}>
             <div className={`text-xs font-semibold uppercase tracking-wide ${HISTORY_APP_COLORS.sidebar.header.text}`}>
