@@ -3,6 +3,34 @@
 ## 项目地址
 https://history.ruciazyt.cn
 
+## 2026-03-26 UI优化与架构完善 - 第三十五轮
+### 常量系统扩展
+- [x] constants/colors.ts: 新增 BATTLE_SCALE_COLORS 常量
+  - 战役规模徽章颜色（massive=red, large=orange, medium=blue, small=green, unknown=gray）
+  - 与项目中其他徽章颜色常量（TERRAIN_BADGE_COLORS, BATTLE_TYPE_COLORS 等）保持一致
+- [x] BattleOfTheDayCard.tsx: 使用 BATTLE_SCALE_COLORS 常量
+  - 移除组件内本地定义的 SCALE_COLORS
+  - 改用 constants 系统中的 BATTLE_SCALE_COLORS
+
+### 修复项（pre-existing build error）
+- [x] TimelineMap.tsx: 修复 logger category 'timeline-map' → 'map'
+  - LogCategory 类型不包含 'timeline-map'，导致 TypeScript 编译失败
+- [x] TimelineMap.tsx: 修复 coord[0]/coord[1] undefined guard
+  - territory.polygon.map 中 coord 类型为 number[]，coord[0]/coord[1] 可能为 undefined
+  - 添加 if guard + filter(Boolean) 类型守卫
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 829个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交 (commit: dbf196d)
+- [x] 代码已推送至仓库
+
+### 优化说明
+- BATTLE_SCALE_COLORS 与已有的 SCALE_LABELS（i18n 键）配合使用，分别处理样式和文本
+- 修复了两处 TimelineMap.tsx 的 TypeScript 编译错误，使项目恢复可构建状态
+- 项目保持健壮可用状态
+
 ## 2026-03-21 UI优化与架构完善 - 第三十四轮（续）
 ### 测试修复
 - [x] battles.test.ts: 更新 getBattleResultLabel/getBattleImpactLabel 测试
