@@ -737,6 +737,20 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
               </button>
               <button
                 type="button"
+                onClick={() => setCurrentYear(y => Math.max(minYear, y - 10))}
+                className="px-1.5 py-0.5 rounded bg-zinc-100 text-zinc-500 text-[10px] hover:bg-zinc-200"
+              >
+                -10
+              </button>
+              <button
+                type="button"
+                onClick={() => setCurrentYear(y => Math.min(maxYear, y + 10))}
+                className="px-1.5 py-0.5 rounded bg-zinc-100 text-zinc-500 text-[10px] hover:bg-zinc-200"
+              >
+                +10
+              </button>
+              <button
+                type="button"
                 onClick={() => setCurrentYear(1)}
                 className="px-1.5 py-0.5 rounded bg-red-100 text-red-600 text-[10px] hover:bg-red-200 ml-auto"
               >
