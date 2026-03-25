@@ -1535,3 +1535,22 @@ export const THIS_DAY_IN_HISTORY_COLORS = {
     hover: 'hover:bg-emerald-200',
   },
 } as const;
+
+export const BOTTOM_NAV_COLORS = {
+  container: {
+    border: 'border-zinc-200/50',
+    bg: 'bg-white/80',
+    text: 'text-zinc-600',
+  },
+  containerDark: {
+    bg: 'dark:bg-zinc-900/80',
+    text: 'dark:text-zinc-400',
+  },
+  item: {
+    active: 'text-blue-600',
+    activeDark: 'dark:text-blue-400',
+    inactive: 'text-zinc-600',
+    inactiveHover: 'hover:text-zinc-900',
+    inactiveHoverDark: 'dark:hover:text-zinc-200',
+  },
+} as const;

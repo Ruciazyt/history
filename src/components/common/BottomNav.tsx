@@ -4,6 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { BOTTOM_NAV_COLORS } from '@/lib/history/constants';
 
 interface BottomNavProps {
   locale?: string;
@@ -30,7 +31,7 @@ export const BottomNav = React.memo(function BottomNav({ locale = 'zh' }: Bottom
 
   return (
     <nav
-      className="bottom-nav fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t border-zinc-200/50 bg-white/80 dark:bg-zinc-900/80 text-zinc-600 dark:text-zinc-400 lg:hidden"
+      className={`bottom-nav fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t ${BOTTOM_NAV_COLORS.container.border} ${BOTTOM_NAV_COLORS.container.bg} ${BOTTOM_NAV_COLORS.container.text} ${BOTTOM_NAV_COLORS.containerDark.bg} ${BOTTOM_NAV_COLORS.containerDark.text} lg:hidden`}
       style={{ height: '56px', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
     >
       {NAV_ITEMS.map((item) => {
@@ -41,8 +42,8 @@ export const BottomNav = React.memo(function BottomNav({ locale = 'zh' }: Bottom
             href={item.href(locale)}
             className={`flex flex-col items-center justify-center gap-0.5 flex-1 py-2 transition-colors ${
               active
-                ? 'text-blue-600 dark:text-blue-400'
-                : 'hover:text-zinc-900 dark:hover:text-zinc-200'
+                ? `${BOTTOM_NAV_COLORS.item.active} ${BOTTOM_NAV_COLORS.item.activeDark}`
+                : `${BOTTOM_NAV_COLORS.item.inactive} ${BOTTOM_NAV_COLORS.item.inactiveHover} ${BOTTOM_NAV_COLORS.item.inactiveHoverDark}`
             }`}
             style={{ minWidth: '44px', minHeight: '44px' }}
           >
