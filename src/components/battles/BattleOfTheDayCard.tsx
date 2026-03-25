@@ -6,7 +6,7 @@ import type { Event } from '@/lib/history/types';
 import { getBattleOfTheDay, getSameEraBattles } from '@/lib/history/battles';
 import { formatYear } from '@/lib/history/utils';
 import { getBattleResultLabel, getBattleImpactLabel } from '@/lib/history/battles';
-import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, ERA_COLORS, BATTLE_CARD_COLORS, BATTLE_OF_THE_DAY_COLORS, COMMANDER_COLORS, BATTLE_TYPE_COLORS } from '@/lib/history/constants';
+import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, ERA_COLORS, BATTLE_CARD_COLORS, BATTLE_OF_THE_DAY_COLORS, COMMANDER_COLORS, BATTLE_TYPE_COLORS, BATTLE_SCALE_COLORS } from '@/lib/history/constants';
 import { useTranslations, useLocale } from 'next-intl';
 import { BattleDetail } from './BattleDetail';
 
@@ -23,13 +23,7 @@ function getEraStyles(entityId: string): { gradient: string; border: string; tex
   };
 }
 
-const SCALE_COLORS: Record<string, { bg: string; text: string }> = {
-  massive: { bg: 'bg-red-100', text: 'text-red-700' },
-  large: { bg: 'bg-orange-100', text: 'text-orange-700' },
-  medium: { bg: 'bg-blue-100', text: 'text-blue-700' },
-  small: { bg: 'bg-green-100', text: 'text-green-700' },
-  unknown: { bg: 'bg-zinc-100', text: 'text-zinc-500' },
-};
+
 
 
 export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ events }: BattleOfTheDayCardProps) {
@@ -52,7 +46,7 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
   const resultText = battleResult ? BATTLE_RESULT_COLORS[battleResult]?.text : 'text-zinc-700';
 
   const scale = battle.battle?.scale;
-  const scaleColors = scale ? SCALE_COLORS[scale] || SCALE_COLORS.unknown : null;
+  const scaleColors = scale ? BATTLE_SCALE_COLORS[scale] || BATTLE_SCALE_COLORS.unknown : null;
 
   return (
     <>

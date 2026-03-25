@@ -94,7 +94,7 @@ export function TimelineMap({ event }: TimelineMapProps) {
           mapRef.current = map;
           setMapReady(true);
         } catch (e) {
-          logger.error('timeline-map', 'Failed to initialize Baidu Map', e);
+          logger.error('map', 'Failed to initialize Baidu Map', e);
         }
       }
     };
@@ -103,7 +103,7 @@ export function TimelineMap({ event }: TimelineMapProps) {
     (window as unknown as Record<string, () => void>)[callbackName] = () => { initMap(); };
 
     if (!BAIDU_MAP_AK) {
-      logger.warn('timeline-map', 'NEXT_PUBLIC_BAIDU_MAP_AK is not configured — map will not load');
+      logger.warn('map', 'NEXT_PUBLIC_BAIDU_MAP_AK is not configured — map will not load');
       delete (window as unknown as Record<string, unknown>)[callbackName];
       return;
     }
@@ -137,10 +137,11 @@ export function TimelineMap({ event }: TimelineMapProps) {
         try {
           const bdCoords = territory.polygon.map(
             (coord: number[]) => {
+              if (coord[0] === undefined || coord[1] === undefined) return null;
               const converted = wgs84ToBd09(coord[0], coord[1]);
               return new window.BMapGL.Point(converted.lon, converted.lat);
             }
-          );
+          ).filter((p): p is NonNullable<typeof p> => p !== null);
 
           const polygon = new window.BMapGL.Polygon(bdCoords, {
             strokeColor: territory.color,
@@ -150,7 +151,7 @@ export function TimelineMap({ event }: TimelineMapProps) {
           });
           map.addOverlay(polygon);
         } catch (e) {
-          logger.warn('timeline-map', 'Failed to draw territory polygon', e);
+          logger.warn('map', 'Failed to draw territory polygon', e);
         }
       }
     }

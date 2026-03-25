@@ -547,6 +547,13 @@ export const TIME_OF_DAY_COLORS = {
   bg: 'bg-amber-100',
   text: 'text-amber-700',
 } as const;
+export const BATTLE_SCALE_COLORS: Record<string, { bg: string; text: string }> = {
+  massive: { bg: 'bg-red-100', text: 'text-red-700' },
+  large: { bg: 'bg-orange-100', text: 'text-orange-700' },
+  medium: { bg: 'bg-blue-100', text: 'text-blue-700' },
+  small: { bg: 'bg-green-100', text: 'text-green-700' },
+  unknown: { bg: 'bg-zinc-100', text: 'text-zinc-500' },
+} as const;
 export const TURNING_POINT_COLORS = {
   positive: 'bg-green-500',
   negative: 'bg-red-500',
