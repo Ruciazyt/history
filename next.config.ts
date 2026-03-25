@@ -16,8 +16,13 @@ const nextConfig: NextConfig = {
   },
   
   typescript: {
-    // Allow building with TypeScript errors (pre-existing test file issues)
-    ignoreBuildErrors: true,
+    // Type checking is handled by tsc --noEmit in CI; Next build stays fast
+    ignoreBuildErrors: false,
+  },
+
+  // Turbopack root for monorepo (suppresses lockfile conflict warning)
+  turbopack: {
+    root: __dirname,
   },
 
   // Experimental features for better performance

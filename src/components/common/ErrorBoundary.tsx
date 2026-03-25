@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { ERROR_BOUNDARY_COLORS } from '@/lib/history/constants';
+import { logger } from '@/lib/history/logger';
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -28,7 +29,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
 
   override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // Log error for debugging (in production, this would send to an error tracking service)
-    console.error(`[ErrorBoundary ${this.props.name || 'anonymous'}] caught an error:`, {
+    logger.error('ui', `[ErrorBoundary ${this.props.name || 'anonymous'}] caught an error`, {
       message: error.message,
       stack: error.stack,
       componentStack: errorInfo.componentStack,

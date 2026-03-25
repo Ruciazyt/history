@@ -5,6 +5,7 @@ import type { Feature, Polygon, MultiPolygon } from 'geojson';
 import type { Event } from '@/lib/history/types';
 import { dynastyBoundaries } from '@/lib/history/data/dynastyBoundaries';
 import { getBattles } from '@/lib/history/battles';
+import { logger } from '@/lib/history/logger';
 
 const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
 
@@ -75,7 +76,7 @@ export function HistoryMap({
           mapRef.current = map;
           setMapReady(true);
         } catch (e) {
-          console.error('Failed to initialize Baidu Map:', e);
+          logger.error('map', 'Failed to initialize Baidu Map', e);
         }
       }
     };
@@ -85,7 +86,7 @@ export function HistoryMap({
 
     // Only load Baidu Map script when API key is configured
     if (!BAIDU_MAP_AK) {
-      console.warn('[HistoryMap] NEXT_PUBLIC_BAIDU_MAP_AK is not configured — map will not load');
+      logger.warn('map', 'NEXT_PUBLIC_BAIDU_MAP_AK is not configured — map will not load');
       // Clean up the callback we just registered
       delete (window as unknown as Record<string, unknown>)[callbackName];
       return;
@@ -149,7 +150,7 @@ export function HistoryMap({
           }
         }
       } catch (e) {
-        console.warn('Failed to draw boundary', e);
+        logger.warn('map', 'Failed to draw boundary', e);
       }
     };
 
