@@ -1879,5 +1879,7 @@
   "rulerBio.wc-ro-byz-fall": "1204 Fourth Crusade sacked Constantinople; empire fragmented; recovery under Palaeologan dynasty; 1453 Ottoman Sultan Mehmed II captured the city, ending the千年 empire.",
   "map": {
     "legend": "Legend"
-  }
+  },
+  "empire_hellenistic": "Hellenistic Kingdoms",
+  "empire_greco-bactrian": "Greco-Bactrian Kingdom"
 }
