@@ -44,7 +44,9 @@
       "10": "October",
       "11": "November",
       "12": "December"
-    }
+    },
+    "yearSlider": "Year slider",
+    "parallelPolities": "parallel polities"
   },
   "locale": {
     "zh": "中文",

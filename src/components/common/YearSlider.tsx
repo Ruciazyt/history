@@ -139,7 +139,7 @@ export function YearSlider({
           ref={sliderRef}
           className="relative h-6 cursor-pointer select-none pt-6"
           role="slider"
-          aria-label="年份滑块"
+          aria-label={t('ui.yearSlider')}
           aria-valuemin={minYear}
           aria-valuemax={maxYear}
           aria-valuenow={year}

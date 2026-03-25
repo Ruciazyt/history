@@ -90,7 +90,7 @@ export const EraDrawer = React.memo(function EraDrawer({
                     <span className={`flex-1 font-semibold ${eraColor.text} text-sm`}>
                       {t(era.nameKey)}
                       {isMultiPolity && (
-                        <span className="text-xs ml-1 text-zinc-400 dark:text-zinc-500">（多国并立）</span>
+                        <span className="text-xs ml-1 text-zinc-400 dark:text-zinc-500">{t('ui.parallelPolities')}</span>
                       )}
                     </span>
                     <span className="text-xs text-zinc-400">
@@ -106,7 +106,7 @@ export const EraDrawer = React.memo(function EraDrawer({
                           <table className="w-full text-xs border-collapse">
                             <thead>
                               <tr className="text-left border-b border-zinc-200 dark:border-zinc-700">
-                                <th className="px-2 py-2 font-medium w-16 shrink-0">年份</th>
+                                <th className="px-2 py-2 font-medium w-16 shrink-0">{t('ui.year')}</th>
                                 {era.polities?.map((p) => (
                                   <th key={p.id} className="px-2 py-2 font-medium min-w-[80px]">
                                     {t(p.nameKey)}
