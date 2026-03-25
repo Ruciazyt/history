@@ -69,12 +69,26 @@ export const ERA_COLORS: Record<string, { bg: string; text: string; dot: string;
     gradient: 'from-yellow-50 to-amber-50',
     border: 'border-yellow-200',
   },
+  'period-chu-han': { 
+    bg: 'bg-purple-50', 
+    text: 'text-purple-700', 
+    dot: 'bg-purple-500',
+    gradient: 'from-purple-50 to-violet-50',
+    border: 'border-purple-200',
+  },
   'han-eastern': { 
     bg: 'bg-orange-50', 
     text: 'text-orange-700', 
     dot: 'bg-orange-500',
     gradient: 'from-orange-50 to-amber-50',
     border: 'border-orange-200',
+  },
+  'period-three-kingdoms': { 
+    bg: 'bg-green-50', 
+    text: 'text-green-700', 
+    dot: 'bg-green-500',
+    gradient: 'from-green-50 to-emerald-50',
+    border: 'border-green-200',
   },
   'three-kingdoms': { 
     bg: 'bg-green-50', 
