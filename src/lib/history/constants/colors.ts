@@ -1061,8 +1061,8 @@ export const BATTLE_CARD_COLORS = {
     pulse: 'animate-pulse',
   },
   fallback: {
-    gradient: 'from-gray-50 to-gray-100',
-    border: 'border-gray-200',
+    gradient: 'from-gray-50 to-gray-100 dark:from-zinc-800 dark:to-zinc-900',
+    border: 'border-gray-200 dark:border-zinc-700',
   },
 } as const;
 export const FAVORITE_BUTTON_COLORS = {
