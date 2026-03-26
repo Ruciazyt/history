@@ -584,6 +584,25 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
             <div className={`mt-0.5 text-[10px] font-medium px-1.5 py-0.5 rounded-md w-fit ${ERA_BANDS[getEraBandIndex(currentYear)]!.badgeClass}`}>
               {t(ERA_BANDS[getEraBandIndex(currentYear)]!.labelKey)}
             </div>
+            {/* Era progress bar */}
+            {(() => {
+              const eraIdx = getEraBandIndex(currentYear);
+              const boundary0 = ERA_BOUNDARY_YEARS[0]!;
+              const boundary1 = ERA_BOUNDARY_YEARS[1]!;
+              const eraStart = eraIdx === 0 ? minYear : eraIdx === 1 ? boundary0 : boundary1;
+              const eraEnd = eraIdx === 2 ? maxYear : eraIdx === 0 ? boundary0 : boundary1;
+              const eraSpan = eraEnd - eraStart;
+              const progress = eraSpan > 0 ? Math.min(1, Math.max(0, (currentYear - eraStart) / eraSpan)) : 0;
+              const barColor = eraIdx === 0 ? 'bg-amber-400' : eraIdx === 1 ? 'bg-stone-400' : 'bg-blue-400';
+              return (
+                <div className="mt-1 h-1 w-full rounded-full bg-zinc-200 overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all duration-300 ${barColor}`}
+                    style={{ width: `${(progress * 100).toFixed(1)}%` }}
+                  />
+                </div>
+              );
+            })()}
           </div>
           <div className="flex-1 overflow-y-auto p-2 space-y-1">
             {activePolities.length === 0 ? (
