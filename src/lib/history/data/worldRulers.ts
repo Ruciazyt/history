@@ -78,7 +78,7 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-is-ilkhanate', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-mongol-dyn', bioKey: 'rulerBio.wc-is-ilkhanate', startYear: 1256, endYear: 1370 , isDynastyBlock: true },
   { id: 'wc-is-timur', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-timur', bioKey: 'rulerBio.wc-is-timur', highlightKey: 'rulerHighlight.wc-is-timur', startYear: 1370, endYear: 1405 },
   { id: 'wc-is-timurid-late', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-timurid-dyn', bioKey: 'rulerBio.wc-is-timurid-late', startYear: 1405, endYear: 1526 , isDynastyBlock: true },
-  { id: 'wc-is-akbar', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-akbar', bioKey: 'rulerBio.wc-is-akbar', highlightKey: 'rulerHighlight.wc-is-akbar', startYear: 1556, endYear: 1857 },
+  { id: 'wc-is-akbar', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-akbar', bioKey: 'rulerBio.wc-is-akbar', highlightKey: 'rulerHighlight.wc-is-akbar', startYear: 1556, endYear: 1605 },
 ];
 
 // ══ East Asia Comparison ═══════════════════════════════════════════════════
