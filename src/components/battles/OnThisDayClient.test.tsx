@@ -3,9 +3,12 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import type { Event } from '@/lib/history/types';
 import { OnThisDayClient } from './OnThisDayClient';
 
-// Mock next-intl
+// Mock next-intl - returns locale-aware month names
+let _mockLocale = 'zh';
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => {
+    const enMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const jaMonths = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
     const map: Record<string, string> = {
       'ui.back': '返回',
       'onThisDay.title': '历史上的今天',
@@ -15,7 +18,14 @@ vi.mock('next-intl', () => ({
       'onThisDay.found': '找到 {count} 场战役',
       'onThisDay.noEvents': '今天暂无记录',
       'onThisDay.noEventsHint': '换个日期试试吧',
+      'onThisDay.monthLabel': '月',
+      'onThisDay.dayLabel': '日',
     };
+    if (key.startsWith('ui.months.')) {
+      const num = parseInt(key.split('.').pop()!);
+      const months = _mockLocale === 'ja' ? jaMonths : _mockLocale === 'en' ? enMonths : jaMonths;
+      return months[num - 1] ?? key;
+    }
     if (key.includes('.')) return map[key] ?? key;
     return key;
   },
@@ -129,11 +139,13 @@ describe('OnThisDayClient', () => {
     });
 
     it('renders month names in English for locale=en', () => {
+      _mockLocale = 'en';
       render(<OnThisDayClient eras={[]} events={[baseBattle]} locale="en" />);
       expect(screen.getByText('January')).toBeInTheDocument();
     });
 
     it('renders month names in Japanese for locale=ja', () => {
+      _mockLocale = 'ja';
       render(<OnThisDayClient eras={[]} events={[baseBattle]} locale="ja" />);
       expect(screen.getByText('1月')).toBeInTheDocument();
     });
