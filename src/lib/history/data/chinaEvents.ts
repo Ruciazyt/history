@@ -862,6 +862,49 @@ export const CHINA_EVENTS: Event[] = [
     },
   },
 
+  // Western Jin - 永嘉之乱 / 五胡乱华
+  {
+    id: 'wj-311-yongjia',
+    entityId: 'jin-western',
+    year: 311,
+    titleKey: 'event.wj-311-yongjia.title',
+    summaryKey: 'event.wj-311-yongjia.summary',
+    tags: ['war', 'barbarian-invasion', 'turningPoint'],
+    location: { lon: 112.45, lat: 34.62, label: '洛阳' },
+    battle: {
+      belligerents: {
+        attacker: '汉赵匈奴军',
+        defender: '西晋军',
+      },
+      result: 'attacker_win',
+      battleType: 'invasion',
+      impact: 'decisive',
+      scale: 'massive',
+      commanders: {
+        attacker: ['刘聪', '刘曜', '石勒'],
+        defender: ['司马炽', '王衍'],
+      },
+      strategy: ['offensive', 'siege', 'ambush'],
+      terrain: ['urban', 'plains'],
+      pacing: 'extended',
+      casualties: {
+        attacker: 20000,
+        defender: 100000,
+        attackerCasualtyType: 'killed',
+        defenderCasualtyType: 'killed',
+        source: '《晋书》《资治通鉴》记载',
+        reliability: 'high',
+      },
+      turningPoints: [
+        {
+          type: 'fortification-breach',
+          description: '匈奴攻破洛阳，掳走怀帝',
+          impact: 'positive',
+        },
+      ],
+    },
+  },
+
   // Sui
   {
     id: 'sui-589-unify',

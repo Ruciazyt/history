@@ -162,7 +162,7 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
           {/* Scale badge */}
           {battle.battle?.scale && battle.battle.scale !== 'unknown' && (
             <div className="mt-2">
-              <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${BATTLE_SCALE_COLORS[battle.battle.scale]?.bg || BATTLE_SCALE_COLORS.unknown.bg} ${BATTLE_SCALE_COLORS[battle.battle.scale]?.text || BATTLE_SCALE_COLORS.unknown.text}`}>
+              <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${BATTLE_SCALE_COLORS[battle.battle.scale]?.bg ?? BATTLE_SCALE_COLORS.unknown!.bg} ${BATTLE_SCALE_COLORS[battle.battle.scale]?.text ?? BATTLE_SCALE_COLORS.unknown!.text}`}>
                 📊 {t('battle.scale.' + battle.battle.scale)}
               </span>
             </div>
