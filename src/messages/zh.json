@@ -1299,6 +1299,26 @@
     "ws-223-qin-conquers-chu": {
       "title": "秦灭楚",
       "summary": "秦国灭楚国，战国七雄格局进一步改变。"
+    },
+    "ws-230-qin-conquers-han": {
+      "title": "秦灭韩",
+      "summary": "秦国灭韩国，统一进程开始。"
+    },
+    "ws-228-qin-conquers-zhao": {
+      "title": "秦灭赵",
+      "summary": "秦国灭赵国。"
+    },
+    "ws-225-qin-conquers-wei": {
+      "title": "秦灭魏",
+      "summary": "秦国灭魏国。"
+    },
+    "ws-222-qin-conquers-yan": {
+      "title": "秦灭燕",
+      "summary": "秦国灭燕国。"
+    },
+    "ws-221-qin-conquers-qi": {
+      "title": "秦灭齐",
+      "summary": "齐国不战而降，秦完成统一大业。"
     }
   },
   "rulerEraName": {

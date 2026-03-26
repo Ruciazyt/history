@@ -1191,6 +1191,30 @@
     "prc-1978-reform": {
       "title": "Reform and Opening",
       "summary": "Deng Xiaoping's reforms."
+    },
+    "ws-230-qin-conquers-han": {
+      "title": "Qin Conquers Han",
+      "summary": "Qin conquers the state of Han, beginning the final unification campaign."
+    },
+    "ws-228-qin-conquers-zhao": {
+      "title": "Qin Conquers Zhao",
+      "summary": "Qin conquers the state of Zhao after the Battle of Changping."
+    },
+    "ws-225-qin-conquers-wei": {
+      "title": "Qin Conquers Wei",
+      "summary": "Qin conquers the state of Wei, destroying its capital Daliang."
+    },
+    "ws-223-qin-conquers-chu": {
+      "title": "Qin Conquers Chu",
+      "summary": "Qin conquers the state of Chu, shifting the balance of the Warring States."
+    },
+    "ws-222-qin-conquers-yan": {
+      "title": "Qin Conquers Yan",
+      "summary": "Qin conquers the state of Yan, annexing the northeastern frontier."
+    },
+    "ws-221-qin-conquers-qi": {
+      "title": "Qin Conquers Qi",
+      "summary": "Qi surrenders to Qin without resistance, completing the unification of China."
     }
   },
   "timeline": {
