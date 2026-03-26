@@ -6,6 +6,16 @@ import { eurasianBoundaries, eastAsiaBoundaries, getWorldEraBounds, getActiveBou
 import { formatYear } from '@/lib/history/utils';
 import { HISTORY_APP_COLORS } from '@/lib/history/constants';
 
+/** Returns a high-contrast text color for tooltip backgrounds: #fff for dark, #111 for light */
+function getTooltipTextColor(hex: string): string {
+  const r = parseInt(hex.slice(1, 3), 16) / 255;
+  const g = parseInt(hex.slice(3, 5), 16) / 255;
+  const b = parseInt(hex.slice(5, 7), 16) / 255;
+  // Relative luminance (sRGB)
+  const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return lum > 0.35 ? '#111827' : '#ffffff';
+}
+
 type GridMode = 'eurasian' | 'east-asia';
 
 interface EurasianGridProps {
@@ -525,7 +535,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                               className={`absolute left-1/2 -translate-x-1/2 ${tooltipFlip ? 'top-full mt-1' : 'bottom-full mb-1'} px-2 py-1 rounded-lg text-[10px] font-medium whitespace-nowrap z-20 shadow-lg`}
                               style={{
                                 backgroundColor: polity.color,
-                                color: 'white',
+                                color: getTooltipTextColor(polity.color),
                               }}
                             >
                               {t(polity.nameKey)} · {formatYear(polity.startYear)}–{formatYear(polity.endYear)}
