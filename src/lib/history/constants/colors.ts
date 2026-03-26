@@ -183,17 +183,17 @@ export const ERA_COLORS: Record<string, { bg: string; text: string; dot: string;
   },
 };
 export const BATTLE_RESULT_COLORS: Record<string, { bg: string; text: string; ring: string }> = {
-  attacker_win: { bg: 'bg-red-500', text: 'text-red-700', ring: 'ring-red-500' },
-  defender_win: { bg: 'bg-blue-500', text: 'text-blue-700', ring: 'ring-blue-500' },
-  draw: { bg: 'bg-gray-400', text: 'text-gray-600', ring: 'ring-gray-400' },
-  inconclusive: { bg: 'bg-yellow-500', text: 'text-yellow-700', ring: 'ring-yellow-500' },
-  unknown: { bg: 'bg-zinc-400', text: 'text-zinc-600', ring: 'ring-zinc-400' },
+  attacker_win: { bg: 'bg-red-500 dark:bg-red-600', text: 'text-red-700 dark:text-red-200', ring: 'ring-red-500 dark:ring-red-400' },
+  defender_win: { bg: 'bg-blue-500 dark:bg-blue-600', text: 'text-blue-700 dark:text-blue-200', ring: 'ring-blue-500 dark:ring-blue-400' },
+  draw: { bg: 'bg-gray-400 dark:bg-gray-500', text: 'text-gray-600 dark:text-gray-200', ring: 'ring-gray-400 dark:ring-gray-500' },
+  inconclusive: { bg: 'bg-yellow-500 dark:bg-yellow-600', text: 'text-yellow-700 dark:text-yellow-200', ring: 'ring-yellow-500 dark:ring-yellow-400' },
+  unknown: { bg: 'bg-zinc-400 dark:bg-zinc-500', text: 'text-zinc-600 dark:text-zinc-200', ring: 'ring-zinc-400 dark:ring-zinc-500' },
 };
 export const BATTLE_IMPACT_COLORS: Record<string, { bg: string; text: string }> = {
-  decisive: { bg: 'bg-red-100', text: 'text-red-700' },
-  major: { bg: 'bg-orange-100', text: 'text-orange-700' },
-  minor: { bg: 'bg-green-100', text: 'text-green-700' },
-  unknown: { bg: 'bg-zinc-100', text: 'text-zinc-500' },
+  decisive: { bg: 'bg-red-100 dark:bg-red-900/60', text: 'text-red-700 dark:text-red-300' },
+  major: { bg: 'bg-orange-100 dark:bg-orange-900/60', text: 'text-orange-700 dark:text-orange-300' },
+  minor: { bg: 'bg-green-100 dark:bg-green-900/60', text: 'text-green-700 dark:text-green-300' },
+  unknown: { bg: 'bg-zinc-100 dark:bg-zinc-800', text: 'text-zinc-500 dark:text-zinc-400' },
 };
 export const ACTION_COLORS = {
   // Primary action colors
