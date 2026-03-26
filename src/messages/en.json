@@ -838,7 +838,8 @@
     "ea-vn-ly": "李朝迁都升龙（今河内），儒学佛教并重，建立科举制度，击退宋朝入侵，是越南文化发展重要时期。",
     "ea-vn-tran": "陈朝三次击退蒙古（元朝）入侵（1258、1285、1288），陈兴道成为民族英雄，白藤江之战载入史册。",
     "ea-vn-le": "黎利驱逐明朝（占领越南20年）后建立后黎朝，圣宗改革创黎朝全盛，字喃文学发展，越南文化认同确立。",
-    "ea-vn-nguyen": "阮朝统一越南全境，定都顺化，1862年起法国侵占，越南最后一个封建王朝。"
+    "ea-vn-nguyen": "阮朝统一越南全境，定都顺化，1862年起法国侵占，越南最后一个封建王朝。",
+    "wc-is-genghis": "Genghis Khan (Temüjin) 1206–1227; founded the Mongol Empire; conquered most of Eurasia; creator of the Yamoto/relay messenger system."
   },
   "rulerHighlight": {
     "qinshihuang": "Unified six states (221 BCE); coined the title 'Huangdi' (Emperor); standardized script, weights, and roads; built the Great Wall and the Terracotta Army mausoleum.",
@@ -1008,7 +1009,8 @@
     "wc-eg-ramesses": "Ramses II fought Hittites at Kadesh (1274 BCE); signed first known peace treaty; built Abu Simbel, Ramesseum; 66-year reign.",
     "wc-iv-chandragupta": "Chandragupta Maurya overthrew Nanda dynasty ~322 BCE; studied with Alexander; founded Mauryan Empire with Chanakya (Kautilya).",
     "wc-iv-ashoka": "Ashoka conquered Kalinga ~261 BCE; 100,000+ died; deeply shaken, converted to Buddhism; erected edicts promoting dhamma.",
-    "wc-pe-xerxes": "Xerxes I invaded Greece 480 BCE; burned Athens; defeated at Salamis naval battle; empire shifted to defensive posture."
+    "wc-pe-xerxes": "Xerxes I invaded Greece 480 BCE; burned Athens; defeated at Salamis naval battle; empire shifted to defensive posture.",
+    "wc-is-genghis": "Reigned 1206–1227; unified Mongol tribes; conquered Jin, Western Xia, Khwarezm; established Yamoto relay system."
   },
   "event": {
     "viewTimeline": "View Timeline",

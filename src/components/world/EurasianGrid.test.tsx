@@ -12,7 +12,7 @@ function makeBoundary(name: string, nameKey: string, startYear: number, endYear:
 
 // Inline copy of classifyRegion for testing (verifies logic independently)
 type RegionId = 'china' | 'korea' | 'japan' | 'central-asia' | 'west' | 'vietnam' | 'other';
-const CHINA_NAMES = new Set(['秦朝', '西汉', '东汉', '唐朝', '宋朝', '元朝', '明朝', '清朝']);
+const CHINA_NAMES = new Set(['秦朝', '西汉', '东汉', '唐朝', '宋朝', '辽朝', '元朝', '明朝', '清朝']);
 const KOREA_NAMES = new Set(['高丽王朝', '朝鲜王朝']);
 const JAPAN_NAMES = new Set(['平安时代', '江户时代']);
 const VIETNAM_NAMES = new Set(['李朝', '黎朝', '阮朝']);
@@ -47,6 +47,12 @@ describe('EurasianGrid pure functions', () => {
         expect(testClassifyRegion(makeBoundary('宋朝', 'empire_song', 960, 1279))).toBe('china');
         expect(testClassifyRegion(makeBoundary('明朝', 'empire_ming', 1368, 1644))).toBe('china');
         expect(testClassifyRegion(makeBoundary('清朝', 'empire_qing', 1644, 1912))).toBe('china');
+      });
+
+      it('classifies Khitan Liao dynasty (契丹辽朝) as china', () => {
+        // Liao (907-1125) was a major steppe empire ruling northern China and Mongolia
+        // contemporary with Song dynasty; classified as China column
+        expect(testClassifyRegion(makeBoundary('辽朝', 'empire_liao', 907, 1125))).toBe('china');
       });
     });
 

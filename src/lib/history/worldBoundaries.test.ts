@@ -30,6 +30,10 @@ describe('worldBoundaries', () => {
       // At 1000 CE, Song should be active
       const song = boundaries.find(b => b.properties.nameKey === 'empire_song');
       expect(song).toBeDefined();
+      
+      // Liao dynasty (907-1125) should also be active at year 1000
+      const liao = boundaries.find(b => b.properties.nameKey === 'empire_liao');
+      expect(liao).toBeDefined();
     });
 
     it('should return boundaries active at year 1200 (Eurasian)', () => {
@@ -41,6 +45,24 @@ describe('worldBoundaries', () => {
       
       expect(song).toBeDefined();
       expect(abbasid).toBeDefined();
+    });
+
+    it('should return Liao dynasty active at year 1100 (Eurasian)', () => {
+      const boundaries = getActiveBoundaries(1100, 'eurasian');
+      
+      // Liao dynasty (907-1125) should be active at year 1100
+      const liao = boundaries.find(b => b.properties.nameKey === 'empire_liao');
+      expect(liao).toBeDefined();
+      expect(liao!.properties.startYear).toBe(907);
+      expect(liao!.properties.endYear).toBe(1125);
+    });
+
+    it('should NOT return Liao dynasty after year 1125', () => {
+      const boundaries = getActiveBoundaries(1130, 'eurasian');
+      
+      // Liao dynasty ended in 1125, so should not be active at year 1130
+      const liao = boundaries.find(b => b.properties.nameKey === 'empire_liao');
+      expect(liao).toBeUndefined();
     });
 
     it('should return boundaries active at year 1800 (Eurasian)', () => {
@@ -125,6 +147,7 @@ describe('worldBoundaries', () => {
       'empire_han-eastern',
       'empire_tang',
       'empire_song',
+      'empire_liao',
       'empire_yuan',
       'empire_ming',
       'empire_qing',

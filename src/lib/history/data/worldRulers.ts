@@ -73,6 +73,7 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-is-harun', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-harun', bioKey: 'rulerBio.wc-is-harun', highlightKey: 'rulerHighlight.wc-is-harun', startYear: 786, endYear: 833 },
   { id: 'wc-is-abbasid-late', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-abbasid-dyn', bioKey: 'rulerBio.wc-is-abbasid-late', startYear: 833, endYear: 1258 , isDynastyBlock: true },
   { id: 'wc-is-saladin', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-saladin', bioKey: 'rulerBio.wc-is-saladin', highlightKey: 'rulerHighlight.wc-is-saladin', startYear: 1174, endYear: 1193 },
+  { id: 'wc-is-genghis', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-genghis', bioKey: 'rulerBio.wc-is-genghis', highlightKey: 'rulerHighlight.wc-is-genghis', startYear: 1206, endYear: 1227 },
   { id: 'wc-is-ilkhanate', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-mongol-dyn', bioKey: 'rulerBio.wc-is-ilkhanate', startYear: 1256, endYear: 1370 , isDynastyBlock: true },
   { id: 'wc-is-timur', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-timur', bioKey: 'rulerBio.wc-is-timur', highlightKey: 'rulerHighlight.wc-is-timur', startYear: 1370, endYear: 1405 },
   { id: 'wc-is-timurid-late', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-timurid-dyn', bioKey: 'rulerBio.wc-is-timurid-late', startYear: 1405, endYear: 1526 , isDynastyBlock: true },
