@@ -1,13 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider } from 'next-intl';
 
-import { CHINA_ERAS } from '@/lib/history/data/chinaEras';
-import { CHINA_EVENTS } from '@/lib/history/data/chinaEvents';
-import { CHINA_RULERS } from '@/lib/history/data/chinaRulers';
-import { HistoryApp } from '@/components/HistoryApp';
-import { ThemeProvider } from '@/components/common/ThemeContext';
 import { locales, type Locale } from '@/i18n/routing';
+import { Shell } from '@/components/Shell';
 
 const localeNames: Record<string, string> = {
   zh: '中国史年表',
@@ -58,11 +53,5 @@ export default async function Home({
 
   const messages = (await import(`../../messages/${locale}.json`)).default;
 
-  return (
-    <NextIntlClientProvider messages={messages} locale={locale}>
-      <ThemeProvider>
-        <HistoryApp eras={CHINA_ERAS} events={CHINA_EVENTS} rulers={CHINA_RULERS} locale={locale} />
-      </ThemeProvider>
-    </NextIntlClientProvider>
-  );
+  return <Shell messages={messages} />;
 }

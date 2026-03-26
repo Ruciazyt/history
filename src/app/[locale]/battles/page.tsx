@@ -1,11 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider } from 'next-intl';
 
-import { CHINA_ERAS } from '@/lib/history/data/chinaEras';
-import { CHINA_EVENTS } from '@/lib/history/data/chinaEvents';
-import { BattlesClient } from '@/components/battles/BattlesClient';
 import { locales, type Locale } from '@/i18n/routing';
+import { Shell } from '@/components/Shell';
 
 const localeNames: Record<string, string> = {
   zh: '战役地图',
@@ -50,9 +47,5 @@ export default async function BattlesPage({
 
   const messages = (await import(`../../../messages/${locale}.json`)).default;
 
-  return (
-    <NextIntlClientProvider messages={messages} locale={locale}>
-      <BattlesClient eras={CHINA_ERAS} events={CHINA_EVENTS} locale={locale} />
-    </NextIntlClientProvider>
-  );
+  return <Shell messages={messages} />;
 }

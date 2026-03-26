@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider } from 'next-intl';
 
-import { CHINA_EVENTS } from '@/lib/history/data/chinaEvents';
-import { OnThisDayClient } from '@/components/battles/OnThisDayClient';
 import { locales, type Locale } from '@/i18n/routing';
+import { Shell } from '@/components/Shell';
 
 const localeNames: Record<string, string> = {
   zh: '历史上的今天',
@@ -49,9 +47,5 @@ export default async function OnThisDayPage({
 
   const messages = (await import(`../../../messages/${locale}.json`)).default;
 
-  return (
-    <NextIntlClientProvider messages={messages} locale={locale}>
-      <OnThisDayClient events={CHINA_EVENTS} locale={locale} />
-    </NextIntlClientProvider>
-  );
+  return <Shell messages={messages} />;
 }

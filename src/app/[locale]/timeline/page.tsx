@@ -1,9 +1,17 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider } from 'next-intl';
+import { Suspense } from 'react';
 
 import { locales, type Locale } from '@/i18n/routing';
-import { TimelineClient } from '@/components/timeline/TimelineClient';
+import { Shell } from '@/components/Shell';
+
+function TimelineLoading() {
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="animate-spin w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full" />
+    </div>
+  );
+}
 
 const localeNames: Record<string, string> = {
   zh: '历史时间线',
@@ -49,8 +57,8 @@ export default async function TimelinePage({
   const messages = (await import(`../../../messages/${locale}.json`)).default;
 
   return (
-    <NextIntlClientProvider messages={messages} locale={locale}>
-      <TimelineClient locale={locale} />
-    </NextIntlClientProvider>
+    <Suspense fallback={<TimelineLoading />}>
+      <Shell messages={messages} />
+    </Suspense>
   );
 }

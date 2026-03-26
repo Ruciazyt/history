@@ -1,12 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider } from 'next-intl';
 
-import { CHINA_ERAS } from '@/lib/history/data/chinaEras';
-import { CHINA_RULERS } from '@/lib/history/data/chinaRulers';
-import { CHINA_EVENTS } from '@/lib/history/data/chinaEvents';
-import { MatrixClient } from '@/components/matrix/MatrixClient';
 import { locales, type Locale } from '@/i18n/routing';
+import { CHINA_ERAS } from '@/lib/history/data/chinaEras';
+import { Shell } from '@/components/Shell';
 
 const localeNames: Record<string, string> = {
   zh: '多国并立',
@@ -54,14 +51,5 @@ export default async function MatrixPage({
   // Filter parallel polities eras for the matrix view
   const parallelPolitiesEras = CHINA_ERAS.filter((era) => era.isParallelPolities);
 
-  return (
-    <NextIntlClientProvider messages={messages} locale={locale}>
-      <MatrixClient
-        locale={locale}
-        eras={parallelPolitiesEras}
-        rulers={CHINA_RULERS}
-        events={CHINA_EVENTS}
-      />
-    </NextIntlClientProvider>
-  );
+  return <Shell messages={messages} eras={parallelPolitiesEras} />;
 }

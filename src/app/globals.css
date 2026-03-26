@@ -316,6 +316,60 @@ body {
   -webkit-backdrop-filter: blur(12px);
 }
 
+/* ─── Bottom Navigation active state ─────────────────────────────────────────── */
+.bottom-nav a:active {
+  transform: scale(0.90);
+  opacity: 0.7;
+  transition: transform 60ms ease-out, opacity 60ms ease-out;
+}
+
+/* ─── Mobile Touch Feedback ─────────────────────────────────────────────────── */
+/* Disable default tap highlight on all interactive elements */
+button,
+[role="button"],
+a,
+select,
+input[type="checkbox"],
+input[type="radio"],
+label[for] {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+
+/* Button active (pressed) state — gives tactile "clicked" feel */
+button:active,
+[role="button"]:active,
+a:active {
+  transform: scale(0.96);
+  opacity: 0.85;
+}
+
+/* Subtle shadow press effect on interactive cards/buttons */
+.btn-press {
+  transition: transform 80ms ease-out, box-shadow 80ms ease-out, opacity 80ms ease-out;
+}
+.btn-press:active {
+  transform: scale(0.96) translateY(1px);
+  box-shadow: none !important;
+}
+
+/* Ensure all touch targets are at least 44px */
+button,
+[role="button"],
+a,
+label {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Override for inline elements that shouldn't be 44px */
+a.nav-label,
+span.icon-only {
+  min-height: unset;
+  min-width: unset;
+}
+
 /* ─── iPhone Safe Area ──────────────────────────────────────────────────────── */
 .pb-safe {
   padding-bottom: env(safe-area-inset-bottom);

@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider } from 'next-intl';
 
-import { LocationClient } from '@/components/location/LocationClient';
 import { locales, type Locale } from '@/i18n/routing';
+import { Shell } from '@/components/Shell';
 
 export default async function LocationPage({
   params,
@@ -15,9 +14,5 @@ export default async function LocationPage({
 
   const messages = (await import(`../../../messages/${locale}.json`)).default;
 
-  return (
-    <NextIntlClientProvider messages={messages} locale={locale}>
-      <LocationClient locale={locale} />
-    </NextIntlClientProvider>
-  );
+  return <Shell messages={messages} />;
 }

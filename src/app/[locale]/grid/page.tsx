@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider } from 'next-intl';
 
-import { EurasianGrid } from '@/components/world/EurasianGrid';
 import { locales, type Locale } from '@/i18n/routing';
+import { Shell } from '@/components/Shell';
+import { EurasianGrid } from '@/components/world/EurasianGrid';
 
 const localeNames: Record<string, string> = {
   zh: '欧亚对比网格',
@@ -48,9 +48,5 @@ export default async function GridPage({
 
   const messages = (await import(`../../../messages/${locale}.json`)).default;
 
-  return (
-    <NextIntlClientProvider messages={messages} locale={locale}>
-      <EurasianGrid initialMode="eurasian" />
-    </NextIntlClientProvider>
-  );
+  return <Shell messages={messages}><EurasianGrid initialMode="eurasian" /></Shell>;
 }
