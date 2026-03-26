@@ -215,10 +215,15 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
     return ticks;
   }, [minYear, maxYear]);
 
-  // Current year line position
+  // Current year line position (full grid)
   const currentYearLineY = React.useMemo(() => {
     return yearToY(currentYear, minYear, maxYear, gridHeight);
   }, [currentYear, minYear, maxYear, gridHeight]);
+
+  // Mini timeline: year → pixel within 96px-tall mini track
+  const miniYearLineY = React.useMemo(() => {
+    return yearToY(currentYear, minYear, maxYear, 96);
+  }, [currentYear, minYear, maxYear]);
 
   const handleYearClick = React.useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -720,7 +725,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
               {/* Current year line */}
               <div
                 className="absolute left-0 right-0 h-0.5 bg-red-500 z-20"
-                style={{ top: currentYearLineY / (gridHeight / 96) }}
+                style={{ top: miniYearLineY }}
               >
                 <div className="absolute -left-0.5 -top-1 w-1.5 h-1.5 bg-red-500 rounded-full" />
               </div>
