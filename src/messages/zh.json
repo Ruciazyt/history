@@ -1299,26 +1299,6 @@
     "ws-223-qin-conquers-chu": {
       "title": "秦灭楚",
       "summary": "秦国灭楚国，战国七雄格局进一步改变。"
-    },
-    "ws-230-qin-conquers-han": {
-      "title": "秦灭韩",
-      "summary": "秦国灭韩国，统一进程开始。"
-    },
-    "ws-228-qin-conquers-zhao": {
-      "title": "秦灭赵",
-      "summary": "秦国灭赵国。"
-    },
-    "ws-225-qin-conquers-wei": {
-      "title": "秦灭魏",
-      "summary": "秦国灭魏国。"
-    },
-    "ws-222-qin-conquers-yan": {
-      "title": "秦灭燕",
-      "summary": "秦国灭燕国。"
-    },
-    "ws-221-qin-conquers-qi": {
-      "title": "秦灭齐",
-      "summary": "齐国不战而降，秦完成统一大业。"
     }
   },
   "rulerEraName": {
@@ -1926,6 +1906,9 @@
   "ruler.wc-iv-maurya": "孔雀王朝",
   "ruler.wc-iv-chandragupta": "旃陀罗笈多",
   "ruler.wc-iv-ashoka": "阿育王",
+  "ruler.wc-iv-gupta-dyn": "笈多帝国",
+  "ruler.wc-iv-samudragupta": "沙摩陀罗笈多",
+  "ruler.wc-iv-chandragupta-ii": "旃陀罗笈多二世",
   "ruler.wc-me-akkadian": "阿卡德帝国",
   "ruler.wc-me-hammurabi": "汉谟拉比",
   "ruler.wc-me-assyrian-dyn": "亚述帝国",
@@ -1982,6 +1965,9 @@
   "rulerBio.wc-iv-chandragupta": "孔雀王朝的建立者。",
   "rulerBio.wc-iv-maurya": "首个统一印度次大陆大部分地区的帝国。",
   "rulerBio.wc-iv-ashoka": "阿育王，征服迦陵伽后皈依佛教。",
+  "rulerBio.wc-iv-gupta": "印度古典黄金时代；艺术、科学与哲学繁荣。",
+  "rulerBio.wc-iv-samudragupta": "沙摩陀罗笈多（335–380年）；军事扩张帝国；艺术和音乐赞助者。",
+  "rulerBio.wc-iv-chandragupta-ii": "旃陀罗笈多二世（375–415年）；笈多帝国黄金时代；驱逐塞族；那烂陀大学繁荣。",
   "rulerHighlight.ea-jp-edo": "德川幕府（1603–1868）；250年以上和平；锁国政策。",
   "rulerHighlight.ea-jp-heian": "平安时代（794–1185）；贵族文化鼎盛；《源氏物语》诞生。",
   "rulerHighlight.ea-jp-kamakura": "首个武士幕府（1185–1333）；击败蒙古入侵；开启武家政治。",
@@ -2000,6 +1986,8 @@
   "rulerHighlight.wc-is-timur": "中亚征服者（1370–1405年）；建立帖木儿帝国；撒马尔罕艺术庇护者。",
   "rulerHighlight.wc-iv-ashoka": "佛教皇帝",
   "rulerHighlight.wc-iv-chandragupta": "孔雀王朝建立者",
+  "rulerHighlight.wc-iv-samudragupta": "笈多军事天才",
+  "rulerHighlight.wc-iv-chandragupta-ii": "笈多帝国黄金时代皇帝",
   "rulerHighlight.wc-pe-cyrus": "阿契美尼德波斯帝国建立者（约公元前550年）；颁布居鲁士圆柱，早期人权宪章。",
   "rulerHighlight.wc-pe-darius": "扩张波斯帝国至最大范围；建立行省制度；建造波斯波利斯。",
   "rulerHighlight.wc-pe-shapur": "萨珊国王（241–272年）；击败罗马皇帝瓦莱里安；萨珊波斯鼎盛期。",
@@ -2039,94 +2027,5 @@
   "rulerHighlight.wc-he-alexander": "亚历山大大帝（公元前336-323年）；征服波斯、埃及、印度；开创希腊化世界。",
   "rulerHighlight.wc-me-hammurabi": "巴比伦国王（公元前1792-1750年）；汉谟拉比法典是最古老的成文法律之一。",
   "rulerHighlight.wc-me-nebuchadnezzar": "尼布甲尼撒二世（公元前605-562年）；建造伊什塔尔门；传说中的巴比伦空中花园。",
-  "quiz": {
-    "title": "战役知识问答",
-    "setup": {
-      "title": "开始答题",
-      "description": "从古代战役数据中生成选择题，测试你的历史知识！",
-      "questionType": "题型",
-      "difficulty": "难度",
-      "start": "开始挑战"
-    },
-    "type": {
-      "commander": "指挥官",
-      "result": "胜负结果",
-      "year": "年份",
-      "terrain": "地形",
-      "scale": "规模",
-      "mixed": "混合题型"
-    },
-    "difficulty": {
-      "easy": "简单",
-      "normal": "普通",
-      "hard": "挑战"
-    },
-    "question": {
-      "commander": {
-        "attacker": "「{battle}」中，进攻方的主将是谁？",
-        "defender": "「{battle}」中，防守方的主将是谁？"
-      },
-      "result": "「{battle}」中，{attacker} vs {defender}，哪一方获胜？",
-      "year": "「{battle}」发生在哪一年？",
-      "terrain": "「{battle}」的主战场地形是什么？",
-      "scale": "「{battle}」的战役规模是？"
-    },
-    "option": {
-      "attacker_win": "进攻方胜",
-      "defender_win": "防守方胜",
-      "draw": "平局",
-      "inconclusive": "结果不明",
-      "unknown": "未知"
-    },
-    "terrain": {
-      "plains": "平原",
-      "mountains": "山地",
-      "hills": "丘陵",
-      "water": "水域",
-      "desert": "沙漠",
-      "plateau": "高原",
-      "forest": "森林",
-      "marsh": "沼泽",
-      "coastal": "沿海",
-      "urban": "城市",
-      "pass": "关隘",
-      "unknown": "未知"
-    },
-    "scale": {
-      "massive": "超大规模",
-      "large": "大规模",
-      "medium": "中等规模",
-      "small": "小规模",
-      "unknown": "未知"
-    },
-    "era": {
-      "westernZhou": "西周时期",
-      "springAutumn": "春秋时期",
-      "warringStates": "战国时期",
-      "chenhan": "秦汉时期",
-      "threeKingdoms": "三国时期"
-    },
-    "explanation": {
-      "commander": "「{battle}」的指挥官信息来源于历史记载。",
-      "result": "根据历史记载分析得出该战役结果。",
-      "year": "战役年份参考《史记》等史料。",
-      "terrain": "地形分析基于战场位置和当时地理环境。",
-      "scale": "战役规模参考史料中的兵力记载。"
-    },
-    "feedback": {
-      "correct": "回答正确！",
-      "wrong": "回答错误，正确答案是："
-    },
-    "progress": "第 {current} / {total} 题",
-    "score": "得分",
-    "streak": "连胜",
-    "bestStreak": "最佳连胜",
-    "next": "下一题",
-    "finish": "查看结果",
-    "result": {
-      "title": "答题完成！",
-      "score": "正确 {correct} / {total} 题",
-      "bestStreak": "最佳连胜：{streak}"
-    }
-  }
+  "empire_liao": "辽朝"
 }

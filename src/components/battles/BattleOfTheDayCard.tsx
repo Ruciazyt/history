@@ -135,7 +135,7 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
             )}
             {battle.battle?.battleType && battle.battle.battleType !== 'unknown' && (
               <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold ${BATTLE_TYPE_COLORS.bg} ${BATTLE_TYPE_COLORS.text}`}>
-                🎯 {t('battleDetail.battleType')} {t('battle.battleType.' + battle.battle.battleType)}
+                🎯 {t('battle.battleType.' + battle.battle.battleType)}
               </span>
             )}
             {sameEraBattles.length > 0 && (

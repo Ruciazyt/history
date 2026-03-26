@@ -130,6 +130,19 @@ export const eurasianBoundaries: WorldBoundary[] = [
     },
   },
 
+  // ═══ 契丹辽朝 (Khitan Liao) ═══
+  {
+    type: 'Feature',
+    properties: { name: '辽朝', nameKey: 'empire_liao', startYear: 907, endYear: 1125, color: '#0D9488' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [60, 38], [70, 32], [85, 28], [105, 22], [125, 28], [130, 42], [120, 50],
+        [100, 52], [80, 50], [60, 48], [50, 44], [55, 40], [60, 38],
+      ]],
+    },
+  },
+
   // ═══ 罗马帝国 (Rome/Byzantine/Ottoman) ═══
   {
     type: 'Feature',
@@ -630,6 +643,19 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
       type: 'Polygon',
       coordinates: [[
         [65, 42], [75, 35], [100, 18], [155, 30], [155, 55], [110, 58], [70, 52], [60, 46], [65, 42],
+      ]],
+    },
+  },
+
+  // ═══ 契丹辽朝 (Khitan Liao) ═══
+  {
+    type: 'Feature',
+    properties: { name: '辽朝', nameKey: 'empire_liao', startYear: 907, endYear: 1125, color: '#0D9488' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [60, 38], [70, 32], [85, 28], [105, 22], [128, 30], [130, 45], [118, 52],
+        [95, 52], [75, 50], [58, 46], [52, 42], [55, 40], [60, 38],
       ]],
     },
   },

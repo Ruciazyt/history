@@ -1755,6 +1755,9 @@
   "ruler.wc-iv-maurya": "マウリヤ帝国",
   "ruler.wc-iv-chandragupta": "チャンドラグプタ",
   "ruler.wc-iv-ashoka": "アショーカ大王",
+  "ruler.wc-iv-gupta-dyn": "クシャーナ朝",
+  "ruler.wc-iv-samudragupta": "サムドラグプタ",
+  "ruler.wc-iv-chandragupta-ii": "チャンドラグプタ2世",
   "ruler.wc-ro-caesar": "ユリウス・カエサル",
   "ruler.wc-ro-augustus": "アウグストゥス",
   "ruler.wc-ro-nerva-antonine": "五賢帝時代",
@@ -1811,12 +1814,17 @@
   "rulerBio.wc-iv-maurya": "インド亜大陸的大部分を統一した最初の帝国。",
   "rulerBio.wc-iv-chandragupta": "マウリヤ朝の建国者。",
   "rulerBio.wc-iv-ashoka": "カルリンガ戦争後、仏教に改宗したマウルヤ朝の皇帝。",
+  "rulerBio.wc-iv-gupta": "インドの黄金時代；芸術・科学・哲学が繁荣した時代。",
+  "rulerBio.wc-iv-samudragupta": "サムドラグプタ王（在位335〜380年）；軍事遠征で帝国を拡大；芸術のパトロン。",
+  "rulerBio.wc-iv-chandragupta-ii": "チャンドラグプタ2世（在位375〜415年）；クシャーナ朝を退けグプタ・黄金時代を実現；ナlanda大学が繁荣した。",
   "rulerHighlight.wc-eg-ramesses": "最强のファラオ",
   "rulerHighlight.wc-me-hammurabi": "バビロニア王（前1792〜1750年）；ハンムラビ法典を制定。",
   "rulerHighlight.wc-me-nebuchadnezzar": "ネブカドネザル2世（前605〜562年）；バビロンの空中庭園の传说。",
   "rulerHighlight.wc-he-alexander": "アレクサンドロス大王（前336〜323年）；ペルシア・エジプト・インドを征服。",
   "rulerHighlight.wc-iv-chandragupta": "Maurya建国者",
   "rulerHighlight.wc-iv-ashoka": "Buddhist皇帝",
+  "rulerHighlight.wc-iv-samudragupta": "グプタ朝の軍事的天才",
+  "rulerHighlight.wc-iv-chandragupta-ii": "グプタ・黄金時代の君主",
   "rulerHighlight.wc-ro-caesar": "共和政を終わらせた独裁官；ルビコン川を渡る（前49年）；ユリウス暦を制定；前44年に暗殺された。",
   "rulerHighlight.wc-ro-augustus": "初代ローマ皇帝（前27年〜14年）；パクス・ロマーナを開始；共和政から帝政への転換を主導。",
   "rulerHighlight.wc-ro-constantine": "初代キリスト教徒皇帝（306〜337年）；ミラノ勅令を発布；コンスタンティノープル建都。",
@@ -1938,94 +1946,5 @@
   },
   "empire_hellenistic": "ヘレニズム諸王国",
   "empire_greco-bactrian": "グリーコ・バクトリア王国",
-  "quiz": {
-    "title": "战役クイズ",
-    "setup": {
-      "title": "クイズを開始",
-      "description": "中国古代戦争の知識をチェック！",
-      "questionType": "問題タイプ",
-      "difficulty": "難易度",
-      "start": "チャレンジ開始"
-    },
-    "type": {
-      "commander": "指揮官",
-      "result": "勝敗",
-      "year": "年",
-      "terrain": "地形",
-      "scale": "規模",
-      "mixed": "ミックス"
-    },
-    "difficulty": {
-      "easy": "簡単",
-      "normal": "普通",
-      "hard": "難しい"
-    },
-    "question": {
-      "commander": {
-        "attacker": "「{battle}」の攻撃側指揮官は誰ですか？",
-        "defender": "「{battle}」の防衛側指揮官は誰ですか？"
-      },
-      "result": "「{battle}」（{attacker} vs {defender}）、どちらが勝利しましたか？",
-      "year": "「{battle}」は何年に起こりましたか？",
-      "terrain": "「{battle}」の主戦場はどこですか？",
-      "scale": "「{battle}」の規模は？"
-    },
-    "option": {
-      "attacker_win": "攻撃側勝利",
-      "defender_win": "防衛側勝利",
-      "draw": "引き分け",
-      "inconclusive": "不詳",
-      "unknown": "不明"
-    },
-    "terrain": {
-      "plains": "平原",
-      "mountains": "山地",
-      "hills": "丘陵",
-      "water": "水域",
-      "desert": "砂漠",
-      "plateau": "高原",
-      "forest": "森林",
-      "marsh": "湿地",
-      "coastal": "沿岸",
-      "urban": "都市",
-      "pass": "関隘",
-      "unknown": "不明"
-    },
-    "scale": {
-      "massive": "超大規模",
-      "large": "大規模",
-      "medium": "中規模",
-      "small": "小規模",
-      "unknown": "不詳"
-    },
-    "era": {
-      "westernZhou": "西周時代",
-      "springAutumn": "春秋時代",
-      "warringStates": "戦国時代",
-      "chenhan": "秦漢時代",
-      "threeKingdoms": "三国時代"
-    },
-    "explanation": {
-      "commander": "「{battle}」の指揮官情報は歴史記録に基づいています。",
-      "result": "この战役の結果は歴史分析に基づいています。",
-      "year": "この战役の年は歴史資料を参照しています。",
-      "terrain": "地形分析は戦場位置と当時の地理的環境に基づいています。",
-      "scale": "規模は兵力記録から推定しています。"
-    },
-    "feedback": {
-      "correct": "正解！",
-      "wrong": "不正解！正解は："
-    },
-    "progress": "第 {current} / {total} 問",
-    "score": "得点",
-    "streak": "連続正解",
-    "bestStreak": "最高連続正解",
-    "next": "次の問題",
-    "finish": "結果を見る",
-    "result": {
-      "title": "クイズ完了！",
-      "score": "正解 {correct} / {total} 問",
-      "bestStreak": "最高連続正解：{streak}"
-    }
-  }
+  "empire_liao": "遼朝"
 }

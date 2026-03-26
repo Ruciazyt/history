@@ -32,7 +32,7 @@ interface RegionColumn {
 /** Region classification helper: categorize a boundary into a region column */
 type RegionId = 'china' | 'korea' | 'japan' | 'central-asia' | 'west' | 'vietnam' | 'other';
 
-const CHINA_NAMES = new Set(['秦朝', '西汉', '东汉', '唐朝', '宋朝', '元朝', '明朝', '清朝']);
+const CHINA_NAMES = new Set(['秦朝', '西汉', '东汉', '唐朝', '宋朝', '辽朝', '元朝', '明朝', '清朝']);
 const KOREA_NAMES = new Set(['高丽王朝', '朝鲜王朝']);
 const JAPAN_NAMES = new Set(['平安时代', '江户时代', '飞鸟时代', '室町时代', '弥生时代', '大和时代', '奈良时代']);
 const VIETNAM_NAMES = new Set(['李朝', '黎朝', '阮朝']);
@@ -166,6 +166,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
   const [currentYear, setCurrentYear] = React.useState<number>(1);
   const [hoveredPolity, setHoveredPolity] = React.useState<string | null>(null);
   const [selectedPolity, setSelectedPolity] = React.useState<string | null>(null);
+  const [hoveredColumn, setHoveredColumn] = React.useState<string | null>(null);
 
   const columns = React.useMemo(() => buildEurasianColumns(mode), [mode]);
   const { min: minYear, max: maxYear } = React.useMemo(() => {
@@ -396,11 +397,16 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
               </div>
 
               {/* Grid columns */}
-              {columns.map(col => (
+              {columns.map(col => {
+                const isColHovered = hoveredColumn === col.id;
+                const isColDimmed = hoveredColumn !== null && !isColHovered;
+                return (
                 <div
                   key={col.id}
-                  className={`flex-1 min-w-[160px] sm:min-w-[200px] relative border-r border-zinc-100 ${col.bgColor} cursor-crosshair overflow-hidden`}
+                  className={`flex-1 min-w-[160px] sm:min-w-[200px] relative border-r border-zinc-100 ${col.bgColor} cursor-crosshair overflow-hidden transition-opacity duration-200 ${isColDimmed ? 'opacity-30' : 'opacity-100'}`}
                   onClick={handleYearClick}
+                  onMouseEnter={() => setHoveredColumn(col.id)}
+                  onMouseLeave={() => setHoveredColumn(null)}
                 >
                   {/* Era band backgrounds */}
                   {[
@@ -533,7 +539,8 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                     <div className="absolute -left-1 -top-1.5 w-2 h-2 bg-red-500 rounded-full" />
                   </div>
                 </div>
-              ))}
+              );
+              })}
             </div>
           </div>
 
@@ -577,6 +584,25 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
             <div className={`mt-0.5 text-[10px] font-medium px-1.5 py-0.5 rounded-md w-fit ${ERA_BANDS[getEraBandIndex(currentYear)]!.badgeClass}`}>
               {t(ERA_BANDS[getEraBandIndex(currentYear)]!.labelKey)}
             </div>
+            {/* Era progress bar */}
+            {(() => {
+              const eraIdx = getEraBandIndex(currentYear);
+              const boundary0 = ERA_BOUNDARY_YEARS[0]!;
+              const boundary1 = ERA_BOUNDARY_YEARS[1]!;
+              const eraStart = eraIdx === 0 ? minYear : eraIdx === 1 ? boundary0 : boundary1;
+              const eraEnd = eraIdx === 2 ? maxYear : eraIdx === 0 ? boundary0 : boundary1;
+              const eraSpan = eraEnd - eraStart;
+              const progress = eraSpan > 0 ? Math.min(1, Math.max(0, (currentYear - eraStart) / eraSpan)) : 0;
+              const barColor = eraIdx === 0 ? 'bg-amber-400' : eraIdx === 1 ? 'bg-stone-400' : 'bg-blue-400';
+              return (
+                <div className="mt-1 h-1 w-full rounded-full bg-zinc-200 overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all duration-300 ${barColor}`}
+                    style={{ width: `${(progress * 100).toFixed(1)}%` }}
+                  />
+                </div>
+              );
+            })()}
           </div>
           <div className="flex-1 overflow-y-auto p-2 space-y-1">
             {activePolities.length === 0 ? (
