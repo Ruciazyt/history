@@ -4,7 +4,7 @@ import * as React from 'react';
 import type { Event } from '@/lib/history/types';
 import { formatYear } from '@/lib/history/utils';
 import { getBattleResultLabel, getBattleImpactLabel } from '@/lib/history/battles';
-import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, ERA_COLORS, COMMANDER_COLORS, SELECTION_COLORS, BATTLE_CARD_COLORS, FAVORITE_BUTTON_COLORS } from '@/lib/history/constants';
+import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, BATTLE_SCALE_COLORS, ERA_COLORS, COMMANDER_COLORS, SELECTION_COLORS, BATTLE_CARD_COLORS, FAVORITE_BUTTON_COLORS } from '@/lib/history/constants';
 import { useTranslations } from 'next-intl';
 import { BattleDetail } from './BattleDetail';
 import { useBattleFavorites } from '@/lib/history/useBattleHooks';
@@ -155,6 +155,15 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
             <div className="mt-2">
               <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.bg || BATTLE_CARD_COLORS.impact.default} ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.text || BATTLE_CARD_COLORS.impact.textDefault}`}>
                 💎 {t(getBattleImpactLabel(battle.battle.impact))}
+              </span>
+            </div>
+          )}
+
+          {/* Scale badge */}
+          {battle.battle?.scale && battle.battle.scale !== 'unknown' && (
+            <div className="mt-2">
+              <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${BATTLE_SCALE_COLORS[battle.battle.scale]?.bg || BATTLE_SCALE_COLORS.unknown.bg} ${BATTLE_SCALE_COLORS[battle.battle.scale]?.text || BATTLE_SCALE_COLORS.unknown.text}`}>
+                📊 {t('battle.scale.' + battle.battle.scale)}
               </span>
             </div>
           )}
