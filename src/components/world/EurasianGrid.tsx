@@ -343,7 +343,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   return (
                     <div
                       key={`minor-${year}`}
-                      className="absolute left-12 right-0"
+                      className="absolute left-0 right-0"
                       style={{ top: y }}
                     >
                       <div className="h-px bg-zinc-200" />
