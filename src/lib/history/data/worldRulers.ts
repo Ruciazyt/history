@@ -37,6 +37,7 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-me-akkadian', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-akkadian', bioKey: 'rulerBio.wc-me-akkadian', startYear: -2334, endYear: -2279 , isDynastyBlock: true },
   { id: 'wc-me-hammurabi', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-hammurabi', bioKey: 'rulerBio.wc-me-hammurabi', highlightKey: 'rulerHighlight.wc-me-hammurabi', startYear: -1792, endYear: -1750 },
   { id: 'wc-me-assyrian', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-assyrian-dyn', bioKey: 'rulerBio.wc-me-assyrian', startYear: -1363, endYear: -609 , isDynastyBlock: true },
+  { id: 'wc-me-ashurbanipal', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-ashurbanipal', bioKey: 'rulerBio.wc-me-ashurbanipal', highlightKey: 'rulerHighlight.wc-me-ashurbanipal', startYear: -669, endYear: -627 },
   { id: 'wc-me-nebuchadnezzar', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-nebuchadnezzar', bioKey: 'rulerBio.wc-me-nebuchadnezzar', highlightKey: 'rulerHighlight.wc-me-nebuchadnezzar', startYear: -605, endYear: -562 },
 
   // ── Indus Valley / Maurya ──────────────────────────────────────────────
