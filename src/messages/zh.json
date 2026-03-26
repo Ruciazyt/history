@@ -1487,7 +1487,8 @@
   },
   "nav": {
     "battles": "战役",
-    "commanders": "指挥官网络"
+    "commanders": "指挥官网络",
+    "favorites": "收藏"
   },
   "favorites": {
     "title": "收藏夹",

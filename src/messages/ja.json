@@ -1271,7 +1271,8 @@
   },
   "nav": {
     "battles": "戦い",
-    "commanders": "指揮官ネットワーク"
+    "commanders": "指揮官ネットワーク",
+    "favorites": "お気に入り"
   },
   "favorites": {
     "title": "お気に入り",
