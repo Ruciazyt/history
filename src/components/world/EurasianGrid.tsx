@@ -518,7 +518,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                         )}
 
                         {/* Tooltip on hover — flips above/below based on proximity to grid edge */}
-                        {isHovered && height <= 30 && (() => {
+                        {isHovered && (() => {
                           const tooltipFlip = topY < 40; // flip above when near top edge
                           return (
                             <div
