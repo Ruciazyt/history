@@ -16,9 +16,6 @@ interface RulerListProps {
   // and dark-mode string types (bg-zinc-800) returned by useHistoryAppColors
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   sidebarColors: any;
-  /** @deprecated Not used in JSX; kept for type compatibility */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  _extraColors?: any;
 }
 
 export function RulerList({
@@ -28,7 +25,6 @@ export function RulerList({
   selectedRulerId,
   onSelectRuler,
   sidebarColors,
-  _extraColors,
 }: RulerListProps) {
   const t = useTranslations();
   const tEra = useTranslations('rulerEraName');

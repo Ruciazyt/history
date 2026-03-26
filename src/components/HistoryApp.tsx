@@ -318,7 +318,6 @@ export function HistoryApp({
                       selectedRulerId={selectedRulerId}
                       onSelectRuler={setSelectedRulerId}
                       sidebarColors={C.sidebar}
-                      _extraColors={EXTRA}
                     />
                   </div>
                 );
