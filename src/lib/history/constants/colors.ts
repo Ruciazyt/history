@@ -547,7 +547,7 @@ export const TIME_OF_DAY_COLORS = {
   bg: 'bg-amber-100',
   text: 'text-amber-700',
 } as const;
-export const BATTLE_SCALE_COLORS: Record<string, { bg: string; text: string }> = {
+export const BATTLE_SCALE_COLORS: Record<'massive' | 'large' | 'medium' | 'small' | 'unknown', { bg: string; text: string }> = {
   massive: { bg: 'bg-red-100', text: 'text-red-700' },
   large: { bg: 'bg-orange-100', text: 'text-orange-700' },
   medium: { bg: 'bg-blue-100', text: 'text-blue-700' },
