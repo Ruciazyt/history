@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import * as React from 'react';
 import { Shell } from './Shell';
+import type { Era } from '@/lib/history/types';
 
 // Mock next/navigation
 const mockUseParams = vi.fn();
@@ -233,7 +234,7 @@ describe('Shell', () => {
   it('renders MatrixClient with eras prop when passed', () => {
     mockUsePathname.mockReturnValue('/zh/matrix');
     const mockEras = [{ id: 'era1', name: 'Test Era' }];
-    render(<Shell messages={defaultMessages} eras={mockEras as any} />);
+    render(<Shell messages={defaultMessages} eras={mockEras as Era[]} />);
     // MatrixClient should still render (eras passed through)
     expect(screen.getByTestId('matrix-client')).toBeInTheDocument();
   });

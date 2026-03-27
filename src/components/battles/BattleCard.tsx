@@ -87,7 +87,6 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
           onKeyDown={handleKeyDown}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          aria-pressed={selected}
           aria-label={`${t(battle.titleKey)} - ${formatYear(battle.year)}`}
           className={`w-full text-left p-3 sm:p-4 rounded-xl border-2 bg-gradient-to-br ${eraGradient} ${eraBorder} hover:shadow-lg transition-all duration-200 pr-12 sm:pr-14 ${
             isHovered ? 'scale-[1.02] shadow-lg' : 'hover:scale-[1.01]'

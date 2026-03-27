@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildEurasianColumns, yearToY, ERA_BANDS, ERA_BOUNDARY_YEARS, QUICK_JUMP_YEARS } from './EurasianGrid';
+import { buildEurasianColumns, yearToY, ERA_BANDS, ERA_BOUNDARY_YEARS, QUICK_JUMP_YEARS, getEraBandIndex } from './EurasianGrid';
 import type { WorldBoundary } from '@/lib/history/data/worldBoundaries';
 
 function makeBoundary(name: string, nameKey: string, startYear: number, endYear: number): WorldBoundary {
@@ -302,6 +302,57 @@ describe('EurasianGrid pure functions', () => {
       // 24 century buttons is reasonable
       expect(QUICK_JUMP_YEARS.length).toBeGreaterThanOrEqual(20);
       expect(QUICK_JUMP_YEARS.length).toBeLessThanOrEqual(30);
+    });
+  });
+
+  describe('getEraBandIndex', () => {
+    it('returns 0 (ancient) for years before first boundary (476)', () => {
+      expect(getEraBandIndex(-2500)).toBe(0);
+      expect(getEraBandIndex(-1000)).toBe(0);
+      expect(getEraBandIndex(-500)).toBe(0);
+      expect(getEraBandIndex(0)).toBe(0);
+      expect(getEraBandIndex(475)).toBe(0);
+    });
+
+    it('returns 1 (medieval) for years between 476 and 1500', () => {
+      expect(getEraBandIndex(476)).toBe(1);
+      expect(getEraBandIndex(500)).toBe(1);
+      expect(getEraBandIndex(1000)).toBe(1);
+      expect(getEraBandIndex(1400)).toBe(1);
+      expect(getEraBandIndex(1499)).toBe(1);
+    });
+
+    it('returns 2 (earlyModern) for years >= 1500', () => {
+      expect(getEraBandIndex(1500)).toBe(2);
+      expect(getEraBandIndex(1600)).toBe(2);
+      expect(getEraBandIndex(1800)).toBe(2);
+      expect(getEraBandIndex(1900)).toBe(2);
+      expect(getEraBandIndex(2000)).toBe(2);
+    });
+
+    it('boundary year 476 itself belongs to medieval (index 1)', () => {
+      expect(getEraBandIndex(476)).toBe(1);
+    });
+
+    it('boundary year 1500 itself belongs to earlyModern (index 2)', () => {
+      expect(getEraBandIndex(1500)).toBe(2);
+    });
+  });
+
+  describe('ERA_BANDS era color assignments', () => {
+    it('ancient band uses amber color for light mode era backgrounds', () => {
+      const ancient = ERA_BANDS[0];
+      expect(ancient.bgClass).toMatch(/bg-amber-/);
+    });
+
+    it('medieval band uses stone color for light mode era backgrounds', () => {
+      const medieval = ERA_BANDS[1];
+      expect(medieval.bgClass).toMatch(/bg-stone-/);
+    });
+
+    it('earlyModern band uses blue color for light mode era backgrounds', () => {
+      const earlyModern = ERA_BANDS[2];
+      expect(earlyModern.bgClass).toMatch(/bg-blue-/);
     });
   });
 });
