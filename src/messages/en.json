@@ -2095,5 +2095,8 @@
   },
   "empire_hellenistic": "Hellenistic Kingdoms",
   "empire_greco-bactrian": "Greco-Bactrian Kingdom",
-  "empire_liao": "Liao Dynasty"
+  "empire_liao": "Liao Dynasty",
+  "ui": {
+    "pageNotFound": "Page not found"
+  }
 }

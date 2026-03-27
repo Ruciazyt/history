@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useParams, usePathname } from 'next/navigation';
-import { NextIntlClientProvider } from 'next-intl';
+import { NextIntlClientProvider, useTranslations } from 'next-intl';
 
 import { HistoryApp } from '@/components/HistoryApp';
 import { ThemeProvider } from '@/components/common/ThemeContext';
@@ -108,16 +108,21 @@ export function Shell({ messages, children, minYear, maxYear, eras }: ShellProps
       return <LocationClient locale={locale} />;
     }
 
+    return null;
+  }, [pathname, locale, children, minYear, maxYear, eras]);
+
+  const NotFoundPage = () => {
+    const t = useTranslations('ui');
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p>Page not found</p>
+        <p className="text-zinc-500">{t('pageNotFound')}</p>
       </div>
     );
-  }, [pathname, locale, children, minYear, maxYear, eras]);
+  };
 
   return (
     <NextIntlClientProvider messages={messages} locale={locale}>
-      {pageContent}
+      {pageContent ?? <NotFoundPage />}
     </NextIntlClientProvider>
   );
 }

@@ -17,6 +17,11 @@ vi.mock('next-intl', () => ({
   NextIntlClientProvider: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="intl-provider">{children}</div>
   ),
+  useTranslations: () => (key: string) => {
+    // Returns the last segment of the i18n key as a simple mock
+    // e.g., 'ui.pageNotFound' -> 'pageNotFound'
+    return key.split('.').pop() ?? key;
+  },
 }));
 
 // Mock page components
@@ -217,7 +222,7 @@ describe('Shell', () => {
   it('renders 404 for unknown path', () => {
     mockUsePathname.mockReturnValue('/zh/unknown-page');
     render(<Shell messages={defaultMessages} />);
-    expect(screen.getByText('Page not found')).toBeInTheDocument();
+    expect(screen.getByText('pageNotFound')).toBeInTheDocument();
   });
 
   it('prefers children over pathname-based rendering when provided', () => {

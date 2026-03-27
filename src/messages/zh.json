@@ -2035,5 +2035,8 @@
   "rulerHighlight.wc-me-hammurabi": "巴比伦国王（公元前1792-1750年）；汉谟拉比法典是最古老的成文法律之一。",
   "rulerHighlight.wc-me-nebuchadnezzar": "尼布甲尼撒二世（公元前605-562年）；建造伊什塔尔门；传说中的巴比伦空中花园。",
   "rulerHighlight.wc-me-ashurbanipal": "亚述巴尼拔（公元前669-627年）；亚述帝国鼎盛时期；建造尼尼微图书馆。",
-  "empire_liao": "辽朝"
+  "empire_liao": "辽朝",
+  "ui": {
+    "pageNotFound": "页面未找到"
+  }
 }
