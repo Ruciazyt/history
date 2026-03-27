@@ -8,45 +8,7 @@
     "range": "Range"
   },
   "ui": {
-    "eras": "Eras (China)",
-    "timeline": "Timeline",
-    "centerYear": "Center year",
-    "back": "Back",
-    "window": {
-      "10": "10 years",
-      "50": "50 years",
-      "100": "100 years",
-      "label": "Window",
-      "years": "{count} years"
-    },
-    "events": "Events",
-    "noEvents": "No events in this window.",
-    "compare": "Compare (other eras)",
-    "noCompare": "No comparable events in this window.",
-    "rulers": "Rulers",
-    "chaos": "Chaotic period",
-    "rulerDetail": "Ruler",
-    "clearRuler": "Clear",
-    "seedNote": "Seed data is for MVP iteration; dates/locations are approximate.",
-    "openEraMenu": "Open dynasty menu",
-    "openEventsList": "Open events list",
-    "year": "Year",
-    "months": {
-      "1": "January",
-      "2": "February",
-      "3": "March",
-      "4": "April",
-      "5": "May",
-      "6": "June",
-      "7": "July",
-      "8": "August",
-      "9": "September",
-      "10": "October",
-      "11": "November",
-      "12": "December"
-    },
-    "yearSlider": "Year slider",
-    "parallelPolities": "parallel polities"
+    "pageNotFound": "Page not found"
   },
   "locale": {
     "zh": "中文",
@@ -2096,7 +2058,23 @@
   "empire_hellenistic": "Hellenistic Kingdoms",
   "empire_greco-bactrian": "Greco-Bactrian Kingdom",
   "empire_liao": "Liao Dynasty",
-  "ui": {
-    "pageNotFound": "Page not found"
-  }
+  "grid.title": "Civilization Timeline",
+  "grid.timeline": "Timeline",
+  "grid.eurasian": "Eurasian",
+  "grid.eastAsia": "East Asia",
+  "grid.activeAtYear": "Active at {year}",
+  "grid.activeEmpires": "{count} active empires",
+  "grid.noActive": "No active empires",
+  "grid.quickJump": "Jump to century",
+  "grid.ce1": "CE",
+  "grid.eraBand.ancient": "Ancient",
+  "grid.eraBand.medieval": "Medieval",
+  "grid.eraBand.earlyModern": "Early Modern",
+  "grid.region.china": "China",
+  "grid.region.korea": "Korea",
+  "grid.region.japan": "Japan",
+  "grid.region.vietnam": "Vietnam",
+  "grid.region.central-asia": "Central Asia",
+  "grid.region.west": "West Asia & Europe",
+  "grid.region.other": "Other"
 }

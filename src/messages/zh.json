@@ -8,45 +8,7 @@
     "range": "范围"
   },
   "ui": {
-    "eras": "时期（中国）",
-    "timeline": "时间轴",
-    "centerYear": "中心年份",
-    "back": "返回",
-    "window": {
-      "10": "10 年",
-      "50": "50 年",
-      "100": "100 年",
-      "label": "窗口",
-      "years": "{count}年"
-    },
-    "events": "事件",
-    "noEvents": "该窗口暂无事件。",
-    "compare": "同期对比（其他时期）",
-    "noCompare": "该窗口暂无可对比事件。",
-    "rulers": "统治者",
-    "chaos": "混乱时期",
-    "rulerDetail": "统治者信息",
-    "clearRuler": "取消选择",
-    "seedNote": "示例数据用于 MVP 迭代；年代与地点为近似值。",
-    "openEraMenu": "打开朝代菜单",
-    "openEventsList": "打开事件列表",
-    "year": "年份",
-    "months": {
-      "1": "一月",
-      "2": "二月",
-      "3": "三月",
-      "4": "四月",
-      "5": "五月",
-      "6": "六月",
-      "7": "七月",
-      "8": "八月",
-      "9": "九月",
-      "10": "十月",
-      "11": "十一月",
-      "12": "十二月"
-    },
-    "yearSlider": "年份滑块",
-    "parallelPolities": "多国并立"
+    "pageNotFound": "页面未找到"
   },
   "locale": {
     "zh": "中文",
@@ -2036,7 +1998,23 @@
   "rulerHighlight.wc-me-nebuchadnezzar": "尼布甲尼撒二世（公元前605-562年）；建造伊什塔尔门；传说中的巴比伦空中花园。",
   "rulerHighlight.wc-me-ashurbanipal": "亚述巴尼拔（公元前669-627年）；亚述帝国鼎盛时期；建造尼尼微图书馆。",
   "empire_liao": "辽朝",
-  "ui": {
-    "pageNotFound": "页面未找到"
-  }
+  "grid.title": "文明时间线",
+  "grid.timeline": "时间线",
+  "grid.eurasian": "欧亚大陆",
+  "grid.eastAsia": "东亚",
+  "grid.activeAtYear": "{year}年势力",
+  "grid.activeEmpires": "{count}个活跃帝国",
+  "grid.noActive": "无活跃帝国",
+  "grid.quickJump": "跳转世纪",
+  "grid.ce1": "公元",
+  "grid.eraBand.ancient": "古代",
+  "grid.eraBand.medieval": "中世纪",
+  "grid.eraBand.earlyModern": "近代早期",
+  "grid.region.china": "中国",
+  "grid.region.korea": "朝鲜半岛",
+  "grid.region.japan": "日本",
+  "grid.region.vietnam": "越南",
+  "grid.region.central-asia": "中亚",
+  "grid.region.west": "西亚与欧洲",
+  "grid.region.other": "其他"
 }

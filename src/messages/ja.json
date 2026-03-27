@@ -8,45 +8,7 @@
     "range": "範囲"
   },
   "ui": {
-    "eras": "時代（中国）",
-    "timeline": "年表",
-    "centerYear": "中心年",
-    "back": "戻る",
-    "window": {
-      "10": "10年",
-      "50": "50年",
-      "100": "100年",
-      "label": "ウィンドウ",
-      "years": "{count}年"
-    },
-    "events": "出来事",
-    "noEvents": "この範囲には出来事がありません。",
-    "compare": "同時期比較（他の時代）",
-    "noCompare": "この範囲には比較できる出来事がありません。",
-    "rulers": "統治者",
-    "chaos": "混乱期",
-    "rulerDetail": "統治者",
-    "clearRuler": "選択解除",
-    "seedNote": "サンプルデータはMVP用です。年代・地点は概算です。",
-    "openEraMenu": "王朝メニューを開く",
-    "openEventsList": "イベントリストを開く",
-    "year": "年",
-    "months": {
-      "1": "1月",
-      "2": "2月",
-      "3": "3月",
-      "4": "4月",
-      "5": "5月",
-      "6": "6月",
-      "7": "7月",
-      "8": "8月",
-      "9": "9月",
-      "10": "10月",
-      "11": "11月",
-      "12": "12月"
-    },
-    "yearSlider": "年份スライダー",
-    "parallelPolities": "多国並立"
+    "pageNotFound": "ページが見つかりません"
   },
   "locale": {
     "zh": "中文",
@@ -2152,7 +2114,23 @@
   "empire_hellenistic": "ヘレニズム諸王国",
   "empire_greco-bactrian": "グリーコ・バクトリア王国",
   "empire_liao": "遼朝",
-  "ui": {
-    "pageNotFound": "ページが見つかりません"
-  }
+  "grid.title": "文明タイムライン",
+  "grid.timeline": "時代",
+  "grid.eurasian": "ユーラシア",
+  "grid.eastAsia": "東アジア",
+  "grid.activeAtYear": "{year}年の勢力",
+  "grid.activeEmpires": "{count}個の帝国が活動中",
+  "grid.noActive": "活動中の帝国なし",
+  "grid.quickJump": "世紀へジャンプ",
+  "grid.ce1": "紀元後",
+  "grid.eraBand.ancient": "古代",
+  "grid.eraBand.medieval": "中世",
+  "grid.eraBand.earlyModern": "近世",
+  "grid.region.china": "中国",
+  "grid.region.korea": "朝鮮",
+  "grid.region.japan": "日本",
+  "grid.region.vietnam": "ベトナム",
+  "grid.region.central-asia": "中央アジア",
+  "grid.region.west": "西アジア・ヨーロッパ",
+  "grid.region.other": "その他"
 }
