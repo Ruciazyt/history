@@ -14,16 +14,16 @@ function makeBoundary(name: string, nameKey: string, startYear: number, endYear:
 type RegionId = 'china' | 'korea' | 'japan' | 'central-asia' | 'west' | 'vietnam' | 'other';
 const CHINA_NAMES = new Set(['秦朝', '西汉', '东汉', '唐朝', '宋朝', '辽朝', '元朝', '明朝', '清朝']);
 const KOREA_NAMES = new Set(['高丽王朝', '朝鲜王朝']);
-const JAPAN_NAMES = new Set(['平安时代', '江户时代']);
+const JAPAN_NAMES = new Set(['平安时代', '江户时代', '飞鸟时代', '室町时代', '弥生时代', '大和时代', '奈良时代']);
 const VIETNAM_NAMES = new Set(['李朝', '黎朝', '阮朝']);
-const CENTRAL_ASIA_NAMES = new Set(['蒙古帝国', '孔雀王朝', '莫卧儿帝国', '印度河文明', '萨塔瓦哈纳', '室利佛逝']);
+const CENTRAL_ASIA_NAMES = new Set(['蒙古帝国', '孔雀王朝', '贵霜帝国', '莫卧儿帝国', '印度河文明', '萨塔瓦哈纳', '室利佛逝', '笈多帝国', '朱罗帝国']);
 const WEST_NAMES = new Set(['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '古埃及', '托勒密埃及', '亚述', '巴比伦', '阿卡德', '赫梯']);
 const CHINA_NAMESMatches = ['蜀', '吴', '晋', '隋', '南北朝', '五代', '三国'];
 const KOREA_NAMESMatches: string[] = [];
 const JAPAN_NAMESMatches: string[] = [];
 const VIETNAM_NAMESMatches: string[] = [];
-const CENTRAL_ASIA_NAMESMatches: string[] = [];
-const WEST_NAMESMatches = ['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '塞琉古', '亚述', '巴比伦', '阿卡德', '赫梯'];
+const CENTRAL_ASIA_NAMESMatches = ['贵霜', '笈多', '朱罗', '希腊-巴克特里亚'];
+const WEST_NAMESMatches = ['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '塞琉古', '亚述', '巴比伦', '阿卡德', '赫梯', '神圣', '继业者'];
 
 function testClassifyRegion(boundary: WorldBoundary): RegionId {
   const name = boundary.properties.name;
@@ -67,6 +67,11 @@ describe('EurasianGrid pure functions', () => {
       it('classifies exact match Japanese periods', () => {
         expect(testClassifyRegion(makeBoundary('平安时代', 'empire_heian', 794, 1185))).toBe('japan');
         expect(testClassifyRegion(makeBoundary('江户时代', 'empire_edo', 1603, 1868))).toBe('japan');
+        expect(testClassifyRegion(makeBoundary('飞鸟时代', 'empire_asuka', 538, 710))).toBe('japan');
+        expect(testClassifyRegion(makeBoundary('室町时代', 'empire_muromachi', 1336, 1573))).toBe('japan');
+        expect(testClassifyRegion(makeBoundary('弥生时代', 'empire_yayoi', -200, 250))).toBe('japan');
+        expect(testClassifyRegion(makeBoundary('大和时代', 'empire_yamato', 250, 710))).toBe('japan');
+        expect(testClassifyRegion(makeBoundary('奈良时代', 'empire_nara', 710, 794))).toBe('japan');
       });
     });
 
@@ -89,6 +94,16 @@ describe('EurasianGrid pure functions', () => {
       it('classifies newly added Southeast Asian empires as central-asia', () => {
         expect(testClassifyRegion(makeBoundary('萨塔瓦哈纳', 'empire_satavahana', -200, 220))).toBe('central-asia');
         expect(testClassifyRegion(makeBoundary('室利佛逝', 'empire_srivijaya', 650, 1377))).toBe('central-asia');
+      });
+
+      it('classifies Kushan, Gupta, and Chola empires as central-asia', () => {
+        expect(testClassifyRegion(makeBoundary('贵霜帝国', 'empire_kushan', 30, 375))).toBe('central-asia');
+        expect(testClassifyRegion(makeBoundary('笈多帝国', 'empire_gupta', 320, 550))).toBe('central-asia');
+        expect(testClassifyRegion(makeBoundary('朱罗帝国', 'empire_chola', -300, 1279))).toBe('central-asia');
+      });
+
+      it('classifies Greco-Bactrian by prefix match as central-asia', () => {
+        expect(testClassifyRegion(makeBoundary('希腊-巴克特里亚王国', 'empire_greco-bactrian', -250, 125))).toBe('central-asia');
       });
     });
 
@@ -116,6 +131,8 @@ describe('EurasianGrid pure functions', () => {
         expect(testClassifyRegion(makeBoundary('亚历山大帝国', 'empire_alexander', -336, -323))).toBe('west');
         expect(testClassifyRegion(makeBoundary('古埃及', 'empire_egypt-old', -2686, -2181))).toBe('west');
         expect(testClassifyRegion(makeBoundary('托勒密埃及', 'empire_egypt-ptolemaic', -305, -30))).toBe('west');
+        expect(testClassifyRegion(makeBoundary('神圣罗马帝国', 'empire_holy-roman', 962, 1806))).toBe('west');
+        expect(testClassifyRegion(makeBoundary('继业者王国', 'empire_hellenistic', -323, -168))).toBe('west');
       });
 
       it('classifies Mesopotamian empires as west using exact or prefix match', () => {
