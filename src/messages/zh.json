@@ -1918,6 +1918,7 @@
   "ruler.wc-me-hammurabi": "汉谟拉比",
   "ruler.wc-me-assyrian-dyn": "亚述帝国",
   "ruler.wc-me-nebuchadnezzar": "尼布甲尼撒二世",
+  "ruler.wc-me-ashurbanipal": "亚述巴尼拔",
   "ruler.wc-he-alexander": "亚历山大大帝",
   "ruler.wc-he-seleucid-dyn": "塞琉古帝国",
   "ruler.wc-he-antigonid-dyn": "安提柯王朝（马其顿）",
@@ -2025,6 +2026,7 @@
   "rulerBio.wc-me-assyrian": "以亚述尔城为中心；军事帝国；残暴征服；尼尼微图书馆。",
   "rulerBio.wc-me-hammurabi": "巴比伦国王；汉谟拉比法典，古老成文法律之一。",
   "rulerBio.wc-me-nebuchadnezzar": "尼布甲尼撒二世；征服耶路撒冷；建造伊什塔尔门和巴比伦空中花园。",
+  "rulerBio.wc-me-ashurbanipal": "亚述最后一位伟大国王；建造尼尼微图书馆——人类最古老的图书馆之一。",
   "rulerBio.wc-he-alexander": "亚历山大大帝；建立从希腊到印度的大型帝国，史上最庞大帝国之一。",
   "rulerBio.wc-he-antigonid": "亚历山大之后统治马其顿和希腊的王朝，直至罗马征服（公元前168年）。",
   "rulerBio.wc-he-ptolemaic": "希腊化王朝，从亚历山大帝国分裂；托勒密王朝治下的埃及。",
@@ -2032,5 +2034,6 @@
   "rulerHighlight.wc-he-alexander": "亚历山大大帝（公元前336-323年）；征服波斯、埃及、印度；开创希腊化世界。",
   "rulerHighlight.wc-me-hammurabi": "巴比伦国王（公元前1792-1750年）；汉谟拉比法典是最古老的成文法律之一。",
   "rulerHighlight.wc-me-nebuchadnezzar": "尼布甲尼撒二世（公元前605-562年）；建造伊什塔尔门；传说中的巴比伦空中花园。",
+  "rulerHighlight.wc-me-ashurbanipal": "亚述巴尼拔（公元前669-627年）；亚述帝国鼎盛时期；建造尼尼微图书馆。",
   "empire_liao": "辽朝"
 }
