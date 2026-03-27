@@ -2077,5 +2077,7 @@
   "grid.region.central-asia": "Central Asia",
   "grid.region.west": "West Asia & Europe",
   "grid.region.other": "Other",
-  "rulerHighlight.wc-is-genghis": "Founded the largest contiguous land empire in history"
+  "rulerHighlight.wc-is-genghis": "Founded the largest contiguous land empire in history",
+  "ruler.wc-is-genghis": "Genghis Khan",
+  "rulerBio.wc-is-genghis": "Genghis Khan (Temüjin) united Mongol tribes in 1206 and conquered the Jin dynasty, Western Xia, Khwarezm, and much of Eurasia, building the largest contiguous land empire in history with a sophisticated relay messenger system."
 }

@@ -2016,5 +2016,7 @@
   "grid.region.vietnam": "越南",
   "grid.region.central-asia": "中亚",
   "grid.region.west": "西亚与欧洲",
-  "grid.region.other": "其他"
+  "grid.region.other": "其他",
+  "ruler.wc-is-genghis": "成吉思汗",
+  "rulerBio.wc-is-genghis": "成吉思汗（帖木真）1206年统一蒙古诸部，征服金朝、西夏、花剌子模及欧亚大部，建立人类历史上最大陆地帝国，创立驿站传信制度。"
 }

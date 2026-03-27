@@ -2133,5 +2133,7 @@
   "grid.region.central-asia": "中央アジア",
   "grid.region.west": "西アジア・ヨーロッパ",
   "grid.region.other": "その他",
-  "rulerHighlight.wc-is-genghis": "历史上最大の連続する大陸帝国を建国"
+  "rulerHighlight.wc-is-genghis": "历史上最大の連続する大陸帝国を建国",
+  "ruler.wc-is-genghis": "チンギス・ハーン",
+  "rulerBio.wc-is-genghis": "チンギス・ハーン（テムジン）1206年にモンゴル諸部族を統一し、金朝、西夏、ホラズム、中央アジアの大部分を征服した。史上最大の連続する大陸帝国を建国し、駅伝制度を確立した。"
 }
