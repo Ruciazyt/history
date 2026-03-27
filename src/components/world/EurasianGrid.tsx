@@ -568,9 +568,9 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
             {QUICK_JUMP_YEARS.map(year => {
               const eraIdx = getEraBandIndex(year);
               const eraClasses = [
-                'bg-amber-50 text-amber-700 hover:bg-amber-100',
-                'bg-stone-100 text-stone-600 hover:bg-stone-200',
-                'bg-blue-50 text-blue-700 hover:bg-blue-100',
+                'bg-amber-50 text-amber-700 hover:bg-amber-100 dark:bg-amber-900/50 dark:text-amber-300 dark:hover:bg-amber-900/70',
+                'bg-stone-100 text-stone-600 hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-300 dark:hover:bg-stone-700',
+                'bg-blue-50 text-blue-700 hover:bg-blue-100 dark:bg-blue-900/50 dark:text-blue-300 dark:hover:bg-blue-900/70',
               ];
               const isCurrent = Math.abs(currentYear - year) < 50;
               return (
@@ -580,7 +580,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   onClick={() => setCurrentYear(year)}
                   className={`px-1.5 py-0.5 rounded text-[10px] transition-colors ${
                     isCurrent
-                      ? 'bg-red-100 text-red-700 font-semibold ring-1 ring-red-200'
+                      ? 'bg-red-100 text-red-700 font-semibold ring-1 ring-red-200 dark:bg-red-900/50 dark:text-red-300 dark:ring-red-700'
                       : `${eraClasses[eraIdx]} font-medium`
                   }`}
                   title={t(ERA_BANDS[eraIdx]!.labelKey)}
