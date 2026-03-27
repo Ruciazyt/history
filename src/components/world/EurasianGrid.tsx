@@ -151,8 +151,11 @@ export function buildEurasianColumns(mode: GridMode): RegionColumn[] {
     });
   }
 
-  // Ensure consistent column order
-  const order: RegionId[] = ['china', 'japan', 'korea', 'vietnam', 'central-asia', 'west'];
+  // Ensure consistent column order:
+  // East Asia core first (China → Korea → Japan), then Southeast Asia (Vietnam),
+  // then West-Central Asia (Central Asia → West) for the Eurasian sweep view.
+  // 'other' always goes last.
+  const order: RegionId[] = ['china', 'korea', 'japan', 'vietnam', 'central-asia', 'west'];
   columns.sort((a, b) => {
     const ai = order.indexOf(a.id as RegionId);
     const bi = order.indexOf(b.id as RegionId);
