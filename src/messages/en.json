@@ -2134,6 +2134,23 @@
       "10": "October",
       "11": "November",
       "12": "December"
+    },
+    "eras": "Eras",
+    "events": "Events",
+    "noEvents": "No Events",
+    "compare": "Compare",
+    "parallelPolities": "Multi-State Period",
+    "rulerDetail": "Ruler Detail",
+    "clearRuler": "Clear",
+    "seedNote": "Click a ruler for details",
+    "timeline": "Timeline",
+    "year": "Year",
+    "yearSlider": "Year Slider",
+    "openEraMenu": "Open Era Menu",
+    "openEventsList": "Open Events List",
+    "window": {
+      "label": "Window",
+      "years": "{count} years"
     }
   },
   "world": {

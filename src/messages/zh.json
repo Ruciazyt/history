@@ -23,6 +23,23 @@
       "10": "10月",
       "11": "11月",
       "12": "12月"
+    },
+    "eras": "时代",
+    "events": "事件",
+    "noEvents": "暂无事件",
+    "compare": "对比",
+    "parallelPolities": "多国并立",
+    "rulerDetail": "君主详情",
+    "clearRuler": "清除",
+    "seedNote": "点击君主查看详情",
+    "timeline": "时间线",
+    "year": "年份",
+    "yearSlider": "年份滑块",
+    "openEraMenu": "打开时代菜单",
+    "openEventsList": "打开事件列表",
+    "window": {
+      "label": "时间窗口",
+      "years": "{count}年"
     }
   },
   "locale": {

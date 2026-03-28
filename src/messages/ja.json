@@ -2190,6 +2190,23 @@
       "10": "10月",
       "11": "11月",
       "12": "12月"
+    },
+    "eras": "時代",
+    "events": "イベント",
+    "noEvents": "イベントなし",
+    "compare": "比較",
+    "parallelPolities": "多国並立",
+    "rulerDetail": "君主詳細",
+    "clearRuler": "クリア",
+    "seedNote": "君主をクリックして詳細を見る",
+    "timeline": "タイムライン",
+    "year": "年",
+    "yearSlider": "年スライダー",
+    "openEraMenu": "時代メニューを開く",
+    "openEventsList": "イベントリストを開く",
+    "window": {
+      "label": "ウィンドウ",
+      "years": "{count}年"
     }
   },
   "world": {
