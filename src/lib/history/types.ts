@@ -142,6 +142,8 @@ export type BattleTurningPointType =
   | 'morale-collapse'       // 士气崩溃
   | 'trap-triggered'        // 陷阱触发
   | 'fire-attack'           // 火攻成功
+  | 'encirclement'       // 包围
+  | 'moral-boost'         // 士气提振
   | 'flood-attack'          // 水攻成功
   | 'unknown';
 

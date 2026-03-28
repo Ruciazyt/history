@@ -603,6 +603,30 @@ export const CHINA_EVENTS: Event[] = [
       },
       strategy: ['offensive', 'encirclement', 'ambush'],
       terrain: ['plains', 'marsh'],
+      pacing: 'rapid',
+      turningPoints: [
+        {
+          type: 'moral-boost',
+          description: '项羽破釜沉舟，断绝退路，全军死战',
+          party: 'attacker',
+          impact: 'positive',
+          phase: '战前动员',
+        },
+        {
+          type: 'encirclement',
+          description: '项羽军切断秦军粮道，完成包围',
+          party: 'attacker',
+          impact: 'positive',
+          phase: '包围阶段',
+        },
+        {
+          type: 'flank-collapse',
+          description: '楚军四面击鼓，秦军大营崩溃',
+          party: 'attacker',
+          impact: 'positive',
+          phase: '决战阶段',
+        },
+      ],
       casualties: {
         attacker: 20000,
         defender: 200000,

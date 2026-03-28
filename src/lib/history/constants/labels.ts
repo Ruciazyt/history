@@ -72,6 +72,8 @@ export const TURNING_POINT_LABELS: Record<string, string> = {
   'morale-collapse': 'battle.turningPoint.morale_collapse',
   'trap-triggered': 'battle.turningPoint.trap_triggered',
   'fire-attack': 'battle.turningPoint.fire_attack',
+  'encirclement': 'battle.turningPoint.encirclement',
+  'moral-boost': 'battle.turningPoint.moral_boost',
   'flood-attack': 'battle.turningPoint.flood_attack',
   unknown: 'battle.turningPoint.unknown',
 };

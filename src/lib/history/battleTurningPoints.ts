@@ -36,7 +36,9 @@ export function getTurningPointTypeStats(events: Event[]): Record<BattleTurningP
     'ambush-triggered': 0,
     'morale-collapse': 0,
     'trap-triggered': 0,
+    'encirclement': 0,
     'fire-attack': 0,
+    'moral-boost': 0,
     'flood-attack': 0,
     'unknown': 0,
   };
@@ -213,7 +215,9 @@ export function getTurningPointInsights(events: Event[]): string[] {
       'ambush-triggered': '伏击触发',
       'morale-collapse': '士气崩溃',
       'trap-triggered': '陷阱触发',
+      'encirclement': '包围',
       'fire-attack': '火攻成功',
+      'moral-boost': '士气提振',
       'flood-attack': '水攻成功',
     };
     
@@ -317,7 +321,9 @@ export const turningPointTypeLabels: Record<BattleTurningPointType, string> = {
   'ambush-triggered': '伏击触发',
   'morale-collapse': '士气崩溃',
   'trap-triggered': '陷阱触发',
+  'encirclement': '包围',
   'fire-attack': '火攻成功',
+  'moral-boost': '士气提振',
   'flood-attack': '水攻成功',
   'unknown': '未知',
 };

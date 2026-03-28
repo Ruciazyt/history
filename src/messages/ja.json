@@ -85,6 +85,7 @@
       "trap_triggered": "罠発動",
       "fire_attack": "火攻成功",
       "flood_attack": "水攻成功",
+      "moral_boost": "士気高揚",
       "unknown": "不明"
     },
     "casualty": {

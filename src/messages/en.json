@@ -85,6 +85,7 @@
       "trap_triggered": "Trap Triggered",
       "fire_attack": "Fire Attack Success",
       "flood_attack": "Flood Attack Success",
+      "moral_boost": "Morale Boost",
       "unknown": "Unknown"
     },
     "casualty": {
