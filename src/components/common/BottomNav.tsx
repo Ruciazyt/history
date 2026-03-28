@@ -4,7 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { BOTTOM_NAV_COLORS } from '@/lib/history/constants';
+import { useTheme } from './ThemeContext';
 
 interface BottomNavProps {
   locale?: string;
@@ -22,6 +22,8 @@ const NAV_ITEMS = [
 export const BottomNav = React.memo(function BottomNav({ locale = 'zh' }: BottomNavProps) {
   const t = useTranslations();
   const pathname = usePathname();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
 
   const isActive = (href: string) => {
     if (href === `/${locale}`) {
@@ -30,37 +32,35 @@ export const BottomNav = React.memo(function BottomNav({ locale = 'zh' }: Bottom
     return pathname.startsWith(href);
   };
 
+  const containerClasses = isDark
+    ? 'bg-zinc-900/90 border-zinc-700/50 text-zinc-400'
+    : 'bg-white/80 border-zinc-200/50 text-zinc-600';
+
   return (
     <nav
-      className={`bottom-nav fixed bottom-0 left-0 right-0 z-50 flex items-center border-t lg:hidden ${BOTTOM_NAV_COLORS.container.border} ${BOTTOM_NAV_COLORS.container.bg} ${BOTTOM_NAV_COLORS.container.text} ${BOTTOM_NAV_COLORS.containerDark.bg} ${BOTTOM_NAV_COLORS.containerDark.text}`}
+      className={`bottom-nav fixed bottom-0 left-0 right-0 z-50 flex items-center border-t backdrop-blur-md lg:hidden ${containerClasses}`}
       style={{ height: '60px', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
     >
       {NAV_ITEMS.map((item) => {
         const active = isActive(item.href(locale));
+        const labelColor = active
+          ? isDark ? 'text-blue-400' : 'text-blue-600'
+          : isDark ? 'text-zinc-400' : 'text-zinc-400';
+        const indicatorColor = isDark ? 'bg-blue-400' : 'bg-blue-500';
         return (
           <Link
             key={item.key}
             href={item.href(locale)}
-            className={`relative flex flex-1 flex-col items-center justify-center gap-0.5 py-1 transition-all ${
-              active
-                ? `${BOTTOM_NAV_COLORS.item.active} ${BOTTOM_NAV_COLORS.item.activeDark}`
-                : `${BOTTOM_NAV_COLORS.item.inactive} ${BOTTOM_NAV_COLORS.item.inactiveHover} ${BOTTOM_NAV_COLORS.item.inactiveHoverDark}`
-            }`}
+            className={`relative flex flex-1 flex-col items-center justify-center gap-0.5 py-1 transition-all ${labelColor}`}
             style={{ minWidth: '44px' }}
             aria-current={active ? 'page' : undefined}
           >
             {/* Active indicator dot */}
             {active && (
-              <span className="absolute top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-blue-500 dark:bg-blue-400" />
+              <span className={`absolute top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full ${indicatorColor}`} />
             )}
             <span className="text-base leading-none mt-0.5">{item.icon}</span>
-            <span
-              className={`text-[10px] leading-tight text-center px-0.5 transition-colors ${
-                active
-                  ? 'font-medium text-blue-600 dark:text-blue-400'
-                  : 'text-zinc-400 dark:text-zinc-500'
-              }`}
-            >
+            <span className="text-[10px] leading-tight text-center px-0.5 transition-colors font-medium">
               {t(item.labelKey)}
             </span>
           </Link>
