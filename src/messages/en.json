@@ -573,7 +573,10 @@
     "ruler.wc-cn-song-dyn": "Song Dynasty",
     "ruler.wc-cn-yuan-dyn": "Yuan Dynasty",
     "ruler.wc-cn-ming-dyn": "Ming Dynasty",
-    "ruler.wc-cn-qing-dyn": "Qing Dynasty"
+    "ruler.wc-cn-qing-dyn": "Qing Dynasty",
+    "ruler.ea-jp-yoritomo": "Minamoto no Yoritomo",
+    "ruler.ea-jp-hideyoshi": "Toyotomi Hideyoshi",
+    "ruler.ea-jp-ieru": "Tokugawa Ieyasu"
   },
   "rulerBio": {
     "qinshihuang": "China's first emperor, who unified the warring states in 221 BCE. He standardized writing, weights and measures, built the Great Wall and vast road networks, and established the centralized imperial system that would last over 2,000 years.",

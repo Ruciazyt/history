@@ -573,7 +573,10 @@
     "ruler.wc-cn-song-dyn": "宋朝",
     "ruler.wc-cn-yuan-dyn": "元朝",
     "ruler.wc-cn-ming-dyn": "明朝",
-    "ruler.wc-cn-qing-dyn": "清朝"
+    "ruler.wc-cn-qing-dyn": "清朝",
+    "ruler.ea-jp-yoritomo": "源頼朝",
+    "ruler.ea-jp-hideyoshi": "豊臣秀吉",
+    "ruler.ea-jp-ieru": "徳川家康"
   },
   "rulerBio": {
     "qinshihuang": "中国历史上首位完成大一统的皇帝。13岁即位，亲政后用10年灭六国，建立中国第一个中央集权封建王朝。推行郡县制、统一文字度量衡、修驰道、筑长城，奠定两千年帝制基础。",
