@@ -23,7 +23,7 @@ const KOREA_NAMESMatches: string[] = [];
 const JAPAN_NAMESMatches: string[] = [];
 const VIETNAM_NAMESMatches: string[] = [];
 const CENTRAL_ASIA_NAMESMatches = ['贵霜', '笈多', '朱罗', '希腊-巴克特里亚'];
-const WEST_NAMESMatches = ['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '塞琉古', '亚述', '巴比伦', '阿卡德', '赫梯', '神圣', '继业者'];
+const WEST_NAMESMatches = ['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '塞琉古', '亚述', '巴比伦', '新巴', '阿卡德', '赫梯', '神圣', '继业者', '托勒密'];
 
 function testClassifyRegion(boundary: WorldBoundary): RegionId {
   const name = boundary.properties.name;
@@ -141,6 +141,8 @@ describe('EurasianGrid pure functions', () => {
         expect(testClassifyRegion(makeBoundary('亚述帝国', 'empire_assyrian', -911, -609))).toBe('west');
         expect(testClassifyRegion(makeBoundary('赫梯帝国', 'empire_hittite', -1650, -1178))).toBe('west');
         expect(testClassifyRegion(makeBoundary('塞琉古帝国', 'empire_seleucid', -312, -63))).toBe('west');
+        expect(testClassifyRegion(makeBoundary('新巴比伦王国', 'empire_neobabylon', -626, -539))).toBe('west');
+        expect(testClassifyRegion(makeBoundary('托勒密埃及', 'empire_egypt-ptolemaic', -305, -30))).toBe('west');
       });
     });
 
