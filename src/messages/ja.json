@@ -2182,5 +2182,9 @@
       "bestStreak": "最高連続",
       "playAgain": "もう一度"
     }
-  }
+  },
+  "grid.eraBandLegend": "時代区分",
+  "grid.eraBand.ancient_short": "古代",
+  "grid.eraBand.medieval_short": "中世",
+  "grid.eraBand.earlyModern_short": "近世"
 }

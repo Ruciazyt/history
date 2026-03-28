@@ -289,6 +289,22 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
               🌏 {t('grid.eastAsia')}
             </button>
           </div>
+          {/* Era band color legend */}
+          <div className="flex items-center gap-1.5 text-xs text-zinc-500">
+            <span className="font-medium mr-1">{t('grid.eraBandLegend')}:</span>
+            <div className="flex items-center gap-0.5">
+              <div className="w-5 h-2 rounded-sm bg-amber-100 border border-amber-200" />
+              <span className="text-amber-700">{t('grid.eraBand.ancient')}</span>
+            </div>
+            <div className="flex items-center gap-0.5">
+              <div className="w-5 h-2 rounded-sm bg-stone-200 border border-stone-300" />
+              <span className="text-stone-600">{t('grid.eraBand.medieval')}</span>
+            </div>
+            <div className="flex items-center gap-0.5">
+              <div className="w-5 h-2 rounded-sm bg-blue-100 border border-blue-200" />
+              <span className="text-blue-700">{t('grid.eraBand.earlyModern')}</span>
+            </div>
+          </div>
         </div>
       </header>
 

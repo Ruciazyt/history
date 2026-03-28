@@ -2126,5 +2126,9 @@
       "bestStreak": "Best Streak",
       "playAgain": "Play Again"
     }
-  }
+  },
+  "grid.eraBandLegend": "Era Bands",
+  "grid.eraBand.ancient_short": "Ancient",
+  "grid.eraBand.medieval_short": "Medieval",
+  "grid.eraBand.earlyModern_short": "Early Modern"
 }
