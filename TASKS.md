@@ -3,7 +3,37 @@
 ## 项目地址
 https://history.ruciazyt.cn
 
+
 ## 2026-03-26 UI优化与架构完善 - 第三十五轮
+## 2026-03-29 UI优化与架构完善 - 第三十六轮
+
+### 修复项（build error）
+- [x] types.ts: 新增 moral-boost 和 encirclement 到 BattleTurningPointType 联合类型
+  - moral-boost（士气提振）：项羽破釜沉舟等正面士气事件
+  - encirclement（包围）：军事包围战术
+- [x] labels.ts: 新增 TURNING_POINT_LABELS 条目
+  - moral-boost: battle.turningPoint.moral_boost
+  - encirclement: battle.turningPoint.encirclement
+- [x] battleTurningPoints.ts: 修复三处 Record<BattleTurningPointType, ...> 类型错误
+  - getTurningPointTypeStats stats 对象：添加 encirclement: 0
+  - inline typeLabels 对象（两处）：添加 encirclement、moral-boost、fire-attack、flood-attack
+  - turningPointTypeLabels 常量：添加 encirclement
+- [x] messages/zh.json、en.json、ja.json: 新增 moral_boost 和 encirclement i18n 键
+- [x] data/chinaEvents.ts: 包含已暂存的战役数据（pacing + turningPoints 扩展）
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 929个测试用例全部通过（+100 新增测试相关）
+- [x] 构建验证通过
+- [x] 代码已提交 (commit: c3faf09)
+- [x] 代码已推送至仓库
+
+### 优化说明
+- 修复了 moral-boost 和 encirclement 两种转折点类型缺失导致的构建失败
+- 数据文件中已存在使用这些类型的真实战役数据（项羽巨鹿之战等）
+- 补充了完整的类型定义、i18n 标签和多语言支持
+- 项目恢复可构建状态，保持健壮可用
+
 ### 常量系统扩展
 - [x] constants/colors.ts: 新增 BATTLE_SCALE_COLORS 常量
   - 战役规模徽章颜色（massive=red, large=orange, medium=blue, small=green, unknown=gray）
