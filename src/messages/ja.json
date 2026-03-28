@@ -3,33 +3,247 @@
     "title": "歴史アトラス（MVP）",
     "subtitle": "中国 · 時代 · 出来事 · 地図"
   },
-  "header": {
-    "era": "時代",
-    "range": "範囲"
-  },
-  "ui": {
-    "pageNotFound": "ページが見つかりません",
-    "back": "戻る",
-    "months": {
-      "1": "1月",
-      "2": "2月",
-      "3": "3月",
-      "4": "4月",
-      "5": "5月",
-      "6": "6月",
-      "7": "7月",
-      "8": "8月",
-      "9": "9月",
-      "10": "10月",
-      "11": "11月",
-      "12": "12月"
+  "battle": {
+    "result": {
+      "attacker_win": "攻撃側勝利",
+      "defender_win": "防衛側勝利",
+      "draw": "引分",
+      "inconclusive": "決着不明"
+    },
+    "impact": {
+      "decisive": "決定的な戦い",
+      "major": "重要な戦い",
+      "minor": "小規模な戦い",
+      "unknown": "不明"
+    },
+    "strategy": {
+      "ambush": "伏撃",
+      "fire": "火攻",
+      "water": "水攻",
+      "encirclement": "包囲",
+      "siege": "攻城戦",
+      "pincer": "钳形作戦",
+      "feigned_retreat": "偽退",
+      "alliance": "連合作戦",
+      "defensive": "防御作戦",
+      "offensive": "攻撃作戦",
+      "guerrilla": "游撃戦",
+      "unknown": "不明"
+    },
+    "terrain": {
+      "plains": "平原",
+      "mountains": "山地",
+      "hills": "丘陵",
+      "water": "水域",
+      "desert": "砂漠",
+      "plateau": "高原",
+      "forest": "森林",
+      "marsh": "沼沢",
+      "coastal": "沿岸",
+      "urban": "都市",
+      "pass": "関所",
+      "unknown": "不明"
+    },
+    "pacing": {
+      "surprise": "奇襲",
+      "rapid": "速決戦",
+      "extended": "持久戦",
+      "siege": "包囲戦",
+      "unknown": "不明"
+    },
+    "timeOfDay": {
+      "dawn": "夜明け",
+      "morning": "午前",
+      "afternoon": "午後",
+      "evening": "夕方",
+      "night": "夜",
+      "unknown": "不明"
+    },
+    "type": {
+      "founding": "建國の戦い",
+      "unification": "統一戦争",
+      "conquest": "征伐",
+      "defense": "防御戦",
+      "rebellion": "反乱",
+      "civil_war": "内戦",
+      "frontier": "辺境の戦い",
+      "invasion": "侵略",
+      "unknown": "不明"
+    },
+    "turningPoint": {
+      "commander_death": "指揮官戦死",
+      "commander_captured": "指揮官捕虜",
+      "flank_collapse": "側面崩壊",
+      "reinforcement_arrival": "増援到着",
+      "supply_disruption": "補給断絶",
+      "weather_change": "天気変化",
+      "defection": "寝返り",
+      "strategic_mistake": "戦略ミス",
+      "fortification_breach": "防御線突破",
+      "ambush_triggered": "伏撃発動",
+      "morale_collapse": "士気崩壊",
+      "trap_triggered": "罠発動",
+      "fire_attack": "火攻成功",
+      "flood_attack": "水攻成功",
+      "unknown": "不明"
+    },
+    "casualty": {
+      "reliability": {
+        "high": "可靠",
+        "medium": "普通",
+        "low": "疑問"
+      },
+      "killed": "戦死",
+      "wounded": "負傷",
+      "captured": "捕虜",
+      "missing": "失踪",
+      "combined": "死傷"
+    },
+    "scale": {
+      "massive": "超大規模",
+      "large": "大規模",
+      "medium": "中規模",
+      "small": "小規模",
+      "unknown": "不明"
     }
   },
-  "locale": {
-    "zh": "中文",
-    "en": "English",
-    "ja": "日本語"
+  "battleCompare": {
+    "title": "⚔️ 戦い比較",
+    "close": "閉じる",
+    "result": "結果",
+    "belligerents": "交戦国",
+    "attacker": "攻撃側",
+    "defender": "防御側",
+    "commanders": "指揮官",
+    "summary": "戦い概要",
+    "closeComparison": "比較を閉じる"
   },
+  "battleDetail": {
+    "close": "閉じる",
+    "result": "結果：",
+    "belligerents": "交戦国",
+    "attacker": "攻撃側",
+    "defender": "防衛側",
+    "summary": "戦闘概要",
+    "location": "戦場位置",
+    "impact": "影響力：",
+    "commanders": "主要指揮官",
+    "unknown": "不明",
+    "strategy": "戦略：",
+    "terrain": "地形：",
+    "battleType": "戦闘類型：",
+    "pacing": "ペース：",
+    "timeOfDay": "時間帯：",
+    "turningPoints": "転換点",
+    "sources": "参考文献",
+    "similarBattles": "類似战役",
+    "similarBattlesDesc": "你也感兴趣的战役",
+    "similarBattleItem": "見る",
+    "noSimilarBattles": "類似战役なし"
+  },
+  "battleOfTheDay": {
+    "title": "今日の戦い",
+    "badge": "今日のおすすめ",
+    "viewDetail": "詳細を見る",
+    "expand": "今日の戦いを表示",
+    "collapse": "折りたたむ",
+    "sameEraBattles": "{n} 件の同時代の戦い"
+  },
+  "battleTimeline": {
+    "noData": "戦いデータなし"
+  },
+  "commanders": {
+    "noData": "指揮官データなし",
+    "noDataDesc": "現在の戦いデータに指揮官情報がありません",
+    "totalCommanders": "指揮官総数",
+    "totalRelations": "関係総数",
+    "collaborations": "協力関係",
+    "matchups": "対決関係",
+    "mostActive": "最もアクティブ",
+    "winRate": "勝率",
+    "participated": "参加",
+    "wins": "勝利",
+    "losses": "敗北",
+    "commanderCount": "{{count}} 人の指揮官",
+    "battleCount": "{{count}} 戦",
+    "collaborationStat": "共同作戦 {{battles}} 戦 · 勝利 {{wins}}",
+    "draws": "引分",
+    "tabs": {
+      "commanders": "指揮官",
+      "collaborations": "最佳パートナー",
+      "matchups": "クラシック対決",
+      "insights": "インサイト",
+      "network": "関係ネットワーク"
+    },
+    "topCollaborations": "最佳パートナー",
+    "topMatchups": "クラシック対決",
+    "insights": "指揮官インサイト",
+    "noCollaborations": "協力データなし",
+    "noMatchups": "対決データなし",
+    "noInsights": "インサイトデータなし"
+  },
+  "empire_abbasid": "アッバス朝",
+  "empire_achaemenid": "アケメネス朝ペルシア",
+  "empire_akkadian": "アッカド帝国",
+  "empire_alexander": "アレクサンドロス帝国",
+  "empire_assyrian": "アッシュリア帝国",
+  "empire_asuka": "飛鳥時代",
+  "empire_byzantine": "ビザンツ帝国",
+  "empire_chola": "チョラ朝",
+  "empire_edo": "江戸時代",
+  "empire_egypt-middle": "古代エジプト（中王国）",
+  "empire_egypt-new": "古代エジプト（新王国）",
+  "empire_egypt-old": "古代エジプト（古王国）",
+  "empire_egypt-ptolemaic": "プトレマイオス朝エジプト",
+  "empire_goryeo": "高麗王朝",
+  "empire_greco-bactrian": "グリーコ・バクトリア王国",
+  "empire_gupta": "グプタ朝",
+  "empire_han-eastern": "後漢",
+  "empire_han-western": "前漢",
+  "empire_heian": "平安時代",
+  "empire_hellenistic": "ヘレニズム諸王国",
+  "empire_hittite": "ヒッタイト帝国",
+  "empire_holy-roman": "神聖ローマ帝国",
+  "empire_indus-valley": "インダス文明",
+  "empire_joseon": "李氏朝鲜",
+  "empire_kushan": "クシャーナ帝国",
+  "empire_le-dynasty": "黎朝",
+  "empire_liao": "遼朝",
+  "empire_ly-dynasty": "李朝",
+  "empire_maurya": "マウリヤ帝国",
+  "empire_ming": "明王朝",
+  "empire_mongol": "モンゴル帝国",
+  "empire_mughal": "ムガル帝国",
+  "empire_muromachi": "室町時代",
+  "empire_nara": "奈良時代",
+  "empire_neobabylon": "新バビロニア",
+  "empire_nguyen-dynasty": "阮朝",
+  "empire_old-babylon": "古バビロニア",
+  "empire_ottoman": "オスマン帝国",
+  "empire_parthian": "パルティア帝国",
+  "empire_qin": "秦王朝",
+  "empire_qing": "清王朝",
+  "empire_rome-empire": "ローマ帝国",
+  "empire_rome-republic": "ローマ共和国",
+  "empire_safavid": "サファヴィー朝",
+  "empire_sassanid": "ササン朝ペルシア",
+  "empire_satavahana": "サータヴァーハナ朝",
+  "empire_seleucid": "セレウコス朝",
+  "empire_song": "宋王朝",
+  "empire_srivijaya": "シュリヴィジャヤ",
+  "empire_tang": "唐王朝",
+  "empire_three-kingdoms": "三国時代",
+  "empire_timurid": "ティムール帝国",
+  "empire_umayyad": "ウマイヤ朝",
+  "empire_yamato": "大和時代",
+  "empire_yayoi": "弥生時代",
+  "empire_yuan": "元王朝",
+  "empires": {
+    "active": "帝国",
+    "asuka": "飛鳥時代",
+    "muromachi": "室町時代"
+  },
+  "empires_active": "帝国",
   "era": {
     "westernZhou": "西周",
     "springAutumn": "春秋",
@@ -53,6 +267,407 @@
     "prc": "中華人民共和国",
     "world-comparison": "ユーラシア比較",
     "east-asia-comparison": "東アジア比較"
+  },
+  "era.east-asia-comparison": "東アジア",
+  "era.world-comparison": "世界文明",
+  "event": {
+    "sa-770-zhou-east": {
+      "title": "周王朝が洛邑（洛陽）へ遷都",
+      "summary": "王室の東遷により、春秋時代の始まりとされる。"
+    },
+    "sa-656-qihuan": {
+      "title": "斉の桓公が覇者となる（伝統）",
+      "summary": "斉が台頭し、覇者体制の一角を占める。"
+    },
+    "sa-632-chengpu": {
+      "title": "城濮の戦い",
+      "summary": "晋が楚に勝利し、諸侯勢力の均衡に影響を与える。"
+    },
+    "sa-551-confucius": {
+      "title": "孔子の誕生（伝統）",
+      "summary": "儒家思想の重要な基礎を築いた人物として後世に大きな影響。"
+    },
+    "sa-506-boju": {
+      "title": "柏挙の戦い",
+      "summary": "呉が楚に勝ち都を一時占領。諸侯抗争の激しさを示す。"
+    },
+    "ws-453-three-jin": {
+      "title": "晋の三分（韓・趙・魏）",
+      "summary": "権力が再編され、戦国秩序が加速する。"
+    },
+    "ws-356-shangyang-reform": {
+      "title": "商鞅の変法（秦）",
+      "summary": "法家改革で秦の国家動員と軍事力が強化され、統一の基盤となる。"
+    },
+    "ws-341-maling": {
+      "title": "馬陵の戦い",
+      "summary": "斉が魏を伏撃で破る。孫臏の戦術で知られる。"
+    },
+    "ws-307-hufu-qishe": {
+      "title": "胡服騎射（趙の軍制改革）",
+      "summary": "趙の武霊王が騎兵戦術と服制改革を推進し、北方の戦争様式を変えた。"
+    },
+    "ws-284-yan-attack-qi": {
+      "title": "燕の対斉侵攻（楽毅の攻勢）",
+      "summary": "燕を中心とする連合軍が斉を大きく破り、斉は崩壊寸前に追い込まれた。"
+    },
+    "ws-278-qin-takes-ying": {
+      "title": "秦が郢を陥落（楚の遷都）",
+      "summary": "白起が楚都の郢を攻め落とし、楚は戦略重心を南へ移す。"
+    },
+    "ws-256-zhou-ends": {
+      "title": "周王室の終焉（伝統）",
+      "summary": "名目上の王権がさらに崩れ、兼併戦がより決定的になる。"
+    },
+    "ws-260-changping": {
+      "title": "長平の戦い",
+      "summary": "秦が趙に大勝し、統一へ向けた優位が明確になる。"
+    },
+    "ws-230-qin-conquers-han": {
+      "title": "秦が韓を滅ぼす",
+      "summary": "秦の最終統一戦の第一歩で、韓は七雄の中で最初に滅亡した。"
+    },
+    "ws-228-qin-conquers-zhao": {
+      "title": "秦が趙を滅ぼす",
+      "summary": "長平以後に衰えた趙は、最終的に秦に攻略される。"
+    },
+    "ws-225-qin-conquers-wei": {
+      "title": "秦が魏を滅ぼす",
+      "summary": "大梁の陥落（しばしば水攻と結び付けて語られる）により魏は滅亡。"
+    },
+    "ws-223-qin-conquers-chu": {
+      "title": "秦が楚を滅ぼす",
+      "summary": "南方の大国楚が大遠征の末に滅ぼされる。"
+    },
+    "ws-222-qin-conquers-yan": {
+      "title": "秦が燕を滅ぼす",
+      "summary": "刺秦の失敗後、燕は秦の進撃に抗しきれず滅亡。"
+    },
+    "ws-221-qin-conquers-qi": {
+      "title": "秦が斉を滅ぼす",
+      "summary": "斉は最終局面で併合され、秦の六国兼併が完了する。"
+    },
+    "ws-221-unification": {
+      "title": "秦が中国を統一",
+      "summary": "六国を滅ぼし、嬴政が始皇帝を称して帝制国家を樹立。"
+    },
+    "qin-214-lingqu": {
+      "title": "霊渠の開削（伝統）",
+      "summary": "南方統治と兵站を支える重要な運河事業。"
+    },
+    "qin-210-first-emperor-death": {
+      "title": "始皇帝の死",
+      "summary": "継承混乱と反乱が続き、秦政権が動揺する。"
+    },
+    "qin-209-dazexiang": {
+      "title": "大沢郷の乱",
+      "summary": "陳勝・呉広の蜂起。反秦の動きが全国へ広がる象徴。"
+    },
+    "han-202-han-founded": {
+      "title": "劉邦が漢を建国",
+      "summary": "楚漢戦争後、劉邦（高祖）が即位し漢帝国を成立させる。"
+    },
+    "han-154-seven-states": {
+      "title": "七国の乱",
+      "summary": "地方諸王の反乱が鎮圧され、中央集権が強化される。"
+    },
+    "han-138-zhangqian": {
+      "title": "張騫が西域へ派遣",
+      "summary": "西域との往来を開き、後のシルクロード交流の基礎となる。"
+    },
+    "eh-105-paper": {
+      "title": "蔡倫の製紙改良（伝統）",
+      "summary": "紙の普及が行政と文化の広がりを後押しする。"
+    },
+    "eh-184-yellow-turbans": {
+      "title": "黄巾の乱",
+      "summary": "大規模反乱で後漢の統制が弱まり、分裂が進む。"
+    },
+    "eh-220-han-ends": {
+      "title": "後漢の終焉",
+      "summary": "献帝が禅譲し、曹丕が魏を建てて三国時代へ。"
+    },
+    "sui-589-unify": {
+      "title": "隋が中国を再統一",
+      "summary": "隋が陳を滅ぼし、南北朝の分裂を終わらせる。"
+    },
+    "sui-605-grand-canal": {
+      "title": "大運河の建設拡大",
+      "summary": "南北を結ぶ運河工事が進み、輸送と財政動員が強化される。"
+    },
+    "tang-618-founded": {
+      "title": "唐の建国",
+      "summary": "李淵が唐を建て、帝国再建の時代が始まる。"
+    },
+    "tang-755-anlushan": {
+      "title": "安史の乱",
+      "summary": "唐の国力を大きく削ぎ、中央権力と社会構造を変化させた大反乱。"
+    },
+    "song-960-founded": {
+      "title": "宋の建国",
+      "summary": "趙匡胤（太祖）が即位し、五代十国の混乱後に統合を進める。"
+    },
+    "song-1127-jingkang": {
+      "title": "靖康の変",
+      "summary": "金が開封を陥落させ、北宋は崩壊し朝廷は南へ退く。"
+    },
+    "yuan-1271-founded": {
+      "title": "元の国号宣言",
+      "summary": "フビライが元を称し、モンゴル統治を中国王朝の枠組みに組み込む。"
+    },
+    "ming-1368-founded": {
+      "title": "明の建国",
+      "summary": "朱元璋（洪武帝）が明を建て、元の支配を終わらせる。"
+    },
+    "ming-1405-zhenghe": {
+      "title": "鄭和の遠征が始まる",
+      "summary": "国家主導の海上遠征がインド洋世界へ影響を及ぼす。"
+    },
+    "qing-1644-founded": {
+      "title": "清が北京を掌握",
+      "summary": "明の崩壊後、清が北京に入り統治の統合を進める。"
+    },
+    "qing-1840-opium": {
+      "title": "アヘン戦争（第一次）",
+      "summary": "対外衝突が近代の転機となり、外圧と内政課題が深まる。"
+    },
+    "roc-1911-xinhai": {
+      "title": "辛亥革命",
+      "summary": "清朝が倒れ、共和制の時代が始まる。"
+    },
+    "prc-1949-founded": {
+      "title": "中華人民共和国の成立",
+      "summary": "北京で建国が宣言され、新たな政治時代へ入る。"
+    },
+    "prc-1978-reform": {
+      "title": "改革開放の開始",
+      "summary": "経済改革と対外開放が本格化し、社会と発展の軌道が大きく変わる。"
+    },
+    "wz-1046-muye": {
+      "title": "牧野の戦い",
+      "summary": "周が殷（商）を破り、西周の時代が始まる。"
+    },
+    "wz-1042-regency": {
+      "title": "周公の摂政（伝承）",
+      "summary": "王位継承期の摂政政治で新王朝の体制を安定させた。"
+    },
+    "wz-1040-fengjian": {
+      "title": "分封と秩序の拡大",
+      "summary": "分封と礼制による政治秩序が各地へ広がり、体制が固められる。"
+    },
+    "wz-841-gonghe": {
+      "title": "共和の開始（前841年）",
+      "summary": "厲王追放後に摂政期が始まり、前841年は年代確定の重要な基準点となる。"
+    },
+    "wz-771-quanrong": {
+      "title": "犬戎が鎬京を陥落（前771年）",
+      "summary": "都が襲撃され幽王が死去。西周が崩壊し、東周への転換が進む。"
+    },
+    "sa-707-xuge": {
+      "title": "繻葛の戦い",
+      "summary": "周王と鄭の戦い。強国諸侯に対する王権の限界を示す。"
+    },
+    "sa-651-kuiqiu": {
+      "title": "葵丘の会盟",
+      "summary": "斉の桓公が主導した会盟で、覇者政治の重要な節目とされる。"
+    },
+    "sa-597-bi": {
+      "title": "邲の戦い",
+      "summary": "晋楚覇権争いの重要戦で、勢力均衡に影響した。"
+    },
+    "sa-594-tax": {
+      "title": "「初税亩」（伝統）",
+      "summary": "租税制度の変化として語られ、春秋期の制度転換の議論に用いられる。"
+    },
+    "sa-651-qihuan": {
+      "summary": "斉桓公、春秋の初代覇者に立つ",
+      "title": "斉桓公の覇者即位"
+    },
+    "sui-605-canal": {
+      "summary": "隋が京杭大運河を築き、南北を結ぶ",
+      "title": "大運河の開削"
+    },
+    "viewTimeline": "タイムラインを見る",
+    "ws-256-zhouends": {
+      "summary": "秦が東周を滅ぼし、周朝が終結する",
+      "title": "東周の滅亡"
+    },
+    "ws-278-ying": {
+      "summary": "秦が楚の都郢を攻略する",
+      "title": "秦の郢攻略"
+    },
+    "ws-284-yan-qi": {
+      "summary": "燕が五国と同盟して斉を攻撃し、斉はほとんど滅びかけた",
+      "title": "楽毅の斉伐"
+    },
+    "ws-307-hufu": {
+      "summary": "趙の武霊王が胡服騎射を推行し、軍事改革を行った",
+      "title": "胡服騎射"
+    },
+    "ws-356-shangyang": {
+      "summary": "秦の孝公が商鞅を採用し変法を行い，秦が台頭した",
+      "title": "商鞅の変法"
+    },
+    "wj-311-yongjia": {
+      "title": "永嘉の乱",
+      "summary": "匈奴軍が洛陽を攻略し、懐帝を捕らえ、西晉が滅び、五胡の侵入が始まる。"
+    }
+  },
+  "faction": {
+    "qin": "秦",
+    "rebels": "義賊軍",
+    "chu": "楚",
+    "xiang": "項羽",
+    "han": "漢",
+    "dongzhuo": "董卓",
+    "cao": "曹操",
+    "wei": "魏",
+    "shu": "蜀漢",
+    "wu": "東呉",
+    "sun": "孫権",
+    "liu": "刘备",
+    "qi": "斉",
+    "zhao": "趙",
+    "han-state": "韓",
+    "yan": "燕"
+  },
+  "favorites": {
+    "title": "お気に入り",
+    "backToBattles": "戦いに戻る",
+    "clearAll": "すべてクリア",
+    "noFavoritesTitle": "お気に入りがありません",
+    "noFavoritesDesc": "戦いカードのハートアイコンをクリックしてお気に入りに追加しましょう。",
+    "browseBattles": "戦いを探す",
+    "recommendations": "おすすめの戦い",
+    "recommendationsEmpty": "お気に入りを追加しておすすめを発見",
+    "addFavorite": "お気に入りに追加",
+    "removeFavorite": "お気に入りから削除"
+  },
+  "grid": {
+    "title": "ユーラシア比較グリッド",
+    "eurasian": "ユーラシア",
+    "eastAsia": "東アジア",
+    "activeEmpires": "アクティブ政体",
+    "quickJump": "クイックジャンプ",
+    "timeline": "タイムライン",
+    "activeAtYear": "{year} アクティブ",
+    "noActive": "アクティブ政体なし",
+    "ce1": "紀元1年",
+    "region": {
+      "china": "中国",
+      "korea": "朝鮮半島",
+      "japan": "日本",
+      "west": "西方",
+      "vietnam": "ベトナム",
+      "central-asia": "中央アジア",
+      "other": "その他"
+    },
+    "eraBand": {
+      "ancient": "古代",
+      "medieval": "中世",
+      "earlyModern": "近世"
+    }
+  },
+  "grid.activeAtYear": "{year}年の勢力",
+  "grid.activeEmpires": "{count}個の帝国が活動中",
+  "grid.ce1": "紀元後",
+  "grid.eastAsia": "東アジア",
+  "grid.eraBand.ancient": "古代",
+  "grid.eraBand.ancient_short": "古代",
+  "grid.eraBand.earlyModern": "近世",
+  "grid.eraBand.earlyModern_short": "近世",
+  "grid.eraBand.medieval": "中世",
+  "grid.eraBand.medieval_short": "中世",
+  "grid.eraBandLegend": "時代区分",
+  "grid.eurasian": "ユーラシア",
+  "grid.noActive": "活動中の帝国なし",
+  "grid.quickJump": "世紀へジャンプ",
+  "grid.region.central-asia": "中央アジア",
+  "grid.region.china": "中国",
+  "grid.region.japan": "日本",
+  "grid.region.korea": "朝鮮",
+  "grid.region.other": "その他",
+  "grid.region.vietnam": "ベトナム",
+  "grid.region.west": "西アジア・ヨーロッパ",
+  "grid.timeline": "時代",
+  "grid.title": "文明タイムライン",
+  "header": {
+    "era": "時代",
+    "range": "範囲"
+  },
+  "locale": {
+    "zh": "中文",
+    "en": "English",
+    "ja": "日本語"
+  },
+  "location": {
+    "title": "地名変化查询",
+    "description": "現代地名を入力し、古代名称の歴史的変遷を表示",
+    "placeholder": "現代地名を入力、例：西安、北京、南京...",
+    "noResults": "関連する地点が見つかりません",
+    "back": "検索に戻る",
+    "modernLabel": "現代",
+    "historyNames": "歴史名称",
+    "daze": "大沢郷（安徽宿州）",
+    "xianyang": "咸陽",
+    "julu": "鉅鹿（河北邢台）",
+    "chang-an": "長安",
+    "gaixia": "垓下（安徽霊璧）",
+    "luoyang": "洛陽",
+    "ye": "鄴城（河北邯鄲）",
+    "red-cliffs": "赤壁（湖北赤壁）",
+    "chengdu": "成都",
+    "jianye": "建業（江蘇南京）"
+  },
+  "map": {
+    "legend": "凡例"
+  },
+  "matrix": {
+    "title": "時系列マトリックス",
+    "selectEra": "時代を選択",
+    "details": "詳細",
+    "selectCell": "セルをクリックして詳細を表示",
+    "rulers": "君主",
+    "events": "出来事",
+    "noRulers": "君主データなし",
+    "noEvents": "出来事データなし",
+    "battle": "戦い",
+    "attackerWin": "攻撃側勝利",
+    "defenderWin": "防守側勝利",
+    "draw": "引分"
+  },
+  "nav": {
+    "battles": "戦い",
+    "commanders": "指揮官ネットワーク",
+    "favorites": "お気に入り"
+  },
+  "onThisDay": {
+    "title": "歴史上の今日",
+    "found": "{count}件の関連戦い",
+    "noEvents": "イベントなし",
+    "featured": "厳選戦い",
+    "viewDetail": "詳細を見る",
+    "allEvents": "すべて {count}件",
+    "noEventsHint": "他の日付を試してください",
+    "monthLabel": "月",
+    "dayLabel": "日"
+  },
+  "placeNames": {
+    "title": "地名変化",
+    "noResults": "一致する都市が見つかりません",
+    "activeEmpires": "箇所",
+    "pageDescription": "都市の名前の歴史的変化",
+    "searchPlaceholder": "都市名を検索...",
+    "citiesCount": "都市",
+    "regionCities": "{} 都市",
+    "currentIndicator": "現在",
+    "toggleLocale": "EN",
+    "toggleLocaleAlt": "日本語",
+    "collaborators": "パートナー",
+    "opponents": "対戦相手",
+    "battles": "戦闘",
+    "winRate": "勝利率",
+    "eraNames": "名称"
   },
   "polity": {
     "ws": {
@@ -107,6 +722,44 @@
       "japan": "日本",
       "korea": "朝鮮/韓国",
       "vietnam": "ベトナム"
+    }
+  },
+  "polity.ea.china": "中国",
+  "polity.ea.japan": "日本",
+  "polity.ea.korea": "朝鲜",
+  "polity.ea.vietnam": "ベトナム",
+  "polity.wc.china": "中国",
+  "polity.wc.egypt": "エジプト",
+  "polity.wc.hellenistic": "ヘレニズム王国",
+  "polity.wc.indus": "インダス Valley／インド",
+  "polity.wc.islam": "イスラーム帝国",
+  "polity.wc.mesopotamia": "メソポタミア",
+  "polity.wc.persia": "ペルシア",
+  "polity.wc.rome": "ローマ／オスマン",
+  "quiz": {
+    "title": "歴史クイズ",
+    "setup": {
+      "title": "クイズ設定",
+      "description": "歴史上の戦いあなたの知識をチェック！",
+      "questionType": "問題タイプ",
+      "difficulty": "難易度",
+      "start": "クイズ開始"
+    },
+    "feedback": {
+      "correct": "正解！🎉",
+      "wrong": "不正解"
+    },
+    "streak": "連続",
+    "bestStreak": "最高連続",
+    "score": "スコア",
+    "progress": "進捗",
+    "finish": "終了",
+    "next": "次へ",
+    "result": {
+      "title": "クイズ結果",
+      "score": "スコア",
+      "bestStreak": "最高連続",
+      "playAgain": "もう一度"
     }
   },
   "ruler": {
@@ -578,6 +1231,90 @@
     "ruler.ea-jp-hideyoshi": "豊臣秀吉",
     "ruler.ea-jp-ieru": "徳川家康"
   },
+  "ruler.ea-jp-edo": "江戸幕府",
+  "ruler.ea-jp-heian": "平安時代",
+  "ruler.ea-jp-hideyoshi": "豊臣秀吉",
+  "ruler.ea-jp-ieru": "徳川家康",
+  "ruler.ea-jp-kamakura": "鎌倉幕府",
+  "ruler.ea-jp-meiji": "明治維新",
+  "ruler.ea-jp-muromachi": "室町幕府",
+  "ruler.ea-jp-nara": "奈良時代",
+  "ruler.ea-jp-sengoku": "戦国時代",
+  "ruler.ea-jp-yamato": "大和時代",
+  "ruler.ea-jp-yayoi": "弥生時代",
+  "ruler.ea-jp-yoritomo": "源頼朝",
+  "ruler.ea-kr-empire": "大韓帝国",
+  "ruler.ea-kr-goryeo": "高麗王朝",
+  "ruler.ea-kr-joseon": "朝鮮王朝",
+  "ruler.ea-kr-silla": "統一新羅",
+  "ruler.ea-kr-three": "朝鮮三国時代",
+  "ruler.ea-vn-china-rule": "中国支配期",
+  "ruler.ea-vn-dinh-le": "丁朝・黎朝",
+  "ruler.ea-vn-le": "後黎朝",
+  "ruler.ea-vn-ly": "李朝",
+  "ruler.ea-vn-nguyen": "阮朝",
+  "ruler.ea-vn-tran": "陳朝",
+  "ruler.wc-cn-3k-dyn": "三国時代",
+  "ruler.wc-cn-han-dyn": "漢朝",
+  "ruler.wc-cn-jin-dyn": "晋・南北朝",
+  "ruler.wc-cn-ming-dyn": "明朝",
+  "ruler.wc-cn-qin-dyn": "秦朝",
+  "ruler.wc-cn-qing-dyn": "清朝",
+  "ruler.wc-cn-song-dyn": "宋朝",
+  "ruler.wc-cn-sui-dyn": "隋唐",
+  "ruler.wc-cn-yuan-dyn": "元朝",
+  "ruler.wc-eg-middle-kingdom": "中王国エジプト",
+  "ruler.wc-eg-new-kingdom": "新王国エジプト",
+  "ruler.wc-eg-old-kingdom": "古王国エジプト",
+  "ruler.wc-eg-ptolemaic": "プトレマイオス朝エジプト",
+  "ruler.wc-eg-ramesses": "ラムセス2世",
+  "ruler.wc-he-alexander": "アレクサンドロス大王",
+  "ruler.wc-he-antigonid-dyn": "アンティゴノス朝（マケドニア）",
+  "ruler.wc-he-ptolemaic-dyn": "プトレマイオス朝",
+  "ruler.wc-he-seleucid-dyn": "セレウコス朝",
+  "ruler.wc-is-abbasid-dyn": "アッバース朝",
+  "ruler.wc-is-akbar": "アクバル大帝",
+  "ruler.wc-is-genghis": "チンギス・ハーン",
+  "ruler.wc-is-harun": "ハールーン・アッラシード",
+  "ruler.wc-is-mongol-dyn": "イルハン国",
+  "ruler.wc-is-muhammad": "ムハンマド",
+  "ruler.wc-is-rashidun-dyn": "正統カリフ時代",
+  "ruler.wc-is-saladin": "サラディン",
+  "ruler.wc-is-timur": "ティムール",
+  "ruler.wc-is-timurid-dyn": "ティムール帝国",
+  "ruler.wc-is-umayyad": "ウマイヤ朝",
+  "ruler.wc-iv-ashoka": "アショーカ大王",
+  "ruler.wc-iv-chandragupta": "チャンドラグプタ",
+  "ruler.wc-iv-chandragupta-ii": "チャンドラグプタ2世",
+  "ruler.wc-iv-gupta-dyn": "グプタ朝",
+  "ruler.wc-iv-indus": "インダス文明",
+  "ruler.wc-iv-maurya": "マウリヤ帝国",
+  "ruler.wc-iv-samudragupta": "サムドラグプタ",
+  "ruler.wc-me-akkadian": "アッカド帝国",
+  "ruler.wc-me-ashurbanipal": "アッシュルバニパル",
+  "ruler.wc-me-assyrian-dyn": "アッシリア帝国",
+  "ruler.wc-me-hammurabi": "ハンムラビ王",
+  "ruler.wc-me-nebuchadnezzar": "ネブカドネザル2世",
+  "ruler.wc-pe-ardashir": "アルダシール1世",
+  "ruler.wc-pe-cyrus": "キュロス大王",
+  "ruler.wc-pe-darius": "ダレイオス1世",
+  "ruler.wc-pe-parthian-dyn": "パルティア帝国",
+  "ruler.wc-pe-safavid": "サファヴィー朝ペルシア",
+  "ruler.wc-pe-seleucid-dyn": "セレウコス朝",
+  "ruler.wc-pe-shapur": "シャープール1世",
+  "ruler.wc-pe-xerxes": "クセルクセス1世",
+  "ruler.wc-ro-augustus": "アウグストゥス",
+  "ruler.wc-ro-byz-fall-dyn": "ビザンツ後期",
+  "ruler.wc-ro-byzantine-dyn": "ビザンツ帝国",
+  "ruler.wc-ro-caesar": "ユリウス・カエサル",
+  "ruler.wc-ro-constantine": "コンスタンティヌス大帝",
+  "ruler.wc-ro-heraclius": "ヘラクレイオス",
+  "ruler.wc-ro-justinian": "ユスティニアヌス1世",
+  "ruler.wc-ro-nerva-antonine": "五賢帝時代",
+  "ruler.wc-ro-ottoman-dyn": "オスマン帝国",
+  "ruler.wc-ro-republic-dyn": "ローマ共和国",
+  "ruler.wc-ro-suleiman": "スレイマン大帝",
+  "ruler.wc-ro-west-dyn": "西ローマ帝国",
   "rulerBio": {
     "qinshihuang": "中国历史上首位完成大一统的皇帝。13岁即位，亲政后用10年灭六国，建立中国第一个中央集权封建王朝。推行郡县制、统一文字度量衡、修驰道、筑长城，奠定两千年帝制基础。",
     "qiner": "秦二世胡亥，始皇第十八子，经赵高、李斯矫诏篡位。在位期间穷兵黩武、大兴土木、滥杀功臣，陈胜吴广起义爆发后六国旧贵族纷纷复辟，秦朝土崩瓦解。最终被赵高逼迫自杀。",
@@ -986,6 +1723,166 @@
     "rulerBio.wc-ro-suleiman": "オスマンスルタン；ベルグラードとロドスを攻略。",
     "rulerBio.wc-ro-ottoman-late": "オスマン後期；チューリップの時代；衰退始まる。"
   },
+  "rulerBio.ea-jp-edo": "徳川幕府；250年以上の平和；鎖国政策；都市商業文化が繁荣。",
+  "rulerBio.ea-jp-heian": "貴族文化がピーク；平仮名・片仮名が発達；《源氏物語》が生まれる。",
+  "rulerBio.ea-jp-hideyoshi": "平民出身の天下人；織田信長死后日本を統一；農民の刀狩りを実施；大坂城を建設。",
+  "rulerBio.ea-jp-ieru": "関ヶ原の戦いで天下分け目の実権を掌握（1600年）；江戸幕府を開府（1603年）；250年間の徳川統治の始まり。",
+  "rulerBio.ea-jp-kamakura": "初の武士による幕府；モンゴル襲来（1274、1281年）を台風で撃退；武家政治の始まり。",
+  "rulerBio.ea-jp-meiji": "明治天皇が親政；快速な近代化；1868年立憲君主制；日本が工業强国に。",
+  "rulerBio.ea-jp-muromachi": "足利幕府；東山文化が兴起；応仁の乱（1467年）で戦国時代が始まる。",
+  "rulerBio.ea-jp-nara": "初の常住首都；仏教を国教に；《古事記》《日本書紀》が編纂された（720年）。",
+  "rulerBio.ea-jp-sengoku": "群雄割據；織田信長、豊臣秀吉、德川家康が崛起し最終的に天下統一。",
+  "rulerBio.ea-jp-yamato": "倭王権の確立；古塡時代；前方後円坟；天皇の直系祖先が確立。",
+  "rulerBio.ea-jp-yayoi": "稲作農法传入；鉄器和銅鐸 появились；部族社会が形成されつつあった。",
+  "rulerBio.ea-jp-yoritomo": "鎌倉幕府の創業者；壇ノ浦の戦いで平家を破り（1185年）；武士による統治を開始。",
+  "rulerBio.ea-kr-empire": "大韓帝国（Daehanjaeguk）；高宗が建国を宣言；1910年に日本が併合。",
+  "rulerBio.ea-kr-goryeo": "金属活字を発明；高麗青磁が世界に名を馳せる；Koreaという名称の由来。",
+  "rulerBio.ea-kr-joseon": "儒教治国五百年；訓民正音（ハングル）を創製（1443年）；朝鲜儒学が東アジアに影響。",
+  "rulerBio.ea-kr-silla": "朝鲜半島を統一（668–935年）；新羅仏教の黄金期；郷吏制度を設置。",
+  "rulerBio.ea-kr-three": "高句麗・百済・新羅が争う；朝鲜仏教文化と中国への外交の最盛期。",
+  "rulerBio.ea-vn-china-rule": "中国の漢朝から唐まで支配；ベトナム文化と民族认同が維持された。",
+  "rulerBio.ea-vn-dinh-le": "ベトナム初の独立王朝；丁先皇が国を統一し丁朝を樹立（968年）。",
+  "rulerBio.ea-vn-le": "後黎朝；明朝からの独立；ハノイを昇龍京とする；15世紀にベトナム領土が最大に。",
+  "rulerBio.ea-vn-ly": "ベトナム初の長期安定王朝；李太祖が創立（1009年）；仏教を推奨し中国式官僚制を採用。",
+  "rulerBio.ea-vn-nguyen": "ベトナム最後の帝制王朝；1802年から1945年（フランス植民地時代の中断あり）。",
+  "rulerBio.ea-vn-tran": "ベトナム古典文化の黄金期；モンゴルの三度目の侵入（1258、1285、1288年）を撃退；陳朝文化が繁荣。",
+  "rulerBio.wc-cn-3k": "魏・蜀・呉の三国対立；《三国志演義」の元になった時代；武将の世紀。",
+  "rulerBio.wc-cn-han": "中国文明の黄金時代；シルクロード交易；儒教が国教となる。",
+  "rulerBio.wc-cn-jin": "晋朝が中国を再統一；五行思想；その後の南北朝への分裂。",
+  "rulerBio.wc-cn-ming": "漢族による統治を復活；紫禁城を建設；鄭和の海洋遠征；陶磁器・絹の輸出。",
+  "rulerBio.wc-cn-qin": "中国初の大一統帝国；度量衡と文字の統一；万里の長城の原型を築いた。",
+  "rulerBio.wc-cn-qing": "満洲族の支配；中国史上最広大な領土；アヘン戦争以降衰退。",
+  "rulerBio.wc-cn-song": "経済革命；紙幣・火薬・羅針盤を発明；海交易が盛んに。",
+  "rulerBio.wc-cn-sui-tang": "隋が300年ぶりに再統一；唐は詩・仏教・国際文化の黄金時代。",
+  "rulerBio.wc-cn-yuan": "モンゴルによる中国支配；マルコ・ポーロが来訪；演劇・絵画が栄えた。",
+  "rulerBio.wc-eg-middle-kingdom": "文化復興と拡張的时代。",
+  "rulerBio.wc-eg-new-kingdom": "エジプト最盛期。",
+  "rulerBio.wc-eg-old-kingdom": "吉薩のピラミッドを築いた時代。",
+  "rulerBio.wc-eg-ptolemaic": "プトレマイオス1世が建国したギリシャ語王朝。",
+  "rulerBio.wc-eg-ramesses": "最も強力なファラオ。",
+  "rulerBio.wc-he-alexander": "アレクサンドロス大王；ギリシャからインドまで古代史上最大の帝国の一つを築いた。",
+  "rulerBio.wc-he-antigonid": "マケドニアの王朝；前168年にローマに滅ぼされるまで存続。",
+  "rulerBio.wc-he-ptolemaic": "エジプトを統治したギリシャ王朝；前30年のローマ併合まで存続。",
+  "rulerBio.wc-he-seleucid": "アレクサンドロス後継国家；ギリシャ〜中央アジアにギリシャ文化を広めた。",
+  "rulerBio.wc-is-abbasid-late": "アッバース朝カリフ制の衰退；1258年にバグダードがモンゴルに略奪；マムルークがエジプトを保持。",
+  "rulerBio.wc-is-akbar": "アクバル大王；ムガル帝国がインド全体に拡大；宗教寛容政策；合一宗教ディーン・イラヒーを創始。",
+  "rulerBio.wc-is-genghis": "チンギス・ハーン（テムジン）1206年にモンゴル諸部族を統一し、金朝、西夏、ホラズム、中央アジアの大部分を征服した。史上最大の連続する大陸帝国を建国し、駅伝制度を確立した。",
+  "rulerBio.wc-is-harun": "ハールーン・アッ＝ラシード；アッバース朝カリフ制の黄金時代；知恵の館を創設；カール大帝と書簡を交換。",
+  "rulerBio.wc-is-ilkhanate": "ペルシアのモンゴル・イル汗国；イスラームに改宗；ペルシア細密画のパトロン。",
+  "rulerBio.wc-is-muhammad": "預言者ムハンマド；610年にイスラームを創業；622年にメディナへ移る；630年にメッカを征服；コーランが啓示された。",
+  "rulerBio.wc-is-rashidun": "四代正統カリフ；急速なアラビアの征服；ペルシア・エジプト・レバントを征服。",
+  "rulerBio.wc-is-saladin": "サラーフッディーン；アイユーブ朝エジプトとシリアを統合；エルサレムを奪回；十字軍から騎士道として称賛された。",
+  "rulerBio.wc-is-timur": "ティムール（タムーラン）；ペルシア・アナトリア・インドを征服；サマルキャンドを再建；残忍だが芸術のパトロン。",
+  "rulerBio.wc-is-timurid-late": "ティムール朝の衰退；バーブルがインドでムガル帝国を建国；ペルシア文化の影響が広まる。",
+  "rulerBio.wc-is-umayyad": "ウマイヤ朝カリフ制；首都ダマスカス；アラビア어가共通語に；モスク建築が栄えた。",
+  "rulerBio.wc-iv-ashoka": "カルリンガ戦争後、仏教に改宗したマウルヤ朝の皇帝。",
+  "rulerBio.wc-iv-chandragupta": "マウリヤ朝の建国者。",
+  "rulerBio.wc-iv-chandragupta-ii": "チャンドラグプタ2世（在位375〜415年）；クシャーナ朝を退けグプタ・黄金時代を実現；ナlanda大学が繁荣した。",
+  "rulerBio.wc-iv-gupta": "インドの黄金時代；芸術・科学・哲学が繁荣した時代。",
+  "rulerBio.wc-iv-indus": "高度な都市計画を持つハラッパ文明。",
+  "rulerBio.wc-iv-maurya": "インド亜大陸的大部分を統一した最初の帝国。",
+  "rulerBio.wc-iv-samudragupta": "サムドラグプタ王（在位335〜380年）；軍事遠征で帝国を拡大；芸術のパトロン。",
+  "rulerBio.wc-me-akkadian": "アッカド大王サルゴンが建設した世界初の帝国。",
+  "rulerBio.wc-me-ashurbanipal": "新アッシリア王（前669〜627年）；帝国最大の版図；ニネヴェの宮殿を建設；アッシュルバニパルの図書館を構築。",
+  "rulerBio.wc-me-assyrian": "アシュールを中心にMilitary帝国；知性アッカドの保護とニネヴェの図書館で知られる。",
+  "rulerBio.wc-me-hammurabi": "バビロニア王；人类最古の成文法の1つハンムラビ法典を制定（前1750年頃）。",
+  "rulerBio.wc-me-nebuchadnezzar": "ネブカドネザル2世；エルサレムを征服；イシュタル門と空中庭園を建設。",
+  "rulerBio.wc-pe-ardashir": "アルダシーラ1世；サーサーン朝ペルシアを建国；ゾロアスター教を国教に；ローマとの対立が始まる。",
+  "rulerBio.wc-pe-cyrus": "キュロス大王；アケメネス朝ペルシアを建国；バビロニアのユダヤ人を解放；被征服地域の文化を尊重。",
+  "rulerBio.wc-pe-darius": "ダレイオス1世；サトラピエ制を整備；王の道；ペルセポリスを建設；ギリシャ侵攻；マラトンの戦い（前490年）。",
+  "rulerBio.wc-pe-parthian": "パルティア帝国；ローマとの絶え間ない紛争；騎馬弓兵戦術；シルクロード貿易の独占。",
+  "rulerBio.wc-pe-safavid": "サファヴィー朝ペルシア；十二イマーム・シーア派を国教と宣言；イスファハーンの建築・芸術の黄金時代。",
+  "rulerBio.wc-pe-seleucid": "セレウコス朝；アレクサンドロスの後継国家；ギリシャから中央アジアへのヘレニズム文化。",
+  "rulerBio.wc-pe-shapur": "シャープール1世；ローマ皇帝ウァレリアヌスを捕虜にする；ゾロアスター教聖典の編纂；文化の黄金時代。",
+  "rulerBio.wc-pe-xerxes": "クセルクェス1世；ギリシャ侵攻；テルモピュレの戦いとサラミス海戦（前480年）；ペルセポリスに万国の門を建設。",
+  "rulerBio.wc-ro-augustus": "初代皇帝；パクス・ロマーナの始まり；ローマ建築の黄金期。",
+  "rulerBio.wc-ro-byz-fall": "1204年第四回十字軍がコンスタンティノポリスを略奪；帝国は分裂；パレオロゴス王朝下で回復；1453年オスマン蘇丹メフメト2世が都市を陥落させ、千年帝国は終焉を迎えた。",
+  "rulerBio.wc-ro-byzantine-mid": "中期拜占庭時代；マケドニア王朝の下で回復；バシレイオス2世；拜占庭芸術・学問のピーク。",
+  "rulerBio.wc-ro-caesar": "ユリウス・カエサル；ガリアを征服；ルビコン渡河（前49年）；終身独裁官；暗殺で共和制終焉。",
+  "rulerBio.wc-ro-constantine": "キリスト教を合法化；コンスタンティノープルを建設；帝国を東西に分割；ニカイア公会議。",
+  "rulerBio.wc-ro-heraclius": "ヘラクレイオス；ペルシア・アラブと戦争；ギリシャ어가公用語に。",
+  "rulerBio.wc-ro-justinian": "ユスティニアヌス1世；地中海を再征服；アヤソフィアを建設；《ユスティニアヌス法典》を編纂。",
+  "rulerBio.wc-ro-nerva-antonine": "五賢帝時代；養子継承制；帝国領土の最大拡大；法の集成。",
+  "rulerBio.wc-ro-ottoman-late": "オスマン帝国の衰退；カルロヴィッツ条約（1699年）； Tanzimat 改革；第一次世界大戦後の解体（1922年）。",
+  "rulerBio.wc-ro-republic": "ローマ共和制500年；元老院が統治；カルタゴとのポエニ戦争；地中海の制圧。",
+  "rulerBio.wc-ro-suleiman": "スレイマン1世（壮麗帝）；オスマン文化の黄金時代；法典改革；ウィーン包囲（1529年）。",
+  "rulerBio.wc-ro-west-fall": "西ローマ帝国滅亡（476年）；ゲルマン人王国が即位；東は拜占庭として存続。",
+  "rulerEraName": {
+    "wc-cn-mingtaizu": "洪武",
+    "wc-cn-ming-xuanzong": "宣徳",
+    "wc-cn-ming-yingzong": "正統/天順",
+    "wc-cn-ming-daizong": "景泰",
+    "wc-cn-ming-xianzong": "成化",
+    "wc-cn-ming-xiaozong": "弘治",
+    "wc-cn-ming-shizong": "正徳",
+    "wc-cn-ming-shenzong": "嘉靖",
+    "wc-cn-ming-sizong": "隆慶/万歴",
+    "wc-cn-qinshihuang": "始皇帝",
+    "wc-cn-hanwudi": "建元/元狩/元封",
+    "wc-cn-guangwu": "建武",
+    "wc-cn-caowei": "黄初",
+    "wc-cn-suiyang": "大業",
+    "wc-cn-tangtaizong": "貞観",
+    "wc-cn-wuzetian": "天授/周歴",
+    "wc-cn-xuanzong": "開元/天宝",
+    "wc-cn-songtaizu": "建隆/乾徳",
+    "wc-cn-huizong": "崇寧/大観",
+    "wc-cn-kublai": "至元",
+    "wc-cn-yongle": "永楽",
+    "wc-cn-kangxi": "康熙",
+    "wc-cn-qianlong": "乾隆",
+    "wc-cn-ehan-ming": "永平",
+    "wc-cn-ehan-zhang": "建初",
+    "wc-cn-ehan-he": "永元",
+    "wc-cn-ehan-an": "永初",
+    "wc-cn-ehan-huan": "建和",
+    "wc-cn-ehan-ling": "中平",
+    "wc-cn-ehan-xian": "建安",
+    "wc-cn-tk-caopi": "黄初",
+    "wc-cn-tk-caorui": "青龍",
+    "wc-cn-tk-caofang": "正始",
+    "wc-cn-tk-caomao": "嘉平",
+    "wc-cn-tk-caohuan": "景元",
+    "wc-cn-tk-liubei": "章武",
+    "wc-cn-tk-liushan": "建興",
+    "wc-cn-tk-sunquan": "黄武",
+    "wc-cn-tk-sunliang": "太元",
+    "wc-cn-tk-sunxiu": "永安",
+    "wc-cn-tk-sunhao": "天紀",
+    "wc-cn-tang-gaozu": "武徳",
+    "wc-cn-tang-gaozong": "永徽",
+    "wc-cn-tang-suzong": "乾元",
+    "wc-cn-tang-dezong": "大歴",
+    "wc-cn-tang-xianzong": "元和",
+    "wc-cn-tang-xizong": "咸通",
+    "wc-cn-tang-aidi": "天祐",
+    "wc-cn-song-taizong": "太平興国",
+    "wc-cn-song-zhenzong": "咸平/天禧",
+    "wc-cn-song-renzong": "天聖/明道",
+    "wc-cn-song-shenzong": "熙寧",
+    "wc-cn-song-gaozong": "建炎/绍兴",
+    "wc-cn-song-xiaozong": "乾道",
+    "wc-cn-song-lizong": "宝慶/绍定",
+    "wc-cn-song-didi": "咸淳",
+    "wc-cn-yuan-taizu": "武徳",
+    "wc-cn-yuan-taizong": "元貞",
+    "wc-cn-yuan-chengzong": "大徳",
+    "wc-cn-yuan-renzong": "皇慶",
+    "wc-cn-yuan-shundi": "至正",
+    "wc-cn-yuanshizu": "至元",
+    "wc-cn-han-lv": "延平",
+    "wc-cn-han-ruzi": "居摂",
+    "wc-cn-qing-taizu": "天命",
+    "wc-cn-qing-taizong": "天聡",
+    "wc-cn-qing-shizhu": "順治",
+    "wc-cn-qing-shizong": "雍正",
+    "wc-cn-qing-renzong": "嘉慶",
+    "wc-cn-qing-xuanzong": "道光",
+    "wc-cn-qing-wenzong": "咸豊",
+    "wc-cn-qing-cixi": "同治",
+    "wc-cn-qing-dezong": "光緒",
+    "wc-cn-qing-puyi": "宣統"
+  },
   "rulerHighlight": {
     "qinshihuang": "前221年统一六国，称「皇帝」；推行书同文、车同轨、统一度量衡；修万里长城；建阿房宫、骊山陵（兵马俑）；前210年巡游途中驾崩于沙丘。",
     "qiner": "赵高「指鹿为马」专权；陈胜吴广大泽乡起义（前209年）；章邯率刑徒军镇压起义；前207年被赵高逼迫自杀，秦朝灭亡进入倒计时。",
@@ -1193,442 +2090,47 @@
     "rulerHighlight.wc-ro-justinian": "ユスティニアヌス1世 — ビザンツピーク；アヤソフィア；法典",
     "rulerHighlight.wc-ro-suleiman": "スレイマン1世 — オスマン帝国のピーク；『スレイマン大王』"
   },
-  "event": {
-    "sa-770-zhou-east": {
-      "title": "周王朝が洛邑（洛陽）へ遷都",
-      "summary": "王室の東遷により、春秋時代の始まりとされる。"
-    },
-    "sa-656-qihuan": {
-      "title": "斉の桓公が覇者となる（伝統）",
-      "summary": "斉が台頭し、覇者体制の一角を占める。"
-    },
-    "sa-632-chengpu": {
-      "title": "城濮の戦い",
-      "summary": "晋が楚に勝利し、諸侯勢力の均衡に影響を与える。"
-    },
-    "sa-551-confucius": {
-      "title": "孔子の誕生（伝統）",
-      "summary": "儒家思想の重要な基礎を築いた人物として後世に大きな影響。"
-    },
-    "sa-506-boju": {
-      "title": "柏挙の戦い",
-      "summary": "呉が楚に勝ち都を一時占領。諸侯抗争の激しさを示す。"
-    },
-    "ws-453-three-jin": {
-      "title": "晋の三分（韓・趙・魏）",
-      "summary": "権力が再編され、戦国秩序が加速する。"
-    },
-    "ws-356-shangyang-reform": {
-      "title": "商鞅の変法（秦）",
-      "summary": "法家改革で秦の国家動員と軍事力が強化され、統一の基盤となる。"
-    },
-    "ws-341-maling": {
-      "title": "馬陵の戦い",
-      "summary": "斉が魏を伏撃で破る。孫臏の戦術で知られる。"
-    },
-    "ws-307-hufu-qishe": {
-      "title": "胡服騎射（趙の軍制改革）",
-      "summary": "趙の武霊王が騎兵戦術と服制改革を推進し、北方の戦争様式を変えた。"
-    },
-    "ws-284-yan-attack-qi": {
-      "title": "燕の対斉侵攻（楽毅の攻勢）",
-      "summary": "燕を中心とする連合軍が斉を大きく破り、斉は崩壊寸前に追い込まれた。"
-    },
-    "ws-278-qin-takes-ying": {
-      "title": "秦が郢を陥落（楚の遷都）",
-      "summary": "白起が楚都の郢を攻め落とし、楚は戦略重心を南へ移す。"
-    },
-    "ws-256-zhou-ends": {
-      "title": "周王室の終焉（伝統）",
-      "summary": "名目上の王権がさらに崩れ、兼併戦がより決定的になる。"
-    },
-    "ws-260-changping": {
-      "title": "長平の戦い",
-      "summary": "秦が趙に大勝し、統一へ向けた優位が明確になる。"
-    },
-    "ws-230-qin-conquers-han": {
-      "title": "秦が韓を滅ぼす",
-      "summary": "秦の最終統一戦の第一歩で、韓は七雄の中で最初に滅亡した。"
-    },
-    "ws-228-qin-conquers-zhao": {
-      "title": "秦が趙を滅ぼす",
-      "summary": "長平以後に衰えた趙は、最終的に秦に攻略される。"
-    },
-    "ws-225-qin-conquers-wei": {
-      "title": "秦が魏を滅ぼす",
-      "summary": "大梁の陥落（しばしば水攻と結び付けて語られる）により魏は滅亡。"
-    },
-    "ws-223-qin-conquers-chu": {
-      "title": "秦が楚を滅ぼす",
-      "summary": "南方の大国楚が大遠征の末に滅ぼされる。"
-    },
-    "ws-222-qin-conquers-yan": {
-      "title": "秦が燕を滅ぼす",
-      "summary": "刺秦の失敗後、燕は秦の進撃に抗しきれず滅亡。"
-    },
-    "ws-221-qin-conquers-qi": {
-      "title": "秦が斉を滅ぼす",
-      "summary": "斉は最終局面で併合され、秦の六国兼併が完了する。"
-    },
-    "ws-221-unification": {
-      "title": "秦が中国を統一",
-      "summary": "六国を滅ぼし、嬴政が始皇帝を称して帝制国家を樹立。"
-    },
-    "qin-214-lingqu": {
-      "title": "霊渠の開削（伝統）",
-      "summary": "南方統治と兵站を支える重要な運河事業。"
-    },
-    "qin-210-first-emperor-death": {
-      "title": "始皇帝の死",
-      "summary": "継承混乱と反乱が続き、秦政権が動揺する。"
-    },
-    "qin-209-dazexiang": {
-      "title": "大沢郷の乱",
-      "summary": "陳勝・呉広の蜂起。反秦の動きが全国へ広がる象徴。"
-    },
-    "han-202-han-founded": {
-      "title": "劉邦が漢を建国",
-      "summary": "楚漢戦争後、劉邦（高祖）が即位し漢帝国を成立させる。"
-    },
-    "han-154-seven-states": {
-      "title": "七国の乱",
-      "summary": "地方諸王の反乱が鎮圧され、中央集権が強化される。"
-    },
-    "han-138-zhangqian": {
-      "title": "張騫が西域へ派遣",
-      "summary": "西域との往来を開き、後のシルクロード交流の基礎となる。"
-    },
-    "eh-105-paper": {
-      "title": "蔡倫の製紙改良（伝統）",
-      "summary": "紙の普及が行政と文化の広がりを後押しする。"
-    },
-    "eh-184-yellow-turbans": {
-      "title": "黄巾の乱",
-      "summary": "大規模反乱で後漢の統制が弱まり、分裂が進む。"
-    },
-    "eh-220-han-ends": {
-      "title": "後漢の終焉",
-      "summary": "献帝が禅譲し、曹丕が魏を建てて三国時代へ。"
-    },
-    "sui-589-unify": {
-      "title": "隋が中国を再統一",
-      "summary": "隋が陳を滅ぼし、南北朝の分裂を終わらせる。"
-    },
-    "sui-605-grand-canal": {
-      "title": "大運河の建設拡大",
-      "summary": "南北を結ぶ運河工事が進み、輸送と財政動員が強化される。"
-    },
-    "tang-618-founded": {
-      "title": "唐の建国",
-      "summary": "李淵が唐を建て、帝国再建の時代が始まる。"
-    },
-    "tang-755-anlushan": {
-      "title": "安史の乱",
-      "summary": "唐の国力を大きく削ぎ、中央権力と社会構造を変化させた大反乱。"
-    },
-    "song-960-founded": {
-      "title": "宋の建国",
-      "summary": "趙匡胤（太祖）が即位し、五代十国の混乱後に統合を進める。"
-    },
-    "song-1127-jingkang": {
-      "title": "靖康の変",
-      "summary": "金が開封を陥落させ、北宋は崩壊し朝廷は南へ退く。"
-    },
-    "yuan-1271-founded": {
-      "title": "元の国号宣言",
-      "summary": "フビライが元を称し、モンゴル統治を中国王朝の枠組みに組み込む。"
-    },
-    "ming-1368-founded": {
-      "title": "明の建国",
-      "summary": "朱元璋（洪武帝）が明を建て、元の支配を終わらせる。"
-    },
-    "ming-1405-zhenghe": {
-      "title": "鄭和の遠征が始まる",
-      "summary": "国家主導の海上遠征がインド洋世界へ影響を及ぼす。"
-    },
-    "qing-1644-founded": {
-      "title": "清が北京を掌握",
-      "summary": "明の崩壊後、清が北京に入り統治の統合を進める。"
-    },
-    "qing-1840-opium": {
-      "title": "アヘン戦争（第一次）",
-      "summary": "対外衝突が近代の転機となり、外圧と内政課題が深まる。"
-    },
-    "roc-1911-xinhai": {
-      "title": "辛亥革命",
-      "summary": "清朝が倒れ、共和制の時代が始まる。"
-    },
-    "prc-1949-founded": {
-      "title": "中華人民共和国の成立",
-      "summary": "北京で建国が宣言され、新たな政治時代へ入る。"
-    },
-    "prc-1978-reform": {
-      "title": "改革開放の開始",
-      "summary": "経済改革と対外開放が本格化し、社会と発展の軌道が大きく変わる。"
-    },
-    "wz-1046-muye": {
-      "title": "牧野の戦い",
-      "summary": "周が殷（商）を破り、西周の時代が始まる。"
-    },
-    "wz-1042-regency": {
-      "title": "周公の摂政（伝承）",
-      "summary": "王位継承期の摂政政治で新王朝の体制を安定させた。"
-    },
-    "wz-1040-fengjian": {
-      "title": "分封と秩序の拡大",
-      "summary": "分封と礼制による政治秩序が各地へ広がり、体制が固められる。"
-    },
-    "wz-841-gonghe": {
-      "title": "共和の開始（前841年）",
-      "summary": "厲王追放後に摂政期が始まり、前841年は年代確定の重要な基準点となる。"
-    },
-    "wz-771-quanrong": {
-      "title": "犬戎が鎬京を陥落（前771年）",
-      "summary": "都が襲撃され幽王が死去。西周が崩壊し、東周への転換が進む。"
-    },
-    "sa-707-xuge": {
-      "title": "繻葛の戦い",
-      "summary": "周王と鄭の戦い。強国諸侯に対する王権の限界を示す。"
-    },
-    "sa-651-kuiqiu": {
-      "title": "葵丘の会盟",
-      "summary": "斉の桓公が主導した会盟で、覇者政治の重要な節目とされる。"
-    },
-    "sa-597-bi": {
-      "title": "邲の戦い",
-      "summary": "晋楚覇権争いの重要戦で、勢力均衡に影響した。"
-    },
-    "sa-594-tax": {
-      "title": "「初税亩」（伝統）",
-      "summary": "租税制度の変化として語られ、春秋期の制度転換の議論に用いられる。"
-    },
-    "sa-651-qihuan": {
-      "summary": "斉桓公、春秋の初代覇者に立つ",
-      "title": "斉桓公の覇者即位"
-    },
-    "sui-605-canal": {
-      "summary": "隋が京杭大運河を築き、南北を結ぶ",
-      "title": "大運河の開削"
-    },
-    "viewTimeline": "タイムラインを見る",
-    "ws-256-zhouends": {
-      "summary": "秦が東周を滅ぼし、周朝が終結する",
-      "title": "東周の滅亡"
-    },
-    "ws-278-ying": {
-      "summary": "秦が楚の都郢を攻略する",
-      "title": "秦の郢攻略"
-    },
-    "ws-284-yan-qi": {
-      "summary": "燕が五国と同盟して斉を攻撃し、斉はほとんど滅びかけた",
-      "title": "楽毅の斉伐"
-    },
-    "ws-307-hufu": {
-      "summary": "趙の武霊王が胡服騎射を推行し、軍事改革を行った",
-      "title": "胡服騎射"
-    },
-    "ws-356-shangyang": {
-      "summary": "秦の孝公が商鞅を採用し変法を行い，秦が台頭した",
-      "title": "商鞅の変法"
-    },
-    "wj-311-yongjia": {
-      "title": "永嘉の乱",
-      "summary": "匈奴軍が洛陽を攻略し、懐帝を捕らえ、西晉が滅び、五胡の侵入が始まる。"
-    }
-  },
-  "faction": {
-    "qin": "秦",
-    "rebels": "義賊軍",
-    "chu": "楚",
-    "xiang": "項羽",
-    "han": "漢",
-    "dongzhuo": "董卓",
-    "cao": "曹操",
-    "wei": "魏",
-    "shu": "蜀漢",
-    "wu": "東呉",
-    "sun": "孫権",
-    "liu": "刘备",
-    "qi": "斉",
-    "zhao": "趙",
-    "han-state": "韓",
-    "yan": "燕"
-  },
-  "nav": {
-    "battles": "戦い",
-    "commanders": "指揮官ネットワーク",
-    "favorites": "お気に入り"
-  },
-  "favorites": {
-    "title": "お気に入り",
-    "backToBattles": "戦いに戻る",
-    "clearAll": "すべてクリア",
-    "noFavoritesTitle": "お気に入りがありません",
-    "noFavoritesDesc": "戦いカードのハートアイコンをクリックしてお気に入りに追加しましょう。",
-    "browseBattles": "戦いを探す",
-    "recommendations": "おすすめの戦い",
-    "recommendationsEmpty": "お気に入りを追加しておすすめを発見",
-    "addFavorite": "お気に入りに追加",
-    "removeFavorite": "お気に入りから削除"
-  },
-  "battleCompare": {
-    "title": "⚔️ 戦い比較",
-    "close": "閉じる",
-    "result": "結果",
-    "belligerents": "交戦国",
-    "attacker": "攻撃側",
-    "defender": "防御側",
-    "commanders": "指揮官",
-    "summary": "戦い概要",
-    "closeComparison": "比較を閉じる"
-  },
-  "matrix": {
-    "title": "時系列マトリックス",
-    "selectEra": "時代を選択",
-    "details": "詳細",
-    "selectCell": "セルをクリックして詳細を表示",
-    "rulers": "君主",
-    "events": "出来事",
-    "noRulers": "君主データなし",
-    "noEvents": "出来事データなし",
-    "battle": "戦い",
-    "attackerWin": "攻撃側勝利",
-    "defenderWin": "防守側勝利",
-    "draw": "引分"
-  },
-  "rulerEraName": {
-    "wc-cn-mingtaizu": "洪武",
-    "wc-cn-ming-xuanzong": "宣徳",
-    "wc-cn-ming-yingzong": "正統/天順",
-    "wc-cn-ming-daizong": "景泰",
-    "wc-cn-ming-xianzong": "成化",
-    "wc-cn-ming-xiaozong": "弘治",
-    "wc-cn-ming-shizong": "正徳",
-    "wc-cn-ming-shenzong": "嘉靖",
-    "wc-cn-ming-sizong": "隆慶/万歴",
-    "wc-cn-qinshihuang": "始皇帝",
-    "wc-cn-hanwudi": "建元/元狩/元封",
-    "wc-cn-guangwu": "建武",
-    "wc-cn-caowei": "黄初",
-    "wc-cn-suiyang": "大業",
-    "wc-cn-tangtaizong": "貞観",
-    "wc-cn-wuzetian": "天授/周歴",
-    "wc-cn-xuanzong": "開元/天宝",
-    "wc-cn-songtaizu": "建隆/乾徳",
-    "wc-cn-huizong": "崇寧/大観",
-    "wc-cn-kublai": "至元",
-    "wc-cn-yongle": "永楽",
-    "wc-cn-kangxi": "康熙",
-    "wc-cn-qianlong": "乾隆",
-    "wc-cn-ehan-ming": "永平",
-    "wc-cn-ehan-zhang": "建初",
-    "wc-cn-ehan-he": "永元",
-    "wc-cn-ehan-an": "永初",
-    "wc-cn-ehan-huan": "建和",
-    "wc-cn-ehan-ling": "中平",
-    "wc-cn-ehan-xian": "建安",
-    "wc-cn-tk-caopi": "黄初",
-    "wc-cn-tk-caorui": "青龍",
-    "wc-cn-tk-caofang": "正始",
-    "wc-cn-tk-caomao": "嘉平",
-    "wc-cn-tk-caohuan": "景元",
-    "wc-cn-tk-liubei": "章武",
-    "wc-cn-tk-liushan": "建興",
-    "wc-cn-tk-sunquan": "黄武",
-    "wc-cn-tk-sunliang": "太元",
-    "wc-cn-tk-sunxiu": "永安",
-    "wc-cn-tk-sunhao": "天紀",
-    "wc-cn-tang-gaozu": "武徳",
-    "wc-cn-tang-gaozong": "永徽",
-    "wc-cn-tang-suzong": "乾元",
-    "wc-cn-tang-dezong": "大歴",
-    "wc-cn-tang-xianzong": "元和",
-    "wc-cn-tang-xizong": "咸通",
-    "wc-cn-tang-aidi": "天祐",
-    "wc-cn-song-taizong": "太平興国",
-    "wc-cn-song-zhenzong": "咸平/天禧",
-    "wc-cn-song-renzong": "天聖/明道",
-    "wc-cn-song-shenzong": "熙寧",
-    "wc-cn-song-gaozong": "建炎/绍兴",
-    "wc-cn-song-xiaozong": "乾道",
-    "wc-cn-song-lizong": "宝慶/绍定",
-    "wc-cn-song-didi": "咸淳",
-    "wc-cn-yuan-taizu": "武徳",
-    "wc-cn-yuan-taizong": "元貞",
-    "wc-cn-yuan-chengzong": "大徳",
-    "wc-cn-yuan-renzong": "皇慶",
-    "wc-cn-yuan-shundi": "至正",
-    "wc-cn-yuanshizu": "至元",
-    "wc-cn-han-lv": "延平",
-    "wc-cn-han-ruzi": "居摂",
-    "wc-cn-qing-taizu": "天命",
-    "wc-cn-qing-taizong": "天聡",
-    "wc-cn-qing-shizhu": "順治",
-    "wc-cn-qing-shizong": "雍正",
-    "wc-cn-qing-renzong": "嘉慶",
-    "wc-cn-qing-xuanzong": "道光",
-    "wc-cn-qing-wenzong": "咸豊",
-    "wc-cn-qing-cixi": "同治",
-    "wc-cn-qing-dezong": "光緒",
-    "wc-cn-qing-puyi": "宣統"
-  },
-  "empire_qin": "秦王朝",
-  "empire_han-western": "前漢",
-  "empire_han-eastern": "後漢",
-  "empire_three-kingdoms": "三国時代",
-  "empire_tang": "唐王朝",
-  "empire_song": "宋王朝",
-  "empire_yuan": "元王朝",
-  "empire_ming": "明王朝",
-  "empire_qing": "清王朝",
-  "empire_rome-republic": "ローマ共和国",
-  "empire_rome-empire": "ローマ帝国",
-  "empire_byzantine": "ビザンツ帝国",
-  "empire_ottoman": "オスマン帝国",
-  "empire_achaemenid": "アケメネス朝ペルシア",
-  "empire_parthian": "パルティア帝国",
-  "empire_sassanid": "ササン朝ペルシア",
-  "empire_safavid": "サファヴィー朝",
-  "empire_umayyad": "ウマイヤ朝",
-  "empire_abbasid": "アッバス朝",
-  "empire_timurid": "ティムール帝国",
-  "empire_alexander": "アレクサンドロス帝国",
-  "empire_mongol": "モンゴル帝国",
-  "empire_maurya": "マウリヤ帝国",
-  "empire_mughal": "ムガル帝国",
-  "empire_muromachi": "室町時代",
-  "empire_egypt-old": "古代エジプト（古王国）",
-  "empire_egypt-middle": "古代エジプト（中王国）",
-  "empire_egypt-new": "古代エジプト（新王国）",
-  "empire_egypt-ptolemaic": "プトレマイオス朝エジプト",
-  "empire_indus-valley": "インダス文明",
-  "empire_kushan": "クシャーナ帝国",
-  "empire_gupta": "グプタ朝",
-  "empire_chola": "チョラ朝",
-  "empire_akkadian": "アッカド帝国",
-  "empire_old-babylon": "古バビロニア",
-  "empire_asuka": "飛鳥時代",
-  "empire_assyrian": "アッシュリア帝国",
-  "empire_hittite": "ヒッタイト帝国",
-  "empire_neobabylon": "新バビロニア",
-  "empire_seleucid": "セレウコス朝",
-  "empire_satavahana": "サータヴァーハナ朝",
-  "empire_srivijaya": "シュリヴィジャヤ",
-  "empire_yayoi": "弥生時代",
-  "empire_yamato": "大和時代",
-  "empire_nara": "奈良時代",
-  "empire_heian": "平安時代",
-  "empire_edo": "江戸時代",
-  "empire_goryeo": "高麗王朝",
-  "empire_joseon": "李氏朝鲜",
-  "empire_ly-dynasty": "李朝",
-  "empire_le-dynasty": "黎朝",
-  "empire_nguyen-dynasty": "阮朝",
-  "empires_active": "帝国",
-  "empires": {
-    "active": "帝国",
-    "asuka": "飛鳥時代",
-    "muromachi": "室町時代"
+  "rulerHighlight.ea-jp-edo": "徳川幕府（1603〜1868年）；250年以上の平和；鎖国政策。",
+  "rulerHighlight.ea-jp-heian": "平安時代（794〜1185年）；貴族文化がピーク；『源氏物語』が生まれる。",
+  "rulerHighlight.ea-jp-hideyoshi": "日本統一（1590年）；刀狩り令；文禄・慶長の役出兵（1592年、1597年）。",
+  "rulerHighlight.ea-jp-ieru": "関ヶ原の戦い（1600年）；江戸幕府を開府（1603年）；250年平和の開始。",
+  "rulerHighlight.ea-jp-kamakura": "初の武士による幕府（1185〜1333年）；蒙古襲来を撃退。",
+  "rulerHighlight.ea-jp-meiji": "明治維新（1868〜1912年）；急速な近代化；日本の工業化。",
+  "rulerHighlight.ea-jp-sengoku": "戦国時代（1467〜1615年）；織田信長、豊臣秀吉、德川家康が崛起。",
+  "rulerHighlight.ea-jp-yoritomo": "鎌倉幕府を開府（1192年）；初の武士征夷大将軍；650年間の武家政治の始まり。",
+  "rulerHighlight.ea-kr-goryeo": "高麗王朝（918〜1392年）；金属活字を発明；Koreaの名前源自。",
+  "rulerHighlight.ea-kr-joseon": "朝鮮王朝（1392〜1897年）；儒教国家；ハングルを創製。",
+  "rulerHighlight.ea-kr-silla": "統一新羅（668〜935年）；韓国仏教と文化の黄金時代。",
+  "rulerHighlight.ea-vn-le": "後黎朝（1428〜1788年）；明からの独立；最大版図を拡張。",
+  "rulerHighlight.ea-vn-tran": "陳朝（1225〜1400年）；モンゴル三度を撃退；越南古典文化が繁荣。",
+  "rulerHighlight.wc-eg-ramesses": "最强のファラオ",
+  "rulerHighlight.wc-he-alexander": "アレクサンドロス大王（前336〜323年）；ペルシア・エジプト・インドを征服。",
+  "rulerHighlight.wc-is-akbar": "ムガル皇帝（1556〜1605年）；帝国を拡張；宗教的寛容を推進。",
+  "rulerHighlight.wc-is-genghis": "历史上最大の連続する大陸帝国を建国",
+  "rulerHighlight.wc-is-harun": "アッバース朝カリフ（786〜833年）；知恵の館を支援；イスラーム黄金時代。",
+  "rulerHighlight.wc-is-muhammad": "イスラームの預言者；アラビア半島を統一；イスラーム国家を建設（610〜632年）。",
+  "rulerHighlight.wc-is-saladin": "十字軍に対抗しイスラームを統一；エルサレムを奪回（1187年）。",
+  "rulerHighlight.wc-is-timur": "中央アジアの征服者（1370〜1405年）；ティムール朝を建設；サマルカンドで芸術を保護。",
+  "rulerHighlight.wc-iv-ashoka": "Buddhist皇帝",
+  "rulerHighlight.wc-iv-chandragupta": "Maurya建国者",
+  "rulerHighlight.wc-iv-chandragupta-ii": "グプタ・黄金時代の君主",
+  "rulerHighlight.wc-iv-samudragupta": "グプタ朝の軍事的天才",
+  "rulerHighlight.wc-me-ashurbanipal": "新アッシリア王（前669〜627年）；帝国最盛期；世界最初期の図書館「ナインジェの図書館」を建設。",
+  "rulerHighlight.wc-me-hammurabi": "バビロニア王（前1792〜1750年）；ハンムラビ法典を制定。",
+  "rulerHighlight.wc-me-nebuchadnezzar": "ネブカドネザル2世（前605〜562年）；バビロンの空中庭園の传说。",
+  "rulerHighlight.wc-pe-cyrus": "アケメネス朝ペルシアの建国者（前550年頃）；キュロス·阿帖木兒の円筒を交付。",
+  "rulerHighlight.wc-pe-darius": "ペルシア帝国を最大版図に拡張；サトラピエ制を整備；ペルセポリスを建設。",
+  "rulerHighlight.wc-pe-shapur": "ササン朝皇帝（241〜272年）；ローマ皇帝バレリアヌスを捕虜にする。",
+  "rulerHighlight.wc-ro-augustus": "初代ローマ皇帝（前27年〜14年）；パクス・ロマーナを開始；共和政から帝政への転換を主導。",
+  "rulerHighlight.wc-ro-caesar": "共和政を終わらせた独裁官；ルビコン川を渡る（前49年）；ユリウス暦を制定；前44年に暗殺された。",
+  "rulerHighlight.wc-ro-constantine": "初代キリスト教徒皇帝（306〜337年）；ミラノ勅令を発布；コンスタンティノープル建都。",
+  "rulerHighlight.wc-ro-justinian": "東ローマ皇帝（527〜565年）；地中海を再征服；ロローマ法大全を編纂。",
+  "rulerHighlight.wc-ro-suleiman": "オスマン皇帝（1520〜1566年）；帝国最盛期；『壮麗』と称される。",
+  "thisDayInHistory": {
+    "title": "歴史上の今日",
+    "battlesFound": "件の関連戦い",
+    "expand": "すべて表示",
+    "collapse": "折りたたむ"
   },
   "timeline": {
     "title": "歴史タイムライン",
@@ -1672,204 +2174,23 @@
     "xiang-liang-uprising": "項梁の蜂起",
     "xiang-liang-uprising-desc": "項梁が会稽で挙兵、楚の王族を支持する"
   },
-  "battle": {
-    "result": {
-      "attacker_win": "攻撃側勝利",
-      "defender_win": "防衛側勝利",
-      "draw": "引分",
-      "inconclusive": "決着不明"
-    },
-    "impact": {
-      "decisive": "決定的な戦い",
-      "major": "重要な戦い",
-      "minor": "小規模な戦い",
-      "unknown": "不明"
-    },
-    "strategy": {
-      "ambush": "伏撃",
-      "fire": "火攻",
-      "water": "水攻",
-      "encirclement": "包囲",
-      "siege": "攻城戦",
-      "pincer": "钳形作戦",
-      "feigned_retreat": "偽退",
-      "alliance": "連合作戦",
-      "defensive": "防御作戦",
-      "offensive": "攻撃作戦",
-      "guerrilla": "游撃戦",
-      "unknown": "不明"
-    },
-    "terrain": {
-      "plains": "平原",
-      "mountains": "山地",
-      "hills": "丘陵",
-      "water": "水域",
-      "desert": "砂漠",
-      "plateau": "高原",
-      "forest": "森林",
-      "marsh": "沼沢",
-      "coastal": "沿岸",
-      "urban": "都市",
-      "pass": "関所",
-      "unknown": "不明"
-    },
-    "pacing": {
-      "surprise": "奇襲",
-      "rapid": "速決戦",
-      "extended": "持久戦",
-      "siege": "包囲戦",
-      "unknown": "不明"
-    },
-    "timeOfDay": {
-      "dawn": "夜明け",
-      "morning": "午前",
-      "afternoon": "午後",
-      "evening": "夕方",
-      "night": "夜",
-      "unknown": "不明"
-    },
-    "type": {
-      "founding": "建國の戦い",
-      "unification": "統一戦争",
-      "conquest": "征伐",
-      "defense": "防御戦",
-      "rebellion": "反乱",
-      "civil_war": "内戦",
-      "frontier": "辺境の戦い",
-      "invasion": "侵略",
-      "unknown": "不明"
-    },
-    "turningPoint": {
-      "commander_death": "指揮官戦死",
-      "commander_captured": "指揮官捕虜",
-      "flank_collapse": "側面崩壊",
-      "reinforcement_arrival": "増援到着",
-      "supply_disruption": "補給断絶",
-      "weather_change": "天気変化",
-      "defection": "寝返り",
-      "strategic_mistake": "戦略ミス",
-      "fortification_breach": "防御線突破",
-      "ambush_triggered": "伏撃発動",
-      "morale_collapse": "士気崩壊",
-      "trap_triggered": "罠発動",
-      "fire_attack": "火攻成功",
-      "flood_attack": "水攻成功",
-      "unknown": "不明"
-    },
-    "casualty": {
-      "reliability": {
-        "high": "可靠",
-        "medium": "普通",
-        "low": "疑問"
-      },
-      "killed": "戦死",
-      "wounded": "負傷",
-      "captured": "捕虜",
-      "missing": "失踪",
-      "combined": "死傷"
-    },
-    "scale": {
-      "massive": "超大規模",
-      "large": "大規模",
-      "medium": "中規模",
-      "small": "小規模",
-      "unknown": "不明"
+  "ui": {
+    "pageNotFound": "ページが見つかりません",
+    "back": "戻る",
+    "months": {
+      "1": "1月",
+      "2": "2月",
+      "3": "3月",
+      "4": "4月",
+      "5": "5月",
+      "6": "6月",
+      "7": "7月",
+      "8": "8月",
+      "9": "9月",
+      "10": "10月",
+      "11": "11月",
+      "12": "12月"
     }
-  },
-  "battleDetail": {
-    "close": "閉じる",
-    "result": "結果：",
-    "belligerents": "交戦国",
-    "attacker": "攻撃側",
-    "defender": "防衛側",
-    "summary": "戦闘概要",
-    "location": "戦場位置",
-    "impact": "影響力：",
-    "commanders": "主要指揮官",
-    "unknown": "不明",
-    "strategy": "戦略：",
-    "terrain": "地形：",
-    "battleType": "戦闘類型：",
-    "pacing": "ペース：",
-    "timeOfDay": "時間帯：",
-    "turningPoints": "転換点",
-    "sources": "参考文献",
-    "similarBattles": "類似战役",
-    "similarBattlesDesc": "你也感兴趣的战役",
-    "similarBattleItem": "見る",
-    "noSimilarBattles": "類似战役なし"
-  },
-  "battleTimeline": {
-    "noData": "戦いデータなし"
-  },
-  "battleOfTheDay": {
-    "title": "今日の戦い",
-    "badge": "今日のおすすめ",
-    "viewDetail": "詳細を見る",
-    "expand": "今日の戦いを表示",
-    "collapse": "折りたたむ",
-    "sameEraBattles": "{n} 件の同時代の戦い"
-  },
-  "location": {
-    "title": "地名変化查询",
-    "description": "現代地名を入力し、古代名称の歴史的変遷を表示",
-    "placeholder": "現代地名を入力、例：西安、北京、南京...",
-    "noResults": "関連する地点が見つかりません",
-    "back": "検索に戻る",
-    "modernLabel": "現代",
-    "historyNames": "歴史名称",
-    "daze": "大沢郷（安徽宿州）",
-    "xianyang": "咸陽",
-    "julu": "鉅鹿（河北邢台）",
-    "chang-an": "長安",
-    "gaixia": "垓下（安徽霊璧）",
-    "luoyang": "洛陽",
-    "ye": "鄴城（河北邯鄲）",
-    "red-cliffs": "赤壁（湖北赤壁）",
-    "chengdu": "成都",
-    "jianye": "建業（江蘇南京）"
-  },
-  "grid": {
-    "title": "ユーラシア比較グリッド",
-    "eurasian": "ユーラシア",
-    "eastAsia": "東アジア",
-    "activeEmpires": "アクティブ政体",
-    "quickJump": "クイックジャンプ",
-    "timeline": "タイムライン",
-    "activeAtYear": "{year} アクティブ",
-    "noActive": "アクティブ政体なし",
-    "ce1": "紀元1年",
-    "region": {
-      "china": "中国",
-      "korea": "朝鮮半島",
-      "japan": "日本",
-      "west": "西方",
-      "vietnam": "ベトナム",
-      "central-asia": "中央アジア",
-      "other": "その他"
-    },
-    "eraBand": {
-      "ancient": "古代",
-      "medieval": "中世",
-      "earlyModern": "近世"
-    }
-  },
-  "placeNames": {
-    "title": "地名変化",
-    "noResults": "一致する都市が見つかりません",
-    "activeEmpires": "箇所",
-    "pageDescription": "都市の名前の歴史的変化",
-    "searchPlaceholder": "都市名を検索...",
-    "citiesCount": "都市",
-    "regionCities": "{} 都市",
-    "currentIndicator": "現在",
-    "toggleLocale": "EN",
-    "toggleLocaleAlt": "日本語",
-    "collaborators": "パートナー",
-    "opponents": "対戦相手",
-    "battles": "戦闘",
-    "winRate": "勝利率",
-    "eraNames": "名称"
   },
   "world": {
     "title": "ユーラシア比較",
@@ -1877,317 +2198,5 @@
     "noRecords": "記録なし",
     "yearLabel": "年",
     "ariaLabel": "世界帝国タイムラインスライダー"
-  },
-  "commanders": {
-    "noData": "指揮官データなし",
-    "noDataDesc": "現在の戦いデータに指揮官情報がありません",
-    "totalCommanders": "指揮官総数",
-    "totalRelations": "関係総数",
-    "collaborations": "協力関係",
-    "matchups": "対決関係",
-    "mostActive": "最もアクティブ",
-    "winRate": "勝率",
-    "participated": "参加",
-    "wins": "勝利",
-    "losses": "敗北",
-    "commanderCount": "{{count}} 人の指揮官",
-    "battleCount": "{{count}} 戦",
-    "collaborationStat": "共同作戦 {{battles}} 戦 · 勝利 {{wins}}",
-    "draws": "引分",
-    "tabs": {
-      "commanders": "指揮官",
-      "collaborations": "最佳パートナー",
-      "matchups": "クラシック対決",
-      "insights": "インサイト",
-      "network": "関係ネットワーク"
-    },
-    "topCollaborations": "最佳パートナー",
-    "topMatchups": "クラシック対決",
-    "insights": "指揮官インサイト",
-    "noCollaborations": "協力データなし",
-    "noMatchups": "対決データなし",
-    "noInsights": "インサイトデータなし"
-  },
-  "thisDayInHistory": {
-    "title": "歴史上の今日",
-    "battlesFound": "件の関連戦い",
-    "expand": "すべて表示",
-    "collapse": "折りたたむ"
-  },
-  "onThisDay": {
-    "title": "歴史上の今日",
-    "found": "{count}件の関連戦い",
-    "noEvents": "イベントなし",
-    "featured": "厳選戦い",
-    "viewDetail": "詳細を見る",
-    "allEvents": "すべて {count}件",
-    "noEventsHint": "他の日付を試してください",
-    "monthLabel": "月",
-    "dayLabel": "日"
-  },
-  "empire_holy-roman": "神聖ローマ帝国",
-  "ruler.wc-eg-old-kingdom": "古王国エジプト",
-  "ruler.wc-eg-middle-kingdom": "中王国エジプト",
-  "ruler.wc-eg-new-kingdom": "新王国エジプト",
-  "ruler.wc-eg-ramesses": "ラムセス2世",
-  "ruler.wc-eg-ptolemaic": "プトレマイオス朝エジプト",
-  "ruler.wc-me-akkadian": "アッカド帝国",
-  "ruler.wc-me-hammurabi": "ハンムラビ王",
-  "ruler.wc-me-assyrian-dyn": "アッシリア帝国",
-  "ruler.wc-me-ashurbanipal": "アッシュルバニパル",
-  "ruler.wc-me-nebuchadnezzar": "ネブカドネザル2世",
-  "ruler.wc-he-alexander": "アレクサンドロス大王",
-  "ruler.wc-he-seleucid-dyn": "セレウコス朝",
-  "ruler.wc-he-antigonid-dyn": "アンティゴノス朝（マケドニア）",
-  "ruler.wc-he-ptolemaic-dyn": "プトレマイオス朝",
-  "ruler.wc-iv-indus": "インダス文明",
-  "ruler.wc-iv-maurya": "マウリヤ帝国",
-  "ruler.wc-iv-chandragupta": "チャンドラグプタ",
-  "ruler.wc-iv-ashoka": "アショーカ大王",
-  "ruler.wc-iv-gupta-dyn": "グプタ朝",
-  "ruler.wc-iv-samudragupta": "サムドラグプタ",
-  "ruler.wc-iv-chandragupta-ii": "チャンドラグプタ2世",
-  "ruler.wc-ro-caesar": "ユリウス・カエサル",
-  "ruler.wc-ro-augustus": "アウグストゥス",
-  "ruler.wc-ro-nerva-antonine": "五賢帝時代",
-  "ruler.wc-ro-constantine": "コンスタンティヌス大帝",
-  "ruler.wc-ro-heraclius": "ヘラクレイオス",
-  "ruler.wc-ro-justinian": "ユスティニアヌス1世",
-  "ruler.wc-ro-suleiman": "スレイマン大帝",
-  "ruler.wc-ro-republic-dyn": "ローマ共和国",
-  "ruler.wc-ro-west-dyn": "西ローマ帝国",
-  "ruler.wc-ro-byzantine-dyn": "ビザンツ帝国",
-  "ruler.wc-ro-byz-fall-dyn": "ビザンツ後期",
-  "ruler.wc-ro-ottoman-dyn": "オスマン帝国",
-  "ruler.wc-pe-cyrus": "キュロス大王",
-  "ruler.wc-pe-darius": "ダレイオス1世",
-  "ruler.wc-pe-xerxes": "クセルクセス1世",
-  "ruler.wc-pe-ardashir": "アルダシール1世",
-  "ruler.wc-pe-shapur": "シャープール1世",
-  "ruler.wc-pe-safavid": "サファヴィー朝ペルシア",
-  "ruler.wc-pe-parthian-dyn": "パルティア帝国",
-  "ruler.wc-pe-seleucid-dyn": "セレウコス朝",
-  "ruler.wc-is-muhammad": "ムハンマド",
-  "ruler.wc-is-rashidun-dyn": "正統カリフ時代",
-  "ruler.wc-is-umayyad": "ウマイヤ朝",
-  "ruler.wc-is-harun": "ハールーン・アッラシード",
-  "ruler.wc-is-abbasid-dyn": "アッバース朝",
-  "ruler.wc-is-saladin": "サラディン",
-  "ruler.wc-is-timur": "ティムール",
-  "ruler.wc-is-timurid-dyn": "ティムール帝国",
-  "ruler.wc-is-mongol-dyn": "イルハン国",
-  "ruler.wc-is-akbar": "アクバル大帝",
-  "ruler.wc-cn-qin-dyn": "秦朝",
-  "ruler.wc-cn-han-dyn": "漢朝",
-  "ruler.wc-cn-3k-dyn": "三国時代",
-  "ruler.wc-cn-jin-dyn": "晋・南北朝",
-  "ruler.wc-cn-sui-dyn": "隋唐",
-  "ruler.wc-cn-song-dyn": "宋朝",
-  "ruler.wc-cn-yuan-dyn": "元朝",
-  "ruler.wc-cn-ming-dyn": "明朝",
-  "ruler.wc-cn-qing-dyn": "清朝",
-  "rulerBio.wc-eg-old-kingdom": "吉薩のピラミッドを築いた時代。",
-  "rulerBio.wc-eg-middle-kingdom": "文化復興と拡張的时代。",
-  "rulerBio.wc-eg-new-kingdom": "エジプト最盛期。",
-  "rulerBio.wc-eg-ramesses": "最も強力なファラオ。",
-  "rulerBio.wc-eg-ptolemaic": "プトレマイオス1世が建国したギリシャ語王朝。",
-  "rulerBio.wc-me-akkadian": "アッカド大王サルゴンが建設した世界初の帝国。",
-  "rulerBio.wc-me-hammurabi": "バビロニア王；人类最古の成文法の1つハンムラビ法典を制定（前1750年頃）。",
-  "rulerBio.wc-me-assyrian": "アシュールを中心にMilitary帝国；知性アッカドの保護とニネヴェの図書館で知られる。",
-  "rulerBio.wc-me-ashurbanipal": "新アッシリア王（前669〜627年）；帝国最大の版図；ニネヴェの宮殿を建設；アッシュルバニパルの図書館を構築。",
-  "rulerBio.wc-me-nebuchadnezzar": "ネブカドネザル2世；エルサレムを征服；イシュタル門と空中庭園を建設。",
-  "rulerBio.wc-he-alexander": "アレクサンドロス大王；ギリシャからインドまで古代史上最大の帝国の一つを築いた。",
-  "rulerBio.wc-he-seleucid": "アレクサンドロス後継国家；ギリシャ〜中央アジアにギリシャ文化を広めた。",
-  "rulerBio.wc-he-antigonid": "マケドニアの王朝；前168年にローマに滅ぼされるまで存続。",
-  "rulerBio.wc-he-ptolemaic": "エジプトを統治したギリシャ王朝；前30年のローマ併合まで存続。",
-  "rulerBio.wc-iv-indus": "高度な都市計画を持つハラッパ文明。",
-  "rulerBio.wc-iv-maurya": "インド亜大陸的大部分を統一した最初の帝国。",
-  "rulerBio.wc-iv-chandragupta": "マウリヤ朝の建国者。",
-  "rulerBio.wc-iv-ashoka": "カルリンガ戦争後、仏教に改宗したマウルヤ朝の皇帝。",
-  "rulerBio.wc-iv-gupta": "インドの黄金時代；芸術・科学・哲学が繁荣した時代。",
-  "rulerBio.wc-iv-samudragupta": "サムドラグプタ王（在位335〜380年）；軍事遠征で帝国を拡大；芸術のパトロン。",
-  "rulerBio.wc-iv-chandragupta-ii": "チャンドラグプタ2世（在位375〜415年）；クシャーナ朝を退けグプタ・黄金時代を実現；ナlanda大学が繁荣した。",
-  "rulerHighlight.wc-eg-ramesses": "最强のファラオ",
-  "rulerHighlight.wc-me-hammurabi": "バビロニア王（前1792〜1750年）；ハンムラビ法典を制定。",
-  "rulerHighlight.wc-me-ashurbanipal": "新アッシリア王（前669〜627年）；帝国最盛期；世界最初期の図書館「ナインジェの図書館」を建設。",
-  "rulerHighlight.wc-me-nebuchadnezzar": "ネブカドネザル2世（前605〜562年）；バビロンの空中庭園の传说。",
-  "rulerHighlight.wc-he-alexander": "アレクサンドロス大王（前336〜323年）；ペルシア・エジプト・インドを征服。",
-  "rulerHighlight.wc-iv-chandragupta": "Maurya建国者",
-  "rulerHighlight.wc-iv-ashoka": "Buddhist皇帝",
-  "rulerHighlight.wc-iv-samudragupta": "グプタ朝の軍事的天才",
-  "rulerHighlight.wc-iv-chandragupta-ii": "グプタ・黄金時代の君主",
-  "rulerHighlight.wc-ro-caesar": "共和政を終わらせた独裁官；ルビコン川を渡る（前49年）；ユリウス暦を制定；前44年に暗殺された。",
-  "rulerHighlight.wc-ro-augustus": "初代ローマ皇帝（前27年〜14年）；パクス・ロマーナを開始；共和政から帝政への転換を主導。",
-  "rulerHighlight.wc-ro-constantine": "初代キリスト教徒皇帝（306〜337年）；ミラノ勅令を発布；コンスタンティノープル建都。",
-  "rulerHighlight.wc-ro-justinian": "東ローマ皇帝（527〜565年）；地中海を再征服；ロローマ法大全を編纂。",
-  "rulerHighlight.wc-ro-suleiman": "オスマン皇帝（1520〜1566年）；帝国最盛期；『壮麗』と称される。",
-  "rulerHighlight.wc-pe-cyrus": "アケメネス朝ペルシアの建国者（前550年頃）；キュロス·阿帖木兒の円筒を交付。",
-  "rulerHighlight.wc-pe-darius": "ペルシア帝国を最大版図に拡張；サトラピエ制を整備；ペルセポリスを建設。",
-  "rulerHighlight.wc-pe-shapur": "ササン朝皇帝（241〜272年）；ローマ皇帝バレリアヌスを捕虜にする。",
-  "rulerHighlight.wc-is-muhammad": "イスラームの預言者；アラビア半島を統一；イスラーム国家を建設（610〜632年）。",
-  "rulerHighlight.wc-is-harun": "アッバース朝カリフ（786〜833年）；知恵の館を支援；イスラーム黄金時代。",
-  "rulerHighlight.wc-is-saladin": "十字軍に対抗しイスラームを統一；エルサレムを奪回（1187年）。",
-  "rulerHighlight.wc-is-timur": "中央アジアの征服者（1370〜1405年）；ティムール朝を建設；サマルカンドで芸術を保護。",
-  "rulerHighlight.wc-is-akbar": "ムガル皇帝（1556〜1605年）；帝国を拡張；宗教的寛容を推進。",
-  "rulerHighlight.ea-jp-sengoku": "戦国時代（1467〜1615年）；織田信長、豊臣秀吉、德川家康が崛起。",
-  "rulerHighlight.ea-jp-edo": "徳川幕府（1603〜1868年）；250年以上の平和；鎖国政策。",
-  "rulerHighlight.ea-jp-heian": "平安時代（794〜1185年）；貴族文化がピーク；『源氏物語』が生まれる。",
-  "rulerHighlight.ea-jp-kamakura": "初の武士による幕府（1185〜1333年）；蒙古襲来を撃退。",
-  "rulerHighlight.ea-jp-meiji": "明治維新（1868〜1912年）；急速な近代化；日本の工業化。",
-  "rulerHighlight.ea-kr-silla": "統一新羅（668〜935年）；韓国仏教と文化の黄金時代。",
-  "rulerHighlight.ea-kr-goryeo": "高麗王朝（918〜1392年）；金属活字を発明；Koreaの名前源自。",
-  "rulerHighlight.ea-kr-joseon": "朝鮮王朝（1392〜1897年）；儒教国家；ハングルを創製。",
-  "rulerHighlight.ea-vn-tran": "陳朝（1225〜1400年）；モンゴル三度を撃退；越南古典文化が繁荣。",
-  "rulerHighlight.ea-vn-le": "後黎朝（1428〜1788年）；明からの独立；最大版図を拡張。",
-  "ruler.ea-jp-yayoi": "弥生時代",
-  "ruler.ea-jp-yamato": "大和時代",
-  "ruler.ea-jp-nara": "奈良時代",
-  "ruler.ea-jp-heian": "平安時代",
-  "ruler.ea-jp-kamakura": "鎌倉幕府",
-  "ruler.ea-jp-muromachi": "室町幕府",
-  "ruler.ea-jp-sengoku": "戦国時代",
-  "ruler.ea-jp-edo": "江戸幕府",
-  "ruler.ea-jp-meiji": "明治維新",
-  "ruler.ea-kr-three": "朝鮮三国時代",
-  "ruler.ea-kr-silla": "統一新羅",
-  "ruler.ea-kr-goryeo": "高麗王朝",
-  "ruler.ea-kr-joseon": "朝鮮王朝",
-  "ruler.ea-kr-empire": "大韓帝国",
-  "ruler.ea-vn-china-rule": "中国支配期",
-  "ruler.ea-vn-dinh-le": "丁朝・黎朝",
-  "ruler.ea-vn-ly": "李朝",
-  "ruler.ea-vn-tran": "陳朝",
-  "ruler.ea-vn-le": "後黎朝",
-  "ruler.ea-vn-nguyen": "阮朝",
-  "rulerBio.ea-jp-yayoi": "稲作農法传入；鉄器和銅鐸 появились；部族社会が形成されつつあった。",
-  "rulerBio.ea-jp-yamato": "倭王権の確立；古塡時代；前方後円坟；天皇の直系祖先が確立。",
-  "rulerBio.ea-jp-nara": "初の常住首都；仏教を国教に；《古事記》《日本書紀》が編纂された（720年）。",
-  "rulerBio.ea-jp-heian": "貴族文化がピーク；平仮名・片仮名が発達；《源氏物語》が生まれる。",
-  "rulerBio.ea-jp-kamakura": "初の武士による幕府；モンゴル襲来（1274、1281年）を台風で撃退；武家政治の始まり。",
-  "rulerBio.ea-jp-muromachi": "足利幕府；東山文化が兴起；応仁の乱（1467年）で戦国時代が始まる。",
-  "rulerBio.ea-jp-sengoku": "群雄割據；織田信長、豊臣秀吉、德川家康が崛起し最終的に天下統一。",
-  "rulerBio.ea-jp-edo": "徳川幕府；250年以上の平和；鎖国政策；都市商業文化が繁荣。",
-  "rulerBio.ea-jp-meiji": "明治天皇が親政；快速な近代化；1868年立憲君主制；日本が工業强国に。",
-  "rulerBio.ea-kr-three": "高句麗・百済・新羅が争う；朝鲜仏教文化と中国への外交の最盛期。",
-  "rulerBio.ea-kr-silla": "朝鲜半島を統一（668–935年）；新羅仏教の黄金期；郷吏制度を設置。",
-  "rulerBio.ea-kr-goryeo": "金属活字を発明；高麗青磁が世界に名を馳せる；Koreaという名称の由来。",
-  "rulerBio.ea-kr-joseon": "儒教治国五百年；訓民正音（ハングル）を創製（1443年）；朝鲜儒学が東アジアに影響。",
-  "rulerBio.ea-kr-empire": "大韓帝国（Daehanjaeguk）；高宗が建国を宣言；1910年に日本が併合。",
-  "rulerBio.ea-vn-china-rule": "中国の漢朝から唐まで支配；ベトナム文化と民族认同が維持された。",
-  "rulerBio.ea-vn-dinh-le": "ベトナム初の独立王朝；丁先皇が国を統一し丁朝を樹立（968年）。",
-  "rulerBio.ea-vn-ly": "ベトナム初の長期安定王朝；李太祖が創立（1009年）；仏教を推奨し中国式官僚制を採用。",
-  "rulerBio.ea-vn-tran": "ベトナム古典文化の黄金期；モンゴルの三度目の侵入（1258、1285、1288年）を撃退；陳朝文化が繁荣。",
-  "rulerBio.ea-vn-le": "後黎朝；明朝からの独立；ハノイを昇龍京とする；15世紀にベトナム領土が最大に。",
-  "rulerBio.ea-vn-nguyen": "ベトナム最後の帝制王朝；1802年から1945年（フランス植民地時代の中断あり）。",
-  "rulerBio.wc-cn-qin": "中国初の大一統帝国；度量衡と文字の統一；万里の長城の原型を築いた。",
-  "rulerBio.wc-cn-han": "中国文明の黄金時代；シルクロード交易；儒教が国教となる。",
-  "rulerBio.wc-cn-3k": "魏・蜀・呉の三国対立；《三国志演義」の元になった時代；武将の世紀。",
-  "rulerBio.wc-cn-jin": "晋朝が中国を再統一；五行思想；その後の南北朝への分裂。",
-  "rulerBio.wc-cn-song": "経済革命；紙幣・火薬・羅針盤を発明；海交易が盛んに。",
-  "rulerBio.wc-cn-sui-tang": "隋が300年ぶりに再統一；唐は詩・仏教・国際文化の黄金時代。",
-  "rulerBio.wc-cn-yuan": "モンゴルによる中国支配；マルコ・ポーロが来訪；演劇・絵画が栄えた。",
-  "rulerBio.wc-cn-ming": "漢族による統治を復活；紫禁城を建設；鄭和の海洋遠征；陶磁器・絹の輸出。",
-  "rulerBio.wc-cn-qing": "満洲族の支配；中国史上最広大な領土；アヘン戦争以降衰退。",
-  "rulerBio.wc-ro-republic": "ローマ共和制500年；元老院が統治；カルタゴとのポエニ戦争；地中海の制圧。",
-  "rulerBio.wc-ro-caesar": "ユリウス・カエサル；ガリアを征服；ルビコン渡河（前49年）；終身独裁官；暗殺で共和制終焉。",
-  "rulerBio.wc-ro-augustus": "初代皇帝；パクス・ロマーナの始まり；ローマ建築の黄金期。",
-  "rulerBio.wc-ro-nerva-antonine": "五賢帝時代；養子継承制；帝国領土の最大拡大；法の集成。",
-  "rulerBio.wc-ro-constantine": "キリスト教を合法化；コンスタンティノープルを建設；帝国を東西に分割；ニカイア公会議。",
-  "rulerBio.wc-ro-west-fall": "西ローマ帝国滅亡（476年）；ゲルマン人王国が即位；東は拜占庭として存続。",
-  "rulerBio.wc-ro-byzantine-mid": "中期拜占庭時代；マケドニア王朝の下で回復；バシレイオス2世；拜占庭芸術・学問のピーク。",
-  "rulerBio.wc-ro-justinian": "ユスティニアヌス1世；地中海を再征服；アヤソフィアを建設；《ユスティニアヌス法典》を編纂。",
-  "rulerBio.wc-ro-heraclius": "ヘラクレイオス；ペルシア・アラブと戦争；ギリシャ어가公用語に。",
-  "rulerBio.wc-ro-suleiman": "スレイマン1世（壮麗帝）；オスマン文化の黄金時代；法典改革；ウィーン包囲（1529年）。",
-  "rulerBio.wc-ro-ottoman-late": "オスマン帝国の衰退；カルロヴィッツ条約（1699年）； Tanzimat 改革；第一次世界大戦後の解体（1922年）。",
-  "rulerBio.wc-pe-cyrus": "キュロス大王；アケメネス朝ペルシアを建国；バビロニアのユダヤ人を解放；被征服地域の文化を尊重。",
-  "rulerBio.wc-pe-darius": "ダレイオス1世；サトラピエ制を整備；王の道；ペルセポリスを建設；ギリシャ侵攻；マラトンの戦い（前490年）。",
-  "rulerBio.wc-pe-xerxes": "クセルクェス1世；ギリシャ侵攻；テルモピュレの戦いとサラミス海戦（前480年）；ペルセポリスに万国の門を建設。",
-  "rulerBio.wc-pe-parthian": "パルティア帝国；ローマとの絶え間ない紛争；騎馬弓兵戦術；シルクロード貿易の独占。",
-  "rulerBio.wc-pe-seleucid": "セレウコス朝；アレクサンドロスの後継国家；ギリシャから中央アジアへのヘレニズム文化。",
-  "rulerBio.wc-pe-ardashir": "アルダシーラ1世；サーサーン朝ペルシアを建国；ゾロアスター教を国教に；ローマとの対立が始まる。",
-  "rulerBio.wc-pe-shapur": "シャープール1世；ローマ皇帝ウァレリアヌスを捕虜にする；ゾロアスター教聖典の編纂；文化の黄金時代。",
-  "rulerBio.wc-pe-safavid": "サファヴィー朝ペルシア；十二イマーム・シーア派を国教と宣言；イスファハーンの建築・芸術の黄金時代。",
-  "rulerBio.wc-is-muhammad": "預言者ムハンマド；610年にイスラームを創業；622年にメディナへ移る；630年にメッカを征服；コーランが啓示された。",
-  "rulerBio.wc-is-rashidun": "四代正統カリフ；急速なアラビアの征服；ペルシア・エジプト・レバントを征服。",
-  "rulerBio.wc-is-umayyad": "ウマイヤ朝カリフ制；首都ダマスカス；アラビア어가共通語に；モスク建築が栄えた。",
-  "rulerBio.wc-is-harun": "ハールーン・アッ＝ラシード；アッバース朝カリフ制の黄金時代；知恵の館を創設；カール大帝と書簡を交換。",
-  "rulerBio.wc-is-abbasid-late": "アッバース朝カリフ制の衰退；1258年にバグダードがモンゴルに略奪；マムルークがエジプトを保持。",
-  "rulerBio.wc-is-saladin": "サラーフッディーン；アイユーブ朝エジプトとシリアを統合；エルサレムを奪回；十字軍から騎士道として称賛された。",
-  "rulerBio.wc-is-timur": "ティムール（タムーラン）；ペルシア・アナトリア・インドを征服；サマルキャンドを再建；残忍だが芸術のパトロン。",
-  "rulerBio.wc-is-timurid-late": "ティムール朝の衰退；バーブルがインドでムガル帝国を建国；ペルシア文化の影響が広まる。",
-  "rulerBio.wc-is-ilkhanate": "ペルシアのモンゴル・イル汗国；イスラームに改宗；ペルシア細密画のパトロン。",
-  "rulerBio.wc-is-akbar": "アクバル大王；ムガル帝国がインド全体に拡大；宗教寛容政策；合一宗教ディーン・イラヒーを創始。",
-  "era.world-comparison": "世界文明",
-  "era.east-asia-comparison": "東アジア",
-  "polity.wc.china": "中国",
-  "polity.wc.rome": "ローマ／オスマン",
-  "polity.wc.persia": "ペルシア",
-  "polity.wc.islam": "イスラーム帝国",
-  "polity.wc.egypt": "エジプト",
-  "polity.wc.indus": "インダス Valley／インド",
-  "polity.wc.mesopotamia": "メソポタミア",
-  "polity.wc.hellenistic": "ヘレニズム王国",
-  "polity.ea.china": "中国",
-  "polity.ea.japan": "日本",
-  "polity.ea.korea": "朝鲜",
-  "polity.ea.vietnam": "ベトナム",
-  "rulerBio.wc-ro-byz-fall": "1204年第四回十字軍がコンスタンティノポリスを略奪；帝国は分裂；パレオロゴス王朝下で回復；1453年オスマン蘇丹メフメト2世が都市を陥落させ、千年帝国は終焉を迎えた。",
-  "map": {
-    "legend": "凡例"
-  },
-  "empire_hellenistic": "ヘレニズム諸王国",
-  "empire_greco-bactrian": "グリーコ・バクトリア王国",
-  "empire_liao": "遼朝",
-  "grid.title": "文明タイムライン",
-  "grid.timeline": "時代",
-  "grid.eurasian": "ユーラシア",
-  "grid.eastAsia": "東アジア",
-  "grid.activeAtYear": "{year}年の勢力",
-  "grid.activeEmpires": "{count}個の帝国が活動中",
-  "grid.noActive": "活動中の帝国なし",
-  "grid.quickJump": "世紀へジャンプ",
-  "grid.ce1": "紀元後",
-  "grid.eraBand.ancient": "古代",
-  "grid.eraBand.medieval": "中世",
-  "grid.eraBand.earlyModern": "近世",
-  "grid.region.china": "中国",
-  "grid.region.korea": "朝鮮",
-  "grid.region.japan": "日本",
-  "grid.region.vietnam": "ベトナム",
-  "grid.region.central-asia": "中央アジア",
-  "grid.region.west": "西アジア・ヨーロッパ",
-  "grid.region.other": "その他",
-  "rulerHighlight.wc-is-genghis": "历史上最大の連続する大陸帝国を建国",
-  "ruler.wc-is-genghis": "チンギス・ハーン",
-  "rulerBio.wc-is-genghis": "チンギス・ハーン（テムジン）1206年にモンゴル諸部族を統一し、金朝、西夏、ホラズム、中央アジアの大部分を征服した。史上最大の連続する大陸帝国を建国し、駅伝制度を確立した。",
-  "quiz": {
-    "title": "歴史クイズ",
-    "setup": {
-      "title": "クイズ設定",
-      "description": "歴史上の戦いあなたの知識をチェック！",
-      "questionType": "問題タイプ",
-      "difficulty": "難易度",
-      "start": "クイズ開始"
-    },
-    "feedback": {
-      "correct": "正解！🎉",
-      "wrong": "不正解"
-    },
-    "streak": "連続",
-    "bestStreak": "最高連続",
-    "score": "スコア",
-    "progress": "進捗",
-    "finish": "終了",
-    "next": "次へ",
-    "result": {
-      "title": "クイズ結果",
-      "score": "スコア",
-      "bestStreak": "最高連続",
-      "playAgain": "もう一度"
-    }
-  },
-  "grid.eraBandLegend": "時代区分",
-  "grid.eraBand.ancient_short": "古代",
-  "grid.eraBand.medieval_short": "中世",
-  "grid.eraBand.earlyModern_short": "近世"
+  }
 }
