@@ -98,9 +98,12 @@ export const eastAsiaRulers: import('@/lib/history/types').Ruler[] = [
   { id: 'ea-jp-yamato', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-yamato', bioKey: 'rulerBio.ea-jp-yamato', startYear: 250, endYear: 710 , isDynastyBlock: true },
   { id: 'ea-jp-nara', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-nara', bioKey: 'rulerBio.ea-jp-nara', startYear: 710, endYear: 794 , isDynastyBlock: true },
   { id: 'ea-jp-heian', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-heian', bioKey: 'rulerBio.ea-jp-heian', highlightKey: 'rulerHighlight.ea-jp-heian', startYear: 794, endYear: 1185 , isDynastyBlock: true },
-  { id: 'ea-jp-kamakura', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-kamakura', bioKey: 'rulerBio.ea-jp-kamakura', highlightKey: 'rulerHighlight.ea-jp-kamakura', startYear: 1185, endYear: 1333 , isDynastyBlock: true },
+  { id: 'ea-jp-kamakura', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-kamakura', bioKey: 'rulerBio.ea-jp-kamakura', startYear: 1185, endYear: 1333 , isDynastyBlock: true },
+  { id: 'ea-jp-yoritomo', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-yoritomo', bioKey: 'rulerBio.ea-jp-yoritomo', highlightKey: 'rulerHighlight.ea-jp-yoritomo', startYear: 1185, endYear: 1199 },
   { id: 'ea-jp-muromachi', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-muromachi', bioKey: 'rulerBio.ea-jp-muromachi', startYear: 1336, endYear: 1573 , isDynastyBlock: true },
   { id: 'ea-jp-sengoku', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-sengoku', bioKey: 'rulerBio.ea-jp-sengoku', highlightKey: 'rulerHighlight.ea-jp-sengoku', startYear: 1467, endYear: 1615 , isDynastyBlock: true },
+  { id: 'ea-jp-hideyoshi', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-hideyoshi', bioKey: 'rulerBio.ea-jp-hideyoshi', highlightKey: 'rulerHighlight.ea-jp-hideyoshi', startYear: 1582, endYear: 1598 },
+  { id: 'ea-jp-ieru', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-ieru', bioKey: 'rulerBio.ea-jp-ieru', highlightKey: 'rulerHighlight.ea-jp-ieru', startYear: 1603, endYear: 1616 },
   { id: 'ea-jp-edo', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-edo', bioKey: 'rulerBio.ea-jp-edo', highlightKey: 'rulerHighlight.ea-jp-edo', startYear: 1603, endYear: 1868 , isDynastyBlock: true },
   { id: 'ea-jp-meiji', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-meiji', bioKey: 'rulerBio.ea-jp-meiji', highlightKey: 'rulerHighlight.ea-jp-meiji', startYear: 1868, endYear: 1912 },
 
