@@ -8,7 +8,8 @@
     "range": "Range"
   },
   "ui": {
-    "pageNotFound": "Page not found"
+    "pageNotFound": "Page not found",
+    "back": "Back"
   },
   "locale": {
     "zh": "中文",
@@ -2079,5 +2080,31 @@
   "grid.region.other": "Other",
   "rulerHighlight.wc-is-genghis": "Founded the largest contiguous land empire in history",
   "ruler.wc-is-genghis": "Genghis Khan",
-  "rulerBio.wc-is-genghis": "Genghis Khan (Temüjin) united Mongol tribes in 1206 and conquered the Jin dynasty, Western Xia, Khwarezm, and much of Eurasia, building the largest contiguous land empire in history with a sophisticated relay messenger system."
+  "rulerBio.wc-is-genghis": "Genghis Khan (Temüjin) united Mongol tribes in 1206 and conquered the Jin dynasty, Western Xia, Khwarezm, and much of Eurasia, building the largest contiguous land empire in history with a sophisticated relay messenger system.",
+  "quiz": {
+    "title": "History Quiz",
+    "setup": {
+      "title": "Quiz Setup",
+      "description": "Test your knowledge of historical battles!",
+      "questionType": "Question Type",
+      "difficulty": "Difficulty",
+      "start": "Start Quiz"
+    },
+    "feedback": {
+      "correct": "Correct! 🎉",
+      "wrong": "Wrong"
+    },
+    "streak": "Streak",
+    "bestStreak": "Best Streak",
+    "score": "Score",
+    "progress": "Progress",
+    "finish": "Finish",
+    "next": "Next",
+    "result": {
+      "title": "Quiz Results",
+      "score": "Score",
+      "bestStreak": "Best Streak",
+      "playAgain": "Play Again"
+    }
+  }
 }

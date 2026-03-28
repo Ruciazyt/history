@@ -8,7 +8,8 @@
     "range": "范围"
   },
   "ui": {
-    "pageNotFound": "页面未找到"
+    "pageNotFound": "页面未找到",
+    "back": "返回"
   },
   "locale": {
     "zh": "中文",
@@ -2018,5 +2019,31 @@
   "grid.region.west": "西亚与欧洲",
   "grid.region.other": "其他",
   "ruler.wc-is-genghis": "成吉思汗",
-  "rulerBio.wc-is-genghis": "成吉思汗（帖木真）1206年统一蒙古诸部，征服金朝、西夏、花剌子模及欧亚大部，建立人类历史上最大陆地帝国，创立驿站传信制度。"
+  "rulerBio.wc-is-genghis": "成吉思汗（帖木真）1206年统一蒙古诸部，征服金朝、西夏、花剌子模及欧亚大部，建立人类历史上最大陆地帝国，创立驿站传信制度。",
+  "quiz": {
+    "title": "知识问答",
+    "setup": {
+      "title": "设置题目",
+      "description": "测试你对历史战役的了解！",
+      "questionType": "题目类型",
+      "difficulty": "难度",
+      "start": "开始挑战"
+    },
+    "feedback": {
+      "correct": "回答正确！🎉",
+      "wrong": "回答错误"
+    },
+    "streak": "连续",
+    "bestStreak": "最佳连续",
+    "score": "得分",
+    "progress": "进度",
+    "finish": "完成",
+    "next": "下一题",
+    "result": {
+      "title": "答题结果",
+      "score": "得分",
+      "bestStreak": "最佳连续",
+      "playAgain": "再玩一次"
+    }
+  }
 }

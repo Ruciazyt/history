@@ -8,7 +8,8 @@
     "range": "範囲"
   },
   "ui": {
-    "pageNotFound": "ページが見つかりません"
+    "pageNotFound": "ページが見つかりません",
+    "back": "戻る"
   },
   "locale": {
     "zh": "中文",
@@ -2135,5 +2136,31 @@
   "grid.region.other": "その他",
   "rulerHighlight.wc-is-genghis": "历史上最大の連続する大陸帝国を建国",
   "ruler.wc-is-genghis": "チンギス・ハーン",
-  "rulerBio.wc-is-genghis": "チンギス・ハーン（テムジン）1206年にモンゴル諸部族を統一し、金朝、西夏、ホラズム、中央アジアの大部分を征服した。史上最大の連続する大陸帝国を建国し、駅伝制度を確立した。"
+  "rulerBio.wc-is-genghis": "チンギス・ハーン（テムジン）1206年にモンゴル諸部族を統一し、金朝、西夏、ホラズム、中央アジアの大部分を征服した。史上最大の連続する大陸帝国を建国し、駅伝制度を確立した。",
+  "quiz": {
+    "title": "歴史クイズ",
+    "setup": {
+      "title": "クイズ設定",
+      "description": "歴史上の戦いあなたの知識をチェック！",
+      "questionType": "問題タイプ",
+      "difficulty": "難易度",
+      "start": "クイズ開始"
+    },
+    "feedback": {
+      "correct": "正解！🎉",
+      "wrong": "不正解"
+    },
+    "streak": "連続",
+    "bestStreak": "最高連続",
+    "score": "スコア",
+    "progress": "進捗",
+    "finish": "終了",
+    "next": "次へ",
+    "result": {
+      "title": "クイズ結果",
+      "score": "スコア",
+      "bestStreak": "最高連続",
+      "playAgain": "もう一度"
+    }
+  }
 }
