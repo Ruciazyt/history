@@ -543,6 +543,10 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                         {/* Tooltip on hover — flips above/below based on proximity to grid edge */}
                         {isHovered && (() => {
                           const tooltipFlip = topY < 40; // flip above when near top edge
+                          const duration = polity.endYear - polity.startYear;
+                          const durationLabel = duration > 0
+                            ? `${duration.toLocaleString()} yr`
+                            : `${Math.abs(duration).toLocaleString()} yr`;
                           return (
                             <div
                               className={`absolute left-1/2 -translate-x-1/2 ${tooltipFlip ? 'top-full mt-1' : 'bottom-full mb-1'} px-2 py-1 rounded-lg text-[10px] font-medium whitespace-nowrap z-20 shadow-lg`}
@@ -551,7 +555,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                                 color: getTooltipTextColor(polity.color),
                               }}
                             >
-                              {t(polity.nameKey)} · {formatYear(polity.startYear)}–{formatYear(polity.endYear)}
+                              {t(polity.nameKey)} · {durationLabel} · {formatYear(polity.startYear)}–{formatYear(polity.endYear)}
                             </div>
                           );
                         })()}
