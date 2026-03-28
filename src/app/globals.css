@@ -3,6 +3,10 @@
 /* ─── Tailwind CSS v4 Theme Configuration ─────────────────────────────────────
  * Uses @theme inline to define design tokens consumed by Tailwind utilities.
  * Uses CSS custom properties for the dark/light theme switcher.
+ *
+ * Token values are defined in :root (light) and [data-theme="dark"] (dark).
+ * The @theme inline block references those CSS variables, so dark/light
+ * switching works automatically via the cascade — no duplication needed.
  * ─────────────────────────────────────────────────────────────────────────── */
 
 :root {
@@ -37,7 +41,8 @@
   /* Animation */
   --animate-spin-slow: spin 2s linear infinite;
 
-  /* Color palette — referenced via var() in utility classes */
+  /* Color palette — referenced via var() in utility classes.
+     Values come from :root / [data-theme="dark"] CSS custom properties. */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
@@ -160,18 +165,10 @@
   --quick-link-eurasian-border: #581c87;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-  --animate-spin-slow: spin 2s linear infinite;
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* ─── Utility classes using CSS variables ──────────────────────────────────── */
