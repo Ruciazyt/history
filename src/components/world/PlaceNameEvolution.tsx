@@ -87,14 +87,14 @@ function getCityRegion(cityName: string): string {
 
 const REGION_ORDER = ['华北', '东北', '华东', '华中', '华南', '西南', '西北', '其他'];
 const REGION_COLORS: Record<string, string> = {
-  '华北': 'bg-red-100 border-red-300 text-red-800',
-  '东北': 'bg-blue-100 border-blue-300 text-blue-800',
-  '华东': 'bg-green-100 border-green-300 text-green-800',
-  '华中': 'bg-yellow-100 border-yellow-300 text-yellow-800',
-  '华南': 'bg-orange-100 border-orange-300 text-orange-800',
-  '西南': 'bg-purple-100 border-purple-300 text-purple-800',
-  '西北': 'bg-pink-100 border-pink-300 text-pink-800',
-  '其他': 'bg-gray-100 border-gray-300 text-gray-800',
+  '华北': 'bg-red-100 dark:bg-red-950 border-red-300 dark:border-red-700 text-red-800 dark:text-red-200',
+  '东北': 'bg-blue-100 dark:bg-blue-950 border-blue-300 dark:border-blue-700 text-blue-800 dark:text-blue-200',
+  '华东': 'bg-green-100 dark:bg-green-950 border-green-300 dark:border-green-700 text-green-800 dark:text-green-200',
+  '华中': 'bg-yellow-100 dark:bg-yellow-950 border-yellow-300 dark:border-yellow-700 text-yellow-800 dark:text-yellow-200',
+  '华南': 'bg-orange-100 dark:bg-orange-950 border-orange-300 dark:border-orange-700 text-orange-800 dark:text-orange-200',
+  '西南': 'bg-purple-100 dark:bg-purple-950 border-purple-300 dark:border-purple-700 text-purple-800 dark:text-purple-200',
+  '西北': 'bg-pink-100 dark:bg-pink-950 border-pink-300 dark:border-pink-700 text-pink-800 dark:text-pink-200',
+  '其他': 'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200',
 };
 
 function PlaceCard({ place }: { place: PlaceEvolution }) {
@@ -108,30 +108,30 @@ function PlaceCard({ place }: { place: PlaceEvolution }) {
   const currentName = place.names.find(n => currentYear >= n.startYear && currentYear <= n.endYear);
 
   return (
-    <div className="rounded-lg border border-zinc-200 bg-white overflow-hidden transition-all duration-200">
+    <div className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 overflow-hidden transition-all duration-200">
       <button
         type="button"
         onClick={() => setExpanded(!expanded)}
-        className="w-full text-left px-4 py-2.5 flex items-center justify-between gap-3 hover:bg-zinc-50 transition-colors"
+        className="w-full text-left px-4 py-2.5 flex items-center justify-between gap-3 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
       >
         <div className="flex items-center gap-3">
-          <h3 className="font-medium text-zinc-900">{place.modernName}</h3>
+          <h3 className="font-medium text-zinc-900 dark:text-zinc-100">{place.modernName}</h3>
           {currentName && currentName.name !== place.modernName && (
-            <span className="text-sm text-red-600">({currentName.name})</span>
+            <span className="text-sm text-red-600 dark:text-red-400">({currentName.name})</span>
           )}
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-zinc-400">
+          <span className="text-xs text-zinc-400 dark:text-zinc-500">
             {place.names.length}个名称 · {formatYear(allStart)}–{formatYear(allEnd)}
           </span>
-          <span className="text-zinc-400">{expanded ? '▲' : '▼'}</span>
+          <span className="text-zinc-400 dark:text-zinc-500">{expanded ? '▲' : '▼'}</span>
         </div>
       </button>
 
       {expanded && (
-        <div className="px-4 pb-4 border-t border-zinc-100">
+        <div className="px-4 pb-4 border-t border-zinc-100 dark:border-zinc-800">
           <div className="relative mt-3 mb-4">
-            <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-zinc-200" />
+            <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-zinc-200 dark:bg-zinc-700" />
             <div className="relative flex items-center justify-between py-2 overflow-x-auto">
               {place.names.map((nameEntry, index) => {
                 const startPos = ((nameEntry.startYear - allStart) / totalSpan) * 100;
@@ -147,7 +147,7 @@ function PlaceCard({ place }: { place: PlaceEvolution }) {
                   >
                     <div
                       className={`h-6 rounded-full flex items-center justify-center text-xs font-medium truncate px-1 w-full min-w-[40px] ${
-                        isCurrent ? 'bg-red-500 text-white' : 'bg-zinc-200 text-zinc-600'
+                        isCurrent ? 'bg-red-500 dark:bg-red-600 text-white dark:text-zinc-100' : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300'
                       }`}
                     >
                       {nameEntry.name}
@@ -168,20 +168,20 @@ function PlaceCard({ place }: { place: PlaceEvolution }) {
                 <div
                   key={index}
                   className={`flex items-center gap-3 p-2 rounded-lg text-sm ${
-                    isCurrent ? 'bg-red-50 border border-red-200' : 'bg-zinc-50'
+                    isCurrent ? 'bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800' : 'bg-zinc-50 dark:bg-zinc-800/50'
                   }`}
                 >
-                  <div className="w-28 text-zinc-600 shrink-0">
+                  <div className="w-28 text-zinc-600 dark:text-zinc-400 shrink-0">
                     {formatYear(nameEntry.startYear)} - {formatYear(nameEntry.endYear)}
                   </div>
-                  <div className={`flex-1 font-medium ${isCurrent ? 'text-red-600' : 'text-zinc-800'}`}>
+                  <div className={`flex-1 font-medium ${isCurrent ? 'text-red-600 dark:text-red-400' : 'text-zinc-800 dark:text-zinc-200'}`}>
                     {nameEntry.name}
                   </div>
                   {nameEntry.dynasty && (
-                    <div className="text-xs text-zinc-500 shrink-0">{nameEntry.dynasty}</div>
+                    <div className="text-xs text-zinc-500 dark:text-zinc-400 shrink-0">{nameEntry.dynasty}</div>
                   )}
                   {isCurrent && (
-                    <span className="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded shrink-0">当前</span>
+                    <span className="text-xs bg-red-500 dark:bg-red-600 text-white dark:text-zinc-100 px-1.5 py-0.5 rounded shrink-0">当前</span>
                   )}
                 </div>
               );
@@ -273,13 +273,13 @@ export function PlaceNameEvolution({}: { initialPlaceId?: string }) {
               <h1 className="text-xl font-bold text-zinc-900">
                 🏛️ {locale === 'zh' ? '地名演化' : 'Place Name Evolution'}
               </h1>
-              <p className="text-sm text-zinc-500 mt-0.5">
+              <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-0.5">
                 {locale === 'zh' ? '城市名称的历史变迁' : 'Historical changes of city names'}
               </p>
             </div>
             <button
               onClick={() => setLocale(l => l === 'zh' ? 'en' : 'zh')}
-              className="px-3 py-1.5 rounded-lg bg-zinc-100 text-zinc-600 text-sm hover:bg-zinc-200 transition-colors"
+              className="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 text-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
             >
               {locale === 'zh' ? 'EN' : '中文'}
             </button>
@@ -296,7 +296,7 @@ export function PlaceNameEvolution({}: { initialPlaceId?: string }) {
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400">🔍</span>
           </div>
 
-          <div className="mt-2 text-sm text-zinc-500">
+          <div className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
             {totalCities} {locale === 'zh' ? '个城市' : 'cities'}
           </div>
         </div>
@@ -306,7 +306,7 @@ export function PlaceNameEvolution({}: { initialPlaceId?: string }) {
         {Object.keys(filteredGroups).length === 0 ? (
           <div className="text-center py-12">
             <div className="text-5xl mb-4">🏛️</div>
-            <p className="text-zinc-500">
+            <p className="text-zinc-500 dark:text-zinc-400">
               {locale === 'zh' ? '未找到匹配的城市' : 'No matching cities found'}
             </p>
           </div>
