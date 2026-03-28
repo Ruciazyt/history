@@ -690,7 +690,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                       style={{ top: y }}
                     >
                       <div className="w-4 text-[8px] text-zinc-400 text-right pr-0.5 leading-none">
-                        {year > 0 ? `${Math.floor((year - 1) / 100) + 1}` : `${Math.ceil(-year / 100)}c`}
+                        {year > 0 ? `${Math.floor((year - 1) / 100) + 1}` : `${Math.ceil((-year + 1) / 100)}c BCE`}
                       </div>
                       <div className="flex-1 h-px bg-zinc-300/60" />
                     </div>
