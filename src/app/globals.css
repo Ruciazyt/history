@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
-/* ─── Theming: CSS Custom Properties ─────────────────────────────────────────
- * HISTORY_APP_COLORS in colors.ts reads these via `var(...)` references.
- * By changing [data-theme="dark"] values the entire app switches theme.
+/* ─── Tailwind CSS v4 Theme Configuration ─────────────────────────────────────
+ * Uses @theme inline to define design tokens consumed by Tailwind utilities.
+ * Uses CSS custom properties for the dark/light theme switcher.
  * ─────────────────────────────────────────────────────────────────────────── */
 
 :root {
+  /* Background & foreground */
   --background: #ffffff;
   --foreground: #171717;
 
@@ -17,114 +18,34 @@
   --border: #e4e4e7;
   --border-strong: #d4d4d8;
 
+  /* Accent */
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+
   /* Text */
   --text-primary: #18181b;
   --text-secondary: #52525b;
   --text-muted: #a1a1aa;
   --text-inverse: #fafafa;
+}
 
-  /* Accent colors */
-  --accent: #3b82f6;
-  --accent-hover: #2563eb;
+@theme inline {
+  /* Font families */
+  --font-sans: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
 
-  /* Semantic — light theme values */
-  --sidebar-bg: #ffffff;
-  --sidebar-border: #e4e4e7;
-  --sidebar-header-bg: #ffffff;
-  --sidebar-header-text: #71717a;
-  --sidebar-era-bg: #f4f4f5;
-  --sidebar-era-text: #3f3f46;
-  --sidebar-era-year: #a1a1aa;
-  --sidebar-era-dot: #a1a1aa;
-  --sidebar-ruler-active-bg: #dbeafe;
-  --sidebar-ruler-active-text: #1e40af;
-  --sidebar-ruler-inactive-text: #52525b;
-  --sidebar-table-header-text: #71717a;
-  --sidebar-table-header-border: #e4e4e7;
-  --sidebar-table-row-border: #f4f4f5;
-  --sidebar-table-row-hover: #f4f4f5;
-  --sidebar-table-row-year: #71717a;
+  /* Animation */
+  --animate-spin-slow: spin 2s linear infinite;
 
-  --header-bg: #ffffff;
-  --header-border: #e4e4e7;
-  --header-title-small: #71717a;
-  --header-title-large: #18181b;
-
-  --civ-switcher-container-bg: #f4f4f5;
-  --civ-switcher-active-bg: #ffffff;
-  --civ-switcher-active-text: #18181b;
-  --civ-switcher-active-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --civ-switcher-inactive-text: #71717a;
-
-  --timeline-bg: #ffffff;
-  --timeline-border: #e4e4e7;
-  --timeline-header-text: #71717a;
-  --timeline-year: #18181b;
-  --timeline-window: #18181b;
-  --timeline-range: #52525b;
-  --timeline-win-btn-active-bg: #3b82f6;
-  --timeline-win-btn-active-text: #ffffff;
-  --timeline-win-btn-inactive-bg: #f4f4f5;
-  --timeline-win-btn-inactive-text: #52525b;
-  --timeline-win-btn-inactive-hover: #e4e4e7;
-  --timeline-nav-bg: #f4f4f5;
-  --timeline-nav-text: #52525b;
-  --timeline-nav-hover: #e4e4e7;
-
-  --events-sidebar-bg: #ffffff;
-  --events-sidebar-border: #e4e4e7;
-  --events-sidebar-header-bg: #ffffff;
-  --events-sidebar-header-text: #71717a;
-  --events-sidebar-event-border: #f4f4f5;
-  --events-sidebar-event-year: #a1a1aa;
-  --events-sidebar-event-title: #18181b;
-  --events-sidebar-empty: #a1a1aa;
-  --events-sidebar-war-badge-bg: #fef2f2;
-  --events-sidebar-war-badge-text: #dc2626;
-  --events-sidebar-compare-header-bg: #fafafa;
-  --events-sidebar-compare-header-border: #e4e4e7;
-  --events-sidebar-compare-header-text: #71717a;
-  --events-sidebar-compare-title: #71717a;
-
-  --ruler-detail-bg: #ffffff;
-  --ruler-detail-border: #e4e4e7;
-  --ruler-detail-header-text: #71717a;
-  --ruler-detail-header-name: #18181b;
-  --ruler-detail-header-year: #a1a1aa;
-  --ruler-detail-era-badge-bg: #fef3c7;
-  --ruler-detail-era-badge-text: #b45309;
-  --ruler-detail-close-border: #e4e4e7;
-  --ruler-detail-close-bg: #ffffff;
-  --ruler-detail-close-text: #52525b;
-  --ruler-detail-close-hover: #f4f4f5;
-  --ruler-detail-highlight: #3f3f46;
-  --ruler-detail-bio: #52525b;
-  --ruler-detail-seed-note: #a1a1aa;
-
-  --container-bg: #fafafa;
-  --container-text: #18181b;
-
-  --era-info-text: #52525b;
-  --era-info-font-weight: font-medium;
-  --divider: #e4e4e7;
-  --multi-polity-text: #a1a1aa;
-  --arrow-text: #d4d4d8;
-  --event-title-default: #18181b;
-  --event-title-light: #52525b;
-  --range-label-text: #52525b;
-
-  --quick-link-timeline-bg: #f4f4f5;
-  --quick-link-timeline-text: #3f3f46;
-  --quick-link-timeline-border: #e4e4e7;
-  --quick-link-matrix-bg: #eff6ff;
-  --quick-link-matrix-text: #1d4ed8;
-  --quick-link-matrix-border: #bfdbfe;
-  --quick-link-battles-bg: #fef2f2;
-  --quick-link-battles-text: #b91c1c;
-  --quick-link-battles-border: #fecaca;
-  --quick-link-eurasian-bg: #faf5ff;
-  --quick-link-eurasian-text: #7e22ce;
-  --quick-link-eurasian-border: #e9d5ff;
+  /* Color palette — referenced via var() in utility classes */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
 }
 
 [data-theme="dark"] {
