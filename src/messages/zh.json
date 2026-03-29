@@ -1704,7 +1704,8 @@
       "fire_attack": "火攻成功",
       "flood_attack": "水攻成功",
       "moral_boost": "士气提振",
-      "unknown": "未知"
+      "unknown": "未知",
+      "encirclement": "包围成功"
     },
     "casualty": {
       "reliability": {
