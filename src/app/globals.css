@@ -292,3 +292,11 @@ span.icon-only {
 .pb-safe {
   padding-bottom: env(safe-area-inset-bottom);
 }
+
+/* ─── Sync Scroll (World Timeline synchronized scrolling) ──────────────────── */
+.sync-scroll {
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.sync-scroll::-webkit-scrollbar { display: none; }

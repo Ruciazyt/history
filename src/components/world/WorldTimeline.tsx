@@ -232,10 +232,6 @@ export function WorldTimeline({ minYear, maxYear, locale }: { minYear: number; m
         </div>
       </div>
 
-      <style jsx global>{`
-        .sync-scroll::-webkit-scrollbar { display: none !important; }
-        .sync-scroll { -ms-overflow-style: none !important; scrollbar-width: none !important; }
-      `}</style>
     </div>
   );
 }
