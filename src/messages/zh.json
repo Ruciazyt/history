@@ -1780,9 +1780,13 @@
     },
     "eraBand": {
       "ancient": "古代",
+      "ancient_short": "古代",
       "medieval": "中世纪",
-      "earlyModern": "近代"
-    }
+      "medieval_short": "中世纪",
+      "earlyModern": "近代",
+      "earlyModern_short": "近代"
+    },
+    "eraBandLegend": "时代带"
   },
   "placeNames": {
     "title": "地名演化",
