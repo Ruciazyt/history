@@ -2086,6 +2086,58 @@
       "score": "得分",
       "bestStreak": "最佳连续",
       "playAgain": "再玩一次"
+    },
+    "option": {
+      "attacker_win": "进攻方胜利",
+      "defender_win": "防守方胜利",
+      "draw": "平局",
+      "inconclusive": "战局不明",
+      "unknown": "未知"
+    },
+    "question": {
+      "commander": {
+        "attacker": "进攻方主将是谁？",
+        "defender": "防守方主将是谁？"
+      },
+      "result": "哪一方赢得了这场战役？",
+      "scale": "这场战役的规模是？",
+      "terrain": "这场战役发生在什么地形？",
+      "year": "这场战役发生在哪一年？"
+    },
+    "explanation": {
+      "commander": "指挥官在战役中起着决定性作用。",
+      "result": "战役结果取决于多种因素。",
+      "scale": "战役规模反映了参战兵力的数量级。",
+      "terrain": "地形对战术选择和战争结果有重要影响。",
+      "year": "了解战役发生的历史时期有助于理解其背景。"
+    },
+    "scale": {
+      "massive": "规模宏大",
+      "large": "规模较大",
+      "medium": "中等规模",
+      "small": "规模较小",
+      "unknown": "规模未知"
+    },
+    "terrain": {
+      "plains": "平原",
+      "mountains": "山地",
+      "hills": "丘陵",
+      "water": "水域",
+      "desert": "沙漠",
+      "plateau": "高原",
+      "forest": "森林",
+      "marsh": "沼泽",
+      "coastal": "沿海",
+      "urban": "城市",
+      "pass": "关隘",
+      "unknown": "未知"
+    },
+    "era": {
+      "springAutumn": "春秋时期",
+      "westernZhou": "西周时期",
+      "warringStates": "战国时期",
+      "chenhan": "秦汉时期",
+      "threeKingdoms": "三国时期"
     }
   }
 }
