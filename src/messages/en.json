@@ -2166,5 +2166,10 @@
     "noRecords": "No records",
     "yearLabel": "Year",
     "ariaLabel": "World empire timeline slider"
-  }
+  },
+  "ruler.wc-iv-kushan-dyn": "Kushan Dynasty",
+  "ruler.wc-iv-kanishka": "Kanishka I",
+  "rulerBio.wc-iv-kushan": "Central Asian empire; connected Silk Road trade; Gandharan and Mathura art styles.",
+  "rulerBio.wc-iv-kanishka": "Great Kushan emperor; expanded empire to peak; patron of Mahayana Buddhism.",
+  "rulerHighlight.wc-iv-kanishka": "Kanishka I — Kushan peak; Mahayana Buddhism patron"
 }

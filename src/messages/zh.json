@@ -2145,5 +2145,10 @@
       "chenhan": "秦汉时期",
       "threeKingdoms": "三国时期"
     }
-  }
+  },
+  "ruler.wc-iv-kushan-dyn": "贵霜王朝",
+  "ruler.wc-iv-kanishka": "迦腻色伽一世",
+  "rulerBio.wc-iv-kushan": "中亚帝国；连接丝绸之路；犍陀罗与马图拉艺术风格繁荣。",
+  "rulerBio.wc-iv-kanishka": "贵霜帝国伟大君主；扩张帝国至鼎盛；大乘佛教的重要赞助者。",
+  "rulerHighlight.wc-iv-kanishka": "迦腻色伽一世 — 贵霜鼎盛期；大乘佛教赞助者"
 }

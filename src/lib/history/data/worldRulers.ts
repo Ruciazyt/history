@@ -51,6 +51,10 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-iv-samudragupta', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-samudragupta', bioKey: 'rulerBio.wc-iv-samudragupta', highlightKey: 'rulerHighlight.wc-iv-samudragupta', startYear: 335, endYear: 380 },
   { id: 'wc-iv-chandragupta-ii', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-chandragupta-ii', bioKey: 'rulerBio.wc-iv-chandragupta-ii', highlightKey: 'rulerHighlight.wc-iv-chandragupta-ii', startYear: 375, endYear: 415 },
 
+  // ── Kushan Empire (India/Central Asia) ──────────────────────────────────
+  { id: 'wc-iv-kushan', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-kushan-dyn', bioKey: 'rulerBio.wc-iv-kushan', startYear: 30, endYear: 375 , isDynastyBlock: true },
+  { id: 'wc-iv-kanishka', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-kanishka', bioKey: 'rulerBio.wc-iv-kanishka', highlightKey: 'rulerHighlight.wc-iv-kanishka', startYear: 127, endYear: 150 },
+
   // ── Persia ─────────────────────────────────────────────
   { id: 'wc-pe-cyrus', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-cyrus', bioKey: 'rulerBio.wc-pe-cyrus', highlightKey: 'rulerHighlight.wc-pe-cyrus', startYear: -550, endYear: -530 },
   { id: 'wc-pe-darius', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-darius', bioKey: 'rulerBio.wc-pe-darius', highlightKey: 'rulerHighlight.wc-pe-darius', startYear: -522, endYear: -486 },
