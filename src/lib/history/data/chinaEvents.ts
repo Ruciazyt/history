@@ -173,6 +173,7 @@ export const CHINA_EVENTS: Event[] = [
       result: 'attacker_win',
       battleType: 'defense',
       impact: 'major',
+      scale: 'large',
       strategy: ['defensive', 'alliance'],
       terrain: ['plains'],
       casualties: {
@@ -356,6 +357,7 @@ export const CHINA_EVENTS: Event[] = [
         defender: '齐军',
       },
       result: 'attacker_win',
+      scale: 'massive',
     },
   },
   {
