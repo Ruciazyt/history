@@ -4,7 +4,6 @@ import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useTheme } from './ThemeContext';
 
 interface BottomNavProps {
   locale?: string;
@@ -19,11 +18,30 @@ const NAV_ITEMS = [
   { key: 'world', href: (locale: string) => `/${locale}/world`, icon: '🌍', labelKey: 'world.title' },
 ];
 
+/**
+ * Reads the current theme from the DOM `data-theme` attribute set by ThemeContext.
+ * This avoids coupling BottomNav to the ThemeProvider — it works regardless of
+ * where in the tree BottomNav is mounted, because the attribute is on <html>.
+ */
+function useThemeFromDOM() {
+  const [isDark, setIsDark] = React.useState(false);
+  React.useEffect(() => {
+    const theme = document.documentElement.dataset.theme;
+    setIsDark(theme === 'dark');
+    // Watch for theme changes (e.g. user toggles via ThemeToggle)
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.dataset.theme === 'dark');
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => observer.disconnect();
+  }, []);
+  return isDark;
+}
+
 export const BottomNav = React.memo(function BottomNav({ locale = 'zh' }: BottomNavProps) {
   const t = useTranslations();
   const pathname = usePathname();
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
+  const isDark = useThemeFromDOM();
 
   const isActive = (href: string) => {
     if (href === `/${locale}`) {
@@ -45,7 +63,7 @@ export const BottomNav = React.memo(function BottomNav({ locale = 'zh' }: Bottom
         const active = isActive(item.href(locale));
         const labelColor = active
           ? isDark ? 'text-blue-400' : 'text-blue-600'
-          : isDark ? 'text-zinc-400' : 'text-zinc-400';
+          : 'text-zinc-400';
         const indicatorColor = isDark ? 'bg-blue-400' : 'bg-blue-500';
         return (
           <Link
