@@ -407,10 +407,11 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                       className="absolute left-0 right-0 flex items-center pointer-events-none z-20"
                       style={{ top: y }}
                     >
-                      <div className={`w-10 text-[9px] font-semibold px-0.5 text-center rounded-sm ${band.badgeClass}`}>
+                      <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mr-0.5 shrink-0" />
+                      <div className={`w-14 text-[10px] font-bold px-1 py-0.5 text-center rounded-sm shadow-sm ${band.badgeClass}`}>
                         {t(band.labelKey)}
                       </div>
-                      <div className="flex-1 h-px bg-amber-300/60" />
+                      <div className="flex-1 h-0.5 bg-amber-400/70" />
                     </div>
                   );
                 })}
@@ -474,7 +475,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                     return (
                       <div
                         key={`era-line-${boundaryYear}`}
-                        className="absolute left-0 right-0 h-px bg-amber-400/50 pointer-events-none z-[3]"
+                        className="absolute left-0 right-0 h-0.5 bg-amber-400/70 pointer-events-none z-[3]"
                         style={{ top: y }}
                       />
                     );
