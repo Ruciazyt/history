@@ -566,8 +566,12 @@
     "eraBand": {
       "ancient": "古代",
       "medieval": "中世",
-      "earlyModern": "近世"
-    }
+      "earlyModern": "近世",
+      "ancient_short": "古代",
+      "medieval_short": "中世",
+      "earlyModern_short": "近世"
+    },
+    "eraBandLegend": "時代区分"
   },
   "grid.activeAtYear": "{year}年の勢力",
   "grid.activeEmpires": "{count}個の帝国が活動中",

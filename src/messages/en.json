@@ -510,8 +510,12 @@
     "eraBand": {
       "ancient": "Ancient",
       "medieval": "Medieval",
-      "earlyModern": "Early Modern"
-    }
+      "earlyModern": "Early Modern",
+      "ancient_short": "Ancient",
+      "medieval_short": "Medieval",
+      "earlyModern_short": "Early Modern"
+    },
+    "eraBandLegend": "Era Bands"
   },
   "grid.activeAtYear": "Active at {year}",
   "grid.activeEmpires": "{count} active empires",
