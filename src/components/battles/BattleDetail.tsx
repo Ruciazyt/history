@@ -18,9 +18,11 @@ interface BattleDetailProps {
   allEvents?: Event[];
   /** Optional: callback when user clicks a similar battle */
   onBattleClick?: (battle: Event) => void;
+  /** Optional: locale for year formatting (defaults to 'zh') */
+  locale?: string;
 }
 
-export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, allEvents, onBattleClick }: BattleDetailProps) {
+export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, allEvents, onBattleClick, locale = 'zh' }: BattleDetailProps) {
   const t = useTranslations();
   
   // Use existing useEscapeKey hook for escape key handling
@@ -62,7 +64,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
             </button>
           </div>
           <div className={`mt-1 ${BATTLE_DETAIL_COLORS.header.yearLocation} text-xs sm:text-sm`}>
-            {formatYear(battle.year)}
+            {formatYear(battle.year, locale)}
             {battle.location?.label && ` · ${battle.location.label}`}
           </div>
         </div>
@@ -313,7 +315,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
                         ⚔️ {t(similar.titleKey)}
                       </div>
                       <div className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.labelSmall} flex items-center gap-1.5`}>
-                        <span>{formatYear(similar.year)}</span>
+                        <span>{formatYear(similar.year, locale)}</span>
                         {similar.location?.label && (
                           <>
                             <span>·</span>

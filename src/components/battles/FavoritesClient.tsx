@@ -85,6 +85,7 @@ export function FavoritesClient({ battles, locale = 'zh' }: FavoritesClientProps
                 <BattleCard 
                   key={battle.id} 
                   battle={battle}
+                  locale={locale}
                 />
               ))}
             </div>
@@ -106,6 +107,7 @@ export function FavoritesClient({ battles, locale = 'zh' }: FavoritesClientProps
                     <BattleCard 
                       key={battle.id} 
                       battle={battle}
+                      locale={locale}
                     />
                   ))}
                 </div>

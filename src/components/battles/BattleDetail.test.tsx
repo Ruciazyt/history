@@ -136,11 +136,11 @@ describe('BattleDetail', () => {
       ]);
 
       const battle = createMockBattle();
-      render(<BattleDetail battle={battle} onClose={mockOnClose} allEvents={[battle, similarBattle]} />);
+      render(<BattleDetail battle={battle} onClose={mockOnClose} allEvents={[battle, similarBattle]} locale="en" />);
 
       // Title (rendered with ⚔️ prefix)
       expect(screen.getByText(/肥之战/)).toBeInTheDocument();
-      // Year - formatYear(-257) = "257 BCE"
+      // Year - formatYear(-257, 'en') = "257 BCE"
       expect(screen.getByText(/257 BCE/)).toBeInTheDocument();
       // Location label appears as a distinct span
       const locationSpans = screen.getAllByText(/肥/);

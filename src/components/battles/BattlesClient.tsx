@@ -327,6 +327,7 @@ export function BattlesClient({
                   selectionMode={compareMode}
                   selected={selectedBattles.some(b => b.id === battle.id)}
                   onSelect={handleBattleSelect}
+                  locale={locale}
                 />
               ))}
             </div>
@@ -348,6 +349,7 @@ export function BattlesClient({
           onClose={() => setSelectedBattle(null)}
           allEvents={events}
           onBattleClick={(battle) => setSelectedBattle(battle)}
+          locale={locale}
         />
       )}
       

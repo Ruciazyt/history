@@ -282,8 +282,8 @@ describe('BattleCard', () => {
     });
 
     it('renders year', () => {
-      render(<BattleCard battle={baseBattle} />);
-      // formatYear(-632) returns '632 BCE'
+      render(<BattleCard battle={baseBattle} locale="en" />);
+      // formatYear(-632, 'en') returns '632 BCE'
       expect(screen.getByText(/632 BCE/)).toBeInTheDocument();
     });
 

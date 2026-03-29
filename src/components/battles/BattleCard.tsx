@@ -15,6 +15,8 @@ interface BattleCardProps {
   selected?: boolean;
   selectionMode?: boolean;
   onSelect?: (battle: Event) => void;
+  /** Locale for year formatting (defaults to 'zh') */
+  locale?: string;
 }
 
 // Get era styles using ERA_COLORS from constants
@@ -26,7 +28,7 @@ function getEraStyles(entityId: string): { gradient: string; border: string } {
   };
 }
 
-export const BattleCard = React.memo(function BattleCard({ battle, onClick, selected, selectionMode, onSelect }: BattleCardProps) {
+export const BattleCard = React.memo(function BattleCard({ battle, onClick, selected, selectionMode, onSelect, locale = 'zh' }: BattleCardProps) {
   const t = useTranslations();
   const [showDetail, setShowDetail] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
@@ -87,7 +89,7 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
           onKeyDown={handleKeyDown}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          aria-label={`${t(battle.titleKey)} - ${formatYear(battle.year)}`}
+          aria-label={`${t(battle.titleKey)} - ${formatYear(battle.year, locale)}`}
           className={`w-full text-left p-3 sm:p-4 rounded-xl border-2 bg-gradient-to-br ${eraGradient} ${eraBorder} hover:shadow-lg transition-all duration-200 pr-12 sm:pr-14 ${
             isHovered ? 'scale-[1.02] shadow-lg' : 'hover:scale-[1.01]'
           } ${selected ? 'ring-2 ring-red-500 ring-offset-2' : ''} ${
@@ -108,7 +110,7 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
               </div>
               <div className={`text-xs ${BATTLE_CARD_COLORS.container.subtitle} mt-1 flex flex-wrap gap-1.5 sm:gap-2`}>
                 <span className={`inline-flex items-center px-2 py-0.5 ${BATTLE_CARD_COLORS.container.badgeBg} rounded-full whitespace-nowrap`}>
-                  📅 {formatYear(battle.year)}
+                  📅 {formatYear(battle.year, locale)}
                 </span>
                 {battle.location?.label && (
                   <span className={`inline-flex items-center px-2 py-0.5 ${BATTLE_CARD_COLORS.container.badgeBg} rounded-full whitespace-nowrap`}>
@@ -196,6 +198,7 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
         <BattleDetail
           battle={battle}
           onClose={() => setShowDetail(false)}
+          locale={locale}
         />
       )}
     </>

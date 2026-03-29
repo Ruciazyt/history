@@ -128,6 +128,7 @@ export function OnThisDayClient({
               selectionMode={false}
               selected={false}
               onSelect={() => setSelectedBattle(featuredBattle)}
+              locale={currentLocale}
             />
             <button
               onClick={() => setSelectedBattle(featuredBattle)}
@@ -152,6 +153,7 @@ export function OnThisDayClient({
                   selectionMode={false}
                   selected={false}
                   onSelect={() => setSelectedBattle(battle)}
+                  locale={currentLocale}
                 />
               ))}
             </div>
@@ -179,6 +181,7 @@ export function OnThisDayClient({
           onClose={() => setSelectedBattle(null)}
           allEvents={events}
           onBattleClick={(battle) => setSelectedBattle(battle)}
+          locale={currentLocale}
         />
       )}
     </div>
