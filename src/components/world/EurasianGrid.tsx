@@ -180,6 +180,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
   const [hoveredPolity, setHoveredPolity] = React.useState<string | null>(null);
   const [selectedPolity, setSelectedPolity] = React.useState<string | null>(null);
   const [hoveredColumn, setHoveredColumn] = React.useState<string | null>(null);
+  const [hoveredMini, setHoveredMini] = React.useState<{ id: string; x: number; y: number } | null>(null);
 
   const columns = React.useMemo(() => buildEurasianColumns(mode), [mode]);
   const { min: minYear, max: maxYear } = React.useMemo(() => {
@@ -737,19 +738,44 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   const bottomY = yearToY(polity.endYear, minYear, maxYear, 96);
                   const height = Math.max(bottomY - topY, 2);
                   const isActive = currentYear >= polity.startYear && currentYear <= polity.endYear;
+                  const isHovered = hoveredMini?.id === polity.id;
                   return (
                     <div
                       key={polity.id}
-                      className="absolute left-0 right-0 rounded-sm transition-opacity"
+                      className="absolute left-0 right-0 rounded-sm transition-all cursor-pointer"
                       style={{
                         top: topY,
                         height,
-                        backgroundColor: `${polity.color}${isActive ? 'FF' : '66'}`,
+                        backgroundColor: `${polity.color}${isActive ? 'FF' : isHovered ? 'BB' : '66'}`,
+                        zIndex: isHovered ? 30 : isActive ? 20 : 1,
+                        boxShadow: isHovered ? `0 0 4px ${polity.color}88` : undefined,
                       }}
+                      onMouseEnter={(e) => {
+                        const rect = e.currentTarget.closest('.relative')!.getBoundingClientRect();
+                        const localY = e.clientY - rect.top;
+                        setHoveredMini({ id: polity.id, x: rect.left, y: localY });
+                      }}
+                      onMouseLeave={() => setHoveredMini(null)}
                     />
                   );
                 })
               )}
+              {/* Mini tooltip */}
+              {hoveredMini && (() => {
+                const polity = columns.flatMap(c => c.polities).find(p => p.id === hoveredMini.id);
+                if (!polity) return null;
+                return (
+                  <div
+                    className="absolute left-1/2 -translate-x-1/2 bottom-full mb-1 px-2 py-1 rounded-lg text-[10px] font-medium whitespace-nowrap z-50 shadow-lg pointer-events-none"
+                    style={{
+                      backgroundColor: polity.color,
+                      color: getTooltipTextColor(polity.color),
+                    }}
+                  >
+                    {t(polity.nameKey)} · {formatYear(polity.startYear)}–{formatYear(polity.endYear)}
+                  </div>
+                );
+              })()}
               {/* Current year line */}
               <div
                 className="absolute left-0 right-0 h-0.5 bg-red-500 z-20"
