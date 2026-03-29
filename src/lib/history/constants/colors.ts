@@ -1059,7 +1059,7 @@ export const BATTLE_CARD_COLORS = {
   },
   commander: {
     dot: 'bg-white/80',
-    pulse: 'animate-pulse',
+    pulse: '',
   },
   fallback: {
     gradient: 'from-gray-50 to-gray-100 dark:from-zinc-800 dark:to-zinc-900',

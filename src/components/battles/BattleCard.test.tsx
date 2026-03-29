@@ -91,7 +91,7 @@ vi.mock('@/lib/history/constants', () => ({
     fallback: { gradient: 'from-gray-50 to-gray-100', border: 'border-gray-200' },
     container: { title: 'text-gray-900', subtitle: 'text-gray-600', badgeBg: 'bg-gray-100' },
     belligerents: { container: 'bg-gray-50', text: 'text-gray-800' },
-    commander: { dot: 'bg-green-500', pulse: 'animate-pulse' },
+    commander: { dot: 'bg-green-500', pulse: '' },
     impact: { default: 'bg-gray-200', textDefault: 'text-gray-700' },
   },
   FAVORITE_BUTTON_COLORS: {
