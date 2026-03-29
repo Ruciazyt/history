@@ -711,6 +711,17 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
       ]],
     },
   },
+  // ═══ 鎌倉幕府 (Kamakura Shogunate) — 1185–1333 ═══
+  {
+    type: 'Feature',
+    properties: { name: '鎌倉时代', nameKey: 'empire_kamakura', startYear: 1185, endYear: 1333, color: '#A855F7' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [129, 32], [130, 34], [133, 36], [138, 38], [141, 38], [142, 35], [140, 32], [132, 31], [129, 32],
+      ]],
+    },
+  },
   {
     type: 'Feature',
     properties: { name: '室町时代', nameKey: 'empire_muromachi', startYear: 1336, endYear: 1573, color: '#9D174D' },
