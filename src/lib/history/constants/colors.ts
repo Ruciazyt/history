@@ -639,16 +639,16 @@ export const MAP_POPUP_COLORS = {
 } as const;
 export const RULER_RELATIONS_COLORS = {
   container: {
-    border: 'border-gray-200',
+    border: 'border-gray-200 dark:border-zinc-700',
   },
   label: {
-    text: 'text-gray-500',
+    text: 'text-gray-500 dark:text-zinc-400',
   },
   badge: {
-    bg: 'bg-amber-50',
-    hoverBg: 'hover:bg-amber-100',
-    text: 'text-amber-700',
-    border: 'border-amber-200',
+    bg: 'bg-amber-50 dark:bg-amber-900/30',
+    hoverBg: 'hover:bg-amber-100 dark:hover:bg-amber-900/50',
+    text: 'text-amber-700 dark:text-amber-300',
+    border: 'border-amber-200 dark:border-amber-700/50',
   },
 } as const;
 export const TIMELINE_MAP_COLORS = {
