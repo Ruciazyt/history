@@ -544,7 +544,9 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
 
                         {/* Tooltip on hover — flips above/below based on proximity to grid edge */}
                         {isHovered && (() => {
-                          const tooltipFlip = topY < 40; // flip above when near top edge
+                          // Flip up when near top edge OR when tooltip would overflow the grid bottom
+                          const tooltipOverflowsBottom = topY + height + 32 > gridHeight;
+                          const tooltipFlip = topY < 40 || tooltipOverflowsBottom;
                           const duration = polity.endYear - polity.startYear;
                           const durationLabel = duration > 0
                             ? `${duration.toLocaleString()} yr`
