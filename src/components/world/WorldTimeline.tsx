@@ -10,6 +10,7 @@ import {
 import { formatYear } from '@/lib/history/utils';
 
 const EMPIRE_INFO: Record<string, { en: string }> = {
+  // ── China ──
   '秦朝': { en: 'Qin' },
   '西汉': { en: 'Western Han' },
   '东汉': { en: 'Eastern Han' },
@@ -20,12 +21,63 @@ const EMPIRE_INFO: Record<string, { en: string }> = {
   '清朝': { en: 'Qing' },
   '隋朝': { en: 'Sui' },
   '三国': { en: 'Three Kingdoms' },
+  '辽朝': { en: 'Liao' },
+  // ── Japan ──
+  '弥生时代': { en: 'Yayoi' },
+  '大和时代': { en: 'Yamato' },
+  '飞鸟时代': { en: 'Asuka' },
+  '奈良时代': { en: 'Nara' },
+  '平安时代': { en: 'Heian' },
+  '鎌倉时代': { en: 'Kamakura' },
+  '室町时代': { en: 'Muromachi' },
+  '江户时代': { en: 'Edo' },
+  // ── Korea ──
+  '高丽王朝': { en: 'Goryeo' },
+  '朝鲜王朝': { en: 'Joseon' },
+  // ── Vietnam ──
+  '李朝': { en: 'Ly Dynasty' },
+  '黎朝': { en: 'Le Dynasty' },
+  '阮朝': { en: 'Nguyen Dynasty' },
+  // ── Rome & successors ──
+  '罗马共和国': { en: 'Roman Republic' },
   '罗马帝国': { en: 'Roman Empire' },
   '拜占庭帝国': { en: 'Byzantine' },
   '奥斯曼帝国': { en: 'Ottoman' },
+  // ── Persia ──
+  '阿契美尼德波斯': { en: 'Achaemenid Persia' },
+  '帕提亚帝国': { en: 'Parthian' },
+  '萨珊波斯': { en: 'Sassanid Persia' },
+  '萨法维波斯': { en: 'Safavid Persia' },
+  // ── Islamic ──
+  '倭马亚王朝': { en: 'Umayyad' },
+  '阿拔斯王朝': { en: 'Abbasid' },
   '帖木儿帝国': { en: 'Timurid' },
-  '平安时代': { en: 'Heian' },
-  '江户时代': { en: 'Edo' },
+  '莫卧儿帝国': { en: 'Mughal' },
+  // ── Hellenistic / Greek ──
+  '亚历山大帝国': { en: 'Alexander' },
+  '继业者王国': { en: 'Hellenistic Kingdoms' },
+  '希腊-巴克特里亚': { en: 'Greco-Bactrian' },
+  // ── Indian subcontinent ──
+  '印度河文明': { en: 'Indus Valley' },
+  '孔雀王朝': { en: 'Maurya' },
+  '贵霜帝国': { en: 'Kushan' },
+  '笈多帝国': { en: 'Gupta' },
+  '朱罗帝国': { en: 'Chola' },
+  '萨塔瓦哈纳': { en: 'Satavahana' },
+  '室利佛逝': { en: 'Srivijaya' },
+  // ── Mesopotamia ──
+  '阿卡德帝国': { en: 'Akkadian' },
+  '古巴比伦': { en: 'Old Babylonian' },
+  '亚述帝国': { en: 'Assyrian' },
+  '新巴比伦': { en: 'Neo-Babylonian' },
+  '塞琉古帝国': { en: 'Seleucid' },
+  // ── Egypt ──
+  '古埃及': { en: 'Ancient Egypt' },
+  '托勒密埃及': { en: 'Ptolemaic Egypt' },
+  // ── Others ──
+  '赫梯帝国': { en: 'Hittite' },
+  '蒙古帝国': { en: 'Mongol' },
+  '神圣罗马帝国': { en: 'Holy Roman Empire' },
 };
 
 const REGIONS = [
