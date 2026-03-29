@@ -48,7 +48,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
       />
       
       {/* Modal - full screen on mobile */}
-      <div className="relative w-full h-full sm:w-full sm:max-w-lg sm:h-auto sm:rounded-xl bg-white shadow-2xl overflow-hidden flex flex-col">
+      <div className="relative w-full h-full sm:w-full sm:max-w-lg sm:h-auto sm:rounded-xl bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden flex flex-col">
         {/* Header */}
         <div className={`shrink-0 ${BATTLE_DETAIL_COLORS.header.bg} ${BATTLE_DETAIL_COLORS.header.text} p-3 sm:p-4 rounded-t-xl`}>
           <div className="flex items-start justify-between gap-2">
@@ -74,7 +74,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
             <div className="flex items-center gap-2">
               <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{t('battleDetail.result')}</span>
               <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                BATTLE_RESULT_STYLES[battle.battle.result]?.badge || BATTLE_RESULT_STYLES.unknown?.badge || 'bg-zinc-100 text-zinc-700'
+                BATTLE_RESULT_STYLES[battle.battle.result]?.badge || BATTLE_RESULT_STYLES.unknown?.badge || 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
               }`}>
                 {t(getBattleResultLabel(battle.battle))}
               </span>
@@ -134,8 +134,8 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
             <div className="flex items-center gap-2">
               <span className={`text-sm font-medium ${BATTLE_DETAIL_TEXT_COLORS.label}`}>{t('battleDetail.impact')}</span>
               <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                BATTLE_IMPACT_COLORS[battle.battle.impact]?.bg || 'bg-zinc-100'
-              } ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.text || 'text-zinc-700'}`}>
+                BATTLE_IMPACT_COLORS[battle.battle.impact]?.bg || 'bg-zinc-100 dark:bg-zinc-800'
+              } ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.text || 'text-zinc-700 dark:text-zinc-300'}`}>
                 {t(getBattleImpactLabel(battle.battle.impact))}
               </span>
             </div>
@@ -240,7 +240,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
                       tp.impact === 'negative' ? TURNING_POINT_COLORS.negative : TURNING_POINT_COLORS.neutral
                     }`} />
                     <div>
-                      <span className={`px-1.5 py-0.5 bg-white ${BATTLE_DETAIL_TEXT_COLORS.label} text-xs rounded border ${TURNING_POINT_COLORS.containerBorder}`}>
+                      <span className={`px-1.5 py-0.5 bg-white dark:bg-zinc-700 ${BATTLE_DETAIL_TEXT_COLORS.label} text-xs rounded border ${TURNING_POINT_COLORS.containerBorder}`}>
                         {(() => {
                           const label = TURNING_POINT_LABELS[tp.type];
                           return label ? t(label) : tp.type;
@@ -302,7 +302,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
                 {similarBattles.map(({ battle: similar, similarity }) => (
                   <div
                     key={similar.id}
-                    className="flex items-center justify-between gap-2 p-2 rounded-lg bg-white dark:bg-zinc-700/50 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer border border-zinc-100 dark:border-zinc-600"
+                    className="flex items-center justify-between gap-2 p-2 rounded-lg bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors cursor-pointer border border-zinc-100 dark:border-zinc-700"
                     onClick={() => onBattleClick?.(similar)}
                     role="button"
                     tabIndex={0}
@@ -324,8 +324,8 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
                           <>
                             <span>·</span>
                             <span className={
-                              similar.battle.result === 'attacker_win' ? 'text-green-600' :
-                              similar.battle.result === 'defender_win' ? 'text-red-600' : 'text-zinc-500'
+                              similar.battle.result === 'attacker_win' ? 'text-green-600 dark:text-green-400' :
+                              similar.battle.result === 'defender_win' ? 'text-red-600 dark:text-red-400' : 'text-zinc-500 dark:text-zinc-400'
                             }>
                               {getBattleResultLabel(similar.battle)}
                             </span>
