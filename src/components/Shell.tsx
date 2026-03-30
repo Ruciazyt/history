@@ -33,6 +33,16 @@ export interface ShellProps {
   eras?: typeof CHINA_ERAS;
 }
 
+// NotFoundPage is a client component — useTranslations must be called at component top level (React hooks rule)
+function NotFoundPage() {
+  const t = useTranslations('ui');
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <p className="text-zinc-500">{t('pageNotFound')}</p>
+    </div>
+  );
+}
+
 export function Shell({ messages, children, minYear, maxYear, eras }: ShellProps) {
   const params = useParams();
   const pathname = usePathname();
@@ -110,15 +120,6 @@ export function Shell({ messages, children, minYear, maxYear, eras }: ShellProps
 
     return null;
   }, [pathname, locale, children, minYear, maxYear, eras]);
-
-  const NotFoundPage = () => {
-    const t = useTranslations('ui');
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-zinc-500">{t('pageNotFound')}</p>
-      </div>
-    );
-  };
 
   return (
     <NextIntlClientProvider messages={messages} locale={locale}>

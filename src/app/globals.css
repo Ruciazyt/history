@@ -136,6 +136,15 @@
   --quick-link-eurasian-bg: #faf5ff;
   --quick-link-eurasian-text: #7c3aed;
   --quick-link-eurasian-border: #e9d5ff;
+  --quick-link-matrix-bg: #eff6ff;
+  --quick-link-matrix-text: #1d4ed8;
+  --quick-link-matrix-border: #bfdbfe;
+  --quick-link-commanders-bg: #fffbeb;
+  --quick-link-commanders-text: #b45309;
+  --quick-link-commanders-border: #fde68a;
+  --quick-link-placeNames-bg: #f0fdf4;
+  --quick-link-placeNames-text: #15803d;
+  --quick-link-placeNames-border: #bbf7d0;
 }
 
 @theme inline {
@@ -268,6 +277,12 @@
   --quick-link-eurasian-bg: #3b0764;
   --quick-link-eurasian-text: #e9d5ff;
   --quick-link-eurasian-border: #581c87;
+  --quick-link-commanders-bg: #27272a;
+  --quick-link-commanders-text: #d4d4d8;
+  --quick-link-commanders-border: #3f3f46;
+  --quick-link-placeNames-bg: #27272a;
+  --quick-link-placeNames-text: #d4d4d8;
+  --quick-link-placeNames-border: #3f3f46;
 }
 
 body {
