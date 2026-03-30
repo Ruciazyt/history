@@ -77,7 +77,7 @@ export const BottomNav = React.memo(function BottomNav({ locale = 'zh' }: Bottom
             {active && (
               <span className={`absolute top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full ${indicatorColor}`} />
             )}
-            <span className="text-base leading-none mt-0.5">{item.icon}</span>
+            <span className="text-base leading-none mt-0.5" aria-hidden="true">{item.icon}</span>
             <span className="text-[10px] leading-tight text-center px-0.5 transition-colors font-medium">
               {t(item.labelKey)}
             </span>

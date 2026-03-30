@@ -58,7 +58,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
             <h2 id={titleId} className="text-base sm:text-lg font-bold line-clamp-2">{t(battle.titleKey)}</h2>
             <button
               onClick={onClose}
-              className={`shrink-0 w-9 h-9 sm:w-8 sm:h-8 flex items-center justify-center rounded-full ${BATTLE_DETAIL_COLORS.header.close} transition-colors text-lg sm:text-base`}
+              className={`shrink-0 w-9 h-9 sm:w-8 sm:h-8 flex items-center justify-center rounded-full text-white ${BATTLE_DETAIL_COLORS.header.close} transition-colors text-lg sm:text-base`}
               aria-label={t('battleDetail.close')}
             >
               ✕

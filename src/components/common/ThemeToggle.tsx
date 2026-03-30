@@ -14,7 +14,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
   return (
     <button
       onClick={toggleTheme}
-      className={`inline-flex items-center justify-center w-9 h-9 border-none rounded-lg bg-transparent cursor-pointer transition-colors duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 ${className || ''}`}
+      className={`inline-flex items-center justify-center w-9 h-9 border-0 rounded-lg bg-transparent cursor-pointer transition-colors duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 ${className || ''}`}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? '浅色模式' : '深色模式'}
     >
