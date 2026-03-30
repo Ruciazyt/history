@@ -98,6 +98,9 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
     setIsOpen(false);
     if (result.type === 'battle') {
       router.push(`/${locale}/battles`);
+    } else {
+      // Navigate to home page so user can find the ruler/event in context
+      router.push(`/${locale}`);
     }
   }, [router, locale]);
 

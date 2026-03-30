@@ -588,9 +588,9 @@
     "draw": "Draw"
   },
   "nav": {
-    "bavorites": "Favorites",
     "battles": "Battles",
-    "commanders": "Commander Network"
+    "commanders": "Commander Network",
+    "favorites": "Favorites"
   },
   "onThisDay": {
     "title": "On This Day",
