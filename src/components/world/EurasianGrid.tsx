@@ -399,7 +399,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   if (bandEnd <= minYear || bandStart >= maxYear) return null;
                   // Clamp to visible range
                   const visibleStart = Math.max(bandStart, minYear);
-                  const visibleEnd = Math.min(bandEnd, maxYear);
+
                   
                   const y = yearToY(visibleStart, minYear, maxYear, gridHeight) - 12; // offset so label sits just above the era boundary line
                   return (
