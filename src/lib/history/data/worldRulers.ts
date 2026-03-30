@@ -54,6 +54,12 @@ export const worldComparisonRulers: Ruler[] = [
   // ── Kushan Empire (India/Central Asia) ──────────────────────────────────
   { id: 'wc-iv-kushan', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-kushan-dyn', bioKey: 'rulerBio.wc-iv-kushan', startYear: 30, endYear: 375 , isDynastyBlock: true },
   { id: 'wc-iv-kanishka', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-kanishka', bioKey: 'rulerBio.wc-iv-kanishka', highlightKey: 'rulerHighlight.wc-iv-kanishka', startYear: 127, endYear: 150 },
+  // ── Satavahana Kingdom (India) ────────────────────────────────
+  { id: 'wc-iv-satavahana', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-satavahana-dyn', bioKey: 'rulerBio.wc-iv-satavahana', startYear: -200, endYear: 220 , isDynastyBlock: true },
+  { id: 'wc-iv-gautamiputra', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-gautamiputra', bioKey: 'rulerBio.wc-iv-gautamiputra', highlightKey: 'rulerHighlight.wc-iv-gautamiputra', startYear: 106, endYear: 130 },
+
+  // ── Srivijaya Empire (Maritime SE Asia) ──────────────────────
+  { id: 'wc-iv-srivijaya', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-srivijaya-dyn', bioKey: 'rulerBio.wc-iv-srivijaya', startYear: 600, endYear: 1295 , isDynastyBlock: true },
 
   // ── Persia ─────────────────────────────────────────────
   { id: 'wc-pe-cyrus', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-cyrus', bioKey: 'rulerBio.wc-pe-cyrus', highlightKey: 'rulerHighlight.wc-pe-cyrus', startYear: -550, endYear: -530 },
