@@ -733,7 +733,44 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
     },
   },
 
+
+  {
+    type: 'Feature',
+    properties: { name: '战国时代', nameKey: 'empire_sengoku', startYear: 1467, endYear: 1615, color: '#7C3AED' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [129, 30], [130, 34], [134, 38], [142, 40], [145, 38], [142, 34], [138, 31],
+        [132, 30], [129, 30],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '明治时代', nameKey: 'empire_meiji', startYear: 1868, endYear: 1912, color: '#BE185D' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [128, 30], [130, 34], [134, 38], [142, 41], [146, 42], [145, 36], [140, 31],
+        [130, 29], [128, 30],
+      ]],
+    },
+  },
+
   // ═══ 朝鲜/韩国 (Korea) ═══
+
+  // ═══ 朝鲜三国时代 (Three Kingdoms of Korea) ═══
+  {
+    type: 'Feature',
+    properties: { name: '三国时代', nameKey: 'empire_korea-three', startYear: -57, endYear: 668, color: '#06B6D4' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [124, 38], [126, 40], [128, 42], [130, 42], [130, 40], [128, 37], [126, 35],
+        [124, 33], [124, 38],
+      ]],
+    },
+  },
   {
     type: 'Feature',
     properties: { name: '新罗王朝', nameKey: 'empire_silla', startYear: 668, endYear: 935, color: '#14B8A6' },
@@ -773,6 +810,18 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
       type: 'Polygon',
       coordinates: [[
         [102, 16], [106, 15], [110, 18], [110, 23], [106, 24], [102, 22], [102, 16],
+      ]],
+    },
+  },
+
+  {
+    type: 'Feature',
+    properties: { name: '陈朝', nameKey: 'empire_tran-dynasty', startYear: 1225, endYear: 1400, color: '#EAB308' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [102, 15], [108, 14], [112, 18], [112, 24], [108, 26], [103, 24], [102, 18],
+        [102, 15],
       ]],
     },
   },
