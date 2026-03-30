@@ -106,6 +106,8 @@ export const eastAsiaRulers: import('@/lib/history/types').Ruler[] = [
   // ── Japan ──────────────────────────────────────────────────────────────
   { id: 'ea-jp-yayoi', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-yayoi', bioKey: 'rulerBio.ea-jp-yayoi', startYear: -200, endYear: 250 , isDynastyBlock: true },
   { id: 'ea-jp-yamato', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-yamato', bioKey: 'rulerBio.ea-jp-yamato', startYear: 250, endYear: 710 , isDynastyBlock: true },
+  { id: 'ea-jp-asuka', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-asuka', bioKey: 'rulerBio.ea-jp-asuka', startYear: 592, endYear: 710 , isDynastyBlock: true },
+  { id: 'ea-jp-shotoku', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-shotoku', bioKey: 'rulerBio.ea-jp-shotoku', highlightKey: 'rulerHighlight.ea-jp-shotoku', startYear: 593, endYear: 622 },
   { id: 'ea-jp-nara', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-nara', bioKey: 'rulerBio.ea-jp-nara', startYear: 710, endYear: 794 , isDynastyBlock: true },
   { id: 'ea-jp-heian', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-heian', bioKey: 'rulerBio.ea-jp-heian', highlightKey: 'rulerHighlight.ea-jp-heian', startYear: 794, endYear: 1185 , isDynastyBlock: true },
   { id: 'ea-jp-kamakura', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-kamakura', bioKey: 'rulerBio.ea-jp-kamakura', startYear: 1185, endYear: 1333 , isDynastyBlock: true },
