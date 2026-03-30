@@ -141,7 +141,12 @@
     "similarBattles": "Similar Battles",
     "similarBattlesDesc": "Battles you might also be interested in",
     "similarBattleItem": "View",
-    "noSimilarBattles": "No similar battles found"
+    "noSimilarBattles": "No similar battles found",
+    "casualties": "Casualties",
+    "casualtiesTotal": "Total",
+    "casualtiesReliability": "Reliability",
+    "casualtiesSource": "Source",
+    "noCasualties": "No casualty data available"
   },
   "battleOfTheDay": {
     "title": "Battle of the Day",

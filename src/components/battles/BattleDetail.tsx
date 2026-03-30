@@ -10,6 +10,7 @@ import { getBattleTypeName } from '@/lib/history/battles';
 import { getPacingLabel, getTimeOfDayLabel } from '@/lib/history/battlePacing';
 import { useEscapeKey } from '@/lib/history/useBattleHooks';
 import { findSimilarBattles } from '@/lib/history/battleComparison';
+import { getTotalCasualties } from '@/lib/history/battleCasualties';
 
 interface BattleDetailProps {
   battle: Event;
@@ -105,6 +106,53 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
             </div>
           )}
           
+
+          {/* Casualties */}
+          {battle.battle?.casualties && (
+            <div className={`${BATTLE_DETAIL_COLORS.section.bg} rounded-lg p-4`}>
+              <h3 className={`text-sm font-semibold ${BATTLE_DETAIL_TEXT_COLORS.sectionTitle} mb-3`}>💀 {t('battleDetail.casualties')}</h3>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="bg-white dark:bg-zinc-800 rounded-lg p-2">
+                  <div className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.labelSmall} mb-1`}>{t('battleDetail.attacker')}</div>
+                  <div className={`text-sm font-semibold ${BATTLE_DETAIL_COLORS.belligerents.attacker}`}>
+                    {(battle.battle.casualties.attacker || 0).toLocaleString()}
+                  </div>
+                </div>
+                <div className="bg-white dark:bg-zinc-800 rounded-lg p-2">
+                  <div className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.labelSmall} mb-1`}>{t('battleDetail.defender')}</div>
+                  <div className={`text-sm font-semibold ${BATTLE_DETAIL_COLORS.belligerents.defender}`}>
+                    {(battle.battle.casualties.defender || 0).toLocaleString()}
+                  </div>
+                </div>
+                <div className="bg-white dark:bg-zinc-800 rounded-lg p-2">
+                  <div className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.labelSmall} mb-1`}>{t('battleDetail.casualtiesTotal')}</div>
+                  <div className={`text-sm font-bold ${BATTLE_DETAIL_TEXT_COLORS.content}`}>
+                    {getTotalCasualties(battle.battle.casualties).toLocaleString()}
+                  </div>
+                </div>
+              </div>
+              {(battle.battle.casualties.reliability || battle.battle.casualties.source) && (
+                <div className="mt-2 flex flex-wrap items-center gap-2">
+                  {battle.battle.casualties.reliability && (
+                    <span className={`text-xs px-2 py-0.5 rounded ${
+                      battle.battle.casualties.reliability === 'high' ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' :
+                      battle.battle.casualties.reliability === 'medium' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300' :
+                      'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300'
+                    }`}>
+                      {t(`battle.casualty.reliability.${battle.battle.casualties.reliability}`)}
+                    </span>
+                  )}
+                  {battle.battle.casualties.source && (
+                    <span className={`text-xs ${BATTLE_DETAIL_TEXT_COLORS.labelSmall}`}>
+                      {t('battleDetail.casualtiesSource')}: {battle.battle.casualties.source}
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+
           {/* Summary */}
           <div>
             <h3 className={`text-sm font-semibold ${BATTLE_DETAIL_TEXT_COLORS.sectionTitle} mb-2`}>{t('battleDetail.summary')}</h3>

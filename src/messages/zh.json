@@ -1801,7 +1801,12 @@
     "similarBattles": "相似战役",
     "similarBattlesDesc": "你可能还感兴趣的战役",
     "similarBattleItem": "查看",
-    "noSimilarBattles": "暂无相似战役"
+    "noSimilarBattles": "暂无相似战役",
+    "casualties": "伤亡数据",
+    "casualtiesTotal": "合计",
+    "casualtiesReliability": "数据可靠度",
+    "casualtiesSource": "数据来源",
+    "noCasualties": "暂无伤亡数据"
   },
   "battleTimeline": {
     "noData": "暂无战役数据"

@@ -387,7 +387,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   );
                 })()}
 
-                {/* Era labels centered within each band for consistent visual placement */}
+                {/* Era labels at top of each band for better readability */}
                 {([
                   { bandIdx: 0, bandStart: minYear, bandEnd: ERA_BOUNDARY_YEARS[0] },
                   { bandIdx: 1, bandStart: ERA_BOUNDARY_YEARS[0], bandEnd: ERA_BOUNDARY_YEARS[1] },
@@ -397,16 +397,16 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   if (!band) return null;
                   // Only render if the band has meaningful height (at least part is visible)
                   if (bandEnd <= minYear || bandStart >= maxYear) return null;
-                  // Clamp to visible range and compute midpoint
+                  // Clamp to visible range
                   const visibleStart = Math.max(bandStart, minYear);
                   const visibleEnd = Math.min(bandEnd, maxYear);
-                  const midYear = (visibleStart + visibleEnd) / 2;
-                  const y = yearToY(midYear, minYear, maxYear, gridHeight);
+                  
+                  const y = yearToY(visibleStart, minYear, maxYear, gridHeight) - 12; // offset so label sits just above the era boundary line
                   return (
                     <div
                       key={band.labelKey}
                       className="absolute left-0 right-0 flex items-center pointer-events-none z-20"
-                      style={{ top: y }}
+                      style={{ top: y, marginTop: -22 }}
                     >
                       <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mr-0.5 shrink-0" />
                       <div className={`w-14 text-[10px] font-bold px-1 py-0.5 text-center rounded-sm shadow-sm ${band.badgeClass}`}>

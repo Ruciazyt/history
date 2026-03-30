@@ -141,7 +141,12 @@
     "similarBattles": "類似战役",
     "similarBattlesDesc": "你也感兴趣的战役",
     "similarBattleItem": "見る",
-    "noSimilarBattles": "類似战役なし"
+    "noSimilarBattles": "類似战役なし",
+    "casualties": "死傷者",
+    "casualtiesTotal": "合計",
+    "casualtiesReliability": "データの信頼性",
+    "casualtiesSource": "データソース",
+    "noCasualties": "死傷者データなし"
   },
   "battleOfTheDay": {
     "title": "今日の戦い",
