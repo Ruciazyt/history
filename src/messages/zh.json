@@ -2120,7 +2120,7 @@
   "grid.region.west": "西亚与欧洲",
   "grid.region.other": "其他",
   "ruler.wc-is-genghis": "成吉思汗",
-  "rulerBio.wc-is-genghis": "成吉思汗（帖木真）1206年统一蒙古诸部，征服金朝、西夏、花剌子模及欧亚大部，建立人类历史上最大陆地帝国，创立驿站传信制度。",
+  "rulerBio.wc-is-genghis": "成吉思汗（1206-1227年在位），蒙古帝国创立者，建立历史上最大连续疆域帝国。",
   "quiz": {
     "title": "知识问答",
     "setup": {
@@ -2203,5 +2203,18 @@
   "ruler.wc-iv-kanishka": "迦腻色伽一世",
   "rulerBio.wc-iv-kushan": "中亚帝国；连接丝绸之路；犍陀罗与马图拉艺术风格繁荣。",
   "rulerBio.wc-iv-kanishka": "贵霜帝国伟大君主；扩张帝国至鼎盛；大乘佛教的重要赞助者。",
-  "rulerHighlight.wc-iv-kanishka": "迦腻色伽一世 — 贵霜鼎盛期；大乘佛教赞助者"
+  "rulerHighlight.wc-iv-kanishka": "迦腻色伽一世 — 贵霜鼎盛期；大乘佛教赞助者",
+  "rulerBio.wc-ro-justinian": "查士丁尼一世（527-565年在位），拜占庭帝国黄金时代皇帝，编纂罗马法典，短暂恢复帝国疆域。",
+  "rulerBio.wc-ro-heraclius": "希拉克略（610-641年在位），拜占庭皇帝，抗击萨珊波斯，收复失地，后被阿拉伯人击败。",
+  "rulerBio.wc-ro-byzantine-mid": "中世纪拜占庭帝国（800-1100年），马其顿王朝复兴期，学术与艺术繁荣。",
+  "rulerBio.wc-ro-ottoman-late": "奥斯曼帝国晚期（1566-1912年），从苏莱曼大帝鼎盛走向衰落，领土不断萎缩。",
+  "rulerBio.wc-is-abbasid-late": "阿拔斯王朝后期（833-1258年），哈里发权力逐渐被蒙古入侵终结。",
+  "rulerBio.wc-is-harun": "哈伦·拉希德（786-833年在位），阿拔斯王朝鼎盛时期哈里发，巴格达繁荣，与查理曼帝国通使。",
+  "rulerBio.wc-is-ilkhanate": "伊尔汗国（1256-1370年），蒙古四大汗国之一，统治波斯与中东地区。",
+  "rulerBio.wc-is-muhammad": "穆罕默德（约570-632年），伊斯兰教先知，阿拉伯帝国创立者。",
+  "rulerBio.wc-is-rashidun": "四大正统哈里发时期（632-661年），伊斯兰帝国快速扩张，领土横跨西亚北非。",
+  "rulerBio.wc-is-saladin": "萨拉丁（1174-1193年在位），阿尤布王朝苏丹，伊斯兰世界英雄，收复耶路撒冷。",
+  "rulerBio.wc-is-timur": "帖木儿（1370-1405年在位），突厥-蒙古征服者，建立帖木儿帝国，定都撒马尔罕。",
+  "rulerBio.wc-is-timurid-late": "帖木儿帝国后期（1405-1526年），艺术与建筑黄金期，后被乌兹别克人和蒙古人瓜分。",
+  "rulerBio.wc-is-umayyad": "倭马亚王朝（661-750年），伊斯兰帝国第一个世袭王朝，定都大马士革，疆域最大。"
 }
