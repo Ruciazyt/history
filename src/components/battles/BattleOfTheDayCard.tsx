@@ -6,7 +6,8 @@ import type { Event } from '@/lib/history/types';
 import { getBattleOfTheDay, getSameEraBattles } from '@/lib/history/battles';
 import { formatYear } from '@/lib/history/utils';
 import { getBattleResultLabel, getBattleImpactLabel } from '@/lib/history/battles';
-import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, ERA_COLORS, BATTLE_CARD_COLORS, BATTLE_OF_THE_DAY_COLORS, COMMANDER_COLORS, BATTLE_TYPE_COLORS, BATTLE_SCALE_COLORS } from '@/lib/history/constants';
+import { getPacingLabel, getTimeOfDayLabel } from '@/lib/history/battlePacing';
+import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, ERA_COLORS, BATTLE_CARD_COLORS, BATTLE_OF_THE_DAY_COLORS, COMMANDER_COLORS, BATTLE_TYPE_COLORS, BATTLE_SCALE_COLORS, PACING_BADGE_COLORS, TIME_OF_DAY_COLORS } from '@/lib/history/constants';
 import { useTranslations, useLocale } from 'next-intl';
 import { BattleDetail } from './BattleDetail';
 
@@ -22,9 +23,6 @@ function getEraStyles(entityId: string): { gradient: string; border: string; tex
     text: eraColor?.text || 'text-gray-800',
   };
 }
-
-
-
 
 export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ events }: BattleOfTheDayCardProps) {
   const t = useTranslations();
@@ -47,6 +45,9 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
 
   const scale = battle.battle?.scale;
   const scaleColors = scale ? BATTLE_SCALE_COLORS[scale] || BATTLE_SCALE_COLORS.unknown : null;
+
+  const pacing = battle.battle?.pacing;
+  const timeOfDay = battle.battle?.timeOfDay;
 
   return (
     <>
@@ -136,6 +137,16 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
             {battle.battle?.battleType && battle.battle.battleType !== 'unknown' && (
               <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold ${BATTLE_TYPE_COLORS.bg} ${BATTLE_TYPE_COLORS.text}`}>
                 🎯 {t('battle.battleType.' + battle.battle.battleType)}
+              </span>
+            )}
+            {pacing && pacing !== 'unknown' && (
+              <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold ${PACING_BADGE_COLORS.bg} ${PACING_BADGE_COLORS.text}`}>
+                ⚡ {t(getPacingLabel(pacing))}
+              </span>
+            )}
+            {timeOfDay && timeOfDay !== 'unknown' && (
+              <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold ${TIME_OF_DAY_COLORS.bg} ${TIME_OF_DAY_COLORS.text}`}>
+                🌅 {t(getTimeOfDayLabel(timeOfDay))}
               </span>
             )}
             {sameEraBattles.length > 0 && (
