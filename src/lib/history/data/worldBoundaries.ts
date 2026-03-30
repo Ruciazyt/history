@@ -588,16 +588,6 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '三国', nameKey: 'empire_three-kingdoms', startYear: 220, endYear: 280, color: '#B91C1C' },
-    geometry: {
-      type: 'Polygon',
-      coordinates: [[
-        [78, 36], [85, 30], [105, 18], [125, 22], [125, 40], [105, 45], [85, 44], [70, 38], [78, 36],
-      ]],
-    },
-  },
-  {
-    type: 'Feature',
     properties: { name: '唐朝', nameKey: 'empire_tang', startYear: 618, endYear: 907, color: '#F59E0B' },
     geometry: {
       type: 'Polygon',
@@ -744,6 +734,16 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
 
   // ═══ 朝鲜/韩国 (Korea) ═══
+  {
+    type: 'Feature',
+    properties: { name: '新罗王朝', nameKey: 'empire_silla', startYear: 668, endYear: 935, color: '#14B8A6' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [124, 34], [128, 35], [130, 38], [130, 40], [128, 42], [125, 42], [124, 38], [124, 34],
+      ]],
+    },
+  },
   {
     type: 'Feature',
     properties: { name: '高丽王朝', nameKey: 'empire_goryeo', startYear: 918, endYear: 1392, color: '#14B8A6' },
