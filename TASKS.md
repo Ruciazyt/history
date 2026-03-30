@@ -4,6 +4,30 @@
 https://history.ruciazyt.cn
 
 
+## 2026-03-30 UI优化与架构完善 - 第三十八轮
+### 功能增强: BattleOfTheDayCard 添加战役节奏和时间段徽章
+- [x] BattleOfTheDayCard.tsx: 新增 pacing 和 timeOfDay 徽章显示
+  - 导入 getPacingLabel/getTimeOfDayLabel 函数 (来自 battlePacing 模块)
+  - 导入 PACING_BADGE_COLORS 和 TIME_OF_DAY_COLORS 常量
+  - 战役节奏徽章 (⚡): surprise/rapid/extended/siege 四种类型
+  - 战役时间段徽章 (🌅): dawn/morning/afternoon/evening/night 五种类型
+  - 仅在数据存在且非 'unknown' 时显示
+  - 与 BattleDetail 组件保持一致性 (该组件已有 pacing/timeOfDay 显示)
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 957个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交 (commit: c9c7363)
+- [x] 代码已推送至仓库
+
+### 优化说明
+- 今日战役卡片现在显示更丰富的战役信息 (节+奏+时间段)
+- 复用已有的 i18n 键和常量系统，无需新增翻译或颜色定义
+- 改动小、安全、不破坏现有逻辑
+- 项目保持健壮可用状态
+
+
 ## 2026-03-30 UI优化与架构完善 - 第三十七轮
 ### i18n 国际化完善
 - [x] BattleGeography.tsx: 组件中文化到 i18n keys
