@@ -31,6 +31,111 @@
   --text-secondary: #52525b;
   --text-muted: #a1a1aa;
   --text-inverse: #fafafa;
+
+  /* ─── Component Variables (light mode) ──────────────────────────────── */
+
+  /* Sidebar */
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #e4e4e7;
+  --sidebar-header-bg: #ffffff;
+  --sidebar-header-text: #71717a;
+  --sidebar-era-bg: #f4f4f5;
+  --sidebar-era-text: #18181b;
+  --sidebar-era-year: #a1a1aa;
+  --sidebar-era-dot: #a1a1aa;
+  --sidebar-ruler-active-bg: #dbeafe;
+  --sidebar-ruler-active-text: #1d4ed8;
+  --sidebar-ruler-inactive-text: #52525b;
+  --sidebar-table-header-text: #71717a;
+  --sidebar-table-header-border: #e4e4e7;
+  --sidebar-table-row-border: #f4f4f5;
+  --sidebar-table-row-hover: #f4f4f5;
+  --sidebar-table-row-year: #a1a1aa;
+
+  /* Header */
+  --header-bg: #ffffff;
+  --header-border: #e4e4e7;
+  --header-title-small: #71717a;
+  --header-title-large: #18181b;
+
+  /* Civ switcher */
+  --civ-switcher-container-bg: #f4f4f5;
+  --civ-switcher-active-bg: #ffffff;
+  --civ-switcher-active-text: #18181b;
+  --civ-switcher-active-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --civ-switcher-inactive-text: #71717a;
+
+  /* Timeline */
+  --timeline-bg: #ffffff;
+  --timeline-border: #e4e4e7;
+  --timeline-header-text: #71717a;
+  --timeline-year: #18181b;
+  --timeline-window: #18181b;
+  --timeline-range: #71717a;
+  --timeline-win-btn-active-bg: #2563eb;
+  --timeline-win-btn-active-text: #ffffff;
+  --timeline-win-btn-inactive-bg: #f4f4f5;
+  --timeline-win-btn-inactive-text: #52525b;
+  --timeline-win-btn-inactive-hover: #e4e4e7;
+  --timeline-nav-bg: #f4f4f5;
+  --timeline-nav-text: #52525b;
+  --timeline-nav-hover: #e4e4e7;
+
+  /* Events sidebar */
+  --events-sidebar-bg: #ffffff;
+  --events-sidebar-border: #e4e4e7;
+  --events-sidebar-header-bg: #ffffff;
+  --events-sidebar-header-text: #71717a;
+  --events-sidebar-event-border: #f4f4f5;
+  --events-sidebar-event-year: #a1a1aa;
+  --events-sidebar-event-title: #18181b;
+  --events-sidebar-empty: #a1a1aa;
+  --events-sidebar-war-badge-bg: #fef2f2;
+  --events-sidebar-war-badge-text: #dc2626;
+  --events-sidebar-compare-header-bg: #fafafa;
+  --events-sidebar-compare-header-border: #e4e4e7;
+  --events-sidebar-compare-header-text: #71717a;
+  --events-sidebar-compare-title: #71717a;
+
+  /* Ruler detail */
+  --ruler-detail-bg: #ffffff;
+  --ruler-detail-border: #e4e4e7;
+  --ruler-detail-header-text: #71717a;
+  --ruler-detail-header-name: #18181b;
+  --ruler-detail-header-year: #a1a1aa;
+  --ruler-detail-era-badge-bg: #fef3c7;
+  --ruler-detail-era-badge-text: #b45309;
+  --ruler-detail-close-border: #e4e4e7;
+  --ruler-detail-close-bg: #f4f4f5;
+  --ruler-detail-close-text: #52525b;
+  --ruler-detail-close-hover: #e4e4e7;
+  --ruler-detail-highlight: #52525b;
+  --ruler-detail-bio: #71717a;
+  --ruler-detail-seed-note: #a1a1aa;
+
+  /* Container */
+  --container-bg: #fafafa;
+  --container-text: #18181b;
+
+  /* Era info / dividers */
+  --era-info-text: #71717a;
+  --divider: #e4e4e7;
+  --multi-polity-text: #a1a1aa;
+  --arrow-text: #d4d4d8;
+  --event-title-default: #18181b;
+  --event-title-light: #71717a;
+  --range-label-text: #71717a;
+
+  /* Quick links */
+  --quick-link-timeline-bg: #f4f4f5;
+  --quick-link-timeline-text: #52525b;
+  --quick-link-timeline-border: #e4e4e7;
+  --quick-link-battles-bg: #fef2f2;
+  --quick-link-battles-text: #dc2626;
+  --quick-link-battles-border: #fecaca;
+  --quick-link-eurasian-bg: #faf5ff;
+  --quick-link-eurasian-text: #7c3aed;
+  --quick-link-eurasian-border: #e9d5ff;
 }
 
 @theme inline {
