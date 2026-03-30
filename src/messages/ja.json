@@ -2318,5 +2318,20 @@
   "empire_sengoku": "戦国時代",
   "empire_meiji": "明治時代",
   "empire_korea-three": "三国時代（朝鮮）",
-  "empire_tran-dynasty": "陳朝（ベトナム）"
+  "empire_tran-dynasty": "陳朝（ベトナム）",
+  "ruler.wc-ro-trajan": "トラヤヌス",
+  "rulerBio.wc-ro-trajan": "トラヤヌス；帝国最大の版図を達成；ダキアを征服；トラヤヌス柱とフォロ・トラヤニを建設。",
+  "rulerHighlight.wc-ro-trajan": "ローマ皇帝（98–117年）；帝国領土が最大に；ダキア戦争；偉大な建築の庇護者。",
+  "ruler.wc-ro-hadrian": "ハドリアヌス",
+  "rulerBio.wc-ro-hadrian": "ハドリアヌス；国境要塞を整備；ブリテンにハドリアヌス牆を建設；ローマ法を体系化；ギリシャ文化を推進。",
+  "rulerHighlight.wc-ro-hadrian": "ローマ皇帝（117–138年）；ハドリアヌス牆の建設；帝国の統合；法の体系化；ヘレニズム文化の推進。",
+  "ruler.wc-ro-antoninus": "アントニヌス・ピウス",
+  "rulerBio.wc-ro-antoninus": "アントニヌス・ピウス；五賢帝のうち最も尊敬された皇帝；治世は平和と繁栄に満ちていた。",
+  "rulerHighlight.wc-ro-antoninus": "ローマ皇帝（138–161年）；五賢帝の一人；パクス・ロマーナの絶頂期；公正と節制で知られる。",
+  "ruler.wc-ro-marcus-aurelius": "マルクス・アウレリウス",
+  "rulerBio.wc-ro-marcus-aurelius": "マルクス・アウレリウス；ストア派哲学者皇帝；《自省録》を著す；マルコマンニ戦争に対処；五賢帝の最後。",
+  "rulerHighlight.wc-ro-marcus-aurelius": "ローマ皇帝（161–180年）；ストア派哲学者で《自省録》の著者；五賢帝の最後；ゲルマン民族の侵入に対処。",
+  "ruler.wc-ro-diocletian": "ディオクレティアヌス",
+  "rulerBio.wc-ro-diocletian": "ディオクレティアヌス；三世紀の危機を収束；四帝統治を確立；州を再編；キリスト教徒を弾圧。",
+  "rulerHighlight.wc-ro-diocletian": "ローマ皇帝（284–305年）；三世紀の危機を収束；四帝統治（テトラルキア）を確立；帝国の行政を再編。"
 }

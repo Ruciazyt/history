@@ -2262,5 +2262,20 @@
   "empire_sengoku": "Sengoku Period",
   "empire_meiji": "Meiji Era",
   "empire_korea-three": "Three Kingdoms (Korea)",
-  "empire_tran-dynasty": "Trần Dynasty (Vietnam)"
+  "empire_tran-dynasty": "Trần Dynasty (Vietnam)",
+  "ruler.wc-ro-trajan": "Trajan",
+  "rulerBio.wc-ro-trajan": "Trajan; expanded empire to greatest extent; Dacia conquered; Trajan's Column and Forum built.",
+  "rulerHighlight.wc-ro-trajan": "Roman Emperor (98–117 CE); empire reached maximum territorial extent; Dacia campaigns; patron of great architecture.",
+  "ruler.wc-ro-hadrian": "Hadrian",
+  "rulerBio.wc-ro-hadrian": "Hadrian; fortified borders; built Hadrian's Wall in Britain; systematized Roman law; promoted Greek culture.",
+  "rulerHighlight.wc-ro-hadrian": "Roman Emperor (117–138 CE); built Hadrian's Wall; consolidated empire; systematized law; promoted Hellenic culture.",
+  "ruler.wc-ro-antoninus": "Antoninus Pius",
+  "rulerBio.wc-ro-antoninus": "Antoninus Pius; the most respected of the Five Good Emperors; reign marked by peace and prosperity.",
+  "rulerHighlight.wc-ro-antoninus": "Roman Emperor (138–161 CE); one of the Five Good Emperors; Pax Romana at its height; known for justice and moderation.",
+  "ruler.wc-ro-marcus-aurelius": "Marcus Aurelius",
+  "rulerBio.wc-ro-marcus-aurelius": "Marcus Aurelius; philosopher-emperor; wrote Meditations; faced Marcomannic Wars; last of the Five Good Emperors.",
+  "rulerHighlight.wc-ro-marcus-aurelius": "Roman Emperor (161–180 CE); Stoic philosopher author of Meditations; last of the Five Good Emperors; faced Germanic invasions.",
+  "ruler.wc-ro-diocletian": "Diocletian",
+  "rulerBio.wc-ro-diocletian": "Diocletian; ended the Crisis of the Third Century; established the Tetrarchy; reorganized provinces; persecuted Christians.",
+  "rulerHighlight.wc-ro-diocletian": "Roman Emperor (284–305 CE); ended the Crisis of the Third Century; established the Tetrarchy (rule of four); reformed the empire's administration."
 }
