@@ -2216,5 +2216,16 @@
   "rulerBio.wc-is-saladin": "萨拉丁（1174-1193年在位），阿尤布王朝苏丹，伊斯兰世界英雄，收复耶路撒冷。",
   "rulerBio.wc-is-timur": "帖木儿（1370-1405年在位），突厥-蒙古征服者，建立帖木儿帝国，定都撒马尔罕。",
   "rulerBio.wc-is-timurid-late": "帖木儿帝国后期（1405-1526年），艺术与建筑黄金期，后被乌兹别克人和蒙古人瓜分。",
-  "rulerBio.wc-is-umayyad": "倭马亚王朝（661-750年），伊斯兰帝国第一个世袭王朝，定都大马士革，疆域最大。"
+  "rulerBio.wc-is-umayyad": "倭马亚王朝（661-750年），伊斯兰帝国第一个世袭王朝，定都大马士革，疆域最大。",
+  "battleGeography": {
+    "title": "战役地理分布",
+    "unknownLocation": "未知地点",
+    "battleUnit": "场",
+    "attackerWins": "进攻方胜利",
+    "defenderWins": "防守方胜利",
+    "attackerShort": "攻",
+    "defenderShort": "防",
+    "other": "其他",
+    "battles": "战役"
+  }
 }

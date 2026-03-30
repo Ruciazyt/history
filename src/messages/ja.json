@@ -2284,5 +2284,16 @@
   "rulerBio.wc-iv-kushan": "中央アジアの帝国；シルクロード交易を結びガンダーラとマトゥラ美術が栄えた。",
   "rulerBio.wc-iv-kanishka": "偉大なるクシャーナ皇帝；帝国を拡張し最盛期に；大乗仏教の支援者。",
   "rulerHighlight.wc-iv-kanishka": "カニシカ1世 — クシャーナ最盛期；大乗仏教の支援者",
-  "empire_silla": "新羅王朝"
+  "empire_silla": "新羅王朝",
+  "battleGeography": {
+    "title": "戦闘地理分布",
+    "unknownLocation": "場所不明",
+    "battleUnit": "件",
+    "attackerWins": "攻撃側勝利",
+    "defenderWins": "防御側勝利",
+    "attackerShort": "攻",
+    "defenderShort": "防",
+    "other": "その他",
+    "battles": "件の戦い"
+  }
 }

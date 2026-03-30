@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import {
   getBattleCountByRegion,
   getGeographicInsights,
@@ -18,6 +19,7 @@ export function BattleGeography({
 }: {
   battles: ReturnType<typeof import('@/lib/history/battles').getBattles>;
 }) {
+  const t = useTranslations();
   const regionStats = React.useMemo(() => getBattleCountByRegion(battles), [battles]);
   const insights = React.useMemo(() => getGeographicInsights(battles), [battles]);
 
@@ -31,8 +33,8 @@ export function BattleGeography({
 
   return (
     <div className={`${BATTLE_GEOGRAPHY_COLORS.container.bg} rounded-xl border ${BATTLE_GEOGRAPHY_COLORS.container.border} p-4`}>
-      <h3 className={`text-lg font-semibold ${BATTLE_GEOGRAPHY_COLORS.title} mb-4`}>战役地理分布</h3>
-      
+      <h3 className={`text-lg font-semibold ${BATTLE_GEOGRAPHY_COLORS.title} mb-4`}>{t('battleGeography.title')}</h3>
+
       {/* Insights */}
       {insights.length > 0 && (
         <div className={`mb-4 p-3 ${GEO_INSIGHT_COLORS.container} rounded-lg border ${GEO_INSIGHT_COLORS.containerBorder}`}>
@@ -44,17 +46,17 @@ export function BattleGeography({
           ))}
         </div>
       )}
-      
+
       {/* Region bars */}
       <div className="space-y-3">
         {knownRegions.map((region) => (
-          <RegionBar key={region.regionId} region={region} />
+          <RegionBar key={region.regionId} region={region} t={t} />
         ))}
-        
+
         {unknownRegion && unknownRegion.count > 0 && (
           <div className={`pt-2 border-t ${BATTLE_GEOGRAPHY_DIVIDER_COLORS.border}`}>
             <div className={`text-xs ${BATTLE_GEOGRAPHY_COLORS.unknown.text}`}>
-              未知地点: {unknownRegion.count} 场战役
+              {t('battleGeography.unknownLocation')}: {unknownRegion.count} {t('battleGeography.battleUnit')} {t('battleGeography.battles', { count: unknownRegion.count })}
             </div>
           </div>
         )}
@@ -66,7 +68,7 @@ export function BattleGeography({
 /**
  * Individual region bar showing battle count and win rate
  */
-const RegionBar = React.memo(function RegionBar({ region }: { region: BattleCountByRegion }) {
+const RegionBar = React.memo(function RegionBar({ region, t }: { region: BattleCountByRegion; t: ReturnType<typeof useTranslations> }) {
   // Determine win rate badge color based on attacker's win rate
   const winRateBadgeClass = React.useMemo(() => {
     if (region.attackerWinRate > 55) return WIN_RATE_COLORS.attacker.high;
@@ -79,30 +81,30 @@ const RegionBar = React.memo(function RegionBar({ region }: { region: BattleCoun
       <div className="flex items-center justify-between text-sm">
         <span className={`font-medium ${BATTLE_GEOGRAPHY_COLORS.regionName}`}>{region.regionName}</span>
         <div className="flex items-center gap-2">
-          <span className={BATTLE_GEOGRAPHY_COLORS.count}>{region.count} 场</span>
+          <span className={BATTLE_GEOGRAPHY_COLORS.count}>{region.count} {t('battleGeography.battleUnit')}</span>
           <span className={`text-xs px-1.5 py-0.5 rounded ${winRateBadgeClass}`}>
-            攻{region.attackerWinRate}% vs 防{100 - region.attackerWinRate}%
+            {t('battleGeography.attackerShort')}{region.attackerWinRate}% vs {t('battleGeography.defenderShort')}{100 - region.attackerWinRate}%
           </span>
         </div>
       </div>
       <div className={`h-3 ${REGION_BAR_COLORS.track} rounded-full overflow-hidden flex`}>
         {/* Attacker wins */}
-        <div 
+        <div
           className={`h-full bg-gradient-to-r ${REGION_BAR_COLORS.attacker} transition-all duration-300`}
           style={{ width: `${(region.attackerWins / Math.max(region.count, 1)) * 100}%` }}
-          title={`进攻方胜利: ${region.attackerWins}`}
+          title={`${t('battleGeography.attackerWins')}: ${region.attackerWins}`}
         />
         {/* Defender wins */}
-        <div 
+        <div
           className={`h-full bg-gradient-to-r ${REGION_BAR_COLORS.defender} transition-all duration-300`}
           style={{ width: `${(region.defenderWins / Math.max(region.count, 1)) * 100}%` }}
-          title={`防守方胜利: ${region.defenderWins}`}
+          title={`${t('battleGeography.defenderWins')}: ${region.defenderWins}`}
         />
         {/* Other (draws, inconclusive) */}
-        <div 
+        <div
           className={`h-full ${REGION_BAR_COLORS.other} transition-all duration-300`}
           style={{ width: `${Math.max(0, (region.count - region.attackerWins - region.defenderWins) / Math.max(region.count, 1)) * 100}%` }}
-          title={`其他: ${region.count - region.attackerWins - region.defenderWins}`}
+          title={`${t('battleGeography.other')}: ${region.count - region.attackerWins - region.defenderWins}`}
         />
       </div>
     </div>

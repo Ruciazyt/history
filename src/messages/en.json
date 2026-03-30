@@ -2228,5 +2228,16 @@
   "rulerBio.wc-iv-kushan": "Central Asian empire; connected Silk Road trade; Gandharan and Mathura art styles.",
   "rulerBio.wc-iv-kanishka": "Great Kushan emperor; expanded empire to peak; patron of Mahayana Buddhism.",
   "rulerHighlight.wc-iv-kanishka": "Kanishka I — Kushan peak; Mahayana Buddhism patron",
-  "empire_silla": "Silla Dynasty"
+  "empire_silla": "Silla Dynasty",
+  "battleGeography": {
+    "title": "Battle Geographic Distribution",
+    "unknownLocation": "Unknown Location",
+    "battleUnit": "",
+    "attackerWins": "Attacker Wins",
+    "defenderWins": "Defender Wins",
+    "attackerShort": "Att",
+    "defenderShort": "Def",
+    "other": "Other",
+    "battles": "battles"
+  }
 }
