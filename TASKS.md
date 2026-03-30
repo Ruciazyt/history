@@ -4,6 +4,26 @@
 https://history.ruciazyt.cn
 
 
+## 2026-03-30 UI优化与架构完善 - 第三十七轮
+### i18n 国际化完善
+- [x] BattleGeography.tsx: 组件中文化到 i18n keys
+  - 添加 battleGeography i18n namespace (zh/en/ja)
+  - 标题、未知地点、战役单位、攻/防标签、胜负提示等全部 i18n 化
+  - RegionBar 组件通过 prop 接收 t 函数
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 957个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交 (commit: 5620233)
+- [x] 代码已推送至仓库
+
+### 优化说明
+- BattleGeography 战役地理分布组件中的硬编码中文字符串替换为 i18n keys
+- 支持中文、英文、日文三种语言
+- RegionBar 子组件通过 prop 接收翻译函数，保持组件独立性
+- 项目保持健壮可用状态
+
 ## 2026-03-26 UI优化与架构完善 - 第三十五轮
 ## 2026-03-29 UI优化与架构完善 - 第三十六轮
 
