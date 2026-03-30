@@ -409,6 +409,7 @@ export const CHINA_EVENTS: Event[] = [
       },
       strategy: ['encirclement', 'offensive'],
       terrain: ['mountains', 'hills'],
+      pacing: 'extended',
       casualties: {
         attacker: 20000,
         defender: 450000,

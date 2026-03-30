@@ -68,3 +68,56 @@ describe('BATTLE_SCALE_COLORS', () => {
     expect(BATTLE_SCALE_COLORS.small.bg).toBe('bg-green-100');
   });
 });
+
+/**
+ * Tests for RULER_RELATIONS_COLORS constant
+ * Dark mode support added in commit 9376f6d
+ */
+
+import { RULER_RELATIONS_COLORS } from './colors';
+
+describe('RULER_RELATIONS_COLORS', () => {
+  it('should export container, label, and badge sections', () => {
+    expect(RULER_RELATIONS_COLORS).toHaveProperty('container');
+    expect(RULER_RELATIONS_COLORS).toHaveProperty('label');
+    expect(RULER_RELATIONS_COLORS).toHaveProperty('badge');
+  });
+
+  describe('container', () => {
+    it('should have border color with light and dark mode', () => {
+      expect(RULER_RELATIONS_COLORS.container.border).toBe('border-gray-200 dark:border-zinc-700');
+    });
+  });
+
+  describe('label', () => {
+    it('should have text color with light and dark mode', () => {
+      expect(RULER_RELATIONS_COLORS.label.text).toBe('text-gray-500 dark:text-zinc-400');
+    });
+  });
+
+  describe('badge', () => {
+    it('should have bg color with light and dark mode', () => {
+      expect(RULER_RELATIONS_COLORS.badge.bg).toBe('bg-amber-50 dark:bg-amber-900/30');
+    });
+
+    it('should have hoverBg color with light and dark mode', () => {
+      expect(RULER_RELATIONS_COLORS.badge.hoverBg).toBe('hover:bg-amber-100 dark:hover:bg-amber-900/50');
+    });
+
+    it('should have text color with light and dark mode', () => {
+      expect(RULER_RELATIONS_COLORS.badge.text).toBe('text-amber-700 dark:text-amber-300');
+    });
+
+    it('should have border color with light and dark mode', () => {
+      expect(RULER_RELATIONS_COLORS.badge.border).toBe('border-amber-200 dark:border-amber-700/50');
+    });
+  });
+
+  it('all colors should contain dark: prefix for dark mode support', () => {
+    Object.entries(RULER_RELATIONS_COLORS).forEach(([_section, styles]) => {
+      Object.values(styles).forEach((cls: string) => {
+        expect(cls).toContain(' dark:');
+      });
+    });
+  });
+});

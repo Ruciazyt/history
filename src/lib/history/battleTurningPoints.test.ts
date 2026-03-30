@@ -76,6 +76,18 @@ const mockEvents: Event[] = [
           party: 'attacker',
           impact: 'positive',
         },
+        {
+          type: 'moral-boost',
+          description: '项羽破釜沉舟，断绝退路',
+          party: 'attacker',
+          impact: 'positive',
+        },
+        {
+          type: 'encirclement',
+          description: '项羽军切断秦军粮道',
+          party: 'attacker',
+          impact: 'positive',
+        },
       ],
     },
   },
@@ -167,12 +179,16 @@ describe('battleTurningPoints', () => {
       expect(stats['reinforcement-arrival']).toBe(1);
       expect(stats['defection']).toBe(1);
       expect(stats['strategic-mistake']).toBe(1);
+      expect(stats['moral-boost']).toBe(1);
+      expect(stats['encirclement']).toBe(1);
     });
 
     it('should return zero for types without data', () => {
       const stats = getTurningPointTypeStats(mockEvents);
       expect(stats['ambush-triggered']).toBe(0);
       expect(stats['weather-change']).toBe(0);
+      expect(stats['fire-attack']).toBe(0);
+      expect(stats['flood-attack']).toBe(0);
     });
   });
 
@@ -194,7 +210,7 @@ describe('battleTurningPoints', () => {
   describe('getTurningPointsByParty', () => {
     it('should return party statistics', () => {
       const stats = getTurningPointsByParty(mockEvents);
-      expect(stats.attacker).toBe(2);
+      expect(stats.attacker).toBe(4);
       expect(stats.defender).toBe(3);
       expect(stats.both).toBe(0);
     });
@@ -203,9 +219,9 @@ describe('battleTurningPoints', () => {
   describe('getTurningPointImpactStats', () => {
     it('should return impact statistics', () => {
       const stats = getTurningPointImpactStats(mockEvents);
-      // 5 total turning points: 3 negative, 2 positive
+      // 7 total turning points: 3 negative, 4 positive
       expect(stats.negative).toBe(3);
-      expect(stats.positive).toBe(2);
+      expect(stats.positive).toBe(4);
     });
   });
 
@@ -214,6 +230,18 @@ describe('battleTurningPoints', () => {
       const result = getBattlesByTurningPointType(mockEvents, 'commander-death');
       expect(result.length).toBe(1);
       expect(result[0].id).toBe('battle-1');
+    });
+
+    it('should return battles with moral-boost turning points', () => {
+      const result = getBattlesByTurningPointType(mockEvents, 'moral-boost');
+      expect(result.length).toBe(1);
+      expect(result[0].id).toBe('battle-2');
+    });
+
+    it('should return battles with encirclement turning points', () => {
+      const result = getBattlesByTurningPointType(mockEvents, 'encirclement');
+      expect(result.length).toBe(1);
+      expect(result[0].id).toBe('battle-2');
     });
 
     it('should return empty array for type with no battles', () => {
@@ -271,7 +299,7 @@ describe('battleTurningPoints', () => {
       
       expect(summary.totalBattles).toBe(5);
       expect(summary.battlesWithTurningPoints).toBe(3);
-      expect(summary.totalTurningPoints).toBe(5);
+      expect(summary.totalTurningPoints).toBe(7);
       expect(summary.typeStats).toBeDefined();
       expect(summary.partyStats).toBeDefined();
       expect(summary.impactStats).toBeDefined();
