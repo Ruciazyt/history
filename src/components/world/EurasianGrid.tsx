@@ -402,11 +402,13 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
 
                   
                   const y = yearToY(visibleStart, minYear, maxYear, gridHeight) - 12; // offset so label sits just above the era boundary line
+                  // Clamp so ancient band label doesn't render above the viewport
+                  const labelTop = Math.max(4, y);
                   return (
                     <div
                       key={band.labelKey}
                       className="absolute left-0 right-0 flex items-center pointer-events-none z-20"
-                      style={{ top: y, marginTop: -22 }}
+                      style={{ top: labelTop, marginTop: 0 }}
                     >
                       <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mr-0.5 shrink-0" />
                       <div className={`w-14 text-[10px] font-bold px-1 py-0.5 text-center rounded-sm shadow-sm ${band.badgeClass}`}>
