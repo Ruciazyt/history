@@ -667,7 +667,7 @@
   "placeNames": {
     "title": "地名変化",
     "noResults": "一致する都市が見つかりません",
-    "activeEmpires": "箇所",
+    "activeEmpires": "{} 箇所",
     "pageDescription": "都市の名前の歴史的変化",
     "searchPlaceholder": "都市名を検索...",
     "citiesCount": "都市",

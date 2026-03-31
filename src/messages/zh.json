@@ -1851,7 +1851,7 @@
   "placeNames": {
     "title": "地名演化",
     "noResults": "未找到匹配的城市",
-    "activeEmpires": "个地名",
+    "activeEmpires": "{} 个地名",
     "pageDescription": "城市在不同历史时期的名称变化",
     "searchPlaceholder": "搜索城市名称...",
     "citiesCount": "个城市",

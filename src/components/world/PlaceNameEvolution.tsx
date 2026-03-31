@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslations, useLocale } from 'next-intl';
 import { PLACE_EVOLUTIONS, type PlaceEvolution } from '@/lib/history/data/placeNameEvolution';
 import { formatYear } from '@/lib/history/utils';
 
@@ -97,7 +98,7 @@ const REGION_COLORS: Record<string, string> = {
   '其他': 'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200',
 };
 
-function PlaceCard({ place }: { place: PlaceEvolution }) {
+function PlaceCard({ place, t }: { place: PlaceEvolution; t: ReturnType<typeof useTranslations> }) {
   const [expanded, setExpanded] = React.useState(false);
 
   const allStart = Math.min(...place.names.map(n => n.startYear));
@@ -122,7 +123,7 @@ function PlaceCard({ place }: { place: PlaceEvolution }) {
         </div>
         <div className="flex items-center gap-2">
           <span className="text-xs text-zinc-400 dark:text-zinc-500">
-            {place.names.length}个名称 · {formatYear(allStart)}–{formatYear(allEnd)}
+            {place.names.length} {t('placeNames.eraNames')} · {formatYear(allStart)}–{formatYear(allEnd)}
           </span>
           <span className="text-zinc-400 dark:text-zinc-500">{expanded ? '▲' : '▼'}</span>
         </div>
@@ -181,7 +182,7 @@ function PlaceCard({ place }: { place: PlaceEvolution }) {
                     <div className="text-xs text-zinc-500 dark:text-zinc-400 shrink-0">{nameEntry.dynasty}</div>
                   )}
                   {isCurrent && (
-                    <span className="text-xs bg-red-500 dark:bg-red-600 text-white dark:text-zinc-100 px-1.5 py-0.5 rounded shrink-0">当前</span>
+                    <span className="text-xs bg-red-500 dark:bg-red-600 text-white dark:text-zinc-100 px-1.5 py-0.5 rounded shrink-0">{t('placeNames.currentIndicator')}</span>
                   )}
                 </div>
               );
@@ -193,7 +194,7 @@ function PlaceCard({ place }: { place: PlaceEvolution }) {
   );
 }
 
-function RegionSection({ region, places }: { region: string; places: PlaceEvolution[] }) {
+function RegionSection({ region, places, t }: { region: string; places: PlaceEvolution[]; t: ReturnType<typeof useTranslations> }) {
   const [collapsed, setCollapsed] = React.useState(false);
 
   return (
@@ -205,7 +206,7 @@ function RegionSection({ region, places }: { region: string; places: PlaceEvolut
       >
         <span className="font-semibold">{region}</span>
         <div className="flex items-center gap-2">
-          <span className="text-sm opacity-75">{places.length} 个城市</span>
+          <span className="text-sm opacity-75">{t('placeNames.regionCities', { count: places.length })}</span>
           <span>{collapsed ? '▶' : '▼'}</span>
         </div>
       </button>
@@ -213,7 +214,7 @@ function RegionSection({ region, places }: { region: string; places: PlaceEvolut
       {!collapsed && (
         <div className="grid gap-2">
           {places.map(place => (
-            <PlaceCard key={place.modernName} place={place} />
+            <PlaceCard key={place.modernName} place={place} t={t} />
           ))}
         </div>
       )}
@@ -222,8 +223,9 @@ function RegionSection({ region, places }: { region: string; places: PlaceEvolut
 }
 
 export function PlaceNameEvolution({}: { initialPlaceId?: string }) {
+  const t = useTranslations();
+  const locale = useLocale();
   const [searchQuery, setSearchQuery] = React.useState('');
-  const [locale, setLocale] = React.useState('zh');
 
   // 按区域分组
   const groupedPlaces = React.useMemo(() => {
@@ -248,7 +250,7 @@ export function PlaceNameEvolution({}: { initialPlaceId?: string }) {
     if (!searchQuery) return groupedPlaces;
     const query = searchQuery.toLowerCase();
     const filtered: Record<string, PlaceEvolution[]> = {};
-    
+
     for (const [region, places] of Object.entries(groupedPlaces)) {
       const matched = places.filter(place => {
         const matchesName = place.names.some(n => n.name.toLowerCase().includes(query));
@@ -270,18 +272,23 @@ export function PlaceNameEvolution({}: { initialPlaceId?: string }) {
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-3">
             <div>
-              <h1 className="text-xl font-bold text-zinc-900">
-                🏛️ {locale === 'zh' ? '地名演化' : 'Place Name Evolution'}
+              <h1 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
+                🏛️ {t('placeNames.title')}
               </h1>
               <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-0.5">
-                {locale === 'zh' ? '城市名称的历史变迁' : 'Historical changes of city names'}
+                {t('placeNames.pageDescription')}
               </p>
             </div>
             <button
-              onClick={() => setLocale(l => l === 'zh' ? 'en' : 'zh')}
+              onClick={() => {
+                const nextLocale = locale === 'zh' ? 'en' : 'zh';
+                const pathname = window.location.pathname;
+                const newPath = pathname.replace(`/${locale}`, `/${nextLocale}`);
+                window.location.href = newPath;
+              }}
               className="px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 text-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
             >
-              {locale === 'zh' ? 'EN' : '中文'}
+              {locale === 'zh' ? t('placeNames.toggleLocale') : t('placeNames.toggleLocaleAlt')}
             </button>
           </div>
 
@@ -290,14 +297,14 @@ export function PlaceNameEvolution({}: { initialPlaceId?: string }) {
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              placeholder={locale === 'zh' ? '搜索城市名称...' : 'Search city names...'}
+              placeholder={t('placeNames.searchPlaceholder')}
               className="w-full px-4 py-2 pl-10 rounded-lg bg-zinc-50 border border-zinc-200 text-sm focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-100"
             />
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400">🔍</span>
           </div>
 
           <div className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-            {totalCities} {locale === 'zh' ? '个城市' : 'cities'}
+            {t('placeNames.activeEmpires', { count: totalCities })}
           </div>
         </div>
       </header>
@@ -307,12 +314,12 @@ export function PlaceNameEvolution({}: { initialPlaceId?: string }) {
           <div className="text-center py-12">
             <div className="text-5xl mb-4">🏛️</div>
             <p className="text-zinc-500 dark:text-zinc-400">
-              {locale === 'zh' ? '未找到匹配的城市' : 'No matching cities found'}
+              {t('placeNames.noResults')}
             </p>
           </div>
         ) : (
           Object.entries(filteredGroups).map(([region, places]) => (
-            <RegionSection key={region} region={region} places={places} />
+            <RegionSection key={region} region={region} places={places} t={t} />
           ))
         )}
       </main>
