@@ -2303,5 +2303,22 @@
   "rulerHighlight.wc-pe-xerxes": "入侵希腊；温泉关与萨拉米斯海战（公元前480-479年）",
   "rulerHighlight.wc-pe-ardashir": "建立萨珊王朝；复兴琐罗亚斯德教波斯帝国",
   "rulerHighlight.wc-pe-safavid": "确立十二伊玛目什叶派为伊朗国教；沙阿·阿拔斯一世（在位1588-1629年）时达鼎盛",
-  "grid.region.southeast-asia": "东南亚"
+  "grid.region.southeast-asia": "东南亚",
+  "ruler.wc-cn-taizong": "唐太宗",
+  "ruler.wc-cn-wuhan": "汉武帝",
+  "ruler.wc-pe-khosrow": "库萨和一世",
+  "ruler.wc-pe-sassanid-dyn": "萨珊波斯帝国",
+  "ruler.wc-ro-basil": "巴西尔二世",
+  "ruler.wc-ro-theodosius": "狄奥多西一世",
+  "rulerBio.wc-cn-taizong": "唐朝皇帝（626-649年）；隋亡后统一天下；颁布《贞观律》；疆域扩展至中亚；佛教护持者；与汉武帝并称中国最伟大帝王。",
+  "rulerBio.wc-cn-wuhan": "汉朝皇帝（公元前141-87年）；疆域扩至中亚、朝鲜半岛、越南；开通丝绸之路；独尊儒术；青铜、诗歌、音乐黄金时代；汉朝鼎盛期。",
+  "rulerBio.wc-pe-khosrow": "库萨和一世（阿努希尔凡）；萨珊波斯鼎盛期；编纂《马兹达祭词》；击败拜占庭；与查士丁尼争雄；推行行政改革。",
+  "rulerBio.wc-pe-sassanid": "萨珊波斯帝国；国教为琐罗亚斯德教；与罗马、拜占庭长期对抗；文化艺术高度繁荣。",
+  "rulerBio.wc-ro-basil": "拜占庭皇帝（976-1025年）；马其顿王朝；收复保加利亚，灭亡第一保加利亚帝国；文艺庇护者；恢复帝国军事与财政实力；人称\"保加利亚人杀手\"。",
+  "rulerBio.wc-ro-theodosius": "罗马皇帝（379-395年）；最后一位同时统治东西罗马的皇帝；确立基督教为国教；主持编纂《狄奥多西法典》；其死后帝国永久分裂。",
+  "rulerHighlight.wc-cn-taizong": "唐太宗（626-649年）；中国最伟大帝王之一；开创贞观之治，为盛唐奠基。",
+  "rulerHighlight.wc-cn-wuhan": "汉武帝（公元前141-87年）；开疆拓土至中亚；开通丝绸之路；汉朝全盛时期。",
+  "rulerHighlight.wc-pe-khosrow": "萨珊波斯鼎盛（531-579年）；\"不朽之魂\"；琐罗亚斯德教黄金时代；与罗马-拜占庭战争；为后来伊斯兰文明奠定基础。",
+  "rulerHighlight.wc-ro-basil": "拜占庭皇帝（976-1025年）；\"保加利亚人杀手\"；恢复拜占庭在巴尔干的霸权。",
+  "rulerHighlight.wc-ro-theodosius": "最后一位统治统一罗马帝国的皇帝（379-395年）；确立基督教为国教。"
 }
