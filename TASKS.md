@@ -4,6 +4,49 @@
 https://history.ruciazyt.cn
 
 
+## 2026-04-01 UI优化与架构完善 - 第四十一轮
+### i18n 命名空间修复：BattlesClient/BattleTimeline era 名称查找
+- [x] BattlesClient.tsx: 修复 era 名称查找使用错误的 i18n 命名空间
+  - `tEra` (useTranslations('rulerEraName')) 被用于 `era.nameKey` 查找
+  - era.nameKey 使用顶级 'era' 命名空间（如 'era.qing'），而非 'rulerEraName'
+  - 修复: getBattleCountByEra(..., t) 和 eraOptions name 查找改用 t()
+  - 移除 BattleTimeline 的 tEra prop（不再需要）
+  - 移除 BattlesClient 中未使用的 tEra 导入
+
+### i18n 修复：BattleOfTheDayCard 战役类型徽章
+- [x] BattleOfTheDayCard.tsx: 修复错误的 battleType i18n 键
+  - 原使用 'battle.battleType.xxx'（不存在于消息文件）
+  - 改用 getBattleTypeName() 返回正确的 'battle.type.xxx' 键
+  - 导入 getBattleTypeName 函数
+
+### 清理：移除遗留备份文件
+- [x] 删除 src/components/common/SearchBox.tsx.bak（已追踪）
+- [x] 确认 src/components/world/EurasianGrid.tsx.bak（未追踪）已删除
+
+### 翻译补全：添加缺失的 event 翻译
+- [x] zh.json: 新增 14 个缺失事件翻译
+- [x] en.json: 新增 14 个缺失事件翻译
+- [x] ja.json: 新增 6 个缺失事件翻译
+  - 包括: ming-1619-sahulu、战国征服系列事件等
+  - 自动生成占位翻译
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 973个测试用例全部通过
+- [x] 代码已提交 (commit: d6e6c38)
+- [x] 代码已推送至仓库
+
+### 优化说明
+- 修复了 BattlesClient 中 era 名称使用错误命名空间的 bug
+- 修复了 BattleOfTheDayCard 战役类型徽章使用错误 i18n 键的 bug
+- 清理了遗留的备份文件
+- 补全了 14+ 个缺失的事件翻译，减少构建时的 MISSING_MESSAGE 错误
+- 项目保持健壮可用状态
+
+### 备注
+- /on-this-day 页面的 ENVIRONMENT_FALLBACK 构建错误为既有issue，与本次修改无关（已通过原始代码验证）
+
+
 ## 2026-03-31 UI优化与架构完善 - 第四十轮
 ### i18n 国际化完善: SearchBox 搜索结果子标题硬编码修复
 - [x] SearchBox.tsx: 搜索结果下拉菜单中的子标题标签 i18n 化
