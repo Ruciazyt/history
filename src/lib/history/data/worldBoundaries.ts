@@ -326,6 +326,20 @@ export const eurasianBoundaries: WorldBoundary[] = [
     },
   },
 
+  // ═══ 基辅罗斯 (Kievan Rus') ═══
+  {
+    type: 'Feature',
+    properties: { name: '基辅罗斯', nameKey: 'empire_kievan-rus', startYear: 882, endYear: 1478, color: '#4A5568' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [22, 48], [26, 50], [30, 52], [35, 54], [40, 56], [45, 58], [50, 58],
+        [50, 56], [48, 54], [45, 52], [40, 50], [35, 48], [30, 47], [25, 47],
+        [22, 48],
+      ]],
+    },
+  },
+
   // ═══ 其他帝国 ═══
   {
     type: 'Feature',
