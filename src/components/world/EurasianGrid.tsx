@@ -64,16 +64,17 @@ const WEST_NAMESMatches = ['罗马', '拜占庭', '奥斯曼', '波斯', '阿契
 /** Era band configuration: defines historical period dividers shown on the grid */
 interface EraBandDef {
   labelKey: string;
-  /** Background CSS class applied to the era band in the grid column */
+  /** Short label key for inline grid use (fits in narrow w-14 badge) */
+  shortLabelKey: string;
   bgClass: string;
   /** Label badge CSS class shown on the Y-axis */
   badgeClass: string;
 }
 
 export const ERA_BANDS: EraBandDef[] = [
-  { labelKey: 'grid.eraBand.ancient',    bgClass: 'bg-amber-50/70',   badgeClass: 'bg-amber-100/80 text-amber-700' },
-  { labelKey: 'grid.eraBand.medieval',   bgClass: 'bg-stone-50/60',   badgeClass: 'bg-stone-200/80 text-stone-700' },
-  { labelKey: 'grid.eraBand.earlyModern', bgClass: 'bg-blue-50/50',   badgeClass: 'bg-blue-100/80 text-blue-700' },
+  { labelKey: 'grid.eraBand.ancient',      shortLabelKey: 'grid.eraBand.ancient_short',      bgClass: 'bg-amber-50/70',   badgeClass: 'bg-amber-100/80 text-amber-700' },
+  { labelKey: 'grid.eraBand.medieval',     shortLabelKey: 'grid.eraBand.medieval_short',     bgClass: 'bg-stone-50/60',   badgeClass: 'bg-stone-200/80 text-stone-700' },
+  { labelKey: 'grid.eraBand.earlyModern',  shortLabelKey: 'grid.eraBand.earlyModern_short',  bgClass: 'bg-blue-50/50',   badgeClass: 'bg-blue-100/80 text-blue-700' },
 ];
 
 /** Era band boundary years (chronological order)
@@ -417,7 +418,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                     >
                       <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mr-0.5 shrink-0" />
                       <div className={`w-14 text-[10px] font-bold px-1 py-0.5 text-center rounded-sm shadow-sm ${band.badgeClass}`}>
-                        {t(band.labelKey)}
+                        {t(band.shortLabelKey)}
                       </div>
                       <div className="flex-1 h-0.5 bg-amber-400/70" />
                     </div>
@@ -625,7 +626,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
               {t('grid.activeAtYear', { year: formatYear(currentYear) })}
             </div>
             <div className={`mt-0.5 text-[10px] font-medium px-1.5 py-0.5 rounded-md w-fit ${ERA_BANDS[getEraBandIndex(currentYear)]!.badgeClass}`}>
-              {t(ERA_BANDS[getEraBandIndex(currentYear)]!.labelKey)}
+              {t(ERA_BANDS[getEraBandIndex(currentYear)]!.shortLabelKey)}
             </div>
             {/* Era progress bar */}
             {(() => {
