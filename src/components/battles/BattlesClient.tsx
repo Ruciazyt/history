@@ -15,6 +15,7 @@ import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 import { useTranslations } from 'next-intl';
 import { BATTLES_CLIENT_COLORS, ERA_COLORS } from '@/lib/history/constants';
 import { useBattleFavorites } from '@/lib/history/useBattleHooks';
+import { getCasualtyStats } from '@/lib/history/battleCasualties';
 
 export function BattlesClient({
   eras,
@@ -33,6 +34,9 @@ export function BattlesClient({
   
   // Battle statistics
   const stats = React.useMemo(() => getBattleStats(battles), [battles]);
+  
+  // Casualty statistics
+  const casualtyStats = React.useMemo(() => getCasualtyStats(events), [events]);
   
   // Battle count by era
   const battleCountByEra = React.useMemo(() => 
@@ -242,7 +246,36 @@ export function BattlesClient({
                 <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.inconclusive.label}`}>胜负未明</div>
               </div>
             </div>
-            
+
+            {/* Casualties stats */}
+            {casualtyStats.battlesWithCasualties > 0 && (
+              <div className="mt-3">
+                <div className={`text-xs ${BATTLES_CLIENT_COLORS.eraDistribution.label} mb-2`}>💀 伤亡统计</div>
+                <div className={`bg-gradient-to-br ${BATTLES_CLIENT_COLORS.statCards.casualties.gradient} rounded-xl p-3 border ${BATTLES_CLIENT_COLORS.statCards.casualties.border}`}>
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex-1 text-center">
+                      <div className={`text-xl font-bold ${BATTLES_CLIENT_COLORS.statCards.casualties.value}`}>
+                        {casualtyStats.totalCasualties.toLocaleString()}
+                      </div>
+                      <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>总伤亡</div>
+                    </div>
+                    <div className="flex-1 text-center">
+                      <div className={`text-xl font-bold ${BATTLES_CLIENT_COLORS.statCards.casualties.value}`}>
+                        {casualtyStats.battlesWithCasualties}
+                      </div>
+                      <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>有伤亡记录</div>
+                    </div>
+                    <div className="flex-1 text-center">
+                      <div className={`text-xl font-bold ${BATTLES_CLIENT_COLORS.statCards.casualties.value}`}>
+                        {Math.round(casualtyStats.averageCasualties).toLocaleString()}
+                      </div>
+                      <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>场均伤亡</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Era distribution */}
             {battleCountByEra.length > 0 && (
               <div className="mt-3">

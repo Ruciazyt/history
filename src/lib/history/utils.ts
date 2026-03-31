@@ -332,3 +332,16 @@ export function shallowEqual(obj1: Record<string, unknown>, obj2: Record<string,
   if (keys1.length !== keys2.length) return false;
   return keys1.every(key => obj1[key] === obj2[key]);
 }
+
+/**
+ * Check if a pathname matches a given route path.
+ * Handles trailing slashes and locale prefixes.
+ * @param pathname - The full pathname from usePathname()
+ * @param locale - The current locale
+ * @param path - The route path to match (e.g. '/timeline', '/battles')
+ */
+export function matchPath(pathname: string, locale: string, path: string): boolean {
+  // Strip trailing slash for comparison
+  const clean = (s: string) => s.replace(/\/$/, '');
+  return clean(pathname) === `/${locale}${path}`;
+}

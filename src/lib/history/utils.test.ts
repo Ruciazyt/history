@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatYear, clamp, truncate, groupBy, sortBy, uniqueBy, get, isEmpty, generateId, pick, omit, arraysEqual, toOrdinal, percentage, formatNumberWithUnit, parseYear, isEvent, hasBattleData, isArray, isString, isNumber, isObject, capitalize, camelToKebab, kebabToCamel, range, average, sum, shallowEqual } from './utils';
+import { formatYear, clamp, truncate, groupBy, sortBy, uniqueBy, get, isEmpty, generateId, pick, omit, arraysEqual, toOrdinal, percentage, formatNumberWithUnit, parseYear, isEvent, hasBattleData, isArray, isString, isNumber, isObject, capitalize, camelToKebab, kebabToCamel, range, average, sum, shallowEqual, matchPath } from './utils';
 import type { Event } from './types';
 
 describe('utils', () => {
@@ -362,6 +362,38 @@ describe('utils', () => {
       expect(shallowEqual({ a: 1, b: 2 }, { a: 1, b: 2 })).toBe(true);
       expect(shallowEqual({ a: 1 }, { a: 1, b: 2 })).toBe(false);
       expect(shallowEqual({ a: 1, b: 2 }, { a: 1, c: 2 })).toBe(false);
+    });
+  });
+
+  describe('matchPath', () => {
+    it('should match root locale path', () => {
+      expect(matchPath('/zh', 'zh', '')).toBe(true);
+      expect(matchPath('/zh/', 'zh', '')).toBe(true);
+      expect(matchPath('/en', 'en', '')).toBe(true);
+    });
+
+    it('should NOT match root when path is non-empty', () => {
+      expect(matchPath('/zh/timeline', 'zh', '')).toBe(false);
+    });
+
+    it('should match sub-paths', () => {
+      expect(matchPath('/zh/timeline', 'zh', '/timeline')).toBe(true);
+      expect(matchPath('/zh/battles', 'zh', '/battles')).toBe(true);
+      expect(matchPath('/zh/on-this-day', 'zh', '/on-this-day')).toBe(true);
+      expect(matchPath('/en/quiz', 'en', '/quiz')).toBe(true);
+      expect(matchPath('/ja/world', 'ja', '/world')).toBe(true);
+    });
+
+    it('should handle trailing slash on sub-paths', () => {
+      expect(matchPath('/zh/timeline/', 'zh', '/timeline')).toBe(true);
+    });
+
+    it('should not match wrong locale', () => {
+      expect(matchPath('/en/timeline', 'zh', '/timeline')).toBe(false);
+    });
+
+    it('should not match wrong path', () => {
+      expect(matchPath('/zh/battles', 'zh', '/timeline')).toBe(false);
     });
   });
 });

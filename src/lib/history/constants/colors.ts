@@ -431,12 +431,14 @@ export const BATTLE_STATS_GRADIENTS = {
   defenderWins: 'from-blue-50 to-indigo-50',
   draws: 'from-gray-50 to-zinc-50',
   inconclusive: 'from-yellow-50 to-amber-50',
+  casualties: 'from-red-50 to-rose-50',
 } as const;
 export const BATTLE_STATS_BORDER_COLORS = {
   attackerWins: 'border-red-100',
   defenderWins: 'border-blue-100',
   draws: 'border-zinc-200',
   inconclusive: 'border-yellow-100',
+  casualties: 'border-red-200',
 } as const;
 export const TIMELINE_COLORS = {
   background: 'bg-zinc-900',
@@ -951,6 +953,12 @@ export const BATTLES_CLIENT_COLORS = {
       border: BATTLE_STATS_BORDER_COLORS.inconclusive,
       value: STATS_TEXT_COLORS.yellow,
       label: STATS_LABEL_COLORS.yellow,
+    },
+    casualties: {
+      gradient: BATTLE_STATS_GRADIENTS.casualties,
+      border: BATTLE_STATS_BORDER_COLORS.casualties,
+      value: STATS_TEXT_COLORS.red,
+      label: STATS_LABEL_COLORS.red,
     },
   },
   eraFilter: {
