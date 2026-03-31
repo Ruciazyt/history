@@ -4,7 +4,7 @@ import * as React from 'react';
 import type { Event } from '@/lib/history/types';
 import { formatYear } from '@/lib/history/utils';
 import { getBattleResultLabel, getBattleImpactLabel } from '@/lib/history/battles';
-import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, BATTLE_SCALE_COLORS, ERA_COLORS, COMMANDER_COLORS, SELECTION_COLORS, BATTLE_CARD_COLORS, FAVORITE_BUTTON_COLORS } from '@/lib/history/constants';
+import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, BATTLE_SCALE_COLORS, ERA_COLORS, ERA_COLORS_DARK, COMMANDER_COLORS, SELECTION_COLORS, BATTLE_CARD_COLORS, FAVORITE_BUTTON_COLORS } from '@/lib/history/constants';
 import { useTranslations } from 'next-intl';
 import { BattleDetail } from './BattleDetail';
 import { useBattleFavorites } from '@/lib/history/useBattleHooks';
@@ -20,7 +20,16 @@ interface BattleCardProps {
 }
 
 // Get era styles using ERA_COLORS from constants
-function getEraStyles(entityId: string): { gradient: string; border: string } {
+function getEraStyles(entityId: string, isDark: boolean): { gradient: string; border: string } {
+  if (isDark) {
+    const darkColor = ERA_COLORS_DARK[entityId];
+    if (darkColor) return darkColor;
+    // Fallback dark gradient if no era match
+    return {
+      gradient: 'from-zinc-800 to-zinc-900',
+      border: 'border-zinc-600',
+    };
+  }
   const eraColor = ERA_COLORS[entityId];
   return {
     gradient: eraColor?.gradient || BATTLE_CARD_COLORS.fallback.gradient,
@@ -28,16 +37,32 @@ function getEraStyles(entityId: string): { gradient: string; border: string } {
   };
 }
 
+// Reads data-theme from the DOM (avoids coupling to ThemeProvider)
+function useDarkMode(): boolean {
+  const [isDark, setIsDark] = React.useState(false);
+  React.useEffect(() => {
+    const theme = document.documentElement.dataset.theme;
+    setIsDark(theme === 'dark');
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.dataset.theme === 'dark');
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    return () => observer.disconnect();
+  }, []);
+  return isDark;
+}
+
 export const BattleCard = React.memo(function BattleCard({ battle, onClick, selected, selectionMode, onSelect, locale = 'zh' }: BattleCardProps) {
   const t = useTranslations();
   const [showDetail, setShowDetail] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
+  const isDark = useDarkMode();
 
   // Favorites functionality
   const { toggleFavorite, isFavorite } = useBattleFavorites();
   const isFavorited = isFavorite(battle.id);
 
-  const { gradient: eraGradient, border: eraBorder } = getEraStyles(battle.entityId);
+  const { gradient: eraGradient, border: eraBorder } = getEraStyles(battle.entityId, isDark);
   const battleResult = battle.battle?.result;
 
   // 结果颜色 - use constants

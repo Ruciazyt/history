@@ -182,6 +182,105 @@ export const ERA_COLORS: Record<string, { bg: string; text: string; dot: string;
     border: 'border-red-200',
   },
 };
+/**
+ * Dark-mode era colors for BattleCard and other era-colored components.
+ * Keys match ERA_COLORS. Values are dark-mode Tailwind classes.
+ */
+export const ERA_COLORS_DARK: Record<string, { gradient: string; border: string }> = {
+  'wz-western-zhou': {
+    gradient: 'from-amber-950 to-orange-950',
+    border: 'border-amber-700',
+  },
+  'period-spring-autumn': {
+    gradient: 'from-blue-950 to-indigo-950',
+    border: 'border-blue-700',
+  },
+  'period-warring-states': {
+    gradient: 'from-purple-950 to-red-950',
+    border: 'border-purple-700',
+  },
+  'qin': {
+    gradient: 'from-zinc-800 to-zinc-900',
+    border: 'border-zinc-600',
+  },
+  'han-western': {
+    gradient: 'from-red-950 to-orange-950',
+    border: 'border-red-700',
+  },
+  'han': {
+    gradient: 'from-red-950 to-orange-950',
+    border: 'border-red-700',
+  },
+  'xin': {
+    gradient: 'from-yellow-950 to-amber-950',
+    border: 'border-yellow-700',
+  },
+  'period-chu-han': {
+    gradient: 'from-purple-950 to-violet-950',
+    border: 'border-purple-700',
+  },
+  'han-eastern': {
+    gradient: 'from-orange-950 to-amber-950',
+    border: 'border-orange-700',
+  },
+  'period-three-kingdoms': {
+    gradient: 'from-green-950 to-emerald-950',
+    border: 'border-green-700',
+  },
+  'three-kingdoms': {
+    gradient: 'from-green-950 to-emerald-950',
+    border: 'border-green-700',
+  },
+  'jin-western': {
+    gradient: 'from-cyan-950 to-blue-950',
+    border: 'border-cyan-700',
+  },
+  'jin-eastern-16k': {
+    gradient: 'from-teal-950 to-cyan-950',
+    border: 'border-teal-700',
+  },
+  'southern-northern': {
+    gradient: 'from-indigo-950 to-purple-950',
+    border: 'border-indigo-700',
+  },
+  'sui': {
+    gradient: 'from-rose-950 to-pink-950',
+    border: 'border-rose-700',
+  },
+  'tang': {
+    gradient: 'from-orange-950 to-amber-950',
+    border: 'border-orange-700',
+  },
+  'five-dynasties-ten-kingdoms': {
+    gradient: 'from-pink-950 to-rose-950',
+    border: 'border-pink-700',
+  },
+  'song': {
+    gradient: 'from-violet-950 to-purple-950',
+    border: 'border-violet-700',
+  },
+  'yuan': {
+    gradient: 'from-sky-950 to-blue-950',
+    border: 'border-sky-700',
+  },
+  'ming': {
+    gradient: 'from-amber-950 to-yellow-950',
+    border: 'border-amber-700',
+  },
+  'qing': {
+    gradient: 'from-emerald-950 to-green-950',
+    border: 'border-emerald-700',
+  },
+  'roc': {
+    gradient: 'from-blue-950 to-cyan-950',
+    border: 'border-blue-700',
+  },
+  'prc': {
+    gradient: 'from-red-950 to-orange-950',
+    border: 'border-red-700',
+  },
+};
+
 export const BATTLE_RESULT_COLORS: Record<string, { bg: string; text: string; ring: string }> = {
   attacker_win: { bg: 'bg-red-500 dark:bg-red-600', text: 'text-red-700 dark:text-red-200', ring: 'ring-red-500 dark:ring-red-400' },
   defender_win: { bg: 'bg-blue-500 dark:bg-blue-600', text: 'text-blue-700 dark:text-blue-200', ring: 'ring-blue-500 dark:ring-blue-400' },
