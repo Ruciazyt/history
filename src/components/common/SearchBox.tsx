@@ -84,7 +84,7 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
           id: event.id,
           titleKey: event.titleKey,
           title: translatedTitle,
-          subtitle: isWar ? '⚔️ 战役' : '📅 事件',
+          subtitle: isWar ? `⚔️ ${t('nav.battles')}` : `📅 ${t('ui.events')}`,
           year: event.year,
         });
       }
