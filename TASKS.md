@@ -1272,3 +1272,26 @@ src/
 - 增强 BattleOfTheDayCard 的发现价值，用户可感知同一时代还有多少战役
 - 与现有功能无缝集成，改动小、价值高
 - 测试覆盖新增函数的边界情况（空结果、单一战役、非战役事件）
+
+## 2026-03-31 UI优化与架构完善 - 第三十九轮
+### i18n国际化完善：PlaceNameEvolution组件接入next-intl
+- [x] PlaceNameEvolution.tsx: 移除本地useState locale，改用useLocale()和useTranslations('placeNames')
+  - 移除硬编码字符串：标题、描述、语言切换按钮、搜索提示、城市计数、无结果提示、时代名称徽章、当前指示器
+  - PlaceCard和RegionSection组件通过props接收t()函数
+  - 语言切换改为通过URL导航(/zh ↔ /en)而非本地状态，与app的locale路由系统一致
+- [x] messages/zh.json & ja.json: 更新activeEmpires键，添加{}占位符支持count插值
+  - zh: `"个地名"` → `"{} 个地名"`
+  - ja: `"{} 箇所"` (已有占位符)
+
+### 验证结果
+- [x] Lint检查通过 (0错误, 0警告)
+- [x] 单元测试: 967个测试用例全部通过
+- [x] 构建验证通过
+- [x] 代码已提交 (commit: 9ee01ac)
+- [x] 代码已推送至仓库
+
+### 优化说明
+- PlaceNameEvolution组件现在与app的next-intl系统完全集成
+- 消除组件内部locale状态与app级locale路由的不一致
+- 所有UI文本均支持中/英/日三语言，与项目其他组件保持一致
+- 项目保持健壮可用状态
