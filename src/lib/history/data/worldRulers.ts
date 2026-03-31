@@ -28,7 +28,11 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-ro-heraclius', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-heraclius', bioKey: 'rulerBio.wc-ro-heraclius', startYear: 610, endYear: 641 },
   { id: 'wc-ro-byzantine-mid', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-byzantine-dyn', bioKey: 'rulerBio.wc-ro-byzantine-mid', startYear: 800, endYear: 1100 , isDynastyBlock: true },
   { id: 'wc-ro-byz-fall', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-byz-fall-dyn', bioKey: 'rulerBio.wc-ro-byz-fall', startYear: 1100, endYear: 1453 , isDynastyBlock: true },
+  // ── Holy Roman Empire (Frederick Barbarossa) ─────────────────────────
+  { id: 'wc-ro-frederick', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-frederick', bioKey: 'rulerBio.wc-ro-frederick', highlightKey: 'rulerHighlight.wc-ro-frederick', startYear: 1152, endYear: 1190 },
   { id: 'wc-ro-suleiman', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-suleiman', bioKey: 'rulerBio.wc-ro-suleiman', highlightKey: 'rulerHighlight.wc-ro-suleiman', startYear: 1520, endYear: 1566 },
+  // ── Holy Roman Empire / Spanish Empire (Charles V) ────────────────────
+  { id: 'wc-ro-charles-v', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-charles-v', bioKey: 'rulerBio.wc-ro-charles-v', highlightKey: 'rulerHighlight.wc-ro-charles-v', startYear: 1519, endYear: 1556 },
   { id: 'wc-ro-ottoman-late', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-ottoman-dyn', bioKey: 'rulerBio.wc-ro-ottoman-late', startYear: 1566, endYear: 1912 , isDynastyBlock: true },
 
   // ── Egypt ─────────────────────────────────────────────────────────────

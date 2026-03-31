@@ -2277,5 +2277,11 @@
   "rulerHighlight.wc-ro-marcus-aurelius": "Roman Emperor (161–180 CE); Stoic philosopher author of Meditations; last of the Five Good Emperors; faced Germanic invasions.",
   "ruler.wc-ro-diocletian": "Diocletian",
   "rulerBio.wc-ro-diocletian": "Diocletian; ended the Crisis of the Third Century; established the Tetrarchy; reorganized provinces; persecuted Christians.",
-  "rulerHighlight.wc-ro-diocletian": "Roman Emperor (284–305 CE); ended the Crisis of the Third Century; established the Tetrarchy (rule of four); reformed the empire's administration."
+  "rulerHighlight.wc-ro-diocletian": "Roman Emperor (284–305 CE); ended the Crisis of the Third Century; established the Tetrarchy (rule of four); reformed the empire's administration.",
+  "ruler.wc-ro-frederick": "Frederick Barbarossa",
+  "rulerBio.wc-ro-frederick": "Holy Roman Emperor (1152-1190); Hohenstaufen dynasty; attempted imperial reform; drowned on Third Crusade in Anatolia.",
+  "rulerHighlight.wc-ro-frederick": "Hohenstaufen emperor; crusader king; \"the gerontion\"",
+  "ruler.wc-ro-charles-v": "Charles V",
+  "rulerBio.wc-ro-charles-v": "Holy Roman Emperor & King of Spain (1519-1556); Habsburg dynasty; ruled Spain, Austria, Netherlands, and Spanish Americas; faced the Protestant Reformation.",
+  "rulerHighlight.wc-ro-charles-v": "Most powerful European monarch of his era; empire on which the sun never set"
 }
