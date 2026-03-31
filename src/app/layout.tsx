@@ -3,7 +3,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'History Atlas',
-  description: 'History learning atlas MVP',
+  description: 'History learning atlas - Explore Chinese dynasties, historical events and figures',
   keywords: ['history', 'atlas', 'China', 'dynasty', 'timeline', 'map'],
   authors: [{ name: 'History Atlas Team' }],
   icons: {
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'History Atlas',
-    description: 'History learning atlas MVP',
+    description: 'History learning atlas - Explore Chinese dynasties, historical events and figures',
     type: 'website',
   },
 };
