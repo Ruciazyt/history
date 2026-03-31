@@ -2287,5 +2287,17 @@
   "rulerHighlight.wc-ro-heraclius": "Defeated Sassanid Persia, saved Byzantium, but lost to Arab expansion (632-641 CE)",
   "rulerHighlight.wc-pe-xerxes": "Invaded Greece; Thermopylae and Salamis battles (480-479 BCE)",
   "rulerHighlight.wc-pe-ardashir": "Founded Sassanid dynasty; revived Zoroastrian Persian empire",
-  "rulerHighlight.wc-pe-safavid": "Established Twelver Shi'a Islam as Iran's state religion; peak under Shah Abbas I (1588-1629)"
+  "rulerHighlight.wc-pe-safavid": "Established Twelver Shi'a Islam as Iran's state religion; peak under Shah Abbas I (1588-1629)",
+  "ruler.wc-cn-taizong": "Emperor Taizong of Tang",
+  "ruler.wc-cn-wuhan": "Emperor Wu of Han",
+  "ruler.wc-ro-theodosius": "Theodosius I",
+  "ruler.wc-ro-basil": "Basil II",
+  "rulerBio.wc-cn-taizong": "Tang dynasty emperor (626-649 CE); consolidated the Tang state after the Sui collapse; promulgated the Eternal Administrative Code; expanded empire to Central Asia; patron of Buddhism; considered one of the greatest Chinese emperors alongside Emperor Wu of Han.",
+  "rulerBio.wc-cn-wuhan": "Han dynasty emperor (141-87 BCE); extended Han rule into Central Asia, the Korean peninsula, and northern Vietnam; opened the Silk Road; promoted Confucianism as state ideology; golden age of bronze, poetry, and music; his reign marked the height of Han power.",
+  "rulerBio.wc-ro-theodosius": "Roman emperor (379-395 CE); last emperor to rule both Eastern and Western Roman Empire; established Christianity as the official state religion; commissioned the Codex Theodosianus legal code; divided the empire permanently after his death.",
+  "rulerBio.wc-ro-basil": "Byzantine emperor (976-1025 CE); Macedonian dynasty; reconquered Bulgaria, ending the First Bulgarian Empire; patron of arts and architecture; restored Byzantine military and financial strength; known as \"Basil the Bulgar-Slayer.\"",
+  "rulerHighlight.wc-cn-taizong": "Tang Emperor Taizong (626-649 CE); one of the greatest Chinese emperors; established the foundation of the Tang golden age.",
+  "rulerHighlight.wc-cn-wuhan": "Han Emperor Wu (141-87 BCE); expanded empire to Central Asia; opened the Silk Road; golden age of Han China.",
+  "rulerHighlight.wc-ro-theodosius": "Last emperor to rule a united Roman Empire (379-395 CE); made Christianity the official state religion.",
+  "rulerHighlight.wc-ro-basil": "Byzantine Emperor (976-1025 CE); \"Basil the Bulgar-Slayer\"; restored Byzantine greatness in the Balkans."
 }

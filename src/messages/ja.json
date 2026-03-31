@@ -2343,5 +2343,17 @@
   "rulerHighlight.wc-ro-heraclius": "サーサーン朝ペルシアを破り、ビザンツを救うが、アラブの拡張には敗れた（632-641年）",
   "rulerHighlight.wc-pe-xerxes": "ギリシャ侵攻（紀元前480-479年）；テルモピュレとサラミスの戦い",
   "rulerHighlight.wc-pe-ardashir": "サーサーン朝を建国；ゾロアスター教ペルシア帝国を復活",
-  "rulerHighlight.wc-pe-safavid": "十二イマーム・シーア派を国教に採用；シャー・アッバース1世（在位1588-1629年）に全盛期"
+  "rulerHighlight.wc-pe-safavid": "十二イマーム・シーア派を国教に採用；シャー・アッバース1世（在位1588-1629年）に全盛期",
+  "ruler.wc-cn-taizong": "唐の太宗",
+  "ruler.wc-cn-wuhan": "漢の武帝",
+  "ruler.wc-ro-theodosius": "テオドシウス1世",
+  "ruler.wc-ro-basil": "バシレイオス2世",
+  "rulerBio.wc-cn-taizong": "唐王朝の皇帝（626-649年）。隋の崩壊後に唐を再統一。太宗法典を公布。中央アジアに進出仏教を保護。中国史上最高の皇帝の一人。",
+  "rulerBio.wc-cn-wuhan": "漢王朝の皇帝（紀元前141-87年）。中央アジア・朝鮮半島・越南に漢の統治を拡大。シルクロードを開拓。儒教を国教とした。漢の黄金時代を象徴する皇帝。",
+  "rulerBio.wc-ro-theodosius": "ローマ皇帝（379-395年）。東西ローマ帝国を最後に統一した皇帝。キリスト教を国教と定めた。テオドシウス法典を編纂。",
+  "rulerBio.wc-ro-basil": "東ローマ皇帝（976-1025年）。マケドニア王朝。ブルガリアを征服し「ブルガールスレイヤー」と呼ばれた。ビザンツの軍事・財政力を回復。",
+  "rulerHighlight.wc-cn-taizong": "唐の太宗（626-649年）— 唐の黄金時代の基礎を築いた名君",
+  "rulerHighlight.wc-cn-wuhan": "漢の武帝（紀元前141-87年）— シルクロードを開拓した漢最强の皇帝",
+  "rulerHighlight.wc-ro-theodosius": "東西統一最後のローマ皇帝（379-395年）",
+  "rulerHighlight.wc-ro-basil": "東ローマ皇帝（976-1025年）— 「ブルガールスレイヤー」"
 }
