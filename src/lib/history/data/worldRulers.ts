@@ -25,7 +25,7 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-ro-constantine', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-constantine', bioKey: 'rulerBio.wc-ro-constantine', highlightKey: 'rulerHighlight.wc-ro-constantine', startYear: 306, endYear: 337 },
   { id: 'wc-ro-west-fall', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-west-dyn', bioKey: 'rulerBio.wc-ro-west-fall', startYear: 395, endYear: 476 , isDynastyBlock: true },
   { id: 'wc-ro-justinian', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-justinian', bioKey: 'rulerBio.wc-ro-justinian', highlightKey: 'rulerHighlight.wc-ro-justinian', startYear: 527, endYear: 565 },
-  { id: 'wc-ro-heraclius', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-heraclius', bioKey: 'rulerBio.wc-ro-heraclius', startYear: 610, endYear: 641 },
+  { id: 'wc-ro-heraclius', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-heraclius', bioKey: 'rulerBio.wc-ro-heraclius', highlightKey: 'rulerHighlight.wc-ro-heraclius', startYear: 610, endYear: 641 },
   { id: 'wc-ro-byzantine-mid', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-byzantine-dyn', bioKey: 'rulerBio.wc-ro-byzantine-mid', startYear: 800, endYear: 1100 , isDynastyBlock: true },
   { id: 'wc-ro-byz-fall', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-byz-fall-dyn', bioKey: 'rulerBio.wc-ro-byz-fall', startYear: 1100, endYear: 1453 , isDynastyBlock: true },
   // ── Holy Roman Empire (Frederick Barbarossa) ─────────────────────────
@@ -73,12 +73,12 @@ export const worldComparisonRulers: Ruler[] = [
   // ── Persia ─────────────────────────────────────────────
   { id: 'wc-pe-cyrus', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-cyrus', bioKey: 'rulerBio.wc-pe-cyrus', highlightKey: 'rulerHighlight.wc-pe-cyrus', startYear: -550, endYear: -530 },
   { id: 'wc-pe-darius', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-darius', bioKey: 'rulerBio.wc-pe-darius', highlightKey: 'rulerHighlight.wc-pe-darius', startYear: -522, endYear: -486 },
-  { id: 'wc-pe-xerxes', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-xerxes', bioKey: 'rulerBio.wc-pe-xerxes', startYear: -486, endYear: -330 },
+  { id: 'wc-pe-xerxes', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-xerxes', bioKey: 'rulerBio.wc-pe-xerxes', highlightKey: 'rulerHighlight.wc-pe-xerxes', startYear: -486, endYear: -330 },
   { id: 'wc-pe-seleucid', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-seleucid-dyn', bioKey: 'rulerBio.wc-pe-seleucid', startYear: -312, endYear: -63 , isDynastyBlock: true },
   { id: 'wc-pe-parthian', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-parthian-dyn', bioKey: 'rulerBio.wc-pe-parthian', startYear: -247, endYear: 224 , isDynastyBlock: true },
-  { id: 'wc-pe-ardashir', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-ardashir', bioKey: 'rulerBio.wc-pe-ardashir', startYear: 224, endYear: 241 },
+  { id: 'wc-pe-ardashir', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-ardashir', bioKey: 'rulerBio.wc-pe-ardashir', highlightKey: 'rulerHighlight.wc-pe-ardashir', startYear: 224, endYear: 241 },
   { id: 'wc-pe-shapur', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-shapur', bioKey: 'rulerBio.wc-pe-shapur', highlightKey: 'rulerHighlight.wc-pe-shapur', startYear: 241, endYear: 651 },
-  { id: 'wc-pe-safavid', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-safavid', bioKey: 'rulerBio.wc-pe-safavid', startYear: 1501, endYear: 1736 },
+  { id: 'wc-pe-safavid', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-safavid', bioKey: 'rulerBio.wc-pe-safavid', highlightKey: 'rulerHighlight.wc-pe-safavid', startYear: 1501, endYear: 1736 },
 
   // ── Hellenistic Greece ─────────────────────────────────
   { id: 'wc-he-alexander', eraId: 'world-comparison', polityId: 'wc-hellenistic', nameKey: 'ruler.wc-he-alexander', bioKey: 'rulerBio.wc-he-alexander', highlightKey: 'rulerHighlight.wc-he-alexander', startYear: -336, endYear: -323 },

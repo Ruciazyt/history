@@ -2283,5 +2283,9 @@
   "rulerHighlight.wc-ro-frederick": "Hohenstaufen emperor; crusader king; \"the gerontion\"",
   "ruler.wc-ro-charles-v": "Charles V",
   "rulerBio.wc-ro-charles-v": "Holy Roman Emperor & King of Spain (1519-1556); Habsburg dynasty; ruled Spain, Austria, Netherlands, and Spanish Americas; faced the Protestant Reformation.",
-  "rulerHighlight.wc-ro-charles-v": "Most powerful European monarch of his era; empire on which the sun never set"
+  "rulerHighlight.wc-ro-charles-v": "Most powerful European monarch of his era; empire on which the sun never set",
+  "rulerHighlight.wc-ro-heraclius": "Defeated Sassanid Persia, saved Byzantium, but lost to Arab expansion (632-641 CE)",
+  "rulerHighlight.wc-pe-xerxes": "Invaded Greece; Thermopylae and Salamis battles (480-479 BCE)",
+  "rulerHighlight.wc-pe-ardashir": "Founded Sassanid dynasty; revived Zoroastrian Persian empire",
+  "rulerHighlight.wc-pe-safavid": "Established Twelver Shi'a Islam as Iran's state religion; peak under Shah Abbas I (1588-1629)"
 }
