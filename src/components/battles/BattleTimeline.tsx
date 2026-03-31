@@ -10,11 +10,10 @@ import { BATTLE_RESULT_COLORS, BATTLE_TIMELINE_COLORS } from '@/lib/history/cons
 interface BattleTimelineProps {
   battles: Event[];
   eras: { id: string; nameKey: string }[];
-  tEra: (key: string) => string;
   onBattleClick: (battle: Event) => void;
 }
 
-export const BattleTimeline = React.memo(function BattleTimeline({ battles, eras, tEra, onBattleClick }: BattleTimelineProps) {
+export const BattleTimeline = React.memo(function BattleTimeline({ battles, eras, onBattleClick }: BattleTimelineProps) {
   const t = useTranslations();
   
   // Sort battles by year
@@ -28,11 +27,11 @@ export const BattleTimeline = React.memo(function BattleTimeline({ battles, eras
       const era = eras.find(e => e.id === battle.entityId);
       return {
         battle,
-        eraName: era ? tEra(era.nameKey) : battle.entityId,
+        eraName: era ? t(era.nameKey) : battle.entityId,
         eraColor: getEraColor(battle.entityId),
       };
     });
-  }, [sortedBattles, eras, tEra]);
+  }, [sortedBattles, eras, t]);
   
   if (battlesWithEra.length === 0) {
     return (

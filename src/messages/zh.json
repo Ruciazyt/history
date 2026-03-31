@@ -1350,6 +1350,86 @@
     "ws-223-qin-conquers-chu": {
       "title": "秦灭楚",
       "summary": "秦国灭楚国，战国七雄格局进一步改变。"
+    },
+    "ming-1619-sahulu": {
+      "title": "萨尔浒之战",
+      "summary": "万历四十七年，后金努尔哈赤在萨尔浒击败明军，是明清之际的重要转折点。"
+    },
+    "ws-221-qin-conquers-qi": {
+      "title": "秦灭齐",
+      "summary": "秦国灭齐国，完成统一。"
+    },
+    "ws-222-qin-conquers-yan": {
+      "title": "秦灭燕",
+      "summary": "秦国灭燕国。"
+    },
+    "ws-225-qin-conquers-wei": {
+      "title": "秦灭赵",
+      "summary": "秦国灭赵国。"
+    },
+    "ws-228-qin-conquers-zhao": {
+      "title": "秦灭魏",
+      "summary": "秦国灭魏国。"
+    },
+    "ws-230-qin-conquers-han": {
+      "title": "秦灭韩",
+      "summary": "秦国灭韩国，统一进程开始。"
+    },
+    "ch-202-gaixia": {
+      "title": "gaixia",
+      "summary": "CH时期历史事件，202年。"
+    },
+    "ch-207-juliu": {
+      "title": "juliu",
+      "summary": "CH时期历史事件，207年。"
+    },
+    "ej-383-feishui": {
+      "title": "feishui",
+      "summary": "EJ时期历史事件，383年。"
+    },
+    "sa-656-qihuan": {
+      "title": "qihuan",
+      "summary": "SA时期历史事件，656年。"
+    },
+    "sui-605-grand-canal": {
+      "title": "grandcanal",
+      "summary": "SUI时期历史事件，605年。"
+    },
+    "tk-200-guandu": {
+      "title": "guandu",
+      "summary": "TK时期历史事件，200年。"
+    },
+    "tk-208-chibi": {
+      "title": "chibi",
+      "summary": "TK时期历史事件，208年。"
+    },
+    "tk-222-yiling": {
+      "title": "yiling",
+      "summary": "TK时期历史事件，222年。"
+    },
+    "ws-256-zhou-ends": {
+      "title": "zhouends",
+      "summary": "WS时期历史事件，256年。"
+    },
+    "ws-278-qin-takes-ying": {
+      "title": "qintakesying",
+      "summary": "WS时期历史事件，278年。"
+    },
+    "ws-284-yan-attack-qi": {
+      "title": "yanattackqi",
+      "summary": "WS时期历史事件，284年。"
+    },
+    "ws-307-hufu-qishe": {
+      "title": "hufuqishe",
+      "summary": "WS时期历史事件，307年。"
+    },
+    "ws-356-shangyang-reform": {
+      "title": "shangyangreform",
+      "summary": "WS时期历史事件，356年。"
+    },
+    "yuan-1271-founded": {
+      "title": "founded",
+      "summary": "YUAN时期历史事件，1271年。"
     }
   },
   "rulerEraName": {

@@ -463,6 +463,90 @@
     "prc-1978-reform": {
       "title": "Reform and Opening",
       "summary": "Deng Xiaoping's reforms."
+    },
+    "ming-1619-sahulu": {
+      "title": "Battle of萨爾滸",
+      "summary": "In 1619, Nurhaci's Later Jin forces defeated the Ming army at萨爾滸, a crucial turning point in Ming-Qing transitions."
+    },
+    "ws-221-qin-conquers-qi": {
+      "title": "Qin Conquers Qi",
+      "summary": "In 221 BCE, Qin conquered the state of Qi, completing the unification of the Warring States."
+    },
+    "ws-222-qin-conquers-yan": {
+      "title": "Qin Conquers Yan",
+      "summary": "In 222 BCE, Qin conquered the state of Yan."
+    },
+    "ws-223-qin-conquers-chu": {
+      "title": "Qin Conquers Chu",
+      "summary": "In 223 BCE, Qin conquered the state of Chu."
+    },
+    "ws-225-qin-conquers-wei": {
+      "title": "Qin Conquers Zhao",
+      "summary": "In 225 BCE, Qin conquered the state of Zhao."
+    },
+    "ws-228-qin-conquers-zhao": {
+      "title": "Qin Conquers Wei",
+      "summary": "In 228 BCE, Qin conquered the state of Wei."
+    },
+    "ws-230-qin-conquers-han": {
+      "title": "Qin Conquers Han",
+      "summary": "In 230 BCE, Qin conquered the state of Han, beginning the final unification campaign."
+    },
+    "ch-202-gaixia": {
+      "title": "Gaixia",
+      "summary": "Historical event from CH period, year 202."
+    },
+    "ch-207-juliu": {
+      "title": "Juliu",
+      "summary": "Historical event from CH period, year 207."
+    },
+    "ej-383-feishui": {
+      "title": "Feishui",
+      "summary": "Historical event from EJ period, year 383."
+    },
+    "sa-656-qihuan": {
+      "title": "Qihuan",
+      "summary": "Historical event from SA period, year 656."
+    },
+    "sui-605-grand-canal": {
+      "title": "Grand Canal",
+      "summary": "Historical event from SUI period, year 605."
+    },
+    "tk-200-guandu": {
+      "title": "Guandu",
+      "summary": "Historical event from TK period, year 200."
+    },
+    "tk-208-chibi": {
+      "title": "Chibi",
+      "summary": "Historical event from TK period, year 208."
+    },
+    "tk-222-yiling": {
+      "title": "Yiling",
+      "summary": "Historical event from TK period, year 222."
+    },
+    "ws-256-zhou-ends": {
+      "title": "Zhou Ends",
+      "summary": "Historical event from WS period, year 256."
+    },
+    "ws-278-qin-takes-ying": {
+      "title": "Qin Takes Ying",
+      "summary": "Historical event from WS period, year 278."
+    },
+    "ws-284-yan-attack-qi": {
+      "title": "Yan Attack Qi",
+      "summary": "Historical event from WS period, year 284."
+    },
+    "ws-307-hufu-qishe": {
+      "title": "Hufu Qishe",
+      "summary": "Historical event from WS period, year 307."
+    },
+    "ws-356-shangyang-reform": {
+      "title": "Shangyang Reform",
+      "summary": "Historical event from WS period, year 356."
+    },
+    "yuan-1271-founded": {
+      "title": "Founded",
+      "summary": "Historical event from YUAN period, year 1271."
     }
   },
   "faction": {

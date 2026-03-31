@@ -27,7 +27,6 @@ export function BattlesClient({
   locale?: string;
 }) {
   const t = useTranslations();
-  const tEra = useTranslations('rulerEraName');
   const { favoritesCount } = useBattleFavorites();
   
   const battles = React.useMemo(() => getBattles(events), [events]);
@@ -40,8 +39,8 @@ export function BattlesClient({
   
   // Battle count by era
   const battleCountByEra = React.useMemo(() => 
-    getBattleCountByEra(battles, eras, tEra), 
-  [battles, eras, tEra]);
+    getBattleCountByEra(battles, eras, t), 
+  [battles, eras, t]);
   
   // Group battles by era ID (not localized name — locale-independent keying)
   const battlesByEra = React.useMemo(() => {
@@ -63,10 +62,10 @@ export function BattlesClient({
       const era = eras.find((e) => e.id === eraId);
       return {
         id: eraId,
-        name: era ? tEra(era.nameKey) : eraId,
+        name: era ? t(era.nameKey) : eraId,
       };
     });
-  }, [battlesByEra, eras, tEra]);
+  }, [battlesByEra, eras, t]);
 
   const [selectedEraId, setSelectedEraId] = React.useState<string | null>(null);
   const [viewMode, setViewMode] = React.useState<'grid' | 'timeline'>('grid');
@@ -348,7 +347,6 @@ export function BattlesClient({
             <BattleTimeline 
               battles={displayedBattles}
               eras={eras}
-              tEra={tEra}
               onBattleClick={setSelectedBattle}
             />
           ) : (

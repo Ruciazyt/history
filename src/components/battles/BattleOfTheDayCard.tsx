@@ -5,7 +5,7 @@ import Link from 'next/link';
 import type { Event } from '@/lib/history/types';
 import { getBattleOfTheDay, getSameEraBattles } from '@/lib/history/battles';
 import { formatYear } from '@/lib/history/utils';
-import { getBattleResultLabel, getBattleImpactLabel } from '@/lib/history/battles';
+import { getBattleResultLabel, getBattleImpactLabel, getBattleTypeName } from '@/lib/history/battles';
 import { getPacingLabel, getTimeOfDayLabel } from '@/lib/history/battlePacing';
 import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, ERA_COLORS, BATTLE_CARD_COLORS, BATTLE_OF_THE_DAY_COLORS, COMMANDER_COLORS, BATTLE_TYPE_COLORS, BATTLE_SCALE_COLORS, PACING_BADGE_COLORS, TIME_OF_DAY_COLORS } from '@/lib/history/constants';
 import { useTranslations, useLocale } from 'next-intl';
@@ -136,7 +136,7 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
             )}
             {battle.battle?.battleType && battle.battle.battleType !== 'unknown' && (
               <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold ${BATTLE_TYPE_COLORS.bg} ${BATTLE_TYPE_COLORS.text}`}>
-                🎯 {t('battle.battleType.' + battle.battle.battleType)}
+                🎯 {t(getBattleTypeName(battle.battle.battleType))}
               </span>
             )}
             {pacing && pacing !== 'unknown' && (

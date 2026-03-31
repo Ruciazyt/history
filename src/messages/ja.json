@@ -519,6 +519,34 @@
     "wj-311-yongjia": {
       "title": "永嘉の乱",
       "summary": "匈奴軍が洛陽を攻略し、懐帝を捕らえ、西晉が滅び、五胡の侵入が始まる。"
+    },
+    "ming-1619-sahulu": {
+      "title": "萨尔滸の戦い",
+      "summary": "万暦47年（1619年）、努尔哈赤の後金は萨尔滸で明軍を破り、明と清の交代における重要な転換点となった。"
+    },
+    "ch-202-gaixia": {
+      "title": "gaixia",
+      "summary": "CH時代の歴史的事件、202年。"
+    },
+    "ch-207-juliu": {
+      "title": "juliu",
+      "summary": "CH時代の歴史的事件、207年。"
+    },
+    "ej-383-feishui": {
+      "title": "feishui",
+      "summary": "EJ時代の歴史的事件、383年。"
+    },
+    "tk-200-guandu": {
+      "title": "guandu",
+      "summary": "TK時代の歴史的事件、200年。"
+    },
+    "tk-208-chibi": {
+      "title": "chibi",
+      "summary": "TK時代の歴史的事件、208年。"
+    },
+    "tk-222-yiling": {
+      "title": "yiling",
+      "summary": "TK時代の歴史的事件、222年。"
     }
   },
   "faction": {
