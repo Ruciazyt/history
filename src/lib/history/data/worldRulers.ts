@@ -81,7 +81,9 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-pe-seleucid', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-seleucid-dyn', bioKey: 'rulerBio.wc-pe-seleucid', startYear: -312, endYear: -63 , isDynastyBlock: true },
   { id: 'wc-pe-parthian', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-parthian-dyn', bioKey: 'rulerBio.wc-pe-parthian', startYear: -247, endYear: 224 , isDynastyBlock: true },
   { id: 'wc-pe-ardashir', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-ardashir', bioKey: 'rulerBio.wc-pe-ardashir', highlightKey: 'rulerHighlight.wc-pe-ardashir', startYear: 224, endYear: 241 },
-  { id: 'wc-pe-shapur', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-shapur', bioKey: 'rulerBio.wc-pe-shapur', highlightKey: 'rulerHighlight.wc-pe-shapur', startYear: 241, endYear: 651 },
+  { id: 'wc-pe-sassanid', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-sassanid-dyn', bioKey: 'rulerBio.wc-pe-sassanid', startYear: 224, endYear: 651 , isDynastyBlock: true },
+  { id: 'wc-pe-shapur', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-shapur', bioKey: 'rulerBio.wc-pe-shapur', highlightKey: 'rulerHighlight.wc-pe-shapur', startYear: 241, endYear: 272 },
+  { id: 'wc-pe-khosrow', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-khosrow', bioKey: 'rulerBio.wc-pe-khosrow', highlightKey: 'rulerHighlight.wc-pe-khosrow', startYear: 531, endYear: 579 },
   { id: 'wc-pe-safavid', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-safavid', bioKey: 'rulerBio.wc-pe-safavid', highlightKey: 'rulerHighlight.wc-pe-safavid', startYear: 1501, endYear: 1736 },
 
   // ── Hellenistic Greece ─────────────────────────────────

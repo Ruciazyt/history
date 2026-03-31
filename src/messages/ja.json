@@ -2243,7 +2243,7 @@
   "rulerHighlight.wc-me-nebuchadnezzar": "ネブカドネザル2世（前605〜562年）；バビロンの空中庭園の传说。",
   "rulerHighlight.wc-pe-cyrus": "アケメネス朝ペルシアの建国者（前550年頃）；キュロス·阿帖木兒の円筒を交付。",
   "rulerHighlight.wc-pe-darius": "ペルシア帝国を最大版図に拡張；サトラピエ制を整備；ペルセポリスを建設。",
-  "rulerHighlight.wc-pe-shapur": "ササン朝皇帝（241〜272年）；ローマ皇帝バレリアヌスを捕虜にする。",
+  "rulerHighlight.wc-pe-shapur": "サーサーン朝国王（在位241–272年）；ローマ皇帝ウァレリアヌスを捕虜に；ペルシア文化の黄金時代。",
   "rulerHighlight.wc-ro-augustus": "初代ローマ皇帝（前27年〜14年）；パクス・ロマーナを開始；共和政から帝政への転換を主導。",
   "rulerHighlight.wc-ro-caesar": "共和政を終わらせた独裁官；ルビコン川を渡る（前49年）；ユリウス暦を制定；前44年に暗殺された。",
   "rulerHighlight.wc-ro-constantine": "初代キリスト教徒皇帝（306〜337年）；ミラノ勅令を発布；コンスタンティノープル建都。",
@@ -2412,5 +2412,10 @@
   "rulerHighlight.wc-ro-theodosius": "東西統一最後のローマ皇帝（379-395年）",
   "rulerHighlight.wc-ro-basil": "東ローマ皇帝（976-1025年）— 「ブルガールスレイヤー」",
   "empire_kievan-rus": "キエフ・ルーシ",
-  "grid.region.southeast-asia": "東南アジア"
+  "grid.region.southeast-asia": "東南アジア",
+  "ruler.wc-pe-sassanid-dyn": "サーサーン朝ペルシア",
+  "rulerBio.wc-pe-sassanid": "サーサーン朝ペルシア；国教としてゾロアスター教；ローマ・ビザンツとの絶え間ない対立；文化的ルネサンス。",
+  "ruler.wc-pe-khosrow": "ホスロー1世",
+  "rulerBio.wc-pe-khosrow": "ホスロー1世（アヌーシュィルヴァーン）；サーサーン朝の黄金時代；マズダヤスナの隆盛；ビザンツを破る；ユスティニアヌスと対立；行政改革。",
+  "rulerHighlight.wc-pe-khosrow": "サーサーン朝の絶頂期（531–579年）；「不死の魂」；マズダヤスナ黄金時代；ローマ・ビザンツ戦争；後のイスラーム文明の基盤を築く。"
 }

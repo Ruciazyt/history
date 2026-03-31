@@ -2187,7 +2187,7 @@
   "rulerHighlight.wc-me-nebuchadnezzar": "Nebuchadnezzar II (605–562 BCE); built Ishtar Gate; legendary Hanging Gardens of Babylon.",
   "rulerHighlight.wc-pe-cyrus": "Founder of Achaemenid Persian Empire (c. 550 BCE); issued Cyrus Cylinder, early human rights charter.",
   "rulerHighlight.wc-pe-darius": "Expanded Persian Empire to greatest extent; organized satrapies; built Persepolis.",
-  "rulerHighlight.wc-pe-shapur": "Sassanid King (241–272 CE); defeated Roman Emperor Valerian; zenith of Sassanid power.",
+  "rulerHighlight.wc-pe-shapur": "Sassanid King (241–272 CE); defeated Roman Emperor Valerian; golden age of Persian culture.",
   "rulerHighlight.wc-ro-augustus": "First Roman Emperor (27 BCE–14 CE); initiated Pax Romana; transformed Republic into Empire.",
   "rulerHighlight.wc-ro-caesar": "Ended the Roman Republic; crossed the Rubicon (49 BCE); reformed calendar; assassinated 44 BCE.",
   "rulerHighlight.wc-ro-constantine": "First Christian Roman Emperor (306–337 CE); issued Edict of Milan; founded Constantinople.",
@@ -2356,5 +2356,10 @@
   "rulerHighlight.wc-ro-theodosius": "Last emperor to rule a united Roman Empire (379-395 CE); made Christianity the official state religion.",
   "rulerHighlight.wc-ro-basil": "Byzantine Emperor (976-1025 CE); \"Basil the Bulgar-Slayer\"; restored Byzantine greatness in the Balkans.",
   "empire_kievan-rus": "Kievan Rus'",
-  "grid.region.southeast-asia": "Southeast Asia"
+  "grid.region.southeast-asia": "Southeast Asia",
+  "ruler.wc-pe-sassanid-dyn": "Sassanid Empire",
+  "rulerBio.wc-pe-sassanid": "Sassanid Persian Empire; Zoroastrian state religion; continuous rivalry with Rome and Byzantium; cultural renaissance.",
+  "ruler.wc-pe-khosrow": "Khosrow I",
+  "rulerBio.wc-pe-khosrow": "Khosrow I (Anushirvan); Sassanid golden age; compiled Mazda Yast; defeated Byzantines; Justinian rival; administrative reforms.",
+  "rulerHighlight.wc-pe-khosrow": "Sassanid apex (531–579 CE); \"Immortal Soul\"; Mazdayasna golden age; Roman-Byzantine wars; laid foundation for later Islamic civilization."
 }
