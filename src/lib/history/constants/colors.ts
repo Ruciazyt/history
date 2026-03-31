@@ -1144,28 +1144,28 @@ export const CARD_SKELETON_COLORS = {
 } as const;
 export const BATTLE_CARD_COLORS = {
   container: {
-    title: 'text-gray-800',
-    subtitle: 'text-gray-500',
-    badgeBg: 'bg-white/60',
-    badgeBorder: 'border-gray-200',
+    title: 'text-gray-800 dark:text-gray-100',
+    subtitle: 'text-gray-500 dark:text-gray-400',
+    badgeBg: 'bg-white/60 dark:bg-zinc-700/60',
+    badgeBorder: 'border-gray-200 dark:border-zinc-600',
     hover: {
       scale: 'scale-[1.02]',
       shadow: 'shadow-lg',
     },
   },
   result: {
-    default: 'bg-gray-400',
+    default: 'bg-gray-400 dark:bg-zinc-500',
   },
   belligerents: {
-    container: 'bg-white/50',
-    text: 'text-gray-700',
+    container: 'bg-white/50 dark:bg-zinc-700/50',
+    text: 'text-gray-700 dark:text-gray-200',
   },
   impact: {
-    default: 'bg-zinc-100',
-    textDefault: 'text-zinc-500',
+    default: 'bg-zinc-100 dark:bg-zinc-800',
+    textDefault: 'text-zinc-500 dark:text-zinc-400',
   },
   commander: {
-    dot: 'bg-white/80',
+    dot: 'bg-white/80 dark:bg-zinc-300/80',
     pulse: '',
   },
   fallback: {
@@ -1611,43 +1611,43 @@ export const MODAL_BACKDROP_COLORS = {
 
 export const BATTLE_OF_THE_DAY_COLORS = {
   badge: {
-    bg: 'bg-gradient-to-r from-amber-100 to-orange-100',
-    text: 'text-amber-800',
+    bg: 'bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/70 dark:to-orange-900/70',
+    text: 'text-amber-800 dark:text-amber-200',
   },
-  subtitle: 'text-gray-500',
+  subtitle: 'text-gray-500 dark:text-gray-400',
   badgeItem: {
-    bg: 'bg-white/60',
+    bg: 'bg-white/60 dark:bg-zinc-700/60',
   },
   belligerents: {
-    container: 'bg-white/50',
-    text: 'text-gray-700',
-    vs: 'text-amber-500',
+    container: 'bg-white/50 dark:bg-zinc-700/50',
+    text: 'text-gray-700 dark:text-gray-200',
+    vs: 'text-amber-500 dark:text-amber-400',
   },
-  cta: 'text-amber-700',
+  cta: 'text-amber-700 dark:text-amber-300',
 } as const;
 
 
 export const THIS_DAY_IN_HISTORY_COLORS = {
   container: {
-    border: 'border-emerald-200',
-    bg: 'bg-emerald-50/60',
+    border: 'border-emerald-200 dark:border-emerald-800',
+    bg: 'bg-emerald-50/60 dark:bg-emerald-950/60',
   },
   badge: {
-    bg: 'bg-gradient-to-r from-emerald-100 to-teal-100',
-    text: 'text-emerald-800',
+    bg: 'bg-gradient-to-r from-emerald-100 to-teal-100 dark:from-emerald-900/70 dark:to-teal-900/70',
+    text: 'text-emerald-800 dark:text-emerald-200',
   },
-  subtitle: 'text-gray-500',
+  subtitle: 'text-gray-500 dark:text-gray-400',
   badgeItem: {
-    bg: 'bg-white/60',
+    bg: 'bg-white/60 dark:bg-zinc-700/60',
   },
   belligerents: {
-    container: 'bg-white/50',
-    text: 'text-gray-700',
-    vs: 'text-emerald-500',
+    container: 'bg-white/50 dark:bg-zinc-700/50',
+    text: 'text-gray-700 dark:text-gray-200',
+    vs: 'text-emerald-500 dark:text-emerald-400',
   },
   toggle: {
-    btn: 'bg-emerald-100 text-emerald-700',
-    hover: 'hover:bg-emerald-200',
+    btn: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300',
+    hover: 'hover:bg-emerald-200 dark:hover:bg-emerald-900/80',
   },
 } as const;
 
