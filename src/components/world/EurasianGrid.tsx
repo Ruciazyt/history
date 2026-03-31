@@ -40,14 +40,16 @@ interface RegionColumn {
 }
 
 /** Region classification helper: categorize a boundary into a region column */
-type RegionId = 'china' | 'korea' | 'japan' | 'central-asia' | 'west' | 'vietnam' | 'other';
+type RegionId = 'china' | 'korea' | 'japan' | 'central-asia' | 'west' | 'vietnam' | 'southeast-asia' | 'other';
 
 const CHINA_NAMES = new Set(['秦朝', '西汉', '东汉', '唐朝', '宋朝', '辽朝', '元朝', '明朝', '清朝']);
 const KOREA_NAMES = new Set(['高丽王朝', '朝鲜王朝', '新罗', '高句麗', '百济']);
 const JAPAN_NAMES = new Set(['平安时代', '鎌倉时代', '江户时代', '飞鸟时代', '室町时代', '弥生时代', '大和时代', '奈良时代']);
-const VIETNAM_NAMES = new Set(['李朝', '黎朝', '阮朝']);
+const VIETNAM_NAMES = new Set(['李朝', '黎朝', '阮朝', '陈朝']);
 // Central Asia: Mongolian, Indian-subcontinent, Southeast Asian maritime empires
-const CENTRAL_ASIA_NAMES = new Set(['蒙古帝国', '孔雀王朝', '贵霜帝国', '莫卧儿帝国', '印度河文明', '萨塔瓦哈纳王国', '室利佛逝帝国', '笈多帝国', '朱罗帝国']);
+const CENTRAL_ASIA_NAMES = new Set(['蒙古帝国', '孔雀王朝', '贵霜帝国', '莫卧儿帝国', '印度河文明', '萨塔瓦哈纳王国', '笈多帝国']);
+// Southeast Asia: Maritime empires (Srivijaya, Chola)
+const SOUTHEAST_ASIA_NAMES = new Set(['室利佛逝帝国', '朱罗帝国']);
 // West: Rome, Persian, Islamic, Hellenistic, Egyptian, Mesopotamian empires (prefix matches for names with suffixes)
 const WEST_NAMES = new Set(['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '古埃及', '托勒密埃及', '亚述', '巴比伦', '古巴比伦', '阿卡德', '赫梯']);
 // Extended matches: prefixes for boundary names that have additional suffixes
@@ -55,7 +57,8 @@ const CHINA_NAMESMatches = ['周', '春秋', '战国', '蜀', '吴', '晋', '隋
 const KOREA_NAMESMatches: string[] = ['新罗', '高句麗', '百济', '高句', '百濟'];
 const JAPAN_NAMESMatches: string[] = [];
 const VIETNAM_NAMESMatches: string[] = ['丁', '前黎', '陳', '后黎'];
-const CENTRAL_ASIA_NAMESMatches: string[] = ['贵霜', '笈多', '朱罗', '希腊-巴克特里亚', '萨塔瓦哈纳', '室利佛逝', '印度'];
+const CENTRAL_ASIA_NAMESMatches: string[] = ['贵霜', '笈多', '希腊-巴克特里亚', '萨塔瓦哈纳', '印度'];
+const SOUTHEAST_ASIA_NAMESMatches: string[] = ['室利佛逝', '朱罗'];
 const WEST_NAMESMatches = ['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '塞琉古', '亚述', '巴比伦', '新巴', '阿卡德', '赫梯', '神圣', '继业者', '托勒密', '基辅'];
 
 /** Era band configuration: defines historical period dividers shown on the grid */
@@ -101,6 +104,7 @@ export function classifyRegion(boundary: WorldBoundary): RegionId {
   if (KOREA_NAMES.has(name) || KOREA_NAMESMatches.some(n => name.startsWith(n))) return 'korea';
   if (JAPAN_NAMES.has(name) || JAPAN_NAMESMatches.some(n => name.startsWith(n))) return 'japan';
   if (VIETNAM_NAMES.has(name) || VIETNAM_NAMESMatches.some(n => name.startsWith(n))) return 'vietnam';
+  if (SOUTHEAST_ASIA_NAMES.has(name) || SOUTHEAST_ASIA_NAMESMatches.some(n => name.startsWith(n))) return 'southeast-asia';
   if (CENTRAL_ASIA_NAMES.has(name) || CENTRAL_ASIA_NAMESMatches.some(n => name.startsWith(n))) return 'central-asia';
   if (WEST_NAMES.has(name) || WEST_NAMESMatches.some(n => name.startsWith(n))) return 'west';
   return 'other';
@@ -114,6 +118,7 @@ const COLUMN_DEFINITIONS: Record<RegionId, { labelKey: string; bgColor: string; 
   'central-asia': { labelKey: 'grid.region.central-asia', bgColor: 'bg-amber-50/40', headerBg: 'bg-amber-100 border-amber-200' },
   west: { labelKey: 'grid.region.west', bgColor: 'bg-purple-50/40', headerBg: 'bg-purple-100 border-purple-200' },
   vietnam: { labelKey: 'grid.region.vietnam', bgColor: 'bg-green-50/40', headerBg: 'bg-green-100 border-green-200' },
+  'southeast-asia': { labelKey: 'grid.region.southeast-asia', bgColor: 'bg-teal-50/40', headerBg: 'bg-teal-100 border-teal-200' },
   other: { labelKey: 'grid.region.other', bgColor: 'bg-zinc-50/40', headerBg: 'bg-zinc-100 border-zinc-200' },
 };
 
@@ -155,7 +160,7 @@ export function buildEurasianColumns(mode: GridMode): RegionColumn[] {
   // East Asia core first (China → Korea → Japan), then Southeast Asia (Vietnam),
   // then West-Central Asia (Central Asia → West) for the Eurasian sweep view.
   // 'other' always goes last.
-  const order: RegionId[] = ['china', 'korea', 'japan', 'vietnam', 'central-asia', 'west'];
+  const order: RegionId[] = ['china', 'korea', 'japan', 'vietnam', 'southeast-asia', 'central-asia', 'west'];
   columns.sort((a, b) => {
     const ai = order.indexOf(a.id as RegionId);
     const bi = order.indexOf(b.id as RegionId);
