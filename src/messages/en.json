@@ -2361,5 +2361,7 @@
   "rulerBio.wc-pe-sassanid": "Sassanid Persian Empire; Zoroastrian state religion; continuous rivalry with Rome and Byzantium; cultural renaissance.",
   "ruler.wc-pe-khosrow": "Khosrow I",
   "rulerBio.wc-pe-khosrow": "Khosrow I (Anushirvan); Sassanid golden age; compiled Mazda Yast; defeated Byzantines; Justinian rival; administrative reforms.",
-  "rulerHighlight.wc-pe-khosrow": "Sassanid apex (531–579 CE); \"Immortal Soul\"; Mazdayasna golden age; Roman-Byzantine wars; laid foundation for later Islamic civilization."
+  "rulerHighlight.wc-pe-khosrow": "Sassanid apex (531–579 CE); \"Immortal Soul\"; Mazdayasna golden age; Roman-Byzantine wars; laid foundation for later Islamic civilization.",
+  "empire.empire_median": "Median Empire",
+  "empire.empire_median.desc": "Ancient Iranian empire centered in northwestern Iran; precursor to the Achaemenid Empire."
 }

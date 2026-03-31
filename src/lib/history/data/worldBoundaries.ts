@@ -190,6 +190,19 @@ export const eurasianBoundaries: WorldBoundary[] = [
     },
   },
 
+  // ═══ 米底亚帝国 (Median Empire) ═══
+  {
+    type: 'Feature',
+    properties: { name: '米底亚帝国', nameKey: 'empire_median', startYear: -625, endYear: -549, color: '#881337' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [36, 38], [42, 36], [52, 34], [56, 36], [54, 40], [50, 44], [42, 44], [36, 40],
+        [36, 38],
+      ]],
+    },
+  },
+
   // ═══ 波斯帝国 (Persia) ═══
   {
     type: 'Feature',

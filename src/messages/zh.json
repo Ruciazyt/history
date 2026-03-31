@@ -2320,5 +2320,7 @@
   "rulerHighlight.wc-cn-wuhan": "汉武帝（公元前141-87年）；开疆拓土至中亚；开通丝绸之路；汉朝全盛时期。",
   "rulerHighlight.wc-pe-khosrow": "萨珊波斯鼎盛（531-579年）；\"不朽之魂\"；琐罗亚斯德教黄金时代；与罗马-拜占庭战争；为后来伊斯兰文明奠定基础。",
   "rulerHighlight.wc-ro-basil": "拜占庭皇帝（976-1025年）；\"保加利亚人杀手\"；恢复拜占庭在巴尔干的霸权。",
-  "rulerHighlight.wc-ro-theodosius": "最后一位统治统一罗马帝国的皇帝（379-395年）；确立基督教为国教。"
+  "rulerHighlight.wc-ro-theodosius": "最后一位统治统一罗马帝国的皇帝（379-395年）；确立基督教为国教。",
+  "empire.empire_median": "米底亚帝国",
+  "empire.empire_median.desc": "以伊朗西北部为中心的古代伊朗帝国；阿契美尼德波斯帝国的前身。"
 }
