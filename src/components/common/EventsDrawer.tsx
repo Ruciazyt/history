@@ -73,7 +73,7 @@ export const EventsDrawer = React.memo(function EventsDrawer({
                     </div>
                     {e.tags && e.tags.includes('war') && (
                       <div className="mt-1 inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400">
-                        ⚔️ 战役
+                        ⚔️ {t('nav.battles')}
                       </div>
                     )}
                   </div>
