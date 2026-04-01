@@ -1390,3 +1390,25 @@ src/
 - 消除组件内部locale状态与app级locale路由的不一致
 - 所有UI文本均支持中/英/日三语言，与项目其他组件保持一致
 - 项目保持健壮可用状态
+
+## 2026-04-02 UI优化与架构完善 - 第四十三轮
+### i18n 完善：LocaleSwitcher 语言切换器
+- [x] LocaleSwitcher.tsx: 使用 `useTranslations('locale')` 替代硬编码 LABELS 常量
+  - 移除了组件内本地定义的 `LABELS: Record<Locale, string>`
+  - 改用 `t(localeCode)` 从 i18n 系统读取翻译
+  - locale 命名空间已在 zh.json/en.json/ja.json 中存在（locale.zh='中文' 等）
+  - 消除翻译数据重复定义，保持 i18n 系统单一数据源
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] TypeScript 类型检查通过 (npx tsc --noEmit 无错误)
+- [x] 单元测试: 973个测试用例全部通过
+- [x] 构建验证: ENVIRONMENT_FALLBACK 错误为既有issue（/zh/on-this-day 页面），与本次修改无关
+- [x] 代码已提交 (commit: ad50b4d)
+- [x] 代码已推送至仓库
+
+### 优化说明
+- 语言切换下拉框现在使用统一的 i18n 系统显示语言名称
+- 消除硬编码字符串，遵循 i18n 最佳实践
+- 改动小、安全、不破坏现有逻辑
+- 项目保持健壮可用状态
