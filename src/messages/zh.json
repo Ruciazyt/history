@@ -114,7 +114,11 @@
       "china": "中国",
       "rome": "罗马/拜占庭/奥斯曼",
       "persia": "波斯帝国",
-      "islam": "伊斯兰哈里发"
+      "islam": "伊斯兰哈里发",
+      "egypt": "古埃及",
+      "indus": "印度河流域",
+      "mesopotamia": "美索不达米亚",
+      "hellenistic": "希腊化时代"
     },
     "ea": {
       "china": "中国",
