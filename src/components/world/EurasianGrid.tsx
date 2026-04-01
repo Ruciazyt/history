@@ -267,7 +267,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
               </span>
               <span>|</span>
               <span>
-                {activePolities.length} {t('grid.activeEmpires')}
+                {t('grid.activeEmpires', { count: activePolities.length })}
               </span>
             </div>
           </div>
