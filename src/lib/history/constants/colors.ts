@@ -1669,3 +1669,37 @@ export const BOTTOM_NAV_COLORS = {
     inactiveHoverDark: 'dark:hover:text-zinc-200',
   },
 } as const;
+
+export const QUIZ_COLORS = {
+  page: { background: 'bg-zinc-50' },
+  header: {
+    border: 'border-zinc-200',
+    background: 'bg-white/95',
+    backdrop: 'backdrop-blur-sm',
+  },
+  backButton: { text: 'text-zinc-600', hover: 'hover:text-zinc-900' },
+  title: 'text-zinc-900',
+  card: {
+    bg: 'bg-white',
+    border: 'border-zinc-200',
+    shadow: 'shadow-sm',
+  },
+  questionText: 'text-zinc-800',
+  option: {
+    default: 'bg-zinc-50 border-zinc-200 text-zinc-700 hover:bg-zinc-100',
+    correct: 'bg-green-50 border-green-400 text-green-800',
+    wrong: 'bg-red-50 border-red-400 text-red-800',
+    selected: 'ring-2 ring-amber-400',
+  },
+  progress: {
+    bar: 'bg-amber-400',
+    track: 'bg-zinc-200',
+  },
+  streak: {
+    fire: 'text-orange-500',
+    badge: 'bg-orange-100 text-orange-700',
+  },
+  score: {
+    badge: 'bg-amber-100 text-amber-700',
+  },
+} as const;
