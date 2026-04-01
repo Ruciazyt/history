@@ -79,7 +79,6 @@ export function TimelineClient({ locale }: { locale: string }) {
 
   // 移动端视图切换状态
   const [mobileView, setMobileView] = React.useState<'list' | 'detail'>('list');
-  const showEventList = true; // 事件列表始终显示，只在移动端切换视图
 
   return (
     <div className={`min-h-screen ${TIMELINE_COLORS.background} ${TIMELINE_COLORS.text} flex flex-col`}>
@@ -117,7 +116,7 @@ export function TimelineClient({ locale }: { locale: string }) {
       {/* 主内容区 */}
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
         {/* 左侧：事件列表 - 移动端可切换显示 */}
-        <div className={`${showEventList ? 'flex' : 'hidden'} lg:flex w-full lg:w-80 xl:w-96 flex-col ${TIMELINE_COLORS.surface} border-r ${TIMELINE_COLORS.border} ${mobileView === 'detail' ? 'hidden lg:flex' : ''}`}>
+        <div className={`flex lg:flex w-full lg:w-80 xl:w-96 flex-col ${TIMELINE_COLORS.surface} border-r ${TIMELINE_COLORS.border} ${mobileView === 'detail' ? 'hidden lg:flex' : ''}`}>
           <div className={`p-3 sm:p-4 border-b ${TIMELINE_COLORS.border}`}>
             <label className={`text-sm ${TIMELINE_COLORS.textSecondary} mb-2 block`}>{t('timeline.selectProcess')}</label>
             <select

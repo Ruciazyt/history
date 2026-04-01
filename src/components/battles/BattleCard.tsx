@@ -9,6 +9,7 @@ import { getPacingLabel, getTimeOfDayLabel } from '@/lib/history/battlePacing';
 import { useTranslations } from 'next-intl';
 import { BattleDetail } from './BattleDetail';
 import { useBattleFavorites } from '@/lib/history/useBattleHooks';
+import { useDarkMode } from '@/lib/history/hooks/useDarkMode';
 
 interface BattleCardProps {
   battle: Event;
@@ -36,21 +37,6 @@ function getEraStyles(entityId: string, isDark: boolean): { gradient: string; bo
     gradient: eraColor?.gradient || BATTLE_CARD_COLORS.fallback.gradient,
     border: eraColor?.border || BATTLE_CARD_COLORS.fallback.border,
   };
-}
-
-// Reads data-theme from the DOM (avoids coupling to ThemeProvider)
-function useDarkMode(): boolean {
-  const [isDark, setIsDark] = React.useState(false);
-  React.useEffect(() => {
-    const theme = document.documentElement.dataset.theme;
-    setIsDark(theme === 'dark');
-    const observer = new MutationObserver(() => {
-      setIsDark(document.documentElement.dataset.theme === 'dark');
-    });
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => observer.disconnect();
-  }, []);
-  return isDark;
 }
 
 export const BattleCard = React.memo(function BattleCard({ battle, onClick, selected, selectionMode, onSelect, locale = 'zh' }: BattleCardProps) {
