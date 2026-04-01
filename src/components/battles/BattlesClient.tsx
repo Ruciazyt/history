@@ -15,7 +15,7 @@ import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 import { useTranslations } from 'next-intl';
 import { BATTLES_CLIENT_COLORS, ERA_COLORS } from '@/lib/history/constants';
 import { useBattleFavorites } from '@/lib/history/useBattleHooks';
-import { getCasualtyStats } from '@/lib/history/battleCasualties';
+import { getCasualtyStats, getBloodiestBattles, getTotalCasualties } from '@/lib/history/battleCasualties';
 
 export function BattlesClient({
   eras,
@@ -36,6 +36,9 @@ export function BattlesClient({
   
   // Casualty statistics
   const casualtyStats = React.useMemo(() => getCasualtyStats(events), [events]);
+
+  // Bloodiest battles
+  const bloodiestBattles = React.useMemo(() => getBloodiestBattles(events, 3), [events]);
   
   // Battle count by era
   const battleCountByEra = React.useMemo(() => 
@@ -272,6 +275,25 @@ export function BattlesClient({
                     </div>
                   </div>
                 </div>
+                {bloodiestBattles.length > 0 && (
+                  <div className="mt-2">
+                    <div className={`text-xs ${BATTLES_CLIENT_COLORS.eraDistribution.label} mb-1.5`}>🔝 最惨烈战役 Top 3</div>
+                    <div className="space-y-1">
+                      {bloodiestBattles.map((battle, idx) => (
+                        <div key={battle.id} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg ${BATTLES_CLIENT_COLORS.eraDistribution.tag.bg}`}>
+                          <span className={`w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold ${
+                            idx === 0 ? 'bg-red-500 text-white' : idx === 1 ? 'bg-orange-400 text-white' : 'bg-amber-300 text-amber-900'
+                          }`}>{idx + 1}</span>
+                          <span className="flex-1 text-xs font-medium truncate">{t(battle.titleKey)}</span>
+                          <span className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.value}`}>
+                            {getTotalCasualties(battle.battle?.casualties).toLocaleString()}
+                          </span>
+                          <span className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>人</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
