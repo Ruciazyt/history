@@ -2478,5 +2478,19 @@
   "rulerBio.wc-rus-vladimir": "Grand Prince of Kiev (980–1015) who Christianized Rus' in 988, building a centralized state and forging cultural bonds with Byzantium through the adoption of Orthodox Christianity.",
   "rulerBio.wc-rus-yaroslav": "Grand Prince of Kiev (1019–1054) who promulgated the Russkaya Pravda legal code, built Saint Sophia Cathedral, and fostered a golden age of literacy and law in Kievan Rus.",
   "rulerHighlight.wc-rus-vladimir": "Vladimir the Great Christianized Kievan Rus (988), making Eastern Orthodoxy the state religion and establishing cultural ties with Byzantium.",
-  "rulerHighlight.wc-rus-yaroslav": "Yaroslav the Wise promulgated the first written legal code in Eastern Europe and made Kiev a major cultural center rivaling Constantinople."
+  "rulerHighlight.wc-rus-yaroslav": "Yaroslav the Wise promulgated the first written legal code in Eastern Europe and made Kiev a major cultural center rivaling Constantinople.",
+  "ruler.wc-pe-bahram-v": "Bahram V",
+  "ruler.wc-pe-darius-iii": "Darius III",
+  "ruler.wc-pe-khosrow-ii": "Khosrow II",
+  "ruler.wc-pe-shapur-ii": "Shapur II",
+  "ruler.wc-pe-yazdegerd": "Yazdegerd III",
+  "rulerBio.wc-pe-bahram-v": "Sassanid king (420–438 CE); reigned during late Antique period; cultural flourishing under his rule; last Sassanid ruler before the Hunnic disruptions.",
+  "rulerBio.wc-pe-darius-iii": "Last Achaemenid king of Persia (336–330 BCE); fought Alexander the Great at Battle of Gaugamela (331 BCE); empire fell to Macedonian conquest.",
+  "rulerBio.wc-pe-khosrow-ii": "Khosrow Parviz (590–628 CE); reached greatest territorial extent of Sassanid Empire; wars with Byzantines; fell in 628 coup.",
+  "rulerBio.wc-pe-shapur-ii": "Shapur II (309–379 CE); longest-reigning Sassanid monarch (70 years); captured Roman Emperor Julian; Sassanid golden age.",
+  "rulerBio.wc-pe-yazdegerd": "Yazdegerd III (632–651 CE); last Sassanid emperor; final years marked by civil war and Arab conquest; Sassanid Empire collapsed by 651.",
+  "rulerHighlight.wc-pe-bahram-v": "Bahram V — Sassanid king (420–438 CE); reign marked by cultural flourishing and stability",
+  "rulerHighlight.wc-pe-darius-iii": "Last Achaemenid king; defeated by Alexander at Gaugamela (331 BCE); end of the Persian Empire",
+  "rulerHighlight.wc-pe-khosrow-ii": "Khosrow Parviz — Sassanid peak; Byzantine-Sasanian wars; greatest territorial extent",
+  "rulerHighlight.wc-pe-shapur-ii": "Longest-reigning Sassanid king (70 yr); defeated Roman Emperor Julian; Sassanid golden age"
 }

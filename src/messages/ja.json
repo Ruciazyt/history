@@ -2478,5 +2478,21 @@
   "rulerBio.wc-rus-vladimir": "キエフ大公（980年–1015年）。988年にルーシをキリスト教化し、ビザンツ帝国との文化的結びつきを確立して中央集権国家を建設した。",
   "rulerBio.wc-rus-yaroslav": "キエフ大公（1019年–1054年）。ルーシ・プラヴダ法典を公布し、聖ソフィア大聖堂を建設。リテラシーと法の黄金時代を築いた。",
   "rulerHighlight.wc-rus-vladimir": "ウラジ米尔大公は988年にキエフ・ルーシをキリスト教化し、正教を国教として受け入れた。",
-  "rulerHighlight.wc-rus-yaroslav": "ヤロスlav賢公は東ヨーロッパで初めて成文化された法典を制定し、キエフをビザンツに匹敵する文化の中心地に押し上げた。"
+  "rulerHighlight.wc-rus-yaroslav": "ヤロスlav賢公は東ヨーロッパで初めて成文化された法典を制定し、キエフをビザンツに匹敵する文化の中心地に押し上げた。",
+  "ruler.wc-pe-bahram-v": "ヴァフラーン5世",
+  "ruler.wc-pe-darius-iii": "ダレイオス3世",
+  "ruler.wc-pe-khosrow-ii": "ホスロウ2世",
+  "ruler.wc-pe-shapur-ii": "シャープール2世",
+  "ruler.wc-pe-yazデガール": "ヤズデギルド3世",
+  "rulerBio.wc-pe-bahram-v": "ササン朝ペルシアの王（420-438年）。文化的に繁栄した治世。",
+  "rulerBio.wc-pe-darius-iii": "アケメネス朝ペルシア最後の王（紀元前336-330年）。アレクサンドロス大王と戦い、紀元前331年のガウガメラの戦いで敗北。",
+  "rulerBio.wc-pe-khosrow-ii": "ホスロウ・パリヴィズ（590-628年）。ササン朝最大の版図を達成。ビザンツとの戦争。628年のクーデターで倒れた。",
+  "rulerBio.wc-pe-shapur-ii": "シャープール2世（309-379年）。ササン朝で最も長く統治した君主（70年）。ローマ皇帝ユリアヌスを捕虜にした。ササン朝の黄金時代。",
+  "rulerBio.wc-pe-yazdegerd": "ヤズデギルド3世（632-651年）。ササン朝最後の皇帝。内戦とアラブの侵攻に包まれた。651年にササン朝は崩壊した。",
+  "rulerHighlight.wc-pe-bahram-v": "ヴァフラーン5世 — ササン朝ペルシアの王（420-438年）",
+  "rulerHighlight.wc-pe-darius-iii": "アケメネス朝最後の王；ガウガメラでアレクサンドロスに敗北（紀元前331年）",
+  "rulerHighlight.wc-pe-khosrow-ii": "ホスロウ・パラヴィズ — ササン朝の絶頂期；ビザンツ・ササン戦争；最大版図",
+  "rulerHighlight.wc-pe-shapur-ii": "ササン朝最長統治の王（70年）；ローマ皇帝ユリアヌスを撃破；ササン朝黄金時代",
+  "rulerHighlight.wc-pe-yazdegerd": "ヤズデギルド3世 — ササン朝最後の皇帝；642年のニハーヴァンドの戦いでアラブ軍に敗北",
+  "ruler.wc-pe-yazdegerd": "ヤズデギルド3世"
 }
