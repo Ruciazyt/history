@@ -97,9 +97,9 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-pe-shapur', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-shapur', bioKey: 'rulerBio.wc-pe-shapur', highlightKey: 'rulerHighlight.wc-pe-shapur', startYear: 241, endYear: 272 },
   { id: 'wc-pe-shapur-ii', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-shapur-ii', bioKey: 'rulerBio.wc-pe-shapur-ii', highlightKey: 'rulerHighlight.wc-pe-shapur-ii', startYear: 309, endYear: 379 },
   { id: 'wc-pe-bahram-v', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-bahram-v', bioKey: 'rulerBio.wc-pe-bahram-v', highlightKey: 'rulerHighlight.wc-pe-bahram-v', startYear: 420, endYear: 438 },
-  { id: 'wc-pe-yazdegerd', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-yazdegerd', bioKey: 'rulerBio.wc-pe-yazdegerd', startYear: 399, endYear: 457 , isDynastyBlock: true },
   { id: 'wc-pe-khosrow', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-khosrow', bioKey: 'rulerBio.wc-pe-khosrow', highlightKey: 'rulerHighlight.wc-pe-khosrow', startYear: 531, endYear: 579 },
   { id: 'wc-pe-khosrow-ii', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-khosrow-ii', bioKey: 'rulerBio.wc-pe-khosrow-ii', highlightKey: 'rulerHighlight.wc-pe-khosrow-ii', startYear: 590, endYear: 628 },
+  { id: 'wc-pe-yazdegerd', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-yazdegerd', bioKey: 'rulerBio.wc-pe-yazdegerd', highlightKey: 'rulerHighlight.wc-pe-yazdegerd', startYear: 632, endYear: 651 },
   { id: 'wc-pe-safavid', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-safavid', bioKey: 'rulerBio.wc-pe-safavid', highlightKey: 'rulerHighlight.wc-pe-safavid', startYear: 1501, endYear: 1736 },
 
   // ── Hellenistic Greece ─────────────────────────────────
