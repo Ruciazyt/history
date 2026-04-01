@@ -65,6 +65,8 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-iv-maurya', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-maurya', bioKey: 'rulerBio.wc-iv-maurya', startYear: -322, endYear: -185 , isDynastyBlock: true },
   { id: 'wc-iv-chandragupta', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-chandragupta', bioKey: 'rulerBio.wc-iv-chandragupta', highlightKey: 'rulerHighlight.wc-iv-chandragupta', startYear: -322, endYear: -298 },
   { id: 'wc-iv-ashoka', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-ashoka', bioKey: 'rulerBio.wc-iv-ashoka', highlightKey: 'rulerHighlight.wc-iv-ashoka', startYear: -268, endYear: -232 },
+  // ── Greco-Bactrian Kingdom (India) ─────────────────────────────────────
+  { id: 'wc-iv-menander', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-menander', bioKey: 'rulerBio.wc-iv-menander', highlightKey: 'rulerHighlight.wc-iv-menander', startYear: -165, endYear: -130 },
 
   // ── Gupta Empire (India) ───────────────────────────────────────────────
   { id: 'wc-iv-gupta', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-gupta-dyn', bioKey: 'rulerBio.wc-iv-gupta', startYear: 320, endYear: 550 , isDynastyBlock: true },
@@ -80,6 +82,8 @@ export const worldComparisonRulers: Ruler[] = [
 
   // ── Srivijaya Empire (Maritime SE Asia) ──────────────────────
   { id: 'wc-iv-srivijaya', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-srivijaya-dyn', bioKey: 'rulerBio.wc-iv-srivijaya', startYear: 600, endYear: 1295 , isDynastyBlock: true },
+  // ── Chola Empire (South India) ────────────────────────────────────────
+  { id: 'wc-iv-rajaraja', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-rajaraja', bioKey: 'rulerBio.wc-iv-rajaraja', highlightKey: 'rulerHighlight.wc-iv-rajaraja', startYear: 985, endYear: 1014 },
 
   // ── Persia ─────────────────────────────────────────────
   { id: 'wc-pe-cyrus', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-cyrus', bioKey: 'rulerBio.wc-pe-cyrus', highlightKey: 'rulerHighlight.wc-pe-cyrus', startYear: -550, endYear: -530 },
