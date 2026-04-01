@@ -2465,5 +2465,16 @@
   "rulerHighlight.wc-pe-k2": "Khosrow Parviz — Sassanid peak; Byzantine-Sasanian wars; greatest territorial extent",
   "ruler.wc-he-antigonus": "Antigonus I Monophthalmus",
   "rulerBio.wc-he-antigonus": "Diadochi general of Alexander; founded the Antigonid dynasty in Macedon (306 BCE); fought at Battle of Ipsus (301 BCE).",
-  "rulerHighlight.wc-he-antigonus": "Alexander's general; Antigonid dynasty founder; defeated at Ipsus (301 BCE)"
+  "rulerHighlight.wc-he-antigonus": "Alexander's general; Antigonid dynasty founder; defeated at Ipsus (301 BCE)",
+  "polity.wc.rus": "Kievan Rus",
+  "ruler.wc-rus-dyn": "Rurikid Dynasty",
+  "ruler.wc-rus-rurik": "Rurik",
+  "ruler.wc-rus-vladimir": "Vladimir the Great",
+  "ruler.wc-rus-yaroslav": "Yaroslav the Wise",
+  "rulerBio.wc-rus-apogee": "The Rurikid Dynasty ruled Kievan Rus from its founding by Rurik (c. 862) until the Mongol invasion (1240), uniting East Slavic tribes and spreading Christianity across the region.",
+  "rulerBio.wc-rus-rurik": "Semi-legendary Varangian leader who founded the Rurikid Dynasty and established the first Rus' state in Novgorod (862), then moved to Kiev (879). The origin of the ruling dynasty of Rus' and much of Eastern Europe.",
+  "rulerBio.wc-rus-vladimir": "Grand Prince of Kiev (980–1015) who Christianized Rus' in 988, building a centralized state and forging cultural bonds with Byzantium through the adoption of Orthodox Christianity.",
+  "rulerBio.wc-rus-yaroslav": "Grand Prince of Kiev (1019–1054) who promulgated the Russkaya Pravda legal code, built Saint Sophia Cathedral, and fostered a golden age of literacy and law in Kievan Rus.",
+  "rulerHighlight.wc-rus-vladimir": "Vladimir the Great Christianized Kievan Rus (988), making Eastern Orthodoxy the state religion and establishing cultural ties with Byzantium.",
+  "rulerHighlight.wc-rus-yaroslav": "Yaroslav the Wise promulgated the first written legal code in Eastern Europe and made Kiev a major cultural center rivaling Constantinople."
 }

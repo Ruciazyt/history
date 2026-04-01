@@ -15,6 +15,7 @@ export const worldComparisonEra: Era = {
     { id: 'wc-indus', nameKey: 'polity.wc.indus' },
     { id: 'wc-mesopotamia', nameKey: 'polity.wc.mesopotamia' },
     { id: 'wc-hellenistic', nameKey: 'polity.wc.hellenistic' },
+    { id: 'wc-rus', nameKey: 'polity.wc.rus' },
   ],
 };
 

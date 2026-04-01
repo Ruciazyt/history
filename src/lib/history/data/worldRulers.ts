@@ -54,6 +54,12 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-me-ashurbanipal', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-ashurbanipal', bioKey: 'rulerBio.wc-me-ashurbanipal', highlightKey: 'rulerHighlight.wc-me-ashurbanipal', startYear: -669, endYear: -627 },
   { id: 'wc-me-nebuchadnezzar', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-nebuchadnezzar', bioKey: 'rulerBio.wc-me-nebuchadnezzar', highlightKey: 'rulerHighlight.wc-me-nebuchadnezzar', startYear: -605, endYear: -562 },
 
+  // ── Kievan Rus (Eastern Europe) ────────────────────────────────────────
+  { id: 'wc-rus-rurik', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-rurik', bioKey: 'rulerBio.wc-rus-rurik', startYear: 862, endYear: 879 , isDynastyBlock: true },
+  { id: 'wc-rus-vladimir', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-vladimir', bioKey: 'rulerBio.wc-rus-vladimir', highlightKey: 'rulerHighlight.wc-rus-vladimir', startYear: 980, endYear: 1015 },
+  { id: 'wc-rus-yaroslav', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-yaroslav', bioKey: 'rulerBio.wc-rus-yaroslav', highlightKey: 'rulerHighlight.wc-rus-yaroslav', startYear: 1019, endYear: 1054 },
+  { id: 'wc-rus-apogee', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-dyn', bioKey: 'rulerBio.wc-rus-apogee', startYear: 882, endYear: 1240 , isDynastyBlock: true },
+
   // ── Indus Valley / Maurya ──────────────────────────────────────────────
   { id: 'wc-iv-indus', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-indus', bioKey: 'rulerBio.wc-iv-indus', startYear: -2600, endYear: -1900 , isDynastyBlock: true },
   { id: 'wc-iv-maurya', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-maurya', bioKey: 'rulerBio.wc-iv-maurya', startYear: -322, endYear: -185 , isDynastyBlock: true },
