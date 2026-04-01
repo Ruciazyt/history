@@ -267,8 +267,8 @@ export function PlaceNameEvolution({}: { initialPlaceId?: string }) {
   const totalCities = Object.values(filteredGroups).reduce((sum, places) => sum + places.length, 0);
 
   return (
-    <div className="min-h-screen bg-zinc-50">
-      <header className="bg-white border-b border-zinc-200 sticky top-0 z-10">
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
+      <header className="bg-white dark:bg-zinc-900 border-b dark:border-zinc-700 sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-3">
             <div>
