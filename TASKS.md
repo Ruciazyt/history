@@ -3,6 +3,36 @@
 ## 项目地址
 https://history.ruciazyt.cn
 
+## 2026-04-02 UI优化与架构完善 - 第四十二轮
+### 常量系统扩展
+- [x] constants/colors.ts: 新增 QUIZ_COLORS 常量
+  - page/header/backButton/card/questionText/option/progress/streak/score 等完整颜色配置
+  - 与项目中其他组件（BATTLES_CLIENT_COLORS、BOTTOM_NAV_COLORS 等）保持一致
+- [x] QuizClient.tsx: 使用 QUIZ_COLORS 常量替代本地定义
+  - 从 @/lib/history/constants 导入 QUIZ_COLORS
+  - 移除组件内本地定义的重复 QUIZ_COLORS
+  - 修复 TS 严格字面量类型问题：cls 变量声明为 string 类型
+
+### 测试修复
+- [x] OnThisDayClient.test.tsx: 移除所有测试中的 spurious eras=[] prop
+  - OnThisDayClient 组件签名只有 events 和 locale 属性
+  - 测试之前传入无用的 eras=[] 参数，已全部清理
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] TypeScript 类型检查通过 (npx tsc --noEmit 无错误)
+- [x] 单元测试: 973个测试用例全部通过
+- [x] 代码已提交 (commit: 297d978)
+- [x] 代码已推送至仓库
+
+### 优化说明
+- QuizClient 组件现在使用项目统一的常量系统，减少代码重复
+- 与 BATTLES_CLIENT_COLORS、BOTTOM_NAV_COLORS 等保持设计一致性
+- 测试文件清理，提升测试代码质量（移除无效参数）
+- 项目保持健壮可用状态
+
+
+
 
 ## 2026-04-01 UI优化与架构完善 - 第四十一轮
 ### i18n 命名空间修复：BattlesClient/BattleTimeline era 名称查找
