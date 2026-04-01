@@ -2450,5 +2450,20 @@
   "empire.empire_median.desc": "Ancient Iranian empire centered in northwestern Iran; precursor to the Achaemenid Empire.",
   "ruler.wc-eg-cleopatra": "Cleopatra VII",
   "rulerBio.wc-eg-cleopatra": "Last active pharaoh of Ptolemaic Egypt; formed alliances with Julius Caesar and Mark Antony; died 30 BCE as Rome annexed Egypt.",
-  "rulerHighlight.wc-eg-cleopatra": "Cleopatra VII — last Ptolemaic ruler; Caesar & Antony alliances; Egypt falls to Rome"
+  "rulerHighlight.wc-eg-cleopatra": "Cleopatra VII — last Ptolemaic ruler; Caesar & Antony alliances; Egypt falls to Rome",
+  "ruler.wc-pe-d3": "Darius III",
+  "rulerBio.wc-pe-d3": "Last Achaemenid king of Persia; fought Alexander the Great at Battle of Gaugamela (331 BCE); empire fell to Macedonian conquest.",
+  "rulerHighlight.wc-pe-d3": "Last Achaemenid king; defeated by Alexander at Gaugamela (331 BCE); end of the Persian Empire",
+  "ruler.wc-pe-s2": "Shapur II",
+  "rulerBio.wc-pe-s2": "Sassanid king who reigned 70 years (309–379 CE); longest-reigning Sassanid monarch; captured Roman Emperor Julian.",
+  "rulerHighlight.wc-pe-s2": "Longest-reigning Sassanid king (70 yr); defeated Roman Emperor Julian; Sassanid golden age",
+  "ruler.wc-pe-b5": "Bahram V",
+  "rulerBio.wc-pe-b5": "Sassanid king (420–438 CE); famed as Bayd, \"God's Friend\" in Shahnameh legends; wrestled a lion; revived Persian arts.",
+  "rulerHighlight.wc-pe-b5": "Bayd — legendary Sassanid king; famed in Persian epic; popular culture hero",
+  "ruler.wc-pe-k2": "Khosrow II",
+  "rulerBio.wc-pe-k2": "Khosrow Parviz (590–628 CE); reached greatest territorial extent of Sassanid Empire; wars with Byzantines; fell in 628 coup.",
+  "rulerHighlight.wc-pe-k2": "Khosrow Parviz — Sassanid peak; Byzantine-Sasanian wars; greatest territorial extent",
+  "ruler.wc-he-antigonus": "Antigonus I Monophthalmus",
+  "rulerBio.wc-he-antigonus": "Diadochi general of Alexander; founded the Antigonid dynasty in Macedon (306 BCE); fought at Battle of Ipsus (301 BCE).",
+  "rulerHighlight.wc-he-antigonus": "Alexander's general; Antigonid dynasty founder; defeated at Ipsus (301 BCE)"
 }
