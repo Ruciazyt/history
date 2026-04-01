@@ -2359,7 +2359,8 @@
     "window": {
       "label": "ウィンドウ",
       "years": "{count}年"
-    }
+    },
+    "close": "閉じる"
   },
   "world": {
     "title": "ユーラシア比較",

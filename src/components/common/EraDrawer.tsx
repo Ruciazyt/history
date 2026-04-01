@@ -57,8 +57,24 @@ export const EraDrawer = React.memo(function EraDrawer({
               onClick={onClose}
               className="rounded-lg p-2 text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
               style={{ minWidth: '44px', minHeight: '44px' }}
+              aria-label={t('ui.close')}
             >
-              ✕
+              {/* X icon — consistent with ThemeToggle SVG style */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
             </button>
           </div>
 
@@ -96,7 +112,22 @@ export const EraDrawer = React.memo(function EraDrawer({
                     <span className="text-xs text-zinc-400">
                       {formatYear(era.startYear)}–{formatYear(era.endYear)}
                     </span>
-                    <span className="text-xs text-zinc-400 ml-1">{isOpen ? '▼' : '▶'}</span>
+                    {/* Chevron icon — consistent with SVG style */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className={`shrink-0 text-zinc-400 transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`}
+                      aria-hidden="true"
+                    >
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
                   </button>
 
                   {isOpen && (

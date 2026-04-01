@@ -2359,7 +2359,8 @@
     "window": {
       "label": "Window",
       "years": "{count} years"
-    }
+    },
+    "close": "Close"
   },
   "world": {
     "title": "Eurasian Timeline",
