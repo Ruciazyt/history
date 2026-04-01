@@ -11,18 +11,20 @@ function makeBoundary(name: string, nameKey: string, startYear: number, endYear:
 }
 
 // Inline copy of classifyRegion for testing (verifies logic independently)
-type RegionId = 'china' | 'korea' | 'japan' | 'central-asia' | 'west' | 'vietnam' | 'other';
+type RegionId = 'china' | 'korea' | 'japan' | 'central-asia' | 'west' | 'vietnam' | 'southeast-asia' | 'other';
 const CHINA_NAMES = new Set(['秦朝', '西汉', '东汉', '唐朝', '宋朝', '辽朝', '元朝', '明朝', '清朝']);
 const KOREA_NAMES = new Set(['高丽王朝', '朝鲜王朝']);
-const JAPAN_NAMES = new Set(['平安时代', '江户时代', '飞鸟时代', '室町时代', '弥生时代', '大和时代', '奈良时代']);
+const JAPAN_NAMES = new Set(['平安时代', '鎌倉时代', '江户时代', '飞鸟时代', '室町时代', '弥生时代', '大和时代', '奈良时代']);
 const VIETNAM_NAMES = new Set(['李朝', '黎朝', '阮朝']);
-const CENTRAL_ASIA_NAMES = new Set(['蒙古帝国', '孔雀王朝', '贵霜帝国', '莫卧儿帝国', '印度河文明', '萨塔瓦哈纳', '室利佛逝', '笈多帝国', '朱罗帝国']);
+const CENTRAL_ASIA_NAMES = new Set(['蒙古帝国', '孔雀王朝', '贵霜帝国', '莫卧儿帝国', '印度河文明', '萨塔瓦哈纳王国', '笈多帝国']);
 const WEST_NAMES = new Set(['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '古埃及', '托勒密埃及', '亚述', '巴比伦', '阿卡德', '赫梯']);
 const CHINA_NAMESMatches = ['蜀', '吴', '晋', '隋', '南北朝', '五代', '三国'];
 const KOREA_NAMESMatches: string[] = [];
 const JAPAN_NAMESMatches: string[] = [];
 const VIETNAM_NAMESMatches: string[] = [];
-const CENTRAL_ASIA_NAMESMatches = ['贵霜', '笈多', '朱罗', '希腊-巴克特里亚'];
+const SOUTHEAST_ASIA_NAMES = new Set(['室利佛逝帝国', '朱罗帝国']);
+const SOUTHEAST_ASIA_NAMESMatches = ['室利佛逝', '朱罗'];
+const CENTRAL_ASIA_NAMESMatches = ['贵霜', '笈多', '希腊-巴克特里亚', '萨塔瓦哈纳'];
 const WEST_NAMESMatches = ['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '塞琉古', '亚述', '巴比伦', '新巴', '阿卡德', '赫梯', '神圣', '继业者', '托勒密'];
 
 function testClassifyRegion(boundary: WorldBoundary): RegionId {
@@ -31,6 +33,7 @@ function testClassifyRegion(boundary: WorldBoundary): RegionId {
   if (KOREA_NAMES.has(name) || KOREA_NAMESMatches.some(n => name.startsWith(n))) return 'korea';
   if (JAPAN_NAMES.has(name) || JAPAN_NAMESMatches.some(n => name.startsWith(n))) return 'japan';
   if (VIETNAM_NAMES.has(name) || VIETNAM_NAMESMatches.some(n => name.startsWith(n))) return 'vietnam';
+  if (SOUTHEAST_ASIA_NAMES.has(name) || SOUTHEAST_ASIA_NAMESMatches.some(n => name.startsWith(n))) return 'southeast-asia';
   if (CENTRAL_ASIA_NAMES.has(name) || CENTRAL_ASIA_NAMESMatches.some(n => name.startsWith(n))) return 'central-asia';
   if (WEST_NAMES.has(name) || WEST_NAMESMatches.some(n => name.startsWith(n))) return 'west';
   return 'other';
@@ -93,13 +96,13 @@ describe('EurasianGrid pure functions', () => {
 
       it('classifies newly added Southeast Asian empires as central-asia', () => {
         expect(testClassifyRegion(makeBoundary('萨塔瓦哈纳', 'empire_satavahana', -200, 220))).toBe('central-asia');
-        expect(testClassifyRegion(makeBoundary('室利佛逝', 'empire_srivijaya', 650, 1377))).toBe('central-asia');
+        expect(testClassifyRegion(makeBoundary('室利佛逝', 'empire_srivijaya', 650, 1377))).toBe('southeast-asia');
       });
 
       it('classifies Kushan, Gupta, and Chola empires as central-asia', () => {
         expect(testClassifyRegion(makeBoundary('贵霜帝国', 'empire_kushan', 30, 375))).toBe('central-asia');
         expect(testClassifyRegion(makeBoundary('笈多帝国', 'empire_gupta', 320, 550))).toBe('central-asia');
-        expect(testClassifyRegion(makeBoundary('朱罗帝国', 'empire_chola', -300, 1279))).toBe('central-asia');
+        expect(testClassifyRegion(makeBoundary('朱罗帝国', 'empire_chola', -300, 1279))).toBe('southeast-asia');
       });
 
       it('classifies Greco-Bactrian by prefix match as central-asia', () => {
