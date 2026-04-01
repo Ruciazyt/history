@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 import { locales, type Locale } from '@/i18n/routing';
 
@@ -15,14 +16,9 @@ function stripLocale(pathname: string) {
   return pathname;
 }
 
-const LABELS: Record<Locale, string> = {
-  zh: '中文',
-  en: 'English',
-  ja: '日本語',
-};
-
 export function LocaleSwitcher() {
   const locale = useLocale() as Locale;
+  const t = useTranslations('locale');
   const router = useRouter();
   const pathname = usePathname();
 
@@ -41,7 +37,7 @@ export function LocaleSwitcher() {
       >
         {locales.map((l) => (
           <option key={l} value={l}>
-            {LABELS[l]}
+            {t(l)}
           </option>
         ))}
       </select>
