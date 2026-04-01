@@ -44,6 +44,7 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-eg-middle-kingdom', eraId: 'world-comparison', polityId: 'wc-egypt', nameKey: 'ruler.wc-eg-middle-kingdom', bioKey: 'rulerBio.wc-eg-middle-kingdom', startYear: -2055, endYear: -1650 , isDynastyBlock: true },
   { id: 'wc-eg-new-kingdom', eraId: 'world-comparison', polityId: 'wc-egypt', nameKey: 'ruler.wc-eg-new-kingdom', bioKey: 'rulerBio.wc-eg-new-kingdom', startYear: -1550, endYear: -1069 , isDynastyBlock: true },
   { id: 'wc-eg-ramesses', eraId: 'world-comparison', polityId: 'wc-egypt', nameKey: 'ruler.wc-eg-ramesses', bioKey: 'rulerBio.wc-eg-ramesses', highlightKey: 'rulerHighlight.wc-eg-ramesses', startYear: -1279, endYear: -1213 },
+  { id: 'wc-eg-cleopatra', eraId: 'world-comparison', polityId: 'wc-egypt', nameKey: 'ruler.wc-eg-cleopatra', bioKey: 'rulerBio.wc-eg-cleopatra', highlightKey: 'rulerHighlight.wc-eg-cleopatra', startYear: -51, endYear: -30 },
   { id: 'wc-eg-late-ptolemaic', eraId: 'world-comparison', polityId: 'wc-egypt', nameKey: 'ruler.wc-eg-ptolemaic', bioKey: 'rulerBio.wc-eg-ptolemaic', startYear: -332, endYear: -30 , isDynastyBlock: true },
 
   // ── Mesopotamia (Assyria / Babylon) ──────────────────────────────────

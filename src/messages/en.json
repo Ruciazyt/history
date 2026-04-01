@@ -2447,5 +2447,8 @@
   "rulerBio.wc-pe-khosrow": "Khosrow I (Anushirvan); Sassanid golden age; compiled Mazda Yast; defeated Byzantines; Justinian rival; administrative reforms.",
   "rulerHighlight.wc-pe-khosrow": "Sassanid apex (531–579 CE); \"Immortal Soul\"; Mazdayasna golden age; Roman-Byzantine wars; laid foundation for later Islamic civilization.",
   "empire.empire_median": "Median Empire",
-  "empire.empire_median.desc": "Ancient Iranian empire centered in northwestern Iran; precursor to the Achaemenid Empire."
+  "empire.empire_median.desc": "Ancient Iranian empire centered in northwestern Iran; precursor to the Achaemenid Empire.",
+  "ruler.wc-eg-cleopatra": "Cleopatra VII",
+  "rulerBio.wc-eg-cleopatra": "Last active pharaoh of Ptolemaic Egypt; formed alliances with Julius Caesar and Mark Antony; died 30 BCE as Rome annexed Egypt.",
+  "rulerHighlight.wc-eg-cleopatra": "Cleopatra VII — last Ptolemaic ruler; Caesar & Antony alliances; Egypt falls to Rome"
 }
