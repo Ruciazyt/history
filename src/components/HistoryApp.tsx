@@ -221,7 +221,7 @@ export function HistoryApp({
                   onClick={() => switchCiv('china')}
                   className={`rounded-md px-2 sm:px-3 py-1 transition-colors whitespace-nowrap ${civMode === 'china' ? `${C.civSwitcher.active.bg} ${C.civSwitcher.active.text} ${C.civSwitcher.active.shadow} ${C.civSwitcher.active.font}` : C.civSwitcher.inactive}`}
                 >
-                  🏯 中国史
+                  🏛️ 中国史
                 </button>
               </div>
               
