@@ -361,7 +361,7 @@ export function BattlesClient({
 
         {/* This Day in History */}
         <div className="mb-6">
-          <ThisDayInHistoryCard events={events} />
+          <ThisDayInHistoryCard events={events} locale={locale} />
         </div>
 
         {displayedBattles.length > 0 ? (

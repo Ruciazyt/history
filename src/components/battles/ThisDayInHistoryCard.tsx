@@ -11,6 +11,8 @@ import { BattleDetail } from './BattleDetail';
 
 interface ThisDayInHistoryCardProps {
   events: Event[];
+  /** Locale for year formatting (defaults to 'zh') */
+  locale?: string;
 }
 
 function getEraStyles(entityId: string): { gradient: string; border: string; text: string } {
@@ -22,7 +24,7 @@ function getEraStyles(entityId: string): { gradient: string; border: string; tex
   };
 }
 
-export const ThisDayInHistoryCard = React.memo(function ThisDayInHistoryCard({ events }: ThisDayInHistoryCardProps) {
+export const ThisDayInHistoryCard = React.memo(function ThisDayInHistoryCard({ events, locale = 'zh' }: ThisDayInHistoryCardProps) {
   const t = useTranslations();
   const [expanded, setExpanded] = React.useState(false);
   const [selectedBattle, setSelectedBattle] = React.useState<Event | null>(null);
@@ -80,7 +82,7 @@ export const ThisDayInHistoryCard = React.memo(function ThisDayInHistoryCard({ e
 
                 <div className="flex flex-wrap items-center gap-2 text-xs">
                   <span className={`inline-flex items-center gap-1 px-2 py-0.5 ${THIS_DAY_IN_HISTORY_COLORS.badgeItem.bg} rounded-full`}>
-                    📅 {formatYear(battle.year)}
+                    📅 {formatYear(battle.year, locale)}
                   </span>
                   {battle.location?.label && (
                     <span className={`inline-flex items-center gap-1 px-2 py-0.5 ${THIS_DAY_IN_HISTORY_COLORS.badgeItem.bg} rounded-full`}>
@@ -115,7 +117,7 @@ export const ThisDayInHistoryCard = React.memo(function ThisDayInHistoryCard({ e
       </div>
 
       {selectedBattle && (
-        <BattleDetail battle={selectedBattle} onClose={() => setSelectedBattle(null)} allEvents={events} />
+        <BattleDetail battle={selectedBattle} onClose={() => setSelectedBattle(null)} allEvents={events} locale={locale} />
       )}
     </>
   );

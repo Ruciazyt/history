@@ -90,9 +90,9 @@ describe('ThisDayInHistoryCard', () => {
   });
 
   describe('card rendering', () => {
-    const renderCard = (battles: Event[]) => {
+    const renderCard = (battles: Event[], locale = 'zh') => {
       vi.mocked(battlesModule.getBattlesOnThisDay).mockReturnValueOnce(battles);
-      return render(<ThisDayInHistoryCard events={[]} />);
+      return render(<ThisDayInHistoryCard events={[]} locale={locale} />);
     };
 
     it('renders title badge', () => {
@@ -112,7 +112,7 @@ describe('ThisDayInHistoryCard', () => {
     });
 
     it('renders year badge via formatYear', () => {
-      renderCard([makeBattle({ year: -632 })]);
+      renderCard([makeBattle({ year: -632 })], 'en');
       // formatYear(-632, 'en') returns "632 BCE"
       expect(screen.getByText(/632 BCE/)).toBeInTheDocument();
     });
