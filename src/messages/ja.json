@@ -2520,5 +2520,10 @@
   "rulerHighlight.wc-ro-bayezid-ii": "安定と繁栄的时代",
   "ruler.wc-ro-selim-i": "セリム1世",
   "rulerBio.wc-ro-selim-i": "「冷酷な王」——急速な拡張により帝国をペルシャ・アラビア・エジプトまで広げた",
-  "rulerHighlight.wc-ro-selim-i": "マムルーク朝征服"
+  "rulerHighlight.wc-ro-selim-i": "マムルーク朝征服",
+  "ruler.wc-me-median": "メディア王国",
+  "ruler.wc-me-cyaxares": "キュアクセルス",
+  "rulerBio.wc-me-median": "メディア王国は古代イランのイラン系部族を統一し、アケメネス朝の母体となった。",
+  "rulerBio.wc-me-cyaxares": "キュアクセルスはメディア軍を再編し、バビロニアと結んでニネヴェを滅ぼし、メディア王国を建国した。",
+  "rulerHighlight.wc-me-cyaxares": "メディア統一、国家建国"
 }

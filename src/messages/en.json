@@ -2520,5 +2520,10 @@
   "rulerHighlight.wc-ro-bayezid-ii": "Age of Stability",
   "ruler.wc-ro-selim-i": "Selim I",
   "rulerBio.wc-ro-selim-i": "The Ruthless — rapidly expanded the empire into the Arab world, Persia, and Egypt",
-  "rulerHighlight.wc-ro-selim-i": "Conquest of the Mamluk Sultanate"
+  "rulerHighlight.wc-ro-selim-i": "Conquest of the Mamluk Sultanate",
+  "ruler.wc-me-median": "Median Empire",
+  "ruler.wc-me-cyaxares": "Cyaxares",
+  "rulerBio.wc-me-median": "The Median Empire united Iranian tribes in ancient Iran, forming the backbone of the Achaemenid dynasty.",
+  "rulerBio.wc-me-cyaxares": "Cyaxares reorganized the Median army and allied with Babylon to destroy Nineveh, founding the Median Empire.",
+  "rulerHighlight.wc-me-cyaxares": "United Media, Founded the Median Empire"
 }
