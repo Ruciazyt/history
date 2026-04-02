@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { eurasianBoundaries, eastAsiaBoundaries, getWorldEraBounds, getActiveBoundaries, type WorldBoundary } from '@/lib/history/data/worldBoundaries';
 import { formatYear } from '@/lib/history/utils';
 import { HISTORY_APP_COLORS } from '@/lib/history/constants';
@@ -181,6 +181,7 @@ const MIN_GRID_HEIGHT = 1200;
 
 export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
   const t = useTranslations();
+  const locale = useLocale();
   const [mode, setMode] = React.useState<GridMode>(initialMode);
   const [currentYear, setCurrentYear] = React.useState<number>(1);
   const [hoveredPolity, setHoveredPolity] = React.useState<string | null>(null);
@@ -263,7 +264,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
             </h1>
             <div className="flex items-center gap-4 text-sm text-zinc-500 mt-0.5">
               <span className="font-semibold text-zinc-700">
-                {formatYear(currentYear)}
+                {formatYear(currentYear, locale)}
               </span>
               <span>|</span>
               <span>
@@ -357,7 +358,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                       style={{ top: y }}
                     >
                       <div className="w-8 text-right pr-1 text-[10px] text-zinc-500 leading-none">
-                        {formatYear(year)}
+                        {formatYear(year, locale)}
                       </div>
                       <div className="flex-1 h-px bg-zinc-300" />
                     </div>
@@ -537,7 +538,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                           className="absolute right-2 top-0.5 text-[10px] font-medium opacity-75"
                           style={{ color: polity.color }}
                         >
-                          {formatYear(polity.startYear)}
+                          {formatYear(polity.startYear, locale)}
                         </div>
 
                         {/* End year - bottom right corner (only for tall bands where tooltip doesn't appear) */}
@@ -546,7 +547,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                             className="absolute right-2 bottom-0.5 text-[10px] font-medium opacity-75"
                             style={{ color: polity.color }}
                           >
-                            {formatYear(polity.endYear)}
+                            {formatYear(polity.endYear, locale)}
                           </div>
                         )}
 
@@ -567,7 +568,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                                 color: getTooltipTextColor(polity.color),
                               }}
                             >
-                              {t(polity.nameKey)} · {durationLabel} · {formatYear(polity.startYear)}–{formatYear(polity.endYear)}
+                              {t(polity.nameKey)} · {durationLabel} · {formatYear(polity.startYear, locale)}–{formatYear(polity.endYear, locale)}
                             </div>
                           );
                         })()}
@@ -611,7 +612,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   }`}
                   title={t(ERA_BANDS[eraIdx]!.labelKey)}
                 >
-                  {formatYear(year)}
+                  {formatYear(year, locale)}
                 </button>
               );
             })}
@@ -623,7 +624,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
           {/* Active polities at current year */}
           <div className={`shrink-0 border-b border-zinc-200 ${HISTORY_APP_COLORS.sidebar.header.bg} p-3`}>
             <div className={`text-xs font-semibold uppercase tracking-wide ${HISTORY_APP_COLORS.sidebar.header.text}`}>
-              {t('grid.activeAtYear', { year: formatYear(currentYear) })}
+              {t('grid.activeAtYear', { year: formatYear(currentYear, locale) })}
             </div>
             <div className={`mt-0.5 text-[10px] font-medium px-1.5 py-0.5 rounded-md w-fit ${ERA_BANDS[getEraBandIndex(currentYear)]!.badgeClass}`}>
               {t(ERA_BANDS[getEraBandIndex(currentYear)]!.shortLabelKey)}
@@ -675,7 +676,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                     </span>
                   </div>
                   <div className="text-[10px] text-zinc-400 ml-3.5">
-                    {formatYear(b.properties.startYear)}–{formatYear(b.properties.endYear)}
+                    {formatYear(b.properties.startYear, locale)}–{formatYear(b.properties.endYear, locale)}
                   </div>
                 </button>
               ))
@@ -786,7 +787,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                       color: getTooltipTextColor(polity.color),
                     }}
                   >
-                    {t(polity.nameKey)} · {formatYear(polity.startYear)}–{formatYear(polity.endYear)}
+                    {t(polity.nameKey)} · {formatYear(polity.startYear, locale)}–{formatYear(polity.endYear, locale)}
                   </div>
                 );
               })()}
