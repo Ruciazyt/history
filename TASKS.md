@@ -1412,3 +1412,32 @@ src/
 - 消除硬编码字符串，遵循 i18n 最佳实践
 - 改动小、安全、不破坏现有逻辑
 - 项目保持健壮可用状态
+
+## 2026-04-02 UI优化与架构完善 - 第四十三轮（续）
+### i18n 修复：EraDrawer 和 EventsDrawer 年份格式本地化
+- [x] EraDrawer.tsx: 新增 locale prop 并传递给所有 formatYear() 调用
+  - 修复：朝代时间范围显示从英文 "221 BCE" 改为中文 "公元前221年"（locale='zh'时）
+  - 接口新增 `locale?: string`，默认值 'zh'
+  - 4处 formatYear 调用全部传入 locale 参数
+
+- [x] EventsDrawer.tsx: 新增 locale prop 并传递给所有 formatYear() 调用
+  - 修复：事件年份显示从英文改为中文格式
+  - 接口新增 `locale?: string`，默认值 'zh'
+  - 2处 formatYear 调用全部传入 locale 参数
+
+- [x] HistoryApp.tsx: 向 EraDrawer 和 EventsDrawer 传入 currentLocale
+  - EraDrawer 新增 `locale={currentLocale}`
+  - EventsDrawer 新增 `locale={currentLocale}`
+
+### 验证结果
+- [x] TypeScript 类型检查通过 (npx tsc --noEmit 无错误)
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 973个测试用例全部通过
+- [x] 代码已提交 (commit: d4d21da)
+- [x] 代码已推送至仓库
+
+### 优化说明
+- 修复了 EraDrawer（时代选择抽屉）和 EventsDrawer（事件列表抽屉）中年份格式显示错误的 bug
+- 朝代/事件年份现在会根据当前语言正确显示：中文显示"公元前221年"，英文显示"221 BCE"
+- 改动小、安全、不破坏现有逻辑（locale 默认值为 'zh'，向后兼容）
+- 项目保持健壮可用状态
