@@ -171,7 +171,7 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
       </button>
 
       {showDetail && (
-        <BattleDetail battle={battle} onClose={() => setShowDetail(false)} allEvents={events} />
+        <BattleDetail battle={battle} onClose={() => setShowDetail(false)} allEvents={events} locale={locale} />
       )}
     </>
   );
