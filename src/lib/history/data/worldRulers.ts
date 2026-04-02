@@ -122,6 +122,7 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-is-muhammad', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-muhammad', bioKey: 'rulerBio.wc-is-muhammad', highlightKey: 'rulerHighlight.wc-is-muhammad', startYear: 610, endYear: 632 },
   { id: 'wc-is-rashidun', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-rashidun-dyn', bioKey: 'rulerBio.wc-is-rashidun', startYear: 632, endYear: 661 , isDynastyBlock: true },
   { id: 'wc-is-umayyad', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-umayyad', bioKey: 'rulerBio.wc-is-umayyad', startYear: 661, endYear: 750 },
+  { id: 'wc-is-mansur', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-mansur', bioKey: 'rulerBio.wc-is-mansur', startYear: 754, endYear: 775 },
   { id: 'wc-is-harun', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-harun', bioKey: 'rulerBio.wc-is-harun', highlightKey: 'rulerHighlight.wc-is-harun', startYear: 786, endYear: 833 },
   { id: 'wc-is-abbasid-late', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-abbasid-dyn', bioKey: 'rulerBio.wc-is-abbasid-late', startYear: 833, endYear: 1258 , isDynastyBlock: true },
   { id: 'wc-is-saladin', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-saladin', bioKey: 'rulerBio.wc-is-saladin', highlightKey: 'rulerHighlight.wc-is-saladin', startYear: 1174, endYear: 1193 },

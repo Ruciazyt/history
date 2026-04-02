@@ -2489,5 +2489,8 @@
   "empire_sengoku": "战国时代",
   "empire_tran-dynasty": "陈朝",
   "polity.wc.median": "米底亚帝国",
-  "polity.wc.rus": "基辅罗斯"
+  "polity.wc.rus": "基辅罗斯",
+  "ruler.wc-is-mansur": "阿布·阿卜杜拉·阿尔-曼苏尔",
+  "rulerBio.wc-is-mansur": "阿尔-曼苏尔（754-775年在位）是第二任阿拔斯哈里发，接替其兄阿布·阿拔斯·萨法赫。762年兴建巴格达城，使之成为阿拔斯王朝的中心。他以卓越的行政能力著称，确立了阿拔斯帝国的统治基础。",
+  "rulerHighlight.wc-is-mansur": "兴建巴格达城（762年）；巩固阿拔斯王朝统治基础"
 }
