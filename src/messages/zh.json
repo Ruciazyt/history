@@ -2485,5 +2485,7 @@
   "empire_median": "米底亚帝国",
   "empire_meiji": "明治时代",
   "empire_sengoku": "战国时代",
-  "empire_tran-dynasty": "陈朝"
+  "empire_tran-dynasty": "陈朝",
+  "polity.wc.median": "米底亚帝国",
+  "polity.wc.rus": "基辅罗斯"
 }
