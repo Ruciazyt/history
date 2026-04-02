@@ -189,7 +189,21 @@
     "insights": "指揮官インサイト",
     "noCollaborations": "協力データなし",
     "noMatchups": "対決データなし",
-    "noInsights": "インサイトデータなし"
+    "noInsights": "インサイトデータなし",
+    "legend": {
+      "collaboration": "協力",
+      "rivalry": "対決",
+      "commander": "指揮官"
+    },
+    "tooltip": {
+      "battles": "⚔️ {{battles}} 戦 · {{winRate}}% 勝率",
+      "relations": "🤝 {{collaborators}} パートナー · ⚔️ {{opponents}} 相手",
+      "dateRange": "📅 {{start}} – {{end}}"
+    },
+    "clearSelection": "選択をクリア",
+    "battlesSummary": "⚔️ {{battles}} 戦 · {{winRate}}% 勝率",
+    "collaboratorsLabel": "パートナー",
+    "opponentsLabel": "相手"
   },
   "empire_abbasid": "アッバス朝",
   "empire_achaemenid": "アケメネス朝ペルシア",

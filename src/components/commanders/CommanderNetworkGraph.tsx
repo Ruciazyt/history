@@ -7,7 +7,7 @@ import {
   type CommanderNode,
   type CommanderRelation,
 } from '@/lib/history/commanderNetwork';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { formatYear } from '@/lib/history/utils';
 
 interface CommanderNetworkGraphProps {
@@ -110,7 +110,8 @@ export function CommanderNetworkGraph({
   onCommanderClick,
   selectedCommander,
 }: CommanderNetworkGraphProps) {
-  const t = useTranslations();
+  const t = useTranslations('commanders');
+  const locale = useLocale();
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = React.useState({ width: 600, height: 400 });
   const [hoveredNode, setHoveredNode] = React.useState<string | null>(null);
@@ -182,7 +183,7 @@ export function CommanderNetworkGraph({
   if (!network || network.nodes.length === 0) {
     return (
       <div className="flex items-center justify-center h-64 text-zinc-400 text-sm">
-        {t('commanders.noData') || '暂无指挥官数据'}
+        {t('noData')}
       </div>
     );
   }
@@ -318,18 +319,19 @@ export function CommanderNetworkGraph({
           <div className="font-bold text-sm mb-1">👤 {tooltip.name}</div>
           <div className="space-y-0.5">
             <div>
-              ⚔️ {tooltip.node.battles} 场战役 · {tooltip.node.winRate}% 胜率
+              {t('tooltip.battles', { battles: tooltip.node.battles, winRate: tooltip.node.winRate })}
             </div>
             <div>
-              🤝 {tooltip.node.collaborators.length} 搭档 · ⚔️ {tooltip.node.opponents.length} 对手
+              {t('tooltip.relations', { collaborators: tooltip.node.collaborators.length, opponents: tooltip.node.opponents.length })}
             </div>
             {tooltip.node.firstBattle !== undefined && (
               <div>
-                📅{' '}
-                {formatYear(tooltip.node.firstBattle)}
-                {tooltip.node.lastBattle !== undefined &&
-                  tooltip.node.lastBattle !== tooltip.node.firstBattle &&
-                  ` – ${formatYear(tooltip.node.lastBattle)}`}
+                {t('tooltip.dateRange', {
+                  start: formatYear(tooltip.node.firstBattle, locale),
+                  end: tooltip.node.lastBattle !== undefined && tooltip.node.lastBattle !== tooltip.node.firstBattle
+                    ? formatYear(tooltip.node.lastBattle, locale)
+                    : '',
+                })}
               </div>
             )}
           </div>
@@ -340,15 +342,15 @@ export function CommanderNetworkGraph({
       <div className="absolute bottom-2 right-2 bg-white/80 dark:bg-zinc-800/80 rounded-lg px-2 py-1.5 text-xs flex gap-3 border border-zinc-200 dark:border-zinc-700">
         <span className="flex items-center gap-1">
           <span className="inline-block w-3 h-0.5 bg-green-500 rounded"></span>
-          <span className="text-zinc-600 dark:text-zinc-400">合作</span>
+          <span className="text-zinc-600 dark:text-zinc-400">{t('legend.collaboration')}</span>
         </span>
         <span className="flex items-center gap-1">
           <span className="inline-block w-3 h-0.5 bg-red-500 rounded"></span>
-          <span className="text-zinc-600 dark:text-zinc-400">对决</span>
+          <span className="text-zinc-600 dark:text-zinc-400">{t('legend.rivalry')}</span>
         </span>
         <span className="flex items-center gap-1">
           <span className="inline-block w-3 h-3 bg-blue-400 rounded-full"></span>
-          <span className="text-zinc-600 dark:text-zinc-400">指挥官</span>
+          <span className="text-zinc-600 dark:text-zinc-400">{t('legend.commander')}</span>
         </span>
       </div>
     </div>

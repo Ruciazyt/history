@@ -96,6 +96,7 @@ function CommanderCard({
   node,
   index,
   t,
+  locale,
 }: {
   node: {
     name: string;
@@ -110,6 +111,7 @@ function CommanderCard({
   };
   index: number;
   t: ReturnType<typeof useTranslations>;
+  locale?: string;
 }) {
   return (
     <div
@@ -127,9 +129,9 @@ function CommanderCard({
             </div>
             {node.firstBattle !== undefined && (
               <div className={`text-xs ${COMMANDERS_COLORS.commanderCard.stat}`}>
-                {formatYear(node.firstBattle)}
+                {formatYear(node.firstBattle, locale)}
                 {node.lastBattle !== undefined && node.lastBattle !== node.firstBattle
-                  ? ` – ${formatYear(node.lastBattle)}`
+                  ? ` – ${formatYear(node.lastBattle, locale)}`
                   : ''}
               </div>
             )}
@@ -344,7 +346,7 @@ export function CommandersClient({
         {activeTab === 'commanders' && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {topCommanders.slice(0, 30).map((node, i) => (
-              <CommanderCard key={node.name} node={node} index={i} t={t} />
+              <CommanderCard key={node.name} node={node} index={i} t={t} locale={locale} />
             ))}
           </div>
         )}
@@ -475,7 +477,7 @@ export function CommandersClient({
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <h2 className={`text-base font-semibold ${COMMANDERS_COLORS.section.title}`}>
-                🕸️ {t('commanders.tabs.network') || '关系网络'}
+                🕸️ {t('commanders.tabs.network')}
               </h2>
               {selectedCommander && (
                 <button
@@ -483,7 +485,7 @@ export function CommandersClient({
                   onClick={() => setSelectedCommander(null)}
                   className={`text-xs px-2 py-1 rounded-lg border ${COMMANDERS_COLORS.commanderCard.border} ${COMMANDERS_COLORS.commanderCard.stat} hover:opacity-80`}
                 >
-                  ✕ 清除选择
+                  ✕ {t('commanders.clearSelection')}
                 </button>
               )}
             </div>
@@ -505,11 +507,11 @@ export function CommandersClient({
                   return (
                     <div className="text-sm space-y-1">
                       <div className={COMMANDERS_COLORS.commanderCard.stat}>
-                        ⚔️ {node.battles} 场战役 · {node.winRate}% 胜率
+                        {t('commanders.battlesSummary', { battles: node.battles, winRate: node.winRate })}
                       </div>
                       {node.collaborators.length > 0 && (
                         <div className="flex flex-wrap gap-1 mt-2">
-                          <span className={`text-xs ${COMMANDERS_COLORS.commanderCard.stat}`}>🤝 搭档:</span>
+                          <span className={`text-xs ${COMMANDERS_COLORS.commanderCard.stat}`}>🤝 {t('commanders.collaboratorsLabel')}:</span>
                           {node.collaborators.slice(0, 5).map((c) => (
                             <button
                               key={c}
@@ -524,7 +526,7 @@ export function CommandersClient({
                       )}
                       {node.opponents.length > 0 && (
                         <div className="flex flex-wrap gap-1 mt-1">
-                          <span className={`text-xs ${COMMANDERS_COLORS.commanderCard.stat}`}>⚔️ 对手:</span>
+                          <span className={`text-xs ${COMMANDERS_COLORS.commanderCard.stat}`}>⚔️ {t('commanders.opponentsLabel')}:</span>
                           {node.opponents.slice(0, 5).map((c) => (
                             <button
                               key={c}

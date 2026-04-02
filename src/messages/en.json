@@ -189,7 +189,21 @@
     "insights": "Commander Insights",
     "noCollaborations": "No collaboration data",
     "noMatchups": "No matchup data",
-    "noInsights": "No insight data"
+    "noInsights": "No insight data",
+    "legend": {
+      "collaboration": "Collaboration",
+      "rivalry": "Rivalry",
+      "commander": "Commander"
+    },
+    "tooltip": {
+      "battles": "⚔️ {{battles}} battles · {{winRate}}% win rate",
+      "relations": "🤝 {{collaborators}} collaborators · ⚔️ {{opponents}} opponents",
+      "dateRange": "📅 {{start}} – {{end}}"
+    },
+    "clearSelection": "Clear Selection",
+    "battlesSummary": "⚔️ {{battles}} battles · {{winRate}}% win rate",
+    "collaboratorsLabel": "Collaborators",
+    "opponentsLabel": "Opponents"
   },
   "empire_abbasid": "Abbasid Caliphate",
   "empire_achaemenid": "Achaemenid Persia",

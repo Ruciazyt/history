@@ -7,11 +7,18 @@ import { CommanderNetworkGraph } from './CommanderNetworkGraph';
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => {
     const map: Record<string, string> = {
-      'commanders.noData': '暂无指挥官数据',
-      'commanders.title': '指挥官关系网络',
+      'noData': '暂无指挥官数据',
+      'title': '指挥官关系网络',
+      'legend.collaboration': '合作',
+      'legend.rivalry': '对决',
+      'legend.commander': '指挥官',
+      'tooltip.battles': '⚔️ {{battles}} 场战役 · {{winRate}}% 胜率',
+      'tooltip.relations': '🤝 {{collaborators}} 搭档 · ⚔️ {{opponents}} 对手',
+      'tooltip.dateRange': '📅 {{start}} – {{end}}',
     };
     return map[key] ?? key;
   },
+  useLocale: () => 'zh',
 }));
 
 // Mock ResizeObserver

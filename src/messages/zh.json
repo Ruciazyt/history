@@ -2000,7 +2000,21 @@
     "insights": "指挥官洞察",
     "noCollaborations": "暂无合作数据",
     "noMatchups": "暂无对决数据",
-    "noInsights": "暂无洞察数据"
+    "noInsights": "暂无洞察数据",
+    "legend": {
+      "collaboration": "合作",
+      "rivalry": "对决",
+      "commander": "指挥官"
+    },
+    "tooltip": {
+      "battles": "⚔️ {{battles}} 场战役 · {{winRate}}% 胜率",
+      "relations": "🤝 {{collaborators}} 搭档 · ⚔️ {{opponents}} 对手",
+      "dateRange": "📅 {{start}} – {{end}}"
+    },
+    "clearSelection": "清除选择",
+    "battlesSummary": "⚔️ {{battles}} 场战役 · {{winRate}}% 胜率",
+    "collaboratorsLabel": "搭档",
+    "opponentsLabel": "对手"
   },
   "thisDayInHistory": {
     "title": "历史上的今天",
