@@ -146,7 +146,9 @@
     "casualtiesTotal": "Total",
     "casualtiesReliability": "Reliability",
     "casualtiesSource": "Source",
-    "noCasualties": "No casualty data available"
+    "noCasualties": "No casualty data available",
+    "casualtyStats": "Casualty Statistics",
+    "bloodiestBattlesTop": "Bloodiest Battles Top {n}"
   },
   "battleOfTheDay": {
     "title": "Battle of the Day",

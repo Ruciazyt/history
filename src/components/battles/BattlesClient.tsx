@@ -252,7 +252,7 @@ export function BattlesClient({
             {/* Casualties stats */}
             {casualtyStats.battlesWithCasualties > 0 && (
               <div className="mt-3">
-                <div className={`text-xs ${BATTLES_CLIENT_COLORS.eraDistribution.label} mb-2`}>💀 伤亡统计</div>
+                <div className={`text-xs ${BATTLES_CLIENT_COLORS.eraDistribution.label} mb-2`}>💀 {t('battleDetail.casualtyStats')}</div>
                 <div className={`bg-gradient-to-br ${BATTLES_CLIENT_COLORS.statCards.casualties.gradient} rounded-xl p-3 border ${BATTLES_CLIENT_COLORS.statCards.casualties.border}`}>
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex-1 text-center">
@@ -277,7 +277,7 @@ export function BattlesClient({
                 </div>
                 {bloodiestBattles.length > 0 && (
                   <div className="mt-2">
-                    <div className={`text-xs ${BATTLES_CLIENT_COLORS.eraDistribution.label} mb-1.5`}>🔝 最惨烈战役 Top 3</div>
+                    <div className={`text-xs ${BATTLES_CLIENT_COLORS.eraDistribution.label} mb-1.5`}>🔝 {t('battleDetail.bloodiestBattlesTop', { n: 3 })}</div>
                     <div className="space-y-1">
                       {bloodiestBattles.map((battle, idx) => (
                         <div key={battle.id} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg ${BATTLES_CLIENT_COLORS.eraDistribution.tag.bg}`}>

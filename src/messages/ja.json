@@ -146,7 +146,9 @@
     "casualtiesTotal": "合計",
     "casualtiesReliability": "データの信頼性",
     "casualtiesSource": "データソース",
-    "noCasualties": "死傷者データなし"
+    "noCasualties": "死傷者データなし",
+    "casualtyStats": "死傷者統計",
+    "bloodiestBattlesTop": "最も惨憺たる戦闘 Top {n}"
   },
   "battleOfTheDay": {
     "title": "今日の戦い",

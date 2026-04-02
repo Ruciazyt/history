@@ -1891,7 +1891,9 @@
     "casualtiesTotal": "合计",
     "casualtiesReliability": "数据可靠度",
     "casualtiesSource": "数据来源",
-    "noCasualties": "暂无伤亡数据"
+    "noCasualties": "暂无伤亡数据",
+    "casualtyStats": "伤亡统计",
+    "bloodiestBattlesTop": "最惨烈战役 Top {n}"
   },
   "battleTimeline": {
     "noData": "暂无战役数据"
