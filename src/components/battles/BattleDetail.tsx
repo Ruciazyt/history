@@ -310,7 +310,7 @@ export const BattleDetail = React.memo(function BattleDetail({ battle, onClose, 
               {battle.tags.filter(tag => tag !== 'war').map(tag => (
                 <span 
                   key={tag}
-                  className={`px-2 py-0.5 bg-zinc-100 ${BATTLE_DETAIL_TEXT_COLORS.labelSmall} text-xs rounded`}
+                  className={`px-2 py-0.5 bg-zinc-100 dark:bg-zinc-700 ${BATTLE_DETAIL_TEXT_COLORS.labelSmall} text-xs rounded`}
                 >
                   {tag}
                 </span>

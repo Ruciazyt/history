@@ -597,31 +597,31 @@ export const COMMANDER_COLORS = {
 } as const;
 export const BATTLE_DETAIL_COLORS = {
   header: {
-    bg: 'bg-red-600',
-    hover: 'hover:bg-red-700',
+    bg: 'bg-red-600 dark:bg-red-700',
+    hover: 'hover:bg-red-700 dark:hover:bg-red-800',
     text: 'text-white',
-    close: 'bg-red-700 hover:bg-red-800',
-    yearLocation: 'text-red-100',
+    close: 'bg-red-700 hover:bg-red-800 dark:bg-red-800 dark:hover:bg-red-900',
+    yearLocation: 'text-red-100 dark:text-red-200',
   },
   section: {
-    bg: 'bg-zinc-50',
-    border: 'border-zinc-200',
+    bg: 'bg-zinc-50 dark:bg-zinc-800',
+    border: 'border-zinc-200 dark:border-zinc-700',
   },
-  closeButton: 'bg-zinc-600 hover:bg-zinc-700',
+  closeButton: 'bg-zinc-600 hover:bg-zinc-700 dark:bg-zinc-700 dark:hover:bg-zinc-600',
   belligerents: {
-    attacker: 'text-red-700',
-    defender: 'text-blue-700',
+    attacker: 'text-red-700 dark:text-red-400',
+    defender: 'text-blue-700 dark:text-blue-400',
   },
 } as const;
 export const BATTLE_DETAIL_TEXT_COLORS = {
-  label: 'text-zinc-600',
-  labelSmall: 'text-zinc-500',
-  content: 'text-zinc-700',
-  contentLight: 'text-zinc-500',
-  unknown: 'text-zinc-400',
-  sectionTitle: 'text-zinc-700',
-  divider: 'border-zinc-200',
-  link: 'text-blue-600 hover:underline',
+  label: 'text-zinc-600 dark:text-zinc-400',
+  labelSmall: 'text-zinc-500 dark:text-zinc-500',
+  content: 'text-zinc-700 dark:text-zinc-300',
+  contentLight: 'text-zinc-500 dark:text-zinc-400',
+  unknown: 'text-zinc-400 dark:text-zinc-500',
+  sectionTitle: 'text-zinc-700 dark:text-zinc-300',
+  divider: 'border-zinc-200 dark:border-zinc-700',
+  link: 'text-blue-600 hover:underline dark:text-blue-400',
 } as const;
 export const MAP_MARKER_COLORS = {
   default: 'bg-red-500',
