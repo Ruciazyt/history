@@ -758,7 +758,8 @@
       "egypt": "エジプト",
       "indus": "インダス文明",
       "mesopotamia": "メソポタミア",
-      "hellenistic": "ヘレニズム・ギリシャ"
+      "hellenistic": "ヘレニズム・ギリシャ",
+      "median": "メディア帝国"
     },
     "ea": {
       "china": "中国",
@@ -1314,7 +1315,9 @@
     "ruler.wc-iv-gautamiputra": "ガウタミプトラ・サータカルニ",
     "ruler.wc-iv-srivijaya-dyn": "シュリヴィジャヤ帝国",
     "ruler.ea-jp-asuka": "飛鳥時代",
-    "ruler.ea-jp-shotoku": "聖徳太子"
+    "ruler.ea-jp-shotoku": "聖徳太子",
+    "wc-me-median": "メディア帝国",
+    "wc-me-cyaxares": "キ·阿クサレス"
   },
   "ruler.ea-jp-edo": "江戸幕府",
   "ruler.ea-jp-heian": "平安時代",
@@ -1847,7 +1850,9 @@
     "rulerBio.wc-iv-gautamiputra": " Gautamiputra Satakarni（在位: 106-130年）。最も偉大なサータヴァーハナ王。西南ヨーロッパの Sectac の Sectakarna を破った。ヴェーダの伝統を復活。",
     "rulerBio.wc-iv-srivijaya": "シュリヴィジャヤ帝国（600-1295年頃）。マラッカ海峡を支配した海洋帝国。学問の中心地であり、大乗仏教とサンスクリット学問を守護した。",
     "rulerBio.ea-jp-asuka": "飛鳥時代（592-710年）。日本国家の形成期。百済から仏教が传来。聖徳太子の大化の改新と十七条宪法が制定された。",
-    "rulerBio.ea-jp-shotoku": "聖徳太子（593-622年）。推古天皇の摂政。仏教を保護。十七条宪法を制定（604年）。隋に遣隋使を派遣。寺院建立を保護した。"
+    "rulerBio.ea-jp-shotoku": "聖徳太子（593-622年）。推古天皇の摂政。仏教を保護。十七条宪法を制定（604年）。隋に遣隋使を派遣。寺院建立を保護した。",
+    "wc-me-median": "メディア帝国（紀元前678年〜549年頃）は、イラン最初の統一帝国で、ハマダンにある都エクバトアナを中心に据えた。イラン諸部族を統一し、紀元前612年にアッシリア帝国を滅ぼし、アケメネス朝ペルシア帝国への道を開いた。",
+    "wc-me-cyaxares": "キ·阿クサレス（紀元前625年〜585年頃）は最も傑出したメディア王で、メディア諸部族を統一し、バビロニアのナボポラッサルと連合して紀元前612年にニネヴェを陥落させた。メディアを近東の支配的勢力に築き上げた。"
   },
   "rulerBio.ea-jp-edo": "徳川幕府；250年以上の平和；鎖国政策；都市商業文化が繁荣。",
   "rulerBio.ea-jp-heian": "貴族文化がピーク；平仮名・片仮名が発達；《源氏物語》が生まれる。",
@@ -2242,7 +2247,9 @@
     "rulerHighlight.wc-pe-xerxes": "紀元前480年にギリシャに侵攻；アテナイを焼き払った",
     "rulerHighlight.wc-pe-ardashir": "サーサーン朝を建国；ゾロアスター教を復活",
     "rulerHighlight.wc-pe-safavid": "十二イマーム派シーア派を国教として確立",
-    "rulerHighlight.ea-jp-shotoku": "日本初の憲法・十七条宪法；仏教を保護し隋に派遣"
+    "rulerHighlight.ea-jp-shotoku": "日本初の憲法・十七条宪法；仏教を保護し隋に派遣",
+    "wc-me-median": "イラン諸部族を統一し、アッシリア帝国を滅ぼし（紀元前612年）、古代近東の格局を変えた。",
+    "wc-me-cyaxares": "メディアを統一し、ニネヴェを陥落（紀元前612年）、メディアを大帝国として確立した。"
   },
   "rulerHighlight.ea-jp-edo": "徳川幕府（1603〜1868年）；250年以上の平和；鎖国政策。",
   "rulerHighlight.ea-jp-heian": "平安時代（794〜1185年）；貴族文化がピーク；『源氏物語』が生まれる。",

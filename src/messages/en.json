@@ -758,7 +758,8 @@
       "egypt": "Egypt",
       "indus": "Indus Valley",
       "mesopotamia": "Mesopotamia",
-      "hellenistic": "Hellenistic Greece"
+      "hellenistic": "Hellenistic Greece",
+      "median": "Median Empire"
     },
     "ea": {
       "china": "China",
@@ -1314,7 +1315,9 @@
     "ruler.wc-iv-gautamiputra": "Gautamiputra Satakarni",
     "ruler.wc-iv-srivijaya-dyn": "Srivijaya Empire",
     "ruler.ea-jp-asuka": "Asuka Period",
-    "ruler.ea-jp-shotoku": "Prince Shōtoku"
+    "ruler.ea-jp-shotoku": "Prince Shōtoku",
+    "wc-me-median": "Median Empire",
+    "wc-me-cyaxares": "Cyaxares"
   },
   "ruler.ea-jp-edo": "Edo Period",
   "ruler.ea-jp-heian": "Heian Period",
@@ -1847,7 +1850,9 @@
     "rulerBio.wc-iv-gautamiputra": "Gautamiputra Satakarni (r. 106-130 CE). Greatest Satavahana king; defeated the Scythian Western Kshatrapas; restored Vedic traditions; issued extensive coinage.",
     "rulerBio.wc-iv-srivijaya": "Srivijaya Empire (c. 600-1295 CE). Maritime empire controlling the Strait of Malacca and surrounding seas; centre of learning; Mahayana Buddhism and Sanskrit scholarship.",
     "rulerBio.ea-jp-asuka": "Asuka Period (592-710 CE). Era of early Japanese state formation; introduced Buddhism from Korea; saw the legendary Prince Shōtoku's Taika Reform and Seventeen-Article Constitution.",
-    "rulerBio.ea-jp-shotoku": "Prince Shōtoku (r. 593-622). Regent for Empress Suiko; promoted Buddhism; introduced the Seventeen-Article Constitution (604); sent envoys to Sui China; patron of temple building."
+    "rulerBio.ea-jp-shotoku": "Prince Shōtoku (r. 593-622). Regent for Empress Suiko; promoted Buddhism; introduced the Seventeen-Article Constitution (604); sent envoys to Sui China; patron of temple building.",
+    "wc-me-median": "The Median Empire (c. 678–549 BCE) was the first organized Iranian empire, centered at Ecbatana (modern Hamadan). It united the Iranian peoples of northwestern Iran and is credited with destroying the Assyrian Empire at Nineveh in 612 BCE, paving the way for the Achaemenid Persian dynasty.",
+    "wc-me-cyaxares": "Cyaxares (r. 625–585 BCE) was the greatest Median king who unified the Median tribes, destroyed Nineveh in alliance with the Babylonian Nabopolassar in 612 BCE, and established Media as the dominant power in the Near East. His empire stretched from the Caspian Sea to the borders of Anatolia."
   },
   "rulerBio.ea-jp-edo": "Tokugawa shogunate; 250+ years of peace; sakoku isolationist policy; urban merchant culture flourished.",
   "rulerBio.ea-jp-heian": "Aristocratic culture peaked; hiragana and katakana developed; The Tale of Genji composed by Murasaki Shikibu.",
@@ -2242,7 +2247,9 @@
     "rulerHighlight.wc-pe-xerxes": "Invaded Greece 480 BCE; burned Athens",
     "rulerHighlight.wc-pe-ardashir": "Founded Sassanid Empire; revived Zoroastrianism",
     "rulerHighlight.wc-pe-safavid": "Established Twelver Shia Islam as state religion",
-    "rulerHighlight.ea-jp-shotoku": "First constitution in East Asia; brought Buddhism to Japan"
+    "rulerHighlight.ea-jp-shotoku": "First constitution in East Asia; brought Buddhism to Japan",
+    "wc-me-median": "United Iranian tribes and destroyed the Assyrian Empire (612 BCE), reshaping the ancient Near East.",
+    "wc-me-cyaxares": "Cyaxares unified the Medes, destroyed Nineveh (612 BCE), and established Media as a major power."
   },
   "rulerHighlight.ea-jp-edo": "Tokugawa Shogunate (1603–1868); 250+ years of peace; isolationist sakoku policy.",
   "rulerHighlight.ea-jp-heian": "Heian period (794–1185); aristocratic culture peaked; Tale of Genji composed.",

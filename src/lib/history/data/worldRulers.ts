@@ -54,6 +54,10 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-me-ashurbanipal', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-ashurbanipal', bioKey: 'rulerBio.wc-me-ashurbanipal', highlightKey: 'rulerHighlight.wc-me-ashurbanipal', startYear: -669, endYear: -627 },
   { id: 'wc-me-nebuchadnezzar', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-nebuchadnezzar', bioKey: 'rulerBio.wc-me-nebuchadnezzar', highlightKey: 'rulerHighlight.wc-me-nebuchadnezzar', startYear: -605, endYear: -562 },
 
+
+  // ── Median Empire (Ancient Iran) ────────────────────────────────────────
+  { id: 'wc-me-median', eraId: 'world-comparison', polityId: 'wc-median', nameKey: 'ruler.wc-me-median', bioKey: 'rulerBio.wc-me-median', startYear: -678, endYear: -549 , isDynastyBlock: true },
+  { id: 'wc-me-cyaxares', eraId: 'world-comparison', polityId: 'wc-median', nameKey: 'ruler.wc-me-cyaxares', bioKey: 'rulerBio.wc-me-cyaxares', highlightKey: 'rulerHighlight.wc-me-cyaxares', startYear: -625, endYear: -585 },
   // ── Kievan Rus (Eastern Europe) ────────────────────────────────────────
   { id: 'wc-rus-rurik', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-rurik', bioKey: 'rulerBio.wc-rus-rurik', startYear: 862, endYear: 879 , isDynastyBlock: true },
   { id: 'wc-rus-vladimir', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-vladimir', bioKey: 'rulerBio.wc-rus-vladimir', highlightKey: 'rulerHighlight.wc-rus-vladimir', startYear: 980, endYear: 1015 },
