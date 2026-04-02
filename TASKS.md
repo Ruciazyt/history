@@ -1441,3 +1441,39 @@ src/
 - 朝代/事件年份现在会根据当前语言正确显示：中文显示"公元前221年"，英文显示"221 BCE"
 - 改动小、安全、不破坏现有逻辑（locale 默认值为 'zh'，向后兼容）
 - 项目保持健壮可用状态
+
+---
+
+### 2026-04-03 03:00 (自动优化任务)
+
+#### 问题发现
+- `BattleOfTheDayCard` 调用 `BattleDetail` 时未传入 `locale` prop，导致详情弹窗中年年份格式化始终使用 'zh' 默认值
+- `ThisDayInHistoryCard` 同样未传入 `locale`，且组件自身也缺少 `locale` prop
+
+#### 修复内容
+
+- [x] BattleOfTheDayCard.tsx: 向 BattleDetail 传入 `locale={locale}`
+  - `locale` 通过 `useLocale()` 获取但之前未传递给 BattleDetail
+
+- [x] ThisDayInHistoryCard.tsx: 新增 `locale?: string` prop
+  - `formatYear(battle.year, locale)` - 年份格式化使用当前语言
+  - `BattleDetail` 传入 `locale={locale}`
+  - 默认值 `'zh'` 保持向后兼容
+
+- [x] BattlesClient.tsx: 向 ThisDayInHistoryCard 传入 `locale={locale}`
+
+- [x] ThisDayInHistoryCard.test.tsx: 修复测试辅助函数
+  - `renderCard` 增加 `locale` 参数
+  - 年份格式化测试传入 `'en'` 显式测试英文 BCE 格式
+
+#### 验证结果
+- [x] TypeScript 类型检查通过 (npx tsc --noEmit 无错误)
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] 单元测试: 973个测试用例全部通过
+- [x] 代码已提交 (commits: 89c489b, 7902f4e)
+- [x] 代码已推送至仓库
+
+#### 优化说明
+- 修复了 BattleOfTheDayCard 和 ThisDayInHistoryCard 中年份格式显示错误的 bug
+- 点击"今日战役"卡片打开详情弹窗时，年份现在会正确使用当前语言格式显示
+- 改动小、安全、不破坏现有逻辑（locale 默认值为 'zh'，向后兼容）
