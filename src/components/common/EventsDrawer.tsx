@@ -11,6 +11,7 @@ interface EventsDrawerProps {
   currentEraEvents: Event[];
   otherEraEvents: Event[];
   activeEras: Era[];
+  locale?: string;
 }
 
 export const EventsDrawer = React.memo(function EventsDrawer({
@@ -19,6 +20,7 @@ export const EventsDrawer = React.memo(function EventsDrawer({
   currentEraEvents,
   otherEraEvents,
   activeEras,
+  locale = 'zh',
 }: EventsDrawerProps) {
   const t = useTranslations();
 
@@ -82,7 +84,7 @@ export const EventsDrawer = React.memo(function EventsDrawer({
                     className="border-b border-zinc-100 dark:border-zinc-800 px-4 py-3"
                   >
                     <div className="text-xs text-zinc-400 dark:text-zinc-500">
-                      {formatYear(e.year)} {eraName ? `· ${eraName}` : ''}
+                      {formatYear(e.year, locale)} {eraName ? `· ${eraName}` : ''}
                     </div>
                     <div className="mt-1 text-sm font-medium text-zinc-900 dark:text-zinc-100">
                       {t(e.titleKey)}
@@ -117,7 +119,7 @@ export const EventsDrawer = React.memo(function EventsDrawer({
                       className="border-b border-zinc-100 dark:border-zinc-800 px-4 py-3"
                     >
                       <div className="text-xs text-zinc-400 dark:text-zinc-500">
-                        {formatYear(e.year)} {eraName ? `· ${eraName}` : ''}
+                        {formatYear(e.year, locale)} {eraName ? `· ${eraName}` : ''}
                       </div>
                       <div className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
                         {t(e.titleKey)}

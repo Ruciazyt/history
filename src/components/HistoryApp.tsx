@@ -535,6 +535,7 @@ export function HistoryApp({
         selectedRulerId={selectedRulerId}
         onToggleEra={toggleEra}
         onSelectRuler={setSelectedRulerId}
+        locale={currentLocale}
       />
 
       {/* Mobile: Events Drawer (right side) */}
@@ -544,6 +545,7 @@ export function HistoryApp({
         currentEraEvents={currentEraEvents}
         otherEraEvents={otherEraEvents}
         activeEras={activeEras}
+        locale={currentLocale}
       />
     </div>
   );

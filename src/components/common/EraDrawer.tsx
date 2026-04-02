@@ -15,6 +15,7 @@ interface EraDrawerProps {
   selectedRulerId: string | null;
   onToggleEra: (id: string) => void;
   onSelectRuler: (id: string | null) => void;
+  locale?: string;
 }
 
 export const EraDrawer = React.memo(function EraDrawer({
@@ -26,6 +27,7 @@ export const EraDrawer = React.memo(function EraDrawer({
   selectedRulerId,
   onToggleEra,
   onSelectRuler,
+  locale = 'zh',
 }: EraDrawerProps) {
   const t = useTranslations();
   const tEra = useTranslations('rulerEraName');
@@ -110,7 +112,7 @@ export const EraDrawer = React.memo(function EraDrawer({
                       )}
                     </span>
                     <span className="text-xs text-zinc-400">
-                      {formatYear(era.startYear)}–{formatYear(era.endYear)}
+                      {formatYear(era.startYear, locale)}–{formatYear(era.endYear, locale)}
                     </span>
                     {/* Chevron icon — consistent with SVG style */}
                     <svg
@@ -163,7 +165,7 @@ export const EraDrawer = React.memo(function EraDrawer({
                                       className="border-b border-zinc-100 dark:border-zinc-800 last:border-0"
                                     >
                                       <td className="px-2 py-2 shrink-0 w-16">
-                                        {formatYear(year)}
+                                        {formatYear(year, locale)}
                                       </td>
                                       {era.polities?.map((p) => {
                                         const r = rulers.find((r) => r.polityId === p.id);
@@ -232,7 +234,7 @@ export const EraDrawer = React.memo(function EraDrawer({
                                 )}
                               </span>
                               <span className="shrink-0 text-xs text-zinc-400">
-                                {formatYear(r.startYear)}–{formatYear(r.endYear)}
+                                {formatYear(r.startYear, locale)}–{formatYear(r.endYear, locale)}
                               </span>
                             </button>
                           );
