@@ -707,6 +707,31 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   />
                 );
               })}
+              {/* Era band name labels — shown at midpoint of each colored band */}
+              {[
+                { band: ERA_BANDS[0], start: minYear, end: ERA_BOUNDARY_YEARS[0] },
+                { band: ERA_BANDS[1], start: ERA_BOUNDARY_YEARS[0], end: ERA_BOUNDARY_YEARS[1] },
+                { band: ERA_BANDS[2], start: ERA_BOUNDARY_YEARS[1], end: maxYear },
+              ].map(({ band, start, end }) => {
+                if (!band) return null;
+                const topY = yearToY(start, minYear, maxYear, 96);
+                const bottomY = yearToY(end, minYear, maxYear, 96);
+                const height = bottomY - topY;
+                if (height < 10) return null; // Skip if band is too small to show a label
+                const midY = (topY + bottomY) / 2;
+                return (
+                  <div
+                    key={`label-${band.labelKey}`}
+                    className="absolute left-1 pointer-events-none"
+                    style={{ top: midY, transform: 'translateY(-50%)' }}
+                  >
+                    <span className="text-[7px] font-semibold tracking-wide uppercase bg-white/70 dark:bg-zinc-800/70 px-0.5 rounded leading-none">
+                      {t(band.shortLabelKey)}
+                    </span>
+                  </div>
+                );
+              })}
+
               {/* Century tick marks */}
               {(() => {
                 const miniTicks: number[] = [];
