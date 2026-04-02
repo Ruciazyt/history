@@ -156,7 +156,7 @@ export function TimelineClient({ locale }: { locale: string }) {
               >
                 <div className="flex items-center gap-2 sm:gap-3">
                   <span className={`text-sm sm:text-lg font-bold shrink-0 ${index === currentEventIndex ? TIMELINE_EVENT_COLORS.year.active : TIMELINE_EVENT_COLORS.year.inactive}`}>
-                    {formatYear(event.year)}
+                    {formatYear(event.year, locale)}
                   </span>
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-sm sm:text-base truncate">{t(event.titleKey)}</p>
