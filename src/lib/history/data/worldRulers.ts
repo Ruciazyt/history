@@ -103,6 +103,7 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-pe-safavid', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-safavid', bioKey: 'rulerBio.wc-pe-safavid', highlightKey: 'rulerHighlight.wc-pe-safavid', startYear: 1501, endYear: 1736 },
 
   // ── Hellenistic Greece ─────────────────────────────────
+  { id: 'wc-he-philip-ii', eraId: 'world-comparison', polityId: 'wc-hellenistic', nameKey: 'ruler.wc-he-philip-ii', bioKey: 'rulerBio.wc-he-philip-ii', highlightKey: 'rulerHighlight.wc-he-philip-ii', startYear: -359, endYear: -336 },
   { id: 'wc-he-alexander', eraId: 'world-comparison', polityId: 'wc-hellenistic', nameKey: 'ruler.wc-he-alexander', bioKey: 'rulerBio.wc-he-alexander', highlightKey: 'rulerHighlight.wc-he-alexander', startYear: -336, endYear: -323 },
   { id: 'wc-he-antigonus', eraId: 'world-comparison', polityId: 'wc-hellenistic', nameKey: 'ruler.wc-he-antigonus', bioKey: 'rulerBio.wc-he-antigonus', highlightKey: 'rulerHighlight.wc-he-antigonus', startYear: -306, endYear: -301 },
   { id: 'wc-he-seleucid', eraId: 'world-comparison', polityId: 'wc-hellenistic', nameKey: 'ruler.wc-he-seleucid-dyn', bioKey: 'rulerBio.wc-he-seleucid', startYear: -312, endYear: -63 , isDynastyBlock: true },
