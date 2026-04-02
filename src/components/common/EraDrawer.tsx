@@ -187,7 +187,7 @@ export const EraDrawer = React.memo(function EraDrawer({
                                             >
                                               <div>{t(r.nameKey)}</div>
                                               {r.eraNameKey && (
-                                                <div className="text-amber-600 dark:text-amber-400 text-xs">
+                                                <div className="text-amber-700 dark:text-amber-300 text-xs">
                                                   {tEra(r.eraNameKey)}
                                                 </div>
                                               )}
@@ -226,7 +226,7 @@ export const EraDrawer = React.memo(function EraDrawer({
                                   <>
                                     <span>{t(r.nameKey)}</span>
                                     {r.eraNameKey && (
-                                      <span className="text-amber-600 dark:text-amber-400 text-xs">
+                                      <span className="text-amber-700 dark:text-amber-300 text-xs">
                                         {tEra(r.eraNameKey)}
                                       </span>
                                     )}

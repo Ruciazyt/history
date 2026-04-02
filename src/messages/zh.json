@@ -1,7 +1,8 @@
 {
   "app": {
     "title": "历史学习地图",
-    "subtitle": "中国 · 朝代/时期 · 事件 · 地图"
+    "subtitle": "中国 · 朝代/时期 · 事件 · 地图",
+    "civModeChina": "中国史"
   },
   "header": {
     "era": "时期",

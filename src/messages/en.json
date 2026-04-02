@@ -1,7 +1,8 @@
 {
   "app": {
     "title": "History Atlas",
-    "subtitle": "China · Eras · Events · Map"
+    "subtitle": "China · Eras · Events · Map",
+    "civModeChina": "Chinese History"
   },
   "battle": {
     "result": {

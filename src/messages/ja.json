@@ -1,7 +1,8 @@
 {
   "app": {
     "title": "歴史アトラス",
-    "subtitle": "中国 · 時代 · 出来事 · 地図"
+    "subtitle": "中国 · 時代 · 出来事 · 地図",
+    "civModeChina": "中国史"
   },
   "battle": {
     "result": {
