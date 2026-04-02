@@ -734,8 +734,8 @@ export const WORLD_MAP_COLORS = {
 } as const;
 export const MAP_POPUP_COLORS = {
   container: 'space-y-2 p-1',
-  title: 'font-semibold text-gray-900',
-  subtitle: 'text-sm text-gray-600',
+  title: 'font-semibold text-gray-900 dark:text-gray-100',
+  subtitle: 'text-sm text-gray-600 dark:text-gray-400',
   dot: 'w-3 h-3 rounded-full',
 } as const;
 export const RULER_RELATIONS_COLORS = {
