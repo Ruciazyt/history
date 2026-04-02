@@ -37,6 +37,10 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-ro-suleiman', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-suleiman', bioKey: 'rulerBio.wc-ro-suleiman', highlightKey: 'rulerHighlight.wc-ro-suleiman', startYear: 1520, endYear: 1566 },
   // ── Holy Roman Empire / Spanish Empire (Charles V) ────────────────────
   { id: 'wc-ro-charles-v', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-charles-v', bioKey: 'rulerBio.wc-ro-charles-v', highlightKey: 'rulerHighlight.wc-ro-charles-v', startYear: 1519, endYear: 1556 },
+  // ── Ottoman Empire (Mehmed II, Selim I, Bayezid II) ──────────────────
+  { id: 'wc-ro-mehmed-ii', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-mehmed-ii', bioKey: 'rulerBio.wc-ro-mehmed-ii', highlightKey: 'rulerHighlight.wc-ro-mehmed-ii', startYear: 1451, endYear: 1481 },
+  { id: 'wc-ro-bayezid-ii', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-bayezid-ii', bioKey: 'rulerBio.wc-ro-bayezid-ii', highlightKey: 'rulerHighlight.wc-ro-bayezid-ii', startYear: 1481, endYear: 1512 },
+  { id: 'wc-ro-selim-i', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-selim-i', bioKey: 'rulerBio.wc-ro-selim-i', highlightKey: 'rulerHighlight.wc-ro-selim-i', startYear: 1512, endYear: 1520 },
   { id: 'wc-ro-ottoman-late', eraId: 'world-comparison', polityId: 'wc-rome', nameKey: 'ruler.wc-ro-ottoman-dyn', bioKey: 'rulerBio.wc-ro-ottoman-late', startYear: 1566, endYear: 1912 , isDynastyBlock: true },
 
   // ── Egypt ─────────────────────────────────────────────────────────────
