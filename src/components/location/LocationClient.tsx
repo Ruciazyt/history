@@ -15,7 +15,7 @@ export function LocationClient({ locale }: LocationClientProps) {
   const [results, setResults] = React.useState<PlaceEvolution[]>([]);
   const [selectedPlace, setSelectedPlace] = React.useState<PlaceEvolution | null>(null);
 
-  // 搜索处理
+  // Handle search input
   const handleSearch = (value: string) => {
     setQuery(value);
     if (value.length >= 1) {
@@ -26,7 +26,7 @@ export function LocationClient({ locale }: LocationClientProps) {
     }
   };
 
-  // 选择地点
+  // Handle place selection
   const handleSelectPlace = (modernName: string) => {
     const evolution = getPlaceEvolution(modernName);
     if (evolution) {
@@ -34,7 +34,7 @@ export function LocationClient({ locale }: LocationClientProps) {
     }
   };
 
-  // 计算年代范围
+  // Format time range for display
   const getTimeRange = (startYear: number, endYear: number): string => {
     const start = formatYear(startYear, locale);
     const end = endYear >= 2026 ? t('location.modernLabel') : formatYear(endYear, locale);
@@ -44,7 +44,7 @@ export function LocationClient({ locale }: LocationClientProps) {
   return (
     <div className="min-h-screen bg-zinc-950 text-white p-6">
       <div className="max-w-4xl mx-auto">
-        {/* 标题 */}
+        {/* Header */}
         <header className="mb-8">
           <h1 className="text-3xl font-bold mb-2">
             📍 {t('location.title')}
@@ -54,7 +54,7 @@ export function LocationClient({ locale }: LocationClientProps) {
           </p>
         </header>
 
-        {/* 搜索框 */}
+        {/* Search input */}
         <div className="mb-8">
           <input
             type="text"
@@ -66,7 +66,7 @@ export function LocationClient({ locale }: LocationClientProps) {
           />
         </div>
 
-        {/* 搜索结果 */}
+        {/* Search results */}
         {query.length >= 1 && results.length > 0 && !selectedPlace && (
           <div className="space-y-2">
             {results.map((place, index) => (
@@ -89,14 +89,14 @@ export function LocationClient({ locale }: LocationClientProps) {
           </div>
         )}
 
-        {/* 暂无结果 */}
+        {/* No results */}
         {query.length >= 2 && results.length === 0 && (
           <div className="text-center text-zinc-500 py-8">
             {t('location.noResults')}
           </div>
         )}
 
-        {/* 地名演变详情 */}
+        {/* Place evolution details */}
         {selectedPlace && (
           <div>
             <button
@@ -115,16 +115,16 @@ export function LocationClient({ locale }: LocationClientProps) {
                 {selectedPlace.names.length} {t('location.historyNames')}
               </p>
 
-              {/* 时间线 */}
+              {/* Timeline */}
               <div className="relative">
-                {/* 竖线 */}
+                {/* Vertical line */}
                 <div className="absolute left-4 top-0 bottom-0 w-px bg-zinc-700" />
 
-                {/* 名称列表 */}
+                {/* Name list */}
                 <div className="space-y-6">
                   {selectedPlace.names.map((record, index) => (
                     <div key={index} className="relative pl-12">
-                      {/* 圆点 */}
+                      {/* Timeline dot */}
                       <div className="absolute left-2.5 top-4 w-3 h-3 bg-blue-500 rounded-full" />
 
                       <div className="bg-zinc-800/50 rounded-lg p-4">
@@ -155,5 +155,4 @@ export function LocationClient({ locale }: LocationClientProps) {
       </div>
     </div>
   );
-}
-;
+};
