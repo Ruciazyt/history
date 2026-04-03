@@ -146,6 +146,7 @@ export const eastAsiaRulers: import('@/lib/history/types').Ruler[] = [
   { id: 'ea-cn-qing', eraId: 'east-asia-comparison', polityId: 'ea-china', nameKey: 'ruler.wc-cn-qing-dyn', bioKey: 'rulerBio.wc-cn-qing', startYear: 1644, endYear: 1912 , isDynastyBlock: true },
 
   // ── Japan ──────────────────────────────────────────────────────────────
+  { id: 'ea-jp-jomon', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-jomon', bioKey: 'rulerBio.ea-jp-jomon', startYear: -10000, endYear: -300 , isDynastyBlock: true },
   { id: 'ea-jp-yayoi', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-yayoi', bioKey: 'rulerBio.ea-jp-yayoi', startYear: -200, endYear: 250 , isDynastyBlock: true },
   { id: 'ea-jp-yamato', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-yamato', bioKey: 'rulerBio.ea-jp-yamato', startYear: 250, endYear: 710 , isDynastyBlock: true },
   { id: 'ea-jp-asuka', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-asuka', bioKey: 'rulerBio.ea-jp-asuka', startYear: 592, endYear: 710 , isDynastyBlock: true },

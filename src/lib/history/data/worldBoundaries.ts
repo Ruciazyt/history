@@ -678,6 +678,18 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
 
   // ═══ 日本 (Japan) ═══
+  // ═══ 绳文时代 (Jōmon Period) ═══
+  {
+    type: 'Feature',
+    properties: { name: '绳文时代', nameKey: 'empire_jomon', startYear: -10000, endYear: -300, color: '#F9A8D4' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [130, 42], [133, 44], [145, 43], [145, 41], [142, 38], [140, 35],
+        [138, 32], [135, 30], [132, 31], [130, 33], [130, 42],
+      ]],
+    },
+  },
   {
     type: 'Feature',
     properties: { name: '弥生时代', nameKey: 'empire_yayoi', startYear: -300, endYear: 250, color: '#F472B6' },
