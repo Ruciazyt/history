@@ -1350,7 +1350,10 @@
     "ruler.ea-jp-asuka": "飛鳥時代",
     "ruler.ea-jp-shotoku": "聖徳太子",
     "wc-me-median": "メディア帝国",
-    "wc-me-cyaxares": "キ·阿クサレス"
+    "wc-me-cyaxares": "キ·阿クサレス",
+    "ruler.wc-eg-hatshepsut": "ハトシェプスト",
+    "ruler.wc-eg-akhenaten": "アクエンアテン",
+    "ruler.wc-me-sargon": "サルゴン大王"
   },
   "ruler.ea-jp-edo": "江戸幕府",
   "ruler.ea-jp-heian": "平安時代",
@@ -1887,7 +1890,10 @@
     "rulerBio.ea-jp-asuka": "飛鳥時代（592-710年）。日本国家の形成期。百済から仏教が传来。聖徳太子の大化の改新と十七条宪法が制定された。",
     "rulerBio.ea-jp-shotoku": "聖徳太子（593-622年）。推古天皇の摂政。仏教を保護。十七条宪法を制定（604年）。隋に遣隋使を派遣。寺院建立を保護した。",
     "wc-me-median": "メディア帝国（紀元前678年〜549年頃）は、イラン最初の統一帝国で、ハマダンにある都エクバトアナを中心に据えた。イラン諸部族を統一し、紀元前612年にアッシリア帝国を滅ぼし、アケメネス朝ペルシア帝国への道を開いた。",
-    "wc-me-cyaxares": "キ·阿クサレス（紀元前625年〜585年頃）は最も傑出したメディア王で、メディア諸部族を統一し、バビロニアのナボポラッサルと連合して紀元前612年にニネヴェを陥落させた。メディアを近東の支配的勢力に築き上げた。"
+    "wc-me-cyaxares": "キ·阿クサレス（紀元前625年〜585年頃）は最も傑出したメディア王で、メディア諸部族を統一し、バビロニアのナボポラッサルと連合して紀元前612年にニネヴェを陥落させた。メディアを近東の支配的勢力に築き上げた。",
+    "rulerBio.wc-eg-hatshepsut": "女性ファラオ。デイル・エル＝バハリ神殿。プント交易。",
+    "rulerBio.wc-eg-akhenaten": "アテン崇拝革命。アマルナ時代。ネフェルティティ。",
+    "rulerBio.wc-me-sargon": "世界初の帝国。シュメールとアッカドを統一。"
   },
   "rulerBio.ea-jp-edo": "徳川幕府；250年以上の平和；鎖国政策；都市商業文化が繁荣。",
   "rulerBio.ea-jp-heian": "貴族文化がピーク；平仮名・片仮名が発達；《源氏物語》が生まれる。",
@@ -2284,7 +2290,10 @@
     "rulerHighlight.wc-pe-safavid": "十二イマーム派シーア派を国教として確立",
     "rulerHighlight.ea-jp-shotoku": "日本初の憲法・十七条宪法；仏教を保護し隋に派遣",
     "wc-me-median": "イラン諸部族を統一し、アッシリア帝国を滅ぼし（紀元前612年）、古代近東の格局を変えた。",
-    "wc-me-cyaxares": "メディアを統一し、ニネヴェを陥落（紀元前612年）、メディアを大帝国として確立した。"
+    "wc-me-cyaxares": "メディアを統一し、ニネヴェを陥落（紀元前612年）、メディアを大帝国として確立した。",
+    "rulerHighlight.wc-eg-hatshepsut": "ハトシェプスト — 強力な女性ファラオ",
+    "rulerHighlight.wc-eg-akhenaten": "アクエンアテン — 宗教革命家",
+    "rulerHighlight.wc-me-sargon": "サルゴン — 世界初の皇帝"
   },
   "rulerHighlight.ea-jp-edo": "徳川幕府（1603〜1868年）；250年以上の平和；鎖国政策。",
   "rulerHighlight.ea-jp-heian": "平安時代（794〜1185年）；貴族文化がピーク；『源氏物語』が生まれる。",
@@ -2582,5 +2591,14 @@
     "details": "エラー詳細",
     "retry": "再試行",
     "refreshPage": "ページを更新"
-  }
+  },
+  "ruler.wc-eg-hatshepsut": "ハトシェプスト",
+  "ruler.wc-eg-akhenaten": "アクエンアテン",
+  "ruler.wc-me-sargon": "サルゴン大王",
+  "rulerBio.wc-eg-hatshepsut": "ハトシェプスト（紀元前1478〜1458年）。エジプト最強の女性ファラオ。デイル・エル＝バハリに葬祭神殿を建設。プントへの交易遠征を派遣。",
+  "rulerBio.wc-eg-akhenaten": "アクエンアテン（紀元前1353〜1336年）。エジプトの多神教をアテン崇拝に変えた宗教革命家。首都をアマルナに移した。",
+  "rulerBio.wc-me-sargon": "サルゴン大王（紀元前2334〜2279年）。世界初の帝国であるアッカド帝国を建国。シュメールの都市国家を征服し、ペルシャ湾から地中海まで拡大。",
+  "rulerHighlight.wc-eg-hatshepsut": "ハトシェプスト — エジプト最強の女性ファラオ",
+  "rulerHighlight.wc-eg-akhenaten": "アクエンアテン — 一神教革命の立役者",
+  "rulerHighlight.wc-me-sargon": "サルゴン — 世界初の帝国建設者"
 }

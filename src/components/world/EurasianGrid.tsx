@@ -176,7 +176,8 @@ export function yearToY(year: number, minYear: number, maxYear: number, heightPx
   return ((year - minYear) / (maxYear - minYear)) * heightPx;
 }
 
-const YEAR_HEIGHT = 8; // pixels per year
+const YEAR_HEIGHT_EURASIAN = 8; // pixels per year for eurasian mode
+const YEAR_HEIGHT_EASTASIA = 3; // pixels per year for east-asia mode (avoids 95kpx grid with Jomon -10000~-300)
 const MIN_GRID_HEIGHT = 1200;
 
 export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
@@ -196,8 +197,9 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
 
   const gridHeight = React.useMemo(() => {
     const span = maxYear - minYear;
-    return Math.max(MIN_GRID_HEIGHT, span * YEAR_HEIGHT);
-  }, [minYear, maxYear]);
+    const yearH = mode === 'eurasian' ? YEAR_HEIGHT_EURASIAN : YEAR_HEIGHT_EASTASIA;
+    return Math.max(MIN_GRID_HEIGHT, span * yearH);
+  }, [minYear, maxYear, mode]);
 
   // Get active polities at currentYear
   const activePolities = React.useMemo(() => {
