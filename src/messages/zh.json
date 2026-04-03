@@ -2517,5 +2517,31 @@
     "statsBar": {
       "eraPeriod": "时期"
     }
-  }
+  },
+  "empire_jomon": "绳文时代",
+  "ruler.ea-jp-jomon": "绳文时代",
+  "rulerBio.ea-jp-jomon": "绳文时代是日本列岛的史前绳纹人狩猎采集文化，以绳纹陶器和竖穴式住所著称。",
+  "ruler.wc-iv-menander": "弥兰陀王",
+  "rulerBio.wc-iv-menander": "弥兰陀王（约公元前165年-前130年），希腊-巴克特里亚国王，皈依佛教，在佛教文献中被提及为弥勒。",
+  "rulerHighlight.wc-iv-menander": "弥兰陀王（约前165-前130年）— 印度-希腊国王，佛教皈依者",
+  "ruler.wc-iv-rajaraja": "罗贾罗阇一世",
+  "rulerBio.wc-iv-rajaraja": "罗贾罗阇一世（约985-1014年），又称罗贾罗阇大帝，最强大的朱罗帝国皇帝，征服斯里兰卡、马尔代夫和东南亚部分地区的室利佛逝。",
+  "rulerHighlight.wc-iv-rajaraja": "罗贾罗阇一世（约985-1014年）— 朱罗帝国皇帝，征服斯里兰卡和室利佛逝",
+  "ruler.wc-me-cyaxares": "塞亚克萨雷斯",
+  "rulerBio.wc-me-cyaxares": "塞亚克萨雷斯重组米底亚军队，联合巴比伦摧毁尼尼微，创建米底亚帝国。",
+  "rulerHighlight.wc-me-cyaxares": "统一米底亚，创建米底亚帝国",
+  "ruler.wc-me-median": "米底亚帝国",
+  "rulerBio.wc-me-median": "米底亚帝国统一伊朗部落，在古伊朗形成阿契美尼德王朝的基础。",
+  "ruler.wc-pe-b5": "巴赫拉姆五世",
+  "rulerBio.wc-pe-b5": "巴赫拉姆五世（420-438年在位），又称 Bayd，\"真主的友人\"，以徒手搏狮著称，复兴波斯艺术。",
+  "rulerHighlight.wc-pe-b5": "Bayd — 传奇萨珊国王，波斯史诗中的文化英雄",
+  "ruler.wc-pe-d3": "大流士三世",
+  "rulerBio.wc-pe-d3": "波斯帝国最后的阿契美尼德国王；在高加米拉战役（前331年）中败于亚历山大大帝；波斯帝国终结。",
+  "rulerHighlight.wc-pe-d3": "最后的阿契美尼德国王；前331年高加米拉战役败于亚历山大大帝",
+  "ruler.wc-pe-k2": "霍斯劳二世",
+  "rulerBio.wc-pe-k2": "霍斯劳·帕尔维兹（590-628年）；萨珊帝国领土最大时期；与拜占庭战争；628年政变中身亡。",
+  "rulerHighlight.wc-pe-k2": "霍斯劳·帕尔维兹 — 萨珊帝国鼎盛；拜占庭-萨珊战争；领土最大",
+  "ruler.wc-pe-s2": "沙普尔二世",
+  "rulerBio.wc-pe-s2": "沙普尔二世（309-379年在位）统治70年，是萨珊君主中在位最久的；俘获罗马皇帝尤里安。",
+  "rulerHighlight.wc-pe-s2": "萨珊在位最久国王（70年）；俘获罗马皇帝尤里安；萨珊黄金时代"
 }
