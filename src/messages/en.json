@@ -596,7 +596,11 @@
     "recommendations": "Battles You Might Like",
     "recommendationsEmpty": "Add more favorites to discover recommendations",
     "addFavorite": "Add to Favorites",
-    "removeFavorite": "Remove from Favorites"
+    "removeFavorite": "Remove from Favorites",
+    "shareFavorites": "Share Favorites",
+    "linkCopied": "Link copied!",
+    "importFavorites": "Import Favorites",
+    "imported": "Imported {count} favorites"
   },
   "grid": {
     "title": "Eurasian Comparison Grid",

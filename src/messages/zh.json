@@ -1690,7 +1690,11 @@
     "recommendations": "你可能感兴趣的战役",
     "recommendationsEmpty": "收藏更多战役后发现更多推荐",
     "addFavorite": "添加收藏",
-    "removeFavorite": "取消收藏"
+    "removeFavorite": "取消收藏",
+    "shareFavorites": "分享收藏",
+    "linkCopied": "链接已复制！",
+    "importFavorites": "导入收藏",
+    "imported": "已导入 {count} 个收藏"
   },
   "battleCompare": {
     "title": "⚔️ 战役对比",
