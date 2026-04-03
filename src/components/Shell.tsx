@@ -123,7 +123,7 @@ export function Shell({ messages, children, minYear, maxYear, eras }: ShellProps
   }, [pathname, locale, children, minYear, maxYear, eras]);
 
   return (
-    <NextIntlClientProvider messages={messages} locale={locale}>
+    <NextIntlClientProvider messages={messages} locale={locale} timeZone="UTC">
       {pageContent ?? <NotFoundPage />}
     </NextIntlClientProvider>
   );
