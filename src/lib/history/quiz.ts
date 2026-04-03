@@ -6,7 +6,7 @@
 import type { Event } from './types';
 import { getBattles } from './battles';
 
-export type QuizType = 'commander' | 'result' | 'year' | 'terrain' | 'scale';
+export type QuizType = 'commander' | 'result' | 'year' | 'terrain' | 'scale' | 'chronology';
 export type QuizDifficulty = 'easy' | 'normal' | 'hard';
 
 export type QuizQuestion = {
@@ -72,6 +72,9 @@ function getWrongOptions(
         break;
       case 'scale':
         val = b.battle.scale;
+        break;
+      case 'chronology':
+        // Not used for wrong options
         break;
     }
     if (val && !seen.has(val)) {
@@ -243,6 +246,47 @@ function makeScaleQuestion(
   };
 }
 
+function makeChronologyQuestion(
+  battles: BattleWithData[],
+  seed: number
+): QuizQuestion | null {
+  if (battles.length < 4) return null;
+
+  // Pick 4 distinct random battles
+  const sortedBattles = [...battles].sort((a, b) => a.year - b.year);
+  const minIdx = 0;
+  const maxIdx = sortedBattles.length - 4;
+
+  const startIdx = Math.abs((seed * 1664525 + 1013904223) & 0xffffffff) % (maxIdx - minIdx + 1) + minIdx;
+  const selectedBattles = sortedBattles.slice(startIdx, startIdx + 4);
+
+  // Build options: each option is a titleKey of a battle
+  const shuffledOptions = shuffle(selectedBattles, seed);
+  const options = shuffledOptions.map(b => b.titleKey);
+
+  // Correct answer: find which option is the earliest
+  const earliestBattle = selectedBattles.reduce((earliest, b) => b.year < earliest.year ? b : earliest);
+  const correctIndex = options.indexOf(earliestBattle.titleKey);
+
+  return {
+    id: `chronology-${selectedBattles[0]!.id}-${selectedBattles[1]!.id}-${selectedBattles[2]!.id}-${selectedBattles[3]!.id}`,
+    type: 'chronology',
+    difficulty: 'normal',
+    battle: selectedBattles[0]!,
+    questionKey: 'quiz.question.chronology',
+    questionArgs: {
+      b1: shuffledOptions[0]!.titleKey,
+      b2: shuffledOptions[1]!.titleKey,
+      b3: shuffledOptions[2]!.titleKey,
+      b4: shuffledOptions[3]!.titleKey,
+      year: String(earliestBattle.year),
+    },
+    options,
+    correctIndex,
+    explanationKey: 'quiz.explanation.chronology',
+  };
+}
+
 /**
  * Generate a batch of quiz questions from battle events.
  * Each question has 4 options (1 correct, 3 wrong).
@@ -285,6 +329,9 @@ export function generateQuizQuestions(
         break;
       case 'scale':
         q = makeScaleQuestion(battle, seed);
+        break;
+      case 'chronology':
+        q = makeChronologyQuestion(battles, seed);
         break;
     }
 

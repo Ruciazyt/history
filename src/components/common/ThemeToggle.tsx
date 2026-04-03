@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import { useTheme } from './ThemeContext';
 
 interface ThemeToggleProps {
@@ -8,6 +9,7 @@ interface ThemeToggleProps {
 }
 
 export function ThemeToggle({ className }: ThemeToggleProps) {
+  const t = useTranslations('ui');
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
 
@@ -15,8 +17,8 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
     <button
       onClick={toggleTheme}
       className={`inline-flex items-center justify-center w-9 h-9 border-0 rounded-lg bg-transparent cursor-pointer transition-colors duration-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 ${className || ''}`}
-      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      title={isDark ? '浅色模式' : '深色模式'}
+      aria-label={isDark ? t('themeLight') : t('themeDark')}
+      title={isDark ? t('themeLight') : t('themeDark')}
     >
       {isDark ? (
         // Sun icon for light mode (when currently dark)

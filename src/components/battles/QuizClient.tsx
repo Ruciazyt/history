@@ -23,6 +23,7 @@ const QUIZ_TYPE_OPTIONS: QuizTypeOption[] = [
   { value: 'year', labelKey: 'quiz.type.year' },
   { value: 'terrain', labelKey: 'quiz.type.terrain' },
   { value: 'scale', labelKey: 'quiz.type.scale' },
+  { value: 'chronology', labelKey: 'quiz.type.chronology' },
   { value: 'mixed', labelKey: 'quiz.type.mixed' },
 ];
 
@@ -40,7 +41,7 @@ export function QuizClient({ events, locale }: { events: Event[]; locale?: strin
   const currentQ = session?.questions[session.currentIndex];
 
   function handleStart() {
-    const types = selectedType === 'mixed' ? undefined : [selectedType as 'commander' | 'result' | 'year' | 'terrain' | 'scale'];
+    const types = selectedType === 'mixed' ? undefined : [selectedType as 'commander' | 'result' | 'year' | 'terrain' | 'scale' | 'chronology'];
     const questions = generateQuizQuestions(events, {
       count: 10,
       difficulty: selectedDifficulty,

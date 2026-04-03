@@ -42,7 +42,11 @@
       "label": "时间窗口",
       "years": "{count}年"
     },
-    "close": "关闭"
+    "close": "关闭",
+    "themeLight": "浅色模式",
+    "themeDark": "深色模式",
+    "clearSearch": "清除搜索",
+    "language": "语言"
   },
   "locale": {
     "zh": "中文",
@@ -2286,14 +2290,16 @@
       "result": "哪一方赢得了这场战役？",
       "scale": "这场战役的规模是？",
       "terrain": "这场战役发生在什么地形？",
-      "year": "这场战役发生在哪一年？"
+      "year": "这场战役发生在哪一年？",
+      "chronology": "以下哪场战役发生最早？"
     },
     "explanation": {
       "commander": "指挥官在战役中起着决定性作用。",
       "result": "战役结果取决于多种因素。",
       "scale": "战役规模反映了参战兵力的数量级。",
       "terrain": "地形对战术选择和战争结果有重要影响。",
-      "year": "了解战役发生的历史时期有助于理解其背景。"
+      "year": "了解战役发生的历史时期有助于理解其背景。",
+      "chronology": "{battle} 发生在 {year} 年。"
     },
     "scale": {
       "massive": "规模宏大",
@@ -2329,7 +2335,8 @@
       "year": "年代",
       "terrain": "地形",
       "scale": "规模",
-      "mixed": "混合"
+      "mixed": "混合",
+      "chronology": "年代排序"
     },
     "difficulty": {
       "easy": "简单",

@@ -829,12 +829,19 @@
       "year": "Year",
       "terrain": "Terrain",
       "scale": "Scale",
-      "mixed": "Mixed"
+      "mixed": "Mixed",
+      "chronology": "Chronology"
     },
     "difficulty": {
       "easy": "Easy",
       "normal": "Normal",
       "hard": "Hard"
+    },
+    "question": {
+      "chronology": "Which of these battles happened first?"
+    },
+    "explanation": {
+      "chronology": "{battle} took place in {year}."
     }
   },
   "ruler": {
@@ -2404,7 +2411,11 @@
       "label": "Window",
       "years": "{count} years"
     },
-    "close": "Close"
+    "close": "Close",
+    "themeLight": "Light mode",
+    "themeDark": "Dark mode",
+    "clearSearch": "Clear search",
+    "language": "Language"
   },
   "world": {
     "title": "Eurasian Timeline",

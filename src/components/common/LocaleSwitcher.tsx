@@ -24,7 +24,7 @@ export function LocaleSwitcher() {
 
   return (
     <label className="inline-flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-      <span className="sr-only">Language</span>
+      <span className="sr-only">{t('ui.language')}</span>
       <select
         value={locale}
         onChange={(e) => {

@@ -829,12 +829,19 @@
       "year": "年代",
       "terrain": "地形",
       "scale": "規模",
-      "mixed": "混合"
+      "mixed": "混合",
+      "chronology": "年代順"
     },
     "difficulty": {
       "easy": "簡単",
       "normal": "普通",
       "hard": "難しい"
+    },
+    "question": {
+      "chronology": "以下の戦闘のうち、最も早く行われたのはどれですか？"
+    },
+    "explanation": {
+      "chronology": "{battle} は {year} 年に行われました。"
     }
   },
   "ruler": {
@@ -2404,7 +2411,11 @@
       "label": "ウィンドウ",
       "years": "{count}年"
     },
-    "close": "閉じる"
+    "close": "閉じる",
+    "themeLight": "ライトモード",
+    "themeDark": "ダークモード",
+    "clearSearch": "検索をクリア",
+    "language": "言語"
   },
   "world": {
     "title": "ユーラシア比較",

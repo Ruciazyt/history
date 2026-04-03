@@ -146,7 +146,7 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
         {query && (
           <button
             onClick={handleClear}
-            aria-label="Clear search"
+            aria-label={t('ui.clearSearch')}
             className="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
           >
             ✕
