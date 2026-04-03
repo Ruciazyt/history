@@ -69,6 +69,7 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-rus-rurik', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-rurik', bioKey: 'rulerBio.wc-rus-rurik', startYear: 862, endYear: 879 , isDynastyBlock: true },
   { id: 'wc-rus-vladimir', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-vladimir', bioKey: 'rulerBio.wc-rus-vladimir', highlightKey: 'rulerHighlight.wc-rus-vladimir', startYear: 980, endYear: 1015 },
   { id: 'wc-rus-yaroslav', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-yaroslav', bioKey: 'rulerBio.wc-rus-yaroslav', highlightKey: 'rulerHighlight.wc-rus-yaroslav', startYear: 1019, endYear: 1054 },
+  { id: 'wc-rus-nevsky', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-nevsky', bioKey: 'rulerBio.wc-rus-nevsky', highlightKey: 'rulerHighlight.wc-rus-nevsky', startYear: 1221, endYear: 1263 },
   { id: 'wc-rus-apogee', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-dyn', bioKey: 'rulerBio.wc-rus-apogee', startYear: 882, endYear: 1240 , isDynastyBlock: true },
 
   // ── Indus Valley / Maurya ──────────────────────────────────────────────
