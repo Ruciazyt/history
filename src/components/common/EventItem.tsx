@@ -28,7 +28,7 @@ export const EventItem = React.memo(function EventItem({
       </div>
       {isWar && (
         <div className={`mt-1 inline-flex items-center gap-1 rounded ${EVENT_ITEM_COLORS.warBadge.bg} px-1.5 py-0.5 text-xs ${EVENT_ITEM_COLORS.warBadge.text}`}>
-          ⚔️ 战役
+          ⚔️ {t('nav.battles')}
         </div>
       )}
     </div>

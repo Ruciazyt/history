@@ -2543,5 +2543,12 @@
   "rulerHighlight.wc-pe-k2": "霍斯劳·帕尔维兹 — 萨珊帝国鼎盛；拜占庭-萨珊战争；领土最大",
   "ruler.wc-pe-s2": "沙普尔二世",
   "rulerBio.wc-pe-s2": "沙普尔二世（309-379年在位）统治70年，是萨珊君主中在位最久的；俘获罗马皇帝尤里安。",
-  "rulerHighlight.wc-pe-s2": "萨珊在位最久国王（70年）；俘获罗马皇帝尤里安；萨珊黄金时代"
+  "rulerHighlight.wc-pe-s2": "萨珊在位最久国王（70年）；俘获罗马皇帝尤里安；萨珊黄金时代",
+  "error": {
+    "somethingWrong": "出了点问题",
+    "loadFailed": "加载数据时发生错误，请稍后重试。",
+    "details": "错误详情",
+    "retry": "重试",
+    "refreshPage": "刷新页面"
+  }
 }

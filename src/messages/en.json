@@ -2575,5 +2575,12 @@
     "statsBar": {
       "eraPeriod": " Period"
     }
+  },
+  "error": {
+    "somethingWrong": "Something went wrong",
+    "loadFailed": "An error occurred while loading data. Please try again later.",
+    "details": "Error details",
+    "retry": "Retry",
+    "refreshPage": "Refresh page"
   }
 }
