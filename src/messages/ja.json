@@ -2413,7 +2413,11 @@
       "label": "ウィンドウ",
       "years": "{count}年"
     },
-    "close": "閉じる"
+    "close": "閉じる",
+    "compareMode": "比較モード",
+    "gridView": "グリッド表示",
+    "timelineView": "タイムライン表示",
+    "favorites": "お気に入り"
   },
   "world": {
     "title": "ユーラシア比較",

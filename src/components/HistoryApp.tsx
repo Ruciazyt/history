@@ -292,7 +292,7 @@ export function HistoryApp({
                       <span className={`w-2 h-2 rounded-full shrink-0 ${eraColor.dot}`}></span>
                       <span className={`flex-1 font-semibold ${eraColor.text} text-sm sm:text-base`}>
                         {t(era.nameKey)}
-                        {era.isParallelPolities && <span className={`text-xs ml-1 ${EXTRA.multiPolity.text}`}>（多国并立）</span>}
+                        {era.isParallelPolities && <span className={`text-xs ml-1 ${EXTRA.multiPolity.text}`}>（{t('ui.parallelPolities')}）</span>}
                       </span>
                       <span className={`text-xs ${C.sidebar.eraItem.year} hidden sm:inline`}>
                         {formatYear(era.startYear)}–{formatYear(era.endYear)}
@@ -430,7 +430,7 @@ export function HistoryApp({
                       </div>
                       {e.tags && e.tags.includes('war') && (
                         <div className={`mt-1 inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs ${C.eventsSidebar.eventItem.warBadge.bg} ${C.eventsSidebar.eventItem.warBadge.text}`}>
-                          ⚔️ 战役
+                          ⚔️ {t('nav.battles')}
                         </div>
                       )}
                     </div>

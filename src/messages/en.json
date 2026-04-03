@@ -2413,7 +2413,11 @@
       "label": "Window",
       "years": "{count} years"
     },
-    "close": "Close"
+    "close": "Close",
+    "compareMode": "Compare",
+    "gridView": "Grid",
+    "timelineView": "Timeline",
+    "favorites": "Favorites"
   },
   "world": {
     "title": "Eurasian Timeline",

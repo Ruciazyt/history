@@ -42,7 +42,11 @@
       "label": "时间窗口",
       "years": "{count}年"
     },
-    "close": "关闭"
+    "close": "关闭",
+    "compareMode": "对比模式",
+    "gridView": "网格视图",
+    "timelineView": "时间线视图",
+    "favorites": "收藏夹"
   },
   "locale": {
     "zh": "中文",
