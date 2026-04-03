@@ -12,10 +12,8 @@ interface BottomNavProps {
 
 const NAV_ITEMS = [
   { key: 'home', href: (locale: string) => `/${locale}`, icon: '🏠', labelKey: 'app.title' },
-  { key: 'timeline', href: (locale: string) => `/${locale}/timeline`, icon: '📜', labelKey: 'event.viewTimeline' },
   { key: 'battles', href: (locale: string) => `/${locale}/battles`, icon: '⚔️', labelKey: 'nav.battles' },
   { key: 'favorites', href: (locale: string) => `/${locale}/favorites`, icon: '❤️', labelKey: 'nav.favorites' },
-  { key: 'commanders', href: (locale: string) => `/${locale}/commanders`, icon: '👑', labelKey: 'nav.commanders' },
   { key: 'world', href: (locale: string) => `/${locale}/world`, icon: '🌍', labelKey: 'world.title' },
 ];
 
