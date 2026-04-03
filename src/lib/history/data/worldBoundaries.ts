@@ -446,6 +446,27 @@ export const eurasianBoundaries: WorldBoundary[] = [
     },
   },
 
+
+  {
+    type: 'Feature',
+    properties: { name: '毗奢耶那伽罗帝国', nameKey: 'empire_vijayanagara', startYear: 1336, endYear: 1646, color: '#DC2626' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [74, 8], [78, 8], [80, 13], [80, 18], [78, 20], [74, 18], [72, 14], [74, 8],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '德里苏丹国', nameKey: 'empire_delhi-sultanate', startYear: 1206, endYear: 1526, color: '#059669' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [68, 22], [75, 25], [82, 28], [88, 28], [88, 24], [82, 22], [75, 20], [68, 20], [68, 22],
+      ]],
+    },
+  },
   {
     type: 'Feature',
     properties: { name: '莫卧儿帝国', nameKey: 'empire_mughal', startYear: 1526, endYear: 1857, color: '#CA8A04' },

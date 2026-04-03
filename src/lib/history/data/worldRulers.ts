@@ -96,6 +96,12 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-iv-srivijaya', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-srivijaya-dyn', bioKey: 'rulerBio.wc-iv-srivijaya', startYear: 600, endYear: 1295 , isDynastyBlock: true },
   // ── Chola Empire (South India) ────────────────────────────────────────
   { id: 'wc-iv-rajaraja', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-rajaraja', bioKey: 'rulerBio.wc-iv-rajaraja', highlightKey: 'rulerHighlight.wc-iv-rajaraja', startYear: 985, endYear: 1014 },
+  // ── Delhi Sultanate (North India) ────────────────────────────────────
+  { id: 'wc-iv-delhi', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-delhi', bioKey: 'rulerBio.wc-iv-delhi', startYear: 1206, endYear: 1526 , isDynastyBlock: true },
+  { id: 'wc-iv-alauddin', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-alauddin', bioKey: 'rulerBio.wc-iv-alauddin', highlightKey: 'rulerHighlight.wc-iv-alauddin', startYear: 1296, endYear: 1316 },
+  // ── Vijayanagara Empire (South India) ───────────────────────────────
+  { id: 'wc-iv-vijayanagara', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-vijayanagara', bioKey: 'rulerBio.wc-iv-vijayanagara', startYear: 1336, endYear: 1646 , isDynastyBlock: true },
+  { id: 'wc-iv-krishna', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-krishna', bioKey: 'rulerBio.wc-iv-krishna', highlightKey: 'rulerHighlight.wc-iv-krishna', startYear: 1509, endYear: 1529 },
 
   // ── Persia ─────────────────────────────────────────────
   { id: 'wc-pe-cyrus', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-cyrus', bioKey: 'rulerBio.wc-pe-cyrus', highlightKey: 'rulerHighlight.wc-pe-cyrus', startYear: -550, endYear: -530 },
