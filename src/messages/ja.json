@@ -214,6 +214,8 @@
   "empire_asuka": "飛鳥時代",
   "empire_byzantine": "ビザンツ帝国",
   "empire_chola": "チョラ朝",
+  "empire_vijayanagara": "ヴィジャヤナガル帝国",
+  "empire_delhi-sultanate": "デリー・スルタン朝",
   "empire_edo": "江戸時代",
   "empire_egypt-middle": "古代エジプト（中王国）",
   "empire_egypt-new": "古代エジプト（新王国）",
@@ -596,7 +598,11 @@
     "recommendations": "おすすめの戦い",
     "recommendationsEmpty": "お気に入りを追加しておすすめを発見",
     "addFavorite": "お気に入りに追加",
-    "removeFavorite": "お気に入りから削除"
+    "removeFavorite": "お気に入りから削除",
+    "shareFavorites": "お気に入りを共有",
+    "linkCopied": "リンクをコピーしました！",
+    "importFavorites": "お気に入りをインポート",
+    "imported": "{count} 件のお気に入りをインポートしました"
   },
   "grid": {
     "title": "ユーラシア比較グリッド",
@@ -1357,7 +1363,10 @@
     "ruler.ea-jp-asuka": "飛鳥時代",
     "ruler.ea-jp-shotoku": "聖徳太子",
     "wc-me-median": "メディア帝国",
-    "wc-me-cyaxares": "キ·阿クサレス"
+    "wc-me-cyaxares": "キ·阿クサレス",
+    "ruler.wc-eg-hatshepsut": "ハトシェプスト",
+    "ruler.wc-eg-akhenaten": "アクエンアテン",
+    "ruler.wc-me-sargon": "サルゴン大王"
   },
   "ruler.ea-jp-edo": "江戸幕府",
   "ruler.ea-jp-heian": "平安時代",
@@ -1894,7 +1903,10 @@
     "rulerBio.ea-jp-asuka": "飛鳥時代（592-710年）。日本国家の形成期。百済から仏教が传来。聖徳太子の大化の改新と十七条宪法が制定された。",
     "rulerBio.ea-jp-shotoku": "聖徳太子（593-622年）。推古天皇の摂政。仏教を保護。十七条宪法を制定（604年）。隋に遣隋使を派遣。寺院建立を保護した。",
     "wc-me-median": "メディア帝国（紀元前678年〜549年頃）は、イラン最初の統一帝国で、ハマダンにある都エクバトアナを中心に据えた。イラン諸部族を統一し、紀元前612年にアッシリア帝国を滅ぼし、アケメネス朝ペルシア帝国への道を開いた。",
-    "wc-me-cyaxares": "キ·阿クサレス（紀元前625年〜585年頃）は最も傑出したメディア王で、メディア諸部族を統一し、バビロニアのナボポラッサルと連合して紀元前612年にニネヴェを陥落させた。メディアを近東の支配的勢力に築き上げた。"
+    "wc-me-cyaxares": "キ·阿クサレス（紀元前625年〜585年頃）は最も傑出したメディア王で、メディア諸部族を統一し、バビロニアのナボポラッサルと連合して紀元前612年にニネヴェを陥落させた。メディアを近東の支配的勢力に築き上げた。",
+    "rulerBio.wc-eg-hatshepsut": "女性ファラオ。デイル・エル＝バハリ神殿。プント交易。",
+    "rulerBio.wc-eg-akhenaten": "アテン崇拝革命。アマルナ時代。ネフェルティティ。",
+    "rulerBio.wc-me-sargon": "世界初の帝国。シュメールとアッカドを統一。"
   },
   "rulerBio.ea-jp-edo": "徳川幕府；250年以上の平和；鎖国政策；都市商業文化が繁荣。",
   "rulerBio.ea-jp-heian": "貴族文化がピーク；平仮名・片仮名が発達；《源氏物語》が生まれる。",
@@ -2291,7 +2303,10 @@
     "rulerHighlight.wc-pe-safavid": "十二イマーム派シーア派を国教として確立",
     "rulerHighlight.ea-jp-shotoku": "日本初の憲法・十七条宪法；仏教を保護し隋に派遣",
     "wc-me-median": "イラン諸部族を統一し、アッシリア帝国を滅ぼし（紀元前612年）、古代近東の格局を変えた。",
-    "wc-me-cyaxares": "メディアを統一し、ニネヴェを陥落（紀元前612年）、メディアを大帝国として確立した。"
+    "wc-me-cyaxares": "メディアを統一し、ニネヴェを陥落（紀元前612年）、メディアを大帝国として確立した。",
+    "rulerHighlight.wc-eg-hatshepsut": "ハトシェプスト — 強力な女性ファラオ",
+    "rulerHighlight.wc-eg-akhenaten": "アクエンアテン — 宗教革命家",
+    "rulerHighlight.wc-me-sargon": "サルゴン — 世界初の皇帝"
   },
   "rulerHighlight.ea-jp-edo": "徳川幕府（1603〜1868年）；250年以上の平和；鎖国政策。",
   "rulerHighlight.ea-jp-heian": "平安時代（794〜1185年）；貴族文化がピーク；『源氏物語』が生まれる。",
@@ -2412,10 +2427,14 @@
       "years": "{count}年"
     },
     "close": "閉じる",
-    "themeLight": "ライトモード",
+"themeLight": "ライトモード",
     "themeDark": "ダークモード",
     "clearSearch": "検索をクリア",
-    "language": "言語"
+    "language": "言語",
+"compareMode": "比較モード",
+    "gridView": "グリッド表示",
+    "timelineView": "タイムライン表示",
+    "favorites": "お気に入り"
   },
   "world": {
     "title": "ユーラシア比較",
@@ -2527,13 +2546,16 @@
   "ruler.wc-rus-dyn": "リューリク朝",
   "ruler.wc-rus-rurik": "リューリク",
   "ruler.wc-rus-vladimir": "ウラジ米尔大公",
-  "ruler.wc-rus-yaroslav": "ヤロスlav賢公",
+  "ruler.wc-rus-yaroslav": "ヤロスラフ賢公",
   "rulerBio.wc-rus-apogee": "リューリク朝は約862年のリューリクの創業からモンゴル侵攻（1240年）までキエフ・ルーシを支配し、東斯拉夫の部族を統合した。",
   "rulerBio.wc-rus-rurik": "伝説的なヴァリエーション人指導者でリューリク朝を建設、ノヴゴロドに最初のルーシ国家を樹立（862年）、その後キエフに移った（879年）。ルーシおよび東ヨーロッパの統朝の基礎。",
   "rulerBio.wc-rus-vladimir": "キエフ大公（980年–1015年）。988年にルーシをキリスト教化し、ビザンツ帝国との文化的結びつきを確立して中央集権国家を建設した。",
   "rulerBio.wc-rus-yaroslav": "キエフ大公（1019年–1054年）。ルーシ・プラヴダ法典を公布し、聖ソフィア大聖堂を建設。リテラシーと法の黄金時代を築いた。",
   "rulerHighlight.wc-rus-vladimir": "ウラジ米尔大公は988年にキエフ・ルーシをキリスト教化し、正教を国教として受け入れた。",
-  "rulerHighlight.wc-rus-yaroslav": "ヤロスlav賢公は東ヨーロッパで初めて成文化された法典を制定し、キエフをビザンツに匹敵する文化の中心地に押し上げた。",
+  "rulerHighlight.wc-rus-yaroslav": "ヤロスラフ賢公は東ヨーロッパで初めて成文化された法典を制定し、キエフをビザンツに匹敵する文化の中心地に押し上げた。",
+  "ruler.wc-rus-nevsky": "アレクサンドル・ネフスキー",
+  "rulerBio.wc-rus-nevsky": "ノヴゴロドおよびウラジーミル大公（1221年–1263年）。1240年にネヴァ河畔でスウェーデン軍を破り、1242年にペイプス湖の氷上でドイツ騎士団を撃破。ロシアの守護聖人。モンゴルの宗主権下でロシアの自治を守り抜いた。",
+  "rulerHighlight.wc-rus-nevsky": "アレクサンドル・ネフスキー — スウェーデン軍とドイツ騎士団を撃破；ロシアの守護聖人",
   "ruler.wc-pe-bahram-v": "ヴァフラーン5世",
   "ruler.wc-pe-darius-iii": "ダレイオス3世",
   "ruler.wc-pe-khosrow-ii": "ホスロウ2世",
@@ -2553,8 +2575,18 @@
   "rulerBio.wc-iv-menander": "メネデロス1世（紀元前165年頃〜紀元前130年頃）。インド・グリーク王の中で最も著名な一人で、仏教に改宗し、パーリ語文献『ミリンダパンの問い』に登場。 カーブルの谷からパンジャブ地方にかけて支配した。",
   "rulerHighlight.wc-iv-menander": "メネデロス1世（紀元前165〜130年）— インド・グリーク王、仏教改宗",
   "ruler.wc-iv-rajaraja": "ラージャラージャ1世",
+  "ruler.wc-iv-delhi": "デリー・スルタン朝",
+  "ruler.wc-iv-alauddin": "アラーウッディーン・ハルジー",
+  "ruler.wc-iv-vijayanagara": "ヴィジャヤナガル帝国",
+  "ruler.wc-iv-krishna": "クリシュナ・デーヴァ・ラーヤ",
   "rulerBio.wc-iv-rajaraja": "ラージャラージャ1世（985〜1014年頃）、ラージャラージャ大王とも呼ばれる。最強のチョーラ皇帝。在位中にスリランカ、モルディブ、東南アジアのシュリヴィジャヤを征服した。タンジョールのブリハディーシュヴァラ神殿を建設。",
+  "rulerBio.wc-iv-delhi": "デリー・スルタン朝（1206〜1526年）；北インドを支配した5つの連続王朝；インド・イスラム建築を導入。",
+  "rulerBio.wc-iv-alauddin": "アラーウッディーン・ハルジー（在位1296〜1316年）；最も強力なデリー・スルタン；デカン征服；市場改革；モンゴル撃退。",
+  "rulerBio.wc-iv-vijayanagara": "ヴィジャヤナガル帝国（1336〜1646年）；南インド最大のヒンドゥー帝国；首都ハンピ；ポルトガルやアラビアとの貿易。",
+  "rulerBio.wc-iv-krishna": "クリシュナ・デーヴァ・ラーヤ（在位1509〜1529年）；最偉大なヴィジャヤナガル皇帝；軍事的成功；テルグ語・カンナダ語文学の庇護者。",
   "rulerHighlight.wc-iv-rajaraja": "ラージャラージャ1世（985〜1014年）— チョーラ皇帝、スリランカとシュリヴィジャヤ征服",
+  "rulerHighlight.wc-iv-alauddin": "アラーウッディーン・ハルジー（在位1296〜1316年）— デリー・スルタン；市場改革；モンゴル撃退",
+  "rulerHighlight.wc-iv-krishna": "クリシュナ・デーヴァ・ラーヤ（在位1509〜1529年）— 最偉大なヴィジャヤナガル皇帝；ハンピ黄金期",
   "ruler.wc-he-philip-ii": "ピリッポス2世",
   "rulerBio.wc-he-philip-ii": "マケドニア王ピリッポス2世（在位: 紀元前359-336年）。アレクサンドロス大王の父。サラサ歩兵ファランクスを導入し、ギリシャ諸都市国家をコリントス同盟として統合。娘の結婚式で暗殺され、その計画は息子の亚历山大が継承。",
   "rulerHighlight.wc-he-philip-ii": "ピリッポス2世（紀元前359-336年）— ギリシャ統一·軍制改革·アレクサンドロスの父",
@@ -2586,5 +2618,24 @@
     "statsBar": {
       "eraPeriod": "時代"
     }
-  }
+  },
+  "error": {
+    "somethingWrong": "問題が発生しました",
+    "loadFailed": "データの読み込み中にエラーが発生しました。後でもう一度お試しください。",
+    "details": "エラー詳細",
+    "retry": "再試行",
+    "refreshPage": "ページを更新"
+  },
+  "ruler.wc-eg-hatshepsut": "ハトシェプスト",
+  "ruler.wc-eg-akhenaten": "アクエンアテン",
+  "ruler.wc-me-sargon": "サルゴン大王",
+  "rulerBio.wc-eg-hatshepsut": "ハトシェプスト（紀元前1478〜1458年）。エジプト最強の女性ファラオ。デイル・エル＝バハリに葬祭神殿を建設。プントへの交易遠征を派遣。",
+  "rulerBio.wc-eg-akhenaten": "アクエンアテン（紀元前1353〜1336年）。エジプトの多神教をアテン崇拝に変えた宗教革命家。首都をアマルナに移した。",
+  "rulerBio.wc-me-sargon": "サルゴン大王（紀元前2334〜2279年）。世界初の帝国であるアッカド帝国を建国。シュメールの都市国家を征服し、ペルシャ湾から地中海まで拡大。",
+  "rulerHighlight.wc-eg-hatshepsut": "ハトシェプスト — エジプト最強の女性ファラオ",
+  "rulerHighlight.wc-eg-akhenaten": "アクエンアテン — 一神教革命の立役者",
+  "rulerHighlight.wc-me-sargon": "サルゴン — 世界初の帝国建設者",
+  "ruler.wc-pe-shah-abbas": "シャー・アッバース1世",
+  "rulerBio.wc-pe-shah-abbas": "サファヴィー朝最大の君主（在位1588年–1629年）。軍事を改革し、首都をイスファハンに移し、ヨーロッパとの貿易を拡大し、文化的黄金時代を築いた。彼の治世はサファヴィー朝の権勢とペルシアの芸術・建築の頂点を示した。",
+  "rulerHighlight.wc-pe-shah-abbas": "シャー・アッバース1世 — 軍事改革；イスファハン建設；サファヴィー朝の頂点"
 }

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import type { Event } from '@/lib/history/types';
 import { BattleCard } from '@/components/battles/BattleCard';
 import { EmptyState } from '@/components/common/EmptyState';
@@ -20,7 +20,40 @@ interface FavoritesClientProps {
 export function FavoritesClient({ battles, locale = 'zh' }: FavoritesClientProps) {
   const t = useTranslations();
   const router = useRouter();
-  const { favorites, clearFavorites, favoritesCount } = useBattleFavorites();
+  const searchParams = useSearchParams();
+  const { favorites, clearFavorites, favoritesCount, addFavorite } = useBattleFavorites();
+  const [copied, setCopied] = React.useState(false);
+  const [imported, setImported] = React.useState<number | null>(null);
+  
+  // Import favorites from URL params on mount
+  React.useEffect(() => {
+    const shareParam = searchParams.get('f');
+    if (!shareParam) return;
+    
+    try {
+      const sharedIds = shareParam.split(',').filter(Boolean);
+      if (sharedIds.length === 0) return;
+      
+      // Only import IDs that exist in our battles data
+      const validIds = sharedIds.filter(id => battles.some(b => b.id === id));
+      let importCount = 0;
+      
+      for (const id of validIds) {
+        if (!favorites.includes(id)) {
+          addFavorite(id);
+          importCount++;
+        }
+      }
+      
+      if (importCount > 0) {
+        setImported(importCount);
+        // Clear URL param after import
+        router.replace(`/${locale}/favorites`);
+      }
+    } catch {
+      // Invalid share param, ignore
+    }
+  }, [searchParams, battles, favorites, addFavorite, router, locale]);
   
   // Filter battles that are in favorites
   const favoriteBattles = React.useMemo(() => {
@@ -37,6 +70,16 @@ export function FavoritesClient({ battles, locale = 'zh' }: FavoritesClientProps
   const handleBrowseBattles = React.useCallback(() => {
     router.push(`/${locale}/battles`);
   }, [router, locale]);
+  
+  // Share favorites as URL
+  const handleShare = React.useCallback(() => {
+    if (favorites.length === 0) return;
+    const url = `${window.location.origin}/${locale}/favorites?f=${favorites.join(',')}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }, [favorites, locale]);
   
   return (
     <div className={`min-h-screen ${BATTLES_CLIENT_COLORS.page.background}`}>
@@ -65,11 +108,28 @@ export function FavoritesClient({ battles, locale = 'zh' }: FavoritesClientProps
 
       {/* Content */}
       <main className="p-4">
+        {/* Import notification */}
+        {imported !== null && (
+          <div className="mb-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 px-4 py-3 text-sm text-green-700 dark:text-green-300">
+            ✅ {t('favorites.imported', { count: imported })}
+          </div>
+        )}
+        
         {favoriteBattles.length > 0 ? (
           <>
-            {/* Clear all button */}
+            {/* Action buttons */}
             {favoritesCount > 0 && (
-              <div className="flex justify-end mb-4">
+              <div className="flex justify-end gap-2 mb-4">
+                <button
+                  onClick={handleShare}
+                  className={`text-sm px-3 py-1.5 rounded-lg border transition-colors ${
+                    copied
+                      ? 'bg-green-50 dark:bg-green-900/20 border-green-300 dark:border-green-700 text-green-700 dark:text-green-300'
+                      : 'border-zinc-300 dark:border-zinc-600 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                  }`}
+                >
+                  {copied ? '✅ ' + t('favorites.linkCopied') : '🔗 ' + t('favorites.shareFavorites')}
+                </button>
                 <button
                   onClick={clearFavorites}
                   className={`text-sm px-3 py-1.5 rounded-lg ${FAVORITES_LIST_COLORS.clearButton.bg} ${FAVORITES_LIST_COLORS.clearButton.text} ${FAVORITES_LIST_COLORS.clearButton.hover} transition-colors`}
@@ -85,7 +145,6 @@ export function FavoritesClient({ battles, locale = 'zh' }: FavoritesClientProps
                 <BattleCard 
                   key={battle.id} 
                   battle={battle}
-                  locale={locale}
                 />
               ))}
             </div>
@@ -107,7 +166,6 @@ export function FavoritesClient({ battles, locale = 'zh' }: FavoritesClientProps
                     <BattleCard 
                       key={battle.id} 
                       battle={battle}
-                      locale={locale}
                     />
                   ))}
                 </div>

@@ -20,7 +20,7 @@ function getEraStyles(entityId: string): { gradient: string; border: string; tex
   return {
     gradient: eraColor?.gradient || BATTLE_CARD_COLORS.fallback.gradient,
     border: eraColor?.border || BATTLE_CARD_COLORS.fallback.border,
-    text: eraColor?.text || 'text-gray-800',
+    text: eraColor?.text || 'text-gray-800 dark:text-gray-100',
   };
 }
 

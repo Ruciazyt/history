@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import type { Ruler } from '@/lib/history/types';
+import type { Ruler, SidebarColors } from '@/lib/history/types';
 import { formatYear } from '@/lib/history/utils';
 import { useTranslations } from 'next-intl';
 import { ERA_COLORS, ERA_ITEM_COLORS, HISTORY_APP_COLORS } from '@/lib/history/constants';
@@ -12,10 +12,7 @@ interface RulerListProps {
   isOpen: boolean;
   selectedRulerId: string | null;
   onSelectRuler: (id: string) => void;
-  // Use a loose type to accommodate both light-mode literal types (bg-zinc-50)
-  // and dark-mode string types (bg-zinc-800) returned by useHistoryAppColors
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  sidebarColors: any;
+  sidebarColors: SidebarColors;
 }
 
 export function RulerList({

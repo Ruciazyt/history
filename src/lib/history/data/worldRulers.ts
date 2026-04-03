@@ -47,12 +47,15 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-eg-old-kingdom', eraId: 'world-comparison', polityId: 'wc-egypt', nameKey: 'ruler.wc-eg-old-kingdom', bioKey: 'rulerBio.wc-eg-old-kingdom', startYear: -2686, endYear: -2181 , isDynastyBlock: true },
   { id: 'wc-eg-middle-kingdom', eraId: 'world-comparison', polityId: 'wc-egypt', nameKey: 'ruler.wc-eg-middle-kingdom', bioKey: 'rulerBio.wc-eg-middle-kingdom', startYear: -2055, endYear: -1650 , isDynastyBlock: true },
   { id: 'wc-eg-new-kingdom', eraId: 'world-comparison', polityId: 'wc-egypt', nameKey: 'ruler.wc-eg-new-kingdom', bioKey: 'rulerBio.wc-eg-new-kingdom', startYear: -1550, endYear: -1069 , isDynastyBlock: true },
+  { id: 'wc-eg-hatshepsut', eraId: 'world-comparison', polityId: 'wc-egypt', nameKey: 'ruler.wc-eg-hatshepsut', bioKey: 'rulerBio.wc-eg-hatshepsut', highlightKey: 'rulerHighlight.wc-eg-hatshepsut', startYear: -1478, endYear: -1458 },
+  { id: 'wc-eg-akhenaten', eraId: 'world-comparison', polityId: 'wc-egypt', nameKey: 'ruler.wc-eg-akhenaten', bioKey: 'rulerBio.wc-eg-akhenaten', highlightKey: 'rulerHighlight.wc-eg-akhenaten', startYear: -1353, endYear: -1336 },
   { id: 'wc-eg-ramesses', eraId: 'world-comparison', polityId: 'wc-egypt', nameKey: 'ruler.wc-eg-ramesses', bioKey: 'rulerBio.wc-eg-ramesses', highlightKey: 'rulerHighlight.wc-eg-ramesses', startYear: -1279, endYear: -1213 },
   { id: 'wc-eg-cleopatra', eraId: 'world-comparison', polityId: 'wc-egypt', nameKey: 'ruler.wc-eg-cleopatra', bioKey: 'rulerBio.wc-eg-cleopatra', highlightKey: 'rulerHighlight.wc-eg-cleopatra', startYear: -51, endYear: -30 },
   { id: 'wc-eg-late-ptolemaic', eraId: 'world-comparison', polityId: 'wc-egypt', nameKey: 'ruler.wc-eg-ptolemaic', bioKey: 'rulerBio.wc-eg-ptolemaic', startYear: -332, endYear: -30 , isDynastyBlock: true },
 
   // ── Mesopotamia (Assyria / Babylon) ──────────────────────────────────
   { id: 'wc-me-akkadian', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-akkadian', bioKey: 'rulerBio.wc-me-akkadian', startYear: -2334, endYear: -2279 , isDynastyBlock: true },
+  { id: 'wc-me-sargon', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-sargon', bioKey: 'rulerBio.wc-me-sargon', highlightKey: 'rulerHighlight.wc-me-sargon', startYear: -2334, endYear: -2279 },
   { id: 'wc-me-hammurabi', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-hammurabi', bioKey: 'rulerBio.wc-me-hammurabi', highlightKey: 'rulerHighlight.wc-me-hammurabi', startYear: -1792, endYear: -1750 },
   { id: 'wc-me-assyrian', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-assyrian-dyn', bioKey: 'rulerBio.wc-me-assyrian', startYear: -1363, endYear: -609 , isDynastyBlock: true },
   { id: 'wc-me-ashurbanipal', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-ashurbanipal', bioKey: 'rulerBio.wc-me-ashurbanipal', highlightKey: 'rulerHighlight.wc-me-ashurbanipal', startYear: -669, endYear: -627 },
@@ -66,6 +69,7 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-rus-rurik', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-rurik', bioKey: 'rulerBio.wc-rus-rurik', startYear: 862, endYear: 879 , isDynastyBlock: true },
   { id: 'wc-rus-vladimir', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-vladimir', bioKey: 'rulerBio.wc-rus-vladimir', highlightKey: 'rulerHighlight.wc-rus-vladimir', startYear: 980, endYear: 1015 },
   { id: 'wc-rus-yaroslav', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-yaroslav', bioKey: 'rulerBio.wc-rus-yaroslav', highlightKey: 'rulerHighlight.wc-rus-yaroslav', startYear: 1019, endYear: 1054 },
+  { id: 'wc-rus-nevsky', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-nevsky', bioKey: 'rulerBio.wc-rus-nevsky', highlightKey: 'rulerHighlight.wc-rus-nevsky', startYear: 1221, endYear: 1263 },
   { id: 'wc-rus-apogee', eraId: 'world-comparison', polityId: 'wc-rus', nameKey: 'ruler.wc-rus-dyn', bioKey: 'rulerBio.wc-rus-apogee', startYear: 882, endYear: 1240 , isDynastyBlock: true },
 
   // ── Indus Valley / Maurya ──────────────────────────────────────────────
@@ -92,6 +96,12 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-iv-srivijaya', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-srivijaya-dyn', bioKey: 'rulerBio.wc-iv-srivijaya', startYear: 600, endYear: 1295 , isDynastyBlock: true },
   // ── Chola Empire (South India) ────────────────────────────────────────
   { id: 'wc-iv-rajaraja', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-rajaraja', bioKey: 'rulerBio.wc-iv-rajaraja', highlightKey: 'rulerHighlight.wc-iv-rajaraja', startYear: 985, endYear: 1014 },
+  // ── Delhi Sultanate (North India) ────────────────────────────────────
+  { id: 'wc-iv-delhi', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-delhi', bioKey: 'rulerBio.wc-iv-delhi', startYear: 1206, endYear: 1526 , isDynastyBlock: true },
+  { id: 'wc-iv-alauddin', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-alauddin', bioKey: 'rulerBio.wc-iv-alauddin', highlightKey: 'rulerHighlight.wc-iv-alauddin', startYear: 1296, endYear: 1316 },
+  // ── Vijayanagara Empire (South India) ───────────────────────────────
+  { id: 'wc-iv-vijayanagara', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-vijayanagara', bioKey: 'rulerBio.wc-iv-vijayanagara', startYear: 1336, endYear: 1646 , isDynastyBlock: true },
+  { id: 'wc-iv-krishna', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-krishna', bioKey: 'rulerBio.wc-iv-krishna', highlightKey: 'rulerHighlight.wc-iv-krishna', startYear: 1509, endYear: 1529 },
 
   // ── Persia ─────────────────────────────────────────────
   { id: 'wc-pe-cyrus', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-cyrus', bioKey: 'rulerBio.wc-pe-cyrus', highlightKey: 'rulerHighlight.wc-pe-cyrus', startYear: -550, endYear: -530 },
@@ -109,6 +119,7 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-pe-khosrow-ii', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-khosrow-ii', bioKey: 'rulerBio.wc-pe-khosrow-ii', highlightKey: 'rulerHighlight.wc-pe-khosrow-ii', startYear: 590, endYear: 628 },
   { id: 'wc-pe-yazdegerd', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-yazdegerd', bioKey: 'rulerBio.wc-pe-yazdegerd', highlightKey: 'rulerHighlight.wc-pe-yazdegerd', startYear: 632, endYear: 651 },
   { id: 'wc-pe-safavid', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-safavid', bioKey: 'rulerBio.wc-pe-safavid', highlightKey: 'rulerHighlight.wc-pe-safavid', startYear: 1501, endYear: 1736 },
+  { id: 'wc-pe-shah-abbas', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-shah-abbas', bioKey: 'rulerBio.wc-pe-shah-abbas', highlightKey: 'rulerHighlight.wc-pe-shah-abbas', startYear: 1588, endYear: 1629 },
 
   // ── Hellenistic Greece ─────────────────────────────────
   { id: 'wc-he-philip-ii', eraId: 'world-comparison', polityId: 'wc-hellenistic', nameKey: 'ruler.wc-he-philip-ii', bioKey: 'rulerBio.wc-he-philip-ii', highlightKey: 'rulerHighlight.wc-he-philip-ii', startYear: -359, endYear: -336 },

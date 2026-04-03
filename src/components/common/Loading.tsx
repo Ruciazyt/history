@@ -18,7 +18,7 @@ const sizeClasses = {
 export function Loading({ size = 'md', text, fullScreen = false }: LoadingProps) {
   const content = (
     <div className="flex flex-col items-center justify-center gap-3">
-      <div className={`${sizeClasses[size]} border-2 ${LOADING_STATE_COLORS.spinner.ring}`} />
+      <div className={`${sizeClasses[size]} ${LOADING_STATE_COLORS.spinner.ring}`} />
       {text && <p className={`text-sm ${LOADING_STATE_COLORS.spinner.text}`}>{text}</p>}
     </div>
   );

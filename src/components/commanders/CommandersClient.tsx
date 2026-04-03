@@ -489,7 +489,7 @@ export function CommandersClient({
                 </button>
               )}
             </div>
-            <div className="rounded-xl border ${COMMANDERS_COLORS.commanderCard.border} overflow-hidden bg-zinc-50 dark:bg-zinc-900/50" style={{ height: 420 }}>
+            <div className={`rounded-xl border ${COMMANDERS_COLORS.commanderCard.border} overflow-hidden bg-zinc-50 dark:bg-zinc-900/50`}  style={{ height: 420 }}>
               <CommanderNetworkGraph
                 events={events}
                 selectedCommander={selectedCommander}
@@ -497,7 +497,7 @@ export function CommandersClient({
               />
             </div>
             {selectedCommander && (
-              <div className="rounded-xl border p-4 ${COMMANDERS_COLORS.commanderCard.bg} ${COMMANDERS_COLORS.commanderCard.border}">
+              <div className={`rounded-xl border p-4 ${COMMANDERS_COLORS.commanderCard.bg} ${COMMANDERS_COLORS.commanderCard.border}`} >
                 <div className={`text-sm font-semibold mb-2 ${COMMANDERS_COLORS.commanderCard.name}`}>
                   👤 {selectedCommander}
                 </div>

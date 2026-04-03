@@ -237,12 +237,6 @@ export function HistoryApp({
               {/* Quick links - desktop only */}
               <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 shrink-0">
                 <Link
-                  href={`/${currentLocale}/timeline`}
-                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.timeline.bg} ${C.quickLink.timeline.text} ${C.quickLink.timeline.border}`}
-                >
-                  📜 <span className="hidden sm:inline">{t('event.viewTimeline')}</span>
-                </Link>
-                <Link
                   href={`/${currentLocale}/matrix`}
                   className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.matrix.bg} ${C.quickLink.matrix.text} ${C.quickLink.matrix.border}`}
                 >
@@ -253,12 +247,6 @@ export function HistoryApp({
                   className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.battles.bg} ${C.quickLink.battles.text} ${C.quickLink.battles.border}`}
                 >
                   ⚔️ <span className="hidden sm:inline">{t('nav.battles')}</span>
-                </Link>
-                <Link
-                  href={`/${currentLocale}/commanders`}
-                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.commanders.bg} ${C.quickLink.commanders.text} ${C.quickLink.commanders.border}`}
-                >
-                  👑 <span className="hidden sm:inline">{t('nav.commanders')}</span>
                 </Link>
                 <Link
                   href={`/${currentLocale}/world`}
@@ -279,7 +267,7 @@ export function HistoryApp({
       </header>
 
       <div className="flex w-full flex-1 flex-col overflow-hidden px-2 sm:px-4 py-2 sm:py-4 pb-[72px] lg:pb-4">
-        <div className="grid h-full grid-cols-1 gap-2 sm:gap-4 overflow-hidden lg:grid-cols-[280px_minmax(0,1fr)_180px] xl:grid-cols-[280px_minmax(0,1fr)_200px]">
+        <div className="grid h-full grid-cols-1 gap-2 sm:gap-4 overflow-hidden lg:grid-cols-[320px_minmax(0,1fr)_180px] xl:grid-cols-[320px_minmax(0,1fr)_200px]">
           {/* Left: global vertical timeline - desktop only */}
           <aside className={`hidden lg:flex max-h-full flex-col overflow-hidden rounded-xl border ${C.sidebar.container.border} ${C.sidebar.container.bg}`}>
             <div className={`shrink-0 border-b ${C.sidebar.header.border} ${C.sidebar.header.bg} p-2 sm:p-3`}>
@@ -304,7 +292,7 @@ export function HistoryApp({
                       <span className={`w-2 h-2 rounded-full shrink-0 ${eraColor.dot}`}></span>
                       <span className={`flex-1 font-semibold ${eraColor.text} text-sm sm:text-base`}>
                         {t(era.nameKey)}
-                        {era.isParallelPolities && <span className={`text-xs ml-1 ${EXTRA.multiPolity.text}`}>（多国并立）</span>}
+                        {era.isParallelPolities && <span className={`text-xs ml-1 ${EXTRA.multiPolity.text}`}>（{t('ui.parallelPolities')}）</span>}
                       </span>
                       <span className={`text-xs ${C.sidebar.eraItem.year} hidden sm:inline`}>
                         {formatYear(era.startYear)}–{formatYear(era.endYear)}
@@ -442,7 +430,7 @@ export function HistoryApp({
                       </div>
                       {e.tags && e.tags.includes('war') && (
                         <div className={`mt-1 inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs ${C.eventsSidebar.eventItem.warBadge.bg} ${C.eventsSidebar.eventItem.warBadge.text}`}>
-                          ⚔️ 战役
+                          ⚔️ {t('nav.battles')}
                         </div>
                       )}
                     </div>

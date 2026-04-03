@@ -212,3 +212,16 @@ export type Event = {
     turningPoints?: BattleTurningPoint[];
   };
 };
+
+/** Sidebar color theme for HistoryApp (used by RulerList component) */
+export type SidebarColors = {
+  container: { bg: string; border: string };
+  header: { bg: string; border: string; text: string };
+  eraItem: { border: string; hover: string; dot: string; name: string; year: string; toggle: string };
+  table: {
+    header: { border: string; text: string };
+    row: { border: string; hover: string; year: string; cell: string };
+    rulerButton: { active: string; inactive: string };
+  };
+  rulerList: { active: string; inactive: string };
+};
