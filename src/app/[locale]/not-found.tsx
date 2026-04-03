@@ -37,7 +37,8 @@ const LOCALE_CONTENT: Record<string, {
 const DEFAULT_CONTENT = LOCALE_CONTENT['zh']!;
 
 export default async function NotFound({ params }: NotFoundProps) {
-  const { locale } = await params;
+  const resolvedParams = await params;
+  const locale = resolvedParams?.locale ?? 'zh';
   const content = LOCALE_CONTENT[locale] ?? DEFAULT_CONTENT;
   const homeHref = `/${locale}`;
   const timelineHref = `/${locale}/timeline`;
