@@ -1477,3 +1477,31 @@ src/
 - 修复了 BattleOfTheDayCard 和 ThisDayInHistoryCard 中年份格式显示错误的 bug
 - 点击"今日战役"卡片打开详情弹窗时，年份现在会正确使用当前语言格式显示
 - 改动小、安全、不破坏现有逻辑（locale 默认值为 'zh'，向后兼容）
+
+## 2026-04-03 UI优化与架构完善 - 第四十四轮
+### i18n 国际化完善：BattlesClient 硬编码字符串替换
+- [x] messages/zh.json, en.json, ja.json: 新增 `battlesClient` i18n 命名空间
+  - `battleCount`: "{count} 场战役" / "{count} battles" / "{count} 戦い"
+  - `allEras`: "全部" / "All" / "すべて"
+  - `eraDistribution`: "各时期战役分布" / "Battle Distribution by Era" / "時代の戦い分布"
+  - `compareModeSelected`: "已选择 {count}/2 场战役" / "{count}/2 battles selected" / "{count}/2 戦い選択済み"
+  - `allErasPeriod`: "全部时期" / "All Periods" / "すべての時代"
+  - `noBattleData`: "暂无战役数据" / "No battle data" / "戦いデータなし"
+  - `statsBar.eraPeriod`: "时期" / " Period" / "時代"
+- [x] BattlesClient.tsx: 使用 `battlesClient` 命名空间
+  - `useTranslations()` → `useTranslations('battlesClient')`
+  - 7 处硬编码中文字符串替换为 `t()` 调用
+  - 战役计数、时代过滤、对比模式选择器、空状态等均支持多语言
+
+### 验证结果
+- [x] Lint 检查通过 (0 错误, 0 警告)
+- [x] TypeScript 类型检查通过 (npx tsc --noEmit 无错误)
+- [x] 单元测试: 973个测试用例全部通过
+- [x] 代码已提交 (commit: dd649f9)
+- [x] 代码已推送至仓库
+
+### 优化说明
+- BattlesClient 战役列表页面完成国际化改造
+- 替换 7 处硬编码字符串，支持中/英/日三语言
+- 改动小、安全、不破坏现有逻辑
+- 项目保持健壮可用状态
