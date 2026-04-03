@@ -113,6 +113,7 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-pe-khosrow-ii', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-khosrow-ii', bioKey: 'rulerBio.wc-pe-khosrow-ii', highlightKey: 'rulerHighlight.wc-pe-khosrow-ii', startYear: 590, endYear: 628 },
   { id: 'wc-pe-yazdegerd', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-yazdegerd', bioKey: 'rulerBio.wc-pe-yazdegerd', highlightKey: 'rulerHighlight.wc-pe-yazdegerd', startYear: 632, endYear: 651 },
   { id: 'wc-pe-safavid', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-safavid', bioKey: 'rulerBio.wc-pe-safavid', highlightKey: 'rulerHighlight.wc-pe-safavid', startYear: 1501, endYear: 1736 },
+  { id: 'wc-pe-shah-abbas', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-shah-abbas', bioKey: 'rulerBio.wc-pe-shah-abbas', highlightKey: 'rulerHighlight.wc-pe-shah-abbas', startYear: 1588, endYear: 1629 },
 
   // ── Hellenistic Greece ─────────────────────────────────
   { id: 'wc-he-philip-ii', eraId: 'world-comparison', polityId: 'wc-hellenistic', nameKey: 'ruler.wc-he-philip-ii', bioKey: 'rulerBio.wc-he-philip-ii', highlightKey: 'rulerHighlight.wc-he-philip-ii', startYear: -359, endYear: -336 },
