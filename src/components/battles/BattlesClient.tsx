@@ -26,7 +26,7 @@ export function BattlesClient({
   events: Event[];
   locale?: string;
 }) {
-  const t = useTranslations();
+  const t = useTranslations('battlesClient');
   const { favoritesCount } = useBattleFavorites();
   
   const battles = React.useMemo(() => getBattles(events), [events]);
@@ -132,7 +132,7 @@ export function BattlesClient({
           </div>
           <div className="flex items-center gap-2">
             <span className={`text-xs ${BATTLES_CLIENT_COLORS.badge.text} ${BATTLES_CLIENT_COLORS.badge.background} px-2 py-1 rounded-full`}>
-              {battles.length} 场战役
+              {t('battleCount', { count: battles.length })}
             </span>
             {/* Compare mode toggle */}
             <button
@@ -202,7 +202,7 @@ export function BattlesClient({
                 : `${BATTLES_CLIENT_COLORS.eraFilter.inactive.bg} ${BATTLES_CLIENT_COLORS.eraFilter.inactive.text} ${BATTLES_CLIENT_COLORS.eraFilter.inactive.border} ${BATTLES_CLIENT_COLORS.eraFilter.inactive.hover}`
             }`}
           >
-            全部
+            {t('allEras')}
           </button>
           {eraOptions.map(({ id, name }) => {
             const era = eras.find(e => e.id === id);
@@ -300,7 +300,7 @@ export function BattlesClient({
             {/* Era distribution */}
             {battleCountByEra.length > 0 && (
               <div className="mt-3">
-                <div className={`text-xs ${BATTLES_CLIENT_COLORS.eraDistribution.label} mb-2`}>各时期战役分布</div>
+                <div className={`text-xs ${BATTLES_CLIENT_COLORS.eraDistribution.label} mb-2`}>{t('eraDistribution')}</div>
                 <div className="flex flex-wrap gap-2">
                   {battleCountByEra.map(({ eraId, eraName, count }) => {
                     const dotColor = ERA_COLORS[eraId]?.dot ?? BATTLES_CLIENT_COLORS.battleDot.default;
@@ -330,7 +330,7 @@ export function BattlesClient({
       {/* Selection indicator when in compare mode */}
       {compareMode && selectedBattles.length > 0 && (
         <div className={`fixed bottom-4 left-1/2 -translate-x-1/2 z-20 ${BATTLES_CLIENT_COLORS.compareIndicator.bg} ${BATTLES_CLIENT_COLORS.compareIndicator.text} px-4 py-2 rounded-full shadow-lg flex items-center gap-2`}>
-          <span>已选择 {selectedBattles.length}/2 场战役</span>
+          <span>{t('compareModeSelected', { count: selectedBattles.length })}</span>
           <button 
             onClick={() => setSelectedBattles([])}
             className={`${BATTLES_CLIENT_COLORS.compareIndicator.hover} rounded-full p-1`}
@@ -344,10 +344,10 @@ export function BattlesClient({
       <div className={`${BATTLES_CLIENT_COLORS.statsBar.container.bg} ${BATTLES_CLIENT_COLORS.statsBar.container.border} ${BATTLES_CLIENT_COLORS.statsBar.container.padding}`}>
         <div className="max-w-4xl mx-auto flex items-center justify-between text-sm">
           <span className={BATTLES_CLIENT_COLORS.statsBar.selectedText}>
-            {selectedEraId ? `${eraOptions.find(e => e.id === selectedEraId)?.name ?? selectedEraId}时期` : '全部时期'}
+            {selectedEraId ? `${eraOptions.find(e => e.id === selectedEraId)?.name ?? selectedEraId}${t('statsBar.eraPeriod')}` : t('allErasPeriod')}
           </span>
           <span className={BATTLES_CLIENT_COLORS.statsBar.countText}>
-            {displayedBattles.length} 场战役
+            {t('battleCount', { count: displayedBattles.length })}
           </span>
         </div>
       </div>
@@ -390,7 +390,7 @@ export function BattlesClient({
             <svg className="w-16 h-16 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            <p>暂无战役数据</p>
+            <p>{t('noBattleData')}</p>
           </div>
         )}
       </main>

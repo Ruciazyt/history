@@ -2564,5 +2564,16 @@
   "polity.wc.median": "Median Empire",
   "ruler.wc-is-mansur": "Al-Mansur",
   "rulerBio.wc-is-mansur": "Al-Mansur (阿尔-曼苏尔) was the second Abbasid caliph (754–775 CE), succeeding Abu al-Abbas al-Saffah. He founded the city of Baghdad in 762 CE, which became the center of the Abbasid Caliphate and one of the largest cities in the world for centuries. Known for his administrative reforms and consolidation of Abbasid power after the fall of the Umayyads.",
-  "rulerHighlight.wc-is-mansur": "Founded Baghdad (762 CE); consolidated early Abbasid Caliphate; built Samarra palace city."
+  "rulerHighlight.wc-is-mansur": "Founded Baghdad (762 CE); consolidated early Abbasid Caliphate; built Samarra palace city.",
+  "battlesClient": {
+    "battleCount": "{count} battles",
+    "allEras": "All",
+    "eraDistribution": "Battle Distribution by Era",
+    "compareModeSelected": "{count}/2 battles selected",
+    "allErasPeriod": "All Periods",
+    "noBattleData": "No battle data",
+    "statsBar": {
+      "eraPeriod": " Period"
+    }
+  }
 }

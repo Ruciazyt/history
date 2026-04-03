@@ -2564,5 +2564,16 @@
   "polity.wc.median": "メディア帝国",
   "ruler.wc-is-mansur": "アル＝マンスール",
   "rulerBio.wc-is-mansur": "アル＝マンスール（754〜775年）は第2代アッバース朝カリフであり、兄のアブー・アル＝アッバス・アル＝サファーの後を継いだ。762年にバグダードを建設し、アッバース朝の中心地とした。卓越した行政能力で知られ、アッバース朝の統治基盤を確立した。",
-  "rulerHighlight.wc-is-mansur": "バグダード建都（762年）；アッバース朝の支配を確立"
+  "rulerHighlight.wc-is-mansur": "バグダード建都（762年）；アッバース朝の支配を確立",
+  "battlesClient": {
+    "battleCount": "{count} 戦い",
+    "allEras": "すべて",
+    "eraDistribution": "時代の戦い分布",
+    "compareModeSelected": "{count}/2 戦い選択済み",
+    "allErasPeriod": "すべての時代",
+    "noBattleData": "戦いデータなし",
+    "statsBar": {
+      "eraPeriod": "時代"
+    }
+  }
 }
