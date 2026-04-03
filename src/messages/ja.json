@@ -615,7 +615,8 @@
       "west": "西アジア＆ヨーロッパ",
       "vietnam": "ベトナム",
       "central-asia": "中央アジア",
-      "other": "その他"
+      "other": "その他",
+      "southeast-asia": "東南アジア"
     },
     "eraBand": {
       "ancient": "古代",
@@ -821,6 +822,19 @@
       "score": "スコア",
       "bestStreak": "最高連続",
       "playAgain": "もう一度"
+    },
+    "type": {
+      "commander": "指揮官",
+      "result": "戦闘結果",
+      "year": "年代",
+      "terrain": "地形",
+      "scale": "規模",
+      "mixed": "混合"
+    },
+    "difficulty": {
+      "easy": "簡単",
+      "normal": "普通",
+      "hard": "難しい"
     }
   },
   "ruler": {

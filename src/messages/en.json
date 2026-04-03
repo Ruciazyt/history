@@ -615,7 +615,8 @@
       "central-asia": "Central Asia",
       "west": "West Asia & Europe",
       "vietnam": "Vietnam",
-      "other": "Other"
+      "other": "Other",
+      "southeast-asia": "Southeast Asia"
     },
     "eraBand": {
       "ancient": "Ancient",
@@ -821,6 +822,19 @@
       "score": "Score",
       "bestStreak": "Best Streak",
       "playAgain": "Play Again"
+    },
+    "type": {
+      "commander": "Commander",
+      "result": "Battle Result",
+      "year": "Year",
+      "terrain": "Terrain",
+      "scale": "Scale",
+      "mixed": "Mixed"
+    },
+    "difficulty": {
+      "easy": "Easy",
+      "normal": "Normal",
+      "hard": "Hard"
     }
   },
   "ruler": {

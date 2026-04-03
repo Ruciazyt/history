@@ -1938,7 +1938,8 @@
       "central-asia": "中亚",
       "west": "西亚和欧洲",
       "vietnam": "越南",
-      "other": "其他"
+      "other": "其他",
+      "southeast-asia": "东南亚"
     },
     "eraBand": {
       "ancient": "古代",
@@ -2321,6 +2322,19 @@
       "warringStates": "战国时期",
       "chenhan": "秦汉时期",
       "threeKingdoms": "三国时期"
+    },
+    "type": {
+      "commander": "指挥官",
+      "result": "战役结果",
+      "year": "年代",
+      "terrain": "地形",
+      "scale": "规模",
+      "mixed": "混合"
+    },
+    "difficulty": {
+      "easy": "简单",
+      "normal": "普通",
+      "hard": "困难"
     }
   },
   "ruler.wc-iv-kushan-dyn": "贵霜王朝",
