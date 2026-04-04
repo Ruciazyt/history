@@ -488,16 +488,29 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                     );
                   })}
 
-                  {/* Era boundary separator lines across each column */}
-                  {ERA_BOUNDARY_YEARS.map(boundaryYear => {
+                  {/* Era boundary separator lines with era transition labels */}
+                  {ERA_BOUNDARY_YEARS.map((boundaryYear, idx) => {
                     if (boundaryYear <= minYear || boundaryYear >= maxYear) return null;
                     const y = yearToY(boundaryYear, minYear, maxYear, gridHeight);
+                    const prevEra = ERA_BANDS[idx]!;           // era transitioning INTO
+                    const nextEra = ERA_BANDS[idx + 1]!;       // era transitioning FROM
+                    const transitionLabel = `${t(prevEra.labelKey)} → ${t(nextEra.labelKey)}`;
+                    const badgeClass = nextEra.badgeClass;
                     return (
                       <div
                         key={`era-line-${boundaryYear}`}
-                        className="absolute left-0 right-0 h-0.5 bg-amber-400/70 pointer-events-none z-[3]"
-                        style={{ top: y }}
-                      />
+                        className="absolute left-0 right-0 pointer-events-none z-[3] flex items-center"
+                        style={{ top: y - 8 }}
+                      >
+                        {/* Era transition badge — positioned on the left Y-axis */}
+                        <span
+                          className={`shrink-0 px-1.5 py-0.5 rounded text-[9px] font-semibold tracking-wide shadow-sm border border-black/10 ${badgeClass}`}
+                        >
+                          {transitionLabel} · {formatYear(boundaryYear, locale)}
+                        </span>
+                        {/* Thin horizontal separator line */}
+                        <div className="flex-1 h-px bg-amber-400/60 ml-1" />
+                      </div>
                     );
                   })}
 
