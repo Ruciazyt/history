@@ -14,6 +14,10 @@ export const metadata: Metadata = {
     description: 'History learning atlas - Explore Chinese dynasties, historical events and figures',
     type: 'website',
   },
+  other: {
+    // Theme color for mobile browser chrome (light mode)
+    'theme-color': '#ffffff',
+  },
 };
 
 export const viewport: Viewport = {
@@ -30,6 +34,10 @@ export default function RootLayout({
 }>) {
   return (
     <html>
+      <head>
+        {/* Theme color for dark mode - added inline to support prefers-color-scheme */}
+        <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
+      </head>
       <body className="antialiased">
         {children}
       </body>
