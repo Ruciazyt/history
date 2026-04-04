@@ -81,7 +81,7 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
             </h3>
             <div className={`text-sm ${BATTLE_OF_THE_DAY_COLORS.subtitle} mt-1 flex flex-wrap items-center gap-2`}>
               <span className={`inline-flex items-center px-2 py-0.5 ${BATTLE_OF_THE_DAY_COLORS.badgeItem.bg} rounded-full`}>
-                📅 {formatYear(battle.year)}
+                📅 {formatYear(battle.year, locale)}
               </span>
               {battle.location?.label && (
                 <span className={`inline-flex items-center px-2 py-0.5 ${BATTLE_OF_THE_DAY_COLORS.badgeItem.bg} rounded-full`}>

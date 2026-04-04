@@ -25,11 +25,11 @@ import { worldComparisonEra, eastAsiaComparisonEra } from '@/lib/history/data/wo
 import { worldComparisonRulers, eastAsiaRulers } from '@/lib/history/data/worldRulers';
 import { getWorldEraBounds, getActiveBoundaries } from '@/lib/history/data/worldBoundaries';
 
-function rangeLabel(centerYear: number, windowYears: number) {
+function rangeLabel(centerYear: number, windowYears: number, locale: string) {
   const half = Math.floor(windowYears / 2);
   const from = centerYear - half;
   const to = centerYear + half;
-  return `${formatYear(from)} → ${formatYear(to)}`;
+  return `${formatYear(from, locale)} → ${formatYear(to, locale)}`;
 }
 
 function yearBounds(eras: Era[]) {
@@ -230,7 +230,7 @@ export function HistoryApp({
                 <span className={C.eraInfo.font}>{selectedEra ? t(selectedEra.nameKey) : ''}</span>
                 <span className={`mx-2 ${EXTRA.divider.default}`}>|</span>
                 <span>
-                  {selectedEra ? `${formatYear(selectedEra.startYear)}–${formatYear(selectedEra.endYear)}` : ''}
+                  {selectedEra ? `${formatYear(selectedEra.startYear, currentLocale)}–${formatYear(selectedEra.endYear, currentLocale)}` : ''}
                 </span>
               </div>
               
@@ -295,7 +295,7 @@ export function HistoryApp({
                         {era.isParallelPolities && <span className={`text-xs ml-1 ${EXTRA.multiPolity.text}`}>（{t('ui.parallelPolities')}）</span>}
                       </span>
                       <span className={`text-xs ${C.sidebar.eraItem.year} hidden sm:inline`}>
-                        {formatYear(era.startYear)}–{formatYear(era.endYear)}
+                        {formatYear(era.startYear, currentLocale)}–{formatYear(era.endYear, currentLocale)}
                       </span>
                       <span className={`text-xs ${EXTRA.arrow.text}`}>{isOpen ? '▼' : '▶'}</span>
                     </button>
@@ -320,12 +320,12 @@ export function HistoryApp({
                 <div className="min-w-0">
                   <div className={`text-xs font-semibold uppercase tracking-wide ${C.timeline.header.text}`}>{t('ui.timeline')}</div>
                   <div className={`text-xs sm:text-sm ${EXTRA.eventTitle.default}`}>
-                    <span className={C.timeline.header.year}>{formatYear(year)}</span>
+                    <span className={C.timeline.header.year}>{formatYear(year, currentLocale)}</span>
                     <span className={`mx-1.5 sm:mx-2 ${EXTRA.divider.default}`}>|</span>
                     <span className="hidden sm:inline">{t('ui.window.label')}: </span>
                     <span className={C.timeline.header.window}>{t('ui.window.years', { count: windowYears })}</span>
                     <span className={`mx-1.5 sm:mx-2 ${EXTRA.divider.default} hidden sm:inline`}>|</span>
-                    <span className={`${EXTRA.rangeLabel.text} hidden sm:inline`}>{rangeLabel(year, windowYears)}</span>
+                    <span className={`${EXTRA.rangeLabel.text} hidden sm:inline`}>{rangeLabel(year, windowYears, currentLocale)}</span>
                   </div>
                 </div>
 
@@ -423,7 +423,7 @@ export function HistoryApp({
                       className={`border-b ${C.eventsSidebar.eventItem.border} px-2 py-2 last:border-0 sm:px-3`}
                     >
                       <div className={`text-xs ${C.eventsSidebar.eventItem.year}`}>
-                        {formatYear(e.year)} {eraName ? `· ${eraName}` : ''}
+                        {formatYear(e.year, currentLocale)} {eraName ? `· ${eraName}` : ''}
                       </div>
                       <div className={`mt-0.5 text-sm font-medium ${EXTRA.eventTitle.default}`}>
                         {t(e.titleKey)}
@@ -455,7 +455,7 @@ export function HistoryApp({
                         className={`border-b ${C.eventsSidebar.eventItem.border} px-2 py-2 last:border-0 sm:px-3`}
                       >
                         <div className={`text-xs ${C.eventsSidebar.eventItem.year}`}>
-                          {formatYear(e.year)} {eraName ? `· ${eraName}` : ''}
+                          {formatYear(e.year, currentLocale)} {eraName ? `· ${eraName}` : ''}
                         </div>
                         <div className={`mt-0.5 text-sm ${EXTRA.eventTitle.light}`}>{t(e.titleKey)}</div>
                       </div>
@@ -480,7 +480,7 @@ export function HistoryApp({
                       )}
                     </div>
                     <div className={`mt-0.5 text-xs ${C.rulerDetail.header.year}`}>
-                      {formatYear(selectedRuler.startYear)}–{formatYear(selectedRuler.endYear)}
+                      {formatYear(selectedRuler.startYear, currentLocale)}–{formatYear(selectedRuler.endYear, currentLocale)}
                     </div>
                   </div>
                   <button
