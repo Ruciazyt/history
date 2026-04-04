@@ -44,7 +44,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   // ═══ 中国王朝 (China) ═══
   {
     type: 'Feature',
-    properties: { name: '秦朝', nameKey: 'empire_qin', startYear: -221, endYear: -206, color: '#374151' },
+    properties: { name: '秦朝', nameKey: 'empire_qin', startYear: -221, endYear: -206, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -66,7 +66,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '东汉', nameKey: 'empire_han-eastern', startYear: 25, endYear: 220, color: '#EA580C' },
+    properties: { name: '东汉', nameKey: 'empire_han-eastern', startYear: 25, endYear: 220, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -77,7 +77,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '唐朝', nameKey: 'empire_tang', startYear: 618, endYear: 907, color: '#F59E0B' },
+    properties: { name: '唐朝', nameKey: 'empire_tang', startYear: 618, endYear: 907, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -88,7 +88,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '宋朝', nameKey: 'empire_song', startYear: 960, endYear: 1279, color: '#10B981' },
+    properties: { name: '宋朝', nameKey: 'empire_song', startYear: 960, endYear: 1279, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -98,7 +98,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '元朝', nameKey: 'empire_yuan', startYear: 1271, endYear: 1368, color: '#6366F1' },
+    properties: { name: '元朝', nameKey: 'empire_yuan', startYear: 1271, endYear: 1368, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -109,7 +109,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '明朝', nameKey: 'empire_ming', startYear: 1368, endYear: 1644, color: '#EF4444' },
+    properties: { name: '明朝', nameKey: 'empire_ming', startYear: 1368, endYear: 1644, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -120,7 +120,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '清朝', nameKey: 'empire_qing', startYear: 1644, endYear: 1912, color: '#059669' },
+    properties: { name: '清朝', nameKey: 'empire_qing', startYear: 1644, endYear: 1912, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -133,7 +133,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   // ═══ 契丹辽朝 (Khitan Liao) ═══
   {
     type: 'Feature',
-    properties: { name: '辽朝', nameKey: 'empire_liao', startYear: 907, endYear: 1125, color: '#0D9488' },
+    properties: { name: '辽朝', nameKey: 'empire_liao', startYear: 907, endYear: 1125, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -146,7 +146,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   // ═══ 罗马帝国 (Rome/Byzantine/Ottoman) ═══
   {
     type: 'Feature',
-    properties: { name: '罗马共和国', nameKey: 'empire_rome-republic', startYear: -500, endYear: -27, color: '#7C3AED' },
+    properties: { name: '罗马共和国', nameKey: 'empire_rome-republic', startYear: -500, endYear: -27, color: '#8B5CF6' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -157,7 +157,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '罗马帝国', nameKey: 'empire_rome-empire', startYear: -27, endYear: 395, color: '#9333EA' },
+    properties: { name: '罗马帝国', nameKey: 'empire_rome-empire', startYear: -27, endYear: 395, color: '#8B5CF6' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -193,7 +193,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   // ═══ 米底亚帝国 (Median Empire) ═══
   {
     type: 'Feature',
-    properties: { name: '米底亚帝国', nameKey: 'empire_median', startYear: -625, endYear: -549, color: '#881337' },
+    properties: { name: '米底亚帝国', nameKey: 'empire_median', startYear: -625, endYear: -549, color: '#BE185D' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -206,7 +206,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   // ═══ 波斯帝国 (Persia) ═══
   {
     type: 'Feature',
-    properties: { name: '阿契美尼德波斯', nameKey: 'empire_achaemenid', startYear: -550, endYear: -330, color: '#E11D48' },
+    properties: { name: '阿契美尼德波斯', nameKey: 'empire_achaemenid', startYear: -550, endYear: -330, color: '#BE185D' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -228,7 +228,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '萨珊波斯', nameKey: 'empire_sassanid', startYear: 224, endYear: 651, color: '#9D174D' },
+    properties: { name: '萨珊波斯', nameKey: 'empire_sassanid', startYear: 224, endYear: 651, color: '#BE185D' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -239,7 +239,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '萨法维波斯', nameKey: 'empire_safavid', startYear: 1501, endYear: 1736, color: '#831843' },
+    properties: { name: '萨法维波斯', nameKey: 'empire_safavid', startYear: 1501, endYear: 1736, color: '#BE185D' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -252,7 +252,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   // ═══ 阿拉伯帝国 (Islamic Caliphates) ═══
   {
     type: 'Feature',
-    properties: { name: '倭马亚王朝', nameKey: 'empire_umayyad', startYear: 661, endYear: 750, color: '#059602' },
+    properties: { name: '倭马亚王朝', nameKey: 'empire_umayyad', startYear: 661, endYear: 750, color: '#16A34A' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -274,7 +274,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '帖木儿帝国', nameKey: 'empire_timurid', startYear: 1370, endYear: 1507, color: '#15803D' },
+    properties: { name: '帖木儿帝国', nameKey: 'empire_timurid', startYear: 1370, endYear: 1507, color: '#16A34A' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -297,7 +297,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '古埃及', nameKey: 'empire_egypt-middle', startYear: -2055, endYear: -1650, color: '#CA8A04' },
+    properties: { name: '古埃及', nameKey: 'empire_egypt-middle', startYear: -2055, endYear: -1650, color: '#EAB308' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -307,7 +307,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '古埃及', nameKey: 'empire_egypt-new', startYear: -1550, endYear: -1069, color: '#A16207' },
+    properties: { name: '古埃及', nameKey: 'empire_egypt-new', startYear: -1550, endYear: -1069, color: '#EAB308' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -317,7 +317,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '托勒密埃及', nameKey: 'empire_egypt-ptolemaic', startYear: -332, endYear: -30, color: '#854D0E' },
+    properties: { name: '托勒密埃及', nameKey: 'empire_egypt-ptolemaic', startYear: -332, endYear: -30, color: '#EAB308' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -380,7 +380,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '希腊-巴克特里亚', nameKey: 'empire_greco-bactrian', startYear: -250, endYear: 125, color: '#EA580C' },
+    properties: { name: '希腊-巴克特里亚', nameKey: 'empire_greco-bactrian', startYear: -250, endYear: 125, color: '#F97316' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -403,7 +403,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '孔雀王朝', nameKey: 'empire_maurya', startYear: -322, endYear: -185, color: '#EAB308' },
+    properties: { name: '孔雀王朝', nameKey: 'empire_maurya', startYear: -322, endYear: -185, color: '#D97706' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -414,7 +414,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '贵霜帝国', nameKey: 'empire_kushan', startYear: 30, endYear: 375, color: '#A855F7' },
+    properties: { name: '贵霜帝国', nameKey: 'empire_kushan', startYear: 30, endYear: 375, color: '#D97706' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -437,7 +437,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '朱罗帝国', nameKey: 'empire_chola', startYear: -300, endYear: 1279, color: '#B45309' },
+    properties: { name: '朱罗帝国', nameKey: 'empire_chola', startYear: -300, endYear: 1279, color: '#D97706' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -449,7 +449,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
 
   {
     type: 'Feature',
-    properties: { name: '毗奢耶那伽罗帝国', nameKey: 'empire_vijayanagara', startYear: 1336, endYear: 1646, color: '#DC2626' },
+    properties: { name: '毗奢耶那伽罗帝国', nameKey: 'empire_vijayanagara', startYear: 1336, endYear: 1646, color: '#D97706' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -459,7 +459,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '德里苏丹国', nameKey: 'empire_delhi-sultanate', startYear: 1206, endYear: 1526, color: '#059669' },
+    properties: { name: '德里苏丹国', nameKey: 'empire_delhi-sultanate', startYear: 1206, endYear: 1526, color: '#D97706' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -469,7 +469,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '莫卧儿帝国', nameKey: 'empire_mughal', startYear: 1526, endYear: 1857, color: '#CA8A04' },
+    properties: { name: '莫卧儿帝国', nameKey: 'empire_mughal', startYear: 1526, endYear: 1857, color: '#D97706' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -493,7 +493,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   // ═══ 中国王朝 (China) — Three Kingdoms / Medieval period ═══
   {
     type: 'Feature',
-    properties: { name: '三国', nameKey: 'empire_three-kingdoms', startYear: 220, endYear: 280, color: '#B91C1C' },
+    properties: { name: '三国', nameKey: 'empire_three-kingdoms', startYear: 220, endYear: 280, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -529,7 +529,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '古巴比伦', nameKey: 'empire_old-babylon', startYear: -1894, endYear: -1595, color: '#B45309' },
+    properties: { name: '古巴比伦', nameKey: 'empire_old-babylon', startYear: -1894, endYear: -1595, color: '#92400E' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -540,7 +540,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '亚述帝国', nameKey: 'empire_assyrian', startYear: -911, endYear: -609, color: '#78350F' },
+    properties: { name: '亚述帝国', nameKey: 'empire_assyrian', startYear: -911, endYear: -609, color: '#92400E' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -551,7 +551,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '新巴比伦', nameKey: 'empire_neobabylon', startYear: -626, endYear: -539, color: '#A16207' },
+    properties: { name: '新巴比伦', nameKey: 'empire_neobabylon', startYear: -626, endYear: -539, color: '#92400E' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -564,7 +564,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   // ═══ 塞琉古帝国 (Seleucid Empire) ═══
   {
     type: 'Feature',
-    properties: { name: '塞琉古帝国', nameKey: 'empire_seleucid', startYear: -312, endYear: -63, color: '#C2410C' },
+    properties: { name: '塞琉古帝国', nameKey: 'empire_seleucid', startYear: -312, endYear: -63, color: '#F97316' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -577,7 +577,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   // ═══ 萨塔瓦哈纳王国 (Satavahana Kingdom) ═══
   {
     type: 'Feature',
-    properties: { name: '萨塔瓦哈纳', nameKey: 'empire_satavahana', startYear: -200, endYear: 220, color: '#B45309' },
+    properties: { name: '萨塔瓦哈纳', nameKey: 'empire_satavahana', startYear: -200, endYear: 220, color: '#D97706' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -613,7 +613,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '飞鸟时代', nameKey: 'empire_asuka', startYear: 592, endYear: 710, color: '#DB2777' },
+    properties: { name: '飞鸟时代', nameKey: 'empire_asuka', startYear: 592, endYear: 710, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -623,7 +623,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '奈良时代', nameKey: 'empire_nara', startYear: 710, endYear: 794, color: '#9D174D' },
+    properties: { name: '奈良时代', nameKey: 'empire_nara', startYear: 710, endYear: 794, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -633,7 +633,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '平安时代', nameKey: 'empire_heian', startYear: 794, endYear: 1185, color: '#BE185D' },
+    properties: { name: '平安时代', nameKey: 'empire_heian', startYear: 794, endYear: 1185, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -643,7 +643,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '镰仓时代', nameKey: 'empire_kamakura', startYear: 1185, endYear: 1333, color: '#A855F7' },
+    properties: { name: '镰仓时代', nameKey: 'empire_kamakura', startYear: 1185, endYear: 1333, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -653,7 +653,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '室町时代', nameKey: 'empire_muromachi', startYear: 1336, endYear: 1573, color: '#9333EA' },
+    properties: { name: '室町时代', nameKey: 'empire_muromachi', startYear: 1336, endYear: 1573, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -663,7 +663,7 @@ export const eurasianBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '江户时代', nameKey: 'empire_edo', startYear: 1603, endYear: 1868, color: '#DB2777' },
+    properties: { name: '江户时代', nameKey: 'empire_edo', startYear: 1603, endYear: 1868, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -678,7 +678,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   // ═══ 中国王朝 ═══
   {
     type: 'Feature',
-    properties: { name: '秦朝', nameKey: 'empire_qin', startYear: -221, endYear: -206, color: '#374151' },
+    properties: { name: '秦朝', nameKey: 'empire_qin', startYear: -221, endYear: -206, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -698,7 +698,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '东汉', nameKey: 'empire_han-eastern', startYear: 25, endYear: 220, color: '#EA580C' },
+    properties: { name: '东汉', nameKey: 'empire_han-eastern', startYear: 25, endYear: 220, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -708,7 +708,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '唐朝', nameKey: 'empire_tang', startYear: 618, endYear: 907, color: '#F59E0B' },
+    properties: { name: '唐朝', nameKey: 'empire_tang', startYear: 618, endYear: 907, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -718,7 +718,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '宋朝', nameKey: 'empire_song', startYear: 960, endYear: 1279, color: '#10B981' },
+    properties: { name: '宋朝', nameKey: 'empire_song', startYear: 960, endYear: 1279, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -728,7 +728,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '元朝', nameKey: 'empire_yuan', startYear: 1271, endYear: 1368, color: '#6366F1' },
+    properties: { name: '元朝', nameKey: 'empire_yuan', startYear: 1271, endYear: 1368, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -738,7 +738,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '明朝', nameKey: 'empire_ming', startYear: 1368, endYear: 1644, color: '#EF4444' },
+    properties: { name: '明朝', nameKey: 'empire_ming', startYear: 1368, endYear: 1644, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -748,7 +748,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '清朝', nameKey: 'empire_qing', startYear: 1644, endYear: 1912, color: '#059669' },
+    properties: { name: '清朝', nameKey: 'empire_qing', startYear: 1644, endYear: 1912, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -760,7 +760,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   // ═══ 契丹辽朝 (Khitan Liao) ═══
   {
     type: 'Feature',
-    properties: { name: '辽朝', nameKey: 'empire_liao', startYear: 907, endYear: 1125, color: '#0D9488' },
+    properties: { name: '辽朝', nameKey: 'empire_liao', startYear: 907, endYear: 1125, color: '#DC2626' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -774,7 +774,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   // ═══ 绳文时代 (Jōmon Period) ═══
   {
     type: 'Feature',
-    properties: { name: '绳文时代', nameKey: 'empire_jomon', startYear: -10000, endYear: -300, color: '#F9A8D4' },
+    properties: { name: '绳文时代', nameKey: 'empire_jomon', startYear: -10000, endYear: -300, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -785,7 +785,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '弥生时代', nameKey: 'empire_yayoi', startYear: -300, endYear: 250, color: '#F472B6' },
+    properties: { name: '弥生时代', nameKey: 'empire_yayoi', startYear: -300, endYear: 250, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -805,7 +805,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '飞鸟时代', nameKey: 'empire_asuka', startYear: 592, endYear: 710, color: '#DB2777' },
+    properties: { name: '飞鸟时代', nameKey: 'empire_asuka', startYear: 592, endYear: 710, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -815,7 +815,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '奈良时代', nameKey: 'empire_nara', startYear: 710, endYear: 794, color: '#9D174D' },
+    properties: { name: '奈良时代', nameKey: 'empire_nara', startYear: 710, endYear: 794, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -825,7 +825,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '平安时代', nameKey: 'empire_heian', startYear: 794, endYear: 1185, color: '#BE185D' },
+    properties: { name: '平安时代', nameKey: 'empire_heian', startYear: 794, endYear: 1185, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -836,7 +836,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   // ═══ 鎌倉幕府 (Kamakura Shogunate) — 1185–1333 ═══
   {
     type: 'Feature',
-    properties: { name: '鎌倉时代', nameKey: 'empire_kamakura', startYear: 1185, endYear: 1333, color: '#A855F7' },
+    properties: { name: '鎌倉时代', nameKey: 'empire_kamakura', startYear: 1185, endYear: 1333, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -846,7 +846,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '室町时代', nameKey: 'empire_muromachi', startYear: 1336, endYear: 1573, color: '#9D174D' },
+    properties: { name: '室町时代', nameKey: 'empire_muromachi', startYear: 1336, endYear: 1573, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -856,7 +856,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '江户时代', nameKey: 'empire_edo', startYear: 1603, endYear: 1868, color: '#DB2777' },
+    properties: { name: '江户时代', nameKey: 'empire_edo', startYear: 1603, endYear: 1868, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -868,7 +868,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
 
   {
     type: 'Feature',
-    properties: { name: '战国时代', nameKey: 'empire_sengoku', startYear: 1467, endYear: 1615, color: '#7C3AED' },
+    properties: { name: '战国时代', nameKey: 'empire_sengoku', startYear: 1467, endYear: 1615, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -879,7 +879,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '明治时代', nameKey: 'empire_meiji', startYear: 1868, endYear: 1912, color: '#BE185D' },
+    properties: { name: '明治时代', nameKey: 'empire_meiji', startYear: 1868, endYear: 1912, color: '#EC4899' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -905,7 +905,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '新罗王朝', nameKey: 'empire_silla', startYear: 668, endYear: 935, color: '#14B8A6' },
+    properties: { name: '新罗王朝', nameKey: 'empire_silla', startYear: 668, endYear: 935, color: '#06B6D4' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -915,7 +915,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '高丽王朝', nameKey: 'empire_goryeo', startYear: 918, endYear: 1392, color: '#14B8A6' },
+    properties: { name: '高丽王朝', nameKey: 'empire_goryeo', startYear: 918, endYear: 1392, color: '#06B6D4' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -925,7 +925,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '朝鲜王朝', nameKey: 'empire_joseon', startYear: 1392, endYear: 1897, color: '#0D9488' },
+    properties: { name: '朝鲜王朝', nameKey: 'empire_joseon', startYear: 1392, endYear: 1897, color: '#06B6D4' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -937,7 +937,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   // ═══ 越南 (Vietnam) ═══
   {
     type: 'Feature',
-    properties: { name: '李朝', nameKey: 'empire_ly-dynasty', startYear: 1009, endYear: 1225, color: '#F59E0B' },
+    properties: { name: '李朝', nameKey: 'empire_ly-dynasty', startYear: 1009, endYear: 1225, color: '#22C55E' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -948,7 +948,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
 
   {
     type: 'Feature',
-    properties: { name: '陈朝', nameKey: 'empire_tran-dynasty', startYear: 1225, endYear: 1400, color: '#EAB308' },
+    properties: { name: '陈朝', nameKey: 'empire_tran-dynasty', startYear: 1225, endYear: 1400, color: '#22C55E' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -959,7 +959,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '黎朝', nameKey: 'empire_le-dynasty', startYear: 1428, endYear: 1788, color: '#D97706' },
+    properties: { name: '黎朝', nameKey: 'empire_le-dynasty', startYear: 1428, endYear: 1788, color: '#22C55E' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
@@ -969,7 +969,7 @@ export const eastAsiaBoundaries: WorldBoundary[] = [
   },
   {
     type: 'Feature',
-    properties: { name: '阮朝', nameKey: 'empire_nguyen-dynasty', startYear: 1802, endYear: 1945, color: '#B45309' },
+    properties: { name: '阮朝', nameKey: 'empire_nguyen-dynasty', startYear: 1802, endYear: 1945, color: '#22C55E' },
     geometry: {
       type: 'Polygon',
       coordinates: [[
