@@ -2846,5 +2846,12 @@
     "han-wester": "西漢",
     "active": " empire"
   },
-  "polity.wc.japan": "日本"
+  "polity.wc.japan": "日本",
+  "ruler.ea-jp-ashikaga": "足利尊氏",
+  "ruler.ea-jp-kanmu": "桓武天皇",
+  "ruler.wc-is-aurangzeb": "アウラングゼブ",
+  "ruler.wc-is-mughal-dyn": "ムガル朝",
+  "rulerHighlight.ea-jp-ashikaga": "室町幕府を開いた",
+  "rulerHighlight.ea-jp-kanmu": "首都を平安京（京都）に移した",
+  "rulerHighlight.wc-is-aurangzeb": "ムガル帝国を最大版図に広げた"
 }

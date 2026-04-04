@@ -2846,5 +2846,12 @@
     "han-wester": "Western Han",
     "active": " empires"
   },
-  "polity.wc.japan": "Japan"
+  "polity.wc.japan": "Japan",
+  "ruler.ea-jp-ashikaga": "Ashikaga Takauji",
+  "ruler.ea-jp-kanmu": "Emperor Kanmu",
+  "ruler.wc-is-aurangzeb": "Aurangzeb",
+  "ruler.wc-is-mughal-dyn": "Mughal Dynasty",
+  "rulerHighlight.ea-jp-ashikaga": "Founded the Muromachi Shogunate",
+  "rulerHighlight.ea-jp-kanmu": "Moved capital to Heian-kyō (Kyoto)",
+  "rulerHighlight.wc-is-aurangzeb": "Expanded Mughal Empire to its greatest extent"
 }
