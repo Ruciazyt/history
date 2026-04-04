@@ -17,6 +17,7 @@ export const worldComparisonEra: Era = {
     { id: 'wc-median', nameKey: 'polity.wc.median' },
     { id: 'wc-hellenistic', nameKey: 'polity.wc.hellenistic' },
     { id: 'wc-rus', nameKey: 'polity.wc.rus' },
+    { id: 'wc-japan', nameKey: 'polity.wc.japan' },
   ],
 };
 

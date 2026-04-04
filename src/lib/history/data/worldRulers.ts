@@ -189,4 +189,12 @@ export const eastAsiaRulers: import('@/lib/history/types').Ruler[] = [
   { id: 'ea-vn-tran', eraId: 'east-asia-comparison', polityId: 'ea-vietnam', nameKey: 'ruler.ea-vn-tran', bioKey: 'rulerBio.ea-vn-tran', highlightKey: 'rulerHighlight.ea-vn-tran', startYear: 1225, endYear: 1400 , isDynastyBlock: true },
   { id: 'ea-vn-le', eraId: 'east-asia-comparison', polityId: 'ea-vietnam', nameKey: 'ruler.ea-vn-le', bioKey: 'rulerBio.ea-vn-le', highlightKey: 'rulerHighlight.ea-vn-le', startYear: 1428, endYear: 1788 , isDynastyBlock: true },
   { id: 'ea-vn-nguyen', eraId: 'east-asia-comparison', polityId: 'ea-vietnam', nameKey: 'ruler.ea-vn-nguyen', bioKey: 'rulerBio.ea-vn-nguyen', startYear: 1802, endYear: 1912 , isDynastyBlock: true },
+
+  // ═══ 日本 (Japan — World Comparison) ═══
+  { id: 'wc-jp-yamato', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-yamato', bioKey: 'rulerBio.ea-jp-yamato', startYear: 250, endYear: 710 , isDynastyBlock: true },
+  { id: 'wc-jp-shotoku', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-shotoku', bioKey: 'rulerBio.ea-jp-shotoku', highlightKey: 'rulerHighlight.ea-jp-shotoku', startYear: 593, endYear: 622 },
+  { id: 'wc-jp-heian', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-heian', bioKey: 'rulerBio.ea-jp-heian', highlightKey: 'rulerHighlight.ea-jp-heian', startYear: 794, endYear: 1185 , isDynastyBlock: true },
+  { id: 'wc-jp-kamakura', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-kamakura', bioKey: 'rulerBio.ea-jp-kamakura', startYear: 1185, endYear: 1333 , isDynastyBlock: true },
+  { id: 'wc-jp-edo', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-edo', bioKey: 'rulerBio.ea-jp-edo', highlightKey: 'rulerHighlight.ea-jp-edo', startYear: 1603, endYear: 1868 , isDynastyBlock: true },
+  { id: 'wc-jp-meiji', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-meiji', bioKey: 'rulerBio.ea-jp-meiji', highlightKey: 'rulerHighlight.ea-jp-meiji', startYear: 1868, endYear: 1912 },
 ];

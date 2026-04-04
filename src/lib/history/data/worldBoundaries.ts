@@ -599,6 +599,78 @@ export const eurasianBoundaries: WorldBoundary[] = [
       ]],
     },
   },
+
+  // ═══ 日本 (Japan) ═══
+  {
+    type: 'Feature',
+    properties: { name: '大和时代', nameKey: 'empire_yamato', startYear: 250, endYear: 592, color: '#EC4899' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [128, 32], [130, 34], [133, 36], [136, 38], [140, 38], [142, 35], [141, 32], [130, 30], [128, 32],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '飞鸟时代', nameKey: 'empire_asuka', startYear: 592, endYear: 710, color: '#DB2777' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [129, 32], [130, 34], [132, 36], [136, 38], [140, 38], [142, 36], [141, 32], [130, 30], [129, 32],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '奈良时代', nameKey: 'empire_nara', startYear: 710, endYear: 794, color: '#9D174D' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [129, 32], [130, 34], [133, 36], [136, 38], [140, 38], [142, 35], [141, 32], [130, 30], [129, 32],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '平安时代', nameKey: 'empire_heian', startYear: 794, endYear: 1185, color: '#BE185D' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [129, 32], [130, 34], [132, 36], [136, 38], [140, 38], [142, 36], [141, 32], [130, 30], [129, 32],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '镰仓时代', nameKey: 'empire_kamakura', startYear: 1185, endYear: 1333, color: '#A855F7' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [129, 32], [130, 34], [133, 36], [138, 38], [141, 38], [142, 35], [140, 32], [132, 31], [129, 32],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '室町时代', nameKey: 'empire_muromachi', startYear: 1336, endYear: 1573, color: '#9333EA' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [129, 32], [131, 34], [134, 36], [139, 38], [142, 38], [143, 35], [141, 32], [135, 31], [129, 32],
+      ]],
+    },
+  },
+  {
+    type: 'Feature',
+    properties: { name: '江户时代', nameKey: 'empire_edo', startYear: 1603, endYear: 1868, color: '#DB2777' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [129, 30], [130, 33], [133, 36], [141, 39], [146, 41], [146, 36], [142, 32], [135, 30], [129, 30],
+      ]],
+    },
+  },
 ];
 
 // 东亚主要帝国边界
