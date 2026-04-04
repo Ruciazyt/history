@@ -25,14 +25,6 @@ const localeDescriptions: Record<string, string> = {
   ja: 'お気に入り - 興味がある歴史的出来事や戦いを保存',
 };
 
-function FavoritesLoading() {
-  return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="animate-spin w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full" />
-    </div>
-  );
-}
-
 export async function generateMetadata({
   params,
 }: {
