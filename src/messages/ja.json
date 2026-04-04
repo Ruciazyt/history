@@ -2437,11 +2437,11 @@
       "years": "{count}年"
     },
     "close": "閉じる",
-"themeLight": "ライトモード",
+    "themeLight": "ライトモード",
     "themeDark": "ダークモード",
     "clearSearch": "検索をクリア",
     "language": "言語",
-"compareMode": "比較モード",
+    "compareMode": "比較モード",
     "gridView": "グリッド表示",
     "timelineView": "タイムライン表示",
     "favorites": "お気に入り"

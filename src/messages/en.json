@@ -2437,11 +2437,11 @@
       "years": "{count} years"
     },
     "close": "Close",
-"themeLight": "Light mode",
+    "themeLight": "Light mode",
     "themeDark": "Dark mode",
     "clearSearch": "Clear search",
     "language": "Language",
-"compareMode": "Compare",
+    "compareMode": "Compare",
     "gridView": "Grid",
     "timelineView": "Timeline",
     "favorites": "Favorites"
