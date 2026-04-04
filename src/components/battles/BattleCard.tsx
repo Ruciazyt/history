@@ -3,8 +3,8 @@
 import * as React from 'react';
 import type { Event } from '@/lib/history/types';
 import { formatYear } from '@/lib/history/utils';
-import { getBattleResultLabel, getBattleImpactLabel } from '@/lib/history/battles';
-import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, BATTLE_SCALE_COLORS, ERA_COLORS, ERA_COLORS_DARK, COMMANDER_COLORS, SELECTION_COLORS, BATTLE_CARD_COLORS, FAVORITE_BUTTON_COLORS, PACING_BADGE_COLORS, TIME_OF_DAY_COLORS } from '@/lib/history/constants';
+import { getBattleResultLabel, getBattleImpactLabel, getBattleTypeName } from '@/lib/history/battles';
+import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, BATTLE_SCALE_COLORS, BATTLE_TYPE_COLORS, ERA_COLORS, ERA_COLORS_DARK, COMMANDER_COLORS, SELECTION_COLORS, BATTLE_CARD_COLORS, FAVORITE_BUTTON_COLORS, PACING_BADGE_COLORS, TIME_OF_DAY_COLORS } from '@/lib/history/constants';
 import { getPacingLabel, getTimeOfDayLabel } from '@/lib/history/battlePacing';
 import { useTranslations } from 'next-intl';
 import { BattleDetail } from './BattleDetail';
@@ -177,6 +177,15 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
             <div className="mt-2">
               <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${BATTLE_SCALE_COLORS[battle.battle.scale]?.bg ?? BATTLE_SCALE_COLORS.unknown!.bg} ${BATTLE_SCALE_COLORS[battle.battle.scale]?.text ?? BATTLE_SCALE_COLORS.unknown!.text}`}>
                 📊 {t('battle.scale.' + battle.battle.scale)}
+              </span>
+            </div>
+          )}
+
+          {/* Battle type badge */}
+          {battle.battle?.battleType && battle.battle.battleType !== 'unknown' && (
+            <div className="mt-2">
+              <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${BATTLE_TYPE_COLORS.bg} ${BATTLE_TYPE_COLORS.text}`}>
+                🎯 {t(getBattleTypeName(battle.battle.battleType))}
               </span>
             </div>
           )}
