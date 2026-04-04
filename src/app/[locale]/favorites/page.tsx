@@ -5,6 +5,14 @@ import { Suspense } from 'react';
 import { locales, type Locale } from '@/i18n/routing';
 import { Shell } from '@/components/Shell';
 
+function FavoritesLoading() {
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="animate-spin w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full" />
+    </div>
+  );
+}
+
 const localeNames: Record<string, string> = {
   zh: '收藏夹',
   en: 'Favorites',
