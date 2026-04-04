@@ -144,6 +144,16 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-is-mughal-dyn', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-mughal-dyn', bioKey: 'rulerBio.wc-is-mughal-dyn', startYear: 1526, endYear: 1857 , isDynastyBlock: true },
   { id: 'wc-is-akbar', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-akbar', bioKey: 'rulerBio.wc-is-akbar', highlightKey: 'rulerHighlight.wc-is-akbar', startYear: 1556, endYear: 1605 },
   { id: 'wc-is-aurangzeb', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-aurangzeb', bioKey: 'rulerBio.wc-is-aurangzeb', highlightKey: 'rulerHighlight.wc-is-aurangzeb', startYear: 1658, endYear: 1707 },
+  // ═══ 日本 — World Comparison (绳文/弥生/飞鸟/奈良/幕府将军) ═══
+  { id: 'wc-jp-jomon', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-jomon', bioKey: 'rulerBio.ea-jp-jomon', startYear: -10000, endYear: -300 , isDynastyBlock: true },
+  { id: 'wc-jp-yayoi', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-yayoi', bioKey: 'rulerBio.ea-jp-yayoi', startYear: -300, endYear: 250 , isDynastyBlock: true },
+  { id: 'wc-jp-asuka', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-asuka', bioKey: 'rulerBio.ea-jp-asuka', startYear: 592, endYear: 710 , isDynastyBlock: true },
+  { id: 'wc-jp-nara', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-nara', bioKey: 'rulerBio.ea-jp-nara', startYear: 710, endYear: 794 , isDynastyBlock: true },
+  { id: 'wc-jp-yoritomo', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-yoritomo', bioKey: 'rulerBio.ea-jp-yoritomo', highlightKey: 'rulerHighlight.ea-jp-yoritomo', startYear: 1185, endYear: 1199 },
+  { id: 'wc-jp-muromachi', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-muromachi', bioKey: 'rulerBio.ea-jp-muromachi', startYear: 1336, endYear: 1573 , isDynastyBlock: true },
+  { id: 'wc-jp-hideyoshi', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-hideyoshi', bioKey: 'rulerBio.ea-jp-hideyoshi', highlightKey: 'rulerHighlight.ea-jp-hideyoshi', startYear: 1582, endYear: 1598 },
+  { id: 'wc-jp-ieru', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-ieru', bioKey: 'rulerBio.ea-jp-ieru', highlightKey: 'rulerHighlight.ea-jp-ieru', startYear: 1603, endYear: 1616 },
+
 ];
 
 // ══ East Asia Comparison ═══════════════════════════════════════════════════
