@@ -263,6 +263,14 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
     setCurrentYear(Math.max(minYear, Math.min(maxYear, year)));
   }, [minYear, maxYear, gridHeight]);
 
+  // Click on mini timeline to jump to that year
+  const handleMiniClick = React.useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const y = e.clientY - rect.top;
+    const year = Math.round(minYear + (y / 96) * (maxYear - minYear));
+    setCurrentYear(Math.max(minYear, Math.min(maxYear, year)));
+  }, [minYear, maxYear]);
+
   return (
     <div className={`flex h-screen flex-col ${HISTORY_APP_COLORS.container.bg} ${HISTORY_APP_COLORS.container.text}`}>
       {/* Header */}
@@ -711,7 +719,7 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
             <div className="text-xs font-semibold text-zinc-600 mb-2">
               {t('grid.timeline')}
             </div>
-            <div className="relative h-24 bg-zinc-100 rounded-lg overflow-hidden">
+            <div className="relative h-24 bg-zinc-100 rounded-lg overflow-hidden cursor-pointer" onClick={handleMiniClick}>
               {/* Era band backgrounds for visual context */}
               {[
                 { band: ERA_BANDS[0], start: minYear, end: ERA_BOUNDARY_YEARS[0] },
