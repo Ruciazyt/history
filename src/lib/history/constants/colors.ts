@@ -1702,6 +1702,7 @@ export const QUIZ_COLORS = {
   score: {
     badge: 'bg-amber-100 text-amber-700',
   },
+  typeBadge: 'bg-amber-50 text-amber-600 border-amber-200',
 } as const;
 
 // Era band colors for EurasianGrid

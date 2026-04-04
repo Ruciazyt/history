@@ -204,7 +204,7 @@ export function QuizClient({ events, locale }: { events: Event[]; locale?: strin
             <div className={`rounded-xl border ${QUIZ_COLORS.card.border} ${QUIZ_COLORS.card.shadow} p-6 ${QUIZ_COLORS.card.bg}`}>
               {/* Question type badge */}
               <div className="mb-3">
-                <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-600 border border-amber-200`}>
+                <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${QUIZ_COLORS.typeBadge}`}>
                   {t(`quiz.type.${currentQ.type}`)}
                 </span>
               </div>
