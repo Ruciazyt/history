@@ -6,14 +6,22 @@ import { eurasianBoundaries, eastAsiaBoundaries, getWorldEraBounds, getActiveBou
 import { formatYear } from '@/lib/history/utils';
 import { HISTORY_APP_COLORS, ERA_BAND_COLORS } from '@/lib/history/constants';
 
-/** Returns a high-contrast text color for tooltip backgrounds: #fff for dark, #111 for light */
+/** Returns a high-contrast text color for tooltip backgrounds: #fff for dark, #111 for light.
+ *  Uses WCAG-compliant gamma correction for accurate relative luminance calculation. */
+function srgbToLinear(c: number): number {
+  // Convert sRGB [0,255] channel to linear light value
+  const s = c / 255;
+  return s <= 0.04045 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+}
+
 function getTooltipTextColor(hex: string): string {
-  const r = parseInt(hex.slice(1, 3), 16) / 255;
-  const g = parseInt(hex.slice(3, 5), 16) / 255;
-  const b = parseInt(hex.slice(5, 7), 16) / 255;
-  // Relative luminance (sRGB)
+  const r = srgbToLinear(parseInt(hex.slice(1, 3), 16));
+  const g = srgbToLinear(parseInt(hex.slice(3, 5), 16));
+  const b = srgbToLinear(parseInt(hex.slice(5, 7), 16));
+  // Relative luminance (linear sRGB, D65 illuminant)
   const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  return lum > 0.35 ? '#111827' : '#ffffff';
+  // WCAG-compliant threshold (0.179) for optimal readability across all empire colors
+  return lum > 0.179 ? '#111827' : '#ffffff';
 }
 
 type GridMode = 'eurasian' | 'east-asia';
