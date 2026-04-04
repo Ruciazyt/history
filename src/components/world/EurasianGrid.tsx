@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { eurasianBoundaries, eastAsiaBoundaries, getWorldEraBounds, getActiveBoundaries, type WorldBoundary } from '@/lib/history/data/worldBoundaries';
 import { formatYear } from '@/lib/history/utils';
-import { HISTORY_APP_COLORS } from '@/lib/history/constants';
+import { HISTORY_APP_COLORS, ERA_BAND_COLORS } from '@/lib/history/constants';
 
 /** Returns a high-contrast text color for tooltip backgrounds: #fff for dark, #111 for light */
 function getTooltipTextColor(hex: string): string {
@@ -72,9 +72,9 @@ interface EraBandDef {
 }
 
 export const ERA_BANDS: EraBandDef[] = [
-  { labelKey: 'grid.eraBand.ancient',      shortLabelKey: 'grid.eraBand.ancient_short',      bgClass: 'bg-amber-50/70',   badgeClass: 'bg-amber-100/80 text-amber-700' },
-  { labelKey: 'grid.eraBand.medieval',     shortLabelKey: 'grid.eraBand.medieval_short',     bgClass: 'bg-stone-50/60',   badgeClass: 'bg-stone-200/80 text-stone-700' },
-  { labelKey: 'grid.eraBand.earlyModern',  shortLabelKey: 'grid.eraBand.earlyModern_short',  bgClass: 'bg-blue-50/50',   badgeClass: 'bg-blue-100/80 text-blue-700' },
+  { labelKey: 'grid.eraBand.ancient',      shortLabelKey: 'grid.eraBand.ancient_short',      bgClass: ERA_BAND_COLORS.ancient.bg,      badgeClass: ERA_BAND_COLORS.ancient.badge },
+  { labelKey: 'grid.eraBand.medieval',     shortLabelKey: 'grid.eraBand.medieval_short',     bgClass: ERA_BAND_COLORS.medieval.bg,     badgeClass: ERA_BAND_COLORS.medieval.badge },
+  { labelKey: 'grid.eraBand.earlyModern',  shortLabelKey: 'grid.eraBand.earlyModern_short',   bgClass: ERA_BAND_COLORS.earlyModern.bg,  badgeClass: ERA_BAND_COLORS.earlyModern.badge },
 ];
 
 /** Era band boundary years (chronological order)

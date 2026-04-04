@@ -1703,3 +1703,19 @@ export const QUIZ_COLORS = {
     badge: 'bg-amber-100 text-amber-700',
   },
 } as const;
+
+// Era band colors for EurasianGrid
+export const ERA_BAND_COLORS = {
+  ancient: {
+    bg: 'bg-amber-50/70',
+    badge: 'bg-amber-100/80 text-amber-700',
+  },
+  medieval: {
+    bg: 'bg-stone-50/60',
+    badge: 'bg-stone-200/80 text-stone-700',
+  },
+  earlyModern: {
+    bg: 'bg-blue-50/50',
+    badge: 'bg-blue-100/80 text-blue-700',
+  },
+} as const;
