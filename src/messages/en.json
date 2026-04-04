@@ -2648,5 +2648,14 @@
   "rulerHighlight.wc-me-sargon": "Sargon — founded world first empire; united Mesopotamia",
   "ruler.wc-pe-shah-abbas": "Shah Abbas I",
   "rulerBio.wc-pe-shah-abbas": "Greatest Safavid ruler (r. 1588–1629). Reformed the military, moved the capital to Isfahan, expanded trade with Europe, and created a cultural golden age. His reign marked the zenith of Safavid power and Persian art and architecture.",
-  "rulerHighlight.wc-pe-shah-abbas": "Shah Abbas I — reformed the military; built Isfahan; zenith of Safavid power"
+  "rulerHighlight.wc-pe-shah-abbas": "Shah Abbas I — reformed the military; built Isfahan; zenith of Safavid power",
+  "ruler.ea-jp-ashikaga": "Ashikaga Takauji",
+  "ruler.ea-jp-kanmu": "Emperor Kanmu",
+  "ruler.ea-jp-tokugawa": "Tokugawa Ieyasu",
+  "rulerBio.ea-jp-ashikaga": "Founder of the Muromachi shogunate (1336). Established the Ashikaga clan dominance over the Japanese imperial court. The Nanboku-chō period of civil war began under his rule.",
+  "rulerBio.ea-jp-kanmu": "Seventh century Emperor who moved the capital to Kyoto and launched failed invasions of Ainu territories. Founded the Heian period (794).",
+  "rulerBio.ea-jp-tokugawa": "Founder of the Edo shogunate (1603). United Japan after the Sengoku period. The Tokugawa bakufu ruled for 250 years of peace until 1868.",
+  "rulerHighlight.ea-jp-ashikaga": "Muromachi Shogunate Founder",
+  "rulerHighlight.ea-jp-kanmu": "Founded Heian Period",
+  "rulerHighlight.ea-jp-tokugawa": "Founded Edo Shogunate"
 }

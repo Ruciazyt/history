@@ -2648,5 +2648,14 @@
   "rulerHighlight.wc-me-sargon": "サルゴン — 世界初の帝国建設者",
   "ruler.wc-pe-shah-abbas": "シャー・アッバース1世",
   "rulerBio.wc-pe-shah-abbas": "サファヴィー朝最大の君主（在位1588年–1629年）。軍事を改革し、首都をイスファハンに移し、ヨーロッパとの貿易を拡大し、文化的黄金時代を築いた。彼の治世はサファヴィー朝の権勢とペルシアの芸術・建築の頂点を示した。",
-  "rulerHighlight.wc-pe-shah-abbas": "シャー・アッバース1世 — 軍事改革；イスファハン建設；サファヴィー朝の頂点"
+  "rulerHighlight.wc-pe-shah-abbas": "シャー・アッバース1世 — 軍事改革；イスファハン建設；サファヴィー朝の頂点",
+  "ruler.ea-jp-ashikaga": "足利尊氏",
+  "ruler.ea-jp-kanmu": "桓武天皇",
+  "ruler.ea-jp-tokugawa": "徳川家康",
+  "rulerBio.ea-jp-ashikaga": "室町幕府の創始者（1336年）。建武の新政を裏切り、足利氏天下の基盤を築いた。南北朝の動乱を引き起こす。",
+  "rulerBio.ea-jp-kanmu": "794年に平安京に遷都し、平安時代を開いた天皇。蝦夷征伐を試みるも失敗。",
+  "rulerBio.ea-jp-tokugawa": "江戸幕府の創始者（1603年）。関ヶ原の合戦で天下分け目の戦いを行い、260年の泰平の世を築いた。",
+  "rulerHighlight.ea-jp-ashikaga": "室町幕府創始者",
+  "rulerHighlight.ea-jp-kanmu": "平安時代創始",
+  "rulerHighlight.ea-jp-tokugawa": "江戸幕府創始者"
 }
