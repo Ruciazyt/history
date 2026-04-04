@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 import { locales, type Locale } from '@/i18n/routing';
 import { Shell } from '@/components/Shell';
@@ -15,6 +16,14 @@ const localeDescriptions: Record<string, string> = {
   en: 'My favorites - Save historical events and battles you are interested in',
   ja: 'お気に入り - 興味がある歴史的出来事や戦いを保存',
 };
+
+function FavoritesLoading() {
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="animate-spin w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full" />
+    </div>
+  );
+}
 
 export async function generateMetadata({
   params,
@@ -47,5 +56,9 @@ export default async function FavoritesPage({
 
   const messages = (await import(`../../../messages/${locale}.json`)).default;
 
-  return <Shell messages={messages} />;
+  return (
+    <Suspense fallback={<FavoritesLoading />}>
+      <Shell messages={messages} />
+    </Suspense>
+  );
 }

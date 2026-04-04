@@ -1,9 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
 
 import { locales, type Locale } from '@/i18n/routing';
 
@@ -18,13 +17,14 @@ function stripLocale(pathname: string) {
 
 export function LocaleSwitcher() {
   const locale = useLocale() as Locale;
-  const t = useTranslations('locale');
+  const tLocale = useTranslations('locale');
+  const tUi = useTranslations('ui');
   const router = useRouter();
   const pathname = usePathname();
 
   return (
     <label className="inline-flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-      <span className="sr-only">{t('ui.language')}</span>
+      <span className="sr-only">{tUi('language')}</span>
       <select
         value={locale}
         onChange={(e) => {
@@ -37,7 +37,7 @@ export function LocaleSwitcher() {
       >
         {locales.map((l) => (
           <option key={l} value={l}>
-            {t(l)}
+            {tLocale(l)}
           </option>
         ))}
       </select>

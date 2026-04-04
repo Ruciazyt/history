@@ -27,6 +27,7 @@ export function BattlesClient({
   locale?: string;
 }) {
   const t = useTranslations('battlesClient');
+  const tRoot = useTranslations(); // root translator for era/root-level keys like 'era.westernZhou'
   const tUi = useTranslations('ui');
   const { favoritesCount } = useBattleFavorites();
   
@@ -43,8 +44,8 @@ export function BattlesClient({
   
   // Battle count by era
   const battleCountByEra = React.useMemo(() => 
-    getBattleCountByEra(battles, eras, t), 
-  [battles, eras, t]);
+    getBattleCountByEra(battles, eras, tRoot), 
+  [battles, eras, tRoot]);
   
   // Group battles by era ID (not localized name — locale-independent keying)
   const battlesByEra = React.useMemo(() => {
@@ -66,10 +67,10 @@ export function BattlesClient({
       const era = eras.find((e) => e.id === eraId);
       return {
         id: eraId,
-        name: era ? t(era.nameKey) : eraId,
+        name: era ? tRoot(era.nameKey) : eraId,
       };
     });
-  }, [battlesByEra, eras, t]);
+  }, [battlesByEra, eras, tRoot]);
 
   const [selectedEraId, setSelectedEraId] = React.useState<string | null>(null);
   const [viewMode, setViewMode] = React.useState<'grid' | 'timeline'>('grid');
