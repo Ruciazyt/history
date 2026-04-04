@@ -72,19 +72,20 @@ export const SearchBox = React.memo(function SearchBox({ events, rulers, locale 
       }
     }
 
-    // Search events — match raw key or translated title
+    // Search events — classify as battle if it has battle field, otherwise as event
     for (const event of events) {
       const translatedTitle = t(event.titleKey);
       const rawTitle = event.titleKey.replace('event.', '').replace('.title', '');
-      const isWar = event.tags?.includes('war');
+      // Use event.battle presence to accurately distinguish battles from events
+      const isBattle = !!event.battle;
 
       if (rawTitle.includes(q) || translatedTitle.includes(q) || event.id.includes(q)) {
         searchResults.push({
-          type: isWar ? 'battle' : 'event',
+          type: isBattle ? 'battle' : 'event',
           id: event.id,
           titleKey: event.titleKey,
           title: translatedTitle,
-          subtitle: isWar ? `⚔️ ${t('nav.battles')}` : `📅 ${t('ui.events')}`,
+          subtitle: isBattle ? `⚔️ ${t('nav.battles')}` : `📅 ${t('ui.events')}`,
           year: event.year,
         });
       }
