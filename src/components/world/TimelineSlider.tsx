@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { formatYear } from '@/lib/history/utils';
+import { useDarkMode } from '@/lib/history/hooks/useDarkMode';
 
 interface TimelineSliderProps {
   year: number;
@@ -22,6 +23,21 @@ export function TimelineSlider({
 }: TimelineSliderProps) {
   const [_isDragging, setIsDragging] = React.useState(false);
   const sliderRef = React.useRef<HTMLDivElement>(null);
+  const isDark = useDarkMode();
+
+  // Theme-aware color classes
+  const colors = React.useMemo(() => ({
+    container: isDark
+      ? 'bg-zinc-900/95 border-zinc-700'
+      : 'bg-white/95 border-zinc-200',
+    yearDisplay: isDark ? 'text-white' : 'text-zinc-900',
+    activeCountText: isDark ? 'text-zinc-400' : 'text-zinc-500',
+    track: isDark ? 'bg-zinc-700' : 'bg-zinc-200',
+    centuryMark: isDark ? 'bg-zinc-600' : 'bg-zinc-300',
+    thumbOuter: isDark ? 'bg-white' : 'bg-white',
+    thumbInner: isDark ? 'bg-blue-400' : 'bg-blue-500',
+    tickLabel: isDark ? 'text-zinc-500' : 'text-zinc-400',
+  }), [isDark]);
 
   // 使用 ref 存储最新值，避免闭包问题
   const stateRef = React.useRef({ year, minYear, maxYear, onYearChange });
@@ -99,13 +115,13 @@ export function TimelineSlider({
   }, []);
 
   return (
-    <div className="bg-zinc-900/95 backdrop-blur-sm border-t border-zinc-700 px-4 py-3">
+    <div className={`backdrop-blur-sm border-t px-4 py-3 ${colors.container}`}>
       <div className="flex items-center justify-between mb-2">
         {/* Mobile: larger year display for easier reading */}
-        <span className="text-xl sm:text-lg font-bold text-white min-w-[80px]">{displayYear}</span>
+        <span className={`text-xl sm:text-lg font-bold min-w-[80px] ${colors.yearDisplay}`}>{displayYear}</span>
         <div className="flex items-center gap-2">
           {activeEmpires.length > 0 && (
-            <span className="text-xs text-zinc-400">
+            <span className={`text-xs ${colors.activeCountText}`}>
               {activeEmpires.length} {t('empires.active')}
             </span>
           )}
@@ -130,7 +146,7 @@ export function TimelineSlider({
         onKeyDown={handleKeyDown}
       >
         {/* 轨道背景 - mobile: taller track */}
-        <div className="absolute top-1/2 left-0 right-0 h-2 sm:h-2 bg-zinc-700 rounded-full -translate-y-1/2 touch-none">
+        <div className={`absolute top-1/2 left-0 right-0 h-2 sm:h-2 rounded-full -translate-y-1/2 touch-none ${colors.track}`}>
           {/* 世纪标记 */}
           {Array.from({ length: Math.ceil((maxYear - minYear) / 100) + 1 }).map((_, i) => {
             const centuryYear = Math.ceil(minYear / 100) * 100 + i * 100;
@@ -139,7 +155,7 @@ export function TimelineSlider({
             return (
               <div
                 key={centuryYear}
-                className="absolute top-0 w-px h-full bg-zinc-600"
+                className={`absolute top-0 w-px h-full ${colors.centuryMark}`}
                 style={{ left: `${pos}%` }}
               />
             );
@@ -148,21 +164,21 @@ export function TimelineSlider({
 
         {/* 已选择区域 */}
         <div
-          className="absolute top-1/2 left-0 h-2 sm:h-2 bg-blue-500 rounded-full -translate-y-1/2 touch-none"
+          className={`absolute top-1/2 left-0 h-2 sm:h-2 bg-blue-500 rounded-full -translate-y-1/2 touch-none`}
           style={{ width: `${positionPercent}%` }}
         />
 
         {/* 滑块把手 - mobile: larger thumb */}
         <div
-          className="absolute top-1/2 w-6 h-6 sm:w-5 sm:h-5 bg-white rounded-full shadow-lg -translate-y-1/2 -translate-x-1/2 transition-transform hover:scale-110 active:scale-125 touch-none"
+          className={`absolute top-1/2 w-6 h-6 sm:w-5 sm:h-5 rounded-full shadow-lg -translate-y-1/2 -translate-x-1/2 transition-transform hover:scale-110 active:scale-125 touch-none ${colors.thumbOuter}`}
           style={{ left: `${positionPercent}%` }}
         >
-          <div className="absolute inset-1 bg-blue-500 rounded-full" />
+          <div className={`absolute inset-1 rounded-full ${colors.thumbInner}`} />
         </div>
       </div>
 
       {/* 年份刻度标签 - mobile: show start/end years */}
-      <div className="flex justify-between mt-1 text-xs text-zinc-500">
+      <div className={`flex justify-between mt-1 text-xs ${colors.tickLabel}`}>
         <span>{formatYear(minYear)}</span>
         <span className="sm:hidden">{formatYear(Math.floor((minYear + maxYear) / 2))}</span>
         <span>{formatYear(maxYear)}</span>
