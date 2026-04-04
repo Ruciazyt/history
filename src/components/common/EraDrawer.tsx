@@ -111,7 +111,7 @@ export const EraDrawer = React.memo(function EraDrawer({
                         <span className="text-xs ml-1 text-zinc-400 dark:text-zinc-500">{t('ui.parallelPolities')}</span>
                       )}
                     </span>
-                    <span className="text-xs text-zinc-400">
+                    <span className="text-xs text-zinc-400 dark:text-zinc-500">
                       {formatYear(era.startYear, locale)}–{formatYear(era.endYear, locale)}
                     </span>
                     {/* Chevron icon — consistent with SVG style */}
@@ -125,7 +125,7 @@ export const EraDrawer = React.memo(function EraDrawer({
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className={`shrink-0 text-zinc-400 transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`}
+                      className={`shrink-0 text-zinc-400 dark:text-zinc-500 transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`}
                       aria-hidden="true"
                     >
                       <polyline points="9 18 15 12 9 6" />
@@ -233,7 +233,7 @@ export const EraDrawer = React.memo(function EraDrawer({
                                   </>
                                 )}
                               </span>
-                              <span className="shrink-0 text-xs text-zinc-400">
+                              <span className="shrink-0 text-xs text-zinc-400 dark:text-zinc-500">
                                 {formatYear(r.startYear, locale)}–{formatYear(r.endYear, locale)}
                               </span>
                             </button>
