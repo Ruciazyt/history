@@ -62,8 +62,8 @@ const SOUTHEAST_ASIA_NAMES = new Set(['室利佛逝帝国', '朱罗帝国']);
 const WEST_NAMES = new Set(['罗马', '拜占庭', '奥斯曼', '波斯', '阿契美尼德', '帕提亚', '萨珊', '萨法维', '亚历山大', '帖木儿', '阿拔斯', '倭马亚', '古埃及', '托勒密埃及', '亚述', '巴比伦', '古巴比伦', '阿卡德', '赫梯']);
 // Extended matches: prefixes for boundary names that have additional suffixes
 const CHINA_NAMESMatches = ['周', '春秋', '战国', '蜀', '吴', '晋', '隋', '南北朝', '五代', '三国', '西周', '东周'];
-const KOREA_NAMESMatches: string[] = ['新罗', '高句麗', '百济', '高句', '百濟'];
-const JAPAN_NAMESMatches: string[] = [];
+const KOREA_NAMESMatches = ['新罗', '高句麗', '百济', '高句', '百濟'];
+const JAPAN_NAMESMatches = ['大和', '鎌倉', '平安', '江户', '飞鸟', '室町', '绳文', '弥生', '奈良', '明治'];
 const VIETNAM_NAMESMatches: string[] = ['丁', '前黎', '陳', '后黎'];
 const CENTRAL_ASIA_NAMESMatches: string[] = ['贵霜', '笈多', '希腊-巴克特里亚', '萨塔瓦哈纳', '印度'];
 const SOUTHEAST_ASIA_NAMESMatches: string[] = ['室利佛逝', '朱罗'];
