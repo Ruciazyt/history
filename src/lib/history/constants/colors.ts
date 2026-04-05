@@ -39,7 +39,7 @@ export const ERA_COLORS: Record<string, { bg: string; text: string; dot: string;
     text: 'text-purple-700', 
     dot: 'bg-purple-500',
     gradient: 'from-purple-50 to-red-50',
-    border: 'border-red-200',
+    border: 'border-purple-200',
   },
   'qin': { 
     bg: 'bg-zinc-100', 

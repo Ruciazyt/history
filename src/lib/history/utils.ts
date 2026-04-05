@@ -152,20 +152,12 @@ export function arraysEqual<T>(a: T[], b: T[]): boolean {
 export function toOrdinal(n: number): string {
   const s = ['th', 'st', 'nd', 'rd'] as const;
   const v = n % 100;
-  let suffix: string = s[0]; // default to 'th'
   // Numbers ending in 11, 12, 13 always use 'th'
-  if (v >= 11 && v <= 13) {
-    suffix = s[0];
-  } else {
-    // For other numbers, use v % 10 to determine suffix
-    const idx = (v % 10);
-    if (idx >= 1 && idx <= 3 && idx !== 0) {
-      suffix = s[idx] ?? s[0];
-    } else {
-      suffix = s[0];
-    }
-  }
-  return n + suffix;
+  if (v >= 11 && v <= 13) return n + s[0];
+  const idx = v % 10;
+  // 1→st, 2→nd, 3→rd, everything else→th
+  if (idx >= 1 && idx <= 3) return n + (s[idx] ?? s[0]);
+  return n + s[0];
 }
 
 /**
