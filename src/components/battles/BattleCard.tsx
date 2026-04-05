@@ -4,7 +4,7 @@ import * as React from 'react';
 import type { Event } from '@/lib/history/types';
 import { formatYear } from '@/lib/history/utils';
 import { getBattleResultLabel, getBattleImpactLabel, getBattleTypeName } from '@/lib/history/battles';
-import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, BATTLE_SCALE_COLORS, BATTLE_TYPE_COLORS, ERA_COLORS, ERA_COLORS_DARK, COMMANDER_COLORS, SELECTION_COLORS, BATTLE_CARD_COLORS, FAVORITE_BUTTON_COLORS, PACING_BADGE_COLORS, TIME_OF_DAY_COLORS } from '@/lib/history/constants';
+import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, BATTLE_SCALE_COLORS, BATTLE_TYPE_COLORS, ERA_COLORS, ERA_COLORS_DARK, SELECTION_COLORS, BATTLE_CARD_COLORS, FAVORITE_BUTTON_COLORS, PACING_BADGE_COLORS, TIME_OF_DAY_COLORS } from '@/lib/history/constants';
 import { getPacingLabel, getTimeOfDayLabel } from '@/lib/history/battlePacing';
 import { useTranslations } from 'next-intl';
 import { BattleDetail } from './BattleDetail';
@@ -54,6 +54,19 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
 
   // 结果颜色 - use constants
   const resultBg = battleResult ? BATTLE_RESULT_COLORS[battleResult]?.bg : BATTLE_CARD_COLORS.result.default;
+
+  // Dark-mode-aware commander badge colors — hardcoded light-mode colors (bg-red-50,
+  // bg-blue-50) are nearly invisible on dark backgrounds, so provide dark variants.
+  const commanderBadge = React.useMemo(() => ({
+    attacker: {
+      bg: isDark ? 'bg-red-900/60' : 'bg-red-50',
+      text: isDark ? 'text-red-300' : 'text-red-600',
+    },
+    defender: {
+      bg: isDark ? 'bg-blue-900/60' : 'bg-blue-50',
+      text: isDark ? 'text-blue-300' : 'text-blue-600',
+    },
+  }), [isDark]);
 
   // Handle keyboard navigation
   const handleKeyDown = React.useCallback((e: React.KeyboardEvent) => {
@@ -151,12 +164,12 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
           {battle.battle?.commanders && (
             <div className="mt-2 flex flex-wrap gap-1">
               {battle.battle.commanders.attacker?.slice(0, 2).map((cmd, i) => (
-                <span key={`att-${i}`} className={`inline-flex items-center px-2 py-0.5 ${COMMANDER_COLORS.attacker.bg} ${COMMANDER_COLORS.attacker.text} text-xs rounded`}>
+                <span key={`att-${i}`} className={`inline-flex items-center px-2 py-0.5 ${commanderBadge.attacker.bg} ${commanderBadge.attacker.text} text-xs rounded`}>
                   👤 {cmd}
                 </span>
               ))}
               {battle.battle.commanders.defender?.slice(0, 2).map((cmd, i) => (
-                <span key={`def-${i}`} className={`inline-flex items-center px-2 py-0.5 ${COMMANDER_COLORS.defender.bg} ${COMMANDER_COLORS.defender.text} text-xs rounded`}>
+                <span key={`def-${i}`} className={`inline-flex items-center px-2 py-0.5 ${commanderBadge.defender.bg} ${commanderBadge.defender.text} text-xs rounded`}>
                   👤 {cmd}
                 </span>
               ))}
