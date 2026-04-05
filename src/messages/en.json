@@ -2978,5 +2978,9 @@
   "ruler.wc-is-mughal-dyn": "Mughal Dynasty",
   "rulerHighlight.ea-jp-ashikaga": "Founded the Muromachi Shogunate",
   "rulerHighlight.ea-jp-kanmu": "Moved capital to Heian-kyō (Kyoto)",
-  "rulerHighlight.wc-is-aurangzeb": "Expanded Mughal Empire to its greatest extent"
+  "rulerHighlight.wc-is-aurangzeb": "Expanded Mughal Empire to its greatest extent",
+  "rulerBio.ea-jp-ashikaga": "1336–1358 CE. Ashikaga Takauji; first shogun of the Muromachi Shogunate; suppressed the Kenmu Restoration; established warrior government in Kyoto.",
+  "rulerBio.ea-jp-kanmu": "781–806 CE. Emperor Kanmu; moved the capital from Nara to Heian-kyō (Kyoto); launched failed expeditions against the Emishi; patron of the Rebuilding of Tōdai-ji.",
+  "rulerBio.wc-is-aurangzeb": "1658–1707 CE. Sixth Mughal Emperor; expanded empire to its greatest territorial extent; imposed strict Sharia law; long reign marked by military campaigns and religious tensions.",
+  "rulerBio.wc-is-mughal-dyn": "1526–1857 CE. Mughal dynasty ruling the Indian subcontinent; founded by Babur after the Delhi Sultanate; peak under Akbar, Jahangir, and Shah Jahan; declined under later rulers."
 }
