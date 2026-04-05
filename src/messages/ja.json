@@ -705,10 +705,28 @@
     "defenderWin": "防守側勝利",
     "draw": "引分"
   },
+  "strategies": {
+    "title": "戦略データベース",
+    "description": "中国古代の戦闘戦術分析 - 伏撃、火攻、水攻などの使用統計と代表戦闘",
+    "overview": "概要",
+    "uniqueStrategies": "独特な戦略",
+    "battlesWithStrategy": "戦略を持つ戦い",
+    "mostUsed": "最も使用",
+    "mostEffective": "最も効果的",
+    "attackerFavoring": "攻撃有利",
+    "defenderFavoring": "防衛有利",
+    "allStrategies": "すべての戦略",
+    "usage": "使用回数",
+    "attackerWins": "攻撃側勝利",
+    "defenderWins": "防衛側勝利",
+    "winRate": "攻撃側勝率",
+    "representativeBattles": "代表戦闘"
+  },
   "nav": {
     "battles": "戦い",
     "commanders": "指揮官ネットワーク",
-    "favorites": "お気に入り"
+    "favorites": "お気に入り",
+    "strategies": "戦略データベース"
   },
   "onThisDay": {
     "title": "歴史上の今日",
@@ -2556,7 +2574,8 @@
     "compareMode": "比較モード",
     "gridView": "グリッド表示",
     "timelineView": "タイムライン表示",
-    "favorites": "お気に入り"
+    "favorites": "お気に入り",
+    "strategies": "戦略データベース"
   },
   "world": {
     "title": "ユーラシア比較",
