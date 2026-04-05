@@ -256,6 +256,9 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
     return yearToY(currentYear, minYear, maxYear, 96);
   }, [currentYear, minYear, maxYear]);
 
+
+  // Current era band index for the displayed year
+  const currentEraBandIdx = React.useMemo(() => getEraBandIndex(currentYear), [currentYear]);
   const handleYearClick = React.useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const y = e.clientY - rect.top;
@@ -449,6 +452,12 @@ export function EurasianGrid({ initialMode = 'eurasian' }: EurasianGridProps) {
                   className="absolute left-0 right-0 h-0.5 bg-red-500 z-10"
                   style={{ top: currentYearLineY }}
                 >
+                  {/* Era badge showing current era band */}
+                  <span
+                    className={`absolute -left-1 -top-5 px-1 py-0.5 rounded text-[9px] font-bold whitespace-nowrap shadow-sm z-20 ${ERA_BANDS[currentEraBandIdx]?.badgeClass ?? ''}`}
+                  >
+                    {t(ERA_BANDS[currentEraBandIdx]?.shortLabelKey ?? '')}
+                  </span>
                   <div className="absolute -left-1 -top-1.5 w-2 h-2 bg-red-500 rounded-full" />
                 </div>
               </div>
