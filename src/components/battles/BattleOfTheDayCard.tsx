@@ -7,15 +7,31 @@ import { getBattleOfTheDay, getSameEraBattles } from '@/lib/history/battles';
 import { formatYear } from '@/lib/history/utils';
 import { getBattleResultLabel, getBattleImpactLabel, getBattleTypeName } from '@/lib/history/battles';
 import { getPacingLabel, getTimeOfDayLabel } from '@/lib/history/battlePacing';
-import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, ERA_COLORS, BATTLE_CARD_COLORS, BATTLE_OF_THE_DAY_COLORS, COMMANDER_COLORS, BATTLE_TYPE_COLORS, BATTLE_SCALE_COLORS, PACING_BADGE_COLORS, TIME_OF_DAY_COLORS } from '@/lib/history/constants';
+import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, ERA_COLORS, ERA_COLORS_DARK, BATTLE_CARD_COLORS, BATTLE_OF_THE_DAY_COLORS, BATTLE_TYPE_COLORS, BATTLE_SCALE_COLORS, PACING_BADGE_COLORS, TIME_OF_DAY_COLORS } from '@/lib/history/constants';
 import { useTranslations, useLocale } from 'next-intl';
 import { BattleDetail } from './BattleDetail';
+import { useDarkMode } from '@/lib/history/hooks/useDarkMode';
 
 interface BattleOfTheDayCardProps {
   events: Event[];
 }
 
-function getEraStyles(entityId: string): { gradient: string; border: string; text: string } {
+function getEraStyles(entityId: string, isDark: boolean): { gradient: string; border: string; text: string } {
+  if (isDark) {
+    const darkColor = ERA_COLORS_DARK[entityId];
+    if (darkColor) {
+      return {
+        gradient: darkColor.gradient,
+        border: darkColor.border,
+        text: 'text-zinc-100',
+      };
+    }
+    return {
+      gradient: 'from-zinc-800 to-zinc-900',
+      border: 'border-zinc-600',
+      text: 'text-zinc-100',
+    };
+  }
   const eraColor = ERA_COLORS[entityId];
   return {
     gradient: eraColor?.gradient || BATTLE_CARD_COLORS.fallback.gradient,
@@ -29,6 +45,7 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
   const locale = useLocale();
   const [showDetail, setShowDetail] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
+  const isDark = useDarkMode();
 
   const battle = React.useMemo(() => getBattleOfTheDay(events), [events]);
   const sameEraBattles = React.useMemo(
@@ -36,9 +53,22 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
     [events, battle]
   );
 
+  // Dark-mode-aware commander badge colors — hardcoded light-mode colors (bg-red-50,
+  // bg-blue-50) are nearly invisible on dark backgrounds, so provide dark variants.
+  const commanderBadge = React.useMemo(() => ({
+    attacker: {
+      bg: isDark ? 'bg-red-900/60' : 'bg-red-50',
+      text: isDark ? 'text-red-300' : 'text-red-600',
+    },
+    defender: {
+      bg: isDark ? 'bg-blue-900/60' : 'bg-blue-50',
+      text: isDark ? 'text-blue-300' : 'text-blue-600',
+    },
+  }), [isDark]);
+
   if (!battle) return null;
 
-  const { gradient: eraGradient, border: eraBorder, text: eraText } = getEraStyles(battle.entityId);
+  const { gradient: eraGradient, border: eraBorder, text: eraText } = getEraStyles(battle.entityId, isDark);
   const battleResult = battle.battle?.result;
   const resultBg = battleResult ? BATTLE_RESULT_COLORS[battleResult]?.bg : BATTLE_CARD_COLORS.result.default;
   const resultText = battleResult ? BATTLE_RESULT_COLORS[battleResult]?.text : 'text-zinc-700';
@@ -109,12 +139,12 @@ export const BattleOfTheDayCard = React.memo(function BattleOfTheDayCard({ event
         {battle.battle?.commanders && (
           <div className="flex flex-wrap gap-1 mb-3">
             {battle.battle.commanders.attacker?.slice(0, 2).map((cmd, i) => (
-              <span key={`att-${i}`} className={`inline-flex items-center px-2 py-0.5 ${COMMANDER_COLORS.attacker.bg} ${COMMANDER_COLORS.attacker.text} text-xs rounded`}>
+              <span key={`att-${i}`} className={`inline-flex items-center px-2 py-0.5 ${commanderBadge.attacker.bg} ${commanderBadge.attacker.text} text-xs rounded`}>
                 👤 {cmd}
               </span>
             ))}
             {battle.battle.commanders.defender?.slice(0, 2).map((cmd, i) => (
-              <span key={`def-${i}`} className={`inline-flex items-center px-2 py-0.5 ${COMMANDER_COLORS.defender.bg} ${COMMANDER_COLORS.defender.text} text-xs rounded`}>
+              <span key={`def-${i}`} className={`inline-flex items-center px-2 py-0.5 ${commanderBadge.defender.bg} ${commanderBadge.defender.text} text-xs rounded`}>
                 👤 {cmd}
               </span>
             ))}
