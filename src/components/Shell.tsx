@@ -17,6 +17,7 @@ import { MatrixClient } from '@/components/matrix/MatrixClient';
 import { EurasianGrid } from '@/components/world/EurasianGrid';
 import { PlaceNameEvolution } from '@/components/world/PlaceNameEvolution';
 import { LocationClient } from '@/components/location/LocationClient';
+import { StrategiesClient } from '@/components/strategies/StrategiesClient';
 
 import { CHINA_ERAS } from '@/lib/history/data/chinaEras';
 import { CHINA_EVENTS } from '@/lib/history/data/chinaEvents';
@@ -117,6 +118,10 @@ export function Shell({ messages, children, minYear, maxYear, eras }: ShellProps
 
     if (matchPath(pathname, locale, '/location')) {
       return <LocationClient locale={locale} />;
+    }
+
+    if (matchPath(pathname, locale, '/strategies')) {
+      return <StrategiesClient events={CHINA_EVENTS} locale={locale} />;
     }
 
     return null;

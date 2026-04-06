@@ -1687,10 +1687,28 @@
     "han-state": "韩",
     "yan": "燕"
   },
+  "strategies": {
+    "title": "策略知识库",
+    "description": "中国古代战术策略分析 - 伏击、火攻、水攻等战术的使用统计与代表战役",
+    "overview": "概览",
+    "uniqueStrategies": "战术种类",
+    "battlesWithStrategy": "有战术记录的战役",
+    "mostUsed": "最常用战术",
+    "mostEffective": "最高胜率战术",
+    "attackerFavoring": "有利于进攻方",
+    "defenderFavoring": "有利于防守方",
+    "allStrategies": "所有战术",
+    "usage": "使用次数",
+    "attackerWins": "进攻方胜",
+    "defenderWins": "防守方胜",
+    "winRate": "进攻方胜率",
+    "representativeBattles": "代表战役"
+  },
   "nav": {
     "battles": "战役",
     "commanders": "指挥官网络",
-    "favorites": "收藏"
+    "favorites": "收藏",
+    "strategies": "策略知识库"
   },
   "favorites": {
     "title": "收藏夹",
@@ -2619,7 +2637,8 @@
       "battles": "战役"
     },
     "ui": {
-      "back": "返回"
+      "back": "返回",
+      "strategies": "策略知识库"
     },
     "battleDetail": {
       "casualtyStats": "伤亡统计",

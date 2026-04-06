@@ -705,10 +705,28 @@
     "defenderWin": "Defender wins",
     "draw": "Draw"
   },
+  "strategies": {
+    "title": "Strategy Encyclopedia",
+    "description": "Ancient Chinese battle tactics analysis - usage statistics and representative battles for ambush, fire attack, water attack and more",
+    "overview": "Overview",
+    "uniqueStrategies": "Unique Strategies",
+    "battlesWithStrategy": "Battles with Strategy",
+    "mostUsed": "Most Used",
+    "mostEffective": "Most Effective",
+    "attackerFavoring": "Attacker Favoring",
+    "defenderFavoring": "Defender Favoring",
+    "allStrategies": "All Strategies",
+    "usage": "Usages",
+    "attackerWins": "Attacker Wins",
+    "defenderWins": "Defender Wins",
+    "winRate": "Attacker Win Rate",
+    "representativeBattles": "Representative Battles"
+  },
   "nav": {
     "battles": "Battles",
     "commanders": "Commander Network",
-    "favorites": "Favorites"
+    "favorites": "Favorites",
+    "strategies": "Strategy Encyclopedia"
   },
   "onThisDay": {
     "title": "On This Day",
@@ -2562,7 +2580,8 @@
     "compareMode": "Compare",
     "gridView": "Grid",
     "timelineView": "Timeline",
-    "favorites": "Favorites"
+    "favorites": "Favorites",
+    "strategies": "Strategy Encyclopedia"
   },
   "world": {
     "title": "Eurasian Timeline",
