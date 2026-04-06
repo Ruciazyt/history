@@ -1703,6 +1703,26 @@ export const QUIZ_COLORS = {
     badge: 'bg-amber-100 text-amber-700',
   },
   typeBadge: 'bg-amber-50 text-amber-600 border-amber-200',
+  difficulty: {
+    easy: {
+      selected: 'bg-green-100 border-green-400 text-green-800',
+    },
+    normal: {
+      selected: 'bg-amber-100 border-amber-400 text-amber-800',
+    },
+    hard: {
+      selected: 'bg-red-100 border-red-400 text-red-800',
+    },
+  },
+  typeSelector: {
+    selected: 'bg-amber-100 border-amber-400 text-amber-800',
+  },
+  accuracyResult: {
+    high: 'text-green-600',
+    medium: 'text-amber-600',
+    low: 'text-zinc-600',
+  },
+  divider: 'bg-zinc-200',
 } as const;
 
 // Era band colors for EurasianGrid

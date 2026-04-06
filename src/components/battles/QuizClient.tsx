@@ -101,7 +101,7 @@ export function QuizClient({ events, locale }: { events: Event[]; locale?: strin
               </svg>
               {t('ui.back')}
             </Link>
-            <div className="w-px h-5 bg-zinc-200"></div>
+            <div className={`w-px h-5 ${QUIZ_COLORS.divider}`}></div>
             <h1 className={`text-lg font-bold ${QUIZ_COLORS.title}`}>🧠 {t('quiz.title')}</h1>
           </div>
           <LocaleSwitcher />
@@ -128,7 +128,7 @@ export function QuizClient({ events, locale }: { events: Event[]; locale?: strin
                     onClick={() => setSelectedType(opt.value)}
                     className={`px-3 py-2 rounded-lg text-sm font-medium border transition-all ${
                       selectedType === opt.value
-                        ? 'bg-amber-100 border-amber-400 text-amber-800'
+                        ? QUIZ_COLORS.typeSelector.selected
                         : QUIZ_COLORS.option.default
                     }`}
                   >
@@ -150,9 +150,9 @@ export function QuizClient({ events, locale }: { events: Event[]; locale?: strin
                     onClick={() => setSelectedDifficulty(d)}
                     className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium border transition-all ${
                       selectedDifficulty === d
-                        ? d === 'easy' ? 'bg-green-100 border-green-400 text-green-800'
-                        : d === 'normal' ? 'bg-amber-100 border-amber-400 text-amber-800'
-                        : 'bg-red-100 border-red-400 text-red-800'
+                        ? d === 'easy' ? QUIZ_COLORS.difficulty.easy.selected
+                        : d === 'normal' ? QUIZ_COLORS.difficulty.normal.selected
+                        : QUIZ_COLORS.difficulty.hard.selected
                         : QUIZ_COLORS.option.default
                     }`}
                   >
@@ -273,7 +273,7 @@ export function QuizClient({ events, locale }: { events: Event[]; locale?: strin
               <h2 className={`text-2xl font-bold mb-1 ${QUIZ_COLORS.title}`}>
                 {t('quiz.result.title')}
               </h2>
-              <p className={`text-4xl font-black my-4 ${accuracy >= 80 ? 'text-green-600' : accuracy >= 60 ? 'text-amber-600' : 'text-zinc-600'}`}>
+              <p className={`text-4xl font-black my-4 ${accuracy >= 80 ? QUIZ_COLORS.accuracyResult.high : accuracy >= 60 ? QUIZ_COLORS.accuracyResult.medium : QUIZ_COLORS.accuracyResult.low}`}>
                 {accuracy}%
               </p>
               <p className={`text-sm mb-2 ${BATTLES_CLIENT_COLORS.badge.text}`}>
