@@ -61,6 +61,7 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-me-ashurbanipal', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-ashurbanipal', bioKey: 'rulerBio.wc-me-ashurbanipal', highlightKey: 'rulerHighlight.wc-me-ashurbanipal', startYear: -669, endYear: -627 },
   { id: 'wc-me-nebuchadnezzar', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-nebuchadnezzar', bioKey: 'rulerBio.wc-me-nebuchadnezzar', highlightKey: 'rulerHighlight.wc-me-nebuchadnezzar', startYear: -605, endYear: -562 },
 
+  { id: 'wc-me-hittite', eraId: 'world-comparison', polityId: 'wc-mesopotamia', nameKey: 'ruler.wc-me-hittite', bioKey: 'rulerBio.wc-me-hittite', highlightKey: 'rulerHighlight.wc-me-hittite', startYear: -1650, endYear: -1178 , isDynastyBlock: true },
 
   // ── Median Empire (Ancient Iran) ────────────────────────────────────────
   { id: 'wc-me-median', eraId: 'world-comparison', polityId: 'wc-median', nameKey: 'ruler.wc-me-median', bioKey: 'rulerBio.wc-me-median', startYear: -678, endYear: -549 , isDynastyBlock: true },
