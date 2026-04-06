@@ -2851,5 +2851,14 @@
   "ruler.wc-pe-shah-abbas": "阿巴斯一世",
   "rulerBio.wc-pe-shah-abbas": "萨法维王朝最伟大的君主（在位1588年–1629年）。改革军事，迁都伊斯法罕，扩大与欧洲的贸易，创造了文化黄金时代。他的统治标志着萨法维王朝权力和波斯艺术建筑的巅峰。",
   "rulerHighlight.wc-pe-shah-abbas": "阿巴斯一世 — 军事改革；建设伊斯法罕；萨法维王朝巅峰",
-  "polity.wc.japan": "日本"
+  "polity.wc.japan": "日本",
+  "ruler.ea-jp-ashikaga": "足利尊氏",
+  "ruler.ea-jp-kanmu": "桓武天皇",
+  "ruler.wc-me-hittite": "赫梯帝国",
+  "rulerBio.ea-jp-ashikaga": "1336–1358。足利尊氏：日本室町幕府第一代征夷大将军；终结建武式年；建立武家政权于京都。",
+  "rulerBio.ea-jp-kanmu": "781–806。桓武天皇：迁都平安京（京都）；对虾夷发动征讨；资助东大寺重建。",
+  "rulerBio.wc-me-hittite": "赫梯帝国（约公元前1650–1178年）。古代近东大国；最早使用铁器；与拉美西斯二世卡迭石之战（公元前1274年）；签订已知最早和平条约。",
+  "rulerHighlight.ea-jp-ashikaga": "建立室町幕府",
+  "rulerHighlight.ea-jp-kanmu": "迁都平安京（京都）",
+  "rulerHighlight.wc-me-hittite": "赫梯帝国（约公元前1650–1178年）；战车军队；与埃及签订卡迭石和约（公元前1259年）。"
 }
