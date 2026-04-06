@@ -104,6 +104,15 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-iv-vijayanagara', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-vijayanagara', bioKey: 'rulerBio.wc-iv-vijayanagara', startYear: 1336, endYear: 1646 , isDynastyBlock: true },
   { id: 'wc-iv-krishna', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-krishna', bioKey: 'rulerBio.wc-iv-krishna', highlightKey: 'rulerHighlight.wc-iv-krishna', startYear: 1509, endYear: 1529 },
 
+  // ── Mughal Empire (North India) ───────────────────────────────
+  { id: 'wc-iv-mughal', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-mughal-dyn', bioKey: 'rulerBio.wc-iv-mughal-dyn', startYear: 1526, endYear: 1857 , isDynastyBlock: true },
+  { id: 'wc-iv-babur', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-babur', bioKey: 'rulerBio.wc-iv-babur', highlightKey: 'rulerHighlight.wc-iv-babur', startYear: 1526, endYear: 1530 },
+  { id: 'wc-iv-humayun', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-humayun', bioKey: 'rulerBio.wc-iv-humayun', highlightKey: 'rulerHighlight.wc-iv-humayun', startYear: 1530, endYear: 1556 },
+  { id: 'wc-iv-akbar', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-akbar', bioKey: 'rulerBio.wc-iv-akbar', highlightKey: 'rulerHighlight.wc-iv-akbar', startYear: 1556, endYear: 1605 },
+  { id: 'wc-iv-jahangir', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-jahangir', bioKey: 'rulerBio.wc-iv-jahangir', highlightKey: 'rulerHighlight.wc-iv-jahangir', startYear: 1605, endYear: 1627 },
+  { id: 'wc-iv-shahjahan', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-shahjahan', bioKey: 'rulerBio.wc-iv-shahjahan', highlightKey: 'rulerHighlight.wc-iv-shahjahan', startYear: 1628, endYear: 1658 },
+  { id: 'wc-iv-aurangzeb', eraId: 'world-comparison', polityId: 'wc-indus', nameKey: 'ruler.wc-iv-aurangzeb', bioKey: 'rulerBio.wc-iv-aurangzeb', highlightKey: 'rulerHighlight.wc-iv-aurangzeb', startYear: 1658, endYear: 1707 },
+
   // ── Persia ─────────────────────────────────────────────
   { id: 'wc-pe-cyrus', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-cyrus', bioKey: 'rulerBio.wc-pe-cyrus', highlightKey: 'rulerHighlight.wc-pe-cyrus', startYear: -550, endYear: -530 },
   { id: 'wc-pe-darius', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-darius', bioKey: 'rulerBio.wc-pe-darius', highlightKey: 'rulerHighlight.wc-pe-darius', startYear: -522, endYear: -486 },
