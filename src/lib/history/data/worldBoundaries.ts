@@ -671,6 +671,43 @@ export const eurasianBoundaries: WorldBoundary[] = [
       ]],
     },
   },
+
+  // ═══ 迦太基 (Carthage) — Mediterranean trade empire, rival to Rome ═══
+  {
+    type: 'Feature',
+    properties: { name: '迦太基', nameKey: 'empire_carthage', startYear: -814, endYear: -146, color: '#8B4513' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [8, 36], [12, 37], [18, 38], [20, 36], [18, 33], [15, 32], [10, 33], [8, 35], [8, 36],
+      ]],
+    },
+  },
+
+  // ═══ 高棉帝国 (Khmer Empire) — Angkor, Southeast Asia ═══
+  {
+    type: 'Feature',
+    properties: { name: '高棉帝国', nameKey: 'empire_khmer', startYear: 802, endYear: 1431, color: '#15803D' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [102, 10], [106, 11], [108, 14], [107, 18], [104, 20], [102, 18], [100, 14], [101, 10],
+        [102, 10],
+      ]],
+    },
+  },
+
+  // ═══ 阿克苏姆帝国 (Aksumite Empire) — East Africa, Ethiopia ═══
+  {
+    type: 'Feature',
+    properties: { name: '阿克苏姆帝国', nameKey: 'empire_aksum', startYear: 100, endYear: 940, color: '#166534' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [36, 12], [42, 12], [44, 15], [43, 18], [40, 20], [36, 18], [34, 15], [36, 12],
+      ]],
+    },
+  },
 ];
 
 // 东亚主要帝国边界

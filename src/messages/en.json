@@ -1501,7 +1501,7 @@
   "ruler.wc-me-assyrian-dyn": "Assyrian Empire",
   "ruler.wc-me-hammurabi": "Hammurabi of Babylon",
   "ruler.wc-me-nebuchadnezzar": "Nebuchadnezzar II",
-    "ruler.wc-me-hittite": "Hittite Empire",
+  "ruler.wc-me-hittite": "Hittite Empire",
   "ruler.wc-pe-ardashir": "Ardashir I",
   "ruler.wc-pe-cyrus": "Cyrus the Great",
   "ruler.wc-pe-darius": "Darius I",
@@ -3017,5 +3017,8 @@
   "rulerBio.ea-jp-ashikaga": "1336–1358 CE. Ashikaga Takauji; first shogun of the Muromachi Shogunate; suppressed the Kenmu Restoration; established warrior government in Kyoto.",
   "rulerBio.ea-jp-kanmu": "781–806 CE. Emperor Kanmu; moved the capital from Nara to Heian-kyō (Kyoto); launched failed expeditions against the Emishi; patron of the Rebuilding of Tōdai-ji.",
   "rulerBio.wc-is-aurangzeb": "1658–1707 CE. Sixth Mughal Emperor; expanded empire to its greatest territorial extent; imposed strict Sharia law; long reign marked by military campaigns and religious tensions.",
-  "rulerBio.wc-is-mughal-dyn": "1526–1857 CE. Mughal dynasty ruling the Indian subcontinent; founded by Babur after the Delhi Sultanate; peak under Akbar, Jahangir, and Shah Jahan; declined under later rulers."
+  "rulerBio.wc-is-mughal-dyn": "1526–1857 CE. Mughal dynasty ruling the Indian subcontinent; founded by Babur after the Delhi Sultanate; peak under Akbar, Jahangir, and Shah Jahan; declined under later rulers.",
+  "empire_carthage": "Carthage",
+  "empire_khmer": "Khmer Empire",
+  "empire_aksum": "Aksumite Empire"
 }
