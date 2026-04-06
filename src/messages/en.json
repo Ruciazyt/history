@@ -2763,7 +2763,15 @@
     "allErasPeriod": "All Periods",
     "noBattleData": "No battle data",
     "statsBar": {
-      "eraPeriod": " (era)"
+      "eraPeriod": " (era)",
+      "attackerWins": "Attacker Wins",
+      "defenderWins": "Defender Wins",
+      "draws": "Draw",
+      "inconclusive": "Inconclusive",
+      "totalCasualties": "Total Casualties",
+      "battlesWithCasualties": "With Casualties",
+      "averageCasualties": "Avg. Casualties",
+      "people": "people"
     },
     "era": {
       "westernZhou": "Western Zhou",

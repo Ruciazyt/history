@@ -2607,7 +2607,15 @@
     "allErasPeriod": "全部时期",
     "noBattleData": "暂无战役数据",
     "statsBar": {
-      "eraPeriod": "（时代）"
+      "eraPeriod": "（时代）",
+      "attackerWins": "进攻方胜利",
+      "defenderWins": "防守方胜利",
+      "draws": "平局",
+      "inconclusive": "胜负未明",
+      "totalCasualties": "总伤亡",
+      "battlesWithCasualties": "有伤亡记录",
+      "averageCasualties": "场均伤亡",
+      "people": "人"
     },
     "era": {
       "westernZhou": "西周",

@@ -235,19 +235,19 @@ export function BattlesClient({
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
               <div className={`bg-gradient-to-br ${BATTLES_CLIENT_COLORS.statCards.attackerWins.gradient} rounded-xl p-3 border ${BATTLES_CLIENT_COLORS.statCards.attackerWins.border}`}>
                 <div className={`text-2xl font-bold ${BATTLES_CLIENT_COLORS.statCards.attackerWins.value}`}>{stats.attackerWins}</div>
-                <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.attackerWins.label}`}>进攻方胜利</div>
+                <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.attackerWins.label}`}>{t('statsBar.attackerWins')}</div>
               </div>
               <div className={`bg-gradient-to-br ${BATTLES_CLIENT_COLORS.statCards.defenderWins.gradient} rounded-xl p-3 border ${BATTLES_CLIENT_COLORS.statCards.defenderWins.border}`}>
                 <div className={`text-2xl font-bold ${BATTLES_CLIENT_COLORS.statCards.defenderWins.value}`}>{stats.defenderWins}</div>
-                <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.defenderWins.label}`}>防守方胜利</div>
+                <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.defenderWins.label}`}>{t('statsBar.defenderWins')}</div>
               </div>
               <div className={`bg-gradient-to-br ${BATTLES_CLIENT_COLORS.statCards.draws.gradient} rounded-xl p-3 border ${BATTLES_CLIENT_COLORS.statCards.draws.border}`}>
                 <div className={`text-2xl font-bold ${BATTLES_CLIENT_COLORS.statCards.draws.value}`}>{stats.draws}</div>
-                <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.draws.label}`}>平局</div>
+                <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.draws.label}`}>{t('statsBar.draws')}</div>
               </div>
               <div className={`bg-gradient-to-br ${BATTLES_CLIENT_COLORS.statCards.inconclusive.gradient} rounded-xl p-3 border ${BATTLES_CLIENT_COLORS.statCards.inconclusive.border}`}>
                 <div className={`text-2xl font-bold ${BATTLES_CLIENT_COLORS.statCards.inconclusive.value}`}>{stats.inconclusive}</div>
-                <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.inconclusive.label}`}>胜负未明</div>
+                <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.inconclusive.label}`}>{t('statsBar.inconclusive')}</div>
               </div>
             </div>
 
@@ -261,19 +261,19 @@ export function BattlesClient({
                       <div className={`text-xl font-bold ${BATTLES_CLIENT_COLORS.statCards.casualties.value}`}>
                         {casualtyStats.totalCasualties.toLocaleString()}
                       </div>
-                      <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>总伤亡</div>
+                      <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>{t('statsBar.totalCasualties')}</div>
                     </div>
                     <div className="flex-1 text-center">
                       <div className={`text-xl font-bold ${BATTLES_CLIENT_COLORS.statCards.casualties.value}`}>
                         {casualtyStats.battlesWithCasualties}
                       </div>
-                      <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>有伤亡记录</div>
+                      <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>{t('statsBar.battlesWithCasualties')}</div>
                     </div>
                     <div className="flex-1 text-center">
                       <div className={`text-xl font-bold ${BATTLES_CLIENT_COLORS.statCards.casualties.value}`}>
                         {Math.round(casualtyStats.averageCasualties).toLocaleString()}
                       </div>
-                      <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>场均伤亡</div>
+                      <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>{t('statsBar.averageCasualties')}</div>
                     </div>
                   </div>
                 </div>
@@ -290,7 +290,7 @@ export function BattlesClient({
                           <span className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.value}`}>
                             {getTotalCasualties(battle.battle?.casualties).toLocaleString()}
                           </span>
-                          <span className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>人</span>
+                          <span className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>{t('statsBar.people')}</span>
                         </div>
                       ))}
                     </div>
