@@ -399,6 +399,7 @@ export function HistoryApp({
                     onYearChange={setWorldYear}
                     activeEmpires={activeWorldBoundaries.map(b => b.properties.nameKey)}
                     t={(key: string) => t(key)}
+                    locale={currentLocale}
                   />
                 </>
               )}

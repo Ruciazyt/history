@@ -11,6 +11,7 @@ interface TimelineSliderProps {
   onYearChange: (year: number) => void;
   activeEmpires: string[];
   t: (key: string) => string;
+  locale?: string;
 }
 
 export function TimelineSlider({
@@ -20,6 +21,7 @@ export function TimelineSlider({
   onYearChange,
   activeEmpires,
   t,
+  locale = 'zh',
 }: TimelineSliderProps) {
   const [_isDragging, setIsDragging] = React.useState(false);
   const sliderRef = React.useRef<HTMLDivElement>(null);
@@ -46,7 +48,7 @@ export function TimelineSlider({
   }, [year, minYear, maxYear, onYearChange]);
 
   // 格式化显示的年份
-  const displayYear = React.useMemo(() => formatYear(year), [year]);
+  const displayYear = React.useMemo(() => formatYear(year, locale), [year, locale]);
 
   // 计算滑块位置百分比
   const positionPercent = React.useMemo(
@@ -179,9 +181,9 @@ export function TimelineSlider({
 
       {/* 年份刻度标签 - mobile: show start/end years */}
       <div className={`flex justify-between mt-1 text-xs ${colors.tickLabel}`}>
-        <span>{formatYear(minYear)}</span>
-        <span className="sm:hidden">{formatYear(Math.floor((minYear + maxYear) / 2))}</span>
-        <span>{formatYear(maxYear)}</span>
+        <span>{formatYear(minYear, locale)}</span>
+        <span className="sm:hidden">{formatYear(Math.floor((minYear + maxYear) / 2), locale)}</span>
+        <span>{formatYear(maxYear, locale)}</span>
       </div>
     </div>
   );
