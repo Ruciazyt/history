@@ -9,6 +9,9 @@ import { logger } from '@/lib/history/logger';
 
 const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
 
+/** Milliseconds to wait for Baidu Map API to load before showing an error state */
+const MAP_LOAD_TIMEOUT_MS = 15_000;
+
 type BoundaryFeature = Feature<Polygon | MultiPolygon>;
 
 declare global {
@@ -32,6 +35,7 @@ export function HistoryMap({
   initialZoom?: number;
 }) {
   const [mapReady, setMapReady] = React.useState(false);
+  const [mapLoadError, setMapLoadError] = React.useState(false);
   const mapContainerRef = React.useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const mapRef = React.useRef<any>(null);
@@ -63,6 +67,13 @@ export function HistoryMap({
     return result;
   }, [openEraIds]);
 
+  // Handle retry: reset error state and force a re-mount by clearing the map ref
+  const handleRetry = React.useCallback(() => {
+    setMapLoadError(false);
+    setMapReady(false);
+    mapRef.current = null;
+  }, []);
+
   // 加载百度地图
   React.useEffect(() => {
     if (mapRef.current) return;
@@ -77,6 +88,7 @@ export function HistoryMap({
           setMapReady(true);
         } catch (e) {
           logger.error('map', 'Failed to initialize Baidu Map', e);
+          setMapLoadError(true);
         }
       }
     };
@@ -97,7 +109,16 @@ export function HistoryMap({
     script.async = true;
     document.head.appendChild(script);
 
+    // Timeout: if map isn't ready within MAP_LOAD_TIMEOUT_MS, show an error
+    const timeoutId = window.setTimeout(() => {
+      // Only trigger error if map still isn't ready (script loaded but init didn't run yet)
+      if (!mapReady) {
+        setMapLoadError(true);
+      }
+    }, MAP_LOAD_TIMEOUT_MS);
+
     return () => {
+      clearTimeout(timeoutId);
       // Cleanup: remove script tag from DOM, delete callback, and clear map ref
       if (script.parentNode) {
         script.parentNode.removeChild(script);
@@ -107,7 +128,7 @@ export function HistoryMap({
       mapRef.current = null;
       setMapReady(false);
     };
-  }, [initialCenter.lon, initialCenter.lat, initialZoom]);
+  }, [initialCenter.lon, initialCenter.lat, initialZoom, mapReady]);
 
   // 绘制内容
   React.useEffect(() => {
@@ -179,10 +200,10 @@ export function HistoryMap({
   }, [mapReady, activeBoundaries, normalEvents, battles]);
 
   return (
-    <div className="h-full w-full overflow-hidden rounded-xl border border-zinc-200 bg-white flex flex-col">
+    <div className="h-full w-full overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 flex flex-col">
       <div className="flex-1 relative">
         {!mapReady && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-zinc-100 dark:bg-zinc-800 text-zinc-400 z-10">
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-zinc-100 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500 z-10">
             {!BAIDU_MAP_AK ? (
               <>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true">
@@ -190,9 +211,22 @@ export function HistoryMap({
                 </svg>
                 <span className="text-sm">地图需要配置 API Key</span>
               </>
+            ) : mapLoadError ? (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                </svg>
+                <span className="text-sm">地图加载失败，请检查网络</span>
+                <button
+                  onClick={handleRetry}
+                  className="mt-1 px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded-lg transition-colors"
+                >
+                  重试
+                </button>
+              </>
             ) : (
               <>
-                <div className="w-6 h-6 border-2 border-zinc-300 border-t-zinc-600 rounded-full animate-spin" aria-hidden="true" />
+                <div className="w-6 h-6 border-2 border-zinc-300 border-t-zinc-600 dark:border-zinc-600 dark:border-t-zinc-400 rounded-full animate-spin" aria-hidden="true" />
                 <span className="text-sm">加载地图中...</span>
               </>
             )}
