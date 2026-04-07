@@ -171,6 +171,15 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-jp-hideyoshi', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-hideyoshi', bioKey: 'rulerBio.ea-jp-hideyoshi', highlightKey: 'rulerHighlight.ea-jp-hideyoshi', startYear: 1582, endYear: 1598 },
   { id: 'wc-jp-ieru', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-ieru', bioKey: 'rulerBio.ea-jp-ieru', highlightKey: 'rulerHighlight.ea-jp-ieru', startYear: 1603, endYear: 1616 },
 
+  // ── Korea ──────────────────────────────────────────────────────────────
+  { id: 'wc-kr-three', eraId: 'world-comparison', polityId: 'wc-korea', nameKey: 'ruler.wc-kr-three', bioKey: 'rulerBio.wc-kr-three', startYear: -57, endYear: 668 , isDynastyBlock: true },
+  { id: 'wc-kr-goguryeo', eraId: 'world-comparison', polityId: 'wc-korea', nameKey: 'ruler.wc-kr-goguryeo', bioKey: 'rulerBio.wc-kr-goguryeo', highlightKey: 'rulerHighlight.wc-kr-goguryeo', startYear: 37, endYear: 668 , isDynastyBlock: true },
+  { id: 'wc-kr-silla', eraId: 'world-comparison', polityId: 'wc-korea', nameKey: 'ruler.wc-kr-silla', bioKey: 'rulerBio.wc-kr-silla', highlightKey: 'rulerHighlight.wc-kr-silla', startYear: 668, endYear: 935 , isDynastyBlock: true },
+  { id: 'wc-kr-wang', eraId: 'world-comparison', polityId: 'wc-korea', nameKey: 'ruler.wc-kr-wang', bioKey: 'rulerBio.wc-kr-wang', highlightKey: 'rulerHighlight.wc-kr-wang', startYear: 918, endYear: 1259 },
+  { id: 'wc-kr-goryeo', eraId: 'world-comparison', polityId: 'wc-korea', nameKey: 'ruler.wc-kr-goryeo', bioKey: 'rulerBio.wc-kr-goryeo', startYear: 918, endYear: 1392 , isDynastyBlock: true },
+  { id: 'wc-kr-sejong', eraId: 'world-comparison', polityId: 'wc-korea', nameKey: 'ruler.wc-kr-sejong', bioKey: 'rulerBio.wc-kr-sejong', highlightKey: 'rulerHighlight.wc-kr-sejong', startYear: 1418, endYear: 1450 },
+  { id: 'wc-kr-joseon', eraId: 'world-comparison', polityId: 'wc-korea', nameKey: 'ruler.wc-kr-joseon', bioKey: 'rulerBio.wc-kr-joseon', startYear: 1392, endYear: 1897 , isDynastyBlock: true },
+
 ];
 
 // ══ East Asia Comparison ═══════════════════════════════════════════════════
