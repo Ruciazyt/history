@@ -390,6 +390,19 @@ export const eurasianBoundaries: WorldBoundary[] = [
     },
   },
 
+  // ═══ Göktürk Khaganate (First Turkic Empire) ═══
+  {
+    type: 'Feature',
+    properties: { name: '突厥', nameKey: 'empire_gokturk', startYear: 552, endYear: 744, color: '#65A30D' },
+    geometry: {
+      type: 'Polygon',
+      coordinates: [[
+        [70, 42], [85, 40], [100, 42], [120, 48], [135, 52], [140, 55], [130, 58],
+        [110, 58], [90, 55], [70, 50], [60, 46], [65, 44], [70, 42],
+      ]],
+    },
+  },
+
   {
     type: 'Feature',
     properties: { name: '蒙古帝国', nameKey: 'empire_mongol', startYear: 1206, endYear: 1368, color: '#0D9488' },

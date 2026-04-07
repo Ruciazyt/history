@@ -3066,5 +3066,12 @@
   "rulerBio.wc-kr-sejong": "朝鮮第4代王；ハングルを創製；科学と農業を推進した。",
   "rulerHighlight.wc-kr-sejong": "ハングル創製",
   "ruler.wc-kr-joseon": "朝鮮王朝",
-  "rulerBio.wc-kr-joseon": "500年以上続けた朝鮮の王朝；儒教治国；漢陽（ソウル）を首都とした。"
+  "rulerBio.wc-kr-joseon": "500年以上続けた朝鮮の王朝；儒教治国；漢陽（ソウル）を首都とした。",
+  "empire_gokturk": "突厥汗国",
+  "ruler.wc-gokturk-dyn": "突厥汗国",
+  "rulerBio.wc-gokturk-dyn": "552年にブミン・カガンによって建国された最初のテュルク系遊牧国家。蒙古ステップを支配し、満洲から中央아시아까지版図を広げた。744年頃、内乱と唐の圧力により崩壊。",
+  "ruler.wc-gokturk-tardu": "タルドゥ・カガン",
+  "rulerBio.wc-gokturk-tardu": "汗国の版図を最大に拡大。中央アジアのステップから中国・ペルシアの境界まで支配した。",
+  "rulerHighlight.wc-gokturk-tardu": "rulerHighlight.wc-gokturk-tardu",
+  "polity.wc.gokturk": "突厥汗国"
 }

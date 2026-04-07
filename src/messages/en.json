@@ -3080,5 +3080,12 @@
   "rulerBio.wc-kr-sejong": "Fourth king of Joseon; created Hangul script; promoted science and agriculture.",
   "rulerHighlight.wc-kr-sejong": "Created Hangul alphabet",
   "ruler.wc-kr-joseon": "Joseon Dynasty",
-  "rulerBio.wc-kr-joseon": "Korean dynasty lasting 500+ years; Confucian state; built Hanyang (Seoul) as capital."
+  "rulerBio.wc-kr-joseon": "Korean dynasty lasting 500+ years; Confucian state; built Hanyang (Seoul) as capital.",
+  "empire_gokturk": "Göktürk Khaganate",
+  "ruler.wc-gokturk-dyn": "Göktürk Khaganate",
+  "rulerBio.wc-gokturk-dyn": "The first Turkic Khaganate, founded by Bumin Kaghan in 552. Controlled the Mongolian steppe and extended from Manchuria to Central Asia. Collapsed due to internal rebellions and Tang pressure around 744 CE.",
+  "ruler.wc-gokturk-tardu": "Tardu Khagan",
+  "rulerBio.wc-gokturk-tardu": "Expanded the Khaganate to its greatest extent, controlling territory from the steppes of Central Asia to the borders of China and Persia.",
+  "rulerHighlight.wc-gokturk-tardu": "rulerHighlight.wc-gokturk-tardu",
+  "polity.wc.gokturk": "Göktürk Khaganate"
 }

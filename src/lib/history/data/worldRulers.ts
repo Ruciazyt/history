@@ -1,6 +1,11 @@
 import type { Ruler } from '@/lib/history/types';
 
 export const worldComparisonRulers: Ruler[] = [
+
+  // ── Göktürk Khaganate (Central Asia) ─────────────────────────────────────
+  { id: 'wc-gokturk-dyn', eraId: 'world-comparison', polityId: 'wc-gokturk', nameKey: 'ruler.wc-gokturk-dyn', bioKey: 'rulerBio.wc-gokturk-dyn', startYear: 552, endYear: 744 , isDynastyBlock: true },
+  { id: 'wc-gokturk-tardu', eraId: 'world-comparison', polityId: 'wc-gokturk', nameKey: 'ruler.wc-gokturk-tardu', bioKey: 'rulerBio.wc-gokturk-tardu', highlightKey: 'rulerHighlight.wc-gokturk-tardu', startYear: 572, endYear: 603 },
+
   // ── China (dynasties as blocks) ────────────────────────
   { id: 'wc-cn-qin', eraId: 'world-comparison', polityId: 'wc-china', nameKey: 'ruler.wc-cn-qin-dyn', bioKey: 'rulerBio.wc-cn-qin', startYear: -221, endYear: -206 , isDynastyBlock: true },
   { id: 'wc-cn-han', eraId: 'world-comparison', polityId: 'wc-china', nameKey: 'ruler.wc-cn-han-dyn', bioKey: 'rulerBio.wc-cn-han', startYear: -206, endYear: 220 , isDynastyBlock: true },
