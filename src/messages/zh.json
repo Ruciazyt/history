@@ -2920,5 +2920,15 @@
   "rulerBio.wc-mo-mongke": "蒙古帝国第四代大汗。继续扩张并推进行政制度标准化。",
   "rulerBio.wc-mo-ogedei": "成吉思汗的第三子，蒙古帝国第二代大汗。向欧洲扩张，继续建设帝国基础设施。",
   "rulerHighlight.wc-mo-genghis": "蒙古帝国创始人",
-  "rulerHighlight.wc-mo-kublai": "建立元朝，征服整个中国"
+  "rulerHighlight.wc-mo-kublai": "建立元朝，征服整个中国",
+  "empire_gokturk": "突厥汗国",
+  "polity.wc.gokturk": "突厥汗国",
+  "polity.wc.mongol": "蒙古帝国",
+  "ruler.wc-gokturk-dyn": "突厥汗国",
+  "ruler.wc-gokturk-tardu": "达头可汗",
+  "rulerBio.wc-gokturk-dyn": "第一个突厥语系游牧民族建立的草原帝国，由布民可汗于552年建立。控制蒙古草原，势力从满洲延伸至中亚。因内部叛乱和唐朝压力约于744年崩溃。",
+  "rulerBio.wc-gokturk-tardu": "将汗国疆域扩展至最大，势力范围从中亚草原直达中国和波斯边境。",
+  "rulerHighlight.wc-gokturk-tardu": "在位时突厥疆域最广",
+  "rulerHighlight.wc-mo-mongke": "蒙古帝国第四代大汗",
+  "rulerHighlight.wc-mo-ogedei": "蒙古帝国第二代大汗"
 }
