@@ -2910,5 +2910,15 @@
   "rulerBio.wc-kr-sejong": "朝鲜第四代王；创制韩文字母；推动科技与农业发展。",
   "rulerHighlight.wc-kr-sejong": "创制韩文",
   "ruler.wc-kr-joseon": "朝鲜王朝",
-  "rulerBio.wc-kr-joseon": "持续五百余年的朝鲜王朝；儒学治国；营建汉阳（首尔）为首都。"
+  "rulerBio.wc-kr-joseon": "持续五百余年的朝鲜王朝；儒学治国；营建汉阳（首尔）为首都。",
+  "ruler.wc-mo-genghis": "成吉思汗",
+  "ruler.wc-mo-kublai": "忽必烈汗",
+  "ruler.wc-mo-mongke": "蒙哥汗",
+  "ruler.wc-mo-ogedei": "窝阔台汗",
+  "rulerBio.wc-mo-genghis": "蒙古帝国创始人，统一蒙古各部，征服了欧亚大陆的广大地区。",
+  "rulerBio.wc-mo-kublai": "第五代大汗，在中国建立了元朝。是首位征服整个中国的蒙古统治者。",
+  "rulerBio.wc-mo-mongke": "蒙古帝国第四代大汗。继续扩张并推进行政制度标准化。",
+  "rulerBio.wc-mo-ogedei": "成吉思汗的第三子，蒙古帝国第二代大汗。向欧洲扩张，继续建设帝国基础设施。",
+  "rulerHighlight.wc-mo-genghis": "蒙古帝国创始人",
+  "rulerHighlight.wc-mo-kublai": "建立元朝，征服整个中国"
 }
