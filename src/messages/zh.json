@@ -2359,7 +2359,8 @@
       "title": "答题结果",
       "score": "得分",
       "bestStreak": "最佳连续",
-      "playAgain": "再玩一次"
+      "playAgain": "再玩一次",
+      "byType": "各类型正确率"
     },
     "option": {
       "attacker_win": "进攻方胜利",

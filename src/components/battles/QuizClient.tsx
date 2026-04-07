@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import type { Event } from '@/lib/history/types';
-import type { QuizSession } from '@/lib/history/quiz';
+import type { QuizSession, QuizType } from '@/lib/history/quiz';
 import { generateQuizQuestions, startQuizSession, answerQuestion, nextQuestion } from '@/lib/history/quiz';
 import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 import { BATTLES_CLIENT_COLORS, QUIZ_COLORS } from '@/lib/history/constants';
@@ -26,6 +26,23 @@ const QUIZ_TYPE_OPTIONS: QuizTypeOption[] = [
   { value: 'chronology', labelKey: 'quiz.type.chronology' },
   { value: 'mixed', labelKey: 'quiz.type.mixed' },
 ];
+
+type TypeBreakdown = {
+  type: QuizType;
+  correct: number;
+  total: number;
+};
+
+function computeTypeBreakdown(session: QuizSession): TypeBreakdown[] {
+  const map = new Map<QuizType, { correct: number; total: number }>();
+  session.questions.forEach((q, i) => {
+    const entry = map.get(q.type) ?? { correct: 0, total: 0 };
+    entry.total++;
+    if (session.answers[i] === q.correctIndex) entry.correct++;
+    map.set(q.type, entry);
+  });
+  return Array.from(map.entries()).map(([type, stats]) => ({ type, ...stats }));
+}
 
 export function QuizClient({ events, locale }: { events: Event[]; locale?: string }) {
   const t = useTranslations();
@@ -90,6 +107,7 @@ export function QuizClient({ events, locale }: { events: Event[]; locale?: strin
   const accuracy = session ? Math.round((session.score / session.questions.length) * 100) : 0;
   const isNewHighScore = session && record.highScore > 0 && accuracy > 0 && accuracy === record.highScore;
   const isNewBestStreak = session && record.bestStreak > 0 && session.maxStreak === record.bestStreak && session.maxStreak > 0;
+  const typeBreakdown = session && phase === 'result' ? computeTypeBreakdown(session) : [];
 
   return (
     <div className={`min-h-screen ${QUIZ_COLORS.page.background}`}>
@@ -329,6 +347,38 @@ export function QuizClient({ events, locale }: { events: Event[]; locale?: strin
                 </div>
               )}
             </div>
+
+            {/* Type breakdown */}
+            {typeBreakdown.length > 1 && (
+              <div className={`rounded-xl border ${QUIZ_COLORS.card.border} ${QUIZ_COLORS.card.shadow} p-4 ${QUIZ_COLORS.card.bg}`}>
+                <p className={`text-sm font-semibold mb-3 ${QUIZ_COLORS.title}`}>
+                  {t('quiz.result.byType')}
+                </p>
+                <div className="space-y-2">
+                  {typeBreakdown.map(b => {
+                    const pct = Math.round((b.correct / b.total) * 100);
+                    return (
+                      <div key={b.type} className="flex items-center justify-between">
+                        <span className={`text-sm font-medium ${BATTLES_CLIENT_COLORS.badge.text}`}>
+                          {t(`quiz.type.${b.type}`)}
+                        </span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-20 h-1.5 rounded-full bg-zinc-200 overflow-hidden">
+                            <div
+                              className={`h-full rounded-full ${pct >= 80 ? 'bg-green-400' : pct >= 50 ? 'bg-amber-400' : 'bg-red-400'}`}
+                              style={{ width: `${pct}%` }}
+                            />
+                          </div>
+                          <span className={`text-xs font-bold w-10 text-right ${pct >= 80 ? 'text-green-600' : pct >= 50 ? 'text-amber-600' : 'text-red-600'}`}>
+                            {b.correct}/{b.total}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             <button
               onClick={handleRestart}

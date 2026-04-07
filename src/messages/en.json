@@ -848,7 +848,8 @@
       "title": "Quiz Results",
       "score": "Score",
       "bestStreak": "Best Streak",
-      "playAgain": "Play Again"
+      "playAgain": "Play Again",
+      "byType": "Accuracy by Type"
     },
     "type": {
       "commander": "Commander",

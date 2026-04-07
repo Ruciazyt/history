@@ -848,7 +848,8 @@
       "title": "クイズ結果",
       "score": "スコア",
       "bestStreak": "最高連続",
-      "playAgain": "もう一度"
+      "playAgain": "もう一度",
+      "byType": "タイプ別正答率"
     },
     "type": {
       "commander": "指揮官",
