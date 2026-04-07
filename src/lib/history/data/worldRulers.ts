@@ -157,6 +157,7 @@ export const worldComparisonRulers: Ruler[] = [
   // ═══ 日本 — World Comparison (绳文/弥生/飞鸟/奈良/幕府将军) ═══
   { id: 'wc-jp-jomon', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-jomon', bioKey: 'rulerBio.ea-jp-jomon', startYear: -10000, endYear: -300 , isDynastyBlock: true },
   { id: 'wc-jp-yayoi', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-yayoi', bioKey: 'rulerBio.ea-jp-yayoi', startYear: -300, endYear: 250 , isDynastyBlock: true },
+  { id: 'wc-jp-yamato', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-yamato', bioKey: 'rulerBio.ea-jp-yamato', startYear: 250, endYear: 592 , isDynastyBlock: true },
   { id: 'wc-jp-asuka', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-asuka', bioKey: 'rulerBio.ea-jp-asuka', startYear: 592, endYear: 710 , isDynastyBlock: true },
   { id: 'wc-jp-nara', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-nara', bioKey: 'rulerBio.ea-jp-nara', startYear: 710, endYear: 794 , isDynastyBlock: true },
   { id: 'wc-jp-kanmu', eraId: 'world-comparison', polityId: 'wc-japan', nameKey: 'ruler.ea-jp-kanmu', bioKey: 'rulerBio.ea-jp-kanmu', highlightKey: 'rulerHighlight.ea-jp-kanmu', startYear: 781, endYear: 806 },
@@ -182,7 +183,7 @@ export const eastAsiaRulers: import('@/lib/history/types').Ruler[] = [
 
   // ── Japan ──────────────────────────────────────────────────────────────
   { id: 'ea-jp-jomon', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-jomon', bioKey: 'rulerBio.ea-jp-jomon', startYear: -10000, endYear: -300 , isDynastyBlock: true },
-  { id: 'ea-jp-yayoi', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-yayoi', bioKey: 'rulerBio.ea-jp-yayoi', startYear: -200, endYear: 250 , isDynastyBlock: true },
+  { id: 'ea-jp-yayoi', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-yayoi', bioKey: 'rulerBio.ea-jp-yayoi', startYear: -300, endYear: 250 , isDynastyBlock: true },
   { id: 'ea-jp-yamato', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-yamato', bioKey: 'rulerBio.ea-jp-yamato', startYear: 250, endYear: 710 , isDynastyBlock: true },
   { id: 'ea-jp-asuka', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-asuka', bioKey: 'rulerBio.ea-jp-asuka', startYear: 592, endYear: 710 , isDynastyBlock: true },
   { id: 'ea-jp-shotoku', eraId: 'east-asia-comparison', polityId: 'ea-japan', nameKey: 'ruler.ea-jp-shotoku', bioKey: 'rulerBio.ea-jp-shotoku', highlightKey: 'rulerHighlight.ea-jp-shotoku', startYear: 593, endYear: 622 },
