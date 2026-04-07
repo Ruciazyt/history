@@ -10,6 +10,7 @@ export const worldComparisonEra: Era = {
     { id: 'wc-china', nameKey: 'polity.wc.china' },
     { id: 'wc-rome', nameKey: 'polity.wc.rome' },
     { id: 'wc-persia', nameKey: 'polity.wc.persia' },
+    { id: 'wc-mongol', nameKey: 'polity.wc.mongol' },
     { id: 'wc-islam', nameKey: 'polity.wc.islam' },
     { id: 'wc-egypt', nameKey: 'polity.wc.egypt' },
     { id: 'wc-indus', nameKey: 'polity.wc.indus' },

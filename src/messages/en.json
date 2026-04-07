@@ -3040,5 +3040,18 @@
   "rulerHighlight.wc-iv-shahjahan": "Mughal Emperor (1628–1658)",
   "ruler.wc-iv-aurangzeb": "Aurangzeb",
   "rulerBio.wc-iv-aurangzeb": "1618–1707 CE. Sixth Mughal Emperor; expanded empire to greatest extent but imposed strict religious policies; long reign led to dynasty decline.",
-  "rulerHighlight.wc-iv-aurangzeb": "Mughal Emperor (1658–1707)"
+  "rulerHighlight.wc-iv-aurangzeb": "Mughal Emperor (1658–1707)",
+  "polity.wc.mongol": "Mongol Empire",
+  "ruler.wc-mo-genghis": "Genghis Khan",
+  "rulerBio.wc-mo-genghis": "Founder of the Mongol Empire, united the Mongol tribes and conquered vast territories across Eurasia.",
+  "rulerHighlight.wc-mo-genghis": "Founder of the Mongol Empire",
+  "ruler.wc-mo-ogedei": "Ögedei Khan",
+  "rulerBio.wc-mo-ogedei": "Third son of Genghis Khan, second Great Khan of the Mongol Empire. Expanded into Europe and continued building the empire infrastructure.",
+  "rulerHighlight.wc-mo-ogedei": "Second Great Khan of the Mongol Empire",
+  "ruler.wc-mo-mongke": "Möngke Khan",
+  "rulerBio.wc-mo-mongke": "Fourth Great Khan of the Mongol Empire. Continued expansion and standardization of administrative systems.",
+  "rulerHighlight.wc-mo-mongke": "Fourth Great Khan of the Mongol Empire",
+  "ruler.wc-mo-kublai": "Kublai Khan",
+  "rulerBio.wc-mo-kublai": "Fifth Great Khan, founded the Yuan dynasty in China. First Mongol ruler to conquer all of China.",
+  "rulerHighlight.wc-mo-kublai": "Founded the Yuan dynasty, conquered all of China"
 }

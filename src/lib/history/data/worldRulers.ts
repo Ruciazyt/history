@@ -131,6 +131,12 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-pe-safavid', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-safavid', bioKey: 'rulerBio.wc-pe-safavid', highlightKey: 'rulerHighlight.wc-pe-safavid', startYear: 1501, endYear: 1736 },
   { id: 'wc-pe-shah-abbas', eraId: 'world-comparison', polityId: 'wc-persia', nameKey: 'ruler.wc-pe-shah-abbas', bioKey: 'rulerBio.wc-pe-shah-abbas', highlightKey: 'rulerHighlight.wc-pe-shah-abbas', startYear: 1588, endYear: 1629 },
 
+  // ── Mongol Empire (Great Khans) ───────────────────────
+  { id: 'wc-mo-genghis', eraId: 'world-comparison', polityId: 'wc-mongol', nameKey: 'ruler.wc-mo-genghis', bioKey: 'rulerBio.wc-mo-genghis', highlightKey: 'rulerHighlight.wc-mo-genghis', startYear: 1206, endYear: 1227 },
+  { id: 'wc-mo-ogedei', eraId: 'world-comparison', polityId: 'wc-mongol', nameKey: 'ruler.wc-mo-ogedei', bioKey: 'rulerBio.wc-mo-ogedei', highlightKey: 'rulerHighlight.wc-mo-ogedei', startYear: 1229, endYear: 1241 },
+  { id: 'wc-mo-mongke', eraId: 'world-comparison', polityId: 'wc-mongol', nameKey: 'ruler.wc-mo-mongke', bioKey: 'rulerBio.wc-mo-mongke', highlightKey: 'rulerHighlight.wc-mo-mongke', startYear: 1251, endYear: 1259 },
+  { id: 'wc-mo-kublai', eraId: 'world-comparison', polityId: 'wc-mongol', nameKey: 'ruler.wc-mo-kublai', bioKey: 'rulerBio.wc-mo-kublai', highlightKey: 'rulerHighlight.wc-mo-kublai', startYear: 1260, endYear: 1294 },
+
   // ── Hellenistic Greece ─────────────────────────────────
   { id: 'wc-he-philip-ii', eraId: 'world-comparison', polityId: 'wc-hellenistic', nameKey: 'ruler.wc-he-philip-ii', bioKey: 'rulerBio.wc-he-philip-ii', highlightKey: 'rulerHighlight.wc-he-philip-ii', startYear: -359, endYear: -336 },
   { id: 'wc-he-alexander', eraId: 'world-comparison', polityId: 'wc-hellenistic', nameKey: 'ruler.wc-he-alexander', bioKey: 'rulerBio.wc-he-alexander', highlightKey: 'rulerHighlight.wc-he-alexander', startYear: -336, endYear: -323 },
@@ -147,8 +153,6 @@ export const worldComparisonRulers: Ruler[] = [
   { id: 'wc-is-harun', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-harun', bioKey: 'rulerBio.wc-is-harun', highlightKey: 'rulerHighlight.wc-is-harun', startYear: 786, endYear: 833 },
   { id: 'wc-is-abbasid-late', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-abbasid-dyn', bioKey: 'rulerBio.wc-is-abbasid-late', startYear: 833, endYear: 1258 , isDynastyBlock: true },
   { id: 'wc-is-saladin', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-saladin', bioKey: 'rulerBio.wc-is-saladin', highlightKey: 'rulerHighlight.wc-is-saladin', startYear: 1174, endYear: 1193 },
-  { id: 'wc-is-genghis', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-genghis', bioKey: 'rulerBio.wc-is-genghis', highlightKey: 'rulerHighlight.wc-is-genghis', startYear: 1206, endYear: 1227 },
-  { id: 'wc-is-ilkhanate', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-mongol-dyn', bioKey: 'rulerBio.wc-is-ilkhanate', startYear: 1256, endYear: 1370 , isDynastyBlock: true },
   { id: 'wc-is-timur', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-timur', bioKey: 'rulerBio.wc-is-timur', highlightKey: 'rulerHighlight.wc-is-timur', startYear: 1370, endYear: 1405 },
   { id: 'wc-is-timurid-late', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-timurid-dyn', bioKey: 'rulerBio.wc-is-timurid-late', startYear: 1405, endYear: 1526 , isDynastyBlock: true },
   { id: 'wc-is-mughal-dyn', eraId: 'world-comparison', polityId: 'wc-islam', nameKey: 'ruler.wc-is-mughal-dyn', bioKey: 'rulerBio.wc-is-mughal-dyn', startYear: 1526, endYear: 1857 , isDynastyBlock: true },

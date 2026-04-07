@@ -3026,5 +3026,18 @@
   "rulerHighlight.wc-iv-shahjahan": "ムガル皇帝（1628–1658）",
   "ruler.wc-iv-aurangzeb": "アウラングゼブ",
   "rulerBio.wc-iv-aurangzeb": "1618–1707年。第6代ムガル皇帝；帝国を最大版図に拡大するが厳格な宗教政策を実施；長期統治により王朝衰退の始まり。",
-  "rulerHighlight.wc-iv-aurangzeb": "ムガル皇帝（1658–1707）"
+  "rulerHighlight.wc-iv-aurangzeb": "ムガル皇帝（1658–1707）",
+  "polity.wc.mongol": "モンゴル帝国",
+  "ruler.wc-mo-genghis": "チンギス・ハーン",
+  "rulerBio.wc-mo-genghis": "モンゴル帝国の創業者。モンゴル諸部族を統一し、ユーラシア大陸の広大な領域を征服した。",
+  "rulerHighlight.wc-mo-genghis": "モンゴル帝国の創業者",
+  "ruler.wc-mo-ogedei": "オゴデイ・ハーン",
+  "rulerBio.wc-mo-ogedei": "チンギス・ハーン的三男、第2代大王。ヨーロッパへの侵攻を進め、帝国のインフラ整備を進めた。",
+  "rulerHighlight.wc-mo-ogedei": "モンゴル帝国第2代大王",
+  "ruler.wc-mo-mongke": "モンケ・ハーン",
+  "rulerBio.wc-mo-mongke": "モンゴル帝国第4代大王。領土拡張と行政制度の標準化を続けた。",
+  "rulerHighlight.wc-mo-mongke": "モンゴル帝国第4代大王",
+  "ruler.wc-mo-kublai": "クビライ・ハーン",
+  "rulerBio.wc-mo-kublai": "モンゴル帝国第5代大王、中国に元王朝を建国。中国全土を征服した最初のモンゴル君主。",
+  "rulerHighlight.wc-mo-kublai": "元王朝を建国、中国全土を征服"
 }
