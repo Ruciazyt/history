@@ -864,6 +864,14 @@
       "normal": "普通",
       "hard": "難しい"
     },
+    "record": {
+      "highScore": "最高正答率",
+      "bestStreak": "最高連続",
+      "totalAnswered": "累計回答",
+      "newHighScore": "新最高記録",
+      "newBestStreak": "新連続記録",
+      "history": "記録：正答率 {highScore}%、連続 {bestStreak}"
+    },
     "question": {
       "chronology": "以下の戦闘のうち、最も早く行われたのはどれですか？"
     },

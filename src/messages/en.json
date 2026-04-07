@@ -864,6 +864,14 @@
       "normal": "Normal",
       "hard": "Hard"
     },
+    "record": {
+      "highScore": "Best Accuracy",
+      "bestStreak": "Best Streak",
+      "totalAnswered": "Total Answered",
+      "newHighScore": "New High Score",
+      "newBestStreak": "New Streak Record",
+      "history": "Record: {highScore}% accuracy, {bestStreak} streak"
+    },
     "question": {
       "chronology": "Which of these battles happened first?"
     },

@@ -2428,6 +2428,14 @@
       "easy": "简单",
       "normal": "普通",
       "hard": "困难"
+    },
+    "record": {
+      "highScore": "最高正确率",
+      "bestStreak": "最佳连胜",
+      "totalAnswered": "累计答题",
+      "newHighScore": "新高正确率",
+      "newBestStreak": "新连胜纪录",
+      "history": "历史最佳：正确率 {highScore}%，最佳连胜 {bestStreak}"
     }
   },
   "ruler.wc-iv-kushan-dyn": "贵霜王朝",

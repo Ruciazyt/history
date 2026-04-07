@@ -8,7 +8,7 @@ import { generateQuizQuestions, startQuizSession, answerQuestion, nextQuestion }
 import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 import { BATTLES_CLIENT_COLORS, QUIZ_COLORS } from '@/lib/history/constants';
 import { useTranslations } from 'next-intl';
-
+import { useQuizScore } from '@/lib/history/hooks/useQuizScore';
 
 type QuizPhase = 'setup' | 'playing' | 'result';
 
@@ -37,6 +37,7 @@ export function QuizClient({ events, locale }: { events: Event[]; locale?: strin
   const [selectedAnswer, setSelectedAnswer] = React.useState<number | null>(null);
   const [answered, setAnswered] = React.useState(false);
   const [_history, _setHistory] = React.useState<QuizSession[]>([]);
+  const { record, updateRecord } = useQuizScore();
 
   const currentQ = session?.questions[session.currentIndex];
 
@@ -74,6 +75,8 @@ export function QuizClient({ events, locale }: { events: Event[]; locale?: strin
       // Finished all questions
       if (session) _setHistory(h => [...h, session]);
       setPhase('result');
+      // Persist high score
+      updateRecord(session.score, session.questions.length, session.maxStreak);
     }
   }
 
@@ -85,6 +88,8 @@ export function QuizClient({ events, locale }: { events: Event[]; locale?: strin
   }
 
   const accuracy = session ? Math.round((session.score / session.questions.length) * 100) : 0;
+  const isNewHighScore = session && record.highScore > 0 && accuracy > 0 && accuracy === record.highScore;
+  const isNewBestStreak = session && record.bestStreak > 0 && session.maxStreak === record.bestStreak && session.maxStreak > 0;
 
   return (
     <div className={`min-h-screen ${QUIZ_COLORS.page.background}`}>
@@ -115,6 +120,23 @@ export function QuizClient({ events, locale }: { events: Event[]; locale?: strin
           <div className={`rounded-xl border ${QUIZ_COLORS.card.border} ${QUIZ_COLORS.card.shadow} p-6 ${QUIZ_COLORS.card.bg}`}>
             <h2 className={`text-xl font-bold mb-2 ${QUIZ_COLORS.title}`}>{t('quiz.setup.title')}</h2>
             <p className={`text-sm mb-6 ${BATTLES_CLIENT_COLORS.badge.text}`}>{t('quiz.setup.description')}</p>
+
+            {/* High score record badges */}
+            {record.highScore > 0 && (
+              <div className="flex gap-2 mb-4 flex-wrap">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200">
+                  🏅 {t('quiz.record.highScore')}: {record.highScore}%
+                </span>
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold bg-orange-100 text-orange-800 border border-orange-200">
+                  🔥 {t('quiz.record.bestStreak')}: {record.bestStreak}
+                </span>
+                {record.totalAnswered > 0 && (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold bg-zinc-100 text-zinc-600 border border-zinc-200">
+                    📝 {t('quiz.record.totalAnswered')}: {record.totalAnswered}
+                  </span>
+                )}
+              </div>
+            )}
 
             {/* Type selector */}
             <div className="mb-4">
@@ -273,6 +295,23 @@ export function QuizClient({ events, locale }: { events: Event[]; locale?: strin
               <h2 className={`text-2xl font-bold mb-1 ${QUIZ_COLORS.title}`}>
                 {t('quiz.result.title')}
               </h2>
+
+              {/* New record badges */}
+              {(isNewHighScore || isNewBestStreak) && (
+                <div className="flex justify-center gap-2 mb-3 flex-wrap">
+                  {isNewHighScore && (
+                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-bold bg-amber-100 text-amber-800 border border-amber-300">
+                      🏅 {t('quiz.record.newHighScore')}!
+                    </span>
+                  )}
+                  {isNewBestStreak && (
+                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-bold bg-orange-100 text-orange-800 border border-orange-300">
+                      🔥 {t('quiz.record.newBestStreak')}!
+                    </span>
+                  )}
+                </div>
+              )}
+
               <p className={`text-4xl font-black my-4 ${accuracy >= 80 ? QUIZ_COLORS.accuracyResult.high : accuracy >= 60 ? QUIZ_COLORS.accuracyResult.medium : QUIZ_COLORS.accuracyResult.low}`}>
                 {accuracy}%
               </p>
@@ -282,6 +321,13 @@ export function QuizClient({ events, locale }: { events: Event[]; locale?: strin
               <p className={`text-sm ${BATTLES_CLIENT_COLORS.badge.text}`}>
                 🔥 {t('quiz.result.bestStreak', { streak: session.maxStreak })}
               </p>
+
+              {/* Historical record display */}
+              {record.highScore > 0 && (
+                <div className={`mt-4 pt-4 border-t border-zinc-200 text-xs ${BATTLES_CLIENT_COLORS.badge.text}`}>
+                  {t('quiz.record.history', { highScore: record.highScore, bestStreak: record.bestStreak })}
+                </div>
+              )}
             </div>
 
             <button
