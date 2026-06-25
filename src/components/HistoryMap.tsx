@@ -7,9 +7,9 @@ import { dynastyBoundaries } from '@/lib/history/data/dynastyBoundaries';
 import { getBattles } from '@/lib/history/battles';
 import { logger } from '@/lib/history/logger';
 
-const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
+const TIANDITU_TOKEN = '07b4df99018dcee22e60ad2064723188';
 
-/** Milliseconds to wait for Baidu Map API to load before showing an error state */
+/** Milliseconds to wait for Tianditu API to load before showing an error state */
 const MAP_LOAD_TIMEOUT_MS = 15_000;
 
 type BoundaryFeature = Feature<Polygon | MultiPolygon>;
@@ -17,7 +17,7 @@ type BoundaryFeature = Feature<Polygon | MultiPolygon>;
 declare global {
   interface Window {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    BMapGL: any;
+    T: any;
   }
 }
 
@@ -67,51 +67,53 @@ export function HistoryMap({
     return result;
   }, [openEraIds]);
 
-  // Handle retry: reset error state and force a re-mount by clearing the map ref
+  // Handle retry: reset error state and force a re-mount
   const handleRetry = React.useCallback(() => {
     setMapLoadError(false);
     setMapReady(false);
     mapRef.current = null;
   }, []);
 
-  // 加载百度地图
+  // 加载天地图
   React.useEffect(() => {
     if (mapRef.current) return;
 
     const initMap = () => {
-      if (window.BMapGL && mapContainerRef.current) {
+      if (window.T && mapContainerRef.current) {
         try {
-          const map = new window.BMapGL.Map(mapContainerRef.current);
-          map.centerAndZoom(new window.BMapGL.Point(initialCenter.lon, initialCenter.lat), initialZoom);
-          map.enableScrollWheelZoom(true);
+          const map = new window.T.Map(mapContainerRef.current);
+          const center = new window.T.LngLat(initialCenter.lon, initialCenter.lat);
+          map.centerAndZoom(center, initialZoom);
+          map.enableScrollWheelZoom();
           mapRef.current = map;
           setMapReady(true);
         } catch (e) {
-          logger.error('map', 'Failed to initialize Baidu Map', e);
+          logger.error('map', 'Failed to initialize Tianditu', e);
           setMapLoadError(true);
         }
       }
     };
 
-    const callbackName = 'baiduMapCb_' + Date.now();
-    (window as unknown as Record<string, () => void>)[callbackName] = () => { initMap(); };
-
-    // Only load Baidu Map script when API key is configured
-    if (!BAIDU_MAP_AK) {
-      logger.warn('map', 'NEXT_PUBLIC_BAIDU_MAP_AK is not configured — map will not load');
-      // Clean up the callback we just registered
-      delete (window as unknown as Record<string, unknown>)[callbackName];
+    // Check if Tianditu is already loaded
+    if (window.T) {
+      initMap();
       return;
     }
 
     const script = document.createElement('script');
-    script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}&callback=${callbackName}`;
+    script.src = `https://api.tianditu.gov.cn/api?v=4.0&tk=${TIANDITU_TOKEN}`;
     script.async = true;
+    script.onload = () => {
+      initMap();
+    };
+    script.onerror = () => {
+      logger.error('map', 'Failed to load Tianditu script');
+      setMapLoadError(true);
+    };
     document.head.appendChild(script);
 
     // Timeout: if map isn't ready within MAP_LOAD_TIMEOUT_MS, show an error
     const timeoutId = window.setTimeout(() => {
-      // Only trigger error if map still isn't ready (script loaded but init didn't run yet)
       if (!mapReady) {
         setMapLoadError(true);
       }
@@ -119,12 +121,9 @@ export function HistoryMap({
 
     return () => {
       clearTimeout(timeoutId);
-      // Cleanup: remove script tag from DOM, delete callback, and clear map ref
       if (script.parentNode) {
         script.parentNode.removeChild(script);
       }
-      delete (window as unknown as Record<string, unknown>)[callbackName];
-      // Reset map state so re-mounting can reinitialize cleanly
       mapRef.current = null;
       setMapReady(false);
     };
@@ -140,16 +139,16 @@ export function HistoryMap({
     // Helper function to draw a polygon boundary on the map
     const drawPolygon = (ring: number[][], strokeColor: string, fillOpacity: number) => {
       if (!ring || ring.length < 3) return;
-      const bmapPoints = ring.map(
-        (coord) => new window.BMapGL.Point(coord[0], coord[1])
+      const points = ring.map(
+        (coord) => new window.T.LngLat(coord[0], coord[1])
       );
-      const polygon = new window.BMapGL.Polygon(bmapPoints, {
+      const polygon = new window.T.Polygon(points, {
         strokeColor,
         strokeWeight: 2,
         fillColor: strokeColor,
         fillOpacity,
       });
-      map.addOverlay(polygon);
+      map.addOverLay(polygon);
     };
 
     // Helper function to process GeoJSON coordinates and draw polygons
@@ -182,36 +181,28 @@ export function HistoryMap({
       processBoundaryCoords(coords, '#DC6432', 0.2);
     });
 
-    // 绘制事件标记 - 使用圆形替代 Marker
+    // 绘制事件标记 - 使用圆形
     const allEvents = [...normalEvents, ...battles];
     allEvents.forEach((e) => {
       if (!e.location) return;
 
-      // 使用圆形标记
-      const circle = new window.BMapGL.Circle(new window.BMapGL.Point(e.location.lon, e.location.lat), {
-        radius: 5000,
+      const center = new window.T.LngLat(e.location.lon, e.location.lat);
+      const circle = new window.T.Circle(center, 5000, {
         strokeColor: '#DC2626',
         strokeWeight: 2,
         fillColor: '#DC2626',
         fillOpacity: 0.8,
       });
-      map.addOverlay(circle);
+      map.addOverLay(circle);
     });
   }, [mapReady, activeBoundaries, normalEvents, battles]);
 
   return (
-    <div className="h-full w-full overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 flex flex-col">
+    <div className="h-full w-full overflow-hidden bg-white dark:bg-zinc-900 flex flex-col">
       <div className="flex-1 relative">
         {!mapReady && (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-zinc-100 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500 z-10">
-            {!BAIDU_MAP_AK ? (
-              <>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                </svg>
-                <span className="text-sm">地图需要配置 API Key</span>
-              </>
-            ) : mapLoadError ? (
+            {mapLoadError ? (
               <>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
@@ -219,7 +210,7 @@ export function HistoryMap({
                 <span className="text-sm">地图加载失败，请检查网络</span>
                 <button
                   onClick={handleRetry}
-                  className="mt-1 px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs rounded-lg transition-colors"
+                  className="mt-1 px-4 py-1.5 bg-[var(--color-primary)] text-[var(--color-on-primary)] text-xs rounded-[var(--rounded-pill)] transition-colors"
                 >
                   重试
                 </button>

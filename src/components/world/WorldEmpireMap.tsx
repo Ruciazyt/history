@@ -1,30 +1,29 @@
 'use client';
 
 import * as React from 'react';
-import Map, {
-  Marker,
-  Popup,
-  NavigationControl,
-  Source,
-  Layer,
-  type MapLib,
-} from 'react-map-gl/maplibre';
-import maplibregl from 'maplibre-gl';
-import 'maplibre-gl/dist/maplibre-gl.css';
-
 import { formatYear } from '@/lib/history/utils';
 import { useTranslations } from 'next-intl';
 import {
   getActiveBoundaries,
   type WorldBoundary,
 } from '@/lib/history/data/worldBoundaries';
-import { WORLD_VIEW_COLORS, MAP_NAV_COLORS, WORLD_MAP_COLORS, MAP_POPUP_COLORS } from '@/lib/history/constants';
+import { WORLD_VIEW_COLORS, MAP_POPUP_COLORS } from '@/lib/history/constants';
+import { logger } from '@/lib/history/logger';
+
+const TIANDITU_TOKEN = '07b4df99018dcee22e60ad2064723188';
 
 interface WorldEmpireMapProps {
   year: number;
   mode: 'eurasian' | 'east-asia';
   initialCenter?: { lon: number; lat: number };
   initialZoom?: number;
+}
+
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    T: any;
+  }
 }
 
 export function WorldEmpireMap({
@@ -35,6 +34,10 @@ export function WorldEmpireMap({
 }: WorldEmpireMapProps) {
   const t = useTranslations();
   const [selectedEmpire, setSelectedEmpire] = React.useState<WorldBoundary | null>(null);
+  const mapContainerRef = React.useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const mapRef = React.useRef<any>(null);
+  const [mapReady, setMapReady] = React.useState(false);
 
   // Get active empires for the current year
   const activeBoundaries = React.useMemo(
@@ -42,7 +45,7 @@ export function WorldEmpireMap({
     [year, mode]
   );
 
-  // Pre-compute empire centers to avoid calling useMemo inside JSX map
+  // Pre-compute empire centers
   const empireCenters = React.useMemo<Record<number, { lon: number; lat: number } | null>>(() => {
     const centers: Record<number, { lon: number; lat: number } | null> = {};
     activeBoundaries.forEach((boundary, index) => {
@@ -75,122 +78,112 @@ export function WorldEmpireMap({
     return centers;
   }, [activeBoundaries]);
 
+  // Load Tianditu
+  React.useEffect(() => {
+    if (mapRef.current) return;
+
+    const initMap = () => {
+      if (window.T && mapContainerRef.current) {
+        try {
+          const map = new window.T.Map(mapContainerRef.current);
+          const center = new window.T.LngLat(initialCenter.lon, initialCenter.lat);
+          map.centerAndZoom(center, initialZoom);
+          map.enableScrollWheelZoom();
+          mapRef.current = map;
+          setMapReady(true);
+        } catch (e) {
+          logger.error('map', 'Failed to initialize Tianditu', e);
+        }
+      }
+    };
+
+    if (window.T) {
+      initMap();
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = `https://api.tianditu.gov.cn/api?v=4.0&tk=${TIANDITU_TOKEN}`;
+    script.async = true;
+    script.onload = () => { initMap(); };
+    script.onerror = () => { logger.error('map', 'Failed to load Tianditu script'); };
+    document.head.appendChild(script);
+
+    return () => {
+      if (script.parentNode) script.parentNode.removeChild(script);
+      mapRef.current = null;
+      setMapReady(false);
+    };
+  }, [initialCenter.lon, initialCenter.lat, initialZoom]);
+
+  // Draw empire boundaries and markers
+  React.useEffect(() => {
+    if (!mapRef.current || !mapReady) return;
+
+    const map = mapRef.current;
+    map.clearOverlays();
+
+    // Draw empire boundaries
+    activeBoundaries.forEach((boundary, index) => {
+      const coords = boundary.geometry.type === 'Polygon'
+        ? boundary.geometry.coordinates
+        : boundary.geometry.type === 'MultiPolygon'
+        ? boundary.geometry.coordinates
+        : [];
+
+      const drawRing = (ring: unknown) => {
+        const r = ring as number[][];
+        if (!r || r.length < 3) return;
+        const points = r.map(c => new window.T.LngLat(c[0], c[1]));
+        const polygon = new window.T.Polygon(points, {
+          strokeColor: boundary.properties.color,
+          strokeWeight: 2,
+          fillColor: boundary.properties.color,
+          fillOpacity: 0.35,
+        });
+        map.addOverLay(polygon);
+      };
+
+      if (boundary.geometry.type === 'Polygon') {
+        for (const ring of coords) {
+          drawRing(ring);
+        }
+      } else if (boundary.geometry.type === 'MultiPolygon') {
+        for (const polygon of coords) {
+          for (const ring of polygon) {
+            drawRing(ring);
+          }
+        }
+      }
+
+      // Add empire label at center
+      const center = empireCenters[index];
+      if (center) {
+        const lnglat = new window.T.LngLat(center.lon, center.lat);
+        const label = new window.T.Label({
+          text: t(boundary.properties.nameKey),
+          position: lnglat,
+          offset: new window.T.Pixel(-30, -10),
+        });
+        label.setBackgroundColor(boundary.properties.color);
+        label.setBorderLine(0);
+        label.setFontColor('#fff');
+        label.setFontSize(12);
+        label.setFontWeight('bold');
+        map.addOverLay(label);
+      }
+    });
+  }, [mapReady, activeBoundaries, empireCenters, t]);
+
   return (
-    <div className={`h-full w-full overflow-hidden rounded-xl border ${WORLD_MAP_COLORS.container.border} ${WORLD_MAP_COLORS.container.bg} relative`}>
-      <Map
-        mapLib={maplibregl as unknown as MapLib}
-        initialViewState={{
-          longitude: initialCenter.lon,
-          latitude: initialCenter.lat,
-          zoom: initialZoom,
-        }}
-        style={{ width: '100%', height: '100%' }}
-        mapStyle="https://tiles.openfreemap.org/styles/liberty"
-        onClick={() => setSelectedEmpire(null)}
-      >
-        <div className={`absolute ${MAP_NAV_COLORS.container}`}>
-          <NavigationControl visualizePitch />
+    <div className="h-full w-full overflow-hidden relative">
+      {!mapReady && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-zinc-100 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500 z-10">
+          <div className="w-6 h-6 border-2 border-zinc-300 border-t-zinc-600 dark:border-zinc-600 dark:border-t-zinc-400 rounded-full animate-spin" aria-hidden="true" />
+          <span className="text-sm">加载地图中...</span>
         </div>
-
-        {/* Empire boundaries */}
-        {activeBoundaries.map((boundary, index) => (
-          <Source
-            key={`${boundary.properties.nameKey}-${index}`}
-            id={`empire-${index}`}
-            type="geojson"
-            data={boundary}
-          >
-            <Layer
-              id={`empire-fill-${index}`}
-              type="fill"
-              paint={{
-                'fill-color': boundary.properties.color,
-                'fill-opacity': 0.35,
-              }}
-            />
-            <Layer
-              id={`empire-line-${index}`}
-              type="line"
-              paint={{
-                'line-color': boundary.properties.color,
-                'line-width': 2,
-                'line-opacity': 0.8,
-              }}
-            />
-          </Source>
-        ))}
-
-        {/* Empire center markers */}
-        {activeBoundaries.map((boundary, index) => {
-          const center = empireCenters[index];
-          if (!center) return null;
-
-          return (
-            <Marker
-              key={`marker-${index}`}
-              longitude={center.lon}
-              latitude={center.lat}
-              anchor="center"
-            >
-              <button
-                type="button"
-                onClick={(ev) => {
-                  ev.stopPropagation();
-                  setSelectedEmpire(boundary);
-                }}
-                onKeyDown={(ev) => {
-                  if (ev.key === 'Enter' || ev.key === ' ') {
-                    ev.preventDefault();
-                    ev.stopPropagation();
-                    setSelectedEmpire(boundary);
-                  }
-                }}
-                className="px-2 py-1 text-xs font-bold text-white rounded-full shadow-md hover:scale-110 transition-transform focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-1"
-                style={{ backgroundColor: boundary.properties.color }}
-                aria-label={`${t(boundary.properties.nameKey)} — ${formatYear(boundary.properties.startYear)} to ${formatYear(boundary.properties.endYear)}`}
-              >
-                {t(boundary.properties.nameKey)}
-              </button>
-            </Marker>
-          );
-        })}
-
-        {/* Selected empire popup */}
-        {selectedEmpire ? (
-          <Popup
-            longitude={
-              selectedEmpire.geometry.type === 'Polygon'
-                ? selectedEmpire.geometry.coordinates[0]?.[0]?.[0] ?? 0
-                : selectedEmpire.geometry.coordinates[0]?.[0]?.[0]?.[0] ?? 0
-            }
-            latitude={
-              selectedEmpire.geometry.type === 'Polygon'
-                ? selectedEmpire.geometry.coordinates[0]?.[0]?.[1] ?? 0
-                : selectedEmpire.geometry.coordinates[0]?.[0]?.[0]?.[1] ?? 0
-            }
-            anchor="top"
-            closeButton
-            closeOnClick={false}
-            onClose={() => setSelectedEmpire(null)}
-            maxWidth="280px"
-          >
-            <div className={`${MAP_POPUP_COLORS.container}`}>
-              <div className="flex items-center gap-2">
-                <div
-                  className={MAP_POPUP_COLORS.dot}
-                  style={{ backgroundColor: selectedEmpire.properties.color }}
-                />
-                <h3 className={MAP_POPUP_COLORS.title}>
-                  {t(selectedEmpire.properties.nameKey)}
-                </h3>
-              </div>
-              <div className={MAP_POPUP_COLORS.subtitle}>
-                {formatYear(selectedEmpire.properties.startYear)} — {formatYear(selectedEmpire.properties.endYear)}
-              </div>
-            </div>
-          </Popup>
-        ) : null}
-      </Map>
+      )}
+      <div ref={mapContainerRef} className="w-full h-full" />
 
       {/* Currently active empire list */}
       <div className={`absolute left-3 top-3 z-10 ${WORLD_VIEW_COLORS.background} ${WORLD_VIEW_COLORS.backdrop} rounded-lg p-2 max-w-[200px]`}>
@@ -212,6 +205,33 @@ export function WorldEmpireMap({
           )}
         </div>
       </div>
+
+      {/* Selected empire popup */}
+      {selectedEmpire && (
+        <div className={`absolute right-3 top-3 z-10 bg-white dark:bg-zinc-800 rounded-lg shadow-lg p-3 max-w-[280px]`}>
+          <div className={MAP_POPUP_COLORS.container}>
+            <div className="flex items-center gap-2">
+              <div
+                className={MAP_POPUP_COLORS.dot}
+                style={{ backgroundColor: selectedEmpire.properties.color }}
+              />
+              <h3 className={MAP_POPUP_COLORS.title}>
+                {t(selectedEmpire.properties.nameKey)}
+              </h3>
+            </div>
+            <div className={MAP_POPUP_COLORS.subtitle}>
+              {formatYear(selectedEmpire.properties.startYear)} — {formatYear(selectedEmpire.properties.endYear)}
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => setSelectedEmpire(null)}
+            className="absolute top-1 right-1 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
+          >
+            ✕
+          </button>
+        </div>
+      )}
     </div>
   );
 }

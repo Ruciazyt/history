@@ -7,61 +7,16 @@ import { useTranslations } from 'next-intl';
 import { TIMELINE_MAP_COLORS } from '@/lib/history/constants';
 import { logger } from '@/lib/history/logger';
 
-const BAIDU_MAP_AK = process.env.NEXT_PUBLIC_BAIDU_MAP_AK || '';
+const TIANDITU_TOKEN = '07b4df99018dcee22e60ad2064723188';
 
 interface TimelineMapProps {
   event: TimelineEvent | null;
 }
 
-// WGS-84 to BD-09 (Baidu) coordinate conversion
-// Based on the official coordinate transformation algorithm
-function wgs84ToBd09(lon: number, lat: number): { lon: number; lat: number } {
-  const PI = Math.PI;
-
-  // Step 1: WGS-84 to GCJ-02 (China encrypted coordinates)
-  const transformLat = (x: number, y: number): number => {
-    let ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
-    ret += (20.0 * Math.sin(6.0 * x * PI) + 20.0 * Math.sin(2.0 * x * PI)) * 2.0 / 3.0;
-    ret += (20.0 * Math.sin(y * PI) + 40.0 * Math.sin(y / 3.0 * PI)) * 2.0 / 3.0;
-    ret += (160.0 * Math.sin(y / 12.0 * PI) + 320.0 * Math.sin(y * PI / 30.0)) * 2.0 / 3.0;
-    return ret;
-  };
-
-  const transformLon = (x: number, y: number): number => {
-    let ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
-    ret += (20.0 * Math.sin(6.0 * x * PI) + 20.0 * Math.sin(x * PI)) * 2.0 / 3.0;
-    ret += (20.0 * Math.sin(x * PI) + 40.0 * Math.sin(x / 3.0 * PI)) * 2.0 / 3.0;
-    ret += (150.0 * Math.sin(x / 12.0 * PI) + 300.0 * Math.sin(x / 30.0 * PI)) * 2.0 / 3.0;
-    return ret;
-  };
-
-  const isInChina = (lat: number, lon: number): boolean => {
-    return lon >= 72.004 && lon <= 137.8347 && lat >= 0.8293 && lat <= 55.8271;
-  };
-
-  let gcjLon = lon;
-  let gcjLat = lat;
-
-  if (isInChina(lat, lon)) {
-    const dLat = transformLat(lon - 105.0, lat - 35.0);
-    const dLon = transformLon(lon - 105.0, lat - 35.0);
-    gcjLat = lat + dLat;
-    gcjLon = lon + dLon;
-  }
-
-  // Step 2: GCJ-02 to BD-09
-  const ZB2 = Math.sqrt(gcjLon * gcjLon + gcjLat * gcjLat) + 0.00002 * Math.sin(gcjLat * PI * 3000.0 / 180.0);
-  const THETA2 = Math.atan2(gcjLat, gcjLon) + 0.000003 * Math.cos(gcjLon * PI * 3000.0 / 180.0);
-  const bdLon = ZB2 * Math.cos(THETA2) + 0.0065;
-  const bdLat = ZB2 * Math.sin(THETA2) + 0.006;
-
-  return { lon: bdLon, lat: bdLat };
-}
-
 declare global {
   interface Window {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    BMapGL: any;
+    T: any;
   }
 }
 
@@ -72,50 +27,46 @@ export function TimelineMap({ event }: TimelineMapProps) {
   const mapRef = React.useRef<any>(null);
   const [mapReady, setMapReady] = React.useState(false);
 
-  // Center is computed on mount; map pans to event location via separate effect
   const initialCenter = (() => {
     if (event?.location) {
-      const converted = wgs84ToBd09(event.location.lon, event.location.lat);
-      return { lon: converted.lon, lat: converted.lat };
+      return { lon: event.location.lon, lat: event.location.lat };
     }
     return { lon: 108.95, lat: 34.34 };
   })();
 
-  // Load Baidu Map script
+  // Load Tianditu script
   React.useEffect(() => {
     if (mapRef.current) return;
 
     const initMap = () => {
-      if (window.BMapGL && mapContainerRef.current) {
+      if (window.T && mapContainerRef.current) {
         try {
-          const map = new window.BMapGL.Map(mapContainerRef.current);
-          map.centerAndZoom(new window.BMapGL.Point(initialCenter.lon, initialCenter.lat), event ? 5 : 4);
-          map.enableScrollWheelZoom(true);
+          const map = new window.T.Map(mapContainerRef.current);
+          const center = new window.T.LngLat(initialCenter.lon, initialCenter.lat);
+          map.centerAndZoom(center, event ? 5 : 4);
+          map.enableScrollWheelZoom();
           mapRef.current = map;
           setMapReady(true);
         } catch (e) {
-          logger.error('map', 'Failed to initialize Baidu Map', e);
+          logger.error('map', 'Failed to initialize Tianditu', e);
         }
       }
     };
 
-    const callbackName = 'baiduTimelineMapCb_' + Date.now();
-    (window as unknown as Record<string, () => void>)[callbackName] = () => { initMap(); };
-
-    if (!BAIDU_MAP_AK) {
-      logger.warn('map', 'NEXT_PUBLIC_BAIDU_MAP_AK is not configured — map will not load');
-      delete (window as unknown as Record<string, unknown>)[callbackName];
+    if (window.T) {
+      initMap();
       return;
     }
 
     const script = document.createElement('script');
-    script.src = `https://api.map.baidu.com/api?v=1.0&type=webgl&ak=${BAIDU_MAP_AK}&callback=${callbackName}`;
+    script.src = `https://api.tianditu.gov.cn/api?v=4.0&tk=${TIANDITU_TOKEN}`;
     script.async = true;
+    script.onload = () => { initMap(); };
+    script.onerror = () => { logger.error('map', 'Failed to load Tianditu script'); };
     document.head.appendChild(script);
 
     return () => {
       if (script.parentNode) script.parentNode.removeChild(script);
-      delete (window as unknown as Record<string, unknown>)[callbackName];
       mapRef.current = null;
       setMapReady(false);
     };
@@ -135,21 +86,20 @@ export function TimelineMap({ event }: TimelineMapProps) {
         if (!territory.polygon || territory.polygon.length < 3) continue;
 
         try {
-          const bdCoords = territory.polygon.map(
+          const points = territory.polygon.map(
             (coord: number[]) => {
               if (coord[0] === undefined || coord[1] === undefined) return null;
-              const converted = wgs84ToBd09(coord[0], coord[1]);
-              return new window.BMapGL.Point(converted.lon, converted.lat);
+              return new window.T.LngLat(coord[0], coord[1]);
             }
           ).filter((p): p is NonNullable<typeof p> => p !== null);
 
-          const polygon = new window.BMapGL.Polygon(bdCoords, {
+          const polygon = new window.T.Polygon(points, {
             strokeColor: territory.color,
             strokeWeight: 2,
             fillColor: territory.color,
             fillOpacity: 0.35,
           });
-          map.addOverlay(polygon);
+          map.addOverLay(polygon);
         } catch (e) {
           logger.warn('map', 'Failed to draw territory polygon', e);
         }
@@ -158,83 +108,59 @@ export function TimelineMap({ event }: TimelineMapProps) {
 
     // Draw event location marker
     if (event.location) {
-      const converted = wgs84ToBd09(event.location.lon, event.location.lat);
-      const point = new window.BMapGL.Point(converted.lon, converted.lat);
+      const lnglat = new window.T.LngLat(event.location.lon, event.location.lat);
 
-      // Create custom marker with emoji
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const icon = new window.BMapGL.Icon(('' as any), new window.BMapGL.Size(0, 0));
-      const marker = new window.BMapGL.Marker(point, { icon });
+      // Create marker
+      const marker = new window.T.Marker(lnglat);
 
-      // Add tooltip via label
-      const label = new window.BMapGL.Label(t(event.location.nameKey), {
-        offset: new window.BMapGL.Size(-20, -25),
+      // Add label
+      const label = new window.T.Label({
+        text: t(event.location.nameKey),
+        position: lnglat,
+        offset: new window.T.Pixel(-20, -25),
       });
-      label.setStyle({
-        backgroundColor: 'transparent',
-        border: 'none',
-        fontSize: '16px',
-      });
-      marker.setLabel(label);
+      label.setBackgroundColor('transparent');
+      label.setBorderLine(0);
+      label.setFontColor('#000');
+      label.setFontSize(16);
+      map.addOverLay(label);
 
-      map.addOverlay(marker);
+      map.addOverLay(marker);
 
       // Draw faction labels near the marker
       if (event.factions && event.factions.length > 0) {
         const count = event.factions.length;
         event.factions.forEach((faction, index) => {
           const offset = (index - (count - 1) / 2) * 4;
-          const labelPoint = new window.BMapGL.Point(converted.lon + offset, converted.lat + 1.5);
-          const factionLabel = new window.BMapGL.Label(t(faction.nameKey), {
-            offset: new window.BMapGL.Size(-30, -10),
+          const labelPoint = new window.T.LngLat(event.location.lon + offset, event.location.lat + 1.5);
+
+          const factionLabel = new window.T.Label({
+            text: t(faction.nameKey),
+            position: labelPoint,
+            offset: new window.T.Pixel(-30, -10),
           });
-          factionLabel.setStyle({
-            backgroundColor: faction.color,
-            color: '#fff',
-            border: `1px solid ${faction.color}`,
-            borderRadius: '4px',
-            padding: '2px 6px',
-            fontSize: '12px',
-            fontWeight: '500',
-            whiteSpace: 'nowrap',
-          });
-          // Position label using a transparent marker
-          const labelMarker = new window.BMapGL.Marker(labelPoint, {
-            icon: new window.BMapGL.Icon(
-              'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-              new window.BMapGL.Size(1, 1)
-            ),
-          });
-          labelMarker.setLabel(factionLabel);
-          map.addOverlay(labelMarker);
+          factionLabel.setBackgroundColor(faction.color);
+          factionLabel.setBorderLine(0);
+          factionLabel.setFontColor('#fff');
+          factionLabel.setFontSize(12);
+          map.addOverLay(factionLabel);
         });
       }
     }
 
     // Pan to the event location
     if (event.location) {
-      const converted = wgs84ToBd09(event.location.lon, event.location.lat);
-      map.panTo(new window.BMapGL.Point(converted.lon, converted.lat));
+      const lnglat = new window.T.LngLat(event.location.lon, event.location.lat);
+      map.panTo(lnglat);
     }
   }, [mapReady, event, t]);
 
   return (
     <div className={`relative w-full h-full rounded-lg overflow-hidden border ${TIMELINE_MAP_COLORS.container}`}>
       {!mapReady && (
-        <div className={`absolute inset-0 flex flex-col items-center justify-center gap-2 bg-zinc-100 dark:bg-zinc-800 text-zinc-400 z-10`}>
-          {!BAIDU_MAP_AK ? (
-            <>
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-              </svg>
-              <span className="text-sm">地图需要配置 API Key</span>
-            </>
-          ) : (
-            <>
-              <div className="w-6 h-6 border-2 border-zinc-300 border-t-zinc-600 rounded-full animate-spin" aria-hidden="true" />
-              <span className="text-sm">加载地图中...</span>
-            </>
-          )}
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-zinc-100 dark:bg-zinc-800 text-zinc-400 z-10">
+          <div className="w-6 h-6 border-2 border-zinc-300 border-t-zinc-600 rounded-full animate-spin" aria-hidden="true" />
+          <span className="text-sm">加载地图中...</span>
         </div>
       )}
       <div ref={mapContainerRef} className="w-full h-full" />
