@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import type { Ruler, SidebarColors } from '@/lib/history/types';
+import type { Ruler } from '@/lib/history/types';
 import { formatYear } from '@/lib/history/utils';
 import { useTranslations } from 'next-intl';
 import { ERA_COLORS, ERA_ITEM_COLORS, HISTORY_APP_COLORS } from '@/lib/history/constants';
@@ -12,7 +12,6 @@ interface RulerListProps {
   isOpen: boolean;
   selectedRulerId: string | null;
   onSelectRuler: (id: string) => void;
-  sidebarColors: SidebarColors;
 }
 
 export function RulerList({
@@ -21,7 +20,6 @@ export function RulerList({
   isOpen,
   selectedRulerId,
   onSelectRuler,
-  sidebarColors,
 }: RulerListProps) {
   const t = useTranslations();
   const tEra = useTranslations('rulerEraName');
@@ -46,7 +44,7 @@ export function RulerList({
           <table className="w-full text-xs sm:text-sm border-collapse">
             <thead>
               <tr
-                className={`text-left ${sidebarColors.table.header.text} border-b ${sidebarColors.table.header.border}`}
+                className="text-left text-[var(--text-muted)] border-b border-[var(--color-hairline)]"
               >
                 <th className="px-2 py-2 font-medium w-16 shrink-0">{t('ui.year')}</th>
                 {era.polities?.map((p) => (
@@ -71,10 +69,10 @@ export function RulerList({
                   return (
                     <tr
                       key={year}
-                      className={`border-b ${sidebarColors.table.row.border} last:border-0 ${sidebarColors.table.row.hover}`}
+                      className="border-b border-[var(--color-hairline-soft)] last:border-0 hover:bg-[var(--color-surface-soft)]"
                     >
                       <td
-                        className={`px-2 py-2 ${sidebarColors.table.row.year} shrink-0 w-16`}
+                        className="px-2 py-2 text-xs text-[var(--text-muted)] font-medium shrink-0 w-16"
                       >
                         {formatYear(year)}
                       </td>
@@ -92,8 +90,8 @@ export function RulerList({
                               onClick={() => onSelectRuler(r.id)}
                               className={`w-full text-left rounded px-2 py-1.5 truncate ${
                                 isActive
-                                  ? sidebarColors.table.rulerButton.active
-                                  : sidebarColors.table.rulerButton.inactive
+                                  ? 'bg-[var(--color-primary)] text-[var(--color-on-primary)] font-medium'
+                                  : 'hover:bg-[var(--color-surface-soft)] text-[var(--text-primary)]'
                               }`}
                             >
                               <div>{t(r.nameKey)}</div>
@@ -122,7 +120,9 @@ export function RulerList({
               type="button"
               onClick={() => onSelectRuler(r.id)}
               className={`flex w-full items-center justify-between gap-2 rounded-lg px-2 py-1.5 text-left text-xs sm:text-sm ${
-                isActive ? sidebarColors.rulerList.active : sidebarColors.rulerList.inactive
+                isActive
+                  ? 'bg-[var(--color-primary)] text-[var(--color-on-primary)]'
+                  : 'hover:bg-[var(--color-surface-soft)] text-[var(--text-secondary)]'
               }`}
             >
               <span className="truncate flex items-center gap-1">
@@ -139,7 +139,7 @@ export function RulerList({
                   </>
                 )}
               </span>
-              <span className={`shrink-0 ${sidebarColors.eraItem.year}`}>
+              <span className="shrink-0 text-xs text-[var(--text-muted)]">
                 {formatYear(r.startYear)}–{formatYear(r.endYear)}
               </span>
             </button>

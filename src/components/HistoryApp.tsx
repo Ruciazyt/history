@@ -18,7 +18,6 @@ import { EventsDrawer } from '@/components/common/EventsDrawer';
 import { useTranslations } from 'next-intl';
 import { ERA_COLORS, ERA_ITEM_COLORS } from '@/lib/history/constants';
 import { BattleOfTheDayCard } from '@/components/battles/BattleOfTheDayCard';
-import { useHistoryAppColors } from '@/lib/history/useHistoryAppColors';
 import { RulerList } from '@/components/HistoryApp/RulerList';
 
 import { worldComparisonEra, eastAsiaComparisonEra } from '@/lib/history/data/worldEras';
@@ -53,7 +52,6 @@ export function HistoryApp({
   const t = useTranslations();
   const tEra = useTranslations('rulerEraName');
   const currentLocale = locale || 'zh';
-  const { C } = useHistoryAppColors();
 
   const [civMode, setCivMode] = React.useState<'china' | 'eurasian' | 'east-asia'>('china');
 
@@ -300,7 +298,6 @@ export function HistoryApp({
                       isOpen={isOpen}
                       selectedRulerId={selectedRulerId}
                       onSelectRuler={setSelectedRulerId}
-                      sidebarColors={C.sidebar}
                     />
                   </div>
                 );

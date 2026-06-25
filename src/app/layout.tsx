@@ -1,5 +1,19 @@
 import type { Metadata, Viewport } from 'next';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
+
+// Google Fonts: Inter (figmaSans substitute) + JetBrains Mono (figmaMono substitute)
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-jetbrains-mono',
+});
 
 export const metadata: Metadata = {
   title: 'History Atlas',
@@ -33,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
+    <html className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
         {/* Theme color for dark mode - added inline to support prefers-color-scheme */}
         <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />

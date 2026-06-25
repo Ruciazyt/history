@@ -90,4 +90,34 @@ The project enforces strict TypeScript: `noUncheckedIndexedAccess`, `noImplicitR
 
 ## Deployment
 
-Vercel-based. `vercel.json` handles rewrite rules (`/history/:path` → `/:path`). No CI/CD workflows in the repo.
+### Vercel Git 集成（自动部署）
+
+项目通过 Vercel Git 集成实现自动部署，无需 GitHub Actions。
+
+**首次设置步骤：**
+
+1. 登录 [vercel.com](https://vercel.com)
+2. 点击 "Add New..." → "Project"
+3. 导入 GitHub 仓库 `history`
+4. Framework Preset 自动识别为 Next.js，无需修改
+5. 点击 "Deploy"
+
+**自动部署行为：**
+
+| 触发条件 | 部署类型 | 说明 |
+|---------|---------|------|
+| Push 到 `main` 分支 | Production | 自动部署到 `history.ruciazyt.cn` |
+| Pull Request | Preview | 生成预览 URL，方便测试 |
+| Push 到其他分支 | Preview | 生成预览 URL |
+
+**自定义域名配置：**
+
+1. 在 Vercel 项目设置 → "Domains"
+2. 添加 `history.ruciazyt.cn`
+3. 按提示配置 DNS（CNAME 记录指向 `cname.vercel-dns.com`）
+
+**Rewrite 规则：**
+
+`vercel.json` 配置了 `/history/:path` → `/:path` 的 rewrite 规则，支持子路径部署。
+
+**无环境变量** — 项目不需要在 Vercel 中配置额外的环境变量。

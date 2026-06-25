@@ -180,9 +180,9 @@
 }
 
 @theme inline {
-  /* Font families - Inter as figmaSans substitute */
-  --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  /* Font families - Inter as figmaSans substitute, JetBrains Mono as figmaMono substitute */
+  --font-sans: var(--font-inter), 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), 'SF Mono', 'Fira Code', 'Consolas', monospace;
 
   /* Animation */
   --animate-spin-slow: spin 2s linear infinite;
