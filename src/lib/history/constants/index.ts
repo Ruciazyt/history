@@ -11,6 +11,3 @@ export * from './labels';
 
 // Layout
 export * from './layout';
-
-// Animations
-export * from './animations';

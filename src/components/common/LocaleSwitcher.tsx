@@ -22,8 +22,9 @@ export function LocaleSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
 
+  // DESIGN.md: pill-shaped select with hairline border
   return (
-    <label className="inline-flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
+    <label className="inline-flex items-center gap-2 text-body-sm text-[var(--text-secondary)]">
       <span className="sr-only">{tUi('language')}</span>
       <select
         value={locale}
@@ -33,7 +34,7 @@ export function LocaleSwitcher() {
           const nextPath = `/${next}${rest}`;
           router.push(nextPath);
         }}
-        className="rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-2 py-1 text-sm cursor-pointer"
+        className="rounded-[var(--rounded-pill)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] text-[var(--text-secondary)] px-3 py-1 text-body-sm cursor-pointer"
       >
         {locales.map((l) => (
           <option key={l} value={l}>

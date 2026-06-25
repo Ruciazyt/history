@@ -53,23 +53,22 @@ export function HistoryApp({
   const t = useTranslations();
   const tEra = useTranslations('rulerEraName');
   const currentLocale = locale || 'zh';
-  const { C, EXTRA } = useHistoryAppColors();
+  const { C } = useHistoryAppColors();
 
   const [civMode, setCivMode] = React.useState<'china' | 'eurasian' | 'east-asia'>('china');
-  
-  // 世界帝国地图的当前年份
+
   const [worldYear, setWorldYear] = React.useState<number>(1);
   const worldEraBounds = React.useMemo(() => getWorldEraBounds(civMode === 'eurasian' ? 'eurasian' : 'east-asia'), [civMode]);
-  const activeWorldBoundaries = React.useMemo(() => 
+  const activeWorldBoundaries = React.useMemo(() =>
     getActiveBoundaries(worldYear, civMode === 'eurasian' ? 'eurasian' : 'east-asia'),
     [worldYear, civMode]
   );
-  
-  const activeEras = React.useMemo(() => 
+
+  const activeEras = React.useMemo(() =>
     civMode === 'china' ? eras : civMode === 'eurasian' ? [worldComparisonEra] : [eastAsiaComparisonEra],
     [civMode, eras]
   );
-  const activeRulers = React.useMemo(() => 
+  const activeRulers = React.useMemo(() =>
     civMode === 'china' ? rulers : civMode === 'eurasian' ? worldComparisonRulers : eastAsiaRulers,
     [civMode, rulers]
   );
@@ -88,13 +87,11 @@ export function HistoryApp({
 
   const [selectedRulerId, setSelectedRulerId] = React.useState<string | null>(null);
 
-  // Mobile drawer states
   const [eraDrawerOpen, setEraDrawerOpen] = React.useState(false);
   const [eventsDrawerOpen, setEventsDrawerOpen] = React.useState(false);
 
   const switchCiv = React.useCallback((mode: 'china' | 'eurasian' | 'east-asia') => {
     setCivMode(mode);
-    // 默认展开：欧亚对比/东亚对比
     if (mode === 'eurasian') setOpenEraIds(new Set(['world-comparison']));
     else if (mode === 'east-asia') setOpenEraIds(new Set(['east-asia-comparison']));
     else setOpenEraIds(new Set());
@@ -113,7 +110,6 @@ export function HistoryApp({
     }
     const firstOpen = activeEras.find((e) => openEraIds.has(e.id));
     return firstOpen ?? activeEras[0];
-
   }, [activeEras, activeRulers, selectedRulerId, openEraIds]);
 
   const [battleOfDayCollapsed, setBattleOfDayCollapsed] = React.useState(false);
@@ -123,7 +119,6 @@ export function HistoryApp({
   const timelineMin = selectedRuler?.startYear ?? selectedEra?.startYear ?? min;
   const timelineMax = selectedRuler?.endYear ?? selectedEra?.endYear ?? max;
 
-  // Keep year within selection (ruler reign if selected; otherwise era).
   React.useEffect(() => {
     setYear((y) => clamp(y, timelineMin, timelineMax));
   }, [timelineMin, timelineMax]);
@@ -155,125 +150,125 @@ export function HistoryApp({
   }, [events, inWindow, openEraIds]);
 
   const mapEvents = React.useMemo(() => {
-    // Prefer showing selected era events, but include others to support comparison.
     const merged = [...currentEraEvents, ...otherEraEvents];
-    // dedupe by id
     const byId = new Map<string, Event>();
     for (const e of merged) byId.set(e.id, e);
     return [...byId.values()];
   }, [currentEraEvents, otherEraEvents]);
 
   return (
-    <div className={`flex h-screen flex-col ${C.container.bg} ${C.container.text}`}>
-      {/* Header */}
-      <header className={`shrink-0 border-b ${C.header.border} ${C.header.bg}`}>
-        <div className="flex w-full flex-col gap-2 px-3 py-3 sm:px-4 sm:py-4">
-          {/* Top row: title + locale - mobile: hamburger + title + events icon */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 flex-1 min-w-0">
-              {/* Mobile: hamburger menu button */}
-              <button
-                type="button"
-                onClick={() => setEraDrawerOpen(true)}
-                className="rounded-lg p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors lg:hidden"
-                style={{ minWidth: '44px', minHeight: '44px' }}
-                aria-label={t('ui.openEraMenu')}
-              >
-                <span className="text-lg">☰</span>
-              </button>
-              <div className="flex-1 min-w-0">
-                <div className={`text-xs sm:text-sm ${C.header.title.small} truncate`}>{t('app.title')}</div>
-                <h1 className={`text-base sm:text-lg font-semibold truncate`}>{t('app.subtitle')}</h1>
-              </div>
-            </div>
-            <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-              {/* Mobile: events button */}
-              <button
-                type="button"
-                onClick={() => setEventsDrawerOpen(true)}
-                className="rounded-lg p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors lg:hidden"
-                style={{ minWidth: '44px', minHeight: '44px' }}
-                aria-label={t('ui.openEventsList')}
-              >
-                <span className="text-lg">📋</span>
-              </button>
-              {/* Desktop only controls */}
-              <div className="hidden lg:flex items-center gap-2 shrink-0">
-                <ThemeToggle />
-                <SearchBox events={events} rulers={rulers} locale={currentLocale} />
-                <LocaleSwitcher />
-              </div>
-              {/* Mobile: theme + locale icons */}
-              <div className="flex lg:hidden items-center gap-1">
-                <ThemeToggle />
-                <LocaleSwitcher />
-              </div>
+    <div className="flex h-screen flex-col bg-[var(--color-canvas)] text-[var(--color-ink)]">
+      {/* Header - DESIGN.md top-nav style: 56px height, white background */}
+      <header className="shrink-0 h-[56px] border-b border-[var(--color-hairline)] bg-[var(--color-canvas)]">
+        <div className="flex h-full w-full items-center justify-between px-4 lg:px-6">
+          {/* Left: hamburger (mobile) + title */}
+          <div className="flex items-center gap-3 flex-1 min-w-0">
+            <button
+              type="button"
+              onClick={() => setEraDrawerOpen(true)}
+              className="rounded-[var(--rounded-md)] p-2 hover:bg-[var(--color-surface-soft)] transition-colors lg:hidden"
+              style={{ minWidth: '44px', minHeight: '44px' }}
+              aria-label={t('ui.openEraMenu')}
+            >
+              <span className="text-lg">☰</span>
+            </button>
+            <div className="flex-1 min-w-0">
+              <div className="text-caption text-[var(--text-muted)] truncate">{t('app.title')}</div>
+              <h1 className="text-body-sm font-medium truncate">{t('app.subtitle')}</h1>
             </div>
           </div>
-          
-          {/* Second row: civ switcher - scrollable on mobile */}
-          <div className="overflow-x-auto scrollbar-hide py-1 -mx-1 px-1">
-            <div className="flex items-center gap-2 sm:gap-3">
-              {/* Civilization switcher */}
-              <div className={`flex rounded-lg ${C.civSwitcher.container} p-0.5 text-xs sm:text-sm shrink-0`}>
-                <button
-                  type="button"
-                  onClick={() => switchCiv('china')}
-                  className={`rounded-md px-2 sm:px-3 py-1 transition-colors whitespace-nowrap ${civMode === 'china' ? `${C.civSwitcher.active.bg} ${C.civSwitcher.active.text} ${C.civSwitcher.active.shadow} ${C.civSwitcher.active.font}` : C.civSwitcher.inactive}`}
-                >
-                  🏛️ {t('app.civModeChina')}
-                </button>
-              </div>
-              
-              {/* Era info */}
-              <div className={`text-xs sm:text-sm ${C.eraInfo.text} hidden sm:block`}>
-                <span className={C.eraInfo.font}>{selectedEra ? t(selectedEra.nameKey) : ''}</span>
-                <span className={`mx-2 ${EXTRA.divider.default}`}>|</span>
-                <span>
-                  {selectedEra ? `${formatYear(selectedEra.startYear, currentLocale)}–${formatYear(selectedEra.endYear, currentLocale)}` : ''}
-                </span>
-              </div>
-              
-              {/* Quick links - desktop only */}
-              <div className="hidden sm:flex items-center gap-1.5 sm:gap-2 shrink-0">
-                <Link
-                  href={`/${currentLocale}/matrix`}
-                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.matrix.bg} ${C.quickLink.matrix.text} ${C.quickLink.matrix.border}`}
-                >
-                  ⊞ <span className="hidden sm:inline">{t('matrix.title')}</span>
-                </Link>
-                <Link
-                  href={`/${currentLocale}/battles`}
-                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.battles.bg} ${C.quickLink.battles.text} ${C.quickLink.battles.border}`}
-                >
-                  ⚔️ <span className="hidden sm:inline">{t('nav.battles')}</span>
-                </Link>
-                <Link
-                  href={`/${currentLocale}/world`}
-                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.eurasian.bg} ${C.quickLink.eurasian.text} ${C.quickLink.eurasian.border}`}
-                >
-                  🌍 <span className="hidden sm:inline">{t('world.title')}</span>
-                </Link>
-                <Link
-                  href={`/${currentLocale}/place-names`}
-                  className={`px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm transition-colors whitespace-nowrap ${C.quickLink.placeNames.bg} ${C.quickLink.placeNames.text} ${C.quickLink.placeNames.border}`}
-                >
-                  🏛️ <span className="hidden sm:inline">{t('placeNames.title')}</span>
-                </Link>
-              </div>
+
+          {/* Right: controls */}
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={() => setEventsDrawerOpen(true)}
+              className="btn-circle lg:hidden"
+              aria-label={t('ui.openEventsList')}
+            >
+              📋
+            </button>
+            <div className="hidden lg:flex items-center gap-2">
+              <ThemeToggle />
+              <SearchBox events={events} rulers={rulers} locale={currentLocale} />
+              <LocaleSwitcher />
+            </div>
+            <div className="flex lg:hidden items-center gap-1">
+              <ThemeToggle />
+              <LocaleSwitcher />
             </div>
           </div>
         </div>
       </header>
 
-      <div className="flex w-full flex-1 flex-col overflow-hidden px-2 sm:px-4 py-2 sm:py-4 pb-[72px] lg:pb-4">
-        <div className="grid h-full grid-cols-1 gap-2 sm:gap-4 overflow-hidden lg:grid-cols-[320px_minmax(0,1fr)_180px] xl:grid-cols-[320px_minmax(0,1fr)_200px]">
-          {/* Left: global vertical timeline - desktop only */}
-          <aside className={`hidden lg:flex max-h-full flex-col overflow-hidden rounded-xl border ${C.sidebar.container.border} ${C.sidebar.container.bg}`}>
-            <div className={`shrink-0 border-b ${C.sidebar.header.border} ${C.sidebar.header.bg} p-2 sm:p-3`}>
+      {/* Sub-header: civ switcher + era info + quick links */}
+      <div className="shrink-0 border-b border-[var(--color-hairline)] bg-[var(--color-canvas)]">
+        <div className="overflow-x-auto scrollbar-hide py-2 px-4 lg:px-6">
+          <div className="flex items-center gap-3">
+            {/* Civilization switcher - pill toggle */}
+            <div className="flex rounded-[var(--rounded-pill)] bg-[var(--color-surface-soft)] p-1 text-sm shrink-0">
+              <button
+                type="button"
+                onClick={() => switchCiv('china')}
+                className={`rounded-[var(--rounded-pill)] px-3 py-1 transition-colors whitespace-nowrap ${
+                  civMode === 'china'
+                    ? 'bg-[var(--color-primary)] text-[var(--color-on-primary)] font-medium'
+                    : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
+                }`}
+              >
+                🏛️ {t('app.civModeChina')}
+              </button>
+            </div>
+
+            {/* Era info */}
+            <div className="text-body-sm text-[var(--text-secondary)] hidden sm:block">
+              <span className="font-medium">{selectedEra ? t(selectedEra.nameKey) : ''}</span>
+              <span className="mx-2 text-[var(--divider)]">|</span>
+              <span>
+                {selectedEra ? `${formatYear(selectedEra.startYear, currentLocale)}–${formatYear(selectedEra.endYear, currentLocale)}` : ''}
+              </span>
+            </div>
+
+            {/* Quick links - using DESIGN.md color blocks */}
+            <div className="hidden sm:flex items-center gap-2 shrink-0">
+              <Link
+                href={`/${currentLocale}/matrix`}
+                className="btn-pill bg-[var(--color-block-lime)] text-[var(--color-ink)] text-sm"
+              >
+                ⊞ <span className="hidden sm:inline">{t('matrix.title')}</span>
+              </Link>
+              <Link
+                href={`/${currentLocale}/battles`}
+                className="btn-pill bg-[var(--color-block-pink)] text-[var(--color-ink)] text-sm"
+              >
+                ⚔️ <span className="hidden sm:inline">{t('nav.battles')}</span>
+              </Link>
+              <Link
+                href={`/${currentLocale}/world`}
+                className="btn-pill bg-[var(--color-block-lilac)] text-[var(--color-ink)] text-sm"
+              >
+                🌍 <span className="hidden sm:inline">{t('world.title')}</span>
+              </Link>
+              <Link
+                href={`/${currentLocale}/place-names`}
+                className="btn-pill bg-[var(--color-block-mint)] text-[var(--color-ink)] text-sm"
+              >
+                🏛️ <span className="hidden sm:inline">{t('placeNames.title')}</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main content area */}
+      <div className="flex w-full flex-1 flex-col overflow-hidden px-4 py-4 pb-[72px] lg:pb-4">
+        <div className="grid h-full grid-cols-1 gap-4 overflow-hidden lg:grid-cols-[320px_minmax(0,1fr)_180px] xl:grid-cols-[320px_minmax(0,1fr)_200px]">
+          {/* Left: era sidebar - DESIGN.md card style */}
+          <aside className="hidden lg:flex max-h-full flex-col overflow-hidden rounded-[var(--rounded-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)]">
+            <div className="shrink-0 border-b border-[var(--color-hairline)] p-3">
               <div className="flex items-baseline justify-between gap-3">
                 <div>
-                  <div className={`text-xs font-semibold uppercase tracking-wide ${C.sidebar.header.text}`}>{t('ui.eras')}</div>
+                  <div className="text-eyebrow text-[var(--text-muted)]">{t('ui.eras')}</div>
                 </div>
               </div>
             </div>
@@ -283,21 +278,21 @@ export function HistoryApp({
                 const eraRulers = activeRulers.filter((r) => r.eraId === era.id);
                 const eraColor = ERA_COLORS[era.id] || ERA_ITEM_COLORS.default;
                 return (
-                  <div key={era.id} className={`border-b ${C.sidebar.eraItem.border} last:border-0 ${isOpen ? eraColor.bg : ''}`}>
+                  <div key={era.id} className={`border-b border-[var(--color-hairline-soft)] last:border-0 ${isOpen ? eraColor.bg : ''}`}>
                     <button
                       type="button"
                       onClick={() => toggleEra(era.id)}
-                      className={`flex w-full items-center gap-2 px-2 py-2.5 text-left ${C.sidebar.eraItem.hover} sm:px-3 transition-colors`}
+                      className="flex w-full items-center gap-2 px-3 py-2.5 text-left hover:bg-[var(--color-surface-soft)] transition-colors"
                     >
                       <span className={`w-2 h-2 rounded-full shrink-0 ${eraColor.dot}`}></span>
-                      <span className={`flex-1 font-semibold ${eraColor.text} text-sm sm:text-base`}>
+                      <span className={`flex-1 font-semibold ${eraColor.text} text-sm`}>
                         {t(era.nameKey)}
-                        {era.isParallelPolities && <span className={`text-xs ml-1 ${EXTRA.multiPolity.text}`}>（{t('ui.parallelPolities')}）</span>}
+                        {era.isParallelPolities && <span className="text-xs ml-1 text-[var(--text-muted)]">（{t('ui.parallelPolities')}）</span>}
                       </span>
-                      <span className={`text-xs ${C.sidebar.eraItem.year} hidden sm:inline`}>
+                      <span className="text-xs text-[var(--text-muted)] hidden sm:inline">
                         {formatYear(era.startYear, currentLocale)}–{formatYear(era.endYear, currentLocale)}
                       </span>
-                      <span className={`text-xs ${EXTRA.arrow.text}`}>{isOpen ? '▼' : '▶'}</span>
+                      <span className="text-xs text-[var(--divider)]">{isOpen ? '▼' : '▶'}</span>
                     </button>
                     <RulerList
                       eraRulers={eraRulers}
@@ -314,42 +309,43 @@ export function HistoryApp({
           </aside>
 
           {/* Center: map + time controls */}
-          <section className="flex min-h-0 flex-col gap-2 sm:gap-3 overflow-hidden">
-            <div className={`rounded-xl border ${C.timeline.container.border} ${C.timeline.container.bg} p-2 sm:p-3`}>
+          <section className="flex min-h-0 flex-col gap-3 overflow-hidden">
+            {/* Timeline controls - DESIGN.md card style */}
+            <div className="shrink-0 rounded-[var(--rounded-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] p-3">
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0">
-                  <div className={`text-xs font-semibold uppercase tracking-wide ${C.timeline.header.text}`}>{t('ui.timeline')}</div>
-                  <div className={`text-xs sm:text-sm ${EXTRA.eventTitle.default}`}>
-                    <span className={C.timeline.header.year}>{formatYear(year, currentLocale)}</span>
-                    <span className={`mx-1.5 sm:mx-2 ${EXTRA.divider.default}`}>|</span>
+                  <div className="text-eyebrow text-[var(--text-muted)]">{t('ui.timeline')}</div>
+                  <div className="text-body-sm text-[var(--text-primary)]">
+                    <span className="font-semibold">{formatYear(year, currentLocale)}</span>
+                    <span className="mx-2 text-[var(--divider)]">|</span>
                     <span className="hidden sm:inline">{t('ui.window.label')}: </span>
-                    <span className={C.timeline.header.window}>{t('ui.window.years', { count: windowYears })}</span>
-                    <span className={`mx-1.5 sm:mx-2 ${EXTRA.divider.default} hidden sm:inline`}>|</span>
-                    <span className={`${EXTRA.rangeLabel.text} hidden sm:inline`}>{rangeLabel(year, windowYears, currentLocale)}</span>
+                    <span className="font-semibold">{t('ui.window.years', { count: windowYears })}</span>
+                    <span className="mx-2 text-[var(--divider)] hidden sm:inline">|</span>
+                    <span className="text-[var(--text-secondary)] hidden sm:inline">{rangeLabel(year, windowYears, currentLocale)}</span>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1.5 sm:gap-2">
+                <div className="flex items-center gap-2">
                   {[10, 50, 100].map((w) => (
                     <button
                       key={w}
                       type="button"
                       onClick={() => setWindowYears(w)}
-                      className={`shrink-0 rounded-lg px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium transition-colors ${
+                      className={`rounded-[var(--rounded-pill)] px-3 py-1 text-sm font-medium transition-colors ${
                         windowYears === w
-                          ? C.timeline.windowButton.active.bg + ' ' + C.timeline.windowButton.active.text
-                          : C.timeline.windowButton.inactive.bg + ' ' + C.timeline.windowButton.inactive.text + ' ' + C.timeline.windowButton.inactive.hover
+                          ? 'bg-[var(--color-primary)] text-[var(--color-on-primary)]'
+                          : 'bg-[var(--color-surface-soft)] text-[var(--text-secondary)] hover:bg-[var(--color-hairline)]'
                       }`}
                     >
                       {w}年
                     </button>
                   ))}
-                  <div className={`flex items-center gap-1 border-l ${EXTRA.sidebar.nav.border} ${EXTRA.sidebar.nav.padding}`}>
+                  <div className="flex items-center gap-1 border-l border-[var(--color-hairline)] pl-2 ml-1">
                     <button
                       type="button"
                       onClick={() => setYear((y) => y - windowYears)}
                       disabled={year - windowYears < timelineMin}
-                      className={`rounded-lg p-1.5 ${C.timeline.navButton.bg} ${C.timeline.navButton.text} ${C.timeline.navButton.hover} ${C.timeline.navButton.disabled}`}
+                      className="rounded-[var(--rounded-md)] p-1.5 bg-[var(--color-surface-soft)] text-[var(--text-secondary)] hover:bg-[var(--color-hairline)] disabled:opacity-50"
                     >
                       ◀
                     </button>
@@ -357,7 +353,7 @@ export function HistoryApp({
                       type="button"
                       onClick={() => setYear((y) => y + windowYears)}
                       disabled={year + windowYears > timelineMax}
-                      className={`rounded-lg p-1.5 ${C.timeline.navButton.bg} ${C.timeline.navButton.text} ${C.timeline.navButton.hover} ${C.timeline.navButton.disabled}`}
+                      className="rounded-[var(--rounded-md)] p-1.5 bg-[var(--color-surface-soft)] text-[var(--text-secondary)] hover:bg-[var(--color-hairline)] disabled:opacity-50"
                     >
                       ▶
                     </button>
@@ -366,7 +362,7 @@ export function HistoryApp({
               </div>
             </div>
 
-            {/* Battle of the Day banner */}
+            {/* Battle of the Day - color block section */}
             {!battleOfDayCollapsed && (
               <div className="shrink-0">
                 <BattleOfTheDayCard events={events} />
@@ -375,20 +371,21 @@ export function HistoryApp({
             <button
               type="button"
               onClick={() => setBattleOfDayCollapsed((v) => !v)}
-              className={`w-full flex items-center justify-center gap-1.5 py-1.5 text-xs rounded-lg border transition-colors ${C.sidebar.eraItem.hover} border-transparent hover:border ${C.sidebar.eraItem.border}`}
+              className="w-full flex items-center justify-center gap-1.5 py-1.5 text-xs rounded-[var(--rounded-md)] hover:bg-[var(--color-surface-soft)] transition-colors"
             >
               <span className="opacity-60">{battleOfDayCollapsed ? '📅' : '▲'}</span>
-              <span className={C.sidebar.eraItem.year}>{battleOfDayCollapsed ? t('battleOfTheDay.expand') : t('battleOfTheDay.collapse')}</span>
+              <span className="text-[var(--text-muted)]">{battleOfDayCollapsed ? t('battleOfTheDay.expand') : t('battleOfTheDay.collapse')}</span>
             </button>
 
-            <div className={`flex-1 min-h-0 rounded-xl border ${C.mapContainer.border} ${C.mapContainer.bg} overflow-hidden`}>
+            {/* Map container - DESIGN.md card style */}
+            <div className="flex-1 min-h-0 rounded-[var(--rounded-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] overflow-hidden">
               {civMode === 'china' ? (
                 <HistoryMap events={mapEvents} openEraIds={openEraIds} />
               ) : (
                 <>
                   <div className="flex-1 min-h-0">
-                    <WorldEmpireMap 
-                      year={worldYear} 
+                    <WorldEmpireMap
+                      year={worldYear}
                       mode={civMode === 'eurasian' ? 'eurasian' : 'east-asia'}
                     />
                   </div>
@@ -406,10 +403,10 @@ export function HistoryApp({
             </div>
           </section>
 
-          {/* Right: events - desktop only */}
-          <aside className={`hidden lg:flex max-h-full flex-col overflow-hidden rounded-xl border ${C.eventsSidebar.container.border} ${C.eventsSidebar.container.bg}`}>
-            <div className={`shrink-0 border-b ${C.eventsSidebar.header.border} ${C.eventsSidebar.header.bg} p-2 sm:p-3`}>
-              <div className={`text-xs font-semibold uppercase tracking-wide ${C.eventsSidebar.header.text}`}>
+          {/* Right: events sidebar - DESIGN.md card style */}
+          <aside className="hidden lg:flex max-h-full flex-col overflow-hidden rounded-[var(--rounded-lg)] border border-[var(--color-hairline)] bg-[var(--color-canvas)]">
+            <div className="shrink-0 border-b border-[var(--color-hairline)] p-3">
+              <div className="text-eyebrow text-[var(--text-muted)]">
                 {t('ui.events')} ({currentEraEvents.length})
               </div>
             </div>
@@ -421,16 +418,16 @@ export function HistoryApp({
                   return (
                     <div
                       key={e.id}
-                      className={`border-b ${C.eventsSidebar.eventItem.border} px-2 py-2 last:border-0 sm:px-3`}
+                      className="border-b border-[var(--color-hairline-soft)] px-3 py-2 last:border-0"
                     >
-                      <div className={`text-xs ${C.eventsSidebar.eventItem.year}`}>
+                      <div className="text-caption text-[var(--text-muted)]">
                         {formatYear(e.year, currentLocale)} {eraName ? `· ${eraName}` : ''}
                       </div>
-                      <div className={`mt-0.5 text-sm font-medium ${EXTRA.eventTitle.default}`}>
+                      <div className="mt-0.5 text-body-sm font-medium text-[var(--text-primary)]">
                         {t(e.titleKey)}
                       </div>
                       {e.tags && e.tags.includes('war') && (
-                        <div className={`mt-1 inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs ${C.eventsSidebar.eventItem.warBadge.bg} ${C.eventsSidebar.eventItem.warBadge.text}`}>
+                        <div className="mt-1 inline-flex items-center gap-1 rounded-[var(--rounded-full)] px-2 py-0.5 text-caption bg-[var(--color-block-pink)] text-[var(--color-ink)]">
                           ⚔️ {t('nav.battles')}
                         </div>
                       )}
@@ -438,12 +435,12 @@ export function HistoryApp({
                   );
                 })
               ) : (
-                <div className={`p-4 text-center text-sm ${C.eventsSidebar.empty}`}>{t('ui.noEvents')}</div>
+                <div className="p-4 text-center text-body-sm text-[var(--text-muted)]">{t('ui.noEvents')}</div>
               )}
               {otherEraEvents.length > 0 && (
                 <>
-                  <div className={`border-t ${C.eventsSidebar.compare.header.border} ${C.eventsSidebar.compare.header.bg} px-2 py-2 sm:px-3`}>
-                    <div className={`text-xs font-semibold uppercase tracking-wide ${C.eventsSidebar.compare.header.text}`}>
+                  <div className="border-t border-[var(--color-hairline)] bg-[var(--color-surface-soft)] px-3 py-2">
+                    <div className="text-eyebrow text-[var(--text-muted)]">
                       {t('ui.compare')} ({otherEraEvents.length})
                     </div>
                   </div>
@@ -453,12 +450,12 @@ export function HistoryApp({
                     return (
                       <div
                         key={e.id}
-                        className={`border-b ${C.eventsSidebar.eventItem.border} px-2 py-2 last:border-0 sm:px-3`}
+                        className="border-b border-[var(--color-hairline-soft)] px-3 py-2 last:border-0"
                       >
-                        <div className={`text-xs ${C.eventsSidebar.eventItem.year}`}>
+                        <div className="text-caption text-[var(--text-muted)]">
                           {formatYear(e.year, currentLocale)} {eraName ? `· ${eraName}` : ''}
                         </div>
-                        <div className={`mt-0.5 text-sm ${EXTRA.eventTitle.light}`}>{t(e.titleKey)}</div>
+                        <div className="mt-0.5 text-body-sm text-[var(--text-secondary)]">{t(e.titleKey)}</div>
                       </div>
                     );
                   })}
@@ -468,35 +465,35 @@ export function HistoryApp({
 
             {/* Ruler detail inline */}
             {selectedRuler ? (
-              <div className={`shrink-0 border-t ${C.rulerDetail.container.border} ${C.rulerDetail.container.bg} p-2 sm:p-3`}>
-                <div className="flex items-start justify-between gap-2 sm:gap-3">
+              <div className="shrink-0 border-t border-[var(--color-hairline)] p-3">
+                <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <div className={`text-xs font-semibold uppercase tracking-wide ${C.rulerDetail.header.text}`}>{t('ui.rulerDetail')}</div>
+                    <div className="text-eyebrow text-[var(--text-muted)]">{t('ui.rulerDetail')}</div>
                     <div className="mt-1 flex items-center gap-2 flex-wrap">
-                      <span className={`truncate text-sm sm:text-base font-semibold ${C.rulerDetail.header.name}`}>{t(selectedRuler.nameKey)}</span>
+                      <span className="truncate text-body-sm font-semibold text-[var(--text-primary)]">{t(selectedRuler.nameKey)}</span>
                       {selectedRuler.eraNameKey && (
-                        <span className={`text-xs px-1.5 py-0.5 rounded ${C.rulerDetail.header.eraBadge.bg} ${C.rulerDetail.header.eraBadge.text}`}>
+                        <span className="text-caption px-2 py-0.5 rounded-[var(--rounded-full)] bg-[var(--color-block-cream)] text-[var(--color-ink)]">
                           {tEra(selectedRuler.eraNameKey)}
                         </span>
                       )}
                     </div>
-                    <div className={`mt-0.5 text-xs ${C.rulerDetail.header.year}`}>
+                    <div className="mt-0.5 text-caption text-[var(--text-muted)]">
                       {formatYear(selectedRuler.startYear, currentLocale)}–{formatYear(selectedRuler.endYear, currentLocale)}
                     </div>
                   </div>
                   <button
                     type="button"
-                    className={`shrink-0 rounded-lg border ${C.rulerDetail.closeButton.border} ${C.rulerDetail.closeButton.bg} px-2 py-1 text-xs ${C.rulerDetail.closeButton.text} ${C.rulerDetail.closeButton.hover}`}
+                    className="shrink-0 rounded-[var(--rounded-pill)] border border-[var(--color-hairline)] bg-[var(--color-canvas)] px-3 py-1 text-caption text-[var(--text-secondary)] hover:bg-[var(--color-surface-soft)]"
                     onClick={() => setSelectedRulerId(null)}
                   >
                     {t('ui.clearRuler')}
                   </button>
                 </div>
                 {selectedRuler.highlightKey ? (
-                  <div className={`mt-2 text-xs sm:text-sm ${C.rulerDetail.highlight}`}>{t(selectedRuler.highlightKey)}</div>
+                  <div className="mt-2 text-body-sm text-[var(--text-secondary)]">{t(selectedRuler.highlightKey)}</div>
                 ) : null}
                 {selectedRuler.bioKey ? (
-                  <div className={`mt-2 text-xs sm:text-sm ${C.rulerDetail.bio}`}>{t(selectedRuler.bioKey)}</div>
+                  <div className="mt-2 text-body-sm text-[var(--text-muted)]">{t(selectedRuler.bioKey)}</div>
                 ) : null}
                 <RulerRelations
                   ruler={selectedRuler}
@@ -505,7 +502,7 @@ export function HistoryApp({
                 />
               </div>
             ) : (
-              <div className={`shrink-0 border-t ${C.rulerDetail.container.border} ${C.rulerDetail.container.bg} p-2 sm:p-3 text-xs ${C.rulerDetail.seedNote}`}>{t('ui.seedNote')}</div>
+              <div className="shrink-0 border-t border-[var(--color-hairline)] p-3 text-caption text-[var(--text-muted)]">{t('ui.seedNote')}</div>
             )}
           </aside>
         </div>

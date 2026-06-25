@@ -29,9 +29,10 @@ export const BottomNav = React.memo(function BottomNav({ locale = 'zh' }: Bottom
     return pathname.startsWith(href);
   };
 
+  // DESIGN.md style: white canvas background, hairline border
   const containerClasses = isDark
-    ? 'bg-zinc-900/90 border-zinc-700/50 text-zinc-400'
-    : 'bg-white/80 border-zinc-200/50 text-zinc-600';
+    ? 'bg-[var(--color-inverse-canvas)]/90 border-[var(--color-hairline)] text-[var(--text-muted)]'
+    : 'bg-[var(--color-canvas)]/80 border-[var(--color-hairline)] text-[var(--text-secondary)]';
 
   return (
     <nav
@@ -40,10 +41,11 @@ export const BottomNav = React.memo(function BottomNav({ locale = 'zh' }: Bottom
     >
       {NAV_ITEMS.map((item) => {
         const active = isActive(item.href(locale));
+        // DESIGN.md: active state uses primary color (black/white)
         const labelColor = active
-          ? isDark ? 'text-blue-400' : 'text-blue-600'
-          : 'text-zinc-400';
-        const indicatorColor = isDark ? 'bg-blue-400' : 'bg-blue-500';
+          ? isDark ? 'text-[var(--color-inverse-ink)]' : 'text-[var(--color-primary)]'
+          : 'text-[var(--text-muted)]';
+        const indicatorColor = isDark ? 'bg-[var(--color-inverse-ink)]' : 'bg-[var(--color-primary)]';
         return (
           <Link
             key={item.key}

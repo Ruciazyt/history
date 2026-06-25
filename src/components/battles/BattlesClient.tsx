@@ -13,7 +13,7 @@ import { BattleOfTheDayCard } from '@/components/battles/BattleOfTheDayCard';
 import { ThisDayInHistoryCard } from '@/components/battles/ThisDayInHistoryCard';
 import { LocaleSwitcher } from '@/components/common/LocaleSwitcher';
 import { useTranslations } from 'next-intl';
-import { BATTLES_CLIENT_COLORS, ERA_COLORS } from '@/lib/history/constants';
+import { ERA_COLORS } from '@/lib/history/constants';
 import { useBattleFavorites } from '@/lib/history/useBattleHooks';
 import { getCasualtyStats, getBloodiestBattles, getTotalCasualties } from '@/lib/history/battleCasualties';
 
@@ -27,27 +27,18 @@ export function BattlesClient({
   locale?: string;
 }) {
   const t = useTranslations('battlesClient');
-  const tRoot = useTranslations(); // root translator for era/root-level keys like 'era.westernZhou'
+  const tRoot = useTranslations();
   const tUi = useTranslations('ui');
   const { favoritesCount } = useBattleFavorites();
-  
-  const battles = React.useMemo(() => getBattles(events), [events]);
-  
-  // Battle statistics
-  const stats = React.useMemo(() => getBattleStats(battles), [battles]);
-  
-  // Casualty statistics
-  const casualtyStats = React.useMemo(() => getCasualtyStats(events), [events]);
 
-  // Bloodiest battles
+  const battles = React.useMemo(() => getBattles(events), [events]);
+  const stats = React.useMemo(() => getBattleStats(battles), [battles]);
+  const casualtyStats = React.useMemo(() => getCasualtyStats(events), [events]);
   const bloodiestBattles = React.useMemo(() => getBloodiestBattles(events, 3), [events]);
-  
-  // Battle count by era
-  const battleCountByEra = React.useMemo(() => 
-    getBattleCountByEra(battles, eras, tRoot), 
+  const battleCountByEra = React.useMemo(() =>
+    getBattleCountByEra(battles, eras, tRoot),
   [battles, eras, tRoot]);
-  
-  // Group battles by era ID (not localized name — locale-independent keying)
+
   const battlesByEra = React.useMemo(() => {
     const map = new Map<string, Event[]>();
     for (const battle of battles) {
@@ -61,7 +52,6 @@ export function BattlesClient({
     return map;
   }, [battles]);
 
-  // Build locale-independent era options (id → localized name)
   const eraOptions = React.useMemo(() => {
     return Array.from(battlesByEra.keys()).map((eraId) => {
       const era = eras.find((e) => e.id === eraId);
@@ -76,7 +66,6 @@ export function BattlesClient({
   const [viewMode, setViewMode] = React.useState<'grid' | 'timeline'>('grid');
   const [selectedBattle, setSelectedBattle] = React.useState<Event | null>(null);
 
-  // Comparison mode state
   const [compareMode, setCompareMode] = React.useState(false);
   const [selectedBattles, setSelectedBattles] = React.useState<Event[]>([]);
   const [compareBattle, setCompareBattle] = React.useState<{ battle1: Event; battle2: Event } | null>(null);
@@ -85,8 +74,6 @@ export function BattlesClient({
     ? battlesByEra.get(selectedEraId) || []
     : battles;
 
-  
-  // Handler for selecting battles in compare mode
   const handleBattleSelect = React.useCallback((battle: Event) => {
     setSelectedBattles(prev => {
       const isSelected = prev.some(b => b.id === battle.id);
@@ -94,81 +81,69 @@ export function BattlesClient({
         return prev.filter(b => b.id !== battle.id);
       }
       if (prev.length >= 2) {
-        // Replace the first one if already 2 selected
         const second = prev[1];
         return second ? [second, battle] : [battle];
       }
       return [...prev, battle];
     });
   }, []);
-  
-  // Auto-open compare modal when 2 battles are selected
+
   React.useEffect(() => {
     if (selectedBattles.length === 2) {
       const battle1 = selectedBattles[0];
       const battle2 = selectedBattles[1];
       if (battle1 && battle2) {
         setCompareBattle({ battle1, battle2 });
-        setSelectedBattles([]); // Clear selection after opening
+        setSelectedBattles([]);
       }
     }
   }, [selectedBattles]);
-  
+
   return (
-    <div className={`min-h-screen ${BATTLES_CLIENT_COLORS.page.background}`}>
-      {/* Header */}
-      <header className={`sticky top-0 z-10 border-b ${BATTLES_CLIENT_COLORS.header.border} ${BATTLES_CLIENT_COLORS.header.background} ${BATTLES_CLIENT_COLORS.header.backdrop}`}>
-        <div className="flex w-full items-center justify-between px-4 py-3">
+    <div className="min-h-screen bg-[var(--color-canvas)]">
+      {/* Header - DESIGN.md top-nav style */}
+      <header className="sticky top-0 z-10 h-[56px] border-b border-[var(--color-hairline)] bg-[var(--color-canvas)]">
+        <div className="flex h-full w-full items-center justify-between px-4">
           <div className="flex items-center gap-3">
-            <Link 
-              href={`/${locale || 'zh'}`} 
-              className={`flex items-center gap-1 text-sm font-medium ${BATTLES_CLIENT_COLORS.backButton.text} ${BATTLES_CLIENT_COLORS.backButton.hover} transition-colors`}
+            <Link
+              href={`/${locale || 'zh'}`}
+              className="text-body-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              {t('ui.back')}
+              ← {t('ui.back')}
             </Link>
-            <div className={`w-px h-5 ${BATTLES_CLIENT_COLORS.divider}`}></div>
-            <h1 className={`text-lg font-bold ${BATTLES_CLIENT_COLORS.title}`}>⚔️ {t('nav.battles')}</h1>
+            <div className="w-px h-5 bg-[var(--color-hairline)]"></div>
+            <h1 className="text-body font-medium">⚔️ {t('nav.battles')}</h1>
           </div>
           <div className="flex items-center gap-2">
-            <span className={`text-xs ${BATTLES_CLIENT_COLORS.badge.text} ${BATTLES_CLIENT_COLORS.badge.background} px-2 py-1 rounded-full`}>
+            <span className="text-caption px-2 py-1 rounded-[var(--rounded-full)] bg-[var(--color-surface-soft)] text-[var(--text-muted)]">
               {t('battleCount', { count: battles.length })}
             </span>
-            {/* Compare mode toggle */}
             <button
               onClick={() => {
                 setCompareMode(!compareMode);
                 setSelectedBattles([]);
               }}
-              className={`p-1.5 rounded-lg transition-all ${
-                compareMode 
-                  ? `${BATTLES_CLIENT_COLORS.compareButton.activeBg} ${BATTLES_CLIENT_COLORS.compareButton.activeText}` 
-                  : `${BATTLES_CLIENT_COLORS.compareButton.inactiveText} ${BATTLES_CLIENT_COLORS.compareButton.inactiveHover}`
-              }`}
+              className={`btn-circle ${compareMode ? 'bg-[var(--color-primary)] text-[var(--color-on-primary)]' : ''}`}
               title={tUi('compareMode')}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
             </button>
-            {/* Favorites link */}
             <Link
               href={`/${locale || 'zh'}/favorites`}
-              className={`p-1.5 rounded-lg transition-all ${BATTLES_CLIENT_COLORS.compareButton.inactiveText} ${BATTLES_CLIENT_COLORS.compareButton.inactiveHover}`}
+              className="btn-circle"
               title={tUi('favorites')}
             >
               <span className="text-sm">{favoritesCount > 0 ? '❤️' : '🤍'}</span>
             </Link>
-            {/* View toggle */}
-            <div className={`flex items-center ${BATTLES_CLIENT_COLORS.viewToggle.container} rounded-lg p-0.5`}>
+            <div className="flex items-center bg-[var(--color-surface-soft)] rounded-[var(--rounded-pill)] p-0.5">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-1.5 rounded-md transition-all ${
-                  viewMode === 'grid' 
-                    ? `${BATTLES_CLIENT_COLORS.viewToggle.activeBg} ${BATTLES_CLIENT_COLORS.viewToggle.activeText} ${BATTLES_CLIENT_COLORS.viewToggle.activeShadow}` 
-                    : `${BATTLES_CLIENT_COLORS.viewToggle.inactiveText} ${BATTLES_CLIENT_COLORS.viewToggle.inactiveHover}`
+                className={`p-1.5 rounded-[var(--rounded-pill)] transition-all ${
+                  viewMode === 'grid'
+                    ? 'bg-[var(--color-primary)] text-[var(--color-on-primary)]'
+                    : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
                 }`}
                 title={tUi('gridView')}
               >
@@ -178,10 +153,10 @@ export function BattlesClient({
               </button>
               <button
                 onClick={() => setViewMode('timeline')}
-                className={`p-1.5 rounded-md transition-all ${
-                  viewMode === 'timeline' 
-                    ? `${BATTLES_CLIENT_COLORS.viewToggle.activeBg} ${BATTLES_CLIENT_COLORS.viewToggle.activeText} ${BATTLES_CLIENT_COLORS.viewToggle.activeShadow}` 
-                    : `${BATTLES_CLIENT_COLORS.viewToggle.inactiveText} ${BATTLES_CLIENT_COLORS.viewToggle.inactiveHover}`
+                className={`p-1.5 rounded-[var(--rounded-pill)] transition-all ${
+                  viewMode === 'timeline'
+                    ? 'bg-[var(--color-primary)] text-[var(--color-on-primary)]'
+                    : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
                 }`}
                 title={tUi('timelineView')}
               >
@@ -193,104 +168,104 @@ export function BattlesClient({
             <LocaleSwitcher />
           </div>
         </div>
-        
-        {/* Era filter - scrollable on mobile */}
-        <div className="px-4 pb-3 overflow-x-auto flex gap-2 scrollbar-hide -mb-3">
-          <button
-            onClick={() => setSelectedEraId(null)}
-            className={`shrink-0 px-4 py-1.5 text-sm font-medium rounded-full border transition-all ${
-              selectedEraId === null
-                ? `${BATTLES_CLIENT_COLORS.eraFilter.active.bg} ${BATTLES_CLIENT_COLORS.eraFilter.active.text} ${BATTLES_CLIENT_COLORS.eraFilter.active.border} ${BATTLES_CLIENT_COLORS.eraFilter.active.shadow}`
-                : `${BATTLES_CLIENT_COLORS.eraFilter.inactive.bg} ${BATTLES_CLIENT_COLORS.eraFilter.inactive.text} ${BATTLES_CLIENT_COLORS.eraFilter.inactive.border} ${BATTLES_CLIENT_COLORS.eraFilter.inactive.hover}`
-            }`}
-          >
-            {t('allEras')}
-          </button>
-          {eraOptions.map(({ id, name }) => {
-            const era = eras.find(e => e.id === id);
-            const dotColor = era && ERA_COLORS[id] ? ERA_COLORS[id].dot : BATTLES_CLIENT_COLORS.battleDot.default;
-
-            return (
-              <button
-                key={id}
-                onClick={() => setSelectedEraId(id)}
-                className={`shrink-0 px-4 py-1.5 text-sm font-medium rounded-full border transition-all flex items-center gap-1.5 ${
-                  selectedEraId === id
-                    ? `${BATTLES_CLIENT_COLORS.eraFilter.active.bg} ${BATTLES_CLIENT_COLORS.eraFilter.active.text} ${BATTLES_CLIENT_COLORS.eraFilter.active.border} ${BATTLES_CLIENT_COLORS.eraFilter.active.shadow}`
-                    : `${BATTLES_CLIENT_COLORS.eraFilter.inactive.bg} ${BATTLES_CLIENT_COLORS.eraFilter.inactive.text} ${BATTLES_CLIENT_COLORS.eraFilter.inactive.border} ${BATTLES_CLIENT_COLORS.eraFilter.inactive.hover}`
-                }`}
-              >
-                <span className={`w-2 h-2 rounded-full ${dotColor}`}></span>
-                {name}
-              </button>
-            );
-          })}
-        </div>
       </header>
-      
-      {/* Stats Panel */}
+
+      {/* Era filter - pill toggle style */}
+      <div className="px-4 py-3 overflow-x-auto flex gap-2 scrollbar-hide border-b border-[var(--color-hairline)]">
+        <button
+          onClick={() => setSelectedEraId(null)}
+          className={`shrink-0 px-4 py-1.5 text-sm font-medium rounded-[var(--rounded-pill)] transition-all ${
+            selectedEraId === null
+              ? 'bg-[var(--color-primary)] text-[var(--color-on-primary)]'
+              : 'bg-[var(--color-surface-soft)] text-[var(--text-secondary)] hover:bg-[var(--color-hairline)]'
+          }`}
+        >
+          {t('allEras')}
+        </button>
+        {eraOptions.map(({ id, name }) => {
+          const era = eras.find(e => e.id === id);
+          const dotColor = era && ERA_COLORS[id] ? ERA_COLORS[id].dot : 'bg-gray-400';
+
+          return (
+            <button
+              key={id}
+              onClick={() => setSelectedEraId(id)}
+              className={`shrink-0 px-4 py-1.5 text-sm font-medium rounded-[var(--rounded-pill)] transition-all flex items-center gap-1.5 ${
+                selectedEraId === id
+                  ? 'bg-[var(--color-primary)] text-[var(--color-on-primary)]'
+                  : 'bg-[var(--color-surface-soft)] text-[var(--text-secondary)] hover:bg-[var(--color-hairline)]'
+              }`}
+            >
+              <span className={`w-2 h-2 rounded-full ${dotColor}`}></span>
+              {name}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Stats Panel - DESIGN.md color-block section */}
       {selectedEraId === null && (
-        <div className={`${BATTLES_CLIENT_COLORS.section.bg} ${BATTLES_CLIENT_COLORS.section.border} ${BATTLES_CLIENT_COLORS.section.padding}`}>
+        <div className="color-block color-block-cream mx-4 mt-4">
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
-              <div className={`bg-gradient-to-br ${BATTLES_CLIENT_COLORS.statCards.attackerWins.gradient} rounded-xl p-3 border ${BATTLES_CLIENT_COLORS.statCards.attackerWins.border}`}>
-                <div className={`text-2xl font-bold ${BATTLES_CLIENT_COLORS.statCards.attackerWins.value}`}>{stats.attackerWins}</div>
-                <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.attackerWins.label}`}>{t('statsBar.attackerWins')}</div>
+              <div className="rounded-[var(--rounded-lg)] bg-[var(--color-canvas)] p-3 border border-[var(--color-hairline)]">
+                <div className="text-display-lg font-bold text-[var(--text-primary)]">{stats.attackerWins}</div>
+                <div className="text-caption text-[var(--text-muted)]">{t('statsBar.attackerWins')}</div>
               </div>
-              <div className={`bg-gradient-to-br ${BATTLES_CLIENT_COLORS.statCards.defenderWins.gradient} rounded-xl p-3 border ${BATTLES_CLIENT_COLORS.statCards.defenderWins.border}`}>
-                <div className={`text-2xl font-bold ${BATTLES_CLIENT_COLORS.statCards.defenderWins.value}`}>{stats.defenderWins}</div>
-                <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.defenderWins.label}`}>{t('statsBar.defenderWins')}</div>
+              <div className="rounded-[var(--rounded-lg)] bg-[var(--color-canvas)] p-3 border border-[var(--color-hairline)]">
+                <div className="text-display-lg font-bold text-[var(--text-primary)]">{stats.defenderWins}</div>
+                <div className="text-caption text-[var(--text-muted)]">{t('statsBar.defenderWins')}</div>
               </div>
-              <div className={`bg-gradient-to-br ${BATTLES_CLIENT_COLORS.statCards.draws.gradient} rounded-xl p-3 border ${BATTLES_CLIENT_COLORS.statCards.draws.border}`}>
-                <div className={`text-2xl font-bold ${BATTLES_CLIENT_COLORS.statCards.draws.value}`}>{stats.draws}</div>
-                <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.draws.label}`}>{t('statsBar.draws')}</div>
+              <div className="rounded-[var(--rounded-lg)] bg-[var(--color-canvas)] p-3 border border-[var(--color-hairline)]">
+                <div className="text-display-lg font-bold text-[var(--text-primary)]">{stats.draws}</div>
+                <div className="text-caption text-[var(--text-muted)]">{t('statsBar.draws')}</div>
               </div>
-              <div className={`bg-gradient-to-br ${BATTLES_CLIENT_COLORS.statCards.inconclusive.gradient} rounded-xl p-3 border ${BATTLES_CLIENT_COLORS.statCards.inconclusive.border}`}>
-                <div className={`text-2xl font-bold ${BATTLES_CLIENT_COLORS.statCards.inconclusive.value}`}>{stats.inconclusive}</div>
-                <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.inconclusive.label}`}>{t('statsBar.inconclusive')}</div>
+              <div className="rounded-[var(--rounded-lg)] bg-[var(--color-canvas)] p-3 border border-[var(--color-hairline)]">
+                <div className="text-display-lg font-bold text-[var(--text-primary)]">{stats.inconclusive}</div>
+                <div className="text-caption text-[var(--text-muted)]">{t('statsBar.inconclusive')}</div>
               </div>
             </div>
 
             {/* Casualties stats */}
             {casualtyStats.battlesWithCasualties > 0 && (
               <div className="mt-3">
-                <div className={`text-xs ${BATTLES_CLIENT_COLORS.eraDistribution.label} mb-2`}>💀 {t('battleDetail.casualtyStats')}</div>
-                <div className={`bg-gradient-to-br ${BATTLES_CLIENT_COLORS.statCards.casualties.gradient} rounded-xl p-3 border ${BATTLES_CLIENT_COLORS.statCards.casualties.border}`}>
+                <div className="text-caption text-[var(--text-muted)] mb-2">💀 {t('battleDetail.casualtyStats')}</div>
+                <div className="rounded-[var(--rounded-lg)] bg-[var(--color-canvas)] p-3 border border-[var(--color-hairline)]">
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex-1 text-center">
-                      <div className={`text-xl font-bold ${BATTLES_CLIENT_COLORS.statCards.casualties.value}`}>
+                      <div className="text-headline font-bold text-[var(--text-primary)]">
                         {casualtyStats.totalCasualties.toLocaleString()}
                       </div>
-                      <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>{t('statsBar.totalCasualties')}</div>
+                      <div className="text-caption text-[var(--text-muted)]">{t('statsBar.totalCasualties')}</div>
                     </div>
                     <div className="flex-1 text-center">
-                      <div className={`text-xl font-bold ${BATTLES_CLIENT_COLORS.statCards.casualties.value}`}>
+                      <div className="text-headline font-bold text-[var(--text-primary)]">
                         {casualtyStats.battlesWithCasualties}
                       </div>
-                      <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>{t('statsBar.battlesWithCasualties')}</div>
+                      <div className="text-caption text-[var(--text-muted)]">{t('statsBar.battlesWithCasualties')}</div>
                     </div>
                     <div className="flex-1 text-center">
-                      <div className={`text-xl font-bold ${BATTLES_CLIENT_COLORS.statCards.casualties.value}`}>
+                      <div className="text-headline font-bold text-[var(--text-primary)]">
                         {Math.round(casualtyStats.averageCasualties).toLocaleString()}
                       </div>
-                      <div className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>{t('statsBar.averageCasualties')}</div>
+                      <div className="text-caption text-[var(--text-muted)]">{t('statsBar.averageCasualties')}</div>
                     </div>
                   </div>
                 </div>
                 {bloodiestBattles.length > 0 && (
                   <div className="mt-2">
-                    <div className={`text-xs ${BATTLES_CLIENT_COLORS.eraDistribution.label} mb-1.5`}>🔝 {t('battleDetail.bloodiestBattlesTop', { n: 3 })}</div>
+                    <div className="text-caption text-[var(--text-muted)] mb-1.5">🔝 {t('battleDetail.bloodiestBattlesTop', { n: 3 })}</div>
                     <div className="space-y-1">
                       {bloodiestBattles.map((battle, idx) => (
-                        <div key={battle.id} className={`flex items-center gap-2 px-3 py-1.5 rounded-lg ${BATTLES_CLIENT_COLORS.eraDistribution.tag.bg}`}>
-                          <span className={`w-5 h-5 flex items-center justify-center rounded-full text-xs font-bold ${
-                            idx === 0 ? 'bg-red-500 text-white' : idx === 1 ? 'bg-orange-400 text-white' : 'bg-amber-300 text-amber-900'
+                        <div key={battle.id} className="flex items-center gap-2 px-3 py-1.5 rounded-[var(--rounded-md)] bg-[var(--color-surface-soft)]">
+                          <span className={`w-5 h-5 flex items-center justify-center rounded-full text-caption font-bold ${
+                            idx === 0 ? 'bg-[var(--color-primary)] text-[var(--color-on-primary)]' : 'bg-[var(--color-hairline)] text-[var(--text-secondary)]'
                           }`}>{idx + 1}</span>
-                          <span className="flex-1 text-xs font-medium truncate">{t(battle.titleKey)}</span>
-                          <span className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.value}`}>
+                          <span className="flex-1 text-body-sm font-medium truncate">{t(battle.titleKey)}</span>
+                          <span className="text-caption text-[var(--text-primary)]">
                             {getTotalCasualties(battle.battle?.casualties).toLocaleString()}
                           </span>
-                          <span className={`text-xs ${BATTLES_CLIENT_COLORS.statCards.casualties.label}`}>{t('statsBar.people')}</span>
+                          <span className="text-caption text-[var(--text-muted)]">{t('statsBar.people')}</span>
                         </div>
                       ))}
                     </div>
@@ -302,58 +277,58 @@ export function BattlesClient({
             {/* Era distribution */}
             {battleCountByEra.length > 0 && (
               <div className="mt-3">
-                <div className={`text-xs ${BATTLES_CLIENT_COLORS.eraDistribution.label} mb-2`}>{t('eraDistribution')}</div>
+                <div className="text-caption text-[var(--text-muted)] mb-2">{t('eraDistribution')}</div>
                 <div className="flex flex-wrap gap-2">
                   {battleCountByEra.map(({ eraId, eraName, count }) => {
-                    const dotColor = ERA_COLORS[eraId]?.dot ?? BATTLES_CLIENT_COLORS.battleDot.default;
+                    const dotColor = ERA_COLORS[eraId]?.dot ?? 'bg-gray-400';
                     return (
                       <span
                         key={eraId}
-                        className={`inline-flex items-center gap-1.5 px-3 py-1 ${BATTLES_CLIENT_COLORS.eraDistribution.tag.bg} rounded-full text-sm`}
+                        className="inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--color-canvas)] rounded-[var(--rounded-full)] text-body-sm border border-[var(--color-hairline)]"
                       >
                         <span className={`w-2 h-2 rounded-full ${dotColor}`}></span>
                         <span className="font-medium">{eraName}</span>
-                        <span className={BATTLES_CLIENT_COLORS.eraDistribution.tag.count}>{count}</span>
+                        <span className="text-[var(--text-muted)]">{count}</span>
                       </span>
                     );
                   })}
                 </div>
               </div>
             )}
-            
+
             {/* Geographic distribution */}
-            <div className={`${BATTLES_CLIENT_COLORS.geoSection.padding} ${BATTLES_CLIENT_COLORS.geoSection.divider}`}>
+            <div className="mt-4 pt-4 border-t border-[var(--color-hairline)]">
               <BattleGeography battles={battles} />
             </div>
           </div>
         </div>
       )}
-      
+
       {/* Selection indicator when in compare mode */}
       {compareMode && selectedBattles.length > 0 && (
-        <div className={`fixed bottom-4 left-1/2 -translate-x-1/2 z-20 ${BATTLES_CLIENT_COLORS.compareIndicator.bg} ${BATTLES_CLIENT_COLORS.compareIndicator.text} px-4 py-2 rounded-full shadow-lg flex items-center gap-2`}>
+        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-20 bg-[var(--color-primary)] text-[var(--color-on-primary)] px-4 py-2 rounded-[var(--rounded-pill)] shadow-lg flex items-center gap-2">
           <span>{t('compareModeSelected', { count: selectedBattles.length })}</span>
-          <button 
+          <button
             onClick={() => setSelectedBattles([])}
-            className={`${BATTLES_CLIENT_COLORS.compareIndicator.hover} rounded-full p-1`}
+            className="hover:opacity-80 rounded-full p-1"
           >
             ✕
           </button>
         </div>
       )}
-      
-      {/* Stats */}
-      <div className={`${BATTLES_CLIENT_COLORS.statsBar.container.bg} ${BATTLES_CLIENT_COLORS.statsBar.container.border} ${BATTLES_CLIENT_COLORS.statsBar.container.padding}`}>
-        <div className="max-w-4xl mx-auto flex items-center justify-between text-sm">
-          <span className={BATTLES_CLIENT_COLORS.statsBar.selectedText}>
+
+      {/* Stats bar */}
+      <div className="bg-[var(--color-canvas)] border-b border-[var(--color-hairline)] px-4 py-3">
+        <div className="max-w-4xl mx-auto flex items-center justify-between text-body-sm">
+          <span className="text-[var(--text-secondary)]">
             {selectedEraId ? `${eraOptions.find(e => e.id === selectedEraId)?.name ?? selectedEraId}${t('statsBar.eraPeriod')}` : t('allErasPeriod')}
           </span>
-          <span className={BATTLES_CLIENT_COLORS.statsBar.countText}>
+          <span className="text-[var(--text-muted)]">
             {t('battleCount', { count: displayedBattles.length })}
           </span>
         </div>
       </div>
-      
+
       {/* Battles list */}
       <main className="max-w-4xl mx-auto p-4">
         {/* Battle of the Day - featured card */}
@@ -368,7 +343,7 @@ export function BattlesClient({
 
         {displayedBattles.length > 0 ? (
           viewMode === 'timeline' ? (
-            <BattleTimeline 
+            <BattleTimeline
               battles={displayedBattles}
               eras={eras}
               onBattleClick={setSelectedBattle}
@@ -388,7 +363,7 @@ export function BattlesClient({
             </div>
           )
         ) : (
-          <div className={`flex flex-col items-center justify-center py-16 ${BATTLES_CLIENT_COLORS.emptyState.text}`}>
+          <div className="flex flex-col items-center justify-center py-16 text-[var(--text-muted)]">
             <svg className="w-16 h-16 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
@@ -396,21 +371,21 @@ export function BattlesClient({
           </div>
         )}
       </main>
-      
+
       {/* Battle Detail Modal */}
       {selectedBattle && (
-        <BattleDetail 
-          battle={selectedBattle} 
+        <BattleDetail
+          battle={selectedBattle}
           onClose={() => setSelectedBattle(null)}
           allEvents={events}
           onBattleClick={(battle) => setSelectedBattle(battle)}
           locale={locale}
         />
       )}
-      
+
       {/* Battle Compare Modal */}
       {compareBattle && (
-        <BattleCompare 
+        <BattleCompare
           battle1={compareBattle.battle1}
           battle2={compareBattle.battle2}
           onClose={() => setCompareBattle(null)}

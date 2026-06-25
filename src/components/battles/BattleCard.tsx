@@ -4,7 +4,7 @@ import * as React from 'react';
 import type { Event } from '@/lib/history/types';
 import { formatYear } from '@/lib/history/utils';
 import { getBattleResultLabel, getBattleImpactLabel, getBattleTypeName } from '@/lib/history/battles';
-import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, BATTLE_SCALE_COLORS, BATTLE_TYPE_COLORS, ERA_COLORS, ERA_COLORS_DARK, SELECTION_COLORS, BATTLE_CARD_COLORS, FAVORITE_BUTTON_COLORS, PACING_BADGE_COLORS, TIME_OF_DAY_COLORS } from '@/lib/history/constants';
+import { BATTLE_RESULT_COLORS, BATTLE_IMPACT_COLORS, BATTLE_SCALE_COLORS, BATTLE_TYPE_COLORS, ERA_COLORS, ERA_COLORS_DARK, BATTLE_CARD_COLORS, PACING_BADGE_COLORS, TIME_OF_DAY_COLORS } from '@/lib/history/constants';
 import { getPacingLabel, getTimeOfDayLabel } from '@/lib/history/battlePacing';
 import { useTranslations } from 'next-intl';
 import { BattleDetail } from './BattleDetail';
@@ -17,16 +17,13 @@ interface BattleCardProps {
   selected?: boolean;
   selectionMode?: boolean;
   onSelect?: (battle: Event) => void;
-  /** Locale for year formatting (defaults to 'zh') */
   locale?: string;
 }
 
-// Get era styles using ERA_COLORS from constants
 function getEraStyles(entityId: string, isDark: boolean): { gradient: string; border: string } {
   if (isDark) {
     const darkColor = ERA_COLORS_DARK[entityId];
     if (darkColor) return darkColor;
-    // Fallback dark gradient if no era match
     return {
       gradient: 'from-zinc-800 to-zinc-900',
       border: 'border-zinc-600',
@@ -45,30 +42,23 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
   const [isHovered, setIsHovered] = React.useState(false);
   const isDark = useDarkMode();
 
-  // Favorites functionality
   const { toggleFavorite, isFavorite } = useBattleFavorites();
   const isFavorited = isFavorite(battle.id);
 
   const { gradient: eraGradient, border: eraBorder } = getEraStyles(battle.entityId, isDark);
   const battleResult = battle.battle?.result;
 
-  // 结果颜色 - use constants
-  const resultBg = battleResult ? BATTLE_RESULT_COLORS[battleResult]?.bg : BATTLE_CARD_COLORS.result.default;
-
-  // Dark-mode-aware commander badge colors — hardcoded light-mode colors (bg-red-50,
-  // bg-blue-50) are nearly invisible on dark backgrounds, so provide dark variants.
   const commanderBadge = React.useMemo(() => ({
     attacker: {
-      bg: isDark ? 'bg-red-900/60' : 'bg-red-50',
-      text: isDark ? 'text-red-300' : 'text-red-600',
+      bg: isDark ? 'bg-red-900/60' : 'bg-[var(--color-block-pink)]',
+      text: isDark ? 'text-red-300' : 'text-[var(--color-ink)]',
     },
     defender: {
-      bg: isDark ? 'bg-blue-900/60' : 'bg-blue-50',
-      text: isDark ? 'text-blue-300' : 'text-blue-600',
+      bg: isDark ? 'bg-blue-900/60' : 'bg-[var(--color-block-lilac)]',
+      text: isDark ? 'text-blue-300' : 'text-[var(--color-ink)]',
     },
   }), [isDark]);
 
-  // Handle keyboard navigation
   const handleKeyDown = React.useCallback((e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -92,7 +82,6 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
     }
   };
 
-  // Handle favorite button click - prevent event bubbling to avoid triggering card click
   const handleFavoriteClick = React.useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     toggleFavorite(battle.id);
@@ -100,13 +89,8 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
 
   return (
     <>
-      {/*
-        Outer wrapper uses position:relative so the favorite button can be
-        absolutely-positioned as a sibling rather than nested inside a button.
-        This avoids the invalid HTML nesting of <button> inside <button>.
-      */}
       <div className="relative">
-        {/* Card content — role=button div so a real <button> (favorite) can be a sibling */}
+        {/* Card - DESIGN.md style: rounded-lg, hairline border */}
         <div
           role="button"
           tabIndex={0}
@@ -115,9 +99,9 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           aria-label={`${t(battle.titleKey)} - ${formatYear(battle.year, locale)}`}
-          className={`w-full text-left p-3 sm:p-4 rounded-xl border-2 bg-gradient-to-br ${eraGradient} ${eraBorder} hover:shadow-lg transition-all duration-200 pr-12 sm:pr-14 ${
-            isHovered ? 'scale-[1.02] shadow-lg' : 'hover:scale-[1.01]'
-          } ${selected ? 'ring-2 ring-red-500 ring-offset-2' : ''} ${
+          className={`w-full text-left p-4 rounded-[var(--rounded-lg)] border bg-gradient-to-br ${eraGradient} ${eraBorder} transition-all duration-200 pr-12 sm:pr-14 ${
+            isHovered ? 'shadow-lg' : ''
+          } ${selected ? 'ring-2 ring-[var(--color-primary)] ring-offset-2' : ''} ${
             selectionMode ? 'cursor-pointer' : ''
           }`}
         >
@@ -126,121 +110,121 @@ export const BattleCard = React.memo(function BattleCard({ battle, onClick, sele
               <div className="flex items-center gap-2">
                 {selectionMode && (
                   <span className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
-                    selected ? SELECTION_COLORS.selected.bg : SELECTION_COLORS.unselected.border
+                    selected ? 'bg-[var(--color-primary)] border-[var(--color-primary)]' : 'border-[var(--color-hairline)]'
                   }`}>
-                    {selected && <span className="text-white text-xs">✓</span>}
+                    {selected && <span className="text-[var(--color-on-primary)] text-xs">✓</span>}
                   </span>
                 )}
-                <span className={`text-sm font-bold ${BATTLE_CARD_COLORS.container.title} truncate`}>⚔️ {t(battle.titleKey)}</span>
+                <span className="text-body-sm font-bold text-[var(--text-primary)] truncate">⚔️ {t(battle.titleKey)}</span>
               </div>
-              <div className={`text-xs ${BATTLE_CARD_COLORS.container.subtitle} mt-1 flex flex-wrap gap-1.5 sm:gap-2`}>
-                <span className={`inline-flex items-center px-2 py-0.5 ${BATTLE_CARD_COLORS.container.badgeBg} rounded-full whitespace-nowrap`}>
+              <div className="text-caption text-[var(--text-muted)] mt-1 flex flex-wrap gap-2">
+                <span className="inline-flex items-center px-2 py-0.5 rounded-[var(--rounded-full)] bg-[var(--color-surface-soft)] whitespace-nowrap">
                   📅 {formatYear(battle.year, locale)}
                 </span>
                 {battle.location?.label && (
-                  <span className={`inline-flex items-center px-2 py-0.5 ${BATTLE_CARD_COLORS.container.badgeBg} rounded-full whitespace-nowrap`}>
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-[var(--rounded-full)] bg-[var(--color-surface-soft)] whitespace-nowrap">
                     📍 {battle.location.label}
                   </span>
                 )}
               </div>
             </div>
             {battleResult && (
-              <div className={`shrink-0 flex items-center gap-1.5 px-2 py-1 rounded-full text-white text-xs font-medium ${resultBg} self-start sm:self-center`}>
-                <span className={`w-1.5 h-1.5 rounded-full ${BATTLE_CARD_COLORS.commander.dot} ${BATTLE_CARD_COLORS.commander.pulse}`}></span>
+              <div className={`shrink-0 flex items-center gap-1.5 px-2 py-1 rounded-[var(--rounded-pill)] text-[var(--color-on-primary)] text-caption font-medium ${BATTLE_RESULT_COLORS[battleResult]?.bg || 'bg-gray-400'} self-start sm:self-center`}>
+                <span className="w-1.5 h-1.5 rounded-full bg-white/80"></span>
                 {battle.battle && t(getBattleResultLabel(battle.battle))}
               </div>
             )}
           </div>
 
           {battle.battle?.belligerents && (
-            <div className={`mt-3 flex items-center justify-center gap-3 py-2 ${BATTLE_CARD_COLORS.belligerents.container} rounded-lg`}>
-              <span className={`text-sm font-semibold ${BATTLE_CARD_COLORS.belligerents.text}`}>{battle.battle.belligerents.attacker}</span>
+            <div className="mt-3 flex items-center justify-center gap-3 py-2 rounded-[var(--rounded-md)] bg-[var(--color-surface-soft)]">
+              <span className="text-body-sm font-semibold text-[var(--text-primary)]">{battle.battle.belligerents.attacker}</span>
               <span className="text-lg">⚔️</span>
-              <span className={`text-sm font-semibold ${BATTLE_CARD_COLORS.belligerents.text}`}>{battle.battle.belligerents.defender}</span>
+              <span className="text-body-sm font-semibold text-[var(--text-primary)]">{battle.battle.belligerents.defender}</span>
             </div>
           )}
 
-          {/* Commanders - show if available */}
+          {/* Commanders */}
           {battle.battle?.commanders && (
             <div className="mt-2 flex flex-wrap gap-1">
               {battle.battle.commanders.attacker?.slice(0, 2).map((cmd, i) => (
-                <span key={`att-${i}`} className={`inline-flex items-center px-2 py-0.5 ${commanderBadge.attacker.bg} ${commanderBadge.attacker.text} text-xs rounded`}>
+                <span key={`att-${i}`} className={`inline-flex items-center px-2 py-0.5 ${commanderBadge.attacker.bg} ${commanderBadge.attacker.text} text-caption rounded-[var(--rounded-full)]`}>
                   👤 {cmd}
                 </span>
               ))}
               {battle.battle.commanders.defender?.slice(0, 2).map((cmd, i) => (
-                <span key={`def-${i}`} className={`inline-flex items-center px-2 py-0.5 ${commanderBadge.defender.bg} ${commanderBadge.defender.text} text-xs rounded`}>
+                <span key={`def-${i}`} className={`inline-flex items-center px-2 py-0.5 ${commanderBadge.defender.bg} ${commanderBadge.defender.text} text-caption rounded-[var(--rounded-full)]`}>
                   👤 {cmd}
                 </span>
               ))}
             </div>
           )}
 
-          {/* Impact badge */}
+          {/* Impact badge - pill shape */}
           {battle.battle?.impact && battle.battle.impact !== 'unknown' && (
             <div className="mt-2">
-              <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.bg || BATTLE_CARD_COLORS.impact.default} ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.text || BATTLE_CARD_COLORS.impact.textDefault}`}>
+              <span className={`inline-flex items-center px-2 py-0.5 rounded-[var(--rounded-pill)] text-caption font-medium ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.bg || 'bg-[var(--color-surface-soft)]'} ${BATTLE_IMPACT_COLORS[battle.battle.impact]?.text || 'text-[var(--text-muted)]'}`}>
                 💎 {t(getBattleImpactLabel(battle.battle.impact))}
               </span>
             </div>
           )}
 
-          {/* Scale badge */}
+          {/* Scale badge - pill shape */}
           {battle.battle?.scale && battle.battle.scale !== 'unknown' && (
             <div className="mt-2">
-              <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${BATTLE_SCALE_COLORS[battle.battle.scale]?.bg ?? BATTLE_SCALE_COLORS.unknown!.bg} ${BATTLE_SCALE_COLORS[battle.battle.scale]?.text ?? BATTLE_SCALE_COLORS.unknown!.text}`}>
+              <span className={`inline-flex items-center px-2 py-0.5 rounded-[var(--rounded-pill)] text-caption font-medium ${BATTLE_SCALE_COLORS[battle.battle.scale]?.bg ?? BATTLE_SCALE_COLORS.unknown!.bg} ${BATTLE_SCALE_COLORS[battle.battle.scale]?.text ?? BATTLE_SCALE_COLORS.unknown!.text}`}>
                 📊 {t('battle.scale.' + battle.battle.scale)}
               </span>
             </div>
           )}
 
-          {/* Battle type badge */}
+          {/* Battle type badge - pill shape */}
           {battle.battle?.battleType && battle.battle.battleType !== 'unknown' && (
             <div className="mt-2">
-              <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${BATTLE_TYPE_COLORS.bg} ${BATTLE_TYPE_COLORS.text}`}>
+              <span className={`inline-flex items-center px-2 py-0.5 rounded-[var(--rounded-pill)] text-caption font-medium ${BATTLE_TYPE_COLORS.bg} ${BATTLE_TYPE_COLORS.text}`}>
                 🎯 {t(getBattleTypeName(battle.battle.battleType))}
               </span>
             </div>
           )}
 
-          {/* Pacing badge */}
+          {/* Pacing badge - pill shape */}
           {battle.battle?.pacing && battle.battle.pacing !== 'unknown' && (
             <div className="mt-2">
-              <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${PACING_BADGE_COLORS.bg} ${PACING_BADGE_COLORS.text}`}>
+              <span className={`inline-flex items-center px-2 py-0.5 rounded-[var(--rounded-pill)] text-caption font-medium ${PACING_BADGE_COLORS.bg} ${PACING_BADGE_COLORS.text}`}>
                 ⚡ {t(getPacingLabel(battle.battle.pacing))}
               </span>
             </div>
           )}
 
-          {/* Time of day badge */}
+          {/* Time of day badge - pill shape */}
           {battle.battle?.timeOfDay && battle.battle.timeOfDay !== 'unknown' && (
             <div className="mt-2">
-              <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${TIME_OF_DAY_COLORS.bg} ${TIME_OF_DAY_COLORS.text}`}>
+              <span className={`inline-flex items-center px-2 py-0.5 rounded-[var(--rounded-pill)] text-caption font-medium ${TIME_OF_DAY_COLORS.bg} ${TIME_OF_DAY_COLORS.text}`}>
                 🌅 {t(getTimeOfDayLabel(battle.battle.timeOfDay))}
               </span>
             </div>
           )}
 
           {battle.summaryKey && (
-            <div className={`mt-2 text-xs ${BATTLE_CARD_COLORS.container.subtitle} line-clamp-2`}>
+            <div className="mt-2 text-caption text-[var(--text-muted)] line-clamp-2">
               {t(battle.summaryKey)}
             </div>
           )}
         </div>
 
-        {/* Favorite button — positioned absolutely as a sibling to the card button, avoiding invalid HTML nesting */}
+        {/* Favorite button - circular */}
         <button
           type="button"
           onClick={handleFavoriteClick}
           onKeyDown={(e) => e.stopPropagation()}
           aria-label={isFavorited ? t('favorites.removeFavorite') : t('favorites.addFavorite')}
-          className={`absolute top-2 right-2 sm:top-3 sm:right-3 shrink-0 p-1 rounded-full transition-colors ${
+          className={`absolute top-2 right-2 sm:top-3 sm:right-3 shrink-0 w-8 h-8 rounded-[var(--rounded-full)] flex items-center justify-center transition-colors ${
             isFavorited
-              ? FAVORITE_BUTTON_COLORS.favorited.bg
-              : FAVORITE_BUTTON_COLORS.default.bg
-          } ${isFavorited ? FAVORITE_BUTTON_COLORS.favorited.hover : FAVORITE_BUTTON_COLORS.default.hover}`}
+              ? 'bg-[var(--color-block-pink)] text-[var(--color-ink)]'
+              : 'bg-[var(--color-surface-soft)] text-[var(--text-muted)] hover:text-[var(--text-primary)]'
+          }`}
         >
-          <span className={`text-lg ${isFavorited ? FAVORITE_BUTTON_COLORS.favorited.text : FAVORITE_BUTTON_COLORS.default.text}`}>
+          <span className="text-sm">
             {isFavorited ? '❤️' : '🤍'}
           </span>
         </button>
