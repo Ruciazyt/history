@@ -1,8 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import type { Event, Ruler } from '@/lib/history/types';
-import { getChgisBoundariesForYear } from '@/lib/history/chgis';
+import type { Event, Era, Ruler } from '@/lib/history/types';
+import { getChgisBoundariesForOpenEras } from '@/lib/history/chgis';
 import { getBattles } from '@/lib/history/battles';
 import {
   MAP_DEFAULT_CENTER,
@@ -11,18 +11,10 @@ import {
   POLITY_CAPITALS,
 } from '@/lib/history/constants/map';
 import { useTiandituMap } from '@/lib/history/hooks/useTiandituMap';
-import { drawBoundaryFeature, type BoundaryFeature } from '@/lib/history/mapOverlays';
+import { drawBoundaryFeature } from '@/lib/history/mapOverlays';
 import { POLITY_DOT_COLORS } from '@/components/HistoryApp/eraGroups';
 
 type MapLayers = { boundaries: boolean; events: boolean; tileLabels: boolean };
-
-type ActiveBoundary = {
-  id: string;
-  feature: BoundaryFeature;
-  strokeColor: string;
-  fillColor: string;
-  fillOpacity: number;
-};
 
 function resolveFocusPolityId(
   selectedRuler: Ruler | null,
@@ -129,11 +121,15 @@ function MapLayerPanel({
 export function HistoryAppMap({
   events,
   year,
+  eras,
+  openEraIds,
   openPolityIds,
   selectedRuler,
 }: {
   events: Event[];
   year: number;
+  eras: Era[];
+  openEraIds: Set<string>;
   openPolityIds: Set<string>;
   selectedRuler: Ruler | null;
 }) {
@@ -184,15 +180,10 @@ export function HistoryAppMap({
     };
   }, [mappable, events]);
 
-  const activeBoundaries = React.useMemo((): ActiveBoundary[] => {
-    return getChgisBoundariesForYear(year).map(({ id, feature }) => ({
-      id,
-      feature,
-      strokeColor: MAP_DESIGN_COLORS.boundaryStroke,
-      fillColor: MAP_DESIGN_COLORS.boundaryFill,
-      fillOpacity: 0.22,
-    }));
-  }, [year]);
+  const activeBoundaries = React.useMemo(
+    () => getChgisBoundariesForOpenEras(openEraIds, eras, year),
+    [openEraIds, eras, year]
+  );
 
   const updatePopupPos = React.useCallback(() => {
     const point = lngLatToContainerPoint(capital.lon, capital.lat);

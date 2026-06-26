@@ -125,11 +125,11 @@ export function HistoryMap({
     map.clearOverLays();
 
     // 绘制 CHGIS 历史疆域
-    activeBoundaries.forEach(({ feature }) => {
+    activeBoundaries.forEach(({ feature, strokeColor, fillColor, fillOpacity }) => {
       drawBoundaryFeature(map, window.T, feature, {
-        strokeColor: '#DC6432',
-        fillColor: '#DC6432',
-        fillOpacity: 0.2,
+        strokeColor,
+        fillColor,
+        fillOpacity,
         strokeWeight: 2,
       });
     });

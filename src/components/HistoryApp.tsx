@@ -129,6 +129,8 @@ export function HistoryApp({
       <HistoryAppMap
         events={currentEraEvents}
         year={year}
+        eras={activeEras}
+        openEraIds={openEraIds}
         openPolityIds={openPolityIds}
         selectedRuler={selectedRuler}
       />

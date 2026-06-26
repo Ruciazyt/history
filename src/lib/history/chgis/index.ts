@@ -14,4 +14,5 @@ export {
   shouldUseChgisForYear,
 } from '@/lib/history/chgis/resolver';
 
-export { getChgisBoundariesForYear, type ChgisBoundaryLayer } from '@/lib/history/chgis/boundaries';
+export { getChgisBoundariesForOpenEras, getChgisBoundariesForYear, type ChgisBoundaryLayer } from '@/lib/history/chgis/boundaries';
+export { CHGIS_DEFAULT_BOUNDARY_COLORS, getChgisEraColors } from '@/lib/history/chgis/colors';

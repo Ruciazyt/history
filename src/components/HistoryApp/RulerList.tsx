@@ -73,7 +73,7 @@ export function RulerList({
 
   if (isMultiPolity && era.polities) {
     return (
-      <TimelineRail depth={2} className="pb-1">
+      <TimelineRail depth={2} className="pb-1" showLine={false}>
         {era.polities.map((polity) => {
           const polityRulers = eraRulers
             .filter((r) => r.polityId === polity.id)
