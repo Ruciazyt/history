@@ -1,18 +1,13 @@
 'use client';
 
 import * as React from 'react';
-import type { Feature, Polygon, MultiPolygon } from 'geojson';
 import type { Event } from '@/lib/history/types';
-import { dynastyBoundaries } from '@/lib/history/data/dynastyBoundaries';
+import { getChgisBoundariesForYear } from '@/lib/history/chgis';
 import { getBattles } from '@/lib/history/battles';
 import { logger } from '@/lib/history/logger';
+import { drawBoundaryFeature } from '@/lib/history/mapOverlays';
 
-const TIANDITU_TOKEN = '07b4df99018dcee22e60ad2064723188';
-
-/** Milliseconds to wait for Tianditu API to load before showing an error state */
-const MAP_LOAD_TIMEOUT_MS = 15_000;
-
-type BoundaryFeature = Feature<Polygon | MultiPolygon>;
+import { TIANDITU_TOKEN, MAP_LOAD_TIMEOUT_MS } from '@/lib/history/constants/map';
 
 declare global {
   interface Window {
@@ -23,12 +18,13 @@ declare global {
 
 export function HistoryMap({
   events,
-  openEraIds,
+  year,
   initialCenter = { lon: 112.45, lat: 34.62 },
   initialZoom = 4,
 }: {
   events?: Event[];
-  openEraIds?: Set<string>;
+  /** 当前年份，用于匹配 CHGIS 疆域快照 */
+  year: number;
   /** Geographic center of the map on initial load */
   initialCenter?: { lon: number; lat: number };
   /** Zoom level on initial load */
@@ -54,18 +50,10 @@ export function HistoryMap({
     };
   }, [mappable, events]);
 
-  // Active dynasty boundaries for the open eras
-  const activeBoundaries = React.useMemo((): Array<{ id: string; feature: BoundaryFeature }> => {
-    if (!openEraIds || openEraIds.size === 0) return [];
-    const result: Array<{ id: string; feature: BoundaryFeature }> = [];
-    for (const id of openEraIds) {
-      const feature = dynastyBoundaries[id];
-      if (feature) {
-        result.push({ id, feature });
-      }
-    }
-    return result;
-  }, [openEraIds]);
+  const activeBoundaries = React.useMemo(
+    () => getChgisBoundariesForYear(year),
+    [year]
+  );
 
   // Handle retry: reset error state and force a re-mount
   const handleRetry = React.useCallback(() => {
@@ -134,51 +122,16 @@ export function HistoryMap({
     if (!mapRef.current || !mapReady) return;
 
     const map = mapRef.current;
-    map.clearOverlays();
+    map.clearOverLays();
 
-    // Helper function to draw a polygon boundary on the map
-    const drawPolygon = (ring: number[][], strokeColor: string, fillOpacity: number) => {
-      if (!ring || ring.length < 3) return;
-      const points = ring.map(
-        (coord) => new window.T.LngLat(coord[0], coord[1])
-      );
-      const polygon = new window.T.Polygon(points, {
-        strokeColor,
-        strokeWeight: 2,
-        fillColor: strokeColor,
-        fillOpacity,
-      });
-      map.addOverLay(polygon);
-    };
-
-    // Helper function to process GeoJSON coordinates and draw polygons
-    const processBoundaryCoords = (coords: number[][][] | number[][][][], strokeColor: string, fillOpacity: number) => {
-      try {
-        if (Array.isArray(coords) && coords.length > 0 && Array.isArray(coords[0]) && coords[0].length > 0) {
-          // Check if it's a MultiPolygon (first element is array of rings)
-          if (Array.isArray(coords[0][0]) && Array.isArray(coords[0][0][0]) && typeof coords[0][0][0][0] === 'number') {
-            // It's a simple Polygon: coords[0] is the ring
-            drawPolygon(coords[0] as number[][], strokeColor, fillOpacity);
-          } else {
-            // It's a MultiPolygon: coords is number[][][][]
-            const multi = coords as number[][][][];
-            for (const polygon of multi) {
-              if (polygon && polygon[0]) {
-                drawPolygon(polygon[0], strokeColor, fillOpacity);
-              }
-            }
-          }
-        }
-      } catch (e) {
-        logger.warn('map', 'Failed to draw boundary', e);
-      }
-    };
-
-    // 绘制中国王朝边界
+    // 绘制 CHGIS 历史疆域
     activeBoundaries.forEach(({ feature }) => {
-      const coords = feature.geometry.coordinates;
-      if (!coords || coords.length === 0) return;
-      processBoundaryCoords(coords, '#DC6432', 0.2);
+      drawBoundaryFeature(map, window.T, feature, {
+        strokeColor: '#DC6432',
+        fillColor: '#DC6432',
+        fillOpacity: 0.2,
+        strokeWeight: 2,
+      });
     });
 
     // 绘制事件标记 - 使用圆形

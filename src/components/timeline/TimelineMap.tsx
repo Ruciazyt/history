@@ -78,7 +78,7 @@ export function TimelineMap({ event }: TimelineMapProps) {
     if (!mapRef.current || !mapReady || !event) return;
 
     const map = mapRef.current;
-    map.clearOverlays();
+    map.clearOverLays();
 
     // Draw territory polygons
     if (event.territories) {

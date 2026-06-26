@@ -32,6 +32,89 @@
   --color-semantic-success: #1ea64a;
   --color-overlay-scrim: #000000;
 
+  /* Design Figma colors */
+  --color-figma-nav-bg: #0b0b0b;
+  --color-figma-nav-text: #8e8e8e;
+  --color-figma-button-bg: #f2ede3;
+  --color-figma-button-text: #9b9892;
+  --color-figma-sidebar-bg: #f7f7f5;
+  --color-figma-sidebar-text: #515151;
+  --color-figma-sidebar-year: #7d7d7d;
+  --color-figma-info-bg: #fcfbfa;
+  --color-figma-info-title: #515151;
+  --color-figma-info-desc: #aaaaaa;
+
+  /* Lanhu design tokens (714px canvas ×2) */
+  --color-figma-page-bg: #eeeee8;
+  --color-figma-card-bg: #ffffff;
+  --color-figma-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --color-figma-nav-logo: rgba(105, 105, 105, 1);
+  --color-figma-nav-tagline: rgba(163, 163, 163, 1);
+  --color-figma-nav-active: rgba(111, 111, 111, 1);
+  --color-figma-nav-inactive: rgba(155, 155, 155, 1);
+  --color-figma-login-bg: rgba(0, 0, 0, 1);
+  --color-figma-login-border: rgba(114, 110, 114, 1);
+  --color-figma-login-text: rgba(130, 130, 129, 1);
+  --color-figma-sidebar-header: rgba(112, 112, 113, 1);
+  --color-figma-sidebar-era-name: rgba(119, 119, 119, 1);
+  --color-figma-sidebar-era-year: rgba(176, 177, 177, 1);
+  --color-figma-sidebar-era-expanded-bg: rgba(247, 246, 243, 1);
+  --color-figma-sidebar-expanded-panel-bg: rgba(252, 251, 250, 1);
+  --color-figma-ruler-active-bg: rgba(229, 229, 182, 1);
+  --color-figma-ruler-active-name: rgba(110, 109, 84, 1);
+  --color-figma-ruler-active-year: rgba(174, 174, 141, 1);
+  --color-figma-ruler-name: rgba(132, 133, 132, 1);
+  --color-figma-ruler-year: rgba(192, 192, 191, 1);
+  --color-figma-polity-name: rgba(131, 130, 130, 1);
+
+  /* 侧栏时间轴轨道 X（圆心，与 timeline/constants.ts 同步） */
+  --timeline-rail-era: 14px;
+  --timeline-rail-period: 28px;
+  --timeline-rail-polity: 42px;
+  --color-figma-filter-bg: rgba(253, 253, 253, 1);
+  --color-figma-filter-border: rgba(247, 247, 246, 1);
+  --color-figma-filter-text: rgba(152, 152, 153, 1);
+  --color-figma-section-title: rgba(114, 114, 115, 1);
+  --color-figma-event-year: rgba(177, 177, 178, 1);
+  --color-figma-event-title: rgba(175, 175, 176, 1);
+  --color-figma-event-dot: rgba(177, 177, 178, 1);
+  --color-figma-explore-bg: rgba(11, 11, 11, 1);
+  --color-figma-explore-border: rgba(88, 88, 88, 1);
+  --color-figma-explore-text: rgba(142, 142, 142, 1);
+  --color-figma-tag-bg: rgba(241, 237, 227, 1);
+  --color-figma-tag-border: rgba(247, 244, 238, 1);
+  --color-figma-tag-text: rgba(147, 143, 134, 1);
+  --color-figma-info-title: rgba(81, 81, 81, 1);
+  --color-figma-info-desc: rgba(170, 170, 170, 1);
+  --color-figma-info-date: rgba(125, 125, 125, 1);
+  --color-figma-map-bg: #e8e4d9;
+  --color-figma-control-bg: rgba(251, 251, 251, 1);
+  --color-figma-control-border: rgba(244, 243, 242, 1);
+  --color-figma-zoom-bg: rgba(243, 245, 245, 1);
+  --color-figma-tree-line: rgba(220, 220, 220, 1);
+  --color-figma-tree-line-0: rgba(180, 180, 180, 1);
+  --color-figma-tree-line-1: rgba(200, 200, 200, 1);
+  --color-figma-tree-line-2: rgba(220, 220, 220, 1);
+  --color-figma-tree-dot-0: rgba(85, 85, 85, 1);
+  --color-figma-tree-dot-1: rgba(105, 105, 105, 1);
+  --color-figma-tree-dot-2: rgba(145, 145, 145, 1);
+  --color-figma-sidebar-divider: rgba(238, 238, 232, 1);
+
+  /* Lanhu overlay layout (714px canvas ×2) */
+  --layout-figma-header-inset-x: 20px;
+  --layout-figma-page-inset-x: 28px;
+  --layout-figma-page-inset-y: 14px;
+  --layout-figma-header-height: 71px;
+  --layout-figma-header-pl: 66px;
+  --layout-figma-header-pr: 30px;
+  --layout-figma-header-px: 66px;
+  --layout-figma-sidebar-top: 99px;
+  --layout-figma-sidebar-bottom: 28px;
+  --layout-figma-sidebar-left-width: 352px;
+  --layout-figma-sidebar-right-width: 376px;
+  --layout-figma-sidebar-right-inset: 21px;
+  --layout-figma-sidebar-radius: 20px;
+
   /* ─── Spacing (DESIGN.md - 8px base) ─────────────────────────────────── */
   --spacing-hair: 1px;
   --spacing-xxs: 4px;
@@ -314,6 +397,24 @@
   --quick-link-placeNames-bg: #222222;
   --quick-link-placeNames-text: #a1a1aa;
   --quick-link-placeNames-border: #333333;
+
+  /* Design Figma colors (dark mode) */
+  --color-figma-nav-bg: #0b0b0b;
+  --color-figma-nav-text: #8e8e8e;
+  --color-figma-button-bg: #f2ede3;
+  --color-figma-button-text: #9b9892;
+  --color-figma-sidebar-bg: #111111;
+  --color-figma-sidebar-text: #ffffff;
+  --color-figma-sidebar-year: #71717a;
+  --color-figma-info-bg: #111111;
+  --color-figma-info-title: #ffffff;
+  --color-figma-info-desc: #a1a1aa;
+  --color-figma-tree-line-0: rgba(80, 80, 80, 1);
+  --color-figma-tree-line-1: rgba(60, 60, 60, 1);
+  --color-figma-tree-line-2: rgba(45, 45, 45, 1);
+  --color-figma-tree-dot-0: rgba(180, 180, 180, 1);
+  --color-figma-tree-dot-1: rgba(140, 140, 140, 1);
+  --color-figma-tree-dot-2: rgba(100, 100, 100, 1);
 }
 
 body {
@@ -605,3 +706,58 @@ span.icon-only {
 .color-block-mint { background-color: var(--color-block-mint); color: var(--color-ink); }
 .color-block-coral { background-color: var(--color-block-coral); color: var(--color-ink); }
 .color-block-navy { background-color: var(--color-block-navy); color: var(--color-inverse-ink); }
+
+/* ─── HistoryApp map (Figma vintage terrain look) ───────────────────────── */
+.history-app-map {
+  background-color: var(--color-figma-map-bg);
+}
+
+/* 不对瓦片容器施加 filter，避免天地图渲染异常；复古感由轻量 wash 层实现 */
+.history-app-map__wash {
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 85% 65% at 52% 42%, rgba(196, 210, 170, 0.35) 0%, transparent 68%),
+    linear-gradient(
+      160deg,
+      rgba(197, 212, 176, 0.22) 0%,
+      rgba(221, 216, 196, 0.14) 38%,
+      rgba(184, 200, 168, 0.2) 68%,
+      rgba(208, 205, 184, 0.16) 100%
+    );
+  mix-blend-mode: soft-light;
+  opacity: 0.75;
+}
+
+.history-app-map__vignette {
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 62%, rgba(180, 175, 160, 0.12) 100%);
+}
+
+.history-app-map .tdt-control-copyright {
+  opacity: 0.35;
+  font-size: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .history-timeline-collapse {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 侧栏时间轴行 — 豁免全局 button:active 缩放 */
+button.timeline-row-btn {
+  min-height: 0;
+  min-width: 0;
+}
+
+button.timeline-row-btn:active {
+  transform: none;
+  opacity: 1;
+}
+
+/* 年代侧栏所有按钮 — 禁用全局 :active 缩放/透明度抖动 */
+.era-sidebar button:active {
+  transform: none;
+  opacity: 1;
+}
+

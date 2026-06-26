@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# CHGIS raw shapefiles (large; download locally — see data/chgis/README.md)
+/data/chgis/raw/**/*.shp
+/data/chgis/raw/**/*.dbf
+/data/chgis/raw/**/*.shx
+/data/chgis/raw/**/*.zip
+/data/chgis/dataset-*.json
+/data/chgis/dataverse-*.json

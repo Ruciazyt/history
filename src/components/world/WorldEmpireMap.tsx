@@ -121,7 +121,7 @@ export function WorldEmpireMap({
     if (!mapRef.current || !mapReady) return;
 
     const map = mapRef.current;
-    map.clearOverlays();
+    map.clearOverLays();
 
     // Draw empire boundaries
     activeBoundaries.forEach((boundary, index) => {

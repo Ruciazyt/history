@@ -16,6 +16,16 @@ export function formatYear(year: number, locale: string = 'en'): string {
   return locale === 'zh' || locale === 'ja' ? `公元${displayYear}年` : `${displayYear} CE`;
 }
 
+/** Compact range label used in Figma sidebar/detail panels, e.g. 公元前306-前251年 */
+export function formatYearRangeShort(startYear: number, endYear: number, locale: string = 'zh'): string {
+  if (locale === 'zh' || locale === 'ja') {
+    const start = startYear < 0 ? `公元前${Math.abs(startYear)}` : `公元${startYear}`;
+    const end = endYear < 0 ? `前${Math.abs(endYear)}` : `${endYear}`;
+    return `${start}-${end}年`;
+  }
+  return `${formatYear(startYear, locale)}–${formatYear(endYear, locale)}`;
+}
+
 export function clamp(n: number, min: number, max: number) {
   return Math.min(max, Math.max(min, n));
 }
