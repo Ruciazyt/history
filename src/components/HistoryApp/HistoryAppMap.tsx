@@ -165,7 +165,19 @@ export function HistoryAppMap({
   const [showLegend, setShowLegend] = React.useState(false);
   const [showLayers, setShowLayers] = React.useState(false);
   const [layers, setLayers] = React.useState<MapLayers>({ boundaries: true, events: true, tileLabels: true });
-  const [popupPos, setPopupPos] = React.useState<{ x: number; y: number } | null>(null);
+  const [popupCapitalId, setPopupCapitalId] = React.useState<string | null>(null);
+  const [capitalMarkerPos, setCapitalMarkerPos] = React.useState<Record<string, { x: number; y: number }>>({});
+
+  const capitalMarkers = React.useMemo(() => {
+    const ids = new Set(openPolityIds);
+    if (focusPolityId) ids.add(focusPolityId);
+    return [...ids]
+      .map((id) => (POLITY_CAPITALS[id] ? { id, ...POLITY_CAPITALS[id] } : null))
+      .filter((item): item is { id: string; lon: number; lat: number; name: string; subtitle: string } => item != null);
+  }, [openPolityIds, focusPolityId]);
+
+  const popupCapital = popupCapitalId ? POLITY_CAPITALS[popupCapitalId] : null;
+  const popupPos = popupCapitalId ? capitalMarkerPos[popupCapitalId] : null;
 
   const mappable = React.useMemo(
     () => events.filter((e) => e.location && Number.isFinite(e.location.lon) && Number.isFinite(e.location.lat)),
@@ -185,10 +197,18 @@ export function HistoryAppMap({
     [openEraIds, eras, year]
   );
 
-  const updatePopupPos = React.useCallback(() => {
-    const point = lngLatToContainerPoint(capital.lon, capital.lat);
-    if (point) setPopupPos(point);
-  }, [capital.lon, capital.lat, lngLatToContainerPoint]);
+  const updateCapitalMarkerPos = React.useCallback(() => {
+    const next: Record<string, { x: number; y: number }> = {};
+    for (const marker of capitalMarkers) {
+      const point = lngLatToContainerPoint(marker.lon, marker.lat);
+      if (point) next[marker.id] = point;
+    }
+    setCapitalMarkerPos(next);
+  }, [capitalMarkers, lngLatToContainerPoint]);
+
+  React.useEffect(() => {
+    setPopupCapitalId(null);
+  }, [focusPolityId]);
 
   React.useEffect(() => {
     if (!mapReady) return;
@@ -198,15 +218,15 @@ export function HistoryAppMap({
   React.useEffect(() => {
     if (!mapReady) return;
     panTo(capital.lon, capital.lat);
-    updatePopupPos();
-  }, [mapReady, capital.lon, capital.lat, panTo, updatePopupPos]);
+    updateCapitalMarkerPos();
+  }, [mapReady, capital.lon, capital.lat, panTo, updateCapitalMarkerPos]);
 
   React.useEffect(() => {
     const map = mapRef.current;
     if (!mapReady || !map) return;
 
-    updatePopupPos();
-    const onMove = () => updatePopupPos();
+    updateCapitalMarkerPos();
+    const onMove = () => updateCapitalMarkerPos();
     map.addEventListener('moveend', onMove);
     map.addEventListener('zoomend', onMove);
 
@@ -214,7 +234,7 @@ export function HistoryAppMap({
       map.removeEventListener('moveend', onMove);
       map.removeEventListener('zoomend', onMove);
     };
-  }, [mapReady, mapRef, updatePopupPos]);
+  }, [mapReady, mapRef, updateCapitalMarkerPos]);
 
   React.useEffect(() => {
     if (!mapRef.current || !mapReady) return;
@@ -311,7 +331,7 @@ export function HistoryAppMap({
 
   const handleLocate = () => {
     panTo(capital.lon, capital.lat, MAP_DEFAULT_ZOOM);
-    updatePopupPos();
+    updateCapitalMarkerPos();
   };
 
   return (
@@ -342,10 +362,30 @@ export function HistoryAppMap({
       <div className="history-app-map__wash absolute inset-0 z-[1]" aria-hidden="true" />
       <div className="history-app-map__vignette absolute inset-0 z-[1]" aria-hidden="true" />
 
-      {popupPos && mapReady && (
+      {mapReady &&
+        capitalMarkers.map((marker) => {
+          const pos = capitalMarkerPos[marker.id];
+          if (!pos) return null;
+          const isFocus = marker.id === focusPolityId;
+          return (
+            <button
+              key={marker.id}
+              type="button"
+              aria-label={marker.name}
+              aria-expanded={popupCapitalId === marker.id}
+              className={`absolute z-[4] -translate-x-1/2 -translate-y-1/2 rounded-full cursor-pointer ${
+                isFocus ? 'h-12 w-12' : 'h-8 w-8'
+              }`}
+              style={{ left: pos.x, top: pos.y }}
+              onClick={() => setPopupCapitalId((prev) => (prev === marker.id ? null : marker.id))}
+            />
+          );
+        })}
+
+      {popupCapital && popupPos && mapReady && (
         <MapCityPopup
-          name={capital.name}
-          subtitle={capital.subtitle}
+          name={popupCapital.name}
+          subtitle={popupCapital.subtitle}
           style={{ left: popupPos.x, top: popupPos.y }}
         />
       )}
